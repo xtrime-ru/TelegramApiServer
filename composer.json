@@ -1,0 +1,32 @@
+{
+  "name": "xtrime-ru/telegramswooleclient",
+  "description": "Fast async php telegram client: MadelineProto + Swoole Server",
+  "type": "project",
+  "homepage": "http://tg.i-c-a.su/",
+  "license": "MIT",
+  "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "swoole", "async", "demon"],
+  "require": {
+    "php": ">=7.2.0",
+    "danog/madelineproto": "dev-master",
+    "vlucas/phpdotenv": "^2.4",
+    "ext-swoole": ">=4.0"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/danog/phpseclib"
+    }
+  ],
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Alexander Pankratov",
+      "email": "s.pankratoff@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "xtrime-ru\\TelegramSwooleClient\\": "src/"
+    }
+  }
+}
