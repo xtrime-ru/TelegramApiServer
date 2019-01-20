@@ -93,8 +93,9 @@ Fast, simple, async php telegram client and parser: MadelineProto + Swoole Serve
     * Url: `http://%address%:%port%/api/%method%/?%param1%=%val%`
     * All available methods you can find in `src/Client.php`.
     * <b>Important: All parameters must be passed at strict order!</b>
-    * <b>Important: api available only from ip in whitelist. By default it is: `127.0.0.1`
-    You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
+    * <b>Important: api available only from ip in whitelist.</b> 
+        By default it is: `127.0.0.1`
+        You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
     
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
