@@ -12,33 +12,40 @@ class RequestCallback
         'html' => ['Content-Type', 'text/html; charset=utf-8'],
     ];
     private const PAGES = [
+        'api' => [
+            'format' => 'json',
+            'headers' => self::HEADERS['json'],
+        ],
         'rss' => [
-            'type' => 'xml',
+            'format' => 'xml',
             'headers' => self::HEADERS['xml'],
         ],
         'json' => [
-            'type' => 'json',
+            'format' => 'json',
             'headers' => self::HEADERS['json'],
         ],
         'index'=>[
-            'type' => 'html',
+            'format' => 'html',
             'headers' => self::HEADERS['html'],
         ],
         'error' => [
-            'type' => 'json',
+            'format' => 'json',
             'headers' => self::HEADERS['json'],
-        ]
+        ],
     ];
     private $path = [];
     public $page = [
         'type' => '',
+        'format' => '',
         'headers' => [],
         'success' => 0,
         'errors' => [],
         'code'  => 200,
         'response' => null,
     ];
-    private $channels = [];
+    private $parameters = [];
+    private $api;
+    private $ipWhiteList = [];
 
     /**
      * RequestCallback constructor.
@@ -48,12 +55,13 @@ class RequestCallback
      */
     public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Parser $parser)
     {
+        $this->ipWhiteList = Config::getInstance()->getConfig('api')['ip_whitelist'] ?? [];
         $this->parser = $parser;
 
         $this->parsePost($request)
             ->resolvePage($request->server['request_uri'])
-            ->resolveChannels($request->post)
-            ->generateResponse();
+            ->resolveRequest((array)$request->get, (array)$request->post)
+            ->generateResponse($request);
 
         $result = $this->encodeResponse();
 
@@ -82,26 +90,57 @@ class RequestCallback
             $this->page['errors'][] = 'Incorrect path';
         }
         $this->page = array_merge($this->page, self::PAGES[$this->path[0]]);
+        $this->page['type'] = $this->path[0];
 
+        return $this;
+    }
+
+    /**
+     * @param array $get
+     * @param array $post
+     * @return RequestCallback
+     */
+    private function resolveRequest(array $get, array $post):self {
+        switch ($this->page['type']) {
+            case 'api':
+                return $this->getApi($get, $post);
+                break;
+            case 'json':
+            case 'xml':
+                return $this->getChannels($post);
+                break;
+        }
+        
+        return $this;
+    }
+
+    /**
+     * @param array $get
+     * @param array $post
+     * @return $this
+     */
+    private function getApi(array $get, array $post) {
+        $this->parameters = array_values(array_merge($get, $post));
+        $this->api = $this->path[1] ?? '';
         return $this;
     }
 
     /**
      * Формирует список каналов из get и post запросов
      *
-     * @param $post
+     * @param array $post
      * @return RequestCallback
      */
-    private function resolveChannels($post): self
+    private function getChannels(array $post): self
     {
-        $this->channels = [];
+        $this->parameters = [];
 
         if (count($this->path) === 2) {
-            $this->channels[] = [
+            $this->parameters[] = [
                 'peer' => $this->path[1]
             ];
         } elseif ($post && array_key_exists('getHistory', $post) && is_array($post['getHistory'])) {
-            $this->channels = $post['getHistory'] ?? [];
+            $this->parameters = $post['getHistory'] ?? [];
         }
 
         return $this;
@@ -110,9 +149,10 @@ class RequestCallback
     /**
      * Получает посты для формирования ответа
      *
+     * @param \Swoole\Http\Request $request
      * @return RequestCallback
      */
-    private function generateResponse(): self
+    private function generateResponse(\Swoole\Http\Request $request): self
     {
         if ($this->page['code'] !== 200) {
             $this->generateErrorResponse();
@@ -120,7 +160,19 @@ class RequestCallback
         }
 
         try {
-            $this->page['response'] = $this->parser->getHistory($this->channels);
+            switch ($this->page['type']) {
+                case 'api':
+                    if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
+                        throw new \Exception('API not available');
+                    }
+                    $this->page['response'] = $this->parser->client->{$this->api}(...$this->parameters);
+                    break;
+                case 'json':
+                case 'xml':
+                    $this->page['response'] = $this->parser->getHistory($this->parameters);
+                    break;
+            }
+
         } catch (\Exception $e) {
             $this->setPageCode(400);
             $this->page['errors'][] = $e->getMessage();
@@ -153,7 +205,7 @@ class RequestCallback
             'response' => $this->page['response']
         ];
         try {
-            switch ($this->page['type']) {
+            switch ($this->page['format']) {
                 case 'json':
                     $result = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                     break;

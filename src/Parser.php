@@ -4,7 +4,7 @@ namespace TelegramSwooleClient;
 
 class Parser
 {
-    private $client;
+    public $client;
     private $settings = [
         'peer' => '',
         'limit' => 10,

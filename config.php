@@ -43,5 +43,8 @@ return [
             'username'  => getenv('CURL_PROXY_USERNAME'),
             'password'  => getenv('CURL_PROXY_PASSWORD'),
         ]
-    ]
+    ],
+    'api' => [
+        'ip_whitelist' => json_decode(getenv('API_CLIENT_WHITELIST'),true),
+    ],
 ];

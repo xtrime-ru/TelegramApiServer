@@ -22,10 +22,12 @@ class Client {
         }
 
         //При каждой инициализации настройки обновляются из массива $config
-        echo 'Starting telegram client ...' . PHP_EOL;
+        echo PHP_EOL . 'Starting telegram client ...' . PHP_EOL;
+        $time = microtime(true);
         $this->MadelineProto = new MadelineProto\API($sessionFile, $config);
         $this->MadelineProto->start();
-        echo 'Client started' . PHP_EOL;
+        $time = round(microtime(true) - $time, 3);
+        echo PHP_EOL . "Client started: $time sec" . PHP_EOL;
 
     }
 
@@ -38,7 +40,7 @@ class Client {
      */
     public function getInfo($id): array
     {
-        return $this->MadelineProto->get_info($id);
+        return $this->MadelineProto->get_info((string)$id);
     }
 
 
@@ -95,74 +97,33 @@ class Client {
 
     /**
      * @param string $q
-     * @param array $channels
      * @param int $limit
-     * @param int $timestampMin
      * @return array
      */
-    public function search($q = '', array $channels = [], $limit = 10, $timestampMin = 0): array
+    public function searchGlobal($q = '', $limit = 10): array
     {
-        $search = $this->MadelineProto->messages->searchGlobal([
+        return $this->MadelineProto->messages->searchGlobal([
             'q'             => $q,
             'offset_id'     => 0,
             'offset_date'   => 0,
-            'limit'         => 100,
+            'limit'         => $limit,
         ]);
-        $foundChannels = [];
-        $messages = [];
-        $tmp = [];
+    }
 
-        // Оставляем только нужные каналы и индексируем их по id
-        foreach ($search['chats'] AS $chat) {
-            if (isset($chat['username'])) {
-                $tmp[$chat['username']] = $chat['id'];
-            }
-        }
-
-        $search['chats'] = $tmp;
-        unset($tmp);
-        if ($channels){
-            foreach ($channels as $channel) {
-                $channel = str_replace('@','',$channel);
-                if ($channelId = $search['chats'][$channel] ?? 0) {
-                    $foundChannels[$channelId] = $channel;
-                }
-            }
-        }else{
-            $foundChannels = array_flip($search['chats']);
-        }
-        unset($search['chats']);
-        //
-
-        foreach ($search['messages'] as $message) {
-            if (!$channelId = $message['to_id']['channel_id'] ?? 0) {
-                continue;
-            }
-            if (!$channelName = $foundChannels[$channelId] ?? '') {
-                continue;
-            }
-            if (empty($message['message'])) {
-                continue;
-            }
-            if ($timestampMin && $message['date'] < $timestampMin) {
-                continue;
-            }
-
-            $messages[crc32($message['message'])] = [
-                'id'        => $message['id'],
-                'text'      => $message['message'],
-                'channel'   => $channelName,
-                'date'      => $message['date'],
-            ];
-        }
-
-        usort($messages, function($a, $b) {
-            return $b['date'] <=> $a['date'];
-        });
-
-        $messages = array_slice($messages, 0, $limit);
-
-        return $messages;
+    /**
+     * @param $data
+     * @return array
+     */
+    public function sendMessage($data = []): array
+    {
+        return $this->MadelineProto->messages->sendMessage(
+            array_merge([
+                'peer' => '',
+                'message' => '',
+                'reply_to_msg_id' => 0,
+                'parse_mode' => 'HTML',
+            ], $data)
+        );
     }
 
 }

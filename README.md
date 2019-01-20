@@ -6,7 +6,7 @@ Fast, simple, async php telegram client and parser: MadelineProto + Swoole Serve
 
 **Features**
  * Fast async swoole server
- * Use as micro-service
+ * Use as micro-service to access telegram api
  * Get any public telegram posts from groups as json
  
 **TODO**
@@ -89,7 +89,19 @@ Fast, simple, async php telegram client and parser: MadelineProto + Swoole Serve
         ```
         You can use any other options from https://docs.madelineproto.xyz/API_docs/methods/messages_getHistory.html
         peer name can be provided in different formats: https://docs.madelineproto.xyz/API_docs/types/InputPeer.html
+1. Access telegram api directly via simple get requests.    
+    * Url: `http://%address%:%port%/api/%method%/?%param1%=%val%`
+    * All available methods you can find in `src/Client.php`.
+    * <b>Important: All parameters must be passed at strict order!</b>
+    * <b>Important: api available only from ip in whitelist. By default it is: `127.0.0.1`
+    You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
     
+    Examples:
+    * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
+    * repost: `http://127.0.0.1:9503/api/forwardMessages/?fromPeer=@xtrime&toPeer=@xtrime&messageId=1234`
+    * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
+    * search: `http://127.0.0.1:9503/api/searchGlobal/?q=Hello%20World&limit=10`
+    * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
         
 **Contacts**
 
