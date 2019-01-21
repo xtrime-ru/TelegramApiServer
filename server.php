@@ -41,5 +41,5 @@ Example:
     exit;
 }
 
-$client = new \TelegramSwooleClient\Client();
+$client = new \TelegramSwooleClient\Client($root);
 new TelegramSwooleClient\Server($client, $options);

@@ -11,9 +11,9 @@ class Client {
     /**
      * Client constructor.
      */
-    public function __construct()
+    public function __construct($root)
     {
-        $sessionFile = __DIR__ . '/../session.madeline';
+        $sessionFile = $root . '/session.madeline';
 
         $config = Config::getInstance()->getConfig('telegram');
 
