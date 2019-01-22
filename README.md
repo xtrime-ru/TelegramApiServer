@@ -98,10 +98,10 @@ Fast, simple, async php telegram client and parser: MadelineProto + Swoole Serve
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
     
     Examples:
-    * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
-    * repost: `http://127.0.0.1:9503/api/forwardMessages/?fromPeer=@xtrime&toPeer=@xtrime&messageId=1234`
+    * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?data[id]=@xtrime`
+    * repost: `http://127.0.0.1:9503/api/forwardMessages/?data[fromPeer]=@xtrime&data[toPeer]=@xtrime&data[messageId]=1234`
     * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
-    * search: `http://127.0.0.1:9503/api/searchGlobal/?q=Hello%20World&limit=10`
+    * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
         
 **Contacts**

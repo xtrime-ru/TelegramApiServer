@@ -165,6 +165,9 @@ class RequestCallback
                     if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
                         throw new \Exception('API not available');
                     }
+                    if (!method_exists($this->parser->client,$this->api)) {
+                        throw new \Exception('api not found');
+                    }
                     $this->page['response'] = $this->parser->client->{$this->api}(...$this->parameters);
                     break;
                 case 'json':

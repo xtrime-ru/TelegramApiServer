@@ -34,13 +34,21 @@ class Client {
     /**
      * Получает данные о канале/пользователе по логину
      *
-     * @param array|string|id $id
-     * Например логин в формате '@xtrime'
+     * @param array $data
+     * <pre>
+     * $data = [
+     *      'id' => , array|string, Например логин в формате '@xtrime'
+     * ];
+     * </pre>
+     *
      * @return array
      */
-    public function getInfo($id): array
+    public function getInfo($data): array
     {
-        return $this->MadelineProto->get_info((string)$id);
+        $data = array_merge([
+            'id' => '',
+        ], $data);
+        return $this->MadelineProto->get_info($data['id']);
     }
 
 
@@ -81,33 +89,32 @@ class Client {
     /**
      * Пересылает сообщения
      *
-     * @param string $fromPeer
-     * @param string $toPeer
-     * @param array|int $messageId
+     * @param array $data
      * Id сообщения, или нескольких сообщений
      */
-    public function forwardMessages($fromPeer, $toPeer, $messageId): void
+    public function forwardMessages($data): void
     {
-        $this->MadelineProto->messages->forwardMessages([
-            'from_peer' => $fromPeer,
-            'to_peer'   => $toPeer,
-            'id'        => (array) $messageId,
-        ]);
+        $data = array_merge([
+            'from_peer' => '',
+            'to_peer'   => '',
+            'id'        => [],
+        ],$data);
+        $this->MadelineProto->messages->forwardMessages($data);
     }
 
     /**
-     * @param string $q
-     * @param int $limit
+     * @param array $data
      * @return array
      */
-    public function searchGlobal($q = '', $limit = 10): array
+    public function searchGlobal(array $data): array
     {
-        return $this->MadelineProto->messages->searchGlobal([
-            'q'             => $q,
+        $data = array_merge([
+            'q'             => '',
             'offset_id'     => 0,
             'offset_date'   => 0,
-            'limit'         => $limit,
-        ]);
+            'limit'         => 10,
+        ],$data);
+        return $this->MadelineProto->messages->searchGlobal($data);
     }
 
     /**
