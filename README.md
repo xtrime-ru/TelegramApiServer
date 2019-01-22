@@ -99,7 +99,7 @@ Fast, simple, async php telegram client and parser: MadelineProto + Swoole Serve
     
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?data[id]=@xtrime`
-    * repost: `http://127.0.0.1:9503/api/forwardMessages/?data[fromPeer]=@xtrime&data[toPeer]=@xtrime&data[messageId]=1234`
+    * repost: `http://127.0.0.1:9503/api/forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
     * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
