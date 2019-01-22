@@ -51,10 +51,22 @@ class Config
      * @return mixed|null
      */
     public function getConfig($key = '', $default = null) {
-        if ($key) {
-            return $this->config[$key] ?? $default;
+        return $this->findByKey($key) ?? $default;
+    }
+
+    private function findByKey($key) {
+        $key = (string) $key;
+        $path = explode('.', $key);
+
+        $value = &$this->config;
+        foreach($path as $pathKey) {
+            if (!is_array($value) || !array_key_exists($pathKey,$value)) {
+                return;
+            }
+            $value = &$value[$pathKey];
         }
-        return $this->config;
+
+        return $value;
     }
 
 }

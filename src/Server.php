@@ -52,7 +52,7 @@ class Server
 
         foreach (['server','options'] as $key) {
             $this->config[$key] = array_merge(
-                Config::getInstance()->getConfig('swoole')[$key] ?? [],
+                Config::getInstance()->getConfig("swoole.{$key}", []),
                 $config[$key] ?? []
             );
         }

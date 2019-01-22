@@ -55,7 +55,7 @@ class RequestCallback
      */
     public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Parser $parser)
     {
-        $this->ipWhiteList = Config::getInstance()->getConfig('api')['ip_whitelist'] ?? [];
+        $this->ipWhiteList = Config::getInstance()->getConfig('api.ip_whitelist', []);
         $this->parser = $parser;
 
         $this->parsePost($request)
