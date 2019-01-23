@@ -59,13 +59,13 @@ class Client {
      * <pre>
      * [
      *     'peer'          => '',
-     *     'offset_id'     => 0,
-     *     'offset_date'   => 0,
-     *     'add_offset'    => 0,
-     *     'limit'         => 0,
-     *     'max_id'        => 0,
-     *     'min_id'        => 0,
-     *     'hash'          => 0
+     *     'offset_id'     => 0, // (optional)
+     *     'offset_date'   => 0, // (optional)
+     *     'add_offset'    => 0, // (optional)
+     *     'limit'         => 0, // (optional)
+     *     'max_id'        => 0, // (optional)
+     *     'min_id'        => 0, // (optional)
+     *     'hash'          => 0, // (optional)
      * ]
      * </pre>
      * @return array
@@ -87,23 +87,105 @@ class Client {
     }
 
     /**
+     * Получает определенные сообщения из канала.
+     *
+     * @param array $data
+     * <pre>
+     * [
+     *  'channel' => '',
+     *  'id'      => [], //Id сообщения, или нескольких сообщений
+     * ]
+     * </pre>
+     * @return array
+     */
+    public function getMessages($data):array {
+        $data = array_merge([
+            'channel' => '',
+            'id'      => [],
+        ],$data);
+        return $this->MadelineProto->channels->getMessages($data);
+    }
+
+    /**
      * Пересылает сообщения
      *
      * @param array $data
-     * Id сообщения, или нескольких сообщений
+     * <pre>
+     * [
+     *  'from_peer' => '',
+     *  'to_peer'   => '',
+     *  'id'        => [], //Id сообщения, или нескольких сообщений
+     * ]
+     * </pre>
+     * @return array
      */
-    public function forwardMessages($data): void
+    public function forwardMessages($data): array
     {
         $data = array_merge([
             'from_peer' => '',
             'to_peer'   => '',
             'id'        => [],
         ],$data);
-        $this->MadelineProto->messages->forwardMessages($data);
+        return $this->MadelineProto->messages->forwardMessages($data);
+    }
+
+    /**
+     * Пересылает сообщения без ссылки на оригинал
+     *
+     * @param array $data
+     * <pre>
+     * [
+     *  'from_peer' => '',
+     *  'to_peer'   => '',
+     *  'id'        => [], //Id сообщения, или нескольких сообщений
+     * ]
+     * </pre>
+     * @return array
+     */
+    public function copyMessages($data):array {
+
+        $data = array_merge([
+            'from_peer' => '',
+            'to_peer'   => '',
+            'id'        => [],
+        ],$data);
+
+        $response = $this->getMessages([
+            'channel'   => $data['from_peer'],
+            'id'        => $data['id'],
+        ]);
+        $result = [];
+        if (!$response || !is_array($response) || !array_key_exists('messages', $response)){
+            return $result;
+        }
+
+        foreach ($response['messages'] as $message) {
+            $messageData = [
+                'message'   => $message['message'] ?? '',
+                'peer'      => $data['to_peer'],
+            ];
+            if (array_key_exists('media', $message)) {
+                $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
+                $result[] = $this->sendMedia($messageData);
+            } else {
+                $result[] = $this->sendMessage($messageData);
+            }
+        }
+
+        return $result;
+
     }
 
     /**
      * @param array $data
+     * <pre>
+     * [
+     *  'q'             => '',  //Поисковый запрос
+     *  'offset_id'     => 0,   // (optional)
+     *  'offset_date'   => 0,   // (optional)
+     *  'limit'         => 10,  // (optional)
+     * ]
+     * </pre>
      * @return array
      */
     public function searchGlobal(array $data): array
@@ -119,18 +201,54 @@ class Client {
 
     /**
      * @param $data
+     * <pre>
+     * [
+     *  'peer'              => '',
+     *  'message'           => '',      // Текст сообщения
+     *  'reply_to_msg_id'   => 0,       // (optional)
+     *  'parse_mode'        => 'HTML',  // (optional)
+     * ]
+     * </pre>
      * @return array
      */
     public function sendMessage($data = []): array
     {
-        return $this->MadelineProto->messages->sendMessage(
-            array_merge([
-                'peer' => '',
-                'message' => '',
-                'reply_to_msg_id' => 0,
-                'parse_mode' => 'HTML',
-            ], $data)
-        );
+        $data = array_merge([
+            'peer'              => '',
+            'message'           => '',
+            'reply_to_msg_id'   => 0,
+            'parse_mode'        => 'HTML',
+        ], $data);
+
+        return $this->MadelineProto->messages->sendMessage($data);
     }
+
+    /**
+     * @param $data
+     * <pre>
+     * [
+     *  'peer'              => '',
+     *  'message'           => '',      // Текст сообщения,
+     *  'media'             => [],      // MessageMedia, Update, Message or InputMedia
+     *  'reply_to_msg_id'   => 0,       // (optional)
+     *  'parse_mode'        => 'HTML',  // (optional)
+     * ]
+     * </pre>
+     * @return array
+     */
+    public function sendMedia($data = []): array
+    {
+        $data = array_merge([
+            'peer'              => '',
+            'message'           => '',
+            'media'             => [],
+            'reply_to_msg_id'   => 0,
+            'parse_mode'        => 'HTML',
+        ], $data);
+
+        return $this->MadelineProto->messages->sendMedia($data);
+    }
+
+
 
 }
