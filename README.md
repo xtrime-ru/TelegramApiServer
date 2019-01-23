@@ -1,5 +1,6 @@
 # TelegramSwooleClient
-Fast, simple, async php telegram client and parser: MadelineProto + Swoole Server
+Fast, simple, async php telegram client and parser: 
+[MadelineProto](https://github.com/danog/MadelineProto) + [Swoole](https://github.com/swoole/swoole-src) Server
 
 * Online server for tests (previous version, different request syntax): http://tg.i-c-a.su/?format=json&images=0&url=breakingmash
 * My content aggregator: [https://i-c-a.su](https://i-c-a.su)
@@ -31,12 +32,19 @@ Fast, simple, async php telegram client and parser: MadelineProto + Swoole Serve
     ```
     "repositories": [
         {
+          "type": "git",
+          "url": "https://github.com/danog/phpseclib"
+        },
+        {
            "type": "git",
            "url": "https://github.com/xtrime-ru/TelegramSwooleClient.git"
         }
     ],
     "require": {
         "xtrime-ru/telegramswooleclient": "dev-master",
+        "amphp/dns": "dev-master#861cc857b1ba6e02e8a7439c30403682785fce96 as 0.9.9",
+        "amphp/file": "dev-master#5a69fca406ac5fd220de0aa68c887bc8046eb93c as 0.3.3",
+        "amphp/uri": "dev-master#f3195b163275383909ded7770a11d8eb865cbc86 as 0.1.3"
     }
     ```
 
