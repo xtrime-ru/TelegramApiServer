@@ -51,6 +51,15 @@ class Client {
         return $this->MadelineProto->get_info($data['id']);
     }
 
+    /**
+     * Список диалогов
+     *
+     * @return array
+     */
+    public function getDialogs():array {
+        return $this->MadelineProto->get_dialogs();
+    }
+
 
     /**
      * Получает последние сообщения из указанных каналов
