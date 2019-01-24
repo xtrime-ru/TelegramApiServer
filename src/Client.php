@@ -159,12 +159,26 @@ class Client {
             return $result;
         }
 
+        $hasMedia = function($media = []) {
+            foreach ($media as $el) {
+                if (
+                    isset($el['_']) &&
+                    !in_array($el['_'],['messageMediaWebPage'])
+                ){
+                    return true;
+                }
+            }
+            return false;
+        };
+
         foreach ($response['messages'] as $message) {
             $messageData = [
                 'message'   => $message['message'] ?? '',
                 'peer'      => $data['to_peer'],
             ];
-            if (array_key_exists('media', $message)) {
+            if (
+                $hasMedia($message['media'] ?? [])
+            ) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
                 $result[] = $this->sendMedia($messageData);
             } else {
