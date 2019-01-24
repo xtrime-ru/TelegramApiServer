@@ -172,6 +172,7 @@ class Client {
         };
 
         foreach ($response['messages'] as $message) {
+            usleep(mt_rand(300,2000)*1000);
             $messageData = [
                 'message'   => $message['message'] ?? '',
                 'peer'      => $data['to_peer'],
