@@ -106,11 +106,25 @@ Fast, simple, async php telegram client and parser:
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
     
     Examples:
-    * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?data[id]=@xtrime`
+    * get_info about channel/user: `http://127.0.0.1:9503/api/get_info/?id=@xtrime`
+    * get_info about currect account: `http://127.0.0.1:9503/api/get_self`
     * repost: `http://127.0.0.1:9503/api/forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
     * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
+    * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
+    
+    Also all methods from MadelineProto supported: https://docs.madelineproto.xyz/API_docs/methods/
+    
+    Rules:
+    * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
+    `http://127.0.0.1:9503/api/contacts.getContacts`
+    * If method requires array of values, use any name of array, for example 'data': 
+    `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
+    * If method requires one or multiple parameters (not inside array) then pass parameters with any names but **in strict order**: 
+    `http://127.0.0.1:9503/api/get_info/?id=@xtrime` or `http://127.0.0.1:9503/api/get_info/?abcd=@xtrime` works the same
+    
+    
         
 **Contacts**
 

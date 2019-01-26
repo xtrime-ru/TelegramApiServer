@@ -32,36 +32,6 @@ class Client {
     }
 
     /**
-     * Получает данные о канале/пользователе по логину
-     *
-     * @param array $data
-     * <pre>
-     * $data = [
-     *      'id' => , array|string, Например логин в формате '@xtrime'
-     * ];
-     * </pre>
-     *
-     * @return array
-     */
-    public function getInfo($data): array
-    {
-        $data = array_merge([
-            'id' => '',
-        ], $data);
-        return $this->MadelineProto->get_info($data['id']);
-    }
-
-    /**
-     * Список диалогов
-     *
-     * @return array
-     */
-    public function getDialogs():array {
-        return $this->MadelineProto->get_dialogs();
-    }
-
-
-    /**
      * Получает последние сообщения из указанных каналов
      *
      * @param array $data
@@ -96,49 +66,6 @@ class Client {
     }
 
     /**
-     * Получает определенные сообщения из канала.
-     *
-     * @param array $data
-     * <pre>
-     * [
-     *  'channel' => '',
-     *  'id'      => [], //Id сообщения, или нескольких сообщений
-     * ]
-     * </pre>
-     * @return array
-     */
-    public function getMessages($data):array {
-        $data = array_merge([
-            'channel' => '',
-            'id'      => [],
-        ],$data);
-        return $this->MadelineProto->channels->getMessages($data);
-    }
-
-    /**
-     * Пересылает сообщения
-     *
-     * @param array $data
-     * <pre>
-     * [
-     *  'from_peer' => '',
-     *  'to_peer'   => '',
-     *  'id'        => [], //Id сообщения, или нескольких сообщений
-     * ]
-     * </pre>
-     * @return array
-     */
-    public function forwardMessages($data): array
-    {
-        $data = array_merge([
-            'from_peer' => '',
-            'to_peer'   => '',
-            'id'        => [],
-        ],$data);
-        return $this->MadelineProto->messages->forwardMessages($data);
-    }
-
-    /**
      * Пересылает сообщения без ссылки на оригинал
      *
      * @param array $data
@@ -159,7 +86,7 @@ class Client {
             'id'        => [],
         ],$data);
 
-        $response = $this->getMessages([
+        $response = $this->MadelineProto->channels->getMessages([
             'channel'   => $data['from_peer'],
             'id'        => $data['id'],
         ]);
@@ -169,15 +96,13 @@ class Client {
         }
 
         $hasMedia = function($media = []) {
-            foreach ($media as $el) {
-                if (
-                    isset($el['_']) &&
-                    !in_array($el['_'],['messageMediaWebPage'])
-                ){
-                    return true;
-                }
+            if (empty($media['_'])) {
+                return false;
             }
-            return false;
+            if ($media['_'] == 'messageMediaWebPage'){
+                return false;
+            }
+            return true;
         };
 
         foreach ($response['messages'] as $message) {
@@ -185,6 +110,7 @@ class Client {
             $messageData = [
                 'message'   => $message['message'] ?? '',
                 'peer'      => $data['to_peer'],
+                'entities'  => $message['entities'] ?? [],
             ];
             if (
                 $hasMedia($message['media'] ?? [])

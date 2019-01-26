@@ -162,13 +162,7 @@ class RequestCallback
         try {
             switch ($this->page['type']) {
                 case 'api':
-                    if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
-                        throw new \Exception('API not available');
-                    }
-                    if (!method_exists($this->parser->client,$this->api)) {
-                        throw new \Exception('api not found');
-                    }
-                    $this->page['response'] = $this->parser->client->{$this->api}(...$this->parameters);
+                    $this->page['response'] = $this->callApi($request);
                     break;
                 case 'json':
                 case 'xml':
@@ -186,6 +180,32 @@ class RequestCallback
         }
 
         return $this;
+    }
+
+    private function callApi(\Swoole\Http\Request $request){
+        if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
+            throw new \Exception('API not available');
+        }
+
+        if (method_exists($this->parser->client,$this->api)){
+            return $this->parser->client->{$this->api}(...$this->parameters);
+        }
+
+        //Проверяем нет ли в madiline proto такого метода.
+        $this->api = explode('.', $this->api);
+        switch (count($this->api)){
+            case 1:
+                return $this->parser->client->MadelineProto->{$this->api[0]}(...$this->parameters);
+                break;
+            case 2:
+                return $this->parser->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
+                break;
+            case 3:
+                return $this->parser->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
+                break;
+            default:
+                throw new \Exception('Incorect api format');
+        }
     }
 
     private function generateErrorResponse(): self
