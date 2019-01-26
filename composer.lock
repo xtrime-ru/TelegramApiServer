@@ -2236,12 +2236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "8997d1e1350547338006b56a09f681cc05a3a226"
+                "reference": "8fd1e4d2f3e2ba7ed746df3f2d3bcd5cb755f9b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/8997d1e1350547338006b56a09f681cc05a3a226",
-                "reference": "8997d1e1350547338006b56a09f681cc05a3a226",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/8fd1e4d2f3e2ba7ed746df3f2d3bcd5cb755f9b3",
+                "reference": "8fd1e4d2f3e2ba7ed746df3f2d3bcd5cb755f9b3",
                 "shasum": ""
             },
             "require": {
@@ -2287,7 +2287,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2019-01-17T19:02:58+00:00"
+            "time": "2019-01-24T13:36:35+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2409,12 +2409,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "450f92f5f843983253e2a1dbafc7e4f553ef374d"
+                "reference": "8bf54ec5235dfe493d64089fd59b7241d405f88e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/450f92f5f843983253e2a1dbafc7e4f553ef374d",
-                "reference": "450f92f5f843983253e2a1dbafc7e4f553ef374d",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/8bf54ec5235dfe493d64089fd59b7241d405f88e",
+                "reference": "8bf54ec5235dfe493d64089fd59b7241d405f88e",
                 "shasum": ""
             },
             "require": {
@@ -2477,7 +2477,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2019-01-16T21:53:45+00:00"
+            "time": "2019-01-25T12:12:05+00:00"
         },
         {
             "name": "tightenco/collect",
