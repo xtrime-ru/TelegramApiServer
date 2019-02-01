@@ -46,5 +46,6 @@ return [
     ],
     'api' => [
         'ip_whitelist' => json_decode(getenv('API_CLIENT_WHITELIST'),true),
+        'index_message' => getenv('API_INDEX_MESSAGE'),
     ],
 ];

@@ -2,8 +2,6 @@
 
 namespace TelegramSwooleClient;
 
-//TODO: flood control
-//TODO: logging
 class Server
 {
     private $config = [];
@@ -31,8 +29,7 @@ class Server
             //иначе их данные будут в области видимости всех запросов.
 
             //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
-            $parser = new Parser($client);
-            new RequestCallback($request, $response, $parser);
+            new RequestCallback($request, $response, $client);
         });
         $http_server->start();
 
@@ -52,7 +49,7 @@ class Server
 
         foreach (['server','options'] as $key) {
             $this->config[$key] = array_merge(
-                Config::getInstance()->getConfig("swoole.{$key}", []),
+                Config::getInstance()->get("swoole.{$key}", []),
                 $config[$key] ?? []
             );
         }
