@@ -1,43 +1,21 @@
 <?php
 
 namespace TelegramSwooleClient;
-//TODO: rss output
+
 class RequestCallback
 {
 
-    private $parser;
-    private const HEADERS = [
-        'json' => ['Content-Type', 'application/json;charset=utf-8'],
-        'xml' => ['Content-Type', 'application/rss+xml;charset=utf-8'],
-        'html' => ['Content-Type', 'text/html; charset=utf-8'],
-    ];
-    private const PAGES = [
-        'api' => [
-            'format' => 'json',
-            'headers' => self::HEADERS['json'],
-        ],
-        'rss' => [
-            'format' => 'xml',
-            'headers' => self::HEADERS['xml'],
-        ],
-        'json' => [
-            'format' => 'json',
-            'headers' => self::HEADERS['json'],
-        ],
-        'index'=>[
-            'format' => 'html',
-            'headers' => self::HEADERS['html'],
-        ],
-        'error' => [
-            'format' => 'json',
-            'headers' => self::HEADERS['json'],
-        ],
-    ];
+    private $client;
+    private const PAGES = ['index', 'api'];
+    /** @var string */
+    private $indexMessage;
+    /** @var array  */
+    private $ipWhiteList;
     private $path = [];
     public $page = [
-        'type' => '',
-        'format' => '',
-        'headers' => [],
+        'headers' => [
+            'Content-Type', 'application/json;charset=utf-8'
+        ],
         'success' => 0,
         'errors' => [],
         'code'  => 200,
@@ -45,18 +23,19 @@ class RequestCallback
     ];
     private $parameters = [];
     private $api;
-    private $ipWhiteList = [];
+
 
     /**
      * RequestCallback constructor.
      * @param \Swoole\Http\Request $request
      * @param \Swoole\Http\Response $response
-     * @param Parser $parser
+     * @param Client $client
      */
-    public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Parser $parser)
+    public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Client $client)
     {
-        $this->ipWhiteList = Config::getInstance()->getConfig('api.ip_whitelist', []);
-        $this->parser = $parser;
+        $this->ipWhiteList = (array) Config::getInstance()->get('api.ip_whitelist', []);
+        $this->indexMessage = (string) Config::getInstance()->get('api.index_message', 'Welcome to telegram client!');
+        $this->client = $client;
 
         $this->parsePost($request)
             ->resolvePage($request->server['request_uri'])
@@ -80,17 +59,12 @@ class RequestCallback
     private function resolvePage($uri): self
     {
         $this->path = array_values(array_filter(explode('/', $uri)));
-        if (!$this->path) {
-            $this->path = ['index'];
-            $this->page['response'] = 'Welcome to i-c-a.su parser for telegram. <br>' .
-                "If you have questions contact me via telegram: <a href='tg://resolve?domain=xtrime'>@xtrime</a>";
-        } elseif (!array_key_exists($this->path[0],self::PAGES)) {
-            $this->path = ['error'];
+        if (!$this->path || $this->path[0] !== 'api') {
+            $this->page['response'] = $this->indexMessage;
+        } elseif (!in_array($this->path[0],self::PAGES, true)) {
             $this->setPageCode(404);
             $this->page['errors'][] = 'Incorrect path';
         }
-        $this->page = array_merge($this->page, self::PAGES[$this->path[0]]);
-        $this->page['type'] = $this->path[0];
 
         return $this;
     }
@@ -101,48 +75,8 @@ class RequestCallback
      * @return RequestCallback
      */
     private function resolveRequest(array $get, array $post):self {
-        switch ($this->page['type']) {
-            case 'api':
-                return $this->getApi($get, $post);
-                break;
-            case 'json':
-            case 'xml':
-                return $this->getChannels($post);
-                break;
-        }
-        
-        return $this;
-    }
-
-    /**
-     * @param array $get
-     * @param array $post
-     * @return $this
-     */
-    private function getApi(array $get, array $post) {
         $this->parameters = array_values(array_merge($get, $post));
         $this->api = $this->path[1] ?? '';
-        return $this;
-    }
-
-    /**
-     * Формирует список каналов из get и post запросов
-     *
-     * @param array $post
-     * @return RequestCallback
-     */
-    private function getChannels(array $post): self
-    {
-        $this->parameters = [];
-
-        if (count($this->path) === 2) {
-            $this->parameters[] = [
-                'peer' => $this->path[1]
-            ];
-        } elseif ($post && array_key_exists('getHistory', $post) && is_array($post['getHistory'])) {
-            $this->parameters = $post['getHistory'] ?? [];
-        }
-
         return $this;
     }
 
@@ -155,28 +89,17 @@ class RequestCallback
     private function generateResponse(\Swoole\Http\Request $request): self
     {
         if ($this->page['code'] !== 200) {
-            $this->generateErrorResponse();
             return $this;
         }
 
         try {
-            switch ($this->page['type']) {
-                case 'api':
-                    $this->page['response'] = $this->callApi($request);
-                    break;
-                case 'json':
-                case 'xml':
-                    $this->page['response'] = $this->parser->getHistory($this->parameters);
-                    break;
-            }
-
+            $this->page['response'] = $this->callApi($request);
         } catch (\Exception $e) {
             $this->setPageCode(400);
-            $this->page['errors'][] = $e->getMessage();
-        }
-
-        if ($this->page['code'] !== 200) {
-            $this->generateErrorResponse();
+            $this->page['errors'][] = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
         }
 
         return $this;
@@ -187,70 +110,41 @@ class RequestCallback
             throw new \Exception('API not available');
         }
 
-        if (method_exists($this->parser->client,$this->api)){
-            return $this->parser->client->{$this->api}(...$this->parameters);
+        if (method_exists($this->client,$this->api)){
+            return $this->client->{$this->api}(...$this->parameters);
         }
 
-        //Проверяем нет ли в madiline proto такого метода.
+        //Проверяем нет ли в MadilineProto такого метода.
         $this->api = explode('.', $this->api);
         switch (count($this->api)){
             case 1:
-                return $this->parser->client->MadelineProto->{$this->api[0]}(...$this->parameters);
+                return $this->client->MadelineProto->{$this->api[0]}(...$this->parameters);
                 break;
             case 2:
-                return $this->parser->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
+                return $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
                 break;
             case 3:
-                return $this->parser->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
+                return $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
                 break;
             default:
-                throw new \Exception('Incorect api format');
+                throw new \Exception('Incorrect method format');
         }
     }
 
-    private function generateErrorResponse(): self
-    {
-        $this->page = array_merge($this->page,self::PAGES['error']);
-        return $this;
-    }
 
     /**
-     * Кодирует ответ в нужный формат: json, rss, html
+     * Кодирует ответ в нужный формат: json
      *
      * @return string
      */
     public function encodeResponse(): string
     {
-        $result = '';
         $data = [
-            'success' =>$this->page['success'],
-            'errors' =>$this->page['errors'],
+            'success' => $this->page['success'],
+            'errors' => $this->page['errors'],
             'response' => $this->page['response']
         ];
-        try {
-            switch ($this->page['format']) {
-                case 'json':
-                    $result = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-                    break;
-                case 'xml':
-                    throw new \Exception('RSS not supported yet. Coming soon.');
-                    break;
-                case 'html':
-                    if ($this->page['code'] !== 200) {
-                        $result = 'ERRORS: <br>' .
-                            '<pre>' .
-                            json_encode($this->page['errors'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) .
-                            '</pre>';
-                    } else {
-                        $result = $this->page['response'];
-                    }
-                    break;
-            }
-        } catch (\Exception $e) {
-            $this->setPageCode(400);
-            $this->page['errors'][] = $e->getMessage();
-            $result = 'Errors: ' . implode(', ', $this->page['errors']);
-        }
+        $result = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         return $result;
     }
@@ -275,7 +169,7 @@ class RequestCallback
      */
     private function parsePost(\Swoole\Http\Request $request): self
     {
-        if (!$request->post) {
+        if (empty($request->post)) {
             return $this;
         }
 
@@ -284,8 +178,6 @@ class RequestCallback
             stripos($request->header['content-type'], 'application/json') !== false
         ) {
             $request->post = json_decode($request->rawcontent(), true);
-        } elseif (array_key_exists('getHistory', $request->post) && is_string($request->post['getHistory'])) {
-            $request->post['getHistory'] = json_decode($request->post['getHistory'],true);
         }
 
         return $this;

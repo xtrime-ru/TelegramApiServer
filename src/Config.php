@@ -50,7 +50,7 @@ class Config
      * @param null $default
      * @return mixed|null
      */
-    public function getConfig($key = '', $default = null) {
+    public function get($key = '', $default = null) {
         return $this->findByKey($key) ?? $default;
     }
 

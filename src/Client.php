@@ -15,7 +15,7 @@ class Client {
     {
         $sessionFile = $root . '/session.madeline';
 
-        $config = Config::getInstance()->getConfig('telegram');
+        $config = Config::getInstance()->get('telegram');
 
         if (empty($config['connection_settings']['all']['proxy_extra']['address'])) {
             unset($config['connection_settings']);
