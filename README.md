@@ -9,11 +9,6 @@ Fast, simple, async php telegram client and parser:
  * Fast async swoole server
  * Use as micro-service to access telegram api
  * Get any public telegram posts from groups as json
- 
-**TODO**
-* RSS output
-* flood protection (for use in public)
-* logging
 
 **Installation**
 
@@ -64,66 +59,28 @@ Fast, simple, async php telegram client and parser:
     
     Also all options can be set in .env file (see .env.example)
     ```
-1. Get posts from any open channel
-
-    * Get 10 latests posts from any open channel via GET request: 
-        `http://%address%:%port%/json/%channel%`
-        Example:
-        `http://127.0.0.1:9503/json/breakingmash`
-    * Get posts from multiple channels via POST:
-        
-        Url: `http://127.0.0.1:9503/json/`
-        
-        Headers: `Content-Type: application/json`
-
-        `form-data` and `x-www-form-urlencoded` should work, 
-        but was not tested
-        
-        Body:
-        ```
-        {
-           	"getHistory": [
-           		{
-           		    "peer":"channel#1259060275"
-           		}, 
-           		{
-           		    "peer": "breakingmash",
-           		    "limit": 30,
-                    "max_id": 200,
-           		}
-           	]
-           	
-           }
-        ```
-        You can use any other options from https://docs.madelineproto.xyz/API_docs/methods/messages_getHistory.html
-        peer name can be provided in different formats: https://docs.madelineproto.xyz/API_docs/types/InputPeer.html
 1. Access telegram api directly via simple get requests.    
-    * Url: `http://%address%:%port%/api/%method%/?%param1%=%val%`
-    * All available methods you can find in `src/Client.php`.
-    * <b>Important: All parameters must be passed at strict order!</b>
+    Rules:
+    * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
+    * Url: `http://%address%:%port%/api/%class%.%method%/?%param1%=%val%`
     * <b>Important: api available only from ip in whitelist.</b> 
         By default it is: `127.0.0.1`
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
+    * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
+        `http://127.0.0.1:9503/api/contacts.getContacts`
+    * If method requires array of values, use any name of array, for example 'data': 
+        `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
+    * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
+        `http://127.0.0.1:9503/api/get_info/?id=@xtrime` or `http://127.0.0.1:9503/api/get_info/?abcd=@xtrime` works the same
     
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/get_info/?id=@xtrime`
     * get_info about currect account: `http://127.0.0.1:9503/api/get_self`
-    * repost: `http://127.0.0.1:9503/api/forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
+    * repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
     * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
     * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
-    
-    Also all methods from MadelineProto supported: https://docs.madelineproto.xyz/API_docs/methods/
-    
-    Rules:
-    * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
-    `http://127.0.0.1:9503/api/contacts.getContacts`
-    * If method requires array of values, use any name of array, for example 'data': 
-    `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
-    * If method requires one or multiple parameters (not inside array) then pass parameters with any names but **in strict order**: 
-    `http://127.0.0.1:9503/api/get_info/?id=@xtrime` or `http://127.0.0.1:9503/api/get_info/?abcd=@xtrime` works the same
-    
     
         
 **Contacts**
