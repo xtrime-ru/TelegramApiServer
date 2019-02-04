@@ -17,7 +17,7 @@ return [
             'api_hash'        => getenv('TELEGRAM_API_HASH'),
         ],
         'logger' => [ // Logger settings
-            'logger'        => 3, // Logs disabled.
+            'logger'        => 3, //  0 - Logs disabled, 3 - echo logs.
             'logger_level'  => 2, // Logging level, available logging levels are: ULTRA_VERBOSE - 0, VERBOSE - 1 , NOTICE - 2, WARNING - 3, ERROR - 4, FATAL_ERROR - 5.
         ],
         'updates' => [
