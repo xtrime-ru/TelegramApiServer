@@ -16,8 +16,6 @@ $options = getopt($shortopts, $longopts);
 $options = [
     'address'   => $options['address'] ?? $options['a'] ?? '',
     'port'      => $options['port'] ?? $options['p'] ?? '',
-    'id'        => $options['id'] ?? $options['i'] ?? '',
-    'hash'      => $options['hash'] ?? $options['h'] ?? '',
     'help'      => isset($options['help']),
 ];
 
