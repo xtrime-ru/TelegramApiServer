@@ -144,6 +144,10 @@ class RequestCallback
             'errors' => $this->page['errors'],
             'response' => $this->page['response']
         ];
+        if (!$data['errors']) {
+	        $data['success'] = 1;
+        }
+
         $result = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         return $result;
