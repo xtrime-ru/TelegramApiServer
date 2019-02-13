@@ -8,9 +8,9 @@
   "require": {
     "php": ">=7.2.0",
     "danog/madelineproto":"dev-master",
-    "amphp/dns": "dev-master#1ccd6337f72107ba422ae72a5812687739d214c8 as 0.9.9",
-    "amphp/file": "dev-master#94f772bd7a438fcc46984b0075155c8eda7284af as 0.3.3",
-    "amphp/uri": "dev-master#b1b0aa74ba76aad7a75693fdc87e017b0c349316 as 0.1.3",
+    "amphp/dns": "dev-master as 0.9.9",
+    "amphp/file": "dev-master as 0.3.3",
+    "amphp/uri": "dev-master as 0.1.3",
     "vlucas/phpdotenv": "^2.4",
     "ext-json": "*",
     "ext-swoole": ">=4.0"
