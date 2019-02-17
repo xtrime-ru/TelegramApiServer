@@ -137,7 +137,7 @@ class RequestCallback
      *
      * @return string
      */
-    public function encodeResponse(): string
+    private function encodeResponse(): string
     {
         $data = [
             'success' => $this->page['success'],

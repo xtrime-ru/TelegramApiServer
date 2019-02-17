@@ -95,16 +95,6 @@ class Client {
             return $result;
         }
 
-        $hasMedia = function($media = []) {
-            if (empty($media['_'])) {
-                return false;
-            }
-            if ($media['_'] == 'messageMediaWebPage'){
-                return false;
-            }
-            return true;
-        };
-
         foreach ($response['messages'] as $message) {
             usleep(mt_rand(300,2000)*1000);
             $messageData = [
@@ -113,7 +103,7 @@ class Client {
                 'entities'  => $message['entities'] ?? [],
             ];
             if (
-                $hasMedia($message['media'] ?? [])
+                static::hasMedia($message)
             ) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
                 $result[] = $this->sendMedia($messageData);
@@ -200,5 +190,58 @@ class Client {
     }
 
 
+	/**
+	 * Загружает медиафайл из указанного сообщения
+	 * @param $data
+	 * @return array
+	 */
+	public function getMedia($data) {
+		$data = array_merge([
+			'channel' =>'',
+			'id' => [0],
+			'message' => []
+		],$data);
+
+
+		if (!$data['message']) {
+			$response = $this->MadelineProto->channels->getMessages($data);
+			$message = $response['messages'][0];
+		} else {
+			$message = $data['message'];
+		}
+
+		if (!static::hasMedia($message)) {
+			throw new \UnexpectedValueException('Message has no media');
+		}
+
+		$info = $this->MadelineProto->get_download_info($message);
+		$file = tempnam(sys_get_temp_dir(), 'telegram_media_');
+
+		$this->MadelineProto->download_to_file($message, $file);
+
+		return [
+			'headers'=> [
+				['Content-Length',$info['size']],
+				['Content-Type',$info['mime']]
+			],
+			'file' => $file,
+		];
+	}
+
+	/**
+	 * Проверяет есть ли подходящие медиа у сообщения
+	 * @param array $message
+	 * @return bool
+	 */
+	private static function hasMedia($message = []){
+		$media = $message['media'] ?? [];
+		if (empty($media['_'])) {
+			return false;
+		}
+		if ($media['_'] == 'messageMediaWebPage'){
+			return false;
+		}
+		return true;
+	}
 
 }

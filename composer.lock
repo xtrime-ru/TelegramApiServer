@@ -772,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "f8502fe543e10c161be43bf66efb31cbb667aa67"
+                "reference": "bde40ecfbf7c19209cddd9872cfdee900a484829"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/f8502fe543e10c161be43bf66efb31cbb667aa67",
-                "reference": "f8502fe543e10c161be43bf66efb31cbb667aa67",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/bde40ecfbf7c19209cddd9872cfdee900a484829",
+                "reference": "bde40ecfbf7c19209cddd9872cfdee900a484829",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-02-10T06:34:39+00:00"
+            "time": "2019-02-16T16:30:48+00:00"
         },
         {
             "name": "amphp/websocket-client",
