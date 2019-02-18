@@ -202,7 +202,6 @@ class Client {
 			'channel' =>'',
 			'id' => [0],
 			'message' => [],
-			'preview' => false,
 		],$data);
 
 
@@ -230,6 +229,13 @@ class Client {
 		];
 	}
 
+	/**
+	 * Загружает превью медиафайла из указанного сообщения во временный файл
+	 *
+	 * Внимание! Необходимо самостоятельно удалять временные файлы после их использования
+	 * @param array $data
+	 * @return array
+	 */
 	public function getMediaPreview(array $data){
 		$data = array_merge([
 			'channel' =>'',
