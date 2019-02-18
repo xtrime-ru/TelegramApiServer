@@ -103,7 +103,7 @@ class Client {
                 'entities'  => $message['entities'] ?? [],
             ];
             if (
-                static::hasMedia($message)
+                static::hasMedia($message, false)
             ) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
                 $result[] = $this->sendMedia($messageData);
@@ -217,20 +217,9 @@ class Client {
 			throw new \UnexpectedValueException('Message has no media');
 		}
 
-		$media = $message['media'][array_key_last($message['media'])];
-
-		if ($data['preview']) {
-			$media = $media['thumb'];
-		}
-		$info = $this->MadelineProto->get_download_info($media);
-
-		if (!$data['preview']){
-			$file = tempnam(sys_get_temp_dir(), 'telegram_media_');
-		}else{
-			$file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
-		}
-
-		$this->MadelineProto->download_to_file($media, $file);
+		$info = $this->MadelineProto->get_download_info($message);
+		$file = tempnam(sys_get_temp_dir(), 'telegram_media_');
+		$this->MadelineProto->download_to_file($message, $file);
 
 		return [
 			'headers'=> [
@@ -241,18 +230,65 @@ class Client {
 		];
 	}
 
+	public function getMediaPreview(array $data){
+		$data = array_merge([
+			'channel' =>'',
+			'id' => [0],
+			'message' => [],
+		],$data);
+
+		if (!$data['message']) {
+			$response = $this->MadelineProto->channels->getMessages($data);
+			$message = $response['messages'][0];
+		} else {
+			$message = $data['message'];
+		}
+
+		if (!static::hasMedia($message)) {
+			throw new \UnexpectedValueException('Message has no media');
+		}
+
+		$media = $message['media'][array_key_last($message['media'])];
+		switch (true) {
+			case isset($media['sizes']):
+				$thumb = $media['sizes'][array_key_last($media['sizes'])];
+				break;
+			case isset($media['thumb']['size']):
+				$thumb = $media['thumb'];
+				break;
+			case isset($media['photo']['sizes']):
+				$thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
+				break;
+			default:
+				throw new \UnexpectedValueException('Message has no preview');
+
+		}
+		$info = $this->MadelineProto->get_download_info($thumb);
+
+		$file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
+		$this->MadelineProto->download_to_file($thumb, $file);
+
+		return [
+			'headers'=> [
+				['Content-Length', $info['size']],
+				['Content-Type', $info['mime']]
+			],
+			'file' => $file,
+		];
+	}
+
 	/**
 	 * Проверяет есть ли подходящие медиа у сообщения
 	 * @param array $message
 	 * @return bool
 	 */
-	private static function hasMedia($message = []){
+	private static function hasMedia($message = [], $useWebPage = true){
 		$media = $message['media'] ?? [];
 		if (empty($media['_'])) {
 			return false;
 		}
 		if ($media['_'] == 'messageMediaWebPage'){
-			return false;
+			return $useWebPage;
 		}
 		return true;
 	}
