@@ -201,7 +201,8 @@ class Client {
 		$data = array_merge([
 			'channel' =>'',
 			'id' => [0],
-			'message' => []
+			'message' => [],
+			'preview' => false,
 		],$data);
 
 
@@ -216,10 +217,20 @@ class Client {
 			throw new \UnexpectedValueException('Message has no media');
 		}
 
-		$info = $this->MadelineProto->get_download_info($message);
-		$file = tempnam(sys_get_temp_dir(), 'telegram_media_');
+		$media = $message['media'][array_key_last($message['media'])];
 
-		$this->MadelineProto->download_to_file($message, $file);
+		if ($data['preview']) {
+			$media = $media['thumb'];
+		}
+		$info = $this->MadelineProto->get_download_info($media);
+
+		if (!$data['preview']){
+			$file = tempnam(sys_get_temp_dir(), 'telegram_media_');
+		}else{
+			$file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
+		}
+
+		$this->MadelineProto->download_to_file($media, $file);
 
 		return [
 			'headers'=> [
