@@ -270,7 +270,6 @@ class Client {
 
 		}
 		$info = $this->MadelineProto->get_download_info($thumb);
-
 		$file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
 		$this->MadelineProto->download_to_file($thumb, $file);
 
