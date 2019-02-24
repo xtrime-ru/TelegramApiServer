@@ -202,6 +202,7 @@ class Client {
 			'channel' =>'',
 			'id' => [0],
 			'message' => [],
+            'size_limit' => 0,
 		],$data);
 
 
@@ -217,6 +218,15 @@ class Client {
 		}
 
 		$info = $this->MadelineProto->get_download_info($message);
+
+		if ($data['size_limit']) {
+		    if ($info['size'] > $data['size_limit']) {
+		        throw new \OutOfRangeException(
+		            "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
+                );
+            }
+        }
+
 		$file = tempnam(sys_get_temp_dir(), 'telegram_media_');
 		$this->MadelineProto->download_to_file($message, $file);
 
