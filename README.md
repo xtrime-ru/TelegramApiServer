@@ -14,39 +14,26 @@ Fast, simple, async php telegram client and parser:
 
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/)
 1. Swoole extension required: [Install swoole](https://github.com/swoole/swoole-src#%EF%B8%8F-installation)
-1. Install this package:
+1. `composer install` to install required libs
+1. Create .env from .env.example
+1. Fill variables in .env
 
-    a. Standalone: 
-   
-    1. download files from github and extract. 
-    2. Run `composer install` inside unpacked directory
-    
-    b. Existing project: 
-    
-    1. Add following into your project's composer.json
-    ```
-    "repositories": [
-        {
-          "type": "git",
-          "url": "https://github.com/danog/phpseclib"
-        },
-        {
-           "type": "git",
-           "url": "https://github.com/xtrime-ru/TelegramSwooleClient.git"
-        }
-    ],
-    "require": {
-        "xtrime-ru/telegramswooleclient": "dev-master",
-        "amphp/dns": "dev-master#861cc857b1ba6e02e8a7439c30403682785fce96 as 0.9.9",
-        "amphp/file": "dev-master#5a69fca406ac5fd220de0aa68c887bc8046eb93c as 0.3.3",
-        "amphp/uri": "dev-master#f3195b163275383909ded7770a11d8eb865cbc86 as 0.1.3"
-    }
-    ```
+     _Optional:_
+1. Use supervisor to monitor and restart swoole servers. Example of `/etc/supervisor/conf.d/telegram_rss.conf`: 
+     ```
+    [program:telegram_client]
+    command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramSwooleClient/server.php
+    numprocs=1
+    directory=/home/admin/web/tg.i-c-a.su/TelegramSwooleClient/
+    autostart=true
+    autorestart=true
+    nodaemon=true
+    logfile=/dev/null
+    logfile_maxbytes=0
+     ```
 
 **Usage**
 
-1. Install
-1. Fill options in .env file (see .env.example)
 1. Run server/parser
     ```
     php server.php [--help] [-a|--address=127.0.0.1] [-p|--port=9503]

@@ -193,12 +193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "1ccd6337f72107ba422ae72a5812687739d214c8"
+                "reference": "ecb423be02e6db60f01bb39d0ab46c0702be8ba0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/1ccd6337f72107ba422ae72a5812687739d214c8",
-                "reference": "1ccd6337f72107ba422ae72a5812687739d214c8",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/ecb423be02e6db60f01bb39d0ab46c0702be8ba0",
+                "reference": "ecb423be02e6db60f01bb39d0ab46c0702be8ba0",
                 "shasum": ""
             },
             "require": {
@@ -261,7 +261,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-01-25T04:12:31+00:00"
+            "time": "2019-03-03T15:12:47+00:00"
         },
         {
             "name": "amphp/file",
@@ -269,12 +269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/file.git",
-                "reference": "94f772bd7a438fcc46984b0075155c8eda7284af"
+                "reference": "654596edeb2255277d21049c852c3eed886659c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/file/zipball/94f772bd7a438fcc46984b0075155c8eda7284af",
-                "reference": "94f772bd7a438fcc46984b0075155c8eda7284af",
+                "url": "https://api.github.com/repos/amphp/file/zipball/654596edeb2255277d21049c852c3eed886659c2",
+                "reference": "654596edeb2255277d21049c852c3eed886659c2",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
                 "non-blocking",
                 "static"
             ],
-            "time": "2019-01-07T17:38:45+00:00"
+            "time": "2019-03-01T16:38:57+00:00"
         },
         {
             "name": "amphp/http",
@@ -546,16 +546,16 @@
         },
         {
             "name": "amphp/process",
-            "version": "v1.0.3",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/process.git",
-                "reference": "e7e28219da753f865f9055e87d0b9b110ea607ba"
+                "reference": "355b1e561b01c16ab3d78fada1ad47ccc96df70e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/process/zipball/e7e28219da753f865f9055e87d0b9b110ea607ba",
-                "reference": "e7e28219da753f865f9055e87d0b9b110ea607ba",
+                "url": "https://api.github.com/repos/amphp/process/zipball/355b1e561b01c16ab3d78fada1ad47ccc96df70e",
+                "reference": "355b1e561b01c16ab3d78fada1ad47ccc96df70e",
                 "shasum": ""
             },
             "require": {
@@ -574,7 +574,7 @@
                     "Amp\\Process\\": "lib"
                 },
                 "files": [
-                    "lib/constants.php"
+                    "lib/functions.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -597,11 +597,11 @@
             ],
             "description": "Asynchronous process manager.",
             "homepage": "https://github.com/amphp/process",
-            "time": "2019-01-15T21:42:43+00:00"
+            "time": "2019-02-26T16:33:03+00:00"
         },
         {
             "name": "amphp/socket",
-            "version": "v0.10.11",
+            "version": "v0.10.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
@@ -772,18 +772,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "658ed08346757ca598f73e60329c272dfd83ee90"
+                "reference": "c367bcf5a874fb5a42e856ce95d44cd6e9096f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/658ed08346757ca598f73e60329c272dfd83ee90",
-                "reference": "658ed08346757ca598f73e60329c272dfd83ee90",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/c367bcf5a874fb5a42e856ce95d44cd6e9096f19",
+                "reference": "c367bcf5a874fb5a42e856ce95d44cd6e9096f19",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/byte-stream": "^1.5",
                 "amphp/socket": "^0.10",
+                "cash/lrucache": "^1.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -800,7 +801,6 @@
                     "Amp\\Websocket\\": "src"
                 },
                 "files": [
-                    "src/constants.php",
                     "src/functions.php"
                 ]
             },
@@ -831,7 +831,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-02-17T20:28:54+00:00"
+            "time": "2019-03-03T14:35:07+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -942,6 +942,47 @@
             ],
             "description": "Windows Registry Reader.",
             "time": "2018-10-24T03:34:54+00:00"
+        },
+        {
+            "name": "cash/lrucache",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cash/LRUCache.git",
+                "reference": "4fa4c6834cec59690b43526c4da41d6153026289"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cash/LRUCache/zipball/4fa4c6834cec59690b43526c4da41d6153026289",
+                "reference": "4fa4c6834cec59690b43526c4da41d6153026289",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "cash": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cash Costello",
+                    "email": "cash.costello@gmail.com"
+                }
+            ],
+            "description": "An efficient memory-based Least Recently Used (LRU) cache",
+            "homepage": "https://github.com/cash/LRUCache",
+            "keywords": [
+                "cache",
+                "lru"
+            ],
+            "time": "2013-09-20T18:59:12+00:00"
         },
         {
             "name": "danog/madelineproto",
@@ -1771,12 +1812,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "8fd1e4d2f3e2ba7ed746df3f2d3bcd5cb755f9b3"
+                "reference": "b1b33ae00f0d3f28d351552a85a367a425456ad7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/8fd1e4d2f3e2ba7ed746df3f2d3bcd5cb755f9b3",
-                "reference": "8fd1e4d2f3e2ba7ed746df3f2d3bcd5cb755f9b3",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/b1b33ae00f0d3f28d351552a85a367a425456ad7",
+                "reference": "b1b33ae00f0d3f28d351552a85a367a425456ad7",
                 "shasum": ""
             },
             "require": {
@@ -1822,7 +1863,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2019-01-24T13:36:35+00:00"
+            "time": "2019-03-04T08:56:09+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
