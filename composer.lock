@@ -772,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "c367bcf5a874fb5a42e856ce95d44cd6e9096f19"
+                "reference": "f521f9a764ee3e92c307b0c0d7d23e067ea87d06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/c367bcf5a874fb5a42e856ce95d44cd6e9096f19",
-                "reference": "c367bcf5a874fb5a42e856ce95d44cd6e9096f19",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/f521f9a764ee3e92c307b0c0d7d23e067ea87d06",
+                "reference": "f521f9a764ee3e92c307b0c0d7d23e067ea87d06",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-03-03T14:35:07+00:00"
+            "time": "2019-03-08T00:34:29+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -839,12 +839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "19b5bc5de53a0fa41d10ff72b2edd2e171c3dea1"
+                "reference": "e73fa757e9afdc77b61261805a70aa3de08e4ca5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/19b5bc5de53a0fa41d10ff72b2edd2e171c3dea1",
-                "reference": "19b5bc5de53a0fa41d10ff72b2edd2e171c3dea1",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/e73fa757e9afdc77b61261805a70aa3de08e4ca5",
+                "reference": "e73fa757e9afdc77b61261805a70aa3de08e4ca5",
                 "shasum": ""
             },
             "require": {
@@ -900,7 +900,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-02-20T06:01:30+00:00"
+            "time": "2019-03-08T00:44:56+00:00"
         },
         {
             "name": "amphp/windows-registry",

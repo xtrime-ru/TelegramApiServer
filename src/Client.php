@@ -7,28 +7,31 @@ use \danog\MadelineProto;
 class Client {
 
     public $MadelineProto;
-
+    private $sessionFile;
     /**
      * Client constructor.
      */
-    public function __construct($root)
+    public function __construct($sessionFile)
     {
-        $sessionFile = $root . '/session.madeline';
+        $this->config = Config::getInstance()->get('telegram');
 
-        $config = Config::getInstance()->get('telegram');
-
-        if (empty($config['connection_settings']['all']['proxy_extra']['address'])) {
-            unset($config['connection_settings']);
+        if (empty($this->config['connection_settings']['all']['proxy_extra']['address'])) {
+            unset($this->config['connection_settings']);
         }
 
+        $this->sessionFile = $sessionFile;
+        $this->connect();
+
+    }
+
+    public function connect(){
         //При каждой инициализации настройки обновляются из массива $config
         echo PHP_EOL . 'Starting telegram client ...' . PHP_EOL;
         $time = microtime(true);
-        $this->MadelineProto = new MadelineProto\API($sessionFile, $config);
+        $this->MadelineProto = new MadelineProto\API($this->sessionFile, $this->config);
         $this->MadelineProto->start();
         $time = round(microtime(true) - $time, 3);
         echo PHP_EOL . "Client started: $time sec" . PHP_EOL;
-
     }
 
     /**
