@@ -6,6 +6,8 @@ class RequestCallback
 {
 
     private $client;
+    private $server;
+    public const FATAL_MESSAGE = 'Fatal error. Restarting.';
     private const PAGES = ['index', 'api'];
     /** @var string */
     private $indexMessage;
@@ -31,12 +33,12 @@ class RequestCallback
      * @param \Swoole\Http\Response $response
      * @param Client $client
      */
-    public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Client $client)
+    public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Client $client, $http_server)
     {
         $this->ipWhiteList = (array) Config::getInstance()->get('api.ip_whitelist', []);
         $this->indexMessage = (string) Config::getInstance()->get('api.index_message', 'Welcome to telegram client!');
         $this->client = $client;
-
+        $this->server = $http_server;
         $this->parsePost($request)
             ->resolvePage($request->server['request_uri'])
             ->resolveRequest((array)$request->get, (array)$request->post)
@@ -94,12 +96,8 @@ class RequestCallback
 
         try {
             $this->page['response'] = $this->callApi($request);
-        } catch (\Exception $e) {
-            $this->setPageCode(400);
-            $this->page['errors'][] = [
-                'code' => $e->getCode(),
-                'message' => $e->getMessage(),
-            ];
+        } catch (\Throwable $e) {
+            $this->setError($e);
         }
 
         return $this;
@@ -129,6 +127,31 @@ class RequestCallback
             default:
                 throw new \Exception('Incorrect method format');
         }
+    }
+
+    /**
+     * @param \Throwable $e
+     * @return RequestCallback
+     */
+    private function setError(\Throwable $e):self {
+        if ($e instanceof \Error){
+            //Это критическая ошибка соедниения. Необходим полный перезапуск.
+            $this->setPageCode(400);
+            $this->page['errors'][] = [
+                'code' => $e->getCode(),
+                'message' => static::FATAL_MESSAGE,
+            ];
+            $this->server->stop();
+            return $this;
+        }
+
+        $this->setPageCode(400);
+        $this->page['errors'][] = [
+            'code' => $e->getCode(),
+            'message' => $e->getMessage(),
+        ];
+
+        return $this;
     }
 
 
