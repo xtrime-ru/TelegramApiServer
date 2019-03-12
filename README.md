@@ -28,9 +28,8 @@ Fast, simple, async php telegram client and parser:
     directory=/home/admin/web/tg.i-c-a.su/TelegramSwooleClient/
     autostart=true
     autorestart=true
-    nodaemon=true
-    logfile=/dev/null
-    logfile_maxbytes=0
+    stdout_logfile=none
+    redirect_stderr=true
      ```
 
 **Usage**
