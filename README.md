@@ -1,9 +1,10 @@
 # TelegramSwooleClient
 Fast, simple, async php telegram client and parser: 
-[MadelineProto](https://github.com/danog/MadelineProto) + [Swoole](https://github.com/swoole/swoole-src) Server
+[MadelineProto](https://github.com/danog/MadelineProto) and [Swoole](https://github.com/swoole/swoole-src) Server
 
-* Online server for tests (previous version, different request syntax): http://tg.i-c-a.su/?format=json&images=0&url=breakingmash
+* Online server for tests (previous version, different request syntax): https://tg.i-c-a.su
 * My content aggregator: [https://i-c-a.su](https://i-c-a.su)
+* Im using this microservice in: [my TelegramRSS microservice](https://github.com/xtrime-ru/TelegramRSS) 
 
 **Features**
  * Fast async swoole server
