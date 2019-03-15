@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39c15f87e0d95226da0592708880fea3",
+    "content-hash": "995dee1393d8940a19601669e605f28e",
     "packages": [
         {
             "name": "amphp/amp",
@@ -193,12 +193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "ecb423be02e6db60f01bb39d0ab46c0702be8ba0"
+                "reference": "cb65162596293e0580acccf2d97d3eeb751235fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/ecb423be02e6db60f01bb39d0ab46c0702be8ba0",
-                "reference": "ecb423be02e6db60f01bb39d0ab46c0702be8ba0",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/cb65162596293e0580acccf2d97d3eeb751235fd",
+                "reference": "cb65162596293e0580acccf2d97d3eeb751235fd",
                 "shasum": ""
             },
             "require": {
@@ -261,7 +261,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-03-03T15:12:47+00:00"
+            "time": "2019-03-13T16:43:10+00:00"
         },
         {
             "name": "amphp/file",
@@ -605,12 +605,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "2cb9d0ef823cfd1de4cfbd0e680c58841367f727"
+                "reference": "7d380c9ddcea159c25e54fe4fcbd545152a07633"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/2cb9d0ef823cfd1de4cfbd0e680c58841367f727",
-                "reference": "2cb9d0ef823cfd1de4cfbd0e680c58841367f727",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/7d380c9ddcea159c25e54fe4fcbd545152a07633",
+                "reference": "7d380c9ddcea159c25e54fe4fcbd545152a07633",
                 "shasum": ""
             },
             "require": {
@@ -664,7 +664,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2018-10-17T16:53:02+00:00"
+            "time": "2018-12-31T15:46:19+00:00"
         },
         {
             "name": "amphp/sync",
@@ -839,12 +839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "e73fa757e9afdc77b61261805a70aa3de08e4ca5"
+                "reference": "9dfca49b8c84f4f1879710acf048a68f140fee12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/e73fa757e9afdc77b61261805a70aa3de08e4ca5",
-                "reference": "e73fa757e9afdc77b61261805a70aa3de08e4ca5",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/9dfca49b8c84f4f1879710acf048a68f140fee12",
+                "reference": "9dfca49b8c84f4f1879710acf048a68f140fee12",
                 "shasum": ""
             },
             "require": {
@@ -900,7 +900,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-03-08T00:44:56+00:00"
+            "time": "2019-03-13T15:46:33+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -990,12 +990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "d489c902689fc5e791e9d97720f28fbc7e0f3810"
+                "reference": "388bfcecc5f76d888c81dd3e1bfd4666a1befc0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/d489c902689fc5e791e9d97720f28fbc7e0f3810",
-                "reference": "d489c902689fc5e791e9d97720f28fbc7e0f3810",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/388bfcecc5f76d888c81dd3e1bfd4666a1befc0a",
+                "reference": "388bfcecc5f76d888c81dd3e1bfd4666a1befc0a",
                 "shasum": ""
             },
             "require": {
@@ -1075,7 +1075,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-02-06T19:23:38+00:00"
+            "time": "2019-03-14T11:37:33+00:00"
         },
         {
             "name": "danog/magicalserializer",

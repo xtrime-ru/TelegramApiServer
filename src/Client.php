@@ -275,6 +275,9 @@ class Client {
 			case isset($media['thumb']['size']):
 				$thumb = $media['thumb'];
 				break;
+            case !empty($media['thumbs']):
+                $thumb = $media['thumbs'][array_key_last($media['thumbs'])];
+                break;
 			case isset($media['photo']['sizes']):
 				$thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
 				break;

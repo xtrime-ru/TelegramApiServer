@@ -7,13 +7,13 @@
   "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "swoole", "async", "daemon", "coroutine", "parser", "micro-service"],
   "require": {
     "php": ">=7.2.0",
-    "danog/madelineproto":"dev-master",
+    "danog/madelineproto":"dev-master#388bfcecc5f76d888c81dd3e1bfd4666a1befc0a",
     "amphp/dns": "dev-master as 0.9.9",
     "amphp/file": "dev-master as 0.3.3",
     "amphp/uri": "dev-master as 0.1.3",
     "vlucas/phpdotenv": "^2.4",
     "ext-json": "*",
-    "ext-swoole": ">=4.0"
+    "ext-swoole": ">=4.1"
   },
   "require-dev": {
     "swoole/ide-helper": "dev-master"
