@@ -21,10 +21,9 @@ class Client {
 
         $this->sessionFile = $sessionFile;
         $this->connect();
-
     }
 
-    public function connect(){
+    public function connect() {
         //При каждой инициализации настройки обновляются из массива $config
         echo PHP_EOL . 'Starting telegram client ...' . PHP_EOL;
         $time = microtime(true);
@@ -292,7 +291,7 @@ class Client {
 		return [
 			'headers'=> [
 				['Content-Length', $info['size']],
-				['Content-Type', $info['mime']]
+				['Content-Type', $info['mime']],
 			],
 			'file' => $file,
 		];
