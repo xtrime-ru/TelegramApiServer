@@ -9,6 +9,6 @@ if (!class_exists('TelegramSwooleClient')) {
     chdir($root);
 }
 //Check if root env file hash been loaded (in case plugin installed in existing project)
-if (!getenv('SWOOLE_SERVER_ADDRESS')){
+if (!getenv('SWOOLE_SERVER_ADDRESS')) {
     (new Dotenv\Dotenv($root))->load();
 }

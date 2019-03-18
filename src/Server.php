@@ -23,8 +23,7 @@ class Server
 
         $http_server->set($this->config['options']);
 
-        $http_server->on('request', function(\Swoole\Http\Request $request,  \Swoole\Http\Response $response) use($client, $http_server)
-        {
+        $http_server->on('request', function (\Swoole\Http\Request $request, \Swoole\Http\Response $response) use ($client, $http_server) {
             //На каждый запрос должны создаваться новые экземпляры классов парсера и коллбеков,
             //иначе их данные будут в области видимости всех запросов.
 
@@ -44,10 +43,10 @@ class Server
     private function setConfig(array $config = []): self
     {
         $config = [
-            'server'=> array_filter($config)
+            'server' => array_filter($config)
         ];
 
-        foreach (['server','options'] as $key) {
+        foreach (['server', 'options'] as $key) {
             $this->config[$key] = array_merge(
                 Config::getInstance()->get("swoole.{$key}", []),
                 $config[$key] ?? []

@@ -7,7 +7,7 @@ if (PHP_SAPI !== 'cli') {
 }
 
 $shortopts = 'a::p::s::';
-$longopts  = [
+$longopts = [
     'address::', // ip адресс сервера, необязательное значение
     'port::',  // порт сервера, необязательное значение
     'session::', //префикс session файла
@@ -15,10 +15,10 @@ $longopts  = [
 ];
 $options = getopt($shortopts, $longopts);
 $options = [
-    'address'       => $options['address'] ?? $options['a'] ?? '',
-    'port'          => $options['port'] ?? $options['p'] ?? '',
-    'session'       => $options['session'] ?? $options['s'] ?? '',
-    'help'          => isset($options['help']),
+    'address' => $options['address'] ?? $options['a'] ?? '',
+    'port' => $options['port'] ?? $options['p'] ?? '',
+    'session' => $options['session'] ?? $options['s'] ?? '',
+    'help' => isset($options['help']),
 ];
 
 if ($options['help']) {
@@ -44,7 +44,7 @@ Example:
 if ($options['session']) {
     $sessionFile = "{$root}/{$options['session']}_session.madeline";
 } else {
-    $sessionFile =  "{$root}/session.madeline";
+    $sessionFile = "{$root}/session.madeline";
 }
 
 $client = new \TelegramSwooleClient\Client($sessionFile);

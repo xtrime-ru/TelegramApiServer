@@ -50,17 +50,19 @@ class Config
      * @param null $default
      * @return mixed|null
      */
-    public function get($key = '', $default = null) {
+    public function get($key = '', $default = null)
+    {
         return $this->findByKey($key) ?? $default;
     }
 
-    private function findByKey($key) {
-        $key = (string) $key;
+    private function findByKey($key)
+    {
+        $key = (string)$key;
         $path = explode('.', $key);
 
         $value = &$this->config;
-        foreach($path as $pathKey) {
-            if (!is_array($value) || !array_key_exists($pathKey,$value)) {
+        foreach ($path as $pathKey) {
+            if (!is_array($value) || !array_key_exists($pathKey, $value)) {
                 return;
             }
             $value = &$value[$pathKey];

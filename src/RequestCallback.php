@@ -11,7 +11,7 @@ class RequestCallback
     private const PAGES = ['index', 'api'];
     /** @var string */
     private $indexMessage;
-    /** @var array  */
+    /** @var array */
     private $ipWhiteList;
     private $path = [];
     public $page = [
@@ -20,7 +20,7 @@ class RequestCallback
         ],
         'success' => 0,
         'errors' => [],
-        'code'  => 200,
+        'code' => 200,
         'response' => null,
     ];
     private $parameters = [];
@@ -35,8 +35,8 @@ class RequestCallback
      */
     public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Client $client, $http_server)
     {
-        $this->ipWhiteList = (array) Config::getInstance()->get('api.ip_whitelist', []);
-        $this->indexMessage = (string) Config::getInstance()->get('api.index_message', 'Welcome to telegram client!');
+        $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
+        $this->indexMessage = (string)Config::getInstance()->get('api.index_message', 'Welcome to telegram client!');
         $this->client = $client;
         $this->server = $http_server;
         $this->parsePost($request)
@@ -63,7 +63,7 @@ class RequestCallback
         $this->path = array_values(array_filter(explode('/', $uri)));
         if (!$this->path || $this->path[0] !== 'api') {
             $this->page['response'] = $this->indexMessage;
-        } elseif (!in_array($this->path[0],self::PAGES, true)) {
+        } elseif (!in_array($this->path[0], self::PAGES, true)) {
             $this->setPageCode(404);
             $this->page['errors'][] = 'Incorrect path';
         }
@@ -76,7 +76,8 @@ class RequestCallback
      * @param array $post
      * @return RequestCallback
      */
-    private function resolveRequest(array $get, array $post):self {
+    private function resolveRequest(array $get, array $post): self
+    {
         $this->parameters = array_values(array_merge($get, $post));
         $this->api = $this->path[1] ?? '';
         return $this;
@@ -103,18 +104,19 @@ class RequestCallback
         return $this;
     }
 
-    private function callApi(\Swoole\Http\Request $request){
+    private function callApi(\Swoole\Http\Request $request)
+    {
         if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
             throw new \Exception('API not available');
         }
 
-        if (method_exists($this->client,$this->api)){
+        if (method_exists($this->client, $this->api)) {
             return $this->client->{$this->api}(...$this->parameters);
         }
 
         //Проверяем нет ли в MadilineProto такого метода.
         $this->api = explode('.', $this->api);
-        switch (count($this->api)){
+        switch (count($this->api)) {
             case 1:
                 return $this->client->MadelineProto->{$this->api[0]}(...$this->parameters);
                 break;
@@ -133,8 +135,9 @@ class RequestCallback
      * @param \Throwable $e
      * @return RequestCallback
      */
-    private function setError(\Throwable $e):self {
-        if ($e instanceof \Error){
+    private function setError(\Throwable $e): self
+    {
+        if ($e instanceof \Error) {
             //Это критическая ошибка соедниения. Необходим полный перезапуск.
             $this->setPageCode(400);
             $this->page['errors'][] = [
