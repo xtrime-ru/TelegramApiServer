@@ -39,12 +39,12 @@ Fast, simple, async php telegram client and parser:
     php server.php [--help] [-a|--address=127.0.0.1] [-p|--port=9503]
     
     Options:
-    
             --help      Show this message
-        -a  --address   Server ip (optional) (example: 127.0.0.1 or 0.0.0.0 to listen all hosts)
+        -a  --address   Server ip (optional) (example: 127.0.0.1)
         -p  --port      Server port (optional) (example: 9503)
+        -s  --session   Prefix for session file (optional) (example: xtrime)
     
-    Also all options can be set in .env file (see .env.example)
+    Also  options can be set in .env file (see .env.example)
     ```
 1. Access telegram api directly via simple get requests.    
     Rules:
