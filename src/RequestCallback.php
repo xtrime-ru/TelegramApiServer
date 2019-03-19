@@ -7,7 +7,7 @@ class RequestCallback
 
     private $client;
     private $server;
-    public const FATAL_MESSAGE = 'Fatal error. Restarting.';
+    public const FATAL_MESSAGE = 'Fatal error. Exit.';
     private const PAGES = ['index', 'api'];
     /** @var string */
     private $indexMessage;
@@ -36,7 +36,7 @@ class RequestCallback
     public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Client $client, $http_server)
     {
         $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
-        $this->indexMessage = (string)Config::getInstance()->get('api.index_message', 'Welcome to telegram client!');
+        $this->indexMessage = (string)Config::getInstance()->get('api.index_message', '');
         $this->client = $client;
         $this->server = $http_server;
         $this->parsePost($request)

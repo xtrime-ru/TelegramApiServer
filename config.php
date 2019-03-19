@@ -36,16 +36,13 @@ return [
             ]
         ]
     ],
-    'curl' => [
-        'proxy' => [
-            'address' => getenv('CURL_PROXY_ADDRESS'),
-            'port' => getenv('CURL_PROXY_PORT'),
-            'username' => getenv('CURL_PROXY_USERNAME'),
-            'password' => getenv('CURL_PROXY_PASSWORD'),
-        ]
-    ],
     'api' => [
-        'ip_whitelist' => json_decode(getenv('API_CLIENT_WHITELIST'), true),
+        'ip_whitelist' => array_filter(
+            array_map(
+                'trim',
+                explode(',', getenv('IP_WHITELIST'))
+            )
+        ),
         'index_message' => getenv('API_INDEX_MESSAGE'),
     ],
 ];
