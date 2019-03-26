@@ -18,7 +18,8 @@ class Client
         $this->config = Config::getInstance()->get('telegram');
 
         if (empty($this->config['connection_settings']['all']['proxy_extra']['address'])) {
-            unset($this->config['connection_settings']);
+            $this->config['connection_settings']['all']['proxy'] = '\Socket';
+            $this->config['connection_settings']['all']['proxy_extra'] = [];
         }
 
         $this->sessionFile = $sessionFile;
