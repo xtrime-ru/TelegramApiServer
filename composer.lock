@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c509809ecfb549689e2df68468bf36e",
+    "content-hash": "e1203c0c3d1e903ce94074321e1e887d",
     "packages": [
         {
             "name": "amphp/amp",
@@ -331,7 +331,7 @@
         },
         {
             "name": "amphp/http",
-            "version": "dev-master",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
@@ -605,12 +605,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "7d380c9ddcea159c25e54fe4fcbd545152a07633"
+                "reference": "e90cda8929462bc563351bf82753ff48d9796ddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/7d380c9ddcea159c25e54fe4fcbd545152a07633",
-                "reference": "7d380c9ddcea159c25e54fe4fcbd545152a07633",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/e90cda8929462bc563351bf82753ff48d9796ddc",
+                "reference": "e90cda8929462bc563351bf82753ff48d9796ddc",
                 "shasum": ""
             },
             "require": {
@@ -664,7 +664,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2018-12-31T15:46:19+00:00"
+            "time": "2019-03-26T04:17:14+00:00"
         },
         {
             "name": "amphp/sync",
@@ -772,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "f521f9a764ee3e92c307b0c0d7d23e067ea87d06"
+                "reference": "e033171516a465b8155b9459189f028a89d6c354"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/f521f9a764ee3e92c307b0c0d7d23e067ea87d06",
-                "reference": "f521f9a764ee3e92c307b0c0d7d23e067ea87d06",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/e033171516a465b8155b9459189f028a89d6c354",
+                "reference": "e033171516a465b8155b9459189f028a89d6c354",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-03-08T00:34:29+00:00"
+            "time": "2019-03-29T17:33:23+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -839,18 +839,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "9dfca49b8c84f4f1879710acf048a68f140fee12"
+                "reference": "7fc266e859e79a10f9db3519d5ff1a0b9239fd91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/9dfca49b8c84f4f1879710acf048a68f140fee12",
-                "reference": "9dfca49b8c84f4f1879710acf048a68f140fee12",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/7fc266e859e79a10f9db3519d5ff1a0b9239fd91",
+                "reference": "7fc266e859e79a10f9db3519d5ff1a0b9239fd91",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
-                "amphp/byte-stream": "^1",
-                "amphp/http": "dev-master as 1.1",
+                "amphp/http": "^1.1",
                 "amphp/socket": "^0.10",
                 "amphp/websocket": "dev-master as 1.0",
                 "league/uri-schemes": "^1.2",
@@ -900,7 +899,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-03-13T15:46:33+00:00"
+            "time": "2019-03-29T16:10:54+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -990,12 +989,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "388bfcecc5f76d888c81dd3e1bfd4666a1befc0a"
+                "reference": "651e1afd66ef7500fe1ad4adf7b3e06a17e47396"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/388bfcecc5f76d888c81dd3e1bfd4666a1befc0a",
-                "reference": "388bfcecc5f76d888c81dd3e1bfd4666a1befc0a",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/651e1afd66ef7500fe1ad4adf7b3e06a17e47396",
+                "reference": "651e1afd66ef7500fe1ad4adf7b3e06a17e47396",
                 "shasum": ""
             },
             "require": {
@@ -1075,7 +1074,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-03-14T11:37:33+00:00"
+            "time": "2019-03-30T13:01:47+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1196,16 +1195,16 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.8.0-beta-5",
+            "version": "v1.8.0-beta-6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "c26a2ee4bf8ba0270daab7da0353f2525ca6564a"
+                "reference": "7d4c06cb520cca6d0c5a381eaa15bb5576593682"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c26a2ee4bf8ba0270daab7da0353f2525ca6564a",
-                "reference": "c26a2ee4bf8ba0270daab7da0353f2525ca6564a",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/7d4c06cb520cca6d0c5a381eaa15bb5576593682",
+                "reference": "7d4c06cb520cca6d0c5a381eaa15bb5576593682",
                 "shasum": ""
             },
             "require": {
@@ -1238,7 +1237,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2018-06-11T18:15:32+00:00"
+            "time": "2019-03-17T17:19:07+00:00"
         },
         {
             "name": "league/uri-interfaces",
@@ -1982,7 +1981,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "cff84462f360a0e281fa8f5fcc91c9420da5b9d9"
+                "reference": "719cc5af3913365921c90cf118bf9eee317d2713"
             },
             "type": "library",
             "license": [
@@ -1995,7 +1994,7 @@
                 }
             ],
             "description": "swoole-ide-helper",
-            "time": "2019-01-15T02:52:04+00:00"
+            "time": "2019-03-29T17:47:11+00:00"
         }
     ],
     "aliases": [
