@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer;
 
+use function Amp\call;
 use danog\MadelineProto;
 
 class Client
@@ -33,6 +34,7 @@ class Client
         $time = microtime(true);
         $this->MadelineProto = new MadelineProto\API($this->sessionFile, $this->config);
         $this->MadelineProto->start();
+        $this->MadelineProto->async(true);
         $time = round(microtime(true) - $time, 3);
         echo PHP_EOL . "Client started: $time sec" . PHP_EOL;
     }
@@ -53,9 +55,10 @@ class Client
      *     'hash'          => 0, // (optional)
      * ]
      * </pre>
-     * @return array
+     * @return \Generator
+     * @throws \Throwable
      */
-    public function getHistory($data): array
+    public function getHistory($data)
     {
         $data = array_merge([
             'peer' => '',
@@ -82,9 +85,10 @@ class Client
      *  'id'        => [], //Id сообщения, или нескольких сообщений
      * ]
      * </pre>
-     * @return array
+     * @return \Amp\Promise
+     * @throws \Throwable
      */
-    public function copyMessages($data): array
+    public function copyMessages($data)
     {
 
         $data = array_merge([
@@ -93,7 +97,7 @@ class Client
             'id' => [],
         ], $data);
 
-        $response = $this->MadelineProto->channels->getMessages([
+        $response = yield $this->MadelineProto->channels->getMessages([
             'channel' => $data['from_peer'],
             'id' => $data['id'],
         ]);
@@ -113,9 +117,9 @@ class Client
             static::hasMedia($message, false)
             ) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
-                $result[] = $this->sendMedia($messageData);
+                $result[] = yield $this->sendMedia($messageData);
             } else {
-                $result[] = $this->sendMessage($messageData);
+                $result[] = yield $this->sendMessage($messageData);
             }
         }
 
@@ -133,9 +137,9 @@ class Client
      *  'limit'         => 10,  // (optional)
      * ]
      * </pre>
-     * @return array
+     * @return \Amp\Promise
      */
-    public function searchGlobal(array $data): array
+    public function searchGlobal(array $data)
     {
         $data = array_merge([
             'q' => '',
@@ -147,7 +151,7 @@ class Client
     }
 
     /**
-     * @param $data
+     * @param array $data
      * <pre>
      * [
      *  'peer'              => '',
@@ -156,9 +160,10 @@ class Client
      *  'parse_mode'        => 'HTML',  // (optional)
      * ]
      * </pre>
-     * @return array
+     * @return \Amp\Promise
+     * @throws \Throwable
      */
-    public function sendMessage($data = []): array
+    public function sendMessage($data = [])
     {
         $data = array_merge([
             'peer' => '',
@@ -171,7 +176,7 @@ class Client
     }
 
     /**
-     * @param $data
+     * @param array $data
      * <pre>
      * [
      *  'peer'              => '',
@@ -181,9 +186,10 @@ class Client
      *  'parse_mode'        => 'HTML',  // (optional)
      * ]
      * </pre>
-     * @return array
+     * @return \Amp\Promise
+     * @throws \Throwable
      */
-    public function sendMedia($data = []): array
+    public function sendMedia($data = [])
     {
         $data = array_merge([
             'peer' => '',
@@ -193,7 +199,7 @@ class Client
             'parse_mode' => 'HTML',
         ], $data);
 
-        return $this->MadelineProto->messages->sendMedia($data);
+       return $this->MadelineProto->messages->sendMedia($data);
     }
 
 
@@ -202,49 +208,52 @@ class Client
      *
      * Внимание! Необходимо самостоятельно удалять временные файлы после их использования
      * @param $data
-     * @return array
+     * @return \Amp\Promise
+     * @throws \Throwable
      */
-    public function getMedia($data): array
+    public function getMedia($data)
     {
-        $data = array_merge([
-            'channel' => '',
-            'id' => [0],
-            'message' => [],
-            'size_limit' => 0,
-        ], $data);
+        return call(function () use($data) {
+            $data = array_merge([
+                'channel' => '',
+                'id' => [0],
+                'message' => [],
+                'size_limit' => 0,
+            ], $data);
 
 
-        if (!$data['message']) {
-            $response = $this->MadelineProto->channels->getMessages($data);
-            $message = $response['messages'][0];
-        } else {
-            $message = $data['message'];
-        }
-
-        if (!static::hasMedia($message)) {
-            throw new \UnexpectedValueException('Message has no media');
-        }
-
-        $info = $this->MadelineProto->get_download_info($message);
-
-        if ($data['size_limit']) {
-            if ($info['size'] > $data['size_limit']) {
-                throw new \OutOfRangeException(
-                    "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
-                );
+            if (!$data['message']) {
+                $response = yield $this->MadelineProto->channels->getMessages($data);
+                $message = $response['messages'][0];
+            } else {
+                $message = $data['message'];
             }
-        }
 
-        $file = tempnam(sys_get_temp_dir(), 'telegram_media_');
-        $this->MadelineProto->download_to_file($message, $file);
+            if (!static::hasMedia($message)) {
+                throw new \UnexpectedValueException('Message has no media');
+            }
 
-        return [
-            'headers' => [
-                ['Content-Length', $info['size']],
-                ['Content-Type', $info['mime']]
-            ],
-            'file' => $file,
-        ];
+            $info = yield $this->MadelineProto->get_download_info($message);
+
+            if ($data['size_limit']) {
+                if ($info['size'] > $data['size_limit']) {
+                    throw new \OutOfRangeException(
+                        "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
+                    );
+                }
+            }
+
+            $file = tempnam(sys_get_temp_dir(), 'telegram_media_');
+            $this->MadelineProto->download_to_file($message, $file);
+
+            return [
+                'headers' => [
+                    ['Content-Length', $info['size']],
+                    ['Content-Type', $info['mime']]
+                ],
+                'file' => $file,
+            ];
+        });
     }
 
     /**
@@ -252,56 +261,59 @@ class Client
      *
      * Внимание! Необходимо самостоятельно удалять временные файлы после их использования
      * @param array $data
-     * @return array
+     * @return \Amp\Promise
+     * @throws \Throwable
      */
-    public function getMediaPreview(array $data): array
+    public function getMediaPreview(array $data)
     {
-        $data = array_merge([
-            'channel' => '',
-            'id' => [0],
-            'message' => [],
-        ], $data);
+        return call(function ()use($data){
+            $data = array_merge([
+                'channel' => '',
+                'id' => [0],
+                'message' => [],
+            ], $data);
 
-        if (!$data['message']) {
-            $response = $this->MadelineProto->channels->getMessages($data);
-            $message = $response['messages'][0];
-        } else {
-            $message = $data['message'];
-        }
+            if (!$data['message']) {
+                $response = yield $this->MadelineProto->channels->getMessages($data);
+                $message = $response['messages'][0];
+            } else {
+                $message = $data['message'];
+            }
 
-        if (!static::hasMedia($message)) {
-            throw new \UnexpectedValueException('Message has no media');
-        }
+            if (!static::hasMedia($message)) {
+                throw new \UnexpectedValueException('Message has no media');
+            }
 
-        $media = $message['media'][array_key_last($message['media'])];
-        switch (true) {
-            case isset($media['sizes']):
-                $thumb = $media['sizes'][array_key_last($media['sizes'])];
-                break;
-            case isset($media['thumb']['size']):
-                $thumb = $media['thumb'];
-                break;
-            case !empty($media['thumbs']):
-                $thumb = $media['thumbs'][array_key_last($media['thumbs'])];
-                break;
-            case isset($media['photo']['sizes']):
-                $thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
-                break;
-            default:
-                throw new \UnexpectedValueException('Message has no preview');
+            $media = $message['media'][array_key_last($message['media'])];
+            switch (true) {
+                case isset($media['sizes']):
+                    $thumb = $media['sizes'][array_key_last($media['sizes'])];
+                    break;
+                case isset($media['thumb']['size']):
+                    $thumb = $media['thumb'];
+                    break;
+                case !empty($media['thumbs']):
+                    $thumb = $media['thumbs'][array_key_last($media['thumbs'])];
+                    break;
+                case isset($media['photo']['sizes']):
+                    $thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
+                    break;
+                default:
+                    throw new \UnexpectedValueException('Message has no preview');
 
-        }
-        $info = $this->MadelineProto->get_download_info($thumb);
-        $file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
-        $this->MadelineProto->download_to_file($thumb, $file);
+            }
+            $info = $this->MadelineProto->get_download_info($thumb);
+            $file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
+            $this->MadelineProto->download_to_file($thumb, $file);
 
-        return [
-            'headers' => [
-                ['Content-Length', $info['size']],
-                ['Content-Type', $info['mime']],
-            ],
-            'file' => $file,
-        ];
+            return [
+                'headers' => [
+                    ['Content-Length', $info['size']],
+                    ['Content-Type', $info['mime']],
+                ],
+                'file' => $file,
+            ];
+        });
     }
 
     /**
