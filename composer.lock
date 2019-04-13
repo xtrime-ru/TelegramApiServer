@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1203c0c3d1e903ce94074321e1e887d",
+    "content-hash": "9321c28c947be4fb0254401953a2db2f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -772,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "e033171516a465b8155b9459189f028a89d6c354"
+                "reference": "db2da8c5b3ed22eae37da5ffa10ab3ea8de19342"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/e033171516a465b8155b9459189f028a89d6c354",
-                "reference": "e033171516a465b8155b9459189f028a89d6c354",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/db2da8c5b3ed22eae37da5ffa10ab3ea8de19342",
+                "reference": "db2da8c5b3ed22eae37da5ffa10ab3ea8de19342",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-03-29T17:33:23+00:00"
+            "time": "2019-04-06T14:39:18+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -839,12 +839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "7fc266e859e79a10f9db3519d5ff1a0b9239fd91"
+                "reference": "aff808025637bd705672338b4904ad03a4dbdc04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/7fc266e859e79a10f9db3519d5ff1a0b9239fd91",
-                "reference": "7fc266e859e79a10f9db3519d5ff1a0b9239fd91",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/aff808025637bd705672338b4904ad03a4dbdc04",
+                "reference": "aff808025637bd705672338b4904ad03a4dbdc04",
                 "shasum": ""
             },
             "require": {
@@ -899,7 +899,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-03-29T16:10:54+00:00"
+            "time": "2019-04-06T14:53:32+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -989,12 +989,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "651e1afd66ef7500fe1ad4adf7b3e06a17e47396"
+                "reference": "56e8ed7add1deefafe12771e7b5254bdc88ea158"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/651e1afd66ef7500fe1ad4adf7b3e06a17e47396",
-                "reference": "651e1afd66ef7500fe1ad4adf7b3e06a17e47396",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/56e8ed7add1deefafe12771e7b5254bdc88ea158",
+                "reference": "56e8ed7add1deefafe12771e7b5254bdc88ea158",
                 "shasum": ""
             },
             "require": {
@@ -1074,7 +1074,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-03-30T13:01:47+00:00"
+            "time": "2019-04-08T14:24:29+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1195,16 +1195,16 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "v1.8.0-beta-6",
+            "version": "1.8.0-beta-7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "7d4c06cb520cca6d0c5a381eaa15bb5576593682"
+                "reference": "fe7a50eceb4a3c867cc9fa9c0aa906b1067d1955"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/7d4c06cb520cca6d0c5a381eaa15bb5576593682",
-                "reference": "7d4c06cb520cca6d0c5a381eaa15bb5576593682",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fe7a50eceb4a3c867cc9fa9c0aa906b1067d1955",
+                "reference": "fe7a50eceb4a3c867cc9fa9c0aa906b1067d1955",
                 "shasum": ""
             },
             "require": {
@@ -1237,7 +1237,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2019-03-17T17:19:07+00:00"
+            "time": "2019-03-17T18:47:21+00:00"
         },
         {
             "name": "league/uri-interfaces",
@@ -1811,12 +1811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "b1b33ae00f0d3f28d351552a85a367a425456ad7"
+                "reference": "b539b65bf462b52e6ec41cb8c758472120d784b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/b1b33ae00f0d3f28d351552a85a367a425456ad7",
-                "reference": "b1b33ae00f0d3f28d351552a85a367a425456ad7",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/b539b65bf462b52e6ec41cb8c758472120d784b6",
+                "reference": "b539b65bf462b52e6ec41cb8c758472120d784b6",
                 "shasum": ""
             },
             "require": {
@@ -1862,7 +1862,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2019-03-04T08:56:09+00:00"
+            "time": "2019-03-24T00:59:57+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1981,9 +1981,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "719cc5af3913365921c90cf118bf9eee317d2713"
+                "reference": "303d47f3a4e2529981bd7580388c164b88ea0fd3"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "~3.4.0",
+                "zendframework/zend-code": "~3.3.0"
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Swoole\\IDEHelper\\": "src/"
+                }
+            },
             "license": [
                 "Apache-2.0"
             ],
@@ -1993,8 +2002,8 @@
                     "email": "team@swoole.com"
                 }
             ],
-            "description": "swoole-ide-helper",
-            "time": "2019-03-29T17:47:11+00:00"
+            "description": "IDE help files for Swoole.",
+            "time": "2019-04-12T05:33:21+00:00"
         }
     ],
     "aliases": [

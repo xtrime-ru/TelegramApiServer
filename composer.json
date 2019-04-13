@@ -7,7 +7,7 @@
   "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "swoole", "async", "daemon", "coroutine", "parser", "micro-service"],
   "require": {
     "php": ">=7.2.0",
-    "danog/madelineproto":"dev-master#651e1afd66ef7500fe1ad4adf7b3e06a17e47396",
+    "danog/madelineproto":"dev-master#56e8ed7add1deefafe12771e7b5254bdc88ea158",
     "amphp/dns": "dev-master as 0.9.9",
     "amphp/file": "dev-master as 0.3.3",
     "amphp/uri": "dev-master as 0.1.3",
