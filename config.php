@@ -34,6 +34,9 @@ return [
                     'password' => getenv('TELEGRAM_PROXY_PASSWORD'),
                 ]
             ]
+        ],
+        'serialization' => [
+            'serialization_interval' => strtotime('10 years', 0), //Отключаем сериализацию
         ]
     ],
     'api' => [
