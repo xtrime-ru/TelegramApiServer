@@ -6,7 +6,7 @@ use danog\MadelineProto;
 
 class Client
 {
-
+    /** @var MadelineProto\API */
     public $MadelineProto;
     private $sessionFile;
 
@@ -103,7 +103,7 @@ class Client
         }
 
         foreach ($response['messages'] as $message) {
-            usleep(mt_rand(300, 2000) * 1000);
+            usleep(random_int(300, 2000) * 1000);
             $messageData = [
                 'message' => $message['message'] ?? '',
                 'peer' => $data['to_peer'],
@@ -204,7 +204,7 @@ class Client
      * @param $data
      * @return array
      */
-    public function getMedia($data)
+    public function getMedia($data): array
     {
         $data = array_merge([
             'channel' => '',
@@ -254,7 +254,7 @@ class Client
      * @param array $data
      * @return array
      */
-    public function getMediaPreview(array $data)
+    public function getMediaPreview(array $data): array
     {
         $data = array_merge([
             'channel' => '',
@@ -309,7 +309,7 @@ class Client
      * @param array $message
      * @return bool
      */
-    private static function hasMedia($message = [], $useWebPage = true)
+    private static function hasMedia($message = [], $useWebPage = true): bool
     {
         $media = $message['media'] ?? [];
         if (empty($media['_'])) {

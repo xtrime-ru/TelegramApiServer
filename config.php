@@ -35,9 +35,6 @@ return [
                 ]
             ]
         ],
-        'serialization' => [
-            'serialization_interval' => strtotime('10 years', 0), //Отключаем сериализацию
-        ]
     ],
     'api' => [
         'ip_whitelist' => array_filter(

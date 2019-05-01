@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9321c28c947be4fb0254401953a2db2f",
+    "content-hash": "f096ccc38e242d3d74a1d22684af86f5",
     "packages": [
         {
             "name": "amphp/amp",
@@ -985,17 +985,11 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "dev-session_optimization",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "56e8ed7add1deefafe12771e7b5254bdc88ea158"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/56e8ed7add1deefafe12771e7b5254bdc88ea158",
-                "reference": "56e8ed7add1deefafe12771e7b5254bdc88ea158",
-                "shasum": ""
+                "url": "https://github.com/xtrime-ru/MadelineProto.git",
+                "reference": "56b6869620ac041cfadb64dc070accbc4774b7af"
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1023,6 +1017,7 @@
                 "krakjoe/pthreads-polyfill": "*"
             },
             "require-dev": {
+                "ennexa/amp-update-cache": "dev-master",
                 "phpdocumentor/reflection-docblock": "^3.1"
             },
             "suggest": {
@@ -1048,7 +1043,6 @@
                     "src/YieldReturnValue.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -1062,19 +1056,19 @@
             "homepage": "https://daniil.it/MadelineProto",
             "keywords": [
                 "GB",
-                "Messenger",
+                "PHP",
                 "audio",
                 "bytes",
                 "client",
                 "files",
+                "messenger",
                 "mtproto",
-                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "time": "2019-04-08T14:24:29+00:00"
+            "time": "2019-05-01T21:30:22+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1241,7 +1235,7 @@
         },
         {
             "name": "league/uri-interfaces",
-            "version": "dev-master",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-interfaces.git",
@@ -1293,7 +1287,7 @@
         },
         {
             "name": "league/uri-parser",
-            "version": "dev-master",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-parser.git",
@@ -1306,7 +1300,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": ">=7.0.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
@@ -1358,7 +1352,7 @@
         },
         {
             "name": "league/uri-schemes",
-            "version": "dev-master",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-schemes.git",
@@ -1981,7 +1975,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "d06716c7ab10bcf638947e7c58eb93b1792d3350"
+                "reference": "3b0b3e761580dd77c5c72c1c4424efd08053230c"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "~3.4.0",
@@ -2003,7 +1997,7 @@
                 }
             ],
             "description": "IDE help files for Swoole.",
-            "time": "2019-04-16T04:23:26+00:00"
+            "time": "2019-04-25T07:05:36+00:00"
         }
     ],
     "aliases": [
