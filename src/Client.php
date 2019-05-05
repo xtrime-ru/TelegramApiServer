@@ -32,7 +32,9 @@ class Client
         echo PHP_EOL . 'Starting telegram client ...' . PHP_EOL;
         $time = microtime(true);
         $this->MadelineProto = new MadelineProto\API($this->sessionFile, $this->config);
-        $this->MadelineProto->start();
+        if (!file_exists($this->sessionFile)) {
+            $this->MadelineProto->start();
+        }
         $time = round(microtime(true) - $time, 3);
         echo PHP_EOL . "Client started: $time sec" . PHP_EOL;
     }

@@ -28,7 +28,11 @@ class Server
             //иначе их данные будут в области видимости всех запросов.
 
             //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
-            new RequestCallback($request, $response, $client, $http_server);
+            $requestCallback = new RequestCallback($request, $client, $http_server);
+
+            $response->header(...$requestCallback->page['headers']);
+            $response->status($requestCallback->page['code']);
+            $response->end($requestCallback->encodeResponse());
         });
         $http_server->start();
 

@@ -30,10 +30,10 @@ class RequestCallback
     /**
      * RequestCallback constructor.
      * @param \Swoole\Http\Request $request
-     * @param \Swoole\Http\Response $response
      * @param Client $client
+     * @param \Swoole\Http\Server $http_server
      */
-    public function __construct(\Swoole\Http\Request $request, \Swoole\Http\Response $response, Client $client, $http_server)
+    public function __construct(\Swoole\Http\Request $request, Client $client, \Swoole\Http\Server $http_server)
     {
         $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
         $this->indexMessage = (string)Config::getInstance()->get('api.index_message', '');
@@ -44,11 +44,6 @@ class RequestCallback
             ->resolveRequest((array)$request->get, (array)$request->post)
             ->generateResponse($request);
 
-        $result = $this->encodeResponse();
-
-        $response->header(...$this->page['headers']);
-        $response->status($this->page['code']);
-        $response->end($result);
     }
 
 
@@ -163,7 +158,7 @@ class RequestCallback
      *
      * @return string
      */
-    private function encodeResponse(): string
+    public function encodeResponse(): string
     {
         $data = [
             'success' => $this->page['success'],
