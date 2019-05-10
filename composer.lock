@@ -989,7 +989,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "56b6869620ac041cfadb64dc070accbc4774b7af"
+                "reference": "4b861388e754f9858a6661246e90256707be0b58"
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1068,7 +1068,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-05-01T21:30:22+00:00"
+            "time": "2019-05-10T20:44:48+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1805,22 +1805,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "b539b65bf462b52e6ec41cb8c758472120d784b6"
+                "reference": "8a57ad9574d85bd818eaedfc8049fdcb16795f31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/b539b65bf462b52e6ec41cb8c758472120d784b6",
-                "reference": "b539b65bf462b52e6ec41cb8c758472120d784b6",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/8a57ad9574d85bd818eaedfc8049fdcb16795f31",
+                "reference": "8a57ad9574d85bd818eaedfc8049fdcb16795f31",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "psr/log": "^1.0.1"
+                "monolog/monolog": "^1",
+                "psr/log": "^1"
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "dev-master",
                 "mockery/mockery": "0.9.*",
-                "monolog/monolog": "^1.24",
                 "packfire/php5.3-compat": "*",
                 "phpmd/phpmd": "@stable",
                 "phpunit/phpunit": "4.8.*",
@@ -1856,7 +1856,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2019-03-24T00:59:57+00:00"
+            "time": "2019-05-06T11:31:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
