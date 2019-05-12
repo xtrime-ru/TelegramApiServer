@@ -16,7 +16,7 @@ class RequestCallback
     private $path = [];
     public $page = [
         'headers' => [
-            'Content-Type', 'application/json;charset=utf-8'
+            ['Content-Type', 'application/json;charset=utf-8'],
         ],
         'success' => 0,
         'errors' => [],

@@ -30,7 +30,10 @@ class Server
             //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
             $requestCallback = new RequestCallback($request, $client, $http_server);
 
-            $response->header(...$requestCallback->page['headers']);
+            foreach ($requestCallback->page['headers'] as $header) {
+                $response->header(...$header);
+            }
+
             $response->status($requestCallback->page['code']);
             $response->end($requestCallback->encodeResponse());
         });
