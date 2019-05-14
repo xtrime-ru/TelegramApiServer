@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f096ccc38e242d3d74a1d22684af86f5",
+    "content-hash": "308dc823c837683776469789ec856985",
     "packages": [
         {
             "name": "amphp/amp",
@@ -81,6 +81,66 @@
                 "promise"
             ],
             "time": "2018-12-11T10:31:37+00:00"
+        },
+        {
+            "name": "amphp/artax",
+            "version": "v3.0.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/artax.git",
+                "reference": "84ba8e2014a81e399541f3dc3a6352bab09c980c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/artax/zipball/84ba8e2014a81e399541f3dc3a6352bab09c980c",
+                "reference": "84ba8e2014a81e399541f3dc3a6352bab09c980c",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/byte-stream": "^1.1.6",
+                "amphp/file": "^0.2 || ^0.3",
+                "amphp/socket": "^0.10.5",
+                "amphp/uri": "^0.1",
+                "kelunik/certificate": "^1.1",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "amphp/phpunit-util": "^1",
+                "friendsofphp/php-cs-fixer": "^2.3",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Artax\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com"
+                }
+            ],
+            "description": "Asynchronous parallel HTTP/1.1 client built on the Amp concurrency framework",
+            "homepage": "https://github.com/amphp/artax",
+            "keywords": [
+                "async",
+                "client",
+                "http",
+                "non-blocking",
+                "parallel",
+                "rest"
+            ],
+            "time": "2018-02-01T20:29:48+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -728,12 +788,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/uri.git",
-                "reference": "b1b0aa74ba76aad7a75693fdc87e017b0c349316"
+                "reference": "30065946d5c69f44c8a47bf8838244029984ff61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/uri/zipball/b1b0aa74ba76aad7a75693fdc87e017b0c349316",
-                "reference": "b1b0aa74ba76aad7a75693fdc87e017b0c349316",
+                "url": "https://api.github.com/repos/amphp/uri/zipball/30065946d5c69f44c8a47bf8838244029984ff61",
+                "reference": "30065946d5c69f44c8a47bf8838244029984ff61",
                 "shasum": ""
             },
             "require-dev": {
@@ -764,7 +824,7 @@
             ],
             "description": "Uri Parser and Resolver.",
             "homepage": "https://github.com/amphp/uri",
-            "time": "2018-12-21T10:29:41+00:00"
+            "time": "2019-05-13T18:25:34+00:00"
         },
         {
             "name": "amphp/websocket",
@@ -985,14 +1045,15 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-session_optimization",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "4b861388e754f9858a6661246e90256707be0b58"
+                "reference": "d18d97d208ef7d39e73cd117b55efc2208dd7819"
             },
             "require": {
                 "amphp/amp": "^2.0",
+                "amphp/artax": "^3.0",
                 "amphp/dns": "dev-master#861cc857b1ba6e02e8a7439c30403682785fce96 as 0.9.9",
                 "amphp/file": "dev-master#5a69fca406ac5fd220de0aa68c887bc8046eb93c as 0.3.3",
                 "amphp/log": "^1.0",
@@ -1009,16 +1070,17 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "php": ">=5.6.0",
-                "phpseclib/phpseclib": "dev-master#27370df",
+                "phpseclib/phpseclib": "dev-master#27370df as 2.0.15",
                 "rollbar/rollbar": "dev-master",
-                "vlucas/phpdotenv": "^2.4"
+                "vlucas/phpdotenv": "^3"
             },
             "conflict": {
                 "krakjoe/pthreads-polyfill": "*"
             },
             "require-dev": {
                 "ennexa/amp-update-cache": "dev-master",
-                "phpdocumentor/reflection-docblock": "^3.1"
+                "phpdocumentor/reflection-docblock": "^3.1",
+                "phpunit/phpunit": "^8"
             },
             "suggest": {
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
@@ -1031,15 +1093,6 @@
                 },
                 "files": [
                     "src/BigIntegor.php",
-                    "src/Socket.php",
-                    "src/Collectable.php",
-                    "src/Threaded.php",
-                    "src/Volatile.php",
-                    "src/Thread.php",
-                    "src/Worker.php",
-                    "src/Pool.php",
-                    "src/HttpProxy.php",
-                    "src/SocksProxy.php",
                     "src/YieldReturnValue.php"
                 ]
             },
@@ -1068,7 +1121,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-05-10T20:44:48+00:00"
+            "time": "2019-05-13T16:06:16+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1232,6 +1285,55 @@
                 "parser"
             ],
             "time": "2019-03-17T18:47:21+00:00"
+        },
+        {
+            "name": "kelunik/certificate",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kelunik/certificate.git",
+                "reference": "524fa432ed1b5f50efbe7749f3c19e28a9866bc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kelunik/certificate/zipball/524fa432ed1b5f50efbe7749f3c19e28a9866bc7",
+                "reference": "524fa432ed1b5f50efbe7749f3c19e28a9866bc7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": "^5.4 | ^7.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kelunik\\Certificate\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Access certificate details and transform between different formats.",
+            "keywords": [
+                "DER",
+                "certificate",
+                "certificates",
+                "openssl",
+                "pem",
+                "x509"
+            ],
+            "time": "2017-07-04T19:37:30+00:00"
         },
         {
             "name": "league/uri-interfaces",
@@ -1616,6 +1718,56 @@
             "time": "2019-01-03T20:59:08+00:00"
         },
         {
+            "name": "phpoption/phpoption",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/php-option.git",
+                "reference": "94e644f7d2051a5f0fcf77d81605f152eecff0ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/94e644f7d2051a5f0fcf77d81605f152eecff0ed",
+                "reference": "94e644f7d2051a5f0fcf77d81605f152eecff0ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PhpOption\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Option Type for PHP",
+            "keywords": [
+                "language",
+                "option",
+                "php",
+                "type"
+            ],
+            "time": "2015-07-25T16:39:46+00:00"
+        },
+        {
             "name": "phpseclib/phpseclib",
             "version": "dev-master",
             "source": {
@@ -1918,29 +2070,30 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "2.6.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5"
+                "reference": "ffcaf1dfee56c8830d83d9812efad2a98c08f02e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
-                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/ffcaf1dfee56c8830d83d9812efad2a98c08f02e",
+                "reference": "ffcaf1dfee56c8830d83d9812efad2a98c08f02e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
+                "php": "^5.4 || ^7.0",
+                "phpoption/phpoption": "^1.5",
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -1965,7 +2118,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-01-29T11:11:52+00:00"
+            "time": "2019-03-23T10:56:16+00:00"
         }
     ],
     "packages-dev": [
