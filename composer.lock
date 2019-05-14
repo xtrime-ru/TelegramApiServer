@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "308dc823c837683776469789ec856985",
+    "content-hash": "fde6d73b5cdc03736a0e1f0268c330b0",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1045,11 +1045,11 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "dev-session_optimization",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "d18d97d208ef7d39e73cd117b55efc2208dd7819"
+                "reference": "694d092ade9a8af0d32d58579c3a7d52df1b2537"
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1121,7 +1121,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-05-13T16:06:16+00:00"
+            "time": "2019-05-14T22:27:21+00:00"
         },
         {
             "name": "danog/magicalserializer",

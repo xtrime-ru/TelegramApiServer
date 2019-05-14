@@ -9,7 +9,7 @@
     "php": ">=7.2.0",
     "ext-json": "*",
     "ext-swoole": ">=4.1",
-    "danog/madelineproto":"dev-master",
+    "danog/madelineproto":"dev-session_optimization",
     "amphp/dns": "dev-master as 0.9.9",
     "amphp/file": "dev-master as 0.3.3",
     "amphp/uri": "dev-master as 0.1.3",
