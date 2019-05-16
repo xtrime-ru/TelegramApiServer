@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fde6d73b5cdc03736a0e1f0268c330b0",
+    "content-hash": "8aee7c1eb22cd664c077c858b8ce8bc7",
     "packages": [
         {
             "name": "amphp/amp",
@@ -249,16 +249,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "dev-master",
+            "version": "v0.9.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "cb65162596293e0580acccf2d97d3eeb751235fd"
+                "reference": "585acfaf7794e68e843295573bf4c8c5730ada61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/cb65162596293e0580acccf2d97d3eeb751235fd",
-                "reference": "cb65162596293e0580acccf2d97d3eeb751235fd",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/585acfaf7794e68e843295573bf4c8c5730ada61",
+                "reference": "585acfaf7794e68e843295573bf4c8c5730ada61",
                 "shasum": ""
             },
             "require": {
@@ -321,20 +321,20 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-03-13T16:43:10+00:00"
+            "time": "2019-03-12T14:39:04+00:00"
         },
         {
             "name": "amphp/file",
-            "version": "dev-master",
+            "version": "v0.3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/file.git",
-                "reference": "654596edeb2255277d21049c852c3eed886659c2"
+                "reference": "ba57064e7c0cbcae89429afb2ba93b8f31bd7fc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/file/zipball/654596edeb2255277d21049c852c3eed886659c2",
-                "reference": "654596edeb2255277d21049c852c3eed886659c2",
+                "url": "https://api.github.com/repos/amphp/file/zipball/ba57064e7c0cbcae89429afb2ba93b8f31bd7fc8",
+                "reference": "ba57064e7c0cbcae89429afb2ba93b8f31bd7fc8",
                 "shasum": ""
             },
             "require": {
@@ -387,7 +387,7 @@
                 "non-blocking",
                 "static"
             ],
-            "time": "2019-03-01T16:38:57+00:00"
+            "time": "2019-03-01T16:38:04+00:00"
         },
         {
             "name": "amphp/http",
@@ -784,7 +784,7 @@
         },
         {
             "name": "amphp/uri",
-            "version": "dev-master",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/uri.git",
@@ -1049,17 +1049,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "694d092ade9a8af0d32d58579c3a7d52df1b2537"
+                "reference": "be8c32e6f7a6bbe466cb27f8bebe2029199f072d"
             },
             "require": {
                 "amphp/amp": "^2.0",
                 "amphp/artax": "^3.0",
-                "amphp/dns": "dev-master#861cc857b1ba6e02e8a7439c30403682785fce96 as 0.9.9",
-                "amphp/file": "dev-master#5a69fca406ac5fd220de0aa68c887bc8046eb93c as 0.3.3",
+                "amphp/file": "^0.3.5",
                 "amphp/log": "^1.0",
                 "amphp/parser": "^1.0",
                 "amphp/socket": "^0.10.11",
-                "amphp/uri": "dev-master#f3195b163275383909ded7770a11d8eb865cbc86 as 0.1.3",
+                "amphp/uri": "^0.1.4",
                 "amphp/websocket": "dev-master",
                 "amphp/websocket-client": "dev-master",
                 "danog/magicalserializer": "^1.0",
@@ -1069,7 +1068,7 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
-                "php": ">=5.6.0",
+                "php": ">=7.1.0",
                 "phpseclib/phpseclib": "dev-master#27370df as 2.0.15",
                 "rollbar/rollbar": "dev-master",
                 "vlucas/phpdotenv": "^3"
@@ -1083,8 +1082,7 @@
                 "phpunit/phpunit": "^8"
             },
             "suggest": {
-                "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
-                "ext-sockets": "Install the socket extension to speed up MadelineProto"
+                "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)"
             },
             "type": "project",
             "autoload": {
@@ -1121,7 +1119,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-05-14T22:27:21+00:00"
+            "time": "2019-05-16T19:14:11+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2153,32 +2151,10 @@
             "time": "2019-04-25T07:05:36+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "0.9.9",
-            "alias_normalized": "0.9.9.0",
-            "version": "9999999-dev",
-            "package": "amphp/dns"
-        },
-        {
-            "alias": "0.3.3",
-            "alias_normalized": "0.3.3.0",
-            "version": "9999999-dev",
-            "package": "amphp/file"
-        },
-        {
-            "alias": "0.1.3",
-            "alias_normalized": "0.1.3.0",
-            "version": "9999999-dev",
-            "package": "amphp/uri"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "danog/madelineproto": 20,
-        "amphp/dns": 20,
-        "amphp/file": 20,
-        "amphp/uri": 20,
         "swoole/ide-helper": 20
     },
     "prefer-stable": false,
