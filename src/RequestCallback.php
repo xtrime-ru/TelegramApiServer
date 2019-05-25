@@ -102,7 +102,7 @@ class RequestCallback
     private function callApi(\Swoole\Http\Request $request)
     {
         if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
-            throw new \Exception('API not available');
+            throw new \Exception('Requests from your IP is forbidden');
         }
 
         if (method_exists($this->client, $this->api)) {

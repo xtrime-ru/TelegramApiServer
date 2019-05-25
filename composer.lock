@@ -2126,7 +2126,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "3b0b3e761580dd77c5c72c1c4424efd08053230c"
+                "reference": "7035aeb5c6d42c22b44aef1304aac62d6733b5e5"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "~3.4.0",
@@ -2148,7 +2148,7 @@
                 }
             ],
             "description": "IDE help files for Swoole.",
-            "time": "2019-04-25T07:05:36+00:00"
+            "time": "2019-05-22T19:49:35+00:00"
         }
     ],
     "aliases": [],
