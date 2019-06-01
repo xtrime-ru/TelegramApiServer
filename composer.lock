@@ -430,67 +430,6 @@
             "time": "2019-02-10T06:38:09+00:00"
         },
         {
-            "name": "amphp/log",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/amphp/log.git",
-                "reference": "728678d6e751abeb54a4d2fc6e76ef977de3f43b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/amphp/log/zipball/728678d6e751abeb54a4d2fc6e76ef977de3f43b",
-                "reference": "728678d6e751abeb54a4d2fc6e76ef977de3f43b",
-                "shasum": ""
-            },
-            "require": {
-                "amphp/amp": "^2",
-                "amphp/byte-stream": "^1.3",
-                "monolog/monolog": "^1.23"
-            },
-            "require-dev": {
-                "amphp/file": "^0.3",
-                "amphp/phpunit-util": "^1",
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "phpunit/phpunit": "^6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Amp\\Log\\": "src"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
-                    "name": "Aaron Piotrowski",
-                    "email": "aaron@trowski.com"
-                }
-            ],
-            "description": "Non-blocking logging for PHP based on Amp and Monolog.",
-            "homepage": "https://github.com/amphp/log",
-            "keywords": [
-                "amp",
-                "amphp",
-                "async",
-                "log",
-                "logger",
-                "logging",
-                "non-blocking"
-            ],
-            "time": "2018-03-22T19:39:52+00:00"
-        },
-        {
             "name": "amphp/parallel",
             "version": "v1.1.1",
             "source": {
@@ -1049,14 +988,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "be8c32e6f7a6bbe466cb27f8bebe2029199f072d"
+                "reference": "ffb2d5271de2f7aa4a3992e46a5337e7f7bf6ad0"
             },
             "require": {
                 "amphp/amp": "^2.0",
                 "amphp/artax": "^3.0",
                 "amphp/file": "^0.3.5",
-                "amphp/log": "^1.0",
-                "amphp/parser": "^1.0",
                 "amphp/socket": "^0.10.11",
                 "amphp/uri": "^0.1.4",
                 "amphp/websocket": "dev-master",
@@ -1064,12 +1001,11 @@
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1.0.3",
                 "erusev/parsedown": "^1.6",
-                "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "php": ">=7.1.0",
-                "phpseclib/phpseclib": "dev-master#27370df as 2.0.15",
+                "phpseclib/phpseclib": "dev-master",
                 "rollbar/rollbar": "dev-master",
                 "vlucas/phpdotenv": "^3"
             },
@@ -1119,7 +1055,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-05-16T19:14:11+00:00"
+            "time": "2019-06-01T22:05:14+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1286,21 +1222,21 @@
         },
         {
             "name": "kelunik/certificate",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kelunik/certificate.git",
-                "reference": "524fa432ed1b5f50efbe7749f3c19e28a9866bc7"
+                "reference": "56542e62d51533d04d0a9713261fea546bff80f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kelunik/certificate/zipball/524fa432ed1b5f50efbe7749f3c19e28a9866bc7",
-                "reference": "524fa432ed1b5f50efbe7749f3c19e28a9866bc7",
+                "url": "https://api.github.com/repos/kelunik/certificate/zipball/56542e62d51533d04d0a9713261fea546bff80f6",
+                "reference": "56542e62d51533d04d0a9713261fea546bff80f6",
                 "shasum": ""
             },
             "require": {
                 "ext-openssl": "*",
-                "php": "^5.4 | ^7.0"
+                "php": ">=5.4"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "^1.9",
@@ -1331,7 +1267,7 @@
                 "pem",
                 "x509"
             ],
-            "time": "2017-07-04T19:37:30+00:00"
+            "time": "2019-05-29T19:02:31+00:00"
         },
         {
             "name": "league/uri-interfaces",
