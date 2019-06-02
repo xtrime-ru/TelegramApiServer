@@ -2,15 +2,19 @@
 Fast, simple, async php telegram client and parser: 
 [MadelineProto](https://github.com/danog/MadelineProto) and [Swoole](https://github.com/swoole/swoole-src) Server
 
-* Online server for tests (previous version, different request syntax): https://tg.i-c-a.su
-* My content aggregator: [https://i-c-a.su](https://i-c-a.su)
-* Im using this microservice in: [my TelegramRSS microservice](https://github.com/xtrime-ru/TelegramRSS) 
+* Online server for tests: [tg.i-c-a.su](https://tg.i-c-a.su)
+* My content aggregator: [i-c-a.su](https://i-c-a.su)
+* Im using this micro-service with: [my TelegramRSS micro-service](https://github.com/xtrime-ru/TelegramRSS) 
 
 **Features**
- * Fast async swoole server
- * Use as micro-service to access telegram api
- * Get any public telegram posts from groups as json
 
+* Fast async swoole server
+* Use as micro-service to access telegram api
+* Get any telegram posts as json
+
+**Example Architecture**
+![Proposed Architecture](https://habrastorage.org/webt/qz/ax/ct/qzaxctkgwehhhsqglgszy4rowwa.png)
+ 
 **Installation**
 
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/)
@@ -74,3 +78,8 @@ Fast, simple, async php telegram client and parser:
 
 * Telegram: [@xtrime](tg://resolve?domain=xtrime)
 * Email: alexander(at)i-c-a.su
+
+**Donations**
+
+* BTC: 1BE1nitXgEAxg7A5tgec67ucNryQwusoiP
+* ETH: 0x0e2d369E28DCA2336803b9dE696eCDa50ff61e27
