@@ -20,7 +20,7 @@ class RequestCallback
     private $path = [];
     public $page = [
         'headers' => [
-            ['Content-Type'=>'application/json;charset=utf-8'],
+            'Content-Type'=>'application/json;charset=utf-8',
         ],
         'success' => 0,
         'errors' => [],
@@ -47,7 +47,6 @@ class RequestCallback
         $this
             ->resolvePage($request->getUri()->getPath())
             ->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'))
-            ->getResponse()
         ;
 
     }
