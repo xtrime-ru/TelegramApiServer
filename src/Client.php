@@ -55,7 +55,7 @@ class Client
      *     'hash'          => 0, // (optional)
      * ]
      * </pre>
-     * @return \Generator
+     * @return \Amp\Promise
      * @throws \Throwable
      */
     public function getHistory($data)
@@ -85,7 +85,7 @@ class Client
      *  'id'        => [], //Id сообщения, или нескольких сообщений
      * ]
      * </pre>
-     * @return \Amp\Promise
+     * @return \Amp\Promise[]
      * @throws \Throwable
      */
     public function copyMessages($data)
@@ -244,7 +244,7 @@ class Client
             }
 
             $file = tempnam(sys_get_temp_dir(), 'telegram_media_');
-            $this->MadelineProto->download_to_file($message, $file);
+            yield $this->MadelineProto->download_to_file($message, $file);
 
             return [
                 'headers' => [
@@ -302,9 +302,9 @@ class Client
                     throw new \UnexpectedValueException('Message has no preview');
 
             }
-            $info = $this->MadelineProto->get_download_info($thumb);
+            $info = yield $this->MadelineProto->get_download_info($thumb);
             $file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
-            $this->MadelineProto->download_to_file($thumb, $file);
+            yield $this->MadelineProto->download_to_file($thumb, $file);
 
             return [
                 'headers' => [
