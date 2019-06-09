@@ -1,5 +1,5 @@
 {
-  "name": "xtrime-ru/telegramswooleclient",
+  "name": "xtrime-ru/telegramapiserver",
   "description": "Fast, simple, async php telegram client and parser: MadelineProto + Swoole Server",
   "type": "project",
   "homepage": "http://tg.i-c-a.su/",
@@ -38,7 +38,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "TelegramSwooleClient\\": "src/"
+      "TelegramApiServer\\": "src/"
     }
   }
 }

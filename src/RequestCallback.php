@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramSwooleClient;
+namespace TelegramApiServer;
 
 class RequestCallback
 {
@@ -169,7 +169,7 @@ class RequestCallback
             $data['success'] = 1;
         }
 
-        $result = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $result = json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE|JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         return $result;
     }

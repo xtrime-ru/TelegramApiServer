@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramSwooleClient;
+namespace TelegramApiServer;
 
 class Server
 {

@@ -47,5 +47,5 @@ if ($options['session']) {
     $sessionFile = "{$root}/session.madeline";
 }
 
-$client = new \TelegramSwooleClient\Client($sessionFile);
-new TelegramSwooleClient\Server($client, $options);
+$client = new TelegramApiServer\Client($sessionFile);
+new TelegramApiServer\Server($client, $options);
