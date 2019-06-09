@@ -47,6 +47,7 @@ class RequestCallback
         $this
             ->resolvePage($request->getUri()->getPath())
             ->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'))
+            ->generateResponse($request)
         ;
 
     }
