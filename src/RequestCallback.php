@@ -116,6 +116,7 @@ class RequestCallback
             if (!in_array($request->getClient()->getRemoteAddress(), $this->ipWhiteList, true)) {
                 throw new \Exception('Requests from your IP is forbidden');
             }
+            $this->page['response'] = $this->callApi();
         } catch (\Throwable $e) {
             $this->setError($e);
         }

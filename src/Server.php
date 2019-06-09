@@ -39,7 +39,6 @@ class Server
                 $requestCallback = new RequestCallback($client, $request, $body);
 
                 try {
-                    $requestCallback->page['response'] = $requestCallback->callApi();
                     if ($requestCallback->page['response'] instanceof Promise) {
                         $requestCallback->page['response'] = yield $requestCallback->page['response'];
                     }
