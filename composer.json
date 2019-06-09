@@ -4,11 +4,10 @@
   "type": "project",
   "homepage": "http://tg.i-c-a.su/",
   "license": "MIT",
-  "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "swoole", "async", "daemon", "coroutine", "parser", "micro-service"],
+  "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "amphp", "async", "daemon", "coroutine", "parser", "micro-service"],
   "require": {
     "php": ">=7.2.0",
     "ext-json": "*",
-    "ext-swoole": ">=4.1",
     "danog/madelineproto":"dev-session_optimization",
     "amphp/amp": "dev-master",
     "amphp/http-server": "dev-master",

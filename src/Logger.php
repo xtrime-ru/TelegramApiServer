@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace TelegramSwooleClient;
+namespace TelegramApiServer;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
