@@ -1129,7 +1129,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "e59d0ecc6c9e7d7ced2d8c9c3dbfb68518741501"
+                "reference": "299ef40c13634c7a1ac27ff47689f6f28ed88fdf"
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1142,6 +1142,7 @@
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1.0.3",
                 "erusev/parsedown": "^1.6",
+                "ext-fileinfo": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
@@ -1196,7 +1197,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-05T21:32:57+00:00"
+            "time": "2019-06-09T12:42:15+00:00"
         },
         {
             "name": "danog/magicalserializer",
