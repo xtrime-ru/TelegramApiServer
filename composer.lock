@@ -144,16 +144,16 @@
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "6bbfcb6f47e92577e739586ba0c87e867be70a23"
+                "reference": "c75af3778b5511deb1d760e4709cade2dabc2295"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/6bbfcb6f47e92577e739586ba0c87e867be70a23",
-                "reference": "6bbfcb6f47e92577e739586ba0c87e867be70a23",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/c75af3778b5511deb1d760e4709cade2dabc2295",
+                "reference": "c75af3778b5511deb1d760e4709cade2dabc2295",
                 "shasum": ""
             },
             "require": {
@@ -199,7 +199,7 @@
                 "non-blocking",
                 "stream"
             ],
-            "time": "2018-12-27T18:08:06+00:00"
+            "time": "2019-06-03T21:45:17+00:00"
         },
         {
             "name": "amphp/cache",
@@ -988,7 +988,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "dc0112e74c112affcf2652e0e089ddfbfdbbaa00"
+                "reference": "299ef40c13634c7a1ac27ff47689f6f28ed88fdf"
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1001,6 +1001,7 @@
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1.0.3",
                 "erusev/parsedown": "^1.6",
+                "ext-fileinfo": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
@@ -1055,7 +1056,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-02T16:03:46+00:00"
+            "time": "2019-06-09T12:42:15+00:00"
         },
         {
             "name": "danog/magicalserializer",
