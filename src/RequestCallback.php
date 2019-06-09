@@ -74,9 +74,9 @@ class RequestCallback
 
     /**
      * @param string $query
-     * @param string|array $body
+     * @param string|null $body
+     * @param string|null $contentType
      * @return RequestCallback
-     * @throws \Throwable
      */
     private function resolveRequest(string $query, $body, $contentType)
     {
@@ -102,6 +102,7 @@ class RequestCallback
      *
      * @param Request $request
      * @return RequestCallback
+     * @throws \Throwable
      */
     public function generateResponse(Request $request)
     {
@@ -152,6 +153,7 @@ class RequestCallback
     /**
      * @param \Throwable $e
      * @return RequestCallback
+     * @throws \Throwable
      */
     public function setError(\Throwable $e): self
     {
