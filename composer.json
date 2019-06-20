@@ -1,8 +1,8 @@
 {
   "name": "xtrime-ru/telegramapiserver",
-  "description": "Fast, simple, async php telegram client and parser: MadelineProto + Swoole Server",
+  "description": "Fast, simple, async php telegram client and parser: MadelineProto + Amphp Server",
   "type": "project",
-  "homepage": "http://tg.i-c-a.su/",
+  "homepage": "https://tg.i-c-a.su/",
   "license": "MIT",
   "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "amphp", "async", "daemon", "coroutine", "parser", "micro-service"],
   "require": {
