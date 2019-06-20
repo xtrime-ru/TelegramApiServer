@@ -25,7 +25,7 @@ class Server
 
         Amp\Loop::run(function () use ($client) {
             $sockets = [
-                Socket\listen("{$this->config['server']['address']}:{$this->config['server']['port']}"),
+                Socket\listen("{$this->config['address']}:{$this->config['port']}"),
             ];
 
             $server = new Amp\Http\Server\Server($sockets, new CallableRequestHandler(function (Request $request) use($client) {
@@ -53,7 +53,7 @@ class Server
                 );
 
 
-            }), new Logger(LogLevel::INFO, 'php://stdout'));
+            }), new Logger(LogLevel::DEBUG));
 
             yield $server->start();
 
@@ -76,16 +76,12 @@ class Server
      */
     private function setConfig(array $config = []): self
     {
-        $config = [
-            'server' => array_filter($config)
-        ];
+        $config =  array_filter($config);
 
-        foreach (['server', 'options'] as $key) {
-            $this->config[$key] = array_merge(
-                Config::getInstance()->get("swoole.{$key}", []),
-                $config[$key] ?? []
-            );
-        }
+        $this->config = array_merge(
+            Config::getInstance()->get("server", []),
+            $config
+        );
 
         return $this;
     }

@@ -35,13 +35,10 @@ class Logger extends AbstractLogger
 
     private $minLevelIndex;
     private $formatter;
-    private $handle;
 
-    public function __construct(string $minLevel = null, $output = 'php://stderr', callable $formatter = null)
+    public function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
     {
         if (null === $minLevel) {
-            $minLevel = 'php://stdout' === $output || 'php://stderr' === $output ? LogLevel::CRITICAL : LogLevel::WARNING;
-
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
                 switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] : $_SERVER['SHELL_VERBOSITY'])) {
                     case -1: $minLevel = LogLevel::ERROR; break;
@@ -58,9 +55,6 @@ class Logger extends AbstractLogger
 
         $this->minLevelIndex = self::$levels[$minLevel];
         $this->formatter = $formatter ?: [$this, 'format'];
-        if (false === $this->handle = \is_resource($output) ? $output : @fopen($output, 'a')) {
-            throw new InvalidArgumentException(sprintf('Unable to open "%s".', $output));
-        }
     }
 
     /**
@@ -77,7 +71,9 @@ class Logger extends AbstractLogger
         }
 
         $formatter = $this->formatter;
-        fwrite($this->handle, $formatter($level, $message, $context));
+
+        //TODO: Convert LogLevel to MadelineProto loglevels.
+        \danog\MadelineProto\Logger::log($formatter($level, $message, $context), \danog\MadelineProto\Logger::NOTICE);
     }
 
     private function format(string $level, string $message, array $context): string

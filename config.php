@@ -1,15 +1,9 @@
 <?php
 
 return [
-    'swoole' => [
-        'server' => [
-            'address' => (string)getenv('SWOOLE_SERVER_ADDRESS'),
-            'port' => (string)getenv('SWOOLE_SERVER_PORT'),
-        ],
-        'options' => [
-            'worker_num' => (int)getenv('SWOOLE_WORKER_NUM'),
-            'http_compression' => (bool)getenv('SWOOLE_HTTP_COMPRESSION'),
-        ]
+    'server' => [
+        'address' => (string)getenv('SERVER_ADDRESS'),
+        'port' => (string)getenv('SERVER_PORT'),
     ],
     'telegram' => [
         'app_info' => [ // obtained in https://my.telegram.org
