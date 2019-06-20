@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28962ae24ac857cdf2ef2d120f89a197",
+    "content-hash": "ac0eb0fceeb756d0a1f971c5dd4002f2",
     "packages": [
         {
             "name": "amphp/amp",
@@ -85,16 +85,16 @@
         },
         {
             "name": "amphp/artax",
-            "version": "v3.0.14",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/artax.git",
-                "reference": "84ba8e2014a81e399541f3dc3a6352bab09c980c"
+                "reference": "fb8c11fe7530be274483adf63346cc1b0fa1714a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/artax/zipball/84ba8e2014a81e399541f3dc3a6352bab09c980c",
-                "reference": "84ba8e2014a81e399541f3dc3a6352bab09c980c",
+                "url": "https://api.github.com/repos/amphp/artax/zipball/fb8c11fe7530be274483adf63346cc1b0fa1714a",
+                "reference": "fb8c11fe7530be274483adf63346cc1b0fa1714a",
                 "shasum": ""
             },
             "require": {
@@ -107,6 +107,7 @@
                 "php": ">=7.0"
             },
             "require-dev": {
+                "amphp/http-server": "^1",
                 "amphp/phpunit-util": "^1",
                 "friendsofphp/php-cs-fixer": "^2.3",
                 "phpunit/phpunit": "^6"
@@ -141,7 +142,7 @@
                 "parallel",
                 "rest"
             ],
-            "time": "2018-02-01T20:29:48+00:00"
+            "time": "2019-05-29T17:21:51+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -250,16 +251,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v0.9.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "585acfaf7794e68e843295573bf4c8c5730ada61"
+                "reference": "fbf1ae2d89c390175a34fd9337e42eac8cc35b86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/585acfaf7794e68e843295573bf4c8c5730ada61",
-                "reference": "585acfaf7794e68e843295573bf4c8c5730ada61",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/fbf1ae2d89c390175a34fd9337e42eac8cc35b86",
+                "reference": "fbf1ae2d89c390175a34fd9337e42eac8cc35b86",
                 "shasum": ""
             },
             "require": {
@@ -322,7 +323,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-03-12T14:39:04+00:00"
+            "time": "2019-06-13T16:38:23+00:00"
         },
         {
             "name": "amphp/file",
@@ -450,16 +451,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "c1317efc6b88df3c18580167b75a8a138134f3e3"
+                "reference": "91c023aec2219aae6cec49a4dc576fb617916f2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/c1317efc6b88df3c18580167b75a8a138134f3e3",
-                "reference": "c1317efc6b88df3c18580167b75a8a138134f3e3",
+                "url": "https://api.github.com/repos/amphp/http/zipball/91c023aec2219aae6cec49a4dc576fb617916f2b",
+                "reference": "91c023aec2219aae6cec49a4dc576fb617916f2b",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +487,7 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
-            "time": "2019-02-10T06:38:09+00:00"
+            "time": "2019-06-10T17:53:40+00:00"
         },
         {
             "name": "amphp/http-server",
@@ -494,12 +495,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "66a68e73a70419db37f2ca70c21d09840fcf1836"
+                "reference": "2cacc09f718d2924f07f042c6ad5640666c8a056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/66a68e73a70419db37f2ca70c21d09840fcf1836",
-                "reference": "66a68e73a70419db37f2ca70c21d09840fcf1836",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/2cacc09f718d2924f07f042c6ad5640666c8a056",
+                "reference": "2cacc09f718d2924f07f042c6ad5640666c8a056",
                 "shasum": ""
             },
             "require": {
@@ -568,7 +569,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-05-29T18:07:31+00:00"
+            "time": "2019-06-17T15:29:09+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1124,31 +1125,171 @@
             "time": "2013-09-20T18:59:12+00:00"
         },
         {
+            "name": "danog/dns-over-https",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/dns-over-https.git",
+                "reference": "44ed129aeb9504b8fa8aa5a7f301001a1a0b13e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/dns-over-https/zipball/44ed129aeb9504b8fa8aa5a7f301001a1a0b13e1",
+                "reference": "44ed129aeb9504b8fa8aa5a7f301001a1a0b13e1",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/artax": "dev-master",
+                "amphp/cache": "^1.2",
+                "amphp/dns": "dev-master as v0.9.x-dev",
+                "amphp/parser": "^1",
+                "danog/libdns-json": "^0.1",
+                "daverandom/libdns": "^2.0.1",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\DoH\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                },
+                {
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "Async DNS-over-HTTPS resolution for Amp.",
+            "homepage": "https://github.com/danog/dns-over-https",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "client",
+                "dns",
+                "dns-over-https",
+                "doh",
+                "https",
+                "resolve"
+            ],
+            "time": "2019-06-12T18:45:19+00:00"
+        },
+        {
+            "name": "danog/libdns-json",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/LibDNSJson.git",
+                "reference": "24908c65f44d54db04c2c427ba9e752be6701fd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/LibDNSJson/zipball/24908c65f44d54db04c2c427ba9e752be6701fd0",
+                "reference": "24908c65f44d54db04c2c427ba9e752be6701fd0",
+                "shasum": ""
+            },
+            "require": {
+                "daverandom/libdns": "^2.0.1",
+                "ext-json": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "danog\\LibDNSJson\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
+                },
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "Encoder/decoder for google's JSON DNS message format based on libdns",
+            "homepage": "https://github.com/danog/libdns-json",
+            "keywords": [
+                "dns",
+                "dns-over-https",
+                "doh",
+                "https",
+                "json",
+                "libdns",
+                "message"
+            ],
+            "time": "2019-06-12T12:39:17+00:00"
+        },
+        {
             "name": "danog/madelineproto",
             "version": "dev-session_optimization",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "299ef40c13634c7a1ac27ff47689f6f28ed88fdf"
+                "reference": "a77aab5eaeb06f6b5780234b4e747f14f000d367"
             },
             "require": {
                 "amphp/amp": "^2.0",
-                "amphp/artax": "^3.0",
-                "amphp/file": "^0.3.5",
-                "amphp/socket": "^0.10.11",
+                "amphp/artax": "dev-master as 3.0.99",
+                "amphp/byte-stream": "^1.6",
+                "amphp/dns": "dev-master as v0.9.x-dev",
+                "amphp/file": "^0.3",
+                "amphp/socket": "^0.10",
                 "amphp/uri": "^0.1.4",
                 "amphp/websocket": "dev-master",
                 "amphp/websocket-client": "dev-master",
+                "danog/dns-over-https": "^0.1",
                 "danog/magicalserializer": "^1.0",
-                "danog/primemodule": "^1.0.3",
+                "danog/primemodule": "^1",
                 "erusev/parsedown": "^1.6",
                 "ext-fileinfo": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "php": ">=7.1.0",
-                "phpseclib/phpseclib": "dev-master",
-                "rollbar/rollbar": "dev-master",
+                "phpseclib/phpseclib": "dev-master#27370df as 2.0.15",
                 "vlucas/phpdotenv": "^3"
             },
             "conflict": {
@@ -1169,7 +1310,8 @@
                 },
                 "files": [
                     "src/BigIntegor.php",
-                    "src/YieldReturnValue.php"
+                    "src/YieldReturnValue.php",
+                    "src/polyfill.php"
                 ]
             },
             "license": [
@@ -1197,7 +1339,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-09T12:42:15+00:00"
+            "time": "2019-06-20T15:06:12+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1604,84 +1746,6 @@
             "time": "2018-11-26T08:09:30+00:00"
         },
         {
-            "name": "monolog/monolog",
-            "version": "1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "4d5b7e6ba1127789c7ff59d6f762298eaa29787f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4d5b7e6ba1127789c7ff59d6f762298eaa29787f",
-                "reference": "4d5b7e6ba1127789c7ff59d6f762298eaa29787f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
-            },
-            "provide": {
-                "psr/log-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
-                "doctrine/couchdb": "~1.0@dev",
-                "graylog2/gelf-php": "~1.0",
-                "jakub-onderka/php-parallel-lint": "0.9",
-                "php-amqplib/php-amqplib": "~2.4",
-                "php-console/php-console": "^3.1.3",
-                "phpunit/phpunit": "~4.5",
-                "phpunit/phpunit-mock-objects": "2.3.0",
-                "ruflin/elastica": ">=0.90 <3.0",
-                "sentry/sentry": "^0.13",
-                "swiftmailer/swiftmailer": "^5.3|^6.0"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
-                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
-                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server",
-                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
-                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-                "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "sentry/sentry": "Allow sending log messages to a Sentry server"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Monolog\\": "src/Monolog"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
-            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-            "homepage": "http://github.com/Seldaek/monolog",
-            "keywords": [
-                "log",
-                "logging",
-                "psr-3"
-            ],
-            "time": "2018-12-26T14:24:03+00:00"
-        },
-        {
             "name": "paragonie/constant_time_encoding",
             "version": "v1.x-dev",
             "source": {
@@ -1849,7 +1913,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/phpseclib",
-                "reference": "27370dff48f01e4e9363f6fcdb15f9eede298cd4"
+                "reference": "5e7d39153270dfd19d585504b0a29ac65a62adf9"
             },
             "require": {
                 "paragonie/constant_time_encoding": "^1",
@@ -1928,7 +1992,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2018-02-20T14:40:20+00:00"
+            "time": "2019-06-17T12:03:31+00:00"
         },
         {
             "name": "psr/http-message",
@@ -2028,65 +2092,6 @@
             "time": "2018-11-21T13:42:00+00:00"
         },
         {
-            "name": "rollbar/rollbar",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "8a57ad9574d85bd818eaedfc8049fdcb16795f31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/8a57ad9574d85bd818eaedfc8049fdcb16795f31",
-                "reference": "8a57ad9574d85bd818eaedfc8049fdcb16795f31",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "monolog/monolog": "^1",
-                "psr/log": "^1"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "mockery/mockery": "0.9.*",
-                "packfire/php5.3-compat": "*",
-                "phpmd/phpmd": "@stable",
-                "phpunit/phpunit": "4.8.*",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "suggest": {
-                "fluent/logger": "Needed to use the 'fluent' handler for fluentd support",
-                "packfire/php5.3-compat": "for backward compatibility with PHP 5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rollbar\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rollbar, Inc.",
-                    "email": "support@rollbar.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Monitors errors and exceptions and reports them to Rollbar",
-            "homepage": "http://github.com/rollbar/rollbar-php",
-            "keywords": [
-                "debugging",
-                "errors",
-                "exceptions",
-                "logging",
-                "monitoring"
-            ],
-            "time": "2019-05-06T11:31:11+00:00"
-        },
-        {
             "name": "symfony/polyfill-ctype",
             "version": "dev-master",
             "source": {
@@ -2150,12 +2155,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "ffcaf1dfee56c8830d83d9812efad2a98c08f02e"
+                "reference": "5084b23845c24dbff8ac6c204290c341e4776c92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/ffcaf1dfee56c8830d83d9812efad2a98c08f02e",
-                "reference": "ffcaf1dfee56c8830d83d9812efad2a98c08f02e",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/5084b23845c24dbff8ac6c204290c341e4776c92",
+                "reference": "5084b23845c24dbff8ac6c204290c341e4776c92",
                 "shasum": ""
             },
             "require": {
@@ -2169,7 +2174,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -2194,7 +2199,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-03-23T10:56:16+00:00"
+            "time": "2019-06-15T22:40:20+00:00"
         }
     ],
     "packages-dev": [
@@ -2229,12 +2234,20 @@
             "time": "2019-05-22T19:49:35+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "v0.9.x-dev",
+            "alias_normalized": "0.9.9999999.9999999-dev",
+            "version": "9999999-dev",
+            "package": "amphp/dns"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "danog/madelineproto": 20,
         "amphp/amp": 20,
         "amphp/http-server": 20,
+        "amphp/dns": 20,
         "swoole/ide-helper": 20
     },
     "prefer-stable": false,

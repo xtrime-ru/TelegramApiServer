@@ -11,6 +11,7 @@
     "danog/madelineproto":"dev-session_optimization",
     "amphp/amp": "dev-master",
     "amphp/http-server": "dev-master",
+    "amphp/dns": "dev-master as v0.9.x-dev",
     "vlucas/phpdotenv": "^3"
   },
   "require-dev": {

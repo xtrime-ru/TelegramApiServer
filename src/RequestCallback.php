@@ -2,10 +2,8 @@
 
 namespace TelegramApiServer;
 
-use function Amp\call;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
-use Amp\Promise;
 
 class RequestCallback
 {
@@ -13,8 +11,6 @@ class RequestCallback
     private $client;
     public const FATAL_MESSAGE = 'Fatal error. Exit.';
     private const PAGES = ['index', 'api'];
-    /** @var string */
-    private $indexMessage;
     /** @var array */
     private $ipWhiteList;
     private $path = [];
@@ -41,7 +37,6 @@ class RequestCallback
     public function __construct(Client $client, $request, $body)
     {
         $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
-        $this->indexMessage = (string)Config::getInstance()->get('api.index_message', '');
         $this->client = $client;
 
         $this
@@ -62,9 +57,7 @@ class RequestCallback
     private function resolvePage($uri): self
     {
         $this->path = array_values(array_filter(explode('/', $uri)));
-        if (!$this->path || $this->path[0] !== 'api') {
-            $this->page['response'] = $this->indexMessage;
-        } elseif (!in_array($this->path[0], self::PAGES, true)) {
+        if (!in_array($this->path[0], self::PAGES, true)) {
             $this->setPageCode(404);
             $this->page['errors'][] = 'Incorrect path';
         }

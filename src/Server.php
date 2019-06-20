@@ -53,7 +53,7 @@ class Server
                 );
 
 
-            }), new Logger(LogLevel::DEBUG, 'php://stdout'));
+            }), new Logger(LogLevel::INFO, 'php://stdout'));
 
             yield $server->start();
 
