@@ -2,11 +2,15 @@
 
 namespace TelegramApiServer;
 
+use function Amp\call;
+use Amp\Http\Server\Request;
+use Amp\Http\Server\Response;
+use Amp\Promise;
+
 class RequestCallback
 {
 
     private $client;
-    private $server;
     public const FATAL_MESSAGE = 'Fatal error. Exit.';
     private const PAGES = ['index', 'api'];
     /** @var string */
@@ -16,7 +20,7 @@ class RequestCallback
     private $path = [];
     public $page = [
         'headers' => [
-            ['Content-Type', 'application/json;charset=utf-8'],
+            'Content-Type'=>'application/json;charset=utf-8',
         ],
         'success' => 0,
         'errors' => [],
@@ -29,20 +33,22 @@ class RequestCallback
 
     /**
      * RequestCallback constructor.
-     * @param \Swoole\Http\Request $request
+     * @param Request $request
+     * @param Response $response
      * @param Client $client
-     * @param \Swoole\Http\Server $http_server
+     * @throws \Throwable
      */
-    public function __construct(\Swoole\Http\Request $request, Client $client, \Swoole\Http\Server $http_server)
+    public function __construct(Client $client, $request, $body)
     {
         $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
         $this->indexMessage = (string)Config::getInstance()->get('api.index_message', '');
         $this->client = $client;
-        $this->server = $http_server;
-        $this->parsePost($request)
-            ->resolvePage($request->server['request_uri'])
-            ->resolveRequest((array)$request->get, (array)$request->post)
-            ->generateResponse($request);
+
+        $this
+            ->resolvePage($request->getUri()->getPath())
+            ->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'))
+            ->generateResponse($request)
+        ;
 
     }
 
@@ -67,13 +73,26 @@ class RequestCallback
     }
 
     /**
-     * @param array $get
-     * @param array $post
+     * @param string $query
+     * @param string|null $body
+     * @param string|null $contentType
      * @return RequestCallback
      */
-    private function resolveRequest(array $get, array $post): self
+    private function resolveRequest(string $query, $body, $contentType)
     {
-        $this->parameters = array_values(array_merge($get, $post));
+        parse_str($query, $get);
+
+        switch ($contentType) {
+            case 'application/json':
+                $post = json_decode($body, 1);
+                break;
+            default:
+                parse_str($body, $post);
+        }
+
+        $this->parameters = array_merge($post, $get);
+        $this->parameters = array_values($this->parameters);
+
         $this->api = $this->path[1] ?? '';
         return $this;
     }
@@ -81,17 +100,24 @@ class RequestCallback
     /**
      * Получает посты для формирования ответа
      *
-     * @param \Swoole\Http\Request $request
+     * @param Request $request
      * @return RequestCallback
+     * @throws \Throwable
      */
-    private function generateResponse(\Swoole\Http\Request $request): self
+    public function generateResponse(Request $request)
     {
         if ($this->page['code'] !== 200) {
             return $this;
         }
+        if (!$this->api) {
+            return $this;
+        }
 
         try {
-            $this->page['response'] = $this->callApi($request);
+            if (!in_array($request->getClient()->getRemoteAddress(), $this->ipWhiteList, true)) {
+                throw new \Exception('Requests from your IP is forbidden');
+            }
+            $this->page['response'] = $this->callApi();
         } catch (\Throwable $e) {
             $this->setError($e);
         }
@@ -99,48 +125,41 @@ class RequestCallback
         return $this;
     }
 
-    private function callApi(\Swoole\Http\Request $request)
+    public function callApi()
     {
-        if (!in_array($request->server['remote_addr'], $this->ipWhiteList, true)) {
-            throw new \Exception('Requests from your IP is forbidden');
-        }
-
         if (method_exists($this->client, $this->api)) {
-            return $this->client->{$this->api}(...$this->parameters);
+            $result = $this->client->{$this->api}(...$this->parameters);
+        } else {
+            //Проверяем нет ли в MadilineProto такого метода.
+            $this->api = explode('.', $this->api);
+            switch (count($this->api)) {
+                case 1:
+                    $result = $this->client->MadelineProto->{$this->api[0]}(...$this->parameters);
+                    break;
+                case 2:
+                    $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
+                    break;
+                case 3:
+                    $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
+                    break;
+                default:
+                    throw new \Exception('Incorrect method format');
+            }
         }
 
-        //Проверяем нет ли в MadilineProto такого метода.
-        $this->api = explode('.', $this->api);
-        switch (count($this->api)) {
-            case 1:
-                return $this->client->MadelineProto->{$this->api[0]}(...$this->parameters);
-                break;
-            case 2:
-                return $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
-                break;
-            case 3:
-                return $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
-                break;
-            default:
-                throw new \Exception('Incorrect method format');
-        }
+        return $result;
     }
 
     /**
      * @param \Throwable $e
      * @return RequestCallback
+     * @throws \Throwable
      */
-    private function setError(\Throwable $e): self
+    public function setError(\Throwable $e): self
     {
         if ($e instanceof \Error) {
             //Это критическая ошибка соедниения. Необходим полный перезапуск.
-            $this->setPageCode(400);
-            $this->page['errors'][] = [
-                'code' => $e->getCode(),
-                'message' => static::FATAL_MESSAGE,
-            ];
-            $this->server->stop();
-            return $this;
+            throw $e;
         }
 
         $this->setPageCode(400);
@@ -158,12 +177,12 @@ class RequestCallback
      *
      * @return string
      */
-    public function encodeResponse(): string
+    public function getResponse()
     {
         $data = [
             'success' => $this->page['success'],
             'errors' => $this->page['errors'],
-            'response' => $this->page['response']
+            'response' => $this->page['response'],
         ];
         if (!$data['errors']) {
             $data['success'] = 1;
@@ -183,28 +202,6 @@ class RequestCallback
     private function setPageCode(int $code): self
     {
         $this->page['code'] = $this->page['code'] === 200 ? $code : $this->page['code'];
-        return $this;
-    }
-
-    /**
-     * Парсит json из post запроса в массив
-     *
-     * @param \Swoole\Http\Request $request
-     * @return RequestCallback
-     */
-    private function parsePost(\Swoole\Http\Request $request): self
-    {
-        if (empty($request->post)) {
-            return $this;
-        }
-
-        if (
-            array_key_exists('content-type', $request->header) &&
-            stripos($request->header['content-type'], 'application/json') !== false
-        ) {
-            $request->post = json_decode($request->rawcontent(), true);
-        }
-
         return $this;
     }
 }

@@ -35,6 +35,9 @@ return [
                 ]
             ]
         ],
+        'serialization' => [
+            'serialization_interval' => 36000
+        ],
     ],
     'api' => [
         'ip_whitelist' => array_filter(
@@ -43,6 +46,6 @@ return [
                 explode(',', getenv('IP_WHITELIST'))
             )
         ),
-        'index_message' => getenv('API_INDEX_MESSAGE'),
+        'index_message' => getenv('INDEX_MESSAGE'),
     ],
 ];

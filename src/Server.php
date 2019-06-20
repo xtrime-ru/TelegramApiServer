@@ -2,6 +2,14 @@
 
 namespace TelegramApiServer;
 
+use Amp;
+use Amp\Http\Server\RequestHandler\CallableRequestHandler;
+use Amp\Promise;
+use Amp\Socket;
+use Amp\Http\Server\Request;
+use Amp\Http\Server\Response;
+use Psr\Log\LogLevel;
+
 class Server
 {
     private $config = [];
@@ -15,29 +23,48 @@ class Server
     {
         $this->setConfig($options);
 
-        $http_server = new \swoole_http_server(
-            $this->config['server']['address'],
-            $this->config['server']['port'],
-            SWOOLE_BASE
-        );
+        Amp\Loop::run(function () use ($client) {
+            $sockets = [
+                Socket\listen("{$this->config['server']['address']}:{$this->config['server']['port']}"),
+            ];
 
-        $http_server->set($this->config['options']);
+            $server = new Amp\Http\Server\Server($sockets, new CallableRequestHandler(function (Request $request) use($client) {
+                //На каждый запрос должны создаваться новые экземпляры классов парсера и коллбеков,
+                //иначе их данные будут в области видимости всех запросов.
 
-        $http_server->on('request', function (\Swoole\Http\Request $request, \Swoole\Http\Response $response) use ($client, $http_server) {
-            //На каждый запрос должны создаваться новые экземпляры классов парсера и коллбеков,
-            //иначе их данные будут в области видимости всех запросов.
+                //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
 
-            //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
-            $requestCallback = new RequestCallback($request, $client, $http_server);
+                $body = yield $request->getBody()->read();
 
-            foreach ($requestCallback->page['headers'] as $header) {
-                $response->header(...$header);
-            }
+                $requestCallback = new RequestCallback($client, $request, $body);
 
-            $response->status($requestCallback->page['code']);
-            $response->end($requestCallback->encodeResponse());
+                try {
+                    if ($requestCallback->page['response'] instanceof Promise) {
+                        $requestCallback->page['response'] = yield $requestCallback->page['response'];
+                    }
+                } catch (\Throwable $e) {
+                    $requestCallback->setError($e);
+                }
+
+                return new Response(
+                    $requestCallback->page['code'],
+                    $requestCallback->page['headers'],
+                    $requestCallback->getResponse()
+                );
+
+
+            }), new Logger(LogLevel::DEBUG, 'php://stdout'));
+
+            yield $server->start();
+
+            // Stop the server gracefully when SIGINT is received.
+            // This is technically optional, but it is best to call Server::stop().
+            Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
+                Amp\Loop::cancel($watcherId);
+                yield $server->stop();
+                exit;
+            });
         });
-        $http_server->start();
 
     }
 
@@ -61,6 +88,14 @@ class Server
         }
 
         return $this;
+    }
+
+    public function resolvePromise(&$promise) {
+        if ($promise instanceof Promise) {
+            return yield $promise;
+        }
+
+        return yield;
     }
 
 }

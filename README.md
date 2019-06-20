@@ -1,6 +1,6 @@
 # TelegramApiServer
-Fast, simple, async php telegram client and parser: 
-[MadelineProto](https://github.com/danog/MadelineProto) and [Swoole](https://github.com/swoole/swoole-src) Server
+Fast, simple, async php telegram api server: 
+[MadelineProto](https://github.com/danog/MadelineProto) and [AmpPhp](https://github.com/amphp/amp) Server
 
 * Online server for tests: [tg.i-c-a.su](https://tg.i-c-a.su)
 * My content aggregator: [i-c-a.su](https://i-c-a.su)
@@ -8,7 +8,7 @@ Fast, simple, async php telegram client and parser:
 
 **Features**
 
-* Fast async swoole server
+* Fast async server
 * Full access to telegram api: bot and user
 
 **Example Architecture**
@@ -16,12 +16,12 @@ Fast, simple, async php telegram client and parser:
  
 **Installation**
 
-1. Swoole extension required: [Install swoole](https://github.com/swoole/swoole-src#%EF%B8%8F-installation)
+1. Git clone this repo
 1. `composer install` to install required libs
 1. Create .env from .env.example
 1. Fill variables in .env
-1. Fill app_id and app_hash from [my.telegram.org](https://my.telegram.org/)
-   Or leave blank and MadelineProto will try to generate on start. 
+1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/) or leave blank.
+   MadelineProto will generate them on start.
 
      _Optional:_
 1. Use supervisor to monitor and restart swoole servers. Example of `/etc/supervisor/conf.d/telegram_rss.conf`: 
