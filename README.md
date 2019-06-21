@@ -62,11 +62,11 @@ Fast, simple, async php telegram api server:
     * If method requires array of values, use any name of array, for example 'data': 
         `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
     * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
-        `http://127.0.0.1:9503/api/get_info/?id=@xtrime` or `http://127.0.0.1:9503/api/get_info/?abcd=@xtrime` works the same
+        `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
     
     Examples:
-    * get_info about channel/user: `http://127.0.0.1:9503/api/get_info/?id=@xtrime`
-    * get_info about currect account: `http://127.0.0.1:9503/api/get_self`
+    * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
+    * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
     * repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
     * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`

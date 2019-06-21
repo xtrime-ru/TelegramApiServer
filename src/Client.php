@@ -236,7 +236,7 @@ class Client
                 throw new \UnexpectedValueException('Message has no media');
             }
 
-            $info = yield $this->MadelineProto->get_download_info($message);
+            $info = yield $this->MadelineProto->getDownloadInfo($message);
 
             if ($data['size_limit']) {
                 if ($info['size'] > $data['size_limit']) {
@@ -247,7 +247,7 @@ class Client
             }
 
             $file = tempnam(sys_get_temp_dir(), 'telegram_media_');
-            yield $this->MadelineProto->download_to_file($message, $file);
+            yield $this->MadelineProto->downloadToFile($message, $file);
 
             return [
                 'headers' => [
@@ -305,9 +305,9 @@ class Client
                     throw new \UnexpectedValueException('Message has no preview');
 
             }
-            $info = yield $this->MadelineProto->get_download_info($thumb);
+            $info = yield $this->MadelineProto->getDownloadInfo($thumb);
             $file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
-            yield $this->MadelineProto->download_to_file($thumb, $file);
+            yield $this->MadelineProto->downloadToFile($thumb, $file);
 
             return [
                 'headers' => [
