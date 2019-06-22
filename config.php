@@ -1,5 +1,9 @@
 <?php
 
+if (getenv('SWOOLE_SERVER_ADDRESS')) {
+    throw new UnexpectedValueException('Please, update .env file! See .env.example');
+}
+
 return [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
@@ -30,7 +34,8 @@ return [
             ]
         ],
         'serialization' => [
-            'serialization_interval' => 36000
+            'serialization_interval' => 300,
+            'cleanup_before_serialization' => true,
         ],
     ],
     'api' => [
