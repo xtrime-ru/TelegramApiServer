@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac0eb0fceeb756d0a1f971c5dd4002f2",
+    "content-hash": "8b8ba3322d447f03eb284d1e73aabfae",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1264,22 +1264,28 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-session_optimization",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "09512b4ab58a48cf24a5022811b2130309b62893"
+                "url": "https://github.com/danog/MadelineProto.git",
+                "reference": "8bfeb1317664d1406cc1572e3bc42ed264bb8984"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/8bfeb1317664d1406cc1572e3bc42ed264bb8984",
+                "reference": "8bfeb1317664d1406cc1572e3bc42ed264bb8984",
+                "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.0",
                 "amphp/artax": "dev-master as 3.0.99",
                 "amphp/byte-stream": "^1.6",
-                "amphp/dns": "dev-master as v0.9.x-dev",
+                "amphp/dns": "dev-master#aa1892bdf13b787d759df6f2523e8027a434d927 as v0.9.x-dev",
                 "amphp/file": "^0.3",
                 "amphp/socket": "^0.10",
                 "amphp/uri": "^0.1.4",
-                "amphp/websocket": "dev-master",
-                "amphp/websocket-client": "dev-master",
+                "amphp/websocket": "dev-master as 1",
+                "amphp/websocket-client": "dev-master as 1",
                 "danog/dns-over-https": "^0.1",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
@@ -1311,9 +1317,11 @@
                 "files": [
                     "src/BigIntegor.php",
                     "src/YieldReturnValue.php",
+                    "src/ReflectionGenerator.php",
                     "src/polyfill.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -1327,19 +1335,19 @@
             "homepage": "https://daniil.it/MadelineProto",
             "keywords": [
                 "GB",
-                "PHP",
+                "Messenger",
                 "audio",
                 "bytes",
                 "client",
                 "files",
-                "messenger",
                 "mtproto",
+                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-22T17:03:46+00:00"
+            "time": "2019-06-23T11:08:44+00:00"
         },
         {
             "name": "danog/magicalserializer",
