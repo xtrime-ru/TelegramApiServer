@@ -8,7 +8,7 @@
   "require": {
     "php": ">=7.2.0",
     "ext-json": "*",
-    "danog/madelineproto":"dev-master",
+    "danog/madelineproto":"4.0.3",
     "amphp/amp": "dev-master",
     "amphp/http-server": "dev-master",
     "amphp/dns": "dev-master as v0.9.x-dev",

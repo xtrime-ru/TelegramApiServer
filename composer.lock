@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b8ba3322d447f03eb284d1e73aabfae",
+    "content-hash": "fbc0c94143a9da8e5123f91929b3ddcc",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1264,16 +1264,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "8bfeb1317664d1406cc1572e3bc42ed264bb8984"
+                "reference": "704152680bb03c108d01123bbcb4602c66dcbcff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/8bfeb1317664d1406cc1572e3bc42ed264bb8984",
-                "reference": "8bfeb1317664d1406cc1572e3bc42ed264bb8984",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/704152680bb03c108d01123bbcb4602c66dcbcff",
+                "reference": "704152680bb03c108d01123bbcb4602c66dcbcff",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1295,7 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "php": ">=7.1.0",
-                "phpseclib/phpseclib": "dev-master#5e7d39153270dfd19d585504b0a29ac65a62adf9 as 2.0.15",
+                "phpseclib/phpseclib": "dev-master#c62fc0c73373426d3ff8729f10e82e09e1874866 as 2.0.15",
                 "vlucas/phpdotenv": "^3"
             },
             "conflict": {
@@ -1347,7 +1347,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-23T11:08:44+00:00"
+            "time": "2019-06-21T15:02:52+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2252,7 +2252,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danog/madelineproto": 20,
         "amphp/amp": 20,
         "amphp/http-server": 20,
         "amphp/dns": 20,
