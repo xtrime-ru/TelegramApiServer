@@ -28,32 +28,42 @@ class Server
                 Socket\listen("{$this->config['address']}:{$this->config['port']}"),
             ];
 
-            $server = new Amp\Http\Server\Server($sockets, new CallableRequestHandler(function (Request $request) use($client) {
-                //На каждый запрос должны создаваться новые экземпляры классов парсера и коллбеков,
-                //иначе их данные будут в области видимости всех запросов.
+            $server = new Amp\Http\Server\Server(
+                $sockets,
+                new CallableRequestHandler(function (Request $request) use($client) {
+                    //На каждый запрос должны создаваться новые экземпляры классов парсера и коллбеков,
+                    //иначе их данные будут в области видимости всех запросов.
 
-                //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
+                    //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
 
-                $body = yield $request->getBody()->read();
-
-                $requestCallback = new RequestCallback($client, $request, $body);
-
-                try {
-                    if ($requestCallback->page['response'] instanceof Promise) {
-                        $requestCallback->page['response'] = yield $requestCallback->page['response'];
+                    $body = '';
+                    while ($chunk = yield $request->getBody()->read()) {
+                        $body .= $chunk;
                     }
-                } catch (\Throwable $e) {
-                    $requestCallback->setError($e);
-                }
 
-                return new Response(
-                    $requestCallback->page['code'],
-                    $requestCallback->page['headers'],
-                    $requestCallback->getResponse()
-                );
+                    $requestCallback = new RequestCallback($client, $request, $body);
+
+                    try {
+                        if ($requestCallback->page['response'] instanceof Promise) {
+                            $requestCallback->page['response'] = yield $requestCallback->page['response'];
+                        }
+                    } catch (\Throwable $e) {
+                        $requestCallback->setError($e);
+                    }
+
+                    return new Response(
+                        $requestCallback->page['code'],
+                        $requestCallback->page['headers'],
+                        $requestCallback->getResponse()
+                    );
 
 
-            }), new Logger(LogLevel::DEBUG));
+                }),
+                new Logger(LogLevel::DEBUG),
+                (new Amp\Http\Server\Options())
+                    ->withCompression()
+                    ->withBodySizeLimit(30*1024*1024)
+            );
 
             yield $server->start();
 
