@@ -24,7 +24,7 @@ return [
         ],
         'connection_settings' => [
             'all' => [
-                'proxy' => \danog\MadelineProto\Stream\Proxy\SocksProxy::getName(),
+                'proxy' => '\SocksProxy',
                 'proxy_extra' => [
                     'address' => getenv('TELEGRAM_PROXY_ADDRESS'),
                     'port' => getenv('TELEGRAM_PROXY_PORT'),

@@ -8,7 +8,7 @@
   "require": {
     "php": ">=7.2.0",
     "ext-json": "*",
-    "danog/madelineproto":"4.0.3",
+    "danog/madelineproto":"dev-session_optimization",
     "amphp/amp": "dev-master",
     "amphp/http-server": "dev-master",
     "amphp/dns": "dev-master as v0.9.x-dev",
@@ -25,6 +25,10 @@
     {
       "type": "git",
       "url": "https://github.com/swoole/ide-helper.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/xtrime-ru/madelineProto"
     }
   ],
   "minimum-stability": "dev",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbc0c94143a9da8e5123f91929b3ddcc",
+    "content-hash": "65a0e83e5c8a9f0f7d58f56325c5def4",
     "packages": [
         {
             "name": "amphp/amp",
@@ -573,16 +573,16 @@
         },
         {
             "name": "amphp/parallel",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parallel.git",
-                "reference": "687776dc6933af4c6009ac58f915faf45e8463ce"
+                "reference": "53aa422eaf89a539b4df58284f7bdf5219e37f66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel/zipball/687776dc6933af4c6009ac58f915faf45e8463ce",
-                "reference": "687776dc6933af4c6009ac58f915faf45e8463ce",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/53aa422eaf89a539b4df58284f7bdf5219e37f66",
+                "reference": "53aa422eaf89a539b4df58284f7bdf5219e37f66",
                 "shasum": ""
             },
             "require": {
@@ -596,9 +596,6 @@
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
                 "phpunit/phpunit": "^6"
-            },
-            "suggest": {
-                "ext-pthreads": "Required for thread contexts"
             },
             "type": "library",
             "autoload": {
@@ -632,7 +629,7 @@
                 "multi-processing",
                 "multi-threading"
             ],
-            "time": "2019-01-09T21:31:46+00:00"
+            "time": "2019-05-11T17:13:47+00:00"
         },
         {
             "name": "amphp/parser",
@@ -1264,17 +1261,11 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "4.0.3",
+            "version": "dev-session_optimization",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "704152680bb03c108d01123bbcb4602c66dcbcff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/704152680bb03c108d01123bbcb4602c66dcbcff",
-                "reference": "704152680bb03c108d01123bbcb4602c66dcbcff",
-                "shasum": ""
+                "url": "https://github.com/xtrime-ru/madelineProto",
+                "reference": "2749e1ae72db5c75e03eca01080c5cb1f0a5d28e"
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1295,7 +1286,7 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "php": ">=7.1.0",
-                "phpseclib/phpseclib": "dev-master#c62fc0c73373426d3ff8729f10e82e09e1874866 as 2.0.15",
+                "phpseclib/phpseclib": "dev-master#5e7d39153270dfd19d585504b0a29ac65a62adf9 as 2.0.15",
                 "vlucas/phpdotenv": "^3"
             },
             "conflict": {
@@ -1321,7 +1312,6 @@
                     "src/polyfill.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -1335,19 +1325,19 @@
             "homepage": "https://daniil.it/MadelineProto",
             "keywords": [
                 "GB",
-                "Messenger",
+                "PHP",
                 "audio",
                 "bytes",
                 "client",
                 "files",
+                "messenger",
                 "mtproto",
-                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-21T15:02:52+00:00"
+            "time": "2019-06-30T00:42:26+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2163,12 +2153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "5084b23845c24dbff8ac6c204290c341e4776c92"
+                "reference": "9159290ad347bf56fa6d208bf35645c450f9e567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/5084b23845c24dbff8ac6c204290c341e4776c92",
-                "reference": "5084b23845c24dbff8ac6c204290c341e4776c92",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/9159290ad347bf56fa6d208bf35645c450f9e567",
+                "reference": "9159290ad347bf56fa6d208bf35645c450f9e567",
                 "shasum": ""
             },
             "require": {
@@ -2196,9 +2186,14 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com",
+                    "homepage": "https://gjcampbell.co.uk/"
+                },
+                {
                     "name": "Vance Lucas",
                     "email": "vance@vancelucas.com",
-                    "homepage": "http://www.vancelucas.com"
+                    "homepage": "https://vancelucas.com/"
                 }
             ],
             "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
@@ -2207,7 +2202,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-06-15T22:40:20+00:00"
+            "time": "2019-06-29T14:13:05+00:00"
         }
     ],
     "packages-dev": [
@@ -2252,6 +2247,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "danog/madelineproto": 20,
         "amphp/amp": 20,
         "amphp/http-server": 20,
         "amphp/dns": 20,
