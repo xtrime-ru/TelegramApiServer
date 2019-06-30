@@ -2,8 +2,9 @@
 
 namespace TelegramApiServer;
 
+use Amp\ByteStream\ResourceInputStream;
 use Amp\Http\Server\Request;
-use Amp\Http\Server\Response;
+use Amp\Promise;
 
 class RequestCallback
 {
@@ -29,22 +30,35 @@ class RequestCallback
 
     /**
      * RequestCallback constructor.
-     * @param Request $request
-     * @param Response $response
      * @param Client $client
      * @throws \Throwable
      */
-    public function __construct(Client $client, $request, $body)
+    public function __construct(Client $client)
     {
         $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
         $this->client = $client;
 
-        $this
+    }
+
+    /**
+     * @param Request $request
+     * @return ResourceInputStream|string
+     * @throws \Throwable
+     */
+    public function process(Request $request)
+    {
+        $body = '';
+        while ($chunk = yield $request->getBody()->read()) {
+            $body .= $chunk;
+        }
+
+        yield from $this
             ->resolvePage($request->getUri()->getPath())
             ->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'))
             ->generateResponse($request)
         ;
 
+        return $this->getResponse();
     }
 
 
@@ -83,7 +97,7 @@ class RequestCallback
                 parse_str($body, $post);
         }
 
-        $this->parameters = array_merge($post, $get);
+        $this->parameters = array_merge((array) $post, $get);
         $this->parameters = array_values($this->parameters);
 
         $this->api = $this->path[1] ?? '';
@@ -97,7 +111,7 @@ class RequestCallback
      * @return RequestCallback
      * @throws \Throwable
      */
-    public function generateResponse(Request $request)
+    private function generateResponse(Request $request)
     {
         if ($this->page['code'] !== 200) {
             return $this;
@@ -111,6 +125,11 @@ class RequestCallback
                 throw new \Exception('Requests from your IP is forbidden');
             }
             $this->page['response'] = $this->callApi();
+
+            if ($this->page['response'] instanceof Promise) {
+                $this->page['response'] = yield $this->page['response'];
+            }
+
         } catch (\Throwable $e) {
             $this->setError($e);
         }
@@ -118,9 +137,13 @@ class RequestCallback
         return $this;
     }
 
-    public function callApi()
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    private function callApi()
     {
-        if (method_exists($this->client, $this->api)) {
+        if (method_exists($this->client, $this->api)){
             $result = $this->client->{$this->api}(...$this->parameters);
         } else {
             //Проверяем нет ли в MadilineProto такого метода.
@@ -136,7 +159,7 @@ class RequestCallback
                     $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
                     break;
                 default:
-                    throw new \Exception('Incorrect method format');
+                    throw new \UnexpectedValueException('Incorrect method format');
             }
         }
 
@@ -148,7 +171,7 @@ class RequestCallback
      * @return RequestCallback
      * @throws \Throwable
      */
-    public function setError(\Throwable $e): self
+    private function setError(\Throwable $e): self
     {
         if ($e instanceof \Error) {
             //Это критическая ошибка соедниения. Необходим полный перезапуск.
@@ -168,10 +191,19 @@ class RequestCallback
     /**
      * Кодирует ответ в нужный формат: json
      *
-     * @return string
+     * @return string|ResourceInputStream
+     * @throws \Throwable
      */
-    public function getResponse()
+    private function getResponse()
     {
+        if (!is_array($this->page['response'])) {
+            $this->page['response'] = null;
+        }
+        if (isset($this->page['response']['stream'])) {
+            $this->page['headers'] = $this->page['response']['headers'];
+            return new ResourceInputStream($this->page['response']['stream']);
+        }
+
         $data = [
             'success' => $this->page['success'],
             'errors' => $this->page['errors'],

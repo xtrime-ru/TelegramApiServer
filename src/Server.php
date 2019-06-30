@@ -36,27 +36,14 @@ class Server
 
                     //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
 
-                    $body = '';
-                    while ($chunk = yield $request->getBody()->read()) {
-                        $body .= $chunk;
-                    }
-
-                    $requestCallback = new RequestCallback($client, $request, $body);
-
-                    try {
-                        if ($requestCallback->page['response'] instanceof Promise) {
-                            $requestCallback->page['response'] = yield $requestCallback->page['response'];
-                        }
-                    } catch (\Throwable $e) {
-                        $requestCallback->setError($e);
-                    }
+                    $requestCallback = new RequestCallback($client);
+                    $response = yield from $requestCallback->process($request);
 
                     return new Response(
                         $requestCallback->page['code'],
                         $requestCallback->page['headers'],
-                        $requestCallback->getResponse()
+                        $response
                     );
-
 
                 }),
                 new Logger(LogLevel::DEBUG),

@@ -226,7 +226,13 @@ class Client
 
 
             if (!$data['message']) {
-                $response = yield $this->MadelineProto->channels->getMessages($data);
+                $peerInfo = yield $this->MadelineProto->getInfo($data['channel']);
+                if ($peerInfo['type'] === 'channel') {
+                    $response = yield $this->MadelineProto->channels->getMessages($data);
+                } else {
+                    $response = yield $this->MadelineProto->messages->getMessages($data);
+                }
+
                 $message = $response['messages'][0];
             } else {
                 $message = $data['message'];
@@ -246,15 +252,16 @@ class Client
                 }
             }
 
-            $file = tempnam(sys_get_temp_dir(), 'telegram_media_');
-            yield $this->MadelineProto->downloadToFile($message, $file);
+            $stream = fopen('php://memory', 'rwb');
+            yield $this->MadelineProto->downloadToStream($message, $stream);
+            rewind($stream);
 
             return [
                 'headers' => [
-                    ['Content-Length', $info['size']],
-                    ['Content-Type', $info['mime']]
+                    'Content-Length'=> $info['size'],
+                    'Content-Type'=> $info['mime'],
                 ],
-                'file' => $file,
+                'stream' => $stream,
             ];
         });
     }
@@ -277,7 +284,13 @@ class Client
             ], $data);
 
             if (!$data['message']) {
-                $response = yield $this->MadelineProto->channels->getMessages($data);
+                $peerInfo = yield $this->MadelineProto->getInfo($data['channel']);
+                if ($peerInfo['type'] === 'channel') {
+                    $response = yield $this->MadelineProto->channels->getMessages($data);
+                } else {
+                    $response = yield $this->MadelineProto->messages->getMessages($data);
+                }
+
                 $message = $response['messages'][0];
             } else {
                 $message = $data['message'];
@@ -306,15 +319,16 @@ class Client
 
             }
             $info = yield $this->MadelineProto->getDownloadInfo($thumb);
-            $file = tempnam(sys_get_temp_dir(), 'telegram_media_preview_');
-            yield $this->MadelineProto->downloadToFile($thumb, $file);
+            $stream = fopen('php://memory', 'rwb');
+            yield $this->MadelineProto->downloadToStream($thumb, $stream);
+            rewind($stream);
 
             return [
                 'headers' => [
-                    ['Content-Length', $info['size']],
-                    ['Content-Type', $info['mime']],
+                    'Content-Length'=> $info['size'],
+                    'Content-Type'=> $info['mime'],
                 ],
-                'file' => $file,
+                'stream' => $stream,
             ];
         });
     }
@@ -330,7 +344,7 @@ class Client
         if (empty($media['_'])) {
             return false;
         }
-        if ($media['_'] == 'messageMediaWebPage') {
+        if ($media['_'] === 'messageMediaWebPage') {
             return $useWebPage;
         }
         return true;
