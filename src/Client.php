@@ -30,7 +30,7 @@ class Client
     public function connect()
     {
         //При каждой инициализации настройки обновляются из массива $config
-        echo PHP_EOL . 'Starting telegram client ...' . PHP_EOL;
+        echo PHP_EOL . 'Starting MadelineProto...' . PHP_EOL;
         $time = microtime(true);
         $this->MadelineProto = new MadelineProto\API($this->sessionFile, $this->config);
 
@@ -39,7 +39,7 @@ class Client
             yield $this->MadelineProto->start();
         });
         $time = round(microtime(true) - $time, 3);
-        echo PHP_EOL . "Client started: $time sec" . PHP_EOL;
+        echo PHP_EOL . "TelegramApiServer ready. Elapsed time: $time sec." . PHP_EOL;
     }
 
     /**
