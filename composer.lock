@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65a0e83e5c8a9f0f7d58f56325c5def4",
+    "content-hash": "8b8ba3322d447f03eb284d1e73aabfae",
     "packages": [
         {
             "name": "amphp/amp",
@@ -255,12 +255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "fbf1ae2d89c390175a34fd9337e42eac8cc35b86"
+                "reference": "2e7921a13ad0fa36cbccafb29b7d6e15dc2740af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/fbf1ae2d89c390175a34fd9337e42eac8cc35b86",
-                "reference": "fbf1ae2d89c390175a34fd9337e42eac8cc35b86",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/2e7921a13ad0fa36cbccafb29b7d6e15dc2740af",
+                "reference": "2e7921a13ad0fa36cbccafb29b7d6e15dc2740af",
                 "shasum": ""
             },
             "require": {
@@ -271,6 +271,7 @@
                 "amphp/windows-registry": "^0.3",
                 "daverandom/libdns": "^2.0.1",
                 "ext-filter": "*",
+                "ext-json": "*",
                 "php": ">=7.0"
             },
             "require-dev": {
@@ -323,7 +324,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-06-13T16:38:23+00:00"
+            "time": "2019-07-08T20:49:23+00:00"
         },
         {
             "name": "amphp/file",
@@ -451,20 +452,20 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "91c023aec2219aae6cec49a4dc576fb617916f2b"
+                "reference": "3b1cddc3f67b618a6197a5e87df834c53f79fcce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/91c023aec2219aae6cec49a4dc576fb617916f2b",
-                "reference": "91c023aec2219aae6cec49a4dc576fb617916f2b",
+                "url": "https://api.github.com/repos/amphp/http/zipball/3b1cddc3f67b618a6197a5e87df834c53f79fcce",
+                "reference": "3b1cddc3f67b618a6197a5e87df834c53f79fcce",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
@@ -474,7 +475,10 @@
             "autoload": {
                 "psr-4": {
                     "Amp\\Http\\": "src"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -487,7 +491,7 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
-            "time": "2019-06-10T17:53:40+00:00"
+            "time": "2019-07-01T19:11:10+00:00"
         },
         {
             "name": "amphp/http-server",
@@ -495,12 +499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "2cacc09f718d2924f07f042c6ad5640666c8a056"
+                "reference": "eba1151848f2cfb9c959ef05737480b9f80f7d43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/2cacc09f718d2924f07f042c6ad5640666c8a056",
-                "reference": "2cacc09f718d2924f07f042c6ad5640666c8a056",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/eba1151848f2cfb9c959ef05737480b9f80f7d43",
+                "reference": "eba1151848f2cfb9c959ef05737480b9f80f7d43",
                 "shasum": ""
             },
             "require": {
@@ -569,7 +573,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-06-17T15:29:09+00:00"
+            "time": "2019-07-16T16:29:16+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1205,16 +1209,16 @@
         },
         {
             "name": "danog/libdns-json",
-            "version": "0.1",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/LibDNSJson.git",
-                "reference": "24908c65f44d54db04c2c427ba9e752be6701fd0"
+                "reference": "7d5e07815d57afa64ef7cdbe1a65fbead9a3e7bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/LibDNSJson/zipball/24908c65f44d54db04c2c427ba9e752be6701fd0",
-                "reference": "24908c65f44d54db04c2c427ba9e752be6701fd0",
+                "url": "https://api.github.com/repos/danog/LibDNSJson/zipball/7d5e07815d57afa64ef7cdbe1a65fbead9a3e7bd",
+                "reference": "7d5e07815d57afa64ef7cdbe1a65fbead9a3e7bd",
                 "shasum": ""
             },
             "require": {
@@ -1257,15 +1261,21 @@
                 "libdns",
                 "message"
             ],
-            "time": "2019-06-12T12:39:17+00:00"
+            "time": "2019-07-14T14:59:51+00:00"
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-session_optimization",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/xtrime-ru/madelineProto",
-                "reference": "2749e1ae72db5c75e03eca01080c5cb1f0a5d28e"
+                "url": "https://github.com/danog/MadelineProto.git",
+                "reference": "005d762a8f8e2d2f08c8d7ec476948f6e9816a19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/005d762a8f8e2d2f08c8d7ec476948f6e9816a19",
+                "reference": "005d762a8f8e2d2f08c8d7ec476948f6e9816a19",
+                "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.0",
@@ -1280,7 +1290,7 @@
                 "danog/dns-over-https": "^0.1",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
-                "erusev/parsedown": "^1.6",
+                "erusev/parsedown": "^1.7",
                 "ext-fileinfo": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
@@ -1312,6 +1322,7 @@
                     "src/polyfill.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -1325,19 +1336,19 @@
             "homepage": "https://daniil.it/MadelineProto",
             "keywords": [
                 "GB",
-                "PHP",
+                "Messenger",
                 "audio",
                 "bytes",
                 "client",
                 "files",
-                "messenger",
                 "mtproto",
+                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "time": "2019-06-30T00:42:26+00:00"
+            "time": "2019-07-16T13:18:37+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2212,7 +2223,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "7035aeb5c6d42c22b44aef1304aac62d6733b5e5"
+                "reference": "d8fcff025cd386635f74fe68fb669be4c5b4a0d4"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "~3.4.0",
@@ -2234,7 +2245,7 @@
                 }
             ],
             "description": "IDE help files for Swoole.",
-            "time": "2019-05-22T19:49:35+00:00"
+            "time": "2019-07-07T19:43:22+00:00"
         }
     ],
     "aliases": [

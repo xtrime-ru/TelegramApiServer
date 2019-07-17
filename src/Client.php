@@ -207,9 +207,8 @@ class Client
 
 
     /**
-     * Загружает медиафайл из указанного сообщения во временный файл
+     * Загружает медиафайл из указанного сообщения в поток
      *
-     * Внимание! Необходимо самостоятельно удалять временные файлы после их использования
      * @param $data
      * @return \Amp\Promise
      * @throws \Throwable
@@ -253,7 +252,7 @@ class Client
             }
 
             $stream = fopen('php://memory', 'rwb');
-            yield $this->MadelineProto->downloadToStream($message, $stream);
+            yield $this->MadelineProto->downloadToStream($info, $stream);
             rewind($stream);
 
             return [
@@ -267,9 +266,8 @@ class Client
     }
 
     /**
-     * Загружает превью медиафайла из указанного сообщения во временный файл
+     * Загружает превью медиафайла из указанного сообщения в поток
      *
-     * Внимание! Необходимо самостоятельно удалять временные файлы после их использования
      * @param array $data
      * @return \Amp\Promise
      * @throws \Throwable
@@ -319,8 +317,19 @@ class Client
 
             }
             $info = yield $this->MadelineProto->getDownloadInfo($thumb);
+
+            //Фикс для LAYER 100+
+            //TODO: Удалить, когда снова станет доступна загрузка photoSize
+            if (isset($info['thumb_size'])) {
+                $infoFull = yield $this->MadelineProto->getDownloadInfo($media);
+                $infoFull['InputFileLocation']['thumb_size'] = $info['thumb_size'];
+                $infoFull['size'] = $info['size'];
+                $infoFull['mime'] = $info['mime'];
+                $info = $infoFull;
+            }
+
             $stream = fopen('php://memory', 'rwb');
-            yield $this->MadelineProto->downloadToStream($thumb, $stream);
+            yield $this->MadelineProto->downloadToStream($info, $stream);
             rewind($stream);
 
             return [
