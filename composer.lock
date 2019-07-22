@@ -499,12 +499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "eba1151848f2cfb9c959ef05737480b9f80f7d43"
+                "reference": "d601f59e06432d8056fb1febce01ca8c2c559bab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/eba1151848f2cfb9c959ef05737480b9f80f7d43",
-                "reference": "eba1151848f2cfb9c959ef05737480b9f80f7d43",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/d601f59e06432d8056fb1febce01ca8c2c559bab",
+                "reference": "d601f59e06432d8056fb1febce01ca8c2c559bab",
                 "shasum": ""
             },
             "require": {
@@ -548,15 +548,15 @@
             ],
             "authors": [
                 {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
                     "name": "Bob Weinand"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 },
                 {
                     "name": "Aaron Piotrowski",
@@ -573,7 +573,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-07-16T16:29:16+00:00"
+            "time": "2019-07-22T18:55:19+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1269,12 +1269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "005d762a8f8e2d2f08c8d7ec476948f6e9816a19"
+                "reference": "c31f4493a1bc5593723ad147e64c93c513cda0af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/005d762a8f8e2d2f08c8d7ec476948f6e9816a19",
-                "reference": "005d762a8f8e2d2f08c8d7ec476948f6e9816a19",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/c31f4493a1bc5593723ad147e64c93c513cda0af",
+                "reference": "c31f4493a1bc5593723ad147e64c93c513cda0af",
                 "shasum": ""
             },
             "require": {
@@ -1348,7 +1348,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-07-16T13:18:37+00:00"
+            "time": "2019-07-21T14:52:34+00:00"
         },
         {
             "name": "danog/magicalserializer",

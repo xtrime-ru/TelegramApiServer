@@ -1,9 +1,4 @@
 vendor
-.idea
-.vscode
-nbproject
-.env
-.phpunit.result.cache
+.*
 *.madeline
 *.madeline.lock
-composer.phar
