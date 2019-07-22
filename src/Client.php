@@ -371,9 +371,12 @@ class Client
                 if (!$data['message']) {
                     $peerInfo = yield $this->MadelineProto->getInfo($data['peer']);
                     if ($peerInfo['type'] === 'channel') {
-                        $response = yield $this->MadelineProto->channels->getMessages($data);
+                        $response = yield $this->MadelineProto->channels->getMessages([
+                            'channel' => $data['peer'],
+                            'id' => $data['id'],
+                        ]);
                     } else {
-                        $response = yield $this->MadelineProto->messages->getMessages($data);
+                        $response = yield $this->MadelineProto->messages->getMessages(['id' => $data['id']]);
                     }
 
                     $message = $response['messages'][0];
