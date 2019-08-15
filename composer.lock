@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "f824f0df1da2cc042934fa267d7a227fff9276c9"
+                "reference": "c6a775a6c9fdd9ca4c909647a19b02d2d11a0568"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/f824f0df1da2cc042934fa267d7a227fff9276c9",
-                "reference": "f824f0df1da2cc042934fa267d7a227fff9276c9",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/c6a775a6c9fdd9ca4c909647a19b02d2d11a0568",
+                "reference": "c6a775a6c9fdd9ca4c909647a19b02d2d11a0568",
                 "shasum": ""
             },
             "require": {
@@ -52,20 +52,20 @@
             ],
             "authors": [
                 {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "A non-blocking concurrency framework for PHP applications.",
@@ -81,7 +81,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2019-05-31T18:42:02+00:00"
+            "time": "2019-08-02T20:37:42+00:00"
         },
         {
             "name": "amphp/artax",
@@ -146,16 +146,16 @@
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "c75af3778b5511deb1d760e4709cade2dabc2295"
+                "reference": "47908f8e8bb2da8af4e59028200758477bc927ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/c75af3778b5511deb1d760e4709cade2dabc2295",
-                "reference": "c75af3778b5511deb1d760e4709cade2dabc2295",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/47908f8e8bb2da8af4e59028200758477bc927ea",
+                "reference": "47908f8e8bb2da8af4e59028200758477bc927ea",
                 "shasum": ""
             },
             "require": {
@@ -183,12 +183,12 @@
             ],
             "authors": [
                 {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "A stream abstraction to make working with non-blocking I/O simple.",
@@ -201,7 +201,7 @@
                 "non-blocking",
                 "stream"
             ],
-            "time": "2019-06-03T21:45:17+00:00"
+            "time": "2019-07-26T21:22:49+00:00"
         },
         {
             "name": "amphp/cache",
@@ -255,12 +255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "2e7921a13ad0fa36cbccafb29b7d6e15dc2740af"
+                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/2e7921a13ad0fa36cbccafb29b7d6e15dc2740af",
-                "reference": "2e7921a13ad0fa36cbccafb29b7d6e15dc2740af",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/493d014b58c14e29303a145b0be4cf272aa6644f",
+                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f",
                 "shasum": ""
             },
             "require": {
@@ -294,20 +294,20 @@
             ],
             "authors": [
                 {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
                 },
                 {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
-                    "name": "Chris Wright",
-                    "email": "addr@daverandom.com"
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 },
                 {
                     "name": "Aaron Piotrowski",
@@ -324,7 +324,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-07-08T20:49:23+00:00"
+            "time": "2019-07-30T16:09:33+00:00"
         },
         {
             "name": "amphp/file",
@@ -394,23 +394,23 @@
         },
         {
             "name": "amphp/hpack",
-            "version": "v1.0.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/hpack.git",
-                "reference": "f6f95e015baa54aa3c0fdbe3ad142fbd18a835e6"
+                "reference": "bf334564c5eead116c342a1c747d3b9bc8a3c36b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/hpack/zipball/f6f95e015baa54aa3c0fdbe3ad142fbd18a835e6",
-                "reference": "f6f95e015baa54aa3c0fdbe3ad142fbd18a835e6",
+                "url": "https://api.github.com/repos/amphp/hpack/zipball/bf334564c5eead116c342a1c747d3b9bc8a3c36b",
+                "reference": "bf334564c5eead116c342a1c747d3b9bc8a3c36b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.3",
+                "amphp/php-cs-fixer-config": "dev-master",
                 "http2jp/hpack-test-case": "^1",
                 "phpunit/phpunit": "^6"
             },
@@ -426,15 +426,15 @@
             ],
             "authors": [
                 {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
                     "name": "Bob Weinand"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 },
                 {
                     "name": "Aaron Piotrowski",
@@ -448,7 +448,7 @@
                 "hpack",
                 "http-2"
             ],
-            "time": "2018-03-16T14:31:41+00:00"
+            "time": "2019-07-26T19:30:42+00:00"
         },
         {
             "name": "amphp/http",
@@ -499,18 +499,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "d601f59e06432d8056fb1febce01ca8c2c559bab"
+                "reference": "adec3f5a7358b6f5b4465f55a4b71314fa0b2b56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/d601f59e06432d8056fb1febce01ca8c2c559bab",
-                "reference": "d601f59e06432d8056fb1febce01ca8c2c559bab",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/adec3f5a7358b6f5b4465f55a4b71314fa0b2b56",
+                "reference": "adec3f5a7358b6f5b4465f55a4b71314fa0b2b56",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/byte-stream": "^1.3",
-                "amphp/hpack": "^1",
+                "amphp/hpack": "^2",
                 "amphp/http": "^1.1",
                 "amphp/socket": "^0.10.7",
                 "cash/lrucache": "^1.0",
@@ -573,7 +573,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-07-22T18:55:19+00:00"
+            "time": "2019-08-09T16:23:23+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1269,12 +1269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "c31f4493a1bc5593723ad147e64c93c513cda0af"
+                "reference": "2c2e33636fd68bcfc180ad6c5b7083a359e6f87e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/c31f4493a1bc5593723ad147e64c93c513cda0af",
-                "reference": "c31f4493a1bc5593723ad147e64c93c513cda0af",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/2c2e33636fd68bcfc180ad6c5b7083a359e6f87e",
+                "reference": "2c2e33636fd68bcfc180ad6c5b7083a359e6f87e",
                 "shasum": ""
             },
             "require": {
@@ -1348,7 +1348,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-07-21T14:52:34+00:00"
+            "time": "2019-08-15T18:33:07+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2106,12 +2106,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "82ebae02209c21113908c229e9883c419720738a"
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
-                "reference": "82ebae02209c21113908c229e9883c419720738a",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
                 "shasum": ""
             },
             "require": {
@@ -2123,7 +2123,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "autoload": {
@@ -2140,12 +2140,12 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                },
-                {
                     "name": "Gert de Pagter",
                     "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -2156,7 +2156,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-02-06T07:57:58+00:00"
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2223,14 +2223,14 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "d8fcff025cd386635f74fe68fb669be4c5b4a0d4"
+                "reference": "ad04cc34f949fc8c4e693dc43ebc7bc34d5c1545"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "~3.4.0",
                 "zendframework/zend-code": "~3.3.0"
             },
             "type": "library",
-            "autoload": {
+            "autoload-dev": {
                 "psr-4": {
                     "Swoole\\IDEHelper\\": "src/"
                 }
@@ -2245,7 +2245,7 @@
                 }
             ],
             "description": "IDE help files for Swoole.",
-            "time": "2019-07-07T19:43:22+00:00"
+            "time": "2019-08-09T06:55:04+00:00"
         }
     ],
     "aliases": [
