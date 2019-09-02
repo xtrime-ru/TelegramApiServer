@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b8ba3322d447f03eb284d1e73aabfae",
+    "content-hash": "49f546a053ee3dadfdae54d690145cf9",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "dev-master",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
@@ -255,12 +255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f"
+                "reference": "aa1892bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/493d014b58c14e29303a145b0be4cf272aa6644f",
-                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/aa1892bd",
+                "reference": "aa1892bd",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-07-30T16:09:33+00:00"
+            "time": "2019-06-12T11:28:22+00:00"
         },
         {
             "name": "amphp/file",
@@ -495,16 +495,16 @@
         },
         {
             "name": "amphp/http-server",
-            "version": "dev-master",
+            "version": "v1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "adec3f5a7358b6f5b4465f55a4b71314fa0b2b56"
+                "reference": "a4936b0ab0d1810e583d7787490d5d6989337fb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/adec3f5a7358b6f5b4465f55a4b71314fa0b2b56",
-                "reference": "adec3f5a7358b6f5b4465f55a4b71314fa0b2b56",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/a4936b0ab0d1810e583d7787490d5d6989337fb8",
+                "reference": "a4936b0ab0d1810e583d7787490d5d6989337fb8",
                 "shasum": ""
             },
             "require": {
@@ -573,7 +573,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-08-09T16:23:23+00:00"
+            "time": "2019-08-19T21:21:30+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -743,7 +743,7 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v0.10.x-dev",
+            "version": "v0.10.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
@@ -924,15 +924,15 @@
             },
             "require": {
                 "amphp/amp": "^2",
-                "amphp/byte-stream": "^1.5",
-                "amphp/socket": "^0.10",
-                "cash/lrucache": "^1.0",
+                "amphp/byte-stream": "^1.6.1",
+                "amphp/socket": "^1",
+                "cash/lrucache": "^1",
                 "php": ">=7.1"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1",
-                "phpunit/phpunit": "^6"
+                "amphp/phpunit-util": "^1.1",
+                "phpunit/phpunit": "^7"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
@@ -956,12 +956,12 @@
                     "email": "bobwei9@hotmail.com"
                 },
                 {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "Shared code for websocket servers and clients.",
@@ -990,19 +990,19 @@
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^2",
-                "amphp/http": "^1.1",
-                "amphp/socket": "^0.10",
-                "amphp/websocket": "dev-master as 1.0",
+                "amphp/amp": "^2.2",
+                "amphp/http": "^1.3",
+                "amphp/socket": "^1",
+                "amphp/websocket": "^1",
                 "league/uri-schemes": "^1.2",
                 "php": ">=7.1"
             },
             "require-dev": {
-                "amphp/http-server": "^1",
+                "amphp/http-server": "^2",
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1",
-                "amphp/websocket-server": "dev-master as 2.0",
-                "phpunit/phpunit": "^6"
+                "amphp/phpunit-util": "^1.1",
+                "amphp/websocket-server": "^2",
+                "phpunit/phpunit": "^8 || ^7"
             },
             "type": "library",
             "autoload": {
@@ -1023,12 +1023,12 @@
                     "email": "bobwei9@hotmail.com"
                 },
                 {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 }
             ],
             "description": "Async WebSocket client for PHP based on Amp.",
@@ -1269,12 +1269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "2c2e33636fd68bcfc180ad6c5b7083a359e6f87e"
+                "reference": "cfaa6241c280e1986796f4806f7f565d4f57453e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/2c2e33636fd68bcfc180ad6c5b7083a359e6f87e",
-                "reference": "2c2e33636fd68bcfc180ad6c5b7083a359e6f87e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/cfaa6241c280e1986796f4806f7f565d4f57453e",
+                "reference": "cfaa6241c280e1986796f4806f7f565d4f57453e",
                 "shasum": ""
             },
             "require": {
@@ -1283,10 +1283,10 @@
                 "amphp/byte-stream": "^1.6",
                 "amphp/dns": "dev-master#aa1892bdf13b787d759df6f2523e8027a434d927 as v0.9.x-dev",
                 "amphp/file": "^0.3",
-                "amphp/socket": "^0.10",
+                "amphp/socket": "0.10.12 as 1",
                 "amphp/uri": "^0.1.4",
-                "amphp/websocket": "dev-master as 1",
-                "amphp/websocket-client": "dev-master as 1",
+                "amphp/websocket": "dev-master#db2da8c5b3ed22eae37da5ffa10ab3ea8de19342 as 1",
+                "amphp/websocket-client": "dev-master#aff808025637bd705672338b4904ad03a4dbdc04 as 1",
                 "danog/dns-over-https": "^0.1",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
@@ -1348,7 +1348,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-08-15T18:33:07+00:00"
+            "time": "2019-09-02T15:42:19+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2009,12 +2009,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+                "reference": "efd67d1dc14a7ef4fc4e518e7dee91c271d524e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/efd67d1dc14a7ef4fc4e518e7dee91c271d524e4",
+                "reference": "efd67d1dc14a7ef4fc4e518e7dee91c271d524e4",
                 "shasum": ""
             },
             "require": {
@@ -2051,7 +2051,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2019-08-29T13:16:46+00:00"
         },
         {
             "name": "psr/log",
@@ -2164,12 +2164,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "9159290ad347bf56fa6d208bf35645c450f9e567"
+                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/9159290ad347bf56fa6d208bf35645c450f9e567",
-                "reference": "9159290ad347bf56fa6d208bf35645c450f9e567",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
+                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
                 "shasum": ""
             },
             "require": {
@@ -2183,7 +2183,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "3.5-dev"
                 }
             },
             "autoload": {
@@ -2213,7 +2213,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-06-29T14:13:05+00:00"
+            "time": "2019-08-27T17:00:38+00:00"
         }
     ],
     "packages-dev": [
@@ -2223,7 +2223,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "ad04cc34f949fc8c4e693dc43ebc7bc34d5c1545"
+                "reference": "6cedb40f0f91bb047cb44b51bcb72d615993ea2b"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "~3.4.0",
@@ -2245,23 +2245,41 @@
                 }
             ],
             "description": "IDE help files for Swoole.",
-            "time": "2019-08-09T06:55:04+00:00"
+            "time": "2019-08-30T16:45:49+00:00"
         }
     ],
     "aliases": [
         {
-            "alias": "v0.9.x-dev",
-            "alias_normalized": "0.9.9999999.9999999-dev",
+            "alias": "0.9",
+            "alias_normalized": "0.9.0.0",
             "version": "9999999-dev",
             "package": "amphp/dns"
+        },
+        {
+            "alias": "1",
+            "alias_normalized": "1.0.0.0",
+            "version": "0.10.12.0",
+            "package": "amphp/socket"
+        },
+        {
+            "alias": "1",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "amphp/websocket"
+        },
+        {
+            "alias": "1",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "amphp/websocket-client"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "danog/madelineproto": 20,
-        "amphp/amp": 20,
-        "amphp/http-server": 20,
         "amphp/dns": 20,
+        "amphp/websocket": 20,
+        "amphp/websocket-client": 20,
         "swoole/ide-helper": 20
     },
     "prefer-stable": false,
