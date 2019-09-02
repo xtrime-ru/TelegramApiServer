@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49f546a053ee3dadfdae54d690145cf9",
+    "content-hash": "af34ecd09da0fe3baa48660289bd66d6",
     "packages": [
         {
             "name": "amphp/amp",
@@ -255,12 +255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "aa1892bd"
+                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/aa1892bd",
-                "reference": "aa1892bd",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/493d014b58c14e29303a145b0be4cf272aa6644f",
+                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-06-12T11:28:22+00:00"
+            "time": "2019-07-30T16:09:33+00:00"
         },
         {
             "name": "amphp/file",
