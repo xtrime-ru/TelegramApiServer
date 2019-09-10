@@ -12,7 +12,7 @@ Fast, simple, async php telegram api server:
 * Full access to telegram api: bot and user
 
 **Example Architecture**
-![Proposed Architecture](https://habrastorage.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
+![Proposed Architecture](https://hsto.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
  
 **Installation**
 
