@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af34ecd09da0fe3baa48660289bd66d6",
+    "content-hash": "49f546a053ee3dadfdae54d690145cf9",
     "packages": [
         {
             "name": "amphp/amp",
@@ -255,12 +255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f"
+                "reference": "aa1892bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/493d014b58c14e29303a145b0be4cf272aa6644f",
-                "reference": "493d014b58c14e29303a145b0be4cf272aa6644f",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/aa1892bd",
+                "reference": "aa1892bd",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-07-30T16:09:33+00:00"
+            "time": "2019-06-12T11:28:22+00:00"
         },
         {
             "name": "amphp/file",
@@ -452,16 +452,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "3b1cddc3f67b618a6197a5e87df834c53f79fcce"
+                "reference": "12e1341852efc7f6d1ae3269a6ee26f0b81f294a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/3b1cddc3f67b618a6197a5e87df834c53f79fcce",
-                "reference": "3b1cddc3f67b618a6197a5e87df834c53f79fcce",
+                "url": "https://api.github.com/repos/amphp/http/zipball/12e1341852efc7f6d1ae3269a6ee26f0b81f294a",
+                "reference": "12e1341852efc7f6d1ae3269a6ee26f0b81f294a",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
-            "time": "2019-07-01T19:11:10+00:00"
+            "time": "2019-09-12T20:06:41+00:00"
         },
         {
             "name": "amphp/http-server",
@@ -1269,12 +1269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "cfaa6241c280e1986796f4806f7f565d4f57453e"
+                "reference": "0fcf83d9ad27ce941386bace3d3c99bd0174792e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/cfaa6241c280e1986796f4806f7f565d4f57453e",
-                "reference": "cfaa6241c280e1986796f4806f7f565d4f57453e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0fcf83d9ad27ce941386bace3d3c99bd0174792e",
+                "reference": "0fcf83d9ad27ce941386bace3d3c99bd0174792e",
                 "shasum": ""
             },
             "require": {
@@ -1303,6 +1303,7 @@
                 "krakjoe/pthreads-polyfill": "*"
             },
             "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
                 "ennexa/amp-update-cache": "dev-master",
                 "phpdocumentor/reflection-docblock": "^3.1",
                 "phpunit/phpunit": "^8"
@@ -1348,7 +1349,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-09-02T15:42:19+00:00"
+            "time": "2019-09-14T15:09:36+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2164,12 +2165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222"
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1bdf24f065975594f6a117f0f1f6cabf1333b156",
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156",
                 "shasum": ""
             },
             "require": {
@@ -2178,12 +2179,12 @@
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.6-dev"
                 }
             },
             "autoload": {
@@ -2213,7 +2214,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-08-27T17:00:38+00:00"
+            "time": "2019-09-10T21:37:39+00:00"
         }
     ],
     "packages-dev": [
