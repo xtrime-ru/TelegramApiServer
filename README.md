@@ -24,12 +24,12 @@ Fast, simple, async php telegram api server:
    MadelineProto will generate them on start.
 
      _Optional:_
-1. Use supervisor to monitor and restart swoole servers. Example of `/etc/supervisor/conf.d/telegram_rss.conf`: 
+1. Use supervisor to monitor and restart swoole/amphp servers. Example of `/etc/supervisor/conf.d/telegram_rss.conf`: 
      ```
     [program:telegram_client]
-    command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramSwooleClient/server.php
+    command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramApiServer/server.php
     numprocs=1
-    directory=/home/admin/web/tg.i-c-a.su/TelegramSwooleClient/
+    directory=/home/admin/web/tg.i-c-a.su/TelegramApiServer/
     autostart=true
     autorestart=true
     stdout_logfile=none
