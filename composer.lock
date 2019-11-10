@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e345d840a432f486fb1d552e02a7640b",
+    "content-hash": "9d2557bf0f29ff86bcb98d3bab9a52c0",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1265,16 +1265,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "4.2.25",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "7581bb1bc6c7cfc3ef261dfd676e170d39f58390"
+                "reference": "bb9804290b531b95f79c3e9501a298391d0f0acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/7581bb1bc6c7cfc3ef261dfd676e170d39f58390",
-                "reference": "7581bb1bc6c7cfc3ef261dfd676e170d39f58390",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/bb9804290b531b95f79c3e9501a298391d0f0acb",
+                "reference": "bb9804290b531b95f79c3e9501a298391d0f0acb",
                 "shasum": ""
             },
             "require": {
@@ -1305,6 +1305,7 @@
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
                 "ennexa/amp-update-cache": "dev-master",
+                "haydenpierce/class-finder": "^0.4",
                 "phpdocumentor/reflection-docblock": "^4.3",
                 "phpunit/phpunit": "^8"
             },
@@ -1313,8 +1314,8 @@
             },
             "type": "project",
             "autoload": {
-                "psr-0": {
-                    "danog\\MadelineProto\\": "src/"
+                "psr-4": {
+                    "danog\\MadelineProto\\": "src/danog/MadelineProto"
                 },
                 "files": [
                     "src/BigIntegor.php",
@@ -1349,7 +1350,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-10-28T22:52:21+00:00"
+            "time": "2019-11-10T18:31:11+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1873,12 +1874,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "2ba2586380f8d2b44ad1b9feb61c371020b27793"
+                "reference": "2f6af23c6ff2bcd32ebd969e118e5a3b57d649dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/2ba2586380f8d2b44ad1b9feb61c371020b27793",
-                "reference": "2ba2586380f8d2b44ad1b9feb61c371020b27793",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/2f6af23c6ff2bcd32ebd969e118e5a3b57d649dc",
+                "reference": "2f6af23c6ff2bcd32ebd969e118e5a3b57d649dc",
                 "shasum": ""
             },
             "require": {
@@ -1890,7 +1891,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -1915,7 +1916,7 @@
                 "php",
                 "type"
             ],
-            "time": "2019-11-06T22:27:00+00:00"
+            "time": "2019-11-10T15:06:50+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -2278,6 +2279,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "danog/madelineproto": 20,
         "amphp/dns": 20,
         "amphp/websocket": 20,
         "amphp/websocket-client": 20,

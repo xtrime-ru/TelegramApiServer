@@ -56,7 +56,7 @@ class Server
 
             // Stop the server gracefully when SIGINT is received.
             // This is technically optional, but it is best to call Server::stop().
-            if (defined(SIGINT)) {
+            if (defined('SIGINT')) {
                 Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
                     Amp\Loop::cancel($watcherId);
                     yield $server->stop();
