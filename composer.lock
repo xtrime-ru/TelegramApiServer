@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d2557bf0f29ff86bcb98d3bab9a52c0",
+    "content-hash": "6b43fbacbbb9ee829ecb9b3931bb684b",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2218,39 +2218,7 @@
             "time": "2019-09-10T21:37:39+00:00"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "swoole/ide-helper",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "915964abd1ff4fe78be3e341ce9008b6d6a7648a"
-            },
-            "require-dev": {
-                "squizlabs/php_codesniffer": "~3.4.0",
-                "symfony/filesystem": "~4.3.0",
-                "zendframework/zend-code": "~3.3.0"
-            },
-            "type": "library",
-            "autoload-dev": {
-                "psr-4": {
-                    "Swoole\\IDEHelper\\": "src/"
-                }
-            },
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Team Swoole",
-                    "email": "team@swoole.com"
-                }
-            ],
-            "description": "IDE help files for Swoole.",
-            "time": "2019-11-04T17:53:06+00:00"
-        }
-    ],
+    "packages-dev": [],
     "aliases": [
         {
             "alias": "0.9",
@@ -2282,8 +2250,7 @@
         "danog/madelineproto": 20,
         "amphp/dns": 20,
         "amphp/websocket": 20,
-        "amphp/websocket-client": 20,
-        "swoole/ide-helper": 20
+        "amphp/websocket-client": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

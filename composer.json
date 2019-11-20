@@ -17,16 +17,11 @@
     "vlucas/phpdotenv": "^3"
   },
   "require-dev": {
-    "swoole/ide-helper": "dev-master"
   },
   "repositories": [
     {
       "type": "git",
       "url": "https://github.com/danog/phpseclib"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/swoole/ide-helper.git"
     }
   ],
   "minimum-stability": "dev",
