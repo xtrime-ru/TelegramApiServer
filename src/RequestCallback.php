@@ -156,7 +156,7 @@ class RequestCallback
                     $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
                     break;
                 case 3:
-                    $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[3]}(...$this->parameters);
+                    $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[2]}(...$this->parameters);
                     break;
                 default:
                     throw new \UnexpectedValueException('Incorrect method format');
