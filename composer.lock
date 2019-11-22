@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b43fbacbbb9ee829ecb9b3931bb684b",
+    "content-hash": "82308a184727a31583d85a0add3ec8a8",
     "packages": [
         {
             "name": "amphp/amp",
@@ -931,8 +931,8 @@
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1.1",
-                "phpunit/phpunit": "^7"
+                "amphp/phpunit-util": "^1",
+                "phpunit/phpunit": "^6"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
@@ -956,12 +956,12 @@
                     "email": "bobwei9@hotmail.com"
                 },
                 {
-                    "name": "Aaron Piotrowski",
-                    "email": "aaron@trowski.com"
-                },
-                {
                     "name": "Niklas Keller",
                     "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
                 }
             ],
             "description": "Shared code for websocket servers and clients.",
@@ -998,11 +998,11 @@
                 "php": ">=7.1"
             },
             "require-dev": {
-                "amphp/http-server": "^2",
+                "amphp/http-server": "^1",
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1.1",
-                "amphp/websocket-server": "^2",
-                "phpunit/phpunit": "^8 || ^7"
+                "amphp/phpunit-util": "^1",
+                "amphp/websocket-server": "dev-master as 2.0",
+                "phpunit/phpunit": "^6"
             },
             "type": "library",
             "autoload": {
@@ -1023,12 +1023,12 @@
                     "email": "bobwei9@hotmail.com"
                 },
                 {
-                    "name": "Aaron Piotrowski",
-                    "email": "aaron@trowski.com"
-                },
-                {
                     "name": "Niklas Keller",
                     "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
                 }
             ],
             "description": "Async WebSocket client for PHP based on Amp.",
@@ -1265,16 +1265,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "4.2.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "bb9804290b531b95f79c3e9501a298391d0f0acb"
+                "reference": "7581bb1bc6c7cfc3ef261dfd676e170d39f58390"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/bb9804290b531b95f79c3e9501a298391d0f0acb",
-                "reference": "bb9804290b531b95f79c3e9501a298391d0f0acb",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/7581bb1bc6c7cfc3ef261dfd676e170d39f58390",
+                "reference": "7581bb1bc6c7cfc3ef261dfd676e170d39f58390",
                 "shasum": ""
             },
             "require": {
@@ -1305,7 +1305,6 @@
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
                 "ennexa/amp-update-cache": "dev-master",
-                "haydenpierce/class-finder": "^0.4",
                 "phpdocumentor/reflection-docblock": "^4.3",
                 "phpunit/phpunit": "^8"
             },
@@ -1314,8 +1313,8 @@
             },
             "type": "project",
             "autoload": {
-                "psr-4": {
-                    "danog\\MadelineProto\\": "src/danog/MadelineProto"
+                "psr-0": {
+                    "danog\\MadelineProto\\": "src/"
                 },
                 "files": [
                     "src/BigIntegor.php",
@@ -1350,7 +1349,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-11-10T18:31:11+00:00"
+            "time": "2019-10-28T22:52:21+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2162,7 +2161,7 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "dev-master",
+            "version": "3.6.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
@@ -2247,7 +2246,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danog/madelineproto": 20,
         "amphp/dns": 20,
         "amphp/websocket": 20,
         "amphp/websocket-client": 20
