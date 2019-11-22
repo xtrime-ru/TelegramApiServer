@@ -93,47 +93,18 @@ class Client
      *
      * @return \Amp\Promise
      */
-    public function getMessagesHTML(array $data): \Amp\Promise
+    public function getHistoryHtml(array $data): \Amp\Promise
     {
         return call(
             function() use ($data) {
-                $data = array_merge(
-                    [
-                        'peer' => '',
-                        'offset_id' => 0,
-                        'offset_date' => 0,
-                        'add_offset' => 0,
-                        'limit' => 0,
-                        'max_id' => 0,
-                        'min_id' => 0,
-                        'hash' => 0,
-                    ],
-                    $data
-                );
+                $response = yield $this->getHistory($data);
 
-                $response = yield $this->MadelineProto->messages->getHistory($data);
-                $messages = $response['messages'] ?? [];
-
-                $result = [];
-                foreach ($messages as $message) {
-                    $html = '';
-                    if (static::hasMedia($message)) {
-                        $html .=
-                            "<a href='/api/getMedia/?data[channel]={$data['peer']}&data[id][]={$message['id']}'>" .
-                            "<img src='/api/getMediaPreview/?data[channel]={$data['peer']}&data[id][]={$message['id']}'" .
-                            " style='max-width:100%'" .
-                            '/>' .
-                            '</a>' .
-                            '<br/><br/>';
-                    }
-                    $html .= $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
-
-                    if ($html) {
-                        $result[] = $html;
-                    }
+                foreach ($response['messages'] as &$message) {
+                    $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
                 }
+                unset($message);
 
-                return $result;
+                return $response;
             }
         );
     }
@@ -187,6 +158,7 @@ class Client
                 $message = $this->substringReplace($message, $textFormate, $entity['offset'], $entity['length']);
             }
         }
+        $message = nl2br($message);
         return $message;
     }
 
