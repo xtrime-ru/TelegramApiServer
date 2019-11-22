@@ -17,16 +17,16 @@ Fast, simple, async php telegram api server:
 **Installation**
 
 1. Git clone this repo
-1. `composer install` to install required libs
+1. `composer install -o --no-dev` to install required libs
 1. Create .env from .env.example
 1. Fill variables in .env
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/) or leave blank.
    MadelineProto will generate them on start.
 
      _Optional:_
-1. Use supervisor to monitor and restart swoole/amphp servers. Example of `/etc/supervisor/conf.d/telegram_rss.conf`: 
+1. Use supervisor to monitor and restart swoole/amphp servers. Example of `/etc/supervisor/conf.d/telegram_api_server.conf`: 
      ```
-    [program:telegram_client]
+    [program:telegram_api_server]
     command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramApiServer/server.php
     numprocs=1
     directory=/home/admin/web/tg.i-c-a.su/TelegramApiServer/
@@ -69,6 +69,7 @@ Fast, simple, async php telegram api server:
     * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
     * repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
     * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
+    * get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
     * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
