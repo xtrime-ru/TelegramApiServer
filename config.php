@@ -18,10 +18,6 @@ return [
             'logger' => \danog\MadelineProto\Logger::ECHO_LOGGER, //  0 - Logs disabled, 3 - echo logs.
             'logger_level' => getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 0, VERBOSE - 1 , NOTICE - 2, WARNING - 3, ERROR - 4, FATAL_ERROR - 5.
         ],
-        'updates' => [
-            'handle_updates' => false, // Should I handle updates?
-            'handle_old_updates' => false, // Should I handle old updates on startup?
-        ],
         'connection_settings' => [
             'all' => [
                 'proxy' => '\SocksProxy',
