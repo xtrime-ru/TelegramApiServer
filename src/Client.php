@@ -13,6 +13,7 @@ class Client
     /** @var MadelineProto\API */
     public $MadelineProto;
     private $sessionFile;
+    private $config;
 
     /**
      * Client constructor.
@@ -21,7 +22,7 @@ class Client
      */
     public function __construct($sessionFile)
     {
-        $this->config = Config::getInstance()->get('telegram');
+        $this->config = (array) Config::getInstance()->get('telegram');
 
         if (empty($this->config['connection_settings']['all']['proxy_extra']['address'])) {
             $this->config['connection_settings']['all']['proxy'] = '\Socket';

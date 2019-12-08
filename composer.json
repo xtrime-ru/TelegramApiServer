@@ -8,15 +8,8 @@
   "require": {
     "php": ">=7.2.0",
     "ext-json": "*",
-    "amphp/http-server": "^1",
-    "vlucas/phpdotenv": "^3"
+    "amphp/http-server": "^1"
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/danog/phpseclib"
-    }
-  ],
   "minimum-stability": "dev",
   "authors": [
     {

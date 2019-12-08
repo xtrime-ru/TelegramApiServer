@@ -16,7 +16,7 @@ return [
         ],
         'logger' => [ // Logger settings
             'logger' => \danog\MadelineProto\Logger::ECHO_LOGGER, //  0 - Logs disabled, 3 - echo logs.
-            'logger_level' => getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 0, VERBOSE - 1 , NOTICE - 2, WARNING - 3, ERROR - 4, FATAL_ERROR - 5.
+            'logger_level' => getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
         'connection_settings' => [
             'all' => [
@@ -33,6 +33,9 @@ return [
             'serialization_interval' => 300,
             'cleanup_before_serialization' => true,
         ],
+        'download'=>[
+            'report_broken_media' => false,
+        ]
     ],
     'api' => [
         'ip_whitelist' => array_filter(

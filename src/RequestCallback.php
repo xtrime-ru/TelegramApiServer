@@ -10,7 +10,6 @@ class RequestCallback
 {
 
     private $client;
-    public const FATAL_MESSAGE = 'Fatal error. Exit.';
     private const PAGES = ['index', 'api'];
     /** @var array */
     private $ipWhiteList;
