@@ -8,7 +8,8 @@
   "require": {
     "php": ">=7.3.0",
     "ext-json": "*",
-    "amphp/http-server": "^1"
+    "amphp/http-server": "^1",
+    "vlucas/phpdotenv": "^3"
   },
   "minimum-stability": "dev",
   "authors": [
