@@ -148,7 +148,7 @@ class Client
         $entities = array_reverse($entities);
         foreach ($entities as $entity) {
             if (isset($html[$entity['_']])) {
-                $text = $this->mb_substr($message, $entity['offset'], $entity['length']);
+                $text = $this->mbSubstr($message, $entity['offset'], $entity['length']);
 
                 if (in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
                     $textFormate = sprintf($html[$entity['_']], $entity['url'] ?? $text, $text);
@@ -165,8 +165,8 @@ class Client
 
     private function substringReplace(string $original, string $replacement, int $position, int $length): string
     {
-        $startString = $this->mb_substr($original, 0, $position);
-        $endString = $this->mb_substr($original, $position + $length, $this->mb_strlen($original));
+        $startString = $this->mbSubstr($original, 0, $position);
+        $endString = $this->mbSubstr($original, $position + $length, $this->mbStrlen($original));
         return $startString . $replacement . $endString;
     }
 
