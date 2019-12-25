@@ -120,7 +120,7 @@ class RequestCallback
         }
 
         try {
-            if (!in_array($request->getClient()->getRemoteAddress(), $this->ipWhiteList, true)) {
+            if (!in_array($request->getClient()->getRemoteAddress()->getHost(), $this->ipWhiteList, true)) {
                 throw new \Exception('Requests from your IP is forbidden');
             }
             $this->page['response'] = $this->callApi();
