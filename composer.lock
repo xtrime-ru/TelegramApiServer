@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d20ec7ae2bf032b2862eee01f622eae4",
+    "content-hash": "f846a05e4e5a59178c941b30b4029704",
     "packages": [
         {
             "name": "amphp/amp",
@@ -196,16 +196,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v0.9.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "2a3e7376f42b289230c0921aceaec5bbf253299d"
+                "reference": "aa1892bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/2a3e7376f42b289230c0921aceaec5bbf253299d",
-                "reference": "2a3e7376f42b289230c0921aceaec5bbf253299d",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/aa1892bd",
+                "reference": "aa1892bd",
                 "shasum": ""
             },
             "require": {
@@ -216,6 +216,7 @@
                 "amphp/windows-registry": "^0.3",
                 "daverandom/libdns": "^2.0.1",
                 "ext-filter": "*",
+                "ext-json": "*",
                 "php": ">=7.0"
             },
             "require-dev": {
@@ -238,20 +239,20 @@
             ],
             "authors": [
                 {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
                 },
                 {
                     "name": "Daniel Lowrey",
                     "email": "rdlowrey@php.net"
                 },
                 {
-                    "name": "Chris Wright",
-                    "email": "addr@daverandom.com"
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
                 },
                 {
                     "name": "Aaron Piotrowski",
@@ -268,7 +269,74 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-07-08T20:58:50+00:00"
+            "time": "2019-06-12T11:28:22+00:00"
+        },
+        {
+            "name": "amphp/file",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/file.git",
+                "reference": "80cfffa8238f4ccfe2bcf425bcc18fd3a8cb5eeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/file/zipball/80cfffa8238f4ccfe2bcf425bcc18fd3a8cb5eeb",
+                "reference": "80cfffa8238f4ccfe2bcf425bcc18fd3a8cb5eeb",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.2",
+                "amphp/byte-stream": "^1.6.1",
+                "amphp/parallel": "^1.2",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1",
+                "phpunit/phpunit": "^8 || ^7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\File\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Allows non-blocking access to the filesystem for Amp.",
+            "homepage": "https://github.com/amphp/file",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "disk",
+                "file",
+                "filesystem",
+                "io",
+                "non-blocking",
+                "static"
+            ],
+            "time": "2019-09-14T03:09:41+00:00"
         },
         {
             "name": "amphp/hpack",
@@ -372,40 +440,180 @@
             "time": "2019-11-04T21:24:40+00:00"
         },
         {
-            "name": "amphp/http-server",
-            "version": "v1.x-dev",
+            "name": "amphp/http-client",
+            "version": "v4.0.0-rc10",
             "source": {
                 "type": "git",
-                "url": "https://github.com/amphp/http-server.git",
-                "reference": "a4936b0ab0d1810e583d7787490d5d6989337fb8"
+                "url": "https://github.com/amphp/http-client.git",
+                "reference": "c371feeb8047d199158c68d9e22ccc20d9071f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/a4936b0ab0d1810e583d7787490d5d6989337fb8",
-                "reference": "a4936b0ab0d1810e583d7787490d5d6989337fb8",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/c371feeb8047d199158c68d9e22ccc20d9071f09",
+                "reference": "c371feeb8047d199158c68d9e22ccc20d9071f09",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.4",
+                "amphp/byte-stream": "^1.6",
+                "amphp/hpack": "^2",
+                "amphp/http": "^1.5",
+                "amphp/socket": "^1",
+                "amphp/sync": "^1.3",
+                "league/uri": "^6",
+                "php": ">=7.2",
+                "psr/http-message": "^1"
+            },
+            "conflict": {
+                "amphp/file": "<0.2 || >=2"
+            },
+            "require-dev": {
+                "amphp/file": "^1 || ^0.3 || ^0.2",
+                "amphp/http-server": "^2-rc3",
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1",
+                "ext-json": "*",
+                "phpunit/phpunit": "^7 || ^8"
+            },
+            "suggest": {
+                "amphp/file": "Required for file request bodies and HTTP archive logging",
+                "ext-json": "*",
+                "ext-zlib": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Http\\Client\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                }
+            ],
+            "description": "Asynchronous concurrent HTTP/2 and HTTP/1.1 client built on the Amp concurrency framework",
+            "homepage": "https://github.com/amphp/http-client",
+            "keywords": [
+                "async",
+                "client",
+                "concurrent",
+                "http",
+                "non-blocking",
+                "rest"
+            ],
+            "time": "2019-12-04T18:30:26+00:00"
+        },
+        {
+            "name": "amphp/http-client-cookies",
+            "version": "v1.0.0-rc5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/http-client-cookies.git",
+                "reference": "253f7de299c174616ddd7b3d907f979806772b0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/253f7de299c174616ddd7b3d907f979806772b0c",
+                "reference": "253f7de299c174616ddd7b3d907f979806772b0c",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.3",
+                "amphp/http": "^1.5",
+                "amphp/http-client": "^4.0.0-rc9",
+                "amphp/socket": "^1",
+                "php": ">=7.2"
+            },
+            "conflict": {
+                "amphp/file": "<1 || >=2"
+            },
+            "require-dev": {
+                "amphp/file": "^1",
+                "amphp/http-server": "^2-rc3",
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1",
+                "friendsofphp/php-cs-fixer": "^2.3",
+                "phpunit/phpunit": "^7 || ^8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Http\\Client\\Cookie\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Automatic cookie handling for Amp's HTTP client.",
+            "homepage": "https://github.com/amphp/http-client-cookies",
+            "keywords": [
+                "async",
+                "client",
+                "cookie",
+                "cookies",
+                "http"
+            ],
+            "time": "2019-11-20T19:24:05+00:00"
+        },
+        {
+            "name": "amphp/http-server",
+            "version": "v2.0.0-rc3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/http-server.git",
+                "reference": "5a4baa7d6aef13fb36415e0573e56211d606995d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/5a4baa7d6aef13fb36415e0573e56211d606995d",
+                "reference": "5a4baa7d6aef13fb36415e0573e56211d606995d",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/byte-stream": "^1.3",
                 "amphp/hpack": "^2",
-                "amphp/http": "^1.1",
-                "amphp/socket": "^0.10.7",
-                "cash/lrucache": "^1.0",
-                "league/uri-parser": "^1.3",
-                "league/uri-schemes": "^1.1",
+                "amphp/http": "^1.5",
+                "amphp/socket": "^1",
+                "cash/lrucache": "^1",
+                "league/uri": "^6",
+                "php": ">=7.2",
                 "psr/http-message": "^1",
                 "psr/log": "^1"
             },
             "require-dev": {
-                "amphp/artax": "^3",
+                "amphp/http-client": "^4-rc8",
                 "amphp/log": "^1",
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1",
+                "amphp/phpunit-util": "^1.1",
                 "infection/infection": "^0.9.2",
-                "league/uri-components": "^1.7",
-                "monolog/monolog": "^1.23",
-                "phpunit/phpunit": "^6"
+                "league/uri-components": "^2",
+                "monolog/monolog": "^2 || ^1.23",
+                "phpunit/phpunit": "^8 || ^7"
             },
             "suggest": {
                 "ext-zlib": "Allows GZip compression of response bodies"
@@ -451,7 +659,67 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-08-19T21:21:30+00:00"
+            "time": "2019-11-05T19:33:55+00:00"
+        },
+        {
+            "name": "amphp/parallel",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/parallel.git",
+                "reference": "53aa422eaf89a539b4df58284f7bdf5219e37f66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/53aa422eaf89a539b4df58284f7bdf5219e37f66",
+                "reference": "53aa422eaf89a539b4df58284f7bdf5219e37f66",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/byte-stream": "^1.5",
+                "amphp/parser": "^1",
+                "amphp/process": "^1",
+                "amphp/sync": "^1.0.1"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Parallel\\": "lib"
+                },
+                "files": [
+                    "lib/Worker/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Coakley",
+                    "email": "me@stephencoakley.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                }
+            ],
+            "description": "Parallel processing component for Amp.",
+            "homepage": "https://github.com/amphp/parallel",
+            "keywords": [
+                "async",
+                "asynchronous",
+                "concurrent",
+                "multi-processing",
+                "multi-threading"
+            ],
+            "time": "2019-05-11T17:13:47+00:00"
         },
         {
             "name": "amphp/parser",
@@ -561,28 +829,31 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v0.10.x-dev",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "d84f6e09675488a52fb6ff5e2d53ecc5d587667a"
+                "reference": "abc18f1786363ceee2555ffd7fe87e4eead2ce24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/d84f6e09675488a52fb6ff5e2d53ecc5d587667a",
-                "reference": "d84f6e09675488a52fb6ff5e2d53ecc5d587667a",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/abc18f1786363ceee2555ffd7fe87e4eead2ce24",
+                "reference": "abc18f1786363ceee2555ffd7fe87e4eead2ce24",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
-                "amphp/byte-stream": "^1.1",
-                "amphp/dns": "^0.9",
-                "amphp/uri": "^0.1",
-                "php": ">=7.0"
+                "amphp/byte-stream": "^1.6",
+                "amphp/dns": "^1 || ^0.9",
+                "ext-openssl": "*",
+                "kelunik/certificate": "^1.1",
+                "league/uri-parser": "^1.4",
+                "php": ">=7.1"
             },
             "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "friendsofphp/php-cs-fixer": "^2.3",
+                "league/uri-schemes": "^1.2.1",
                 "phpunit/phpunit": "^6"
             },
             "type": "library",
@@ -624,7 +895,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2019-11-05T22:34:12+00:00"
+            "time": "2019-08-01T19:32:46+00:00"
         },
         {
             "name": "amphp/sync",
@@ -727,6 +998,145 @@
             "time": "2019-05-13T18:25:34+00:00"
         },
         {
+            "name": "amphp/websocket",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/websocket.git",
+                "reference": "db2da8c5b3ed22eae37da5ffa10ab3ea8de19342"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/db2da8c5b3ed22eae37da5ffa10ab3ea8de19342",
+                "reference": "db2da8c5b3ed22eae37da5ffa10ab3ea8de19342",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.2",
+                "amphp/byte-stream": "^1.6.1",
+                "amphp/socket": "^1",
+                "cash/lrucache": "^1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1.2",
+                "phpunit/phpunit": "^8 || ^7"
+            },
+            "suggest": {
+                "ext-zlib": "Required for compression"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Websocket\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                }
+            ],
+            "description": "Shared code for websocket servers and clients.",
+            "homepage": "https://github.com/amphp/websocket",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "http",
+                "non-blocking",
+                "websocket"
+            ],
+            "time": "2019-04-06T14:39:18+00:00"
+        },
+        {
+            "name": "amphp/websocket-client",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/websocket-client.git",
+                "reference": "aff808025637bd705672338b4904ad03a4dbdc04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/aff808025637bd705672338b4904ad03a4dbdc04",
+                "reference": "aff808025637bd705672338b4904ad03a4dbdc04",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.2",
+                "amphp/http": "^1.3",
+                "amphp/http-client": "^4",
+                "amphp/socket": "^1",
+                "amphp/websocket": "^1",
+                "league/uri": "^6",
+                "php": ">=7.2",
+                "psr/http-message": "^1"
+            },
+            "require-dev": {
+                "amphp/http-server": "dev-master as 2",
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1",
+                "amphp/websocket-server": "dev-master as 2",
+                "phpunit/phpunit": "^8 || ^7",
+                "psr/log": "^1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Websocket\\Client\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Async WebSocket client for PHP based on Amp.",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "client",
+                "http",
+                "non-blocking",
+                "websocket"
+            ],
+            "time": "2019-04-06T14:53:32+00:00"
+        },
+        {
             "name": "amphp/windows-registry",
             "version": "v0.3.2",
             "source": {
@@ -809,6 +1219,409 @@
             "time": "2013-09-20T18:59:12+00:00"
         },
         {
+            "name": "danog/dns-over-https",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/dns-over-https.git",
+                "reference": "3e782949896089f5af0219b7550bf56c45cf629b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/dns-over-https/zipball/3e782949896089f5af0219b7550bf56c45cf629b",
+                "reference": "3e782949896089f5af0219b7550bf56c45cf629b",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/cache": "^1",
+                "amphp/dns": "dev-master as v0.9.x-dev",
+                "amphp/http-client": "^4",
+                "amphp/parser": "^1",
+                "danog/libdns-json": "^0.1",
+                "daverandom/libdns": "^2.0.1",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\DoH\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                },
+                {
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                },
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                }
+            ],
+            "description": "Async DNS-over-HTTPS resolution for Amp.",
+            "homepage": "https://github.com/danog/dns-over-https",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "client",
+                "dns",
+                "dns-over-https",
+                "doh",
+                "https",
+                "resolve"
+            ],
+            "time": "2019-12-22T18:08:04+00:00"
+        },
+        {
+            "name": "danog/libdns-json",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/LibDNSJson.git",
+                "reference": "7d5e07815d57afa64ef7cdbe1a65fbead9a3e7bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/LibDNSJson/zipball/7d5e07815d57afa64ef7cdbe1a65fbead9a3e7bd",
+                "reference": "7d5e07815d57afa64ef7cdbe1a65fbead9a3e7bd",
+                "shasum": ""
+            },
+            "require": {
+                "daverandom/libdns": "^2.0.1",
+                "ext-json": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "danog\\LibDNSJson\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
+                },
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "Encoder/decoder for google's JSON DNS message format based on libdns",
+            "homepage": "https://github.com/danog/libdns-json",
+            "keywords": [
+                "dns",
+                "dns-over-https",
+                "doh",
+                "https",
+                "json",
+                "libdns",
+                "message"
+            ],
+            "time": "2019-07-14T14:59:51+00:00"
+        },
+        {
+            "name": "danog/madelineproto",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/MadelineProto.git",
+                "reference": "eea6c966af9c8bb55a84c2540c0ebb4adcc3f90b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/eea6c966af9c8bb55a84c2540c0ebb4adcc3f90b",
+                "reference": "eea6c966af9c8bb55a84c2540c0ebb4adcc3f90b",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.0",
+                "amphp/byte-stream": "^1",
+                "amphp/dns": "dev-master#ecbeca2ae0e93c08e8150a92810a3961fad8ecbe as v1",
+                "amphp/file": "^1",
+                "amphp/http-client": "^4",
+                "amphp/http-client-cookies": "^1",
+                "amphp/socket": "^1",
+                "amphp/uri": "^0.1",
+                "amphp/websocket-client": "dev-master as 1.0.0-rc2",
+                "danog/dns-over-https": "^0.2",
+                "danog/magicalserializer": "^1.0",
+                "danog/primemodule": "^1",
+                "danog/tgseclib": "^3",
+                "erusev/parsedown": "^1.7",
+                "ext-dom": "*",
+                "ext-fileinfo": "*",
+                "ext-filter": "*",
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-xml": "*",
+                "ext-zlib": "*",
+                "php": ">=7.4.0"
+            },
+            "conflict": {
+                "krakjoe/pthreads-polyfill": "*"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "ennexa/amp-update-cache": "dev-master",
+                "ext-ctype": "*",
+                "haydenpierce/class-finder": "^0.4",
+                "phpdocumentor/reflection-docblock": "^4.3",
+                "phpunit/phpunit": "^8",
+                "vlucas/phpdotenv": "^3"
+            },
+            "suggest": {
+                "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "danog\\MadelineProto\\": "src/danog/MadelineProto"
+                },
+                "files": [
+                    "src/BigIntegor.php",
+                    "src/YieldReturnValue.php",
+                    "src/ReflectionGenerator.php",
+                    "src/polyfill.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "PHP implementation of telegram's MTProto protocol.",
+            "homepage": "https://daniil.it/MadelineProto",
+            "keywords": [
+                "GB",
+                "Messenger",
+                "audio",
+                "bytes",
+                "client",
+                "files",
+                "mtproto",
+                "php",
+                "protocol",
+                "stickers",
+                "telegram",
+                "video"
+            ],
+            "time": "2019-12-25T21:03:51+00:00"
+        },
+        {
+            "name": "danog/magicalserializer",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/MagicalSerializer.git",
+                "reference": "87b6ed05a86021e9364f31133089bb83980d5e24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/MagicalSerializer/zipball/87b6ed05a86021e9364f31133089bb83980d5e24",
+                "reference": "87b6ed05a86021e9364f31133089bb83980d5e24",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "danog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "Serialize Volatile, Threaded or any other internal PHP class!",
+            "homepage": "https://daniil.it/MagicalSerializer",
+            "keywords": [
+                "pthreads",
+                "serializable",
+                "serialize",
+                "threading",
+                "volatile"
+            ],
+            "time": "2018-02-20T10:35:49+00:00"
+        },
+        {
+            "name": "danog/primemodule",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/PrimeModule.git",
+                "reference": "a18918c4092d6d8696521b05a59a3cdb5cdc061e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/PrimeModule/zipball/a18918c4092d6d8696521b05a59a3cdb5cdc061e",
+                "reference": "a18918c4092d6d8696521b05a59a3cdb5cdc061e",
+                "shasum": ""
+            },
+            "suggest": {
+                "ext-primemodule": "Install the native C++ extension for extremely fast factorization (https://github.com/danog/PrimeModule-ext)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "danog\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "Prime module capable of doing prime factorization of huge numbers very quickly.\"",
+            "time": "2018-03-21T10:47:51+00:00"
+        },
+        {
+            "name": "danog/tgseclib",
+            "version": "3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/tgseclib.git",
+                "reference": "da042c720fb94178b0ffa74e24ba6121f304a64e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/tgseclib/zipball/da042c720fb94178b0ffa74e24ba6121f304a64e",
+                "reference": "da042c720fb94178b0ffa74e24ba6121f304a64e",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/constant_time_encoding": "^1",
+                "paragonie/random_compat": "^1.4|^2.0",
+                "php": ">=5.6.1"
+            },
+            "require-dev": {
+                "phing/phing": "~2.7",
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+                "sami/sami": "~2.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "suggest": {
+                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "phpseclib/bootstrap.php"
+                ],
+                "psr-4": {
+                    "tgseclib\\": "phpseclib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Patrick Monnerat",
+                    "email": "pm@datasphere.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Andreas Fischer",
+                    "email": "bantu@phpbb.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hans-Jürgen Petrich",
+                    "email": "petrich@tronic-media.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Secure Communications Library (+Telegram-specific AES IGE primitives) - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+            "homepage": "http://phpseclib.sourceforge.net",
+            "keywords": [
+                "BigInteger",
+                "aes",
+                "asn.1",
+                "asn1",
+                "blowfish",
+                "crypto",
+                "cryptography",
+                "encryption",
+                "rsa",
+                "security",
+                "sftp",
+                "signature",
+                "signing",
+                "ssh",
+                "twofish",
+                "x.509",
+                "x509"
+            ],
+            "time": "2019-12-18T13:00:20+00:00"
+        },
+        {
             "name": "daverandom/libdns",
             "version": "2.x-dev",
             "source": {
@@ -849,29 +1662,210 @@
             "time": "2019-12-03T09:12:46+00:00"
         },
         {
-            "name": "league/uri-interfaces",
-            "version": "1.1.1",
+            "name": "erusev/parsedown",
+            "version": "1.8.0-beta-7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/thephpleague/uri-interfaces.git",
-                "reference": "081760c53a4ce76c9935a755a21353610f5495f6"
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "fe7a50eceb4a3c867cc9fa9c0aa906b1067d1955"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/081760c53a4ce76c9935a755a21353610f5495f6",
-                "reference": "081760c53a4ce76c9935a755a21353610f5495f6",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fe7a50eceb4a3c867cc9fa9c0aa906b1067d1955",
+                "reference": "fe7a50eceb4a3c867cc9fa9c0aa906b1067d1955",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.0.0"
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2019-03-17T18:47:21+00:00"
+        },
+        {
+            "name": "kelunik/certificate",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kelunik/certificate.git",
+                "reference": "56542e62d51533d04d0a9713261fea546bff80f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kelunik/certificate/zipball/56542e62d51533d04d0a9713261fea546bff80f6",
+                "reference": "56542e62d51533d04d0a9713261fea546bff80f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kelunik\\Certificate\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Access certificate details and transform between different formats.",
+            "keywords": [
+                "DER",
+                "certificate",
+                "certificates",
+                "openssl",
+                "pem",
+                "x509"
+            ],
+            "time": "2019-05-29T19:02:31+00:00"
+        },
+        {
+            "name": "league/uri",
+            "version": "6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/uri.git",
+                "reference": "cf488ec34faa3b5c600659c8fc18d67c4752a5cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/cf488ec34faa3b5c600659c8fc18d67c4752a5cb",
+                "reference": "cf488ec34faa3b5c600659c8fc18d67c4752a5cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "league/uri-interfaces": "^2.0",
+                "php": "^7.2",
+                "psr/http-message": "^1.0"
+            },
+            "conflict": {
+                "league/uri-schemes": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-strict-rules": "^0.11",
+                "phpunit/phpunit": "^7.0 | ^8.0"
+            },
+            "suggest": {
+                "ext-intl": "Needed to improve host validation",
+                "league/uri-components": "Needed to easily manipulate URI objects"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Uri\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://nyamsprod.com"
+                }
+            ],
+            "description": "URI manipulation library",
+            "homepage": "http://uri.thephpleague.com",
+            "keywords": [
+                "data-uri",
+                "file-uri",
+                "ftp",
+                "hostname",
+                "http",
+                "https",
+                "middleware",
+                "parse_str",
+                "parse_url",
+                "psr-7",
+                "query-string",
+                "querystring",
+                "rfc3986",
+                "rfc3987",
+                "uri",
+                "url",
+                "ws"
+            ],
+            "time": "2019-11-23T20:59:00+00:00"
+        },
+        {
+            "name": "league/uri-interfaces",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/uri-interfaces.git",
+                "reference": "ae2601a183ad14b73628a305c0f906c030757b39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/ae2601a183ad14b73628a305c0f906c030757b39",
+                "reference": "ae2601a183ad14b73628a305c0f906c030757b39",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-strict-rules": "^0.11",
+                "phpunit/phpunit": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -898,7 +1892,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2018-11-05T14:00:06+00:00"
+            "time": "2019-12-17T13:59:29+00:00"
         },
         {
             "name": "league/uri-parser",
@@ -966,49 +1960,95 @@
             "time": "2019-09-20T22:27:10+00:00"
         },
         {
-            "name": "league/uri-schemes",
-            "version": "1.x-dev",
+            "name": "paragonie/constant_time_encoding",
+            "version": "v1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/thephpleague/uri-schemes.git",
-                "reference": "f821a444785724bcc9bc244b1173b9d6ca4d71e6"
+                "url": "https://github.com/paragonie/constant_time_encoding.git",
+                "reference": "2132f0f293d856026d7d11bd81b9f4a23a1dc1f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-schemes/zipball/f821a444785724bcc9bc244b1173b9d6ca4d71e6",
-                "reference": "f821a444785724bcc9bc244b1173b9d6ca4d71e6",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/2132f0f293d856026d7d11bd81b9f4a23a1dc1f6",
+                "reference": "2132f0f293d856026d7d11bd81b9f4a23a1dc1f6",
                 "shasum": ""
             },
             "require": {
-                "ext-fileinfo": "*",
-                "league/uri-interfaces": "^1.1",
-                "league/uri-parser": "^1.4.0",
-                "php": ">=7.0.13",
-                "psr/http-message": "^1.0"
+                "php": "^5.3|^7"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.0",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-phpunit": "^0.9.4",
-                "phpstan/phpstan-strict-rules": "^0.9.0",
-                "phpunit/phpunit": "^6.0"
-            },
-            "suggest": {
-                "ext-intl": "Allow parsing RFC3987 compliant hosts",
-                "league/uri-manipulations": "Needed to easily manipulate URI objects"
+                "paragonie/random_compat": "^1.4|^2",
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^0.3|^1"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "League\\Uri\\": "src"
+                    "ParagonIE\\ConstantTime\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com",
+                    "role": "Maintainer"
                 },
+                {
+                    "name": "Steve 'Sc00bz' Thomas",
+                    "email": "steve@tobtu.com",
+                    "homepage": "https://www.tobtu.com",
+                    "role": "Original Developer"
+                }
+            ],
+            "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
+            "keywords": [
+                "base16",
+                "base32",
+                "base32_decode",
+                "base32_encode",
+                "base64",
+                "base64_decode",
+                "base64_encode",
+                "bin2hex",
+                "encoding",
+                "hex",
+                "hex2bin",
+                "rfc4648"
+            ],
+            "time": "2018-04-30T17:57:16+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
+                "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
                 "files": [
-                    "src/functions_include.php"
+                    "lib/random.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1017,28 +2057,19 @@
             ],
             "authors": [
                 {
-                    "name": "Ignace Nyamagana Butera",
-                    "email": "nyamsprod@gmail.com",
-                    "homepage": "https://nyamsprod.com"
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
                 }
             ],
-            "description": "URI manipulation library",
-            "homepage": "http://uri.thephpleague.com",
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
             "keywords": [
-                "data-uri",
-                "file",
-                "ftp",
-                "http",
-                "https",
-                "parse_url",
-                "psr-7",
-                "rfc3986",
-                "uri",
-                "url",
-                "ws",
-                "wss"
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
             ],
-            "time": "2018-11-26T08:09:30+00:00"
+            "time": "2019-01-03T20:59:08+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1309,9 +2340,33 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.9",
+            "alias_normalized": "0.9.0.0",
+            "version": "9999999-dev",
+            "package": "amphp/dns"
+        },
+        {
+            "alias": "1",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "amphp/websocket"
+        },
+        {
+            "alias": "1",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "amphp/websocket-client"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "danog/madelineproto": 20,
+        "amphp/dns": 20,
+        "amphp/websocket": 20,
+        "amphp/websocket-client": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
