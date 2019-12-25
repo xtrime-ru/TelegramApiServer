@@ -1,6 +1,6 @@
 {
   "name": "xtrime-ru/telegramapiserver",
-  "description": "Fast, simple, async php telegram client and parser: MadelineProto + Amphp Server",
+  "description": "Fast, simple, async php telegram client and parser: MadelineProto + Amp HTTP Server",
   "type": "project",
   "homepage": "https://tg.i-c-a.su/",
   "license": "MIT",
@@ -11,10 +11,7 @@
     "amphp/http-server": "^2",
     "vlucas/phpdotenv": "^3",
     "danog/madelineproto":"dev-master",
-    "amphp/dns": "dev-master#aa1892bd as 0.9",
-    "amphp/socket": "^1",
-    "amphp/websocket": "dev-master#db2da8c5b3ed22eae37da5ffa10ab3ea8de19342 as 1",
-    "amphp/websocket-client": "dev-master#aff808025637bd705672338b4904ad03a4dbdc04 as 1"
+    "amphp/dns": "dev-master#9d7e57f37d21bfed8ff2e78db52b99d45ce0c215 as v1"
   },
   "minimum-stability": "dev",
   "authors": [

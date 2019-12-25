@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f846a05e4e5a59178c941b30b4029704",
+    "content-hash": "0dfdd4dd83499b0b5b58c1fd0f42af8f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -200,12 +200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "aa1892bd"
+                "reference": "9d7e57f37d21bfed8ff2e78db52b99d45ce0c215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/aa1892bd",
-                "reference": "aa1892bd",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/9d7e57f37d21bfed8ff2e78db52b99d45ce0c215",
+                "reference": "9d7e57f37d21bfed8ff2e78db52b99d45ce0c215",
                 "shasum": ""
             },
             "require": {
@@ -269,7 +269,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2019-06-12T11:28:22+00:00"
+            "time": "2019-11-28T20:10:22+00:00"
         },
         {
             "name": "amphp/file",
@@ -999,20 +999,20 @@
         },
         {
             "name": "amphp/websocket",
-            "version": "dev-master",
+            "version": "v1.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "db2da8c5b3ed22eae37da5ffa10ab3ea8de19342"
+                "reference": "52b85af9657a4d674c8ae4210187eaf95d8c5e03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/db2da8c5b3ed22eae37da5ffa10ab3ea8de19342",
-                "reference": "db2da8c5b3ed22eae37da5ffa10ab3ea8de19342",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/52b85af9657a4d674c8ae4210187eaf95d8c5e03",
+                "reference": "52b85af9657a4d674c8ae4210187eaf95d8c5e03",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^2.2",
+                "amphp/amp": "^2",
                 "amphp/byte-stream": "^1.6.1",
                 "amphp/socket": "^1",
                 "cash/lrucache": "^1",
@@ -1020,8 +1020,8 @@
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1.1.2",
-                "phpunit/phpunit": "^8 || ^7"
+                "amphp/phpunit-util": "^1.1",
+                "phpunit/phpunit": "^7"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
@@ -1041,20 +1041,19 @@
             ],
             "authors": [
                 {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
                 },
                 {
                     "name": "Niklas Keller",
                     "email": "me@kelunik.com"
-                },
-                {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
                 }
             ],
             "description": "Shared code for websocket servers and clients.",
-            "homepage": "https://github.com/amphp/websocket",
             "keywords": [
                 "amp",
                 "amphp",
@@ -1063,7 +1062,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-04-06T14:39:18+00:00"
+            "time": "2019-08-06T16:55:52+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -1071,12 +1070,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "aff808025637bd705672338b4904ad03a4dbdc04"
+                "reference": "53f7883b325b09864095300ec8ff81e84e772c3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/aff808025637bd705672338b4904ad03a4dbdc04",
-                "reference": "aff808025637bd705672338b4904ad03a4dbdc04",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/53f7883b325b09864095300ec8ff81e84e772c3b",
+                "reference": "53f7883b325b09864095300ec8ff81e84e772c3b",
                 "shasum": ""
             },
             "require": {
@@ -1134,7 +1133,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2019-04-06T14:53:32+00:00"
+            "time": "2019-12-22T13:22:00+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -1362,12 +1361,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "eea6c966af9c8bb55a84c2540c0ebb4adcc3f90b"
+                "reference": "6f578c6647496295abbbc938499ce49510d5402a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/eea6c966af9c8bb55a84c2540c0ebb4adcc3f90b",
-                "reference": "eea6c966af9c8bb55a84c2540c0ebb4adcc3f90b",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/6f578c6647496295abbbc938499ce49510d5402a",
+                "reference": "6f578c6647496295abbbc938499ce49510d5402a",
                 "shasum": ""
             },
             "require": {
@@ -1448,7 +1447,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-12-25T21:03:51+00:00"
+            "time": "2019-12-25T23:20:15+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2342,30 +2341,16 @@
     "packages-dev": [],
     "aliases": [
         {
-            "alias": "0.9",
-            "alias_normalized": "0.9.0.0",
+            "alias": "v1",
+            "alias_normalized": "1.0.0.0",
             "version": "9999999-dev",
             "package": "amphp/dns"
-        },
-        {
-            "alias": "1",
-            "alias_normalized": "1.0.0.0",
-            "version": "9999999-dev",
-            "package": "amphp/websocket"
-        },
-        {
-            "alias": "1",
-            "alias_normalized": "1.0.0.0",
-            "version": "9999999-dev",
-            "package": "amphp/websocket-client"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "danog/madelineproto": 20,
-        "amphp/dns": 20,
-        "amphp/websocket": 20,
-        "amphp/websocket-client": 20
+        "amphp/dns": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
