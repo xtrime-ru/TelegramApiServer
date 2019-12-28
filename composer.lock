@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dfdd4dd83499b0b5b58c1fd0f42af8f",
+    "content-hash": "fb50c9261436e97c8a020fb4ffe033ec",
     "packages": [
         {
             "name": "amphp/amp",
@@ -196,7 +196,7 @@
         },
         {
             "name": "amphp/dns",
-            "version": "dev-master",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
@@ -518,33 +518,37 @@
         },
         {
             "name": "amphp/http-client-cookies",
-            "version": "v1.0.0-rc5",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client-cookies.git",
-                "reference": "253f7de299c174616ddd7b3d907f979806772b0c"
+                "reference": "06f32a7d208e20a0ce9f9ee42f7132f65d31724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/253f7de299c174616ddd7b3d907f979806772b0c",
-                "reference": "253f7de299c174616ddd7b3d907f979806772b0c",
+                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/06f32a7d208e20a0ce9f9ee42f7132f65d31724d",
+                "reference": "06f32a7d208e20a0ce9f9ee42f7132f65d31724d",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.3",
+                "amphp/dns": "^1.2",
                 "amphp/http": "^1.5",
-                "amphp/http-client": "^4.0.0-rc9",
-                "amphp/socket": "^1",
-                "php": ">=7.2"
+                "amphp/http-client": "^4",
+                "amphp/sync": "^1.3",
+                "ext-filter": "*",
+                "php": ">=7.2",
+                "psr/http-message": "^1.0"
             },
             "conflict": {
                 "amphp/file": "<1 || >=2"
             },
             "require-dev": {
                 "amphp/file": "^1",
-                "amphp/http-server": "^2-rc3",
+                "amphp/http-server": "dev-master",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
+                "amphp/socket": "^1",
                 "friendsofphp/php-cs-fixer": "^2.3",
                 "phpunit/phpunit": "^7 || ^8"
             },
@@ -577,7 +581,7 @@
                 "cookies",
                 "http"
             ],
-            "time": "2019-11-20T19:24:05+00:00"
+            "time": "2019-12-21T17:05:53+00:00"
         },
         {
             "name": "amphp/http-server",
@@ -1219,22 +1223,22 @@
         },
         {
             "name": "danog/dns-over-https",
-            "version": "0.2.3",
+            "version": "0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/dns-over-https.git",
-                "reference": "3e782949896089f5af0219b7550bf56c45cf629b"
+                "reference": "a288be1f4fdd4ce9838e98bfa96407fcfdd099b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/dns-over-https/zipball/3e782949896089f5af0219b7550bf56c45cf629b",
-                "reference": "3e782949896089f5af0219b7550bf56c45cf629b",
+                "url": "https://api.github.com/repos/danog/dns-over-https/zipball/a288be1f4fdd4ce9838e98bfa96407fcfdd099b3",
+                "reference": "a288be1f4fdd4ce9838e98bfa96407fcfdd099b3",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/cache": "^1",
-                "amphp/dns": "dev-master as v0.9.x-dev",
+                "amphp/dns": "^1",
                 "amphp/http-client": "^4",
                 "amphp/parser": "^1",
                 "danog/libdns-json": "^0.1",
@@ -1297,7 +1301,7 @@
                 "https",
                 "resolve"
             ],
-            "time": "2019-12-22T18:08:04+00:00"
+            "time": "2019-12-27T14:35:55+00:00"
         },
         {
             "name": "danog/libdns-json",
@@ -1361,18 +1365,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "6f578c6647496295abbbc938499ce49510d5402a"
+                "reference": "f64efb021c4b796c02a50404f273bb675dd5831e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/6f578c6647496295abbbc938499ce49510d5402a",
-                "reference": "6f578c6647496295abbbc938499ce49510d5402a",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/f64efb021c4b796c02a50404f273bb675dd5831e",
+                "reference": "f64efb021c4b796c02a50404f273bb675dd5831e",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.0",
                 "amphp/byte-stream": "^1",
-                "amphp/dns": "dev-master#ecbeca2ae0e93c08e8150a92810a3961fad8ecbe as v1",
+                "amphp/dns": "^1",
                 "amphp/file": "^1",
                 "amphp/http-client": "^4",
                 "amphp/http-client-cookies": "^1",
@@ -1399,6 +1403,8 @@
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
+                "danog/7to5": "^1",
+                "danog/7to70": "^1",
                 "ennexa/amp-update-cache": "dev-master",
                 "ext-ctype": "*",
                 "haydenpierce/class-finder": "^0.4",
@@ -1432,7 +1438,7 @@
                 }
             ],
             "description": "PHP implementation of telegram's MTProto protocol.",
-            "homepage": "https://daniil.it/MadelineProto",
+            "homepage": "https://docs.madelineproto.xyz",
             "keywords": [
                 "GB",
                 "Messenger",
@@ -1447,7 +1453,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-12-25T23:20:15+00:00"
+            "time": "2019-12-28T20:07:50+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2339,18 +2345,10 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "v1",
-            "alias_normalized": "1.0.0.0",
-            "version": "9999999-dev",
-            "package": "amphp/dns"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danog/madelineproto": 20,
-        "amphp/dns": 20
+        "danog/madelineproto": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

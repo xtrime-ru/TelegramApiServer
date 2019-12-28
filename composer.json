@@ -10,8 +10,7 @@
     "ext-json": "*",
     "amphp/http-server": "^2",
     "vlucas/phpdotenv": "^3",
-    "danog/madelineproto":"dev-master",
-    "amphp/dns": "dev-master#9d7e57f37d21bfed8ff2e78db52b99d45ce0c215 as v1"
+    "danog/madelineproto":"^5"
   },
   "minimum-stability": "dev",
   "authors": [
