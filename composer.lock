@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb50c9261436e97c8a020fb4ffe033ec",
+    "content-hash": "e6402b29093e8463dff6bf8559aafc84",
     "packages": [
         {
             "name": "amphp/amp",
@@ -833,16 +833,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "abc18f1786363ceee2555ffd7fe87e4eead2ce24"
+                "reference": "cf56db51bff8570a0741f9de8f0922ef589642d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/abc18f1786363ceee2555ffd7fe87e4eead2ce24",
-                "reference": "abc18f1786363ceee2555ffd7fe87e4eead2ce24",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/cf56db51bff8570a0741f9de8f0922ef589642d3",
+                "reference": "cf56db51bff8570a0741f9de8f0922ef589642d3",
                 "shasum": ""
             },
             "require": {
@@ -857,7 +857,6 @@
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1",
-                "league/uri-schemes": "^1.2.1",
                 "phpunit/phpunit": "^6"
             },
             "type": "library",
@@ -899,7 +898,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2019-08-01T19:32:46+00:00"
+            "time": "2019-12-31T13:59:21+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1361,16 +1360,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "5.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "f64efb021c4b796c02a50404f273bb675dd5831e"
+                "reference": "0f50f565cfb7315f0891a26237eb3abb3777c9ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/f64efb021c4b796c02a50404f273bb675dd5831e",
-                "reference": "f64efb021c4b796c02a50404f273bb675dd5831e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0f50f565cfb7315f0891a26237eb3abb3777c9ba",
+                "reference": "0f50f565cfb7315f0891a26237eb3abb3777c9ba",
                 "shasum": ""
             },
             "require": {
@@ -1453,7 +1452,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-12-28T20:07:50+00:00"
+            "time": "2019-12-31T12:12:58+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2347,9 +2346,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "danog/madelineproto": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
