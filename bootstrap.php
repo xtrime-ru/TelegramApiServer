@@ -9,5 +9,5 @@ chdir($root);
 
 //Check if root env file hash been loaded (in case plugin installed in existing project)
 if (!getenv('SERVER_ADDRESS')) {
-    Dotenv\Dotenv::create($root, '.env')->load();
+    Dotenv\Dotenv::createImmutable($root)->load();
 }

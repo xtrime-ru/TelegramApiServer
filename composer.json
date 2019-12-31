@@ -9,10 +9,11 @@
     "php": ">=7.3.0",
     "ext-json": "*",
     "amphp/http-server": "^2",
-    "vlucas/phpdotenv": "^3",
+    "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"^5"
   },
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Alexander Pankratov",
