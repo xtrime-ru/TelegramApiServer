@@ -40,9 +40,10 @@ class Client
         $time = microtime(true);
         $this->MadelineProto = new MadelineProto\API($this->sessionFile, $this->config);
 
-        $this->MadelineProto->start();
         $this->MadelineProto->async(true);
-
+        $this->MadelineProto->loop(function() {
+            yield $this->MadelineProto->start();
+        });
         $time = round(microtime(true) - $time, 3);
         echo PHP_EOL . "TelegramApiServer ready. Elapsed time: $time sec." . PHP_EOL;
     }
