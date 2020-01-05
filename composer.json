@@ -6,7 +6,7 @@
   "license": "MIT",
   "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "amphp", "async", "daemon", "coroutine", "parser", "micro-service"],
   "require": {
-    "php": ">=7.3.0",
+    "php": ">=7.4.0",
     "ext-json": "*",
     "amphp/http-server": "^2",
     "vlucas/phpdotenv": "^4",
