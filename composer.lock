@@ -340,25 +340,25 @@
         },
         {
             "name": "amphp/hpack",
-            "version": "v2.0.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/hpack.git",
-                "reference": "bf334564c5eead116c342a1c747d3b9bc8a3c36b"
+                "reference": "84fb1373b8a3cfdf7462a87a3e79efe503f0e101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/hpack/zipball/bf334564c5eead116c342a1c747d3b9bc8a3c36b",
-                "reference": "bf334564c5eead116c342a1c747d3b9bc8a3c36b",
+                "url": "https://api.github.com/repos/amphp/hpack/zipball/84fb1373b8a3cfdf7462a87a3e79efe503f0e101",
+                "reference": "84fb1373b8a3cfdf7462a87a3e79efe503f0e101",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
                 "http2jp/hpack-test-case": "^1",
-                "phpunit/phpunit": "^6"
+                "phpunit/phpunit": "^6 | ^7"
             },
             "type": "library",
             "autoload": {
@@ -394,28 +394,29 @@
                 "hpack",
                 "http-2"
             ],
-            "time": "2019-07-26T19:30:42+00:00"
+            "time": "2019-12-12T21:37:06+00:00"
         },
         {
             "name": "amphp/http",
-            "version": "v1.5.0",
+            "version": "v1.6.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "9bc6ad5b2d92afb959068a65a21ce0409c7db67e"
+                "reference": "d2c00e3c48dc0511d2cea0d6fe73ea084f673aa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/9bc6ad5b2d92afb959068a65a21ce0409c7db67e",
-                "reference": "9bc6ad5b2d92afb959068a65a21ce0409c7db67e",
+                "url": "https://api.github.com/repos/amphp/http/zipball/d2c00e3c48dc0511d2cea0d6fe73ea084f673aa4",
+                "reference": "d2c00e3c48dc0511d2cea0d6fe73ea084f673aa4",
                 "shasum": ""
             },
             "require": {
+                "amphp/hpack": "^3",
                 "php": ">=7.1"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
-                "phpunit/phpunit": "^6.5"
+                "phpunit/phpunit": "^7 || ^6.5"
             },
             "type": "library",
             "autoload": {
@@ -437,26 +438,26 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
-            "time": "2019-11-04T21:24:40+00:00"
+            "time": "2020-01-01T16:28:25+00:00"
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.0.0-rc10",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "c371feeb8047d199158c68d9e22ccc20d9071f09"
+                "reference": "6ae1baaabb6ce104f1b636a5e117ced798087ed4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/c371feeb8047d199158c68d9e22ccc20d9071f09",
-                "reference": "c371feeb8047d199158c68d9e22ccc20d9071f09",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/6ae1baaabb6ce104f1b636a5e117ced798087ed4",
+                "reference": "6ae1baaabb6ce104f1b636a5e117ced798087ed4",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.4",
                 "amphp/byte-stream": "^1.6",
-                "amphp/hpack": "^2",
+                "amphp/hpack": "^3",
                 "amphp/http": "^1.5",
                 "amphp/socket": "^1",
                 "amphp/sync": "^1.3",
@@ -469,7 +470,7 @@
             },
             "require-dev": {
                 "amphp/file": "^1 || ^0.3 || ^0.2",
-                "amphp/http-server": "^2-rc3",
+                "amphp/http-server": "dev-master",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
                 "ext-json": "*",
@@ -477,8 +478,8 @@
             },
             "suggest": {
                 "amphp/file": "Required for file request bodies and HTTP archive logging",
-                "ext-json": "*",
-                "ext-zlib": "*"
+                "ext-json": "Required for logging HTTP archives",
+                "ext-zlib": "Allows using compression for response bodies."
             },
             "type": "library",
             "autoload": {
@@ -514,7 +515,7 @@
                 "non-blocking",
                 "rest"
             ],
-            "time": "2019-12-04T18:30:26+00:00"
+            "time": "2019-12-21T10:49:06+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -585,23 +586,23 @@
         },
         {
             "name": "amphp/http-server",
-            "version": "v2.0.0-rc3",
+            "version": "v2.0.0-rc4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "5a4baa7d6aef13fb36415e0573e56211d606995d"
+                "reference": "2c3d5724b4b86f9a7fa7feed13a7c50e2bf8ad1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/5a4baa7d6aef13fb36415e0573e56211d606995d",
-                "reference": "5a4baa7d6aef13fb36415e0573e56211d606995d",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/2c3d5724b4b86f9a7fa7feed13a7c50e2bf8ad1b",
+                "reference": "2c3d5724b4b86f9a7fa7feed13a7c50e2bf8ad1b",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/byte-stream": "^1.3",
-                "amphp/hpack": "^2",
-                "amphp/http": "^1.5",
+                "amphp/hpack": "^3",
+                "amphp/http": "^1.6-rc1",
                 "amphp/socket": "^1",
                 "cash/lrucache": "^1",
                 "league/uri": "^6",
@@ -610,7 +611,7 @@
                 "psr/log": "^1"
             },
             "require-dev": {
-                "amphp/http-client": "^4-rc8",
+                "amphp/http-client": "^4",
                 "amphp/log": "^1",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
@@ -663,7 +664,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2019-11-05T19:33:55+00:00"
+            "time": "2020-01-04T18:10:10+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1361,16 +1362,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "5.0.22",
+            "version": "5.0.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "0f50f565cfb7315f0891a26237eb3abb3777c9ba"
+                "reference": "32f7b9a69d20f7fba3bed150d90ae46ec050e1fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0f50f565cfb7315f0891a26237eb3abb3777c9ba",
-                "reference": "0f50f565cfb7315f0891a26237eb3abb3777c9ba",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/32f7b9a69d20f7fba3bed150d90ae46ec050e1fe",
+                "reference": "32f7b9a69d20f7fba3bed150d90ae46ec050e1fe",
                 "shasum": ""
             },
             "require": {
@@ -1453,7 +1454,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2019-12-31T12:12:58+00:00"
+            "time": "2020-01-05T17:43:47+00:00"
         },
         {
             "name": "danog/magicalserializer",
