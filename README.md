@@ -55,7 +55,7 @@ Fast, simple, async php telegram api server:
 1. Access telegram api directly via simple get requests.    
     Rules:
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
-    * Url: `http://%address%:%port%/api/%class%.%method%/?%param1%=%val%[&session=%session%]`
+    * Url: `http://%address%:%port%/api/[%session%/]%class%.%method%/?%param1%=%val%`
     * <b>Important: api available only from ip in whitelist.</b> 
         By default it is: `127.0.0.1`
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
@@ -65,8 +65,15 @@ Fast, simple, async php telegram api server:
         `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
     * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
         `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
-    * CombinedAPI (multiple sessions) support. If running with multiple sessions use option 'session' to define which session to use for request:
-        `http://127.0.0.1:9503/api/getSelf/?session=xtrime` or `http://127.0.0.1:9503/api/getInfo/?id=@xtrime&session=xtrime`
+    * CombinedAPI (multiple sessions) support. 
+
+        If running with multiple sessions use include 'session' in path, before method, to define which session to use for request:
+        * `php server.php --session=session --session=bot --session=xtrime`
+        * `http://127.0.0.1:9503/api/xtrime/getSelf` 
+        * `http://127.0.0.1:9503/api/bot/getSelf`
+        * `http://127.0.0.1:9503/api/session/getSelf`
+        
+        Each session is store in `{$session}.madeline` file in root folder of library.
     
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`

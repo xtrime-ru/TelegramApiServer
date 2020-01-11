@@ -13,7 +13,6 @@ class RequestCallback
     private const PAGES = ['index', 'api'];
     /** @var array */
     private $ipWhiteList;
-    private $path = [];
     public $page = [
         'headers' => [
             'Content-Type'=>'application/json;charset=utf-8',
@@ -70,10 +69,19 @@ class RequestCallback
      */
     private function resolvePage($uri): self
     {
-        $this->path = array_values(array_filter(explode('/', $uri)));
-        if (!in_array($this->path[0], self::PAGES, true)) {
+        preg_match("~/(?'page'[^/]*)(?:/(?'session'[^/]*))?/(?'method'[^/]*)~", $uri, $matches);
+
+        $page = $matches['page'] ?? null;
+        $this->session = $matches['session'] ?? null;
+        $this->api = explode('.', $matches['method'] ?? '');
+
+        if (!in_array($page, self::PAGES, true)) {
             $this->setPageCode(404);
             $this->page['errors'][] = 'Incorrect path';
+        }
+        if (count($this->api) === 0) {
+            $this->setPageCode(404);
+            $this->page['errors'][] = 'No method specified';
         }
 
         return $this;
@@ -98,13 +106,8 @@ class RequestCallback
         }
 
         $this->parameters = array_merge((array) $post, $get);
-        if (isset($this->parameters['session'])) {
-            $this->session = $this->parameters['session'];
-            unset($this->parameters['session']);
-        }
         $this->parameters = array_values($this->parameters);
 
-        $this->api = explode('.', $this->path[1] ?? '');
         return $this;
     }
 
@@ -148,8 +151,9 @@ class RequestCallback
     private function callApi()
     {
         $pathSize = count($this->api);
-        if ($pathSize === 1 && method_exists($this->client, $this->api[0])) {
-            $result = $this->client->{$this->api[0]}(...array_merge($this->parameters, [$this->session]));
+        if ($pathSize === 1 && is_callable([CustomMethods::class,$this->api[0]])) {
+            $customMethods = new CustomMethods($this->client->getInstance($this->session));
+            $result = $customMethods->{$this->api[0]}(...$this->parameters);
         } else {
             //Проверяем нет ли в MadilineProto такого метода.
             switch ($pathSize) {
