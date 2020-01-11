@@ -46,14 +46,16 @@ Fast, simple, async php telegram api server:
             --help      Show this message
         -a  --address   Server ip (optional) (example: 127.0.0.1)
         -p  --port      Server port (optional) (example: 9503)
-        -s  --session   Prefix for session file (optional) (example: xtrime)
+        -s  --session   Prefix for session file (optional) (example: xtrime). 
+                        Multiple sessions can be used via CombinedAPI. Example "--session=user --session=bot"
+                        If running multiple sessions, then "session" parameter must be provided with every request.
     
     Also  options can be set in .env file (see .env.example)
     ```
 1. Access telegram api directly via simple get requests.    
     Rules:
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
-    * Url: `http://%address%:%port%/api/%class%.%method%/?%param1%=%val%`
+    * Url: `http://%address%:%port%/api/%class%.%method%/?%param1%=%val%[&session=%session%]`
     * <b>Important: api available only from ip in whitelist.</b> 
         By default it is: `127.0.0.1`
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
@@ -63,6 +65,8 @@ Fast, simple, async php telegram api server:
         `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
     * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
         `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
+    * CombinedAPI (multiple sessions) support. If running with multiple sessions use option 'session' to define which session to use for request:
+        `http://127.0.0.1:9503/api/getSelf/?session=xtrime` or `http://127.0.0.1:9503/api/getInfo/?id=@xtrime&session=xtrime`
     
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`

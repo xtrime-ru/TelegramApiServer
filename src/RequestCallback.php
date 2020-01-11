@@ -23,8 +23,9 @@ class RequestCallback
         'code' => 200,
         'response' => null,
     ];
-    private $parameters = [];
-    private $api;
+    private array $parameters = [];
+    private array $api;
+    private string $session = '';
 
 
     /**
@@ -97,9 +98,13 @@ class RequestCallback
         }
 
         $this->parameters = array_merge((array) $post, $get);
+        if (isset($this->parameters['session'])) {
+            $this->session = $this->parameters['session'];
+            unset($this->parameters['session']);
+        }
         $this->parameters = array_values($this->parameters);
 
-        $this->api = $this->path[1] ?? '';
+        $this->api = explode('.', $this->path[1] ?? '');
         return $this;
     }
 
@@ -142,20 +147,20 @@ class RequestCallback
      */
     private function callApi()
     {
-        if (method_exists($this->client, $this->api)){
-            $result = $this->client->{$this->api}(...$this->parameters);
+        $pathSize = count($this->api);
+        if ($pathSize === 1 && method_exists($this->client, $this->api[0])) {
+            $result = $this->client->{$this->api[0]}(...array_merge($this->parameters, [$this->session]));
         } else {
             //Проверяем нет ли в MadilineProto такого метода.
-            $this->api = explode('.', $this->api);
-            switch (count($this->api)) {
+            switch ($pathSize) {
                 case 1:
-                    $result = $this->client->MadelineProto->{$this->api[0]}(...$this->parameters);
+                    $result = $this->client->getInstance($this->session)->{$this->api[0]}(...$this->parameters);
                     break;
                 case 2:
-                    $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
+                    $result = $this->client->getInstance($this->session)->{$this->api[0]}->{$this->api[1]}(...$this->parameters);
                     break;
                 case 3:
-                    $result = $this->client->MadelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[2]}(...$this->parameters);
+                    $result = $this->client->getInstance($this->session)->{$this->api[0]}->{$this->api[1]}->{$this->api[2]}(...$this->parameters);
                     break;
                 default:
                     throw new \UnexpectedValueException('Incorrect method format');

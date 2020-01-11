@@ -10,42 +10,87 @@ class Client
 {
     use BotAPI;
 
-    /** @var MadelineProto\API */
-    public $MadelineProto;
-    private $sessionFile;
-    private $config;
+    /** @var MadelineProto\CombinedAPI */
+    public MadelineProto\CombinedAPI $MadelineProto;
+    private ?string $defaultSession = null;
 
     /**
      * Client constructor.
      *
-     * @param $sessionFile
+     * @param array $sessions
      */
-    public function __construct($sessionFile)
+    public function __construct(array $sessions)
     {
-        $this->config = (array) Config::getInstance()->get('telegram');
+        $config = (array) Config::getInstance()->get('telegram');
 
-        if (empty($this->config['connection_settings']['all']['proxy_extra']['address'])) {
-            $this->config['connection_settings']['all']['proxy'] = '\Socket';
-            $this->config['connection_settings']['all']['proxy_extra'] = [];
+        if (empty($config['connection_settings']['all']['proxy_extra']['address'])) {
+            $config['connection_settings']['all']['proxy'] = '\Socket';
+            $config['connection_settings']['all']['proxy_extra'] = [];
         }
+        foreach ($sessions as &$session) {
+            $session = $config;
+        }
+        unset($session);
 
-        $this->sessionFile = $sessionFile;
-        $this->connect();
+        if (count($sessions) === 1) {
+            $this->defaultSession = (string) array_key_first($sessions);
+        }
+        $this->connect($sessions);
     }
 
-    public function connect()
+    /**
+     * @param string|null $session
+     *
+     * @return string|null
+     */
+    public static function getSessionFileName(?string $session): ?string
+    {
+        return $session ? "{$session}.madeline" : null;
+    }
+
+    /**
+     * @param array $sessions
+     */
+    public function connect(array $sessions): void
     {
         //При каждой инициализации настройки обновляются из массива $config
         echo PHP_EOL . 'Starting MadelineProto...' . PHP_EOL;
         $time = microtime(true);
-        $this->MadelineProto = new MadelineProto\API($this->sessionFile, $this->config);
+        $this->MadelineProto = new MadelineProto\CombinedAPI('combined_session.madeline', $sessions);
 
         $this->MadelineProto->async(true);
-        $this->MadelineProto->loop(function() {
-            yield $this->MadelineProto->start();
+        $this->MadelineProto->loop(function() use($sessions) {
+            $res = [];
+            foreach ($sessions as $session => $message) {
+                MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
+                $res[] = $this->MadelineProto->instances[$session]->start();
+            }
+            yield $this->MadelineProto->all($res);
         });
         $time = round(microtime(true) - $time, 3);
-        echo PHP_EOL . "TelegramApiServer ready. Elapsed time: $time sec." . PHP_EOL;
+        $sessionsCount = count($sessions);
+        MadelineProto\Logger::log(
+            "\nTelegramApiServer ready."
+            ."\nNumber of sessions: {$sessionsCount}."
+            ."\nElapsed time: {$time} sec.\n",
+            MadelineProto\Logger::WARNING
+        );
+    }
+
+    /**
+     * @param string|null $session
+     *
+     * @return MadelineProto\API
+     */
+    public function getInstance(?string $session): MadelineProto\API
+    {
+        $session = static::getSessionFileName($session) ?: $this->defaultSession;
+
+        if (!$session) {
+            throw new \InvalidArgumentException('Multiple sessions detected. You need to specify which session to use');
+        }
+
+        return $this->MadelineProto->instances[$session];
     }
 
     /**
@@ -65,10 +110,11 @@ class Client
      * ]
      * </pre>
      *
+     * @param string|null $session
+     *
      * @return \Amp\Promise
-     * @throws \Throwable
      */
-    public function getHistory(array $data): \Amp\Promise
+    public function getHistory(array $data, ?string $session = null): \Amp\Promise
     {
         $data = array_merge(
             [
@@ -84,19 +130,21 @@ class Client
             $data
         );
 
-        return $this->MadelineProto->messages->getHistory($data);
+        return $this->getInstance($session)->messages->getHistory($data);
     }
 
     /**
-     * @param $data
+     * @param array $data
+     *
+     * @param string|null $session
      *
      * @return \Amp\Promise
      */
-    public function getHistoryHtml(array $data): \Amp\Promise
+    public function getHistoryHtml(array $data, ?string $session): \Amp\Promise
     {
         return call(
-            function() use ($data) {
-                $response = yield $this->getHistory($data);
+            function() use ($data, $session) {
+                $response = yield $this->getHistory($data, $session);
 
                 foreach ($response['messages'] as &$message) {
                     $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
@@ -146,7 +194,7 @@ class Client
         $entities = array_reverse($entities);
         foreach ($entities as $entity) {
             if (isset($html[$entity['_']])) {
-                $text = $this->mbSubstr($message, $entity['offset'], $entity['length']);
+                $text = static::mbSubstr($message, $entity['offset'], $entity['length']);
 
                 if (in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
                     $textFormate = sprintf($html[$entity['_']], $entity['url'] ?? $text, $text);
@@ -154,17 +202,17 @@ class Client
                     $textFormate = sprintf($html[$entity['_']], $text);
                 }
 
-                $message = $this->substringReplace($message, $textFormate, $entity['offset'], $entity['length']);
+                $message = static::substringReplace($message, $textFormate, $entity['offset'], $entity['length']);
             }
         }
         $message = nl2br($message);
         return $message;
     }
 
-    private function substringReplace(string $original, string $replacement, int $position, int $length): string
+    private static function substringReplace(string $original, string $replacement, int $position, int $length): string
     {
-        $startString = $this->mbSubstr($original, 0, $position);
-        $endString = $this->mbSubstr($original, $position + $length, $this->mbStrlen($original));
+        $startString = static::mbSubstr($original, 0, $position);
+        $endString = static::mbSubstr($original, $position + $length, static::mbStrlen($original));
         return $startString . $replacement . $endString;
     }
 
@@ -180,13 +228,14 @@ class Client
      * ]
      * </pre>
      *
+     * @param string|null $session
+     *
      * @return \Amp\Promise
-     * @throws \Throwable
      */
-    public function copyMessages(array $data): \Amp\Promise
+    public function copyMessages(array $data, ?string $session): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function() use ($data, $session) {
                 $data = array_merge(
                     [
                         'from_peer' => '',
@@ -196,7 +245,7 @@ class Client
                     $data
                 );
 
-                $response = yield $this->MadelineProto->channels->getMessages(
+                $response = yield $this->getInstance($session)->channels->getMessages(
                     [
                         'channel' => $data['from_peer'],
                         'id' => $data['id'],
@@ -216,9 +265,9 @@ class Client
                     ];
                     if (static::hasMedia($message, false)) {
                         $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
-                        $result[] = yield $this->sendMedia($messageData);
+                        $result[] = yield $this->sendMedia($messageData, $session);
                     } else {
-                        $result[] = yield $this->sendMessage($messageData);
+                        $result[] = yield $this->sendMessage($messageData, $session);
                     }
                 }
 
@@ -239,10 +288,11 @@ class Client
      * ]
      * </pre>
      *
+     * @param string|null $session
+     *
      * @return \Amp\Promise
-     * @throws \Throwable
      */
-    public function sendMedia(array $data): \Amp\Promise
+    public function sendMedia(array $data, ?string $session): \Amp\Promise
     {
         $data = array_merge(
             [
@@ -255,7 +305,7 @@ class Client
             $data
         );
 
-        return $this->MadelineProto->messages->sendMedia($data);
+        return $this->getInstance($session)->messages->sendMedia($data);
     }
 
     /**
@@ -269,10 +319,11 @@ class Client
      * ]
      * </pre>
      *
+     * @param string|null $session
+     *
      * @return \Amp\Promise
-     * @throws \Throwable
      */
-    public function sendMessage(array $data): \Amp\Promise
+    public function sendMessage(array $data, ?string $session): \Amp\Promise
     {
         $data = array_merge(
             [
@@ -284,7 +335,7 @@ class Client
             $data
         );
 
-        return $this->MadelineProto->messages->sendMessage($data);
+        return $this->getInstance($session)->messages->sendMessage($data);
     }
 
     /**
@@ -302,7 +353,7 @@ class Client
      *
      * @return \Amp\Promise
      */
-    public function searchGlobal(array $data): \Amp\Promise
+    public function searchGlobal(array $data, ?string $session): \Amp\Promise
     {
         $data = array_merge(
             [
@@ -314,21 +365,22 @@ class Client
             ],
             $data
         );
-        return $this->MadelineProto->messages->searchGlobal($data);
+        return $this->getInstance($session)->messages->searchGlobal($data);
     }
 
     /**
      * Загружает медиафайл из указанного сообщения в поток
      *
-     * @param $data
+     * @param array $data
+     *
+     * @param string|null $session
      *
      * @return \Amp\Promise
-     * @throws \Throwable
      */
-    public function getMedia(array $data): \Amp\Promise
+    public function getMedia(array $data, ?string $session): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function() use ($data, $session) {
                 $data = array_merge(
                     [
                         'peer' => '',
@@ -340,14 +392,14 @@ class Client
                 );
 
                 if (!$data['message']) {
-                    $peerInfo = yield $this->MadelineProto->getInfo($data['peer']);
+                    $peerInfo = yield $this->getInstance($session)->getInfo($data['peer']);
                     if ($peerInfo['type'] === 'channel') {
-                        $response = yield $this->MadelineProto->channels->getMessages([
+                        $response = yield $this->getInstance($session)->channels->getMessages([
                             'channel' => $data['peer'],
                             'id' => $data['id'],
                         ]);
                     } else {
-                        $response = yield $this->MadelineProto->messages->getMessages(['id' => $data['id']]);
+                        $response = yield $this->getInstance($session)->messages->getMessages(['id' => $data['id']]);
                     }
 
                     $message = $response['messages'][0];
@@ -359,7 +411,7 @@ class Client
                     throw new \UnexpectedValueException('Message has no media');
                 }
 
-                $info = yield $this->MadelineProto->getDownloadInfo($message);
+                $info = yield $this->getInstance($session)->getDownloadInfo($message);
 
                 if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
                     throw new \OutOfRangeException(
@@ -368,7 +420,7 @@ class Client
                 }
 
                 $stream = fopen('php://memory', 'rwb');
-                yield $this->MadelineProto->downloadToStream($info, $stream);
+                yield $this->getInstance($session)->downloadToStream($info, $stream);
                 rewind($stream);
 
                 return [
@@ -387,13 +439,14 @@ class Client
      *
      * @param array $data
      *
+     * @param string|null $session
+     *
      * @return \Amp\Promise
-     * @throws \Throwable
      */
-    public function getMediaPreview(array $data): \Amp\Promise
+    public function getMediaPreview(array $data, ?string $session): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function() use ($data, $session) {
                 $data = array_merge(
                     [
                         'peer' => '',
@@ -404,14 +457,14 @@ class Client
                 );
 
                 if (!$data['message']) {
-                    $peerInfo = yield $this->MadelineProto->getInfo($data['peer']);
+                    $peerInfo = yield $this->getInstance($session)->getInfo($data['peer']);
                     if ($peerInfo['type'] === 'channel') {
-                        $response = yield $this->MadelineProto->channels->getMessages([
+                        $response = yield $this->getInstance($session)->channels->getMessages([
                             'channel' => $data['peer'],
                             'id' => $data['id'],
                         ]);
                     } else {
-                        $response = yield $this->MadelineProto->messages->getMessages(['id' => $data['id']]);
+                        $response = yield $this->getInstance($session)->messages->getMessages(['id' => $data['id']]);
                     }
 
                     $message = $response['messages'][0];
@@ -441,12 +494,12 @@ class Client
                         throw new \UnexpectedValueException('Message has no preview');
 
                 }
-                $info = yield $this->MadelineProto->getDownloadInfo($thumb);
+                $info = yield $this->getInstance($session)->getDownloadInfo($thumb);
 
                 //Фикс для LAYER 100+
                 //TODO: Удалить, когда снова станет доступна загрузка photoSize
                 if (isset($info['thumb_size'])) {
-                    $infoFull = yield $this->MadelineProto->getDownloadInfo($media);
+                    $infoFull = yield $this->getInstance($session)->getDownloadInfo($media);
                     $infoFull['InputFileLocation']['thumb_size'] = $info['thumb_size'];
                     $infoFull['size'] = $info['size'];
                     $infoFull['mime'] = $info['mime'];
@@ -454,7 +507,7 @@ class Client
                 }
 
                 $stream = fopen('php://memory', 'rwb');
-                yield $this->MadelineProto->downloadToStream($info, $stream);
+                yield $this->getInstance($session)->downloadToStream($info, $stream);
                 rewind($stream);
 
                 return [
