@@ -23,6 +23,7 @@ class Client
             $config['connection_settings']['all']['proxy'] = '\Socket';
             $config['connection_settings']['all']['proxy_extra'] = [];
         }
+
         foreach ($sessions as &$session) {
             $session = $config;
         }

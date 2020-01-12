@@ -3,7 +3,6 @@
 namespace TelegramApiServer;
 
 use danog\MadelineProto\CombinedEventHandler;
-use danog\MadelineProto\Logger;
 
 class EventHandler extends CombinedEventHandler
 {
@@ -12,15 +11,17 @@ class EventHandler extends CombinedEventHandler
 
     public static function addEventListener($clientId, callable $callback)
     {
-        Logger::log("Add event listener. ClientId: {$clientId}");
+        Logger::getInstance()->notice("Add event listener. ClientId: {$clientId}");
         static::$eventListeners[$clientId] = $callback;
     }
 
     public static function removeEventListener($clientId): void
     {
-        Logger::log("Removing listener: {$clientId}");
+        Logger::getInstance()->notice("Removing listener: {$clientId}");
         unset(static::$eventListeners[$clientId]);
-        if (!static::$eventListeners) {
+        $listenersCount = count(static::$eventListeners);
+        Logger::getInstance()->notice("Event listeners left: {$listenersCount}");
+        if ($listenersCount === 0) {
             static::$eventListeners = [];
         }
     }
@@ -28,10 +29,10 @@ class EventHandler extends CombinedEventHandler
     public function onAny($update, $sessionFile): void
     {
         $session = Client::getSessionName($sessionFile);
-        Logger::log("Got update from session: {$session}");
+        Logger::getInstance()->info("Received update from session: {$session}");
 
         foreach (static::$eventListeners as $clientId => $callback) {
-            Logger::log("Pass update to callback. ClientId: {$clientId}");
+            Logger::getInstance()->notice("Pass update to callback. ClientId: {$clientId}");
             $callback($update, $session);
         }
     }

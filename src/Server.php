@@ -23,7 +23,7 @@ class Server
             $server = new Amp\Http\Server\Server(
                 $this->getServerAddresses(static::getConfig($options)),
                 static::getRouter($client),
-                new Logger(LogLevel::DEBUG),
+                Logger::getInstance(),
                 (new Amp\Http\Server\Options())
                     ->withCompression()
                     ->withBodySizeLimit(30*1024*1024)

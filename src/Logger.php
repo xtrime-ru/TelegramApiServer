@@ -28,6 +28,8 @@ use const PHP_EOL;
  */
 class Logger extends AbstractLogger
 {
+    private static ?Logger $instanse = null;
+
     private static array $levels = [
         LogLevel::DEBUG => 0,
         LogLevel::INFO => 1,
@@ -54,7 +56,22 @@ class Logger extends AbstractLogger
     private int $minLevelIndex;
     private array $formatter;
 
-    public function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
+    public static function getInstance(): Logger
+    {
+        if (!static::$instanse) {
+            $settings = Config::getInstance()->get('telegram');
+            MadelineProto\Logger::$default = null;
+            MadelineProto\Logger::constructorFromSettings($settings);
+
+            $conversionTable = array_flip(static::$madelineLevels);
+            $loggerLevel = $conversionTable[$settings['logger']['logger_level']];
+            static::$instanse = new static($loggerLevel);
+        }
+
+        return static::$instanse;
+    }
+
+    protected function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
     {
         if (null === $minLevel) {
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
