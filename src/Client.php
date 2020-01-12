@@ -4,7 +4,6 @@ namespace TelegramApiServer;
 
 use Amp\Loop;
 use danog\MadelineProto;
-use TelegramApiServer\EventHandlers\EventHandler;
 
 class Client
 {

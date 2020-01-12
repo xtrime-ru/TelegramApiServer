@@ -9,7 +9,7 @@ use Amp\Promise;
 use Amp\Success;
 use Amp\Websocket\Server\Websocket;
 use TelegramApiServer\Client;
-use TelegramApiServer\EventHandlers\EventHandler;
+use TelegramApiServer\EventHandler;
 use function Amp\call;
 
 class EventsController extends Websocket

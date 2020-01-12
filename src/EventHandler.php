@@ -1,10 +1,9 @@
 <?php
 
-namespace TelegramApiServer\EventHandlers;
+namespace TelegramApiServer;
 
 use danog\MadelineProto\CombinedEventHandler;
 use danog\MadelineProto\Logger;
-use TelegramApiServer\Client;
 
 class EventHandler extends CombinedEventHandler
 {
