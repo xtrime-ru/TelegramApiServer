@@ -77,8 +77,8 @@ Fast, simple, async php telegram api server:
     * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
         Each event stored inside object, where key is name of session which created event. 
         
-        When using CombinedAPI (multiple account) name of session can be added to path of websocket endpoint.
-        `ws://127.0.0.1:9503/events/session_name`. This endpoint will emmit events only from given session.
+        When using CombinedAPI (multiple account) name of session can be added to path of websocket endpoint: 
+        `ws://127.0.0.1:9503/events/session_name`. This endpoint will send events only from given session.
         
         PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
     

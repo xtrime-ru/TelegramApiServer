@@ -26,6 +26,10 @@ Amp\Loop::run(function () use($options) {
     /** @var Connection $connection */
     $connection = yield connect($options['url']);
 
+    $connection->onClose(static function() use($connection) {
+        printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
+    });
+
     echo 'Waiting for events...' . PHP_EOL;
     while ($message = yield $connection->receive()) {
         /** @var Message $message */
