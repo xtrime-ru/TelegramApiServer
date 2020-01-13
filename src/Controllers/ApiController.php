@@ -17,9 +17,7 @@ class ApiController
 
     private Client $client;
     public array $page = [
-        'headers' => [
-            self::JSON_HEADER,
-        ],
+        'headers' => self::JSON_HEADER,
         'success' => false,
         'errors' => [],
         'code' => 200,
