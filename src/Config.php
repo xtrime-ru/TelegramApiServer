@@ -6,14 +6,11 @@ namespace TelegramApiServer;
 
 class Config
 {
-    /**
-     * @var self
-     */
-    private static $instance;
-    private $config;
+    private static ?Config $instance = null;
+    private array $config;
 
 
-    public static function getInstance()
+    public static function getInstance(): Config
     {
         if (null === static::$instance) {
             static::$instance = new static();
@@ -57,13 +54,13 @@ class Config
 
     private function findByKey($key)
     {
-        $key = (string)$key;
+        $key = (string) $key;
         $path = explode('.', $key);
 
         $value = &$this->config;
         foreach ($path as $pathKey) {
             if (!is_array($value) || !array_key_exists($pathKey, $value)) {
-                return;
+                return null;
             }
             $value = &$value[$pathKey];
         }

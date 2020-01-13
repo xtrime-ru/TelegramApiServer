@@ -1,19 +1,22 @@
 <?php
 
-namespace TelegramApiServer;
+namespace TelegramApiServer\Controllers;
 
 use Amp\ByteStream\ResourceInputStream;
 use Amp\Http\Server\Request;
+use Amp\Http\Server\RequestHandler\CallableRequestHandler;
+use Amp\Http\Server\Response;
+use Amp\Http\Server\Router;
 use Amp\Promise;
+use TelegramApiServer\Client;
+use TelegramApiServer\Config;
+use TelegramApiServer\ClientCustomMethods;
 
-class RequestCallback
+class ApiController
 {
-
-    private $client;
-    private const PAGES = ['index', 'api'];
-    /** @var array */
-    private $ipWhiteList;
-    public $page = [
+    private Client $client;
+    private array $ipWhiteList;
+    public array $page = [
         'headers' => [
             'Content-Type'=>'application/json;charset=utf-8',
         ],
@@ -24,8 +27,23 @@ class RequestCallback
     ];
     private array $parameters = [];
     private array $api;
-    private string $session = '';
+    private ?string $session = '';
 
+    public static function getRouterCallback($client): CallableRequestHandler
+    {
+        return new CallableRequestHandler(
+                static function (Request $request) use($client) {
+                    $requestCallback = new static($client);
+                    $response = yield from $requestCallback->process($request);
+
+                    return new Response(
+                        $requestCallback->page['code'],
+                        $requestCallback->page['headers'],
+                        $response
+                    );
+                }
+        );
+    }
 
     /**
      * RequestCallback constructor.
@@ -34,9 +52,8 @@ class RequestCallback
      */
     public function __construct(Client $client)
     {
-        $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
+        $this->ipWhiteList = (array) Config::getInstance()->get('api.ip_whitelist', []);
         $this->client = $client;
-
     }
 
     /**
@@ -52,7 +69,7 @@ class RequestCallback
         }
 
         yield from $this
-            ->resolvePage($request->getUri()->getPath())
+            ->resolvePath($request->getAttribute(Router::class))
             ->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'))
             ->generateResponse($request)
         ;
@@ -60,38 +77,29 @@ class RequestCallback
         return $this->getResponse();
     }
 
-
     /**
-     * Определяет какую страницу запросили
+     * Получаем параметры из uri
      *
-     * @param $uri
-     * @return RequestCallback
+     * @param array $path
+     *
+     * @return ApiController
      */
-    private function resolvePage($uri): self
+    private function resolvePath(array $path): self
     {
-        preg_match("~/(?'page'[^/]*)(?:/(?'session'[^/]*))?/(?'method'[^/]*)~", $uri, $matches);
-
-        $page = $matches['page'] ?? null;
-        $this->session = $matches['session'] ?? null;
-        $this->api = explode('.', $matches['method'] ?? '');
-
-        if (!in_array($page, self::PAGES, true)) {
-            $this->setPageCode(404);
-            $this->page['errors'][] = 'Incorrect path';
-        }
-        if (count($this->api) === 0) {
-            $this->setPageCode(404);
-            $this->page['errors'][] = 'No method specified';
-        }
+        $this->session = $path['session'] ?? null;
+        $this->api = explode('.', $path['method'] ?? '');
 
         return $this;
     }
 
     /**
+     * Получаем параметры из GET и POST
+     *
      * @param string $query
      * @param string|null $body
      * @param string|null $contentType
-     * @return RequestCallback
+     *
+     * @return ApiController
      */
     private function resolveRequest(string $query, $body, $contentType)
     {
@@ -115,7 +123,8 @@ class RequestCallback
      * Получает посты для формирования ответа
      *
      * @param Request $request
-     * @return RequestCallback
+     *
+     * @return ApiController
      * @throws \Throwable
      */
     private function generateResponse(Request $request)
@@ -151,8 +160,8 @@ class RequestCallback
     private function callApi()
     {
         $pathSize = count($this->api);
-        if ($pathSize === 1 && is_callable([CustomMethods::class,$this->api[0]])) {
-            $customMethods = new CustomMethods($this->client->getInstance($this->session));
+        if ($pathSize === 1 && is_callable([ClientCustomMethods::class,$this->api[0]])) {
+            $customMethods = new ClientCustomMethods($this->client->getInstance($this->session));
             $result = $customMethods->{$this->api[0]}(...$this->parameters);
         } else {
             //Проверяем нет ли в MadilineProto такого метода.
@@ -176,7 +185,8 @@ class RequestCallback
 
     /**
      * @param \Throwable $e
-     * @return RequestCallback
+     *
+     * @return ApiController
      * @throws \Throwable
      */
     private function setError(\Throwable $e): self
@@ -221,16 +231,24 @@ class RequestCallback
             $data['success'] = 1;
         }
 
-        $result = json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE|JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $result = json_encode(
+            $data,
+            JSON_THROW_ON_ERROR |
+            JSON_INVALID_UTF8_SUBSTITUTE |
+            JSON_PRETTY_PRINT |
+            JSON_UNESCAPED_SLASHES |
+            JSON_UNESCAPED_UNICODE
+        );
 
-        return $result;
+        return $result . "\n";
     }
 
     /**
      * Устанавливает http код ответа (200, 400, 404 и тд.)
      *
      * @param int $code
-     * @return RequestCallback
+     *
+     * @return ApiController
      */
     private function setPageCode(int $code): self
     {

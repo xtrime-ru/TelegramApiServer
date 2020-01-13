@@ -53,7 +53,7 @@ foreach ($options['session'] as $session) {
     if (!$session) {
         $session = 'session';
     }
-    $session = TelegramApiServer\Client::getSessionFileName($session);
+    $session = TelegramApiServer\Client::getSessionFile($session);
     $sessionFiles[$session] = '';
 }
 

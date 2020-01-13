@@ -8,7 +8,7 @@ use danog\MadelineProto\TL\Conversion\BotAPI;
 use function Amp\call;
 use \danog\MadelineProto;
 
-class CustomMethods
+class ClientCustomMethods
 {
     use BotAPI;
 

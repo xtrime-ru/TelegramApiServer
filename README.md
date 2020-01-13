@@ -74,6 +74,13 @@ Fast, simple, async php telegram api server:
         * `http://127.0.0.1:9503/api/session/getSelf`
         
         Each session is store in `{$session}.madeline` file in root folder of library.
+    * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
+        Each event stored inside object, where key is name of session which created event. 
+        
+        When using CombinedAPI (multiple account) name of session can be added to path of websocket endpoint: 
+        `ws://127.0.0.1:9503/events/session_name`. This endpoint will send events only from given session.
+        
+        PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
     
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
@@ -84,7 +91,15 @@ Fast, simple, async php telegram api server:
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
     * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
-    
+
+**INPORTANT SECURITY NOTICE!**
+
+Do not use `SERVER_ADDRESS=0.0.0.0` in version 1.5.0+, because websocket EventHandler endpoint currently not use `IP_WHITELIST` option. 
+This means, anyone from internet can listen your updates via websocket in this mode.
+
+Use only default setting: `SERVER_ADDRESS=127.0.0.1`, or protect your app with external firewall.
+
+This security issue will be fixed in one of next releases in January 2020.
         
 **Contacts**
 

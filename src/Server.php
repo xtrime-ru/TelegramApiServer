@@ -4,16 +4,14 @@ namespace TelegramApiServer;
 
 use Amp;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
-use Amp\Promise;
-use Amp\Socket;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Psr\Log\LogLevel;
+use TelegramApiServer\Controllers\ApiController;
+use TelegramApiServer\Controllers\EventsController;
 
 class Server
 {
-    private $config = [];
-
     /**
      * Server constructor.
      * @param Client $client
@@ -21,32 +19,11 @@ class Server
      */
     public function __construct(Client $client, array $options)
     {
-        $this->setConfig($options);
-
-        Amp\Loop::run(function () use ($client) {
-            $sockets = [
-                Socket\listen("{$this->config['address']}:{$this->config['port']}"),
-            ];
-
+        Amp\Loop::run(function () use ($client, $options) {
             $server = new Amp\Http\Server\Server(
-                $sockets,
-                new CallableRequestHandler(function (Request $request) use($client) {
-                    //На каждый запрос должны создаваться новые экземпляры классов парсера и коллбеков,
-                    //иначе их данные будут в области видимости всех запросов.
-
-                    //Телеграм клиент инициализируется 1 раз и используется во всех запросах.
-
-                    $requestCallback = new RequestCallback($client);
-                    $response = yield from $requestCallback->process($request);
-
-                    return new Response(
-                        $requestCallback->page['code'],
-                        $requestCallback->page['headers'],
-                        $response
-                    );
-
-                }),
-                new Logger(LogLevel::DEBUG),
+                $this->getServerAddresses(static::getConfig($options)),
+                static::getRouter($client),
+                Logger::getInstance(),
                 (new Amp\Http\Server\Options())
                     ->withCompression()
                     ->withBodySizeLimit(30*1024*1024)
@@ -54,43 +31,82 @@ class Server
 
             yield $server->start();
 
-            // Stop the server gracefully when SIGINT is received.
-            // This is technically optional, but it is best to call Server::stop().
-            if (defined('SIGINT')) {
-                Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
-                    Amp\Loop::cancel($watcherId);
-                    yield $server->stop();
-                    exit;
-                });
-            }
+            static::registerShutdown($server);
         });
+    }
 
+    private static function getServerAddresses(array $config): array
+    {
+        return [
+            Amp\Socket\Server::listen("{$config['address']}:{$config['port']}"),
+        ];
+    }
+
+    private static function getRouter(Client $client): Amp\Http\Server\Router
+    {
+        $router = new Amp\Http\Server\Router();
+        foreach (['GET', 'POST'] as $method) {
+            $router->addRoute($method, '/api/{session}/{method}', ApiController::getRouterCallback($client));
+            $router->addRoute($method, '/api/{method}', ApiController::getRouterCallback($client));
+
+            $router->addRoute($method, '/events[/{session}]', EventsController::getRouterCallback($client));
+        }
+
+        $router->setFallback(new CallableRequestHandler(static function (Request $request) {
+            return new Response(
+                Amp\Http\Status::NOT_FOUND,
+                [ 'Content-Type'=>'application/json;charset=utf-8'],
+                json_encode(
+                    [
+                        'success' => 0,
+                        'errors' => [
+                            [
+                                'code' => 404,
+                                'message' => 'Path not found',
+                            ]
+                        ]
+                    ],
+                    JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+                ) . "\n"
+            );
+        }));
+
+        return $router;
+    }
+
+    /**
+     * Stop the server gracefully when SIGINT is received.
+     * This is technically optional, but it is best to call Server::stop().
+     *
+     * @throws Amp\Loop\UnsupportedFeatureException
+     */
+    private static function registerShutdown(Amp\Http\Server\Server $server)
+    {
+
+        if (defined('SIGINT')) {
+            Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
+                Amp\Loop::cancel($watcherId);
+                yield $server->stop();
+            });
+        }
     }
 
     /**
      * Установить конфигурацию для http-сервера
      *
      * @param array $config
-     * @return Server
+     * @return array
      */
-    private function setConfig(array $config = []): self
+    private static function getConfig(array $config = []): array
     {
         $config =  array_filter($config);
 
-        $this->config = array_merge(
-            Config::getInstance()->get("server", []),
+        $config = array_merge(
+            Config::getInstance()->get('server', []),
             $config
         );
 
-        return $this;
-    }
-
-    public function resolvePromise(&$promise) {
-        if ($promise instanceof Promise) {
-            return yield $promise;
-        }
-
-        return yield;
+        return $config;
     }
 
 }
