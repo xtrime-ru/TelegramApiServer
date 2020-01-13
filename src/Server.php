@@ -46,10 +46,10 @@ class Server
     {
         $router = new Amp\Http\Server\Router();
         foreach (['GET', 'POST'] as $method) {
-            $router->addRoute($method, '/api/{session}/{method}', ApiController::getRouterCallback($client));
-            $router->addRoute($method, '/api/{method}', ApiController::getRouterCallback($client));
-
-            $router->addRoute($method, '/events[/{session}]', EventsController::getRouterCallback($client));
+            $router->addRoute($method, '/api/{session}/{method}[/]', ApiController::getRouterCallback($client));
+            $router->addRoute($method, '/api/{method}[/]', ApiController::getRouterCallback($client));
+            $router->addRoute($method, '/events/{session}[/]', EventsController::getRouterCallback($client));
+            $router->addRoute($method, '/events[/]', EventsController::getRouterCallback($client));
         }
 
         $router->setFallback(new CallableRequestHandler(static function (Request $request) {
