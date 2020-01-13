@@ -191,11 +191,6 @@ class ApiController
      */
     private function setError(\Throwable $e): self
     {
-        if ($e instanceof \Error) {
-            //Это критическая ошибка соедниения. Необходим полный перезапуск.
-            throw $e;
-        }
-
         $this->setPageCode(400);
         $this->page['errors'][] = [
             'code' => $e->getCode(),
