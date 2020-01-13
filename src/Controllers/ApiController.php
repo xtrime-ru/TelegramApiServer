@@ -9,18 +9,18 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use TelegramApiServer\Client;
-use TelegramApiServer\Config;
 use TelegramApiServer\ClientCustomMethods;
 
 class ApiController
 {
+    public const JSON_HEADER = ['Content-Type'=>'application/json;charset=utf-8'];
+
     private Client $client;
-    private array $ipWhiteList;
     public array $page = [
         'headers' => [
-            'Content-Type'=>'application/json;charset=utf-8',
+            self::JSON_HEADER,
         ],
-        'success' => 0,
+        'success' => false,
         'errors' => [],
         'code' => 200,
         'response' => null,
@@ -52,7 +52,6 @@ class ApiController
      */
     public function __construct(Client $client)
     {
-        $this->ipWhiteList = (array) Config::getInstance()->get('api.ip_whitelist', []);
         $this->client = $client;
     }
 
@@ -137,9 +136,6 @@ class ApiController
         }
 
         try {
-            if (!in_array($request->getClient()->getRemoteAddress()->getHost(), $this->ipWhiteList, true)) {
-                throw new \Exception('Requests from your IP is forbidden');
-            }
             $this->page['response'] = $this->callApi();
 
             if ($this->page['response'] instanceof Promise) {
@@ -191,15 +187,20 @@ class ApiController
      */
     private function setError(\Throwable $e): self
     {
-        $this->setPageCode(400);
+        $errorCode = $e->getCode();
+        if ($errorCode >= 400 && $errorCode < 500) {
+            $this->setPageCode($errorCode);
+        } else {
+            $this->setPageCode(400);
+        }
+
         $this->page['errors'][] = [
-            'code' => $e->getCode(),
+            'code' => $errorCode,
             'message' => $e->getMessage(),
         ];
 
         return $this;
     }
-
 
     /**
      * Кодирует ответ в нужный формат: json
@@ -223,7 +224,7 @@ class ApiController
             'response' => $this->page['response'],
         ];
         if (!$data['errors']) {
-            $data['success'] = 1;
+            $data['success'] = true;
         }
 
         $result = json_encode(

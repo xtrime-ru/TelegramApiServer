@@ -11,8 +11,8 @@ Fast, simple, async php telegram api server:
 * Fast async server
 * Full access to telegram api: bot and user
 
-**Example Architecture**
-![Proposed Architecture](https://hsto.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
+**Architecture Example**
+![Architecture Example](https://hsto.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
  
 **Installation**
 
@@ -92,15 +92,7 @@ Fast, simple, async php telegram api server:
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
     * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
-**INPORTANT SECURITY NOTICE!**
 
-Do not use `SERVER_ADDRESS=0.0.0.0` in version 1.5.0+, because websocket EventHandler endpoint currently not use `IP_WHITELIST` option. 
-This means, anyone from internet can listen your updates via websocket in this mode.
-
-Use only default setting: `SERVER_ADDRESS=127.0.0.1`, or protect your app with external firewall.
-
-This security issue will be fixed in one of next releases in January 2020.
-        
 **Contacts**
 
 * Telegram: [@xtrime](tg://resolve?domain=xtrime)

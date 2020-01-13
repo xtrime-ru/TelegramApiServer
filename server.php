@@ -5,7 +5,7 @@ chdir(__DIR__);
 require_once __DIR__ . '/bootstrap.php';
 
 if (PHP_SAPI !== 'cli') {
-    throw new \Exception('Start in CLI');
+    throw new \RuntimeException('Start in CLI');
 }
 
 $shortopts = 'a::p::s::';
@@ -58,4 +58,4 @@ foreach ($options['session'] as $session) {
 }
 
 $client = new TelegramApiServer\Client($sessionFiles);
-new TelegramApiServer\Server($client, $options);
+new TelegramApiServer\Server\Server($client, $options);
