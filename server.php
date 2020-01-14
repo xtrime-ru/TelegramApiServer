@@ -32,15 +32,18 @@ usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|
 
 Options:
         --help      Show this message
-    -a  --address   Server ip (optional) (example: 127.0.0.1)
-    -p  --port      Server port (optional) (example: 9503)
-    -s  --session   Name for session file (optional) (example: xtrime). 
-                    Multiple sessions can be used (MadelineProto CombinedAPI). 
-                    Example: "--session=user --session=bot"
+        
+    -a  --address   Server ip (optional) (default: 127.0.0.1)
+                    To listen external connections use 0.0.0.0 and fill IP_WHITELIST in .env
+                    
+    -p  --port      Server port (optional) (default: 9503)
+    
+    -s  --session   Name for session file (optional) (default: session)
+                    Multiple sessions can be specified: "--session=user --session=bot"
+                    
                     Each session is stored in `sessions/{$session}.madeline`. 
                     Nested folders supported.
                     See README for more examples.
-    
 
 Also all options can be set in .env file (see .env.example)
 

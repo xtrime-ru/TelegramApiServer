@@ -40,22 +40,29 @@ Fast, simple, async php telegram api server:
 
 1. Run server/parser
     ```
-    php server.php [--help] [-a|--address=127.0.0.1] [-p|--port=9503]
+    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=session]
     
     Options:
             --help      Show this message
-        -a  --address   Server ip (optional) (example: 127.0.0.1)
-        -p  --port      Server port (optional) (example: 9503)
-        -s  --session   Prefix for session file (optional) (example: xtrime). 
-                        Multiple sessions can be used via CombinedAPI. Example "--session=user --session=bot"
-                        If running multiple sessions, then "session" parameter must be provided with every request.
-    
+            
+        -a  --address   Server ip (optional) (default: 127.0.0.1)
+                        To listen external connections use 0.0.0.0 and fill IP_WHITELIST in .env
+                        
+        -p  --port      Server port (optional) (default: 9503)
+        
+        -s  --session   Name for session file (optional) (default: session)
+                        Multiple sessions can be specified: "--session=user --session=bot"
+                        
+                        Each session is stored in `sessions/%session%.madeline`. 
+                        Nested folders supported.
+                        See README for more examples.
+   
     Also  options can be set in .env file (see .env.example)
     ```
-1. Access telegram api directly via simple get requests.    
+1. Access telegram api directly with simple GET/POST requests.    
     Rules:
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
-    * Url: `http://%address%:%port%/api/[%session%/]%class%.%method%/?%param1%=%val%`
+    * Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
     * <b>Important: api available only from ip in whitelist.</b> 
         By default it is: `127.0.0.1`
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
@@ -93,7 +100,7 @@ Fast, simple, async php telegram api server:
     * get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
-    * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
+    * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
 
 **Contacts**
