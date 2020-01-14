@@ -57,6 +57,17 @@ class Client
         return $sessionName ?: null;
     }
 
+    public static function checkOrCreateSessionFolder($session, $rootDir): void
+    {
+        $directory = dirname($session);
+        if ($directory && $directory !== '.' && !is_dir($directory)) {
+            $parentDirectoryPermissions = fileperms($rootDir);
+            if (!mkdir($directory, $parentDirectoryPermissions, true) && !is_dir($directory)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
+            }
+        }
+    }
+
     /**
      * @param array $sessions
      */

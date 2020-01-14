@@ -50,11 +50,17 @@ Example:
 
 $sessionFiles = [];
 foreach ($options['session'] as $session) {
+    $session = trim($session);
+    if (mb_substr($session, -1) === '/') {
+        throw new InvalidArgumentException('Session name specified as directory');
+    }
     if (!$session) {
         $session = 'session';
     }
+
+    TelegramApiServer\Client::checkOrCreateSessionFolder($session, __DIR__);
     $session = TelegramApiServer\Client::getSessionFile($session);
-    $sessionFiles[$session] = '';
+    $sessionFiles[$session] = null;
 }
 
 $client = new TelegramApiServer\Client($sessionFiles);
