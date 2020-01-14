@@ -70,7 +70,6 @@ class EventsController extends Websocket
                     $update,
                     JSON_THROW_ON_ERROR |
                     JSON_INVALID_UTF8_SUBSTITUTE |
-                    JSON_PRETTY_PRINT |
                     JSON_UNESCAPED_SLASHES |
                     JSON_UNESCAPED_UNICODE
                 ),

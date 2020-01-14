@@ -7,7 +7,8 @@ use danog\MadelineProto;
 
 class Client
 {
-    private static string $sessionExtension = '.madeline';
+    public static string $sessionExtension = '.madeline';
+    public static string $sessionFolder = 'sessions';
     public ?MadelineProto\CombinedAPI $MadelineProtoCombined = null;
 
     /**
@@ -39,7 +40,12 @@ class Client
      */
     public static function getSessionFile(?string $session): ?string
     {
-        return $session ? ($session . static::$sessionExtension) : null;
+        if (!$session) {
+            return null;
+        }
+        $session = static::$sessionFolder . '/' . $session . static::$sessionExtension;
+        $session = str_replace('//', '/', $session);
+        return $session;
     }
 
     public static function getSessionName(?string $sessionFile): ?string
@@ -48,13 +54,13 @@ class Client
             return null;
         }
 
-        $extensionPosition = strrpos($sessionFile, static::$sessionExtension);
-        if($extensionPosition === false) {
-           return null;
-        }
+        preg_match(
+            '~^' . static::$sessionFolder . "/(?'sessionName'.*?)" . static::$sessionExtension . '$~',
+            $sessionFile,
+            $matches
+        );
 
-        $sessionName = substr_replace($sessionFile, '', $extensionPosition, strlen(static::$sessionExtension));
-        return $sessionName ?: null;
+        return $matches['sessionName'] ?? null;
     }
 
     public static function checkOrCreateSessionFolder($session, $rootDir): void
@@ -82,16 +88,18 @@ class Client
         $this->MadelineProtoCombined->session = null;
 
         $this->MadelineProtoCombined->async(true);
-        $this->MadelineProtoCombined->loop(function() use($sessions) {
-            $promises = [];
-            foreach ($sessions as $session => $message) {
-                MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
-                $promises[]= $this->MadelineProtoCombined->instances[$session]->start();
-            }
-            yield $this->MadelineProtoCombined::all($promises);
+        $this->MadelineProtoCombined->loop(
+            function() use ($sessions) {
+                $promises = [];
+                foreach ($sessions as $session => $message) {
+                    MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
+                    $promises[] = $this->MadelineProtoCombined->instances[$session]->start();
+                }
+                yield $this->MadelineProtoCombined::all($promises);
 
-            $this->MadelineProtoCombined->setEventHandler(EventHandler::class);
-        });
+                $this->MadelineProtoCombined->setEventHandler(EventHandler::class);
+            }
+        );
 
         Loop::defer(function() {
             $this->MadelineProtoCombined->loop();
@@ -101,8 +109,8 @@ class Client
         $sessionsCount = count($sessions);
         MadelineProto\Logger::log(
             "\nTelegramApiServer ready."
-            ."\nNumber of sessions: {$sessionsCount}."
-            ."\nElapsed time: {$time} sec.\n",
+            . "\nNumber of sessions: {$sessionsCount}."
+            . "\nElapsed time: {$time} sec.\n",
             MadelineProto\Logger::WARNING
         );
     }
@@ -130,6 +138,5 @@ class Client
 
         return $this->MadelineProtoCombined->instances[$session];
     }
-
 
 }

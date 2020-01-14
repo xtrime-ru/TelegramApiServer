@@ -20,7 +20,7 @@ $options = [
     'url' => $options['url'] ?? $options['u'] ?? 'ws://127.0.0.1:9503/events',
 ];
 
-Amp\Loop::run(function () use($options) {
+Amp\Loop::run(static function () use($options) {
     echo "Connecting to: {$options['url']}" . PHP_EOL;
 
     try {

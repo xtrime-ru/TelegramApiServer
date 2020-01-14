@@ -1,11 +1,13 @@
 <?php
 
+use TelegramApiServer\Migrations;
+
 chdir(__DIR__);
 
 require_once __DIR__ . '/bootstrap.php';
 
 if (PHP_SAPI !== 'cli') {
-    throw new \RuntimeException('Start in CLI');
+    throw new RuntimeException('Start in CLI');
 }
 
 $shortopts = 'a::p::s::';
@@ -48,6 +50,9 @@ Example:
     exit;
 }
 
+Migrations\Sessions::move(__DIR__);
+
+
 $sessionFiles = [];
 foreach ($options['session'] as $session) {
     $session = trim($session);
@@ -58,8 +63,9 @@ foreach ($options['session'] as $session) {
         $session = 'session';
     }
 
-    TelegramApiServer\Client::checkOrCreateSessionFolder($session, __DIR__);
     $session = TelegramApiServer\Client::getSessionFile($session);
+    TelegramApiServer\Client::checkOrCreateSessionFolder($session, __DIR__);
+
     $sessionFiles[$session] = null;
 }
 

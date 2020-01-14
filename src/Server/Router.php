@@ -40,12 +40,12 @@ class Router
         $eventsHandler = stack(EventsController::getRouterCallback($client), $authorization);
 
         foreach (['GET', 'POST'] as $method) {
-            $this->router->addRoute($method, '/api/{session}/{method}[/]', $apiHandler);
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
+            $this->router->addRoute($method, '/api/{session:.*?}/{method}[/]', $apiHandler);
         }
 
-        $this->router->addRoute('GET', '/events/{session}[/]', $eventsHandler);
         $this->router->addRoute('GET', '/events[/]', $eventsHandler);
+        $this->router->addRoute('GET', '/events/{session:.*?}[/]', $eventsHandler);
     }
 
 
