@@ -43,6 +43,7 @@ class Client
         if (!$session) {
             return null;
         }
+        $session = rtrim(trim($session), '/');
         $session = static::$sessionFolder . '/' . $session . static::$sessionExtension;
         $session = str_replace('//', '/', $session);
         return $session;
@@ -129,11 +130,11 @@ class Client
         }
 
         if (!$session) {
-            throw new \InvalidArgumentException('Multiple sessions detected. You need to specify which session to use');
+            throw new \InvalidArgumentException('Multiple sessions detected. Specify which session to use. See README for examples.');
         }
 
         if (empty($this->MadelineProtoCombined->instances[$session])) {
-            throw new \InvalidArgumentException('Session not found');
+            throw new \InvalidArgumentException('Session not found.');
         }
 
         return $this->MadelineProtoCombined->instances[$session];

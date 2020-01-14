@@ -67,18 +67,21 @@ Fast, simple, async php telegram api server:
         `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
     * CombinedAPI (multiple sessions) support. 
 
-        If running with multiple sessions use include 'session' in path, before method, to define which session to use for request:
-        * `php server.php --session=session --session=bot --session=xtrime`
-        * `http://127.0.0.1:9503/api/xtrime/getSelf` 
+        When running  multiple sessions, need to define which session to use for request.
+        Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
+        
+        Examples:
+        * `php server.php --session=bot --session=users/xtrime --session=users/user1`
         * `http://127.0.0.1:9503/api/bot/getSelf`
-        * `http://127.0.0.1:9503/api/session/getSelf`
+        * `http://127.0.0.1:9503/api/users/xtrime/getSelf` 
+        * `http://127.0.0.1:9503/api/users/user1/getSelf`
+        * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
         
-        Each session is store in `{$session}.madeline` file in root folder of library.
     * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
-        Each event stored inside object, where key is name of session which created event. 
+        Each event is json object. Key is name of session, which created event. 
         
-        When using CombinedAPI (multiple account) name of session can be added to path of websocket endpoint: 
-        `ws://127.0.0.1:9503/events/session_name`. This endpoint will send events only from given session.
+        When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
+        This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
         
         PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
     

@@ -28,16 +28,18 @@ $options = [
 if ($options['help']) {
     $help = 'Fast, simple, async php telegram parser: MadelineProto + Swoole Server
 
-usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]
+usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=session]
 
 Options:
         --help      Show this message
     -a  --address   Server ip (optional) (example: 127.0.0.1)
     -p  --port      Server port (optional) (example: 9503)
-    -s  --session   Prefix for session file (optional) (example: xtrime). 
-                    Multiple sessions can be used via CombinedAPI. Example "--session=user --session=bot"
-                    If running multiple sessions, then "session" parameter must be provided with every request.
-                    See README for example requests.
+    -s  --session   Name for session file (optional) (example: xtrime). 
+                    Multiple sessions can be used (MadelineProto CombinedAPI). 
+                    Example: "--session=user --session=bot"
+                    Each session is stored in `sessions/{$session}.madeline`. 
+                    Nested folders supported.
+                    See README for more examples.
     
 
 Also all options can be set in .env file (see .env.example)
