@@ -4,10 +4,6 @@ if (getenv('SWOOLE_SERVER_ADDRESS')) {
     throw new UnexpectedValueException('Please, update .env file! See .env.example');
 }
 
-$rsaKeys = null;
-if (file_exists('.rsa_keys'))
-    $rsaKeys = explode(',', file_get_contents('.rsa_keys'));
-
 return [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
@@ -44,20 +40,6 @@ return [
         'download' => [
             'report_broken_media' => false,
         ],
-        'authorization' => [
-            'rsa_keys' => $rsaKeys,
-        ],
-        'connection' => [
-            'main' => [
-                'ipv4' => [
-                    // ipv4 addresses
-                    2 => [
-                        // The rest will be fetched automatically
-                        'ip_address' => '149.154.167.50',
-                    ],
-                ],
-            ]
-        ]
     ],
     'api' => [
         'ip_whitelist' => array_filter(

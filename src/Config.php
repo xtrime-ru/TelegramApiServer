@@ -26,6 +26,11 @@ class Config
     private function __construct()
     {
         $this->config = include __DIR__ . '/../config.php';
+
+        if (file_exists(__DIR__ . '/../config.local.php')) {
+            $localConfig = include __DIR__ . '/../config.local.php';
+            $this->config = array_merge_recursive($this->config, $localConfig);
+        }
     }
 
     /**
@@ -54,7 +59,7 @@ class Config
 
     private function findByKey($key)
     {
-        $key = (string) $key;
+        $key = (string)$key;
         $path = explode('.', $key);
 
         $value = &$this->config;

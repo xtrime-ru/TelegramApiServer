@@ -3,3 +3,6 @@ vendor
 *.madeline
 *.madeline.lock
 madeline.phar*
+config.local.php
+.env
+.rsa_keys
