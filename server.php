@@ -1,11 +1,13 @@
 <?php
 
+use TelegramApiServer\Migrations;
+
 chdir(__DIR__);
 
 require_once __DIR__ . '/bootstrap.php';
 
 if (PHP_SAPI !== 'cli') {
-    throw new \Exception('Start in CLI');
+    throw new RuntimeException('Start in CLI');
 }
 
 $shortopts = 'a::p::s::';
@@ -26,17 +28,22 @@ $options = [
 if ($options['help']) {
     $help = 'Fast, simple, async php telegram parser: MadelineProto + Swoole Server
 
-usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]
+usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=session]
 
 Options:
         --help      Show this message
-    -a  --address   Server ip (optional) (example: 127.0.0.1)
-    -p  --port      Server port (optional) (example: 9503)
-    -s  --session   Prefix for session file (optional) (example: xtrime). 
-                    Multiple sessions can be used via CombinedAPI. Example "--session=user --session=bot"
-                    If running multiple sessions, then "session" parameter must be provided with every request.
-                    See README for example requests.
+        
+    -a  --address   Server ip (optional) (default: 127.0.0.1)
+                    To listen external connections use 0.0.0.0 and fill IP_WHITELIST in .env
+                    
+    -p  --port      Server port (optional) (default: 9503)
     
+    -s  --session   Name for session file (optional) (default: session)
+                    Multiple sessions can be specified: "--session=user --session=bot"
+                    
+                    Each session is stored in `sessions/{$session}.madeline`. 
+                    Nested folders supported.
+                    See README for more examples.
 
 Also all options can be set in .env file (see .env.example)
 
@@ -48,14 +55,24 @@ Example:
     exit;
 }
 
+Migrations\Sessions::move(__DIR__);
+
+
 $sessionFiles = [];
 foreach ($options['session'] as $session) {
+    $session = trim($session);
+    if (mb_substr($session, -1) === '/') {
+        throw new InvalidArgumentException('Session name specified as directory');
+    }
     if (!$session) {
         $session = 'session';
     }
+
     $session = TelegramApiServer\Client::getSessionFile($session);
-    $sessionFiles[$session] = '';
+    TelegramApiServer\Client::checkOrCreateSessionFolder($session, __DIR__);
+
+    $sessionFiles[$session] = null;
 }
 
 $client = new TelegramApiServer\Client($sessionFiles);
-new TelegramApiServer\Server($client, $options);
+new TelegramApiServer\Server\Server($client, $options);

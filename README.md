@@ -11,8 +11,8 @@ Fast, simple, async php telegram api server:
 * Fast async server
 * Full access to telegram api: bot and user
 
-**Example Architecture**
-![Proposed Architecture](https://hsto.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
+**Architecture Example**
+![Architecture Example](https://hsto.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
  
 **Installation**
 
@@ -40,22 +40,29 @@ Fast, simple, async php telegram api server:
 
 1. Run server/parser
     ```
-    php server.php [--help] [-a|--address=127.0.0.1] [-p|--port=9503]
+    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=session]
     
     Options:
             --help      Show this message
-        -a  --address   Server ip (optional) (example: 127.0.0.1)
-        -p  --port      Server port (optional) (example: 9503)
-        -s  --session   Prefix for session file (optional) (example: xtrime). 
-                        Multiple sessions can be used via CombinedAPI. Example "--session=user --session=bot"
-                        If running multiple sessions, then "session" parameter must be provided with every request.
-    
+            
+        -a  --address   Server ip (optional) (default: 127.0.0.1)
+                        To listen external connections use 0.0.0.0 and fill IP_WHITELIST in .env
+                        
+        -p  --port      Server port (optional) (default: 9503)
+        
+        -s  --session   Name for session file (optional) (default: session)
+                        Multiple sessions can be specified: "--session=user --session=bot"
+                        
+                        Each session is stored in `sessions/%session%.madeline`. 
+                        Nested folders supported.
+                        See README for more examples.
+   
     Also  options can be set in .env file (see .env.example)
     ```
-1. Access telegram api directly via simple get requests.    
+1. Access telegram api directly with simple GET/POST requests.    
     Rules:
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
-    * Url: `http://%address%:%port%/api/[%session%/]%class%.%method%/?%param1%=%val%`
+    * Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
     * <b>Important: api available only from ip in whitelist.</b> 
         By default it is: `127.0.0.1`
         You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
@@ -67,18 +74,21 @@ Fast, simple, async php telegram api server:
         `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
     * CombinedAPI (multiple sessions) support. 
 
-        If running with multiple sessions use include 'session' in path, before method, to define which session to use for request:
-        * `php server.php --session=session --session=bot --session=xtrime`
-        * `http://127.0.0.1:9503/api/xtrime/getSelf` 
+        When running  multiple sessions, need to define which session to use for request.
+        Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
+        
+        Examples:
+        * `php server.php --session=bot --session=users/xtrime --session=users/user1`
         * `http://127.0.0.1:9503/api/bot/getSelf`
-        * `http://127.0.0.1:9503/api/session/getSelf`
+        * `http://127.0.0.1:9503/api/users/xtrime/getSelf` 
+        * `http://127.0.0.1:9503/api/users/user1/getSelf`
+        * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
         
-        Each session is store in `{$session}.madeline` file in root folder of library.
     * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
-        Each event stored inside object, where key is name of session which created event. 
+        Each event is json object. Key is name of session, which created event. 
         
-        When using CombinedAPI (multiple account) name of session can be added to path of websocket endpoint: 
-        `ws://127.0.0.1:9503/events/session_name`. This endpoint will send events only from given session.
+        When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
+        This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
         
         PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
     
@@ -90,17 +100,9 @@ Fast, simple, async php telegram api server:
     * get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
-    * copy message from one channel to other (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
+    * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
-**INPORTANT SECURITY NOTICE!**
 
-Do not use `SERVER_ADDRESS=0.0.0.0` in version 1.5.0+, because websocket EventHandler endpoint currently not use `IP_WHITELIST` option. 
-This means, anyone from internet can listen your updates via websocket in this mode.
-
-Use only default setting: `SERVER_ADDRESS=127.0.0.1`, or protect your app with external firewall.
-
-This security issue will be fixed in one of next releases in January 2020.
-        
 **Contacts**
 
 * Telegram: [@xtrime](tg://resolve?domain=xtrime)

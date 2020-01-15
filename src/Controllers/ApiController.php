@@ -9,40 +9,38 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use TelegramApiServer\Client;
-use TelegramApiServer\Config;
 use TelegramApiServer\ClientCustomMethods;
 use danog\MadelineProto;
 
 class ApiController
 {
-    private Client  $client;
-    private array   $ipWhiteList;
-    public array    $page = [
-        'headers' => [
-            'Content-Type' => 'application/json;charset=utf-8',
-        ],
-        'success' => 0,
+    public const JSON_HEADER = ['Content-Type'=>'application/json;charset=utf-8'];
+
+    private Client $client;
+    public array $page = [
+        'headers' => self::JSON_HEADER,
+        'success' => false,
         'errors' => [],
         'code' => 200,
         'response' => null,
     ];
-    private array   $parameters = [];
-    private array   $api;
+    private array $parameters = [];
+    private array $api;
     private ?string $session = '';
 
     public static function getRouterCallback($client): CallableRequestHandler
     {
         return new CallableRequestHandler(
-            static function (Request $request) use ($client) {
-                $requestCallback = new static($client);
-                $response = yield from $requestCallback->process($request);
+                static function (Request $request) use($client) {
+                    $requestCallback = new static($client);
+                    $response = yield from $requestCallback->process($request);
 
-                return new Response(
-                    $requestCallback->page['code'],
-                    $requestCallback->page['headers'],
-                    $response
-                );
-            }
+                    return new Response(
+                        $requestCallback->page['code'],
+                        $requestCallback->page['headers'],
+                        $response
+                    );
+                }
         );
     }
 
@@ -53,7 +51,6 @@ class ApiController
      */
     public function __construct(Client $client)
     {
-        $this->ipWhiteList = (array)Config::getInstance()->get('api.ip_whitelist', []);
         $this->client = $client;
     }
 
@@ -72,7 +69,8 @@ class ApiController
         yield from $this
             ->resolvePath($request->getAttribute(Router::class))
             ->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'))
-            ->generateResponse($request);
+            ->generateResponse($request)
+        ;
 
         return $this->getResponse();
     }
@@ -113,7 +111,7 @@ class ApiController
                 parse_str($body, $post);
         }
 
-        $this->parameters = array_merge((array)$post, $get);
+        $this->parameters = array_merge((array) $post, $get);
         $this->parameters = array_values($this->parameters);
 
         return $this;
@@ -137,10 +135,6 @@ class ApiController
         }
 
         try {
-            if (!in_array($request->getClient()->getRemoteAddress()->getHost(), $this->ipWhiteList, true)) {
-                throw new \Exception('Requests from your IP is forbidden');
-            }
-
             $botLoginPromise = $this->client->tryBotLogin($this->session);
             if ($botLoginPromise)
                 yield $botLoginPromise;
@@ -164,9 +158,8 @@ class ApiController
      */
     private function callApi()
     {
-
         $pathSize = count($this->api);
-        if ($pathSize === 1 && is_callable([ClientCustomMethods::class, $this->api[0]])) {
+        if ($pathSize === 1 && is_callable([ClientCustomMethods::class,$this->api[0]])) {
             $customMethods = new ClientCustomMethods($this->client->getInstance($this->session));
             $result = $customMethods->{$this->api[0]}(...$this->parameters);
         } else {
@@ -197,20 +190,20 @@ class ApiController
      */
     private function setError(\Throwable $e): self
     {
-        if ($e instanceof \Error) {
-            //Это критическая ошибка соедниения. Необходим полный перезапуск.
-            throw $e;
+        $errorCode = $e->getCode();
+        if ($errorCode >= 400 && $errorCode < 500) {
+            $this->setPageCode($errorCode);
+        } else {
+            $this->setPageCode(400);
         }
 
-        $this->setPageCode(400);
         $this->page['errors'][] = [
-            'code' => $e->getCode(),
+            'code' => $errorCode,
             'message' => $e->getMessage(),
         ];
 
         return $this;
     }
-
 
     /**
      * Кодирует ответ в нужный формат: json
@@ -234,7 +227,7 @@ class ApiController
             'response' => $this->page['response'],
         ];
         if (!$data['errors']) {
-            $data['success'] = 1;
+            $data['success'] = true;
         }
 
         $result = json_encode(

@@ -7,7 +7,8 @@ use danog\MadelineProto;
 
 class Client
 {
-    private static string             $sessionExtension = '.madeline';
+    public static string $sessionExtension = '.madeline';
+    public static string $sessionFolder = 'sessions';
     public ?MadelineProto\CombinedAPI $MadelineProtoCombined = null;
 
     /**
@@ -17,7 +18,7 @@ class Client
      */
     public function __construct(array $sessions)
     {
-        $config = (array)Config::getInstance()->get('telegram');
+        $config = (array) Config::getInstance()->get('telegram');
 
         if (empty($config['connection_settings']['all']['proxy_extra']['address'])) {
             $config['connection_settings']['all']['proxy'] = '\Socket';
@@ -39,7 +40,13 @@ class Client
      */
     public static function getSessionFile(?string $session): ?string
     {
-        return $session ? ($session . static::$sessionExtension) : null;
+        if (!$session) {
+            return null;
+        }
+        $session = rtrim(trim($session), '/');
+        $session = static::$sessionFolder . '/' . $session . static::$sessionExtension;
+        $session = str_replace('//', '/', $session);
+        return $session;
     }
 
     public static function getSessionName(?string $sessionFile): ?string
@@ -48,13 +55,24 @@ class Client
             return null;
         }
 
-        $extensionPosition = strrpos($sessionFile, static::$sessionExtension);
-        if ($extensionPosition === false) {
-            return null;
-        }
+        preg_match(
+            '~^' . static::$sessionFolder . "/(?'sessionName'.*?)" . static::$sessionExtension . '$~',
+            $sessionFile,
+            $matches
+        );
 
-        $sessionName = substr_replace($sessionFile, '', $extensionPosition, strlen(static::$sessionExtension));
-        return $sessionName ?: null;
+        return $matches['sessionName'] ?? null;
+    }
+
+    public static function checkOrCreateSessionFolder($session, $rootDir): void
+    {
+        $directory = dirname($session);
+        if ($directory && $directory !== '.' && !is_dir($directory)) {
+            $parentDirectoryPermissions = fileperms($rootDir);
+            if (!mkdir($directory, $parentDirectoryPermissions, true) && !is_dir($directory)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
+            }
+        }
     }
 
     /**
@@ -71,18 +89,20 @@ class Client
         $this->MadelineProtoCombined->session = null;
 
         $this->MadelineProtoCombined->async(true);
-        $this->MadelineProtoCombined->loop(function () use ($sessions) {
-            $promises = [];
-            foreach ($sessions as $session => $message) {
-                MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
-                $promises[] = $this->MadelineProtoCombined->instances[$session]->start();
+        $this->MadelineProtoCombined->loop(
+            function() use ($sessions) {
+                $promises = [];
+                foreach ($sessions as $session => $message) {
+                    MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
+                    $promises[] = $this->MadelineProtoCombined->instances[$session]->start();
+                }
+                yield $this->MadelineProtoCombined::all($promises);
+
+                $this->MadelineProtoCombined->setEventHandler(EventHandler::class);
             }
-            yield $this->MadelineProtoCombined::all($promises);
+        );
 
-            $this->MadelineProtoCombined->setEventHandler(EventHandler::class);
-        });
-
-        Loop::defer(function () {
+        Loop::defer(function() {
             $this->MadelineProtoCombined->loop();
         });
 
@@ -90,8 +110,8 @@ class Client
         $sessionsCount = count($sessions);
         MadelineProto\Logger::log(
             "\nTelegramApiServer ready."
-            . "\nNumber of sessions: {$sessionsCount}."
-            . "\nElapsed time: {$time} sec.\n",
+            ."\nNumber of sessions: {$sessionsCount}."
+            ."\nElapsed time: {$time} sec.\n",
             MadelineProto\Logger::WARNING
         );
     }
@@ -104,17 +124,17 @@ class Client
     public function getInstance(?string $session = null): MadelineProto\API
     {
         if (count($this->MadelineProtoCombined->instances) === 1) {
-            $session = (string)array_key_first($this->MadelineProtoCombined->instances);
+            $session = (string) array_key_first($this->MadelineProtoCombined->instances);
         } else {
             $session = static::getSessionFile($session);
         }
 
         if (!$session) {
-            throw new \InvalidArgumentException('Multiple sessions detected. You need to specify which session to use');
+            throw new \InvalidArgumentException('Multiple sessions detected. Specify which session to use. See README for examples.');
         }
 
         if (empty($this->MadelineProtoCombined->instances[$session])) {
-            throw new \InvalidArgumentException('Session not found');
+            throw new \InvalidArgumentException('Session not found.');
         }
 
         return $this->MadelineProtoCombined->instances[$session];

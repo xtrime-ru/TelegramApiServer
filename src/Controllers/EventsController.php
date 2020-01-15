@@ -32,7 +32,6 @@ class EventsController extends Websocket
             }
         }  catch (\Throwable $e){
             $response->setStatus(400);
-            $response->setBody($e->getMessage());
         }
 
         return new Success($response);
@@ -65,7 +64,17 @@ class EventsController extends Websocket
                 return;
             }
             $update = [$session => $update];
-            $this->multicast(json_encode($update, JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE), [$clientId]);
+
+            $this->multicast(
+                json_encode(
+                    $update,
+                    JSON_THROW_ON_ERROR |
+                    JSON_INVALID_UTF8_SUBSTITUTE |
+                    JSON_UNESCAPED_SLASHES |
+                    JSON_UNESCAPED_UNICODE
+                ),
+                [$clientId]
+            );
         });
     }
 }

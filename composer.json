@@ -8,11 +8,15 @@
   "require": {
     "php": ">=7.4.0",
     "ext-json": "*",
+    "ext-mbstring": "*",
     "amphp/http-server": "^2",
     "amphp/http-server-router": "^1",
     "amphp/websocket-server": "^2",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"^5"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
