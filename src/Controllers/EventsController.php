@@ -63,7 +63,14 @@ class EventsController extends Websocket
             if ($requestedSession && $session !== $requestedSession) {
                 return;
             }
-            $update = [$session => $update];
+            $update = [
+                'jsonrpc' => '2.0',
+                'result' => [
+                    'session' => $session,
+                    'update' => $update,
+                ],
+                'id' => null,
+            ];
 
             $this->multicast(
                 json_encode(

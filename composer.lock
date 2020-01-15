@@ -398,16 +398,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.6.0-rc1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "d2c00e3c48dc0511d2cea0d6fe73ea084f673aa4"
+                "reference": "8a1a1d6a78e6f432618aea02c6351602cf735cef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/d2c00e3c48dc0511d2cea0d6fe73ea084f673aa4",
-                "reference": "d2c00e3c48dc0511d2cea0d6fe73ea084f673aa4",
+                "url": "https://api.github.com/repos/amphp/http/zipball/8a1a1d6a78e6f432618aea02c6351602cf735cef",
+                "reference": "8a1a1d6a78e6f432618aea02c6351602cf735cef",
                 "shasum": ""
             },
             "require": {
@@ -419,6 +419,11 @@
                 "phpunit/phpunit": "^7 || ^6.5"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Amp\\Http\\": "src"
@@ -438,7 +443,7 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
-            "time": "2020-01-01T16:28:25+00:00"
+            "time": "2020-01-14T17:41:56+00:00"
         },
         {
             "name": "amphp/http-client",
@@ -1499,16 +1504,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "5.0.30",
+            "version": "5.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "daf98b698bce9a082b7a9f8bf52b268030f84674"
+                "reference": "a9c35bd9876bea46fe23f71dd5892ed831ab18da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/daf98b698bce9a082b7a9f8bf52b268030f84674",
-                "reference": "daf98b698bce9a082b7a9f8bf52b268030f84674",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/a9c35bd9876bea46fe23f71dd5892ed831ab18da",
+                "reference": "a9c35bd9876bea46fe23f71dd5892ed831ab18da",
                 "shasum": ""
             },
             "require": {
@@ -1591,7 +1596,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-01-11T16:34:40+00:00"
+            "time": "2020-01-15T17:03:15+00:00"
         },
         {
             "name": "danog/magicalserializer",
