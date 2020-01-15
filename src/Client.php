@@ -152,7 +152,6 @@ class Client
                 $this->MadelineProtoCombined->instances[$session]->async(true);
                 $token = explode('/', $token);
                 $token = end($token);
-                MadelineProto\Logger::log('token : '.$token,MadelineProto\Logger::WARNING);
                 return $this->MadelineProtoCombined->instances[$session]->botLogin($token);
             }
         }
