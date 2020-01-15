@@ -9,6 +9,7 @@ use Amp\Http\Server\Response;
 use Psr\Log\LogLevel;
 use TelegramApiServer\Controllers\ApiController;
 use TelegramApiServer\Controllers\EventsController;
+use danog\MadelineProto;
 
 class Server
 {
@@ -26,7 +27,7 @@ class Server
                 Logger::getInstance(),
                 (new Amp\Http\Server\Options())
                     ->withCompression()
-                    ->withBodySizeLimit(30*1024*1024)
+                    ->withBodySizeLimit(30 * 1024 * 1024)
             );
 
             yield $server->start();
@@ -53,9 +54,10 @@ class Server
         }
 
         $router->setFallback(new CallableRequestHandler(static function (Request $request) {
+            MadelineProto\Logger::log("Path not found : {$request->getUri()}", MadelineProto\Logger::WARNING);
             return new Response(
                 Amp\Http\Status::NOT_FOUND,
-                [ 'Content-Type'=>'application/json;charset=utf-8'],
+                ['Content-Type' => 'application/json;charset=utf-8'],
                 json_encode(
                     [
                         'success' => 0,
@@ -99,7 +101,7 @@ class Server
      */
     private static function getConfig(array $config = []): array
     {
-        $config =  array_filter($config);
+        $config = array_filter($config);
 
         $config = array_merge(
             Config::getInstance()->get('server', []),

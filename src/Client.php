@@ -7,7 +7,7 @@ use danog\MadelineProto;
 
 class Client
 {
-    private static string $sessionExtension = '.madeline';
+    private static string             $sessionExtension = '.madeline';
     public ?MadelineProto\CombinedAPI $MadelineProtoCombined = null;
 
     /**
@@ -17,7 +17,7 @@ class Client
      */
     public function __construct(array $sessions)
     {
-        $config = (array) Config::getInstance()->get('telegram');
+        $config = (array)Config::getInstance()->get('telegram');
 
         if (empty($config['connection_settings']['all']['proxy_extra']['address'])) {
             $config['connection_settings']['all']['proxy'] = '\Socket';
@@ -49,8 +49,8 @@ class Client
         }
 
         $extensionPosition = strrpos($sessionFile, static::$sessionExtension);
-        if($extensionPosition === false) {
-           return null;
+        if ($extensionPosition === false) {
+            return null;
         }
 
         $sessionName = substr_replace($sessionFile, '', $extensionPosition, strlen(static::$sessionExtension));
@@ -71,18 +71,18 @@ class Client
         $this->MadelineProtoCombined->session = null;
 
         $this->MadelineProtoCombined->async(true);
-        $this->MadelineProtoCombined->loop(function() use($sessions) {
+        $this->MadelineProtoCombined->loop(function () use ($sessions) {
             $promises = [];
             foreach ($sessions as $session => $message) {
                 MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
-                $promises[]= $this->MadelineProtoCombined->instances[$session]->start();
+                $promises[] = $this->MadelineProtoCombined->instances[$session]->start();
             }
             yield $this->MadelineProtoCombined::all($promises);
 
             $this->MadelineProtoCombined->setEventHandler(EventHandler::class);
         });
 
-        Loop::defer(function() {
+        Loop::defer(function () {
             $this->MadelineProtoCombined->loop();
         });
 
@@ -90,8 +90,8 @@ class Client
         $sessionsCount = count($sessions);
         MadelineProto\Logger::log(
             "\nTelegramApiServer ready."
-            ."\nNumber of sessions: {$sessionsCount}."
-            ."\nElapsed time: {$time} sec.\n",
+            . "\nNumber of sessions: {$sessionsCount}."
+            . "\nElapsed time: {$time} sec.\n",
             MadelineProto\Logger::WARNING
         );
     }
@@ -104,7 +104,7 @@ class Client
     public function getInstance(?string $session = null): MadelineProto\API
     {
         if (count($this->MadelineProtoCombined->instances) === 1) {
-            $session = (string) array_key_first($this->MadelineProtoCombined->instances);
+            $session = (string)array_key_first($this->MadelineProtoCombined->instances);
         } else {
             $session = static::getSessionFile($session);
         }
@@ -120,5 +120,18 @@ class Client
         return $this->MadelineProtoCombined->instances[$session];
     }
 
+    public function tryBotLogin($token)
+    {
+        if ($token && preg_match("/[0-9]{9}:[a-zA-Z0-9_-]{35}/", $token) === 1) {
+            $session = static::getSessionFile($token);
+            if ($session && empty($this->MadelineProtoCombined->instances[$session])) {
+                $this->MadelineProtoCombined->addInstance($session, (array)Config::getInstance()->get('telegram'));
+                $this->MadelineProtoCombined->instances[$session]->async(true);
+                return $this->MadelineProtoCombined->instances[$session]->botLogin($token);
+            }
+        }
+
+        return false;
+    }
 
 }

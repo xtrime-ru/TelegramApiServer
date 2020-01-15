@@ -65,7 +65,7 @@ class ClientCustomMethods
     public function getHistoryHtml(array $data): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function () use ($data) {
                 $response = yield $this->getHistory($data);
 
                 foreach ($response['messages'] as &$message) {
@@ -155,7 +155,7 @@ class ClientCustomMethods
     public function copyMessages(array $data): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function () use ($data) {
                 $data = array_merge(
                     [
                         'from_peer' => '',
@@ -294,7 +294,7 @@ class ClientCustomMethods
     public function getMedia(array $data): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function () use ($data) {
                 $data = array_merge(
                     [
                         'peer' => '',
@@ -347,7 +347,7 @@ class ClientCustomMethods
     public function getMediaPreview(array $data): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function () use ($data) {
                 $data = array_merge(
                     [
                         'peer' => '',
@@ -419,17 +419,17 @@ class ClientCustomMethods
     public function getMessages(array $data): \Amp\Promise
     {
         return call(
-            function() use ($data) {
+            function () use ($data) {
                 $peerInfo = yield $this->madelineProto->getInfo($data['peer']);
                 if ($peerInfo['type'] === 'channel') {
                     $response = yield $this->madelineProto->channels->getMessages(
                         [
                             'channel' => $data['peer'],
-                            'id' => (array) $data['id'],
+                            'id' => (array)$data['id'],
                         ]
                     );
                 } else {
-                    $response = yield $this->madelineProto->messages->getMessages(['id' => (array) $data['id']]);
+                    $response = yield $this->madelineProto->messages->getMessages(['id' => (array)$data['id']]);
                 }
 
                 return $response;
