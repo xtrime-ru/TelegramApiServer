@@ -85,7 +85,7 @@ Fast, simple, async php telegram api server:
         * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
         
     * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
-        Each event is json object. Key is name of session, which created event. 
+        Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
         
         When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
         This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
