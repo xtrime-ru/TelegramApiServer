@@ -1,5 +1,6 @@
 <?php
 //Check if autoload has been already loaded (in case plugin installed in existing project)
+define('ROOT', __DIR__);
 $root = __DIR__;
 if (!file_exists($root . '/vendor/autoload.php')) {
     $root = __DIR__ . '/../../..';

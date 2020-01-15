@@ -18,7 +18,7 @@ class Client
      */
     public function __construct(array $sessions)
     {
-        $config = (array) Config::getInstance()->get('telegram');
+        $config = (array)Config::getInstance()->get('telegram');
 
         if (empty($config['connection_settings']['all']['proxy_extra']['address'])) {
             $config['connection_settings']['all']['proxy'] = '\Socket';
@@ -90,7 +90,7 @@ class Client
 
         $this->MadelineProtoCombined->async(true);
         $this->MadelineProtoCombined->loop(
-            function() use ($sessions) {
+            function () use ($sessions) {
                 $promises = [];
                 foreach ($sessions as $session => $message) {
                     MadelineProto\Logger::log("Starting session: {$session}", MadelineProto\Logger::WARNING);
@@ -102,7 +102,7 @@ class Client
             }
         );
 
-        Loop::defer(function() {
+        Loop::defer(function () {
             $this->MadelineProtoCombined->loop();
         });
 
@@ -110,8 +110,8 @@ class Client
         $sessionsCount = count($sessions);
         MadelineProto\Logger::log(
             "\nTelegramApiServer ready."
-            ."\nNumber of sessions: {$sessionsCount}."
-            ."\nElapsed time: {$time} sec.\n",
+            . "\nNumber of sessions: {$sessionsCount}."
+            . "\nElapsed time: {$time} sec.\n",
             MadelineProto\Logger::WARNING
         );
     }
@@ -124,7 +124,7 @@ class Client
     public function getInstance(?string $session = null): MadelineProto\API
     {
         if (count($this->MadelineProtoCombined->instances) === 1) {
-            $session = (string) array_key_first($this->MadelineProtoCombined->instances);
+            $session = (string)array_key_first($this->MadelineProtoCombined->instances);
         } else {
             $session = static::getSessionFile($session);
         }
@@ -143,10 +143,16 @@ class Client
     public function tryBotLogin($token)
     {
         if ($token && preg_match("/[0-9]{9}:[a-zA-Z0-9_-]{35}/", $token) === 1) {
+
             $session = static::getSessionFile($token);
+            static::checkOrCreateSessionFolder($session,ROOT);
+
             if ($session && empty($this->MadelineProtoCombined->instances[$session])) {
                 $this->MadelineProtoCombined->addInstance($session, (array)Config::getInstance()->get('telegram'));
                 $this->MadelineProtoCombined->instances[$session]->async(true);
+                $token = explode('/', $token);
+                $token = end($token);
+                MadelineProto\Logger::log('token : '.$token,MadelineProto\Logger::WARNING);
                 return $this->MadelineProtoCombined->instances[$session]->botLogin($token);
             }
         }

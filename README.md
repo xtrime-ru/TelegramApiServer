@@ -92,6 +92,12 @@ Fast, simple, async php telegram api server:
         
         PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
     
+    * Dynamic Bot Login
+        You can dynamically login with new bots after server has been started.
+        Set the bot's token az session name in the api request url.
+        * `http://127.0.0.1:9503/api/YOUR_BOT_TOKEN/getSelf`
+        * `http://127.0.0.1:9503/api/bot/YOUR_BOT_TOKEN/getSelf`
+    
     Examples:
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
     * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
