@@ -1,0 +1,22 @@
+<?php
+
+$rsaKeys = explode(',', file_get_contents('.rsa_keys'));
+
+return [
+    'telegram' => [
+        'authorization' => [
+            'rsa_keys' => $rsaKeys,
+        ],
+        'connection' => [
+            'main' => [
+                'ipv4' => [
+                    // ipv4 addresses
+                    2 => [
+                        // The rest will be fetched automatically
+                        'ip_address' => '149.154.167.50',
+                    ],
+                ],
+            ]
+        ]
+    ],
+];
