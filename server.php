@@ -60,7 +60,6 @@ Migrations\Sessions::move(__DIR__);
 $sessionFiles = [];
 if (stristr("*",$options['session'])) {$options['session'] = glob($options['session']);}
 foreach ($options['session'] as $session) {
-    if (isset($options['all-session'])) {$session = str_replace(array("sessions/",".madeline"),"",$session;}
     $session = trim($session);
     if (mb_substr($session, -1) === '/') {
         throw new InvalidArgumentException('Session name specified as directory');
