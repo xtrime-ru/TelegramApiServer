@@ -6,15 +6,18 @@ Fast, simple, async php telegram api server:
 * My content aggregator: [i-c-a.su](https://i-c-a.su)
 * Im using this micro-service with: [my TelegramRSS micro-service](https://github.com/xtrime-ru/TelegramRSS) 
 
-**Features**
+## Features
 
-* Fast async server
+* Fast async amp http server
 * Full access to telegram api: bot and user
+* Multiple sessions
+* Stream media (view files in browser)
+* Websocket endpoint for events
 
 **Architecture Example**
 ![Architecture Example](https://hsto.org/webt/j-/ob/ky/j-obkye1dv68ngsrgi12qevutra.png)
  
-**Installation**
+## Installation
 
 1. Git clone this repo
 1. `composer install -o --no-dev` to install required libs
@@ -36,7 +39,7 @@ Fast, simple, async php telegram api server:
     redirect_stderr=true
      ```
 
-**Usage**
+## Usage
 
 1. Run server/parser
     ```
@@ -59,8 +62,11 @@ Fast, simple, async php telegram api server:
    
     Also  options can be set in .env file (see .env.example)
     ```
-1. Access telegram api directly with simple GET/POST requests.    
-    Rules:
+1. Access telegram api directly with simple GET/POST requests.
+    
+    Its recommended to use http_build_query for GET requests.
+    
+    **Rules:**
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
     * Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
     * <b>Important: api available only from ip in whitelist.</b> 
@@ -72,30 +78,8 @@ Fast, simple, async php telegram api server:
         `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
     * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
         `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
-    * CombinedAPI (multiple sessions) support. 
 
-        When running  multiple sessions, need to define which session to use for request.
-        Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
-        
-        Examples:
-        * `php server.php --session=bot --session=users/xtrime --session=users/user1`
-        * `http://127.0.0.1:9503/api/bot/getSelf`
-        * `http://127.0.0.1:9503/api/users/xtrime/getSelf` 
-        * `http://127.0.0.1:9503/api/users/user1/getSelf`
-        * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
-        * glob syntax for sessions:
-            * `--session=*` to use all `sessions/*.madeline` files.
-            * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders.
-        
-    * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
-        Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
-        
-        When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
-        This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
-        
-        PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
-    
-    Examples:
+    **Examples:**
     * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
     * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
     * repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
@@ -105,13 +89,34 @@ Fast, simple, async php telegram api server:
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
+## Advanced features
 
-**Contacts**
+* CombinedAPI (multiple sessions) support. 
+    When running  multiple sessions, need to define which session to use for request.
+    Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
+    **Examples:**
+    * `php server.php --session=bot --session=users/xtrime --session=users/user1`
+    * `http://127.0.0.1:9503/api/bot/getSelf`
+    * `http://127.0.0.1:9503/api/users/xtrime/getSelf` 
+    * `http://127.0.0.1:9503/api/users/user1/getSelf`
+    * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
+    * glob syntax for sessions:
+        * `--session=*` to use all `sessions/*.madeline` files.
+        * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
+
+* EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
+    Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
+    
+    When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
+    This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
+    
+    PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
+    
+
+## Contacts
 
 * Telegram: [@xtrime](tg://resolve?domain=xtrime)
 * Email: alexander(at)i-c-a.su
-
-**Donations**
-
-* BTC: 1BE1nitXgEAxg7A5tgec67ucNryQwusoiP
-* ETH: 0x0e2d369E28DCA2336803b9dE696eCDa50ff61e27
+* Donations:
+    * BTC: `1BE1nitXgEAxg7A5tgec67ucNryQwusoiP`
+    * ETH: `0x0e2d369E28DCA2336803b9dE696eCDa50ff61e27`
