@@ -16,7 +16,6 @@ $longopts = [
     'port::',  // порт сервера, необязательное значение
     'session::', //префикс session файла
     'help', //нужна ли справка?
-    'all-session'
 ];
 $options = getopt($shortopts, $longopts);
 $options = [
@@ -24,7 +23,6 @@ $options = [
     'port' => $options['port'] ?? $options['p'] ?? '',
     'session' => (array) ($options['session'] ?? $options['s'] ?? ''),
     'help' => isset($options['help']),
-    'all-session' => ((isset($options['all_session'])||isset($options['A']))??''))
 ];
 
 if ($options['help']) {
@@ -46,7 +44,6 @@ Options:
                     Each session is stored in `sessions/{$session}.madeline`. 
                     Nested folders supported.
                     See README for more examples.
-    -A --all-session Fetch all session within `session` directory
 Also all options can be set in .env file (see .env.example)
 
 Example:
@@ -61,7 +58,7 @@ Migrations\Sessions::move(__DIR__);
 
 
 $sessionFiles = [];
-if (isset($options['all-session'])) $options['session'] = glob("sessions/*.madeline");
+if (stristr("*",$options['session'])) {$options['session'] = glob($options['session']);}
 foreach ($options['session'] as $session) {
     if (isset($options['all-session'])) {$session = str_replace(array("sessions/",".madeline"),"",$session;}
     $session = trim($session);
