@@ -69,9 +69,10 @@ foreach ($options['session'] as $session) {
     }
 
     $session = TelegramApiServer\Client::getSessionFile($session);
-    TelegramApiServer\Client::checkOrCreateSessionFolder($session, __DIR__);
-
-    $sessionFiles[$session] = null;
+    foreach (glob($session) as $file) {
+        TelegramApiServer\Client::checkOrCreateSessionFolder($file, __DIR__);
+        $sessionFiles[$file] = null;
+    }
 }
 
 $client = new TelegramApiServer\Client($sessionFiles);
