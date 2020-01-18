@@ -58,7 +58,7 @@ Migrations\Sessions::move(__DIR__);
 
 
 $sessionFiles = [];
-if (stristr("*",$options['session'])) {$options['session'] = glob($options['session']);}
+if (stristr("*",$options['session'])) {$options['session'] = glob($options['session'].".madeline");}
 foreach ($options['session'] as $session) {
     $session = trim($session);
     if (mb_substr($session, -1) === '/') {
