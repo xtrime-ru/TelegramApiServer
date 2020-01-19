@@ -103,13 +103,12 @@ Fast, simple, async php telegram api server:
     * glob syntax for sessions:
         * `--session=*` to use all `sessions/*.madeline` files.
         * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
-* Session management
-    Session can be added and removed while server is running. 
+* Session management (**Use with caution, can be unstable**)
     
     **Examples:**
     * Adding session: `http://127.0.0.1:9503/system/addInstance?session=users/xtrime`
     * Removing session: `http://127.0.0.1:9503/system/removeInstance?session=users/xtrime`
-    
+       
     If there is no authorization in session, or session file is blank, authorization required:
     
     User: 
