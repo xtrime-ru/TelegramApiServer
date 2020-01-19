@@ -3,7 +3,7 @@
 namespace TelegramApiServer\Server;
 
 use Amp\Http\Server\Response;
-use TelegramApiServer\Controllers\ApiController;
+use TelegramApiServer\Controllers\AbstractApiController;
 
 class ErrorResponses
 {
@@ -17,7 +17,7 @@ class ErrorResponses
     {
         return new Response(
             $status,
-            ApiController::JSON_HEADER,
+            AbstractApiController::JSON_HEADER,
             json_encode(
                 [
                     'success' => false,

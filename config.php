@@ -1,10 +1,6 @@
 <?php
 
-if (getenv('SWOOLE_SERVER_ADDRESS')) {
-    throw new UnexpectedValueException('Please, update .env file! See .env.example');
-}
-
-return [
+$settings = [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
         'port' => (string)getenv('SERVER_PORT'),
@@ -50,3 +46,10 @@ return [
         ),
     ],
 ];
+
+if (empty($settings['connection_settings']['all']['proxy_extra']['address'])) {
+    $settings['connection_settings']['all']['proxy'] = '\Socket';
+    $settings['connection_settings']['all']['proxy_extra'] = [];
+}
+
+return $settings;

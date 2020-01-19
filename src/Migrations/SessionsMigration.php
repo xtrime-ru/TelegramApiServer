@@ -4,7 +4,7 @@ namespace TelegramApiServer\Migrations;
 
 use TelegramApiServer\Client;
 
-class Sessions
+class SessionsMigration
 {
     public static function move($rootDir)
     {

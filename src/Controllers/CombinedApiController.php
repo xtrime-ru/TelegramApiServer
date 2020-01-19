@@ -4,10 +4,8 @@ namespace TelegramApiServer\Controllers;
 
 use Amp\Promise;
 
-class ApiController extends AbstractApiController
+class CombinedApiController extends AbstractApiController
 {
-
-    private ?string $session = '';
 
     /**
      * Получаем параметры из uri
@@ -17,7 +15,6 @@ class ApiController extends AbstractApiController
      */
     protected function resolvePath(array $path): void
     {
-        $this->session = $path['session'] ?? null;
         $this->api = explode('.', $path['method'] ?? '');
     }
 
@@ -27,7 +24,7 @@ class ApiController extends AbstractApiController
      */
     protected function callApi()
     {
-        $madelineProto = $this->client->getInstance($this->session);
+        $madelineProto = $this->client->getCombinedInstance();
         return $this->callApiCommon($madelineProto);
     }
 

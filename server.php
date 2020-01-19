@@ -1,6 +1,7 @@
 <?php
 
-use TelegramApiServer\Migrations;
+use TelegramApiServer\Migrations\SessionsMigration;
+use TelegramApiServer\Migrations\SwooleToAmpMigration;
 
 chdir(__DIR__);
 
@@ -21,14 +22,14 @@ $options = getopt($shortopts, $longopts);
 $options = [
     'address' => $options['address'] ?? $options['a'] ?? '',
     'port' => $options['port'] ?? $options['p'] ?? '',
-    'session' => (array) ($options['session'] ?? $options['s'] ?? ''),
+    'session' => (array) ($options['session'] ?? $options['s'] ?? []),
     'help' => isset($options['help']),
 ];
 
 if ($options['help']) {
     $help = 'Fast, simple, async php telegram parser: MadelineProto + Swoole Server
 
-usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=session]
+usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]
 
 Options:
         --help      Show this message
@@ -38,7 +39,7 @@ Options:
                     
     -p  --port      Server port (optional) (default: 9503)
     
-    -s  --session   Name for session file (optional) (default: session)
+    -s  --session   Name for session file (optional)
                     Multiple sessions can be specified: "--session=user --session=bot"
                     
                     Each session is stored in `sessions/{$session}.madeline`. 
@@ -55,17 +56,14 @@ Example:
     exit;
 }
 
-Migrations\Sessions::move(__DIR__);
-
+SessionsMigration::move(__DIR__);
+SwooleToAmpMigration::check();
 
 $sessionFiles = [];
 foreach ($options['session'] as $session) {
     $session = trim($session);
     if (mb_substr($session, -1) === '/') {
         throw new InvalidArgumentException('Session name specified as directory');
-    }
-    if (!$session) {
-        $session = 'session';
     }
 
     $session = TelegramApiServer\Client::getSessionFile($session);

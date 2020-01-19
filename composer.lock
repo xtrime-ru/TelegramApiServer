@@ -447,23 +447,23 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.0.0",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "6ae1baaabb6ce104f1b636a5e117ced798087ed4"
+                "reference": "a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/6ae1baaabb6ce104f1b636a5e117ced798087ed4",
-                "reference": "6ae1baaabb6ce104f1b636a5e117ced798087ed4",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9",
+                "reference": "a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.4",
                 "amphp/byte-stream": "^1.6",
                 "amphp/hpack": "^3",
-                "amphp/http": "^1.5",
+                "amphp/http": "^1.6",
                 "amphp/socket": "^1",
                 "amphp/sync": "^1.3",
                 "league/uri": "^6",
@@ -475,7 +475,7 @@
             },
             "require-dev": {
                 "amphp/file": "^1 || ^0.3 || ^0.2",
-                "amphp/http-server": "dev-master",
+                "amphp/http-server": "^2-rc4",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
                 "ext-json": "*",
@@ -487,6 +487,11 @@
                 "ext-zlib": "Allows using compression for response bodies."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Amp\\Http\\Client\\": "src"
@@ -520,7 +525,7 @@
                 "non-blocking",
                 "rest"
             ],
-            "time": "2019-12-21T10:49:06+00:00"
+            "time": "2020-01-17T21:44:53+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1504,16 +1509,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "5.0.31",
+            "version": "5.0.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "a9c35bd9876bea46fe23f71dd5892ed831ab18da"
+                "reference": "0003ada3ff4de9114b5a8b04f5362f549d45c8ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/a9c35bd9876bea46fe23f71dd5892ed831ab18da",
-                "reference": "a9c35bd9876bea46fe23f71dd5892ed831ab18da",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0003ada3ff4de9114b5a8b04f5362f549d45c8ed",
+                "reference": "0003ada3ff4de9114b5a8b04f5362f549d45c8ed",
                 "shasum": ""
             },
             "require": {
@@ -1596,7 +1601,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-01-15T17:03:15+00:00"
+            "time": "2020-01-18T18:05:43+00:00"
         },
         {
             "name": "danog/magicalserializer",

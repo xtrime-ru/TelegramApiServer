@@ -43,7 +43,7 @@ Fast, simple, async php telegram api server:
 
 1. Run server/parser
     ```
-    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=session]
+    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]
     
     Options:
             --help      Show this message
@@ -53,7 +53,7 @@ Fast, simple, async php telegram api server:
                         
         -p  --port      Server port (optional) (default: 9503)
         
-        -s  --session   Name for session file (optional) (default: session)
+        -s  --session   Name for session file (optional)
                         Multiple sessions can be specified: "--session=user --session=bot"
                         
                         Each session is stored in `sessions/%session%.madeline`. 
@@ -103,7 +103,23 @@ Fast, simple, async php telegram api server:
     * glob syntax for sessions:
         * `--session=*` to use all `sessions/*.madeline` files.
         * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
-
+* Session management
+    Session can be added and removed while server is running. 
+    
+    **Examples:**
+    * Adding session: `http://127.0.0.1:9503/combinedApi/addInstance?session=users/xtrime`
+    * Adding session: `http://127.0.0.1:9503/combinedApi/addInstance?session=users/xtrime`
+    
+    If there is no authorization in session, or session file is blank, authorization required:
+    
+    User: 
+    * `http://127.0.0.1:9503/combinedApi/phoneLogin?phone=+7123...`
+    * `http://127.0.0.1:9503/combinedApi/completePhoneLogin?code=123456`
+    * (optional) `http://127.0.0.1:9503/combinedApi/complete2falogin?password=123456`
+    * (optional) `http://127.0.0.1:9503/combinedApi/completeSignup?firstName=MyExampleName`
+    
+    Bot:
+    * `http://127.0.0.1:9503/combinedApi/botLogin?token=34298141894:aflknsaflknLKNFS`
 * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
     Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
     
@@ -111,7 +127,6 @@ Fast, simple, async php telegram api server:
     This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
     
     PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
-    
 
 ## Contacts
 
