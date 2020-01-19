@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54ef9b56875aa555b45ded686ad11afd",
+    "content-hash": "0c7c3080d9acd84b31df59a5168d1b9e",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1509,20 +1509,20 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "5.0.41",
+            "version": "5.0.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "0003ada3ff4de9114b5a8b04f5362f549d45c8ed"
+                "reference": "db4084886667289c13963a5d4f3ea267ea698ba0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0003ada3ff4de9114b5a8b04f5362f549d45c8ed",
-                "reference": "0003ada3ff4de9114b5a8b04f5362f549d45c8ed",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/db4084886667289c13963a5d4f3ea267ea698ba0",
+                "reference": "db4084886667289c13963a5d4f3ea267ea698ba0",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^2.0",
+                "amphp/amp": "^2",
                 "amphp/byte-stream": "^1",
                 "amphp/dns": "^1",
                 "amphp/file": "^1",
@@ -1530,7 +1530,6 @@
                 "amphp/http-client-cookies": "^1",
                 "amphp/socket": "^1",
                 "amphp/uri": "^0.1",
-                "amphp/websocket-client": "dev-master as 1.0.0-rc2",
                 "danog/dns-over-https": "^0.2",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
@@ -1601,7 +1600,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-01-18T18:05:43+00:00"
+            "time": "2020-01-19T14:44:12+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2764,6 +2763,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "amphp/websocket-client": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

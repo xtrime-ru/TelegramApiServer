@@ -60,8 +60,8 @@ class Logger extends AbstractLogger
     {
         if (!static::$instanse) {
             $settings = Config::getInstance()->get('telegram');
-            MadelineProto\Logger::$default = null;
-            MadelineProto\Logger::constructorFromSettings($settings);
+            //MadelineProto\Logger::$default = null;
+            //MadelineProto\Logger::constructorFromSettings($settings);
 
             $conversionTable = array_flip(static::$madelineLevels);
             $loggerLevel = $conversionTable[$settings['logger']['logger_level']];
@@ -107,7 +107,8 @@ class Logger extends AbstractLogger
 
         $formatter = $this->formatter;
 
-        MadelineProto\Logger::log($formatter($level, $message, $context), static::$madelineLevels[$level]);
+        echo $formatter($level, $message, $context) . PHP_EOL;
+        //MadelineProto\Logger::log($formatter($level, $message, $context), static::$madelineLevels[$level]);
     }
 
     private function format(string $level, string $message, array $context): string

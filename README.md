@@ -91,7 +91,7 @@ Fast, simple, async php telegram api server:
 
 ## Advanced features
 
-* CombinedAPI (multiple sessions) support. 
+* Multiple sessions support. 
     When running  multiple sessions, need to define which session to use for request.
     Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
     **Examples:**
@@ -107,16 +107,16 @@ Fast, simple, async php telegram api server:
     Session can be added and removed while server is running. 
     
     **Examples:**
-    * Adding session: `http://127.0.0.1:9503/combinedApi/addInstance?session=users/xtrime`
-    * Adding session: `http://127.0.0.1:9503/combinedApi/addInstance?session=users/xtrime`
+    * Adding session: `http://127.0.0.1:9503/system/addInstance?session=users/xtrime`
+    * Removing session: `http://127.0.0.1:9503/system/removeInstance?session=users/xtrime`
     
     If there is no authorization in session, or session file is blank, authorization required:
     
     User: 
-    * `http://127.0.0.1:9503/combinedApi/phoneLogin?phone=+7123...`
-    * `http://127.0.0.1:9503/combinedApi/completePhoneLogin?code=123456`
-    * (optional) `http://127.0.0.1:9503/combinedApi/complete2falogin?password=123456`
-    * (optional) `http://127.0.0.1:9503/combinedApi/completeSignup?firstName=MyExampleName`
+    * `http://127.0.0.1:9503/api/users/xtrime/phoneLogin?phone=+7123...`
+    * `http://127.0.0.1:9503/api/users/xtrime/completePhoneLogin?code=123456`
+    * (optional) `http://127.0.0.1:9503/api/users/xtrime/complete2falogin?password=123456`
+    * (optional) `http://127.0.0.1:9503/api/users/xtrime/completeSignup?firstName=MyExampleName`
     
     Bot:
     * `http://127.0.0.1:9503/combinedApi/botLogin?token=34298141894:aflknsaflknLKNFS`

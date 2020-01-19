@@ -3,6 +3,7 @@
 namespace TelegramApiServer\Server;
 
 use Amp;
+use danog\MadelineProto\Tools;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
@@ -26,9 +27,11 @@ class Server
                     ->withBodySizeLimit(30*1024*1024)
             );
 
+            $client->connect();
             yield $server->start();
 
-            static::registerShutdown($server);
+            $this->registerShutdown($server);
+
         });
     }
 
@@ -64,7 +67,7 @@ class Server
      * @param array $config
      * @return array
      */
-    private static function getConfig(array $config = []): array
+    private function getConfig(array $config = []): array
     {
         $config =  array_filter($config);
 

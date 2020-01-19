@@ -4,9 +4,8 @@ namespace TelegramApiServer\Controllers;
 
 use Amp\Promise;
 
-class CombinedApiController extends AbstractApiController
+class SystemController extends AbstractApiController
 {
-
     /**
      * Получаем параметры из uri
      *
@@ -24,8 +23,9 @@ class CombinedApiController extends AbstractApiController
      */
     protected function callApi()
     {
-        $madelineProto = $this->client->getCombinedInstance();
-        return $this->callApiCommon($madelineProto);
+        $madelineProtoExtensions = new $this->extensionClass($this->client);
+        $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
+        return $result;
     }
 
 }

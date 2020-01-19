@@ -14,7 +14,7 @@ use danog\MadelineProto\CombinedAPI;
 use danog\MadelineProto\TON\API as TonAPI;
 use TelegramApiServer\Client;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
-use TelegramApiServer\MadelineProtoExtensions\CombinedApiExtensions;
+use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 
 abstract class AbstractApiController
 {
@@ -36,7 +36,7 @@ abstract class AbstractApiController
     abstract protected function resolvePath(array $path);
     abstract protected function callApi();
 
-    public static function getRouterCallback($client, $extensionClass): CallableRequestHandler
+    public static function getRouterCallback(Client $client, $extensionClass): CallableRequestHandler
     {
         return new CallableRequestHandler(
             static function (Request $request) use($client, $extensionClass) {
@@ -145,7 +145,7 @@ abstract class AbstractApiController
     {
         $pathCount = count($this->api);
         if ($pathCount === 1 && is_callable([$this->extensionClass,$this->api[0]])) {
-            /** @var ApiExtensions|CombinedApiExtensions $madelineProtoExtensions */
+            /** @var ApiExtensions|SystemApiExtensions $madelineProtoExtensions */
             $madelineProtoExtensions = new $this->extensionClass($madelineProto);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         } else {
