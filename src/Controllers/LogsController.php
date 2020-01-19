@@ -9,10 +9,9 @@ use Amp\Promise;
 use Amp\Success;
 use Amp\Websocket\Server\Websocket;
 use TelegramApiServer\Client;
-use TelegramApiServer\EventObservers\EventHandler;
 use function Amp\call;
 
-class EventsController extends Websocket
+class LogsController extends Websocket
 {
     private Client $client;
 
@@ -25,15 +24,6 @@ class EventsController extends Websocket
 
     public function onHandshake(Request $request, Response $response): Promise
     {
-        try {
-            $session = $request->getAttribute(Router::class)['session'] ?? null;
-            if ($session) {
-                $this->client->getInstance($session);
-            }
-        }  catch (\Throwable $e){
-            $response->setStatus(400);
-        }
-
         return new Success($response);
     }
 
@@ -56,10 +46,10 @@ class EventsController extends Websocket
         $clientId = $client->getId();
 
         $client->onClose(static function() use($clientId) {
-            EventHandler::removeEventListener($clientId);
+            \TelegramApiServer\EventObservers\EventHandler::removeEventListener($clientId);
         });
 
-        EventHandler::addEventListener($clientId, function($update, string $session) use($clientId, $requestedSession) {
+        \TelegramApiServer\EventObservers\EventHandler::addEventListener($clientId, function($update, string $session) use($clientId, $requestedSession) {
             if ($requestedSession && $session !== $requestedSession) {
                 return;
             }

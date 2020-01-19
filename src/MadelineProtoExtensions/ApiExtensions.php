@@ -1,14 +1,17 @@
 <?php
 
 
-namespace TelegramApiServer;
+namespace TelegramApiServer\MadelineProtoExtensions;
 
 
+use Amp\Promise;
 use danog\MadelineProto\TL\Conversion\BotAPI;
+use OutOfRangeException;
+use UnexpectedValueException;
 use function Amp\call;
 use \danog\MadelineProto;
 
-class ClientCustomMethods
+class ApiExtensions
 {
     use BotAPI;
 
@@ -36,9 +39,9 @@ class ClientCustomMethods
      * ]
      * </pre>
      *
-     * @return \Amp\Promise
+     * @return MadelineProto\messages|Promise
      */
-    public function getHistory(array $data): \Amp\Promise
+    public function getHistory(array $data): Promise
     {
         $data = array_merge(
             [
@@ -60,9 +63,9 @@ class ClientCustomMethods
     /**
      * @param array $data
      *
-     * @return \Amp\Promise
+     * @return Promise
      */
-    public function getHistoryHtml(array $data): \Amp\Promise
+    public function getHistoryHtml(array $data): Promise
     {
         return call(
             function() use ($data) {
@@ -150,9 +153,9 @@ class ClientCustomMethods
      * ]
      * </pre>
      *
-     * @return \Amp\Promise
+     * @return Promise
      */
-    public function copyMessages(array $data): \Amp\Promise
+    public function copyMessages(array $data): Promise
     {
         return call(
             function() use ($data) {
@@ -208,9 +211,9 @@ class ClientCustomMethods
      * ]
      * </pre>
      *
-     * @return \Amp\Promise
+     * @return MadelineProto\updates|Promise
      */
-    public function sendMedia(array $data): \Amp\Promise
+    public function sendMedia(array $data): Promise
     {
         $data = array_merge(
             [
@@ -237,9 +240,9 @@ class ClientCustomMethods
      * ]
      * </pre>
      *
-     * @return \Amp\Promise
+     * @return Promise|MadelineProto\updates
      */
-    public function sendMessage(array $data): \Amp\Promise
+    public function sendMessage(array $data)
     {
         $data = array_merge(
             [
@@ -267,9 +270,9 @@ class ClientCustomMethods
      * ]
      * </pre>
      *
-     * @return \Amp\Promise
+     * @return Promise
      */
-    public function searchGlobal(array $data): \Amp\Promise
+    public function searchGlobal(array $data): Promise
     {
         $data = array_merge(
             [
@@ -289,9 +292,9 @@ class ClientCustomMethods
      *
      * @param array $data
      *
-     * @return \Amp\Promise
+     * @return Promise
      */
-    public function getMedia(array $data): \Amp\Promise
+    public function getMedia(array $data): Promise
     {
         return call(
             function() use ($data) {
@@ -307,17 +310,17 @@ class ClientCustomMethods
 
                 $message = $data['message'] ?: (yield $this->getMessages($data))['messages'][0] ?? null;
                 if (!$message || $message['_'] === 'messageEmpty') {
-                    throw new \UnexpectedValueException('Empty message');
+                    throw new UnexpectedValueException('Empty message');
                 }
 
                 if (!static::hasMedia($message)) {
-                    throw new \UnexpectedValueException('Message has no media');
+                    throw new UnexpectedValueException('Message has no media');
                 }
 
                 $info = yield $this->madelineProto->getDownloadInfo($message);
 
                 if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
-                    throw new \OutOfRangeException(
+                    throw new OutOfRangeException(
                         "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
                     );
                 }
@@ -342,9 +345,9 @@ class ClientCustomMethods
      *
      * @param array $data
      *
-     * @return \Amp\Promise
+     * @return Promise
      */
-    public function getMediaPreview(array $data): \Amp\Promise
+    public function getMediaPreview(array $data): Promise
     {
         return call(
             function() use ($data) {
@@ -359,11 +362,11 @@ class ClientCustomMethods
 
                 $message = $data['message'] ?: (yield $this->getMessages($data))['messages'][0] ?? null;
                 if (!$message || $message['_'] === 'messageEmpty') {
-                    throw new \UnexpectedValueException('Empty message');
+                    throw new UnexpectedValueException('Empty message');
                 }
 
                 if (!static::hasMedia($message)) {
-                    throw new \UnexpectedValueException('Message has no media');
+                    throw new UnexpectedValueException('Message has no media');
                 }
 
                 $media = $message['media'][array_key_last($message['media'])];
@@ -381,7 +384,7 @@ class ClientCustomMethods
                         $thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
                         break;
                     default:
-                        throw new \UnexpectedValueException('Message has no preview');
+                        throw new UnexpectedValueException('Message has no preview');
 
                 }
                 $info = yield $this->madelineProto->getDownloadInfo($thumb);
@@ -414,9 +417,9 @@ class ClientCustomMethods
     /**
      * @param array $data
      *
-     * @return \Amp\Promise
+     * @return Promise
      */
-    public function getMessages(array $data): \Amp\Promise
+    public function getMessages(array $data): Promise
     {
         return call(
             function() use ($data) {

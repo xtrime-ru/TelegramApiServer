@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54ef9b56875aa555b45ded686ad11afd",
+    "content-hash": "0c7c3080d9acd84b31df59a5168d1b9e",
     "packages": [
         {
             "name": "amphp/amp",
@@ -447,23 +447,23 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.0.0",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "6ae1baaabb6ce104f1b636a5e117ced798087ed4"
+                "reference": "a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/6ae1baaabb6ce104f1b636a5e117ced798087ed4",
-                "reference": "6ae1baaabb6ce104f1b636a5e117ced798087ed4",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9",
+                "reference": "a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.4",
                 "amphp/byte-stream": "^1.6",
                 "amphp/hpack": "^3",
-                "amphp/http": "^1.5",
+                "amphp/http": "^1.6",
                 "amphp/socket": "^1",
                 "amphp/sync": "^1.3",
                 "league/uri": "^6",
@@ -475,7 +475,7 @@
             },
             "require-dev": {
                 "amphp/file": "^1 || ^0.3 || ^0.2",
-                "amphp/http-server": "dev-master",
+                "amphp/http-server": "^2-rc4",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
                 "ext-json": "*",
@@ -487,6 +487,11 @@
                 "ext-zlib": "Allows using compression for response bodies."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Amp\\Http\\Client\\": "src"
@@ -520,7 +525,7 @@
                 "non-blocking",
                 "rest"
             ],
-            "time": "2019-12-21T10:49:06+00:00"
+            "time": "2020-01-17T21:44:53+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1504,20 +1509,20 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "5.0.31",
+            "version": "5.0.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "a9c35bd9876bea46fe23f71dd5892ed831ab18da"
+                "reference": "db4084886667289c13963a5d4f3ea267ea698ba0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/a9c35bd9876bea46fe23f71dd5892ed831ab18da",
-                "reference": "a9c35bd9876bea46fe23f71dd5892ed831ab18da",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/db4084886667289c13963a5d4f3ea267ea698ba0",
+                "reference": "db4084886667289c13963a5d4f3ea267ea698ba0",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "^2.0",
+                "amphp/amp": "^2",
                 "amphp/byte-stream": "^1",
                 "amphp/dns": "^1",
                 "amphp/file": "^1",
@@ -1525,7 +1530,6 @@
                 "amphp/http-client-cookies": "^1",
                 "amphp/socket": "^1",
                 "amphp/uri": "^0.1",
-                "amphp/websocket-client": "dev-master as 1.0.0-rc2",
                 "danog/dns-over-https": "^0.2",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
@@ -1596,7 +1600,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-01-15T17:03:15+00:00"
+            "time": "2020-01-19T14:44:12+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2759,6 +2763,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "amphp/websocket-client": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

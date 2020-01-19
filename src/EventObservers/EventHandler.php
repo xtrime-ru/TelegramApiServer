@@ -1,13 +1,26 @@
 <?php
 
-namespace TelegramApiServer;
+namespace TelegramApiServer\EventObservers;
 
-use danog\MadelineProto\CombinedEventHandler;
+use danog\MadelineProto\API;
+use TelegramApiServer\Client;
+use TelegramApiServer\Logger;
 
-class EventHandler extends CombinedEventHandler
+class EventHandler extends \danog\MadelineProto\EventHandler
 {
     /** @var callable[] */
     public static array $eventListeners = [];
+
+    public function __construct(?API $MadelineProto)
+    {
+        parent::__construct($MadelineProto);
+        var_dump('CONSTRUCTED');
+    }
+
+    public function __destruct()
+    {
+        var_dump('DESTRUCTED');
+    }
 
     public static function addEventListener($clientId, callable $callback)
     {
@@ -26,9 +39,9 @@ class EventHandler extends CombinedEventHandler
         }
     }
 
-    public function onAny($update, $sessionFile): void
+    public function onAny($update): void
     {
-        $session = Client::getSessionName($sessionFile);
+        $session = Client::getSessionName($this->API->wrapper->session);
         Logger::getInstance()->info("Received update from session: {$session}");
 
         foreach (static::$eventListeners as $clientId => $callback) {

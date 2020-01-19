@@ -5,9 +5,12 @@ namespace TelegramApiServer\Server;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use TelegramApiServer\Client;
+use TelegramApiServer\Controllers\SystemController;
 use TelegramApiServer\Controllers\ApiController;
 use TelegramApiServer\Controllers\EventsController;
 use Amp\Http\Status;
+use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
+use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 use function Amp\Http\Server\Middleware\stack;
 
 class Router
@@ -36,12 +39,15 @@ class Router
     private function setRoutes($client): void
     {
         $authorization = new Authorization();
-        $apiHandler = stack(ApiController::getRouterCallback($client), $authorization);
+        $apiHandler = stack(ApiController::getRouterCallback($client, ApiExtensions::class), $authorization);
+        $combinedHandler = stack(SystemController::getRouterCallback($client, SystemApiExtensions::class), $authorization);
         $eventsHandler = stack(EventsController::getRouterCallback($client), $authorization);
 
         foreach (['GET', 'POST'] as $method) {
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
             $this->router->addRoute($method, '/api/{session:.*?[^/]}/{method}[/]', $apiHandler);
+
+            $this->router->addRoute($method, '/system/{method}[/]', $combinedHandler);
         }
 
         $this->router->addRoute('GET', '/events[/]', $eventsHandler);
