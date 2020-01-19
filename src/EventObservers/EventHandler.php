@@ -41,7 +41,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 
     public function onAny($update): void
     {
-        $session = Client::getSessionName($this->API->wrapper->session);
+        $session = Client::getSessionName($this->API->wrapper->session ?? null);
         Logger::getInstance()->info("Received update from session: {$session}");
 
         foreach (static::$eventListeners as $clientId => $callback) {
