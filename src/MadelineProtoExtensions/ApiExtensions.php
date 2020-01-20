@@ -425,22 +425,8 @@ class ApiExtensions
         );
     }
 
-    private function getByteRange(?string $header) {
-        $matches = [
-            'start' => 0,
-            'end' => -1
-        ];
-        if ($header) {
-            preg_match("~bytes=(?'start'\d+)-(?'end'\d*)~", $header, $matches);
-        }
-        return [
-            'start' => (int) $matches['start'],
-            'end' =>  (int) $matches['end'] ?: -1
-        ];
-    }
-
-    private function downloadToResponse(array $info) {
-
+    public function downloadToResponse(array $info): array
+    {
         $range = $this->getByteRange($this->request->getHeader('Range'));
 
         if ($range['end'] === -1) {
@@ -472,6 +458,20 @@ class ApiExtensions
         return [
             'headers' => $headers,
             'stream' => $stream,
+        ];
+    }
+
+    private function getByteRange(?string $header) {
+        $matches = [
+            'start' => 0,
+            'end' => -1
+        ];
+        if ($header) {
+            preg_match("~bytes=(?'start'\d+)-(?'end'\d*)~", $header, $matches);
+        }
+        return [
+            'start' => (int) $matches['start'],
+            'end' =>  (int) $matches['end'] ?: -1
         ];
     }
 
