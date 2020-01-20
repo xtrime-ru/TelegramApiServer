@@ -47,9 +47,9 @@ $settings = [
     ],
 ];
 
-if (empty($settings['connection_settings']['all']['proxy_extra']['address'])) {
-    $settings['connection_settings']['all']['proxy'] = '\Socket';
-    $settings['connection_settings']['all']['proxy_extra'] = [];
+if (empty($settings['telegram']['connection_settings']['all']['proxy_extra']['address'])) {
+    $settings['telegram']['connection_settings']['all']['proxy'] = '\Socket';
+    $settings['telegram']['connection_settings']['all']['proxy_extra'] = [];
 }
 
 return $settings;
