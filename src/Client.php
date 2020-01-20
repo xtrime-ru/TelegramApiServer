@@ -102,7 +102,7 @@ class Client
             Loop::defer(static function() use($instance) {
                 $instance->loop(['async' => true]);
             });
-        } else {
+        } elseif($startSession === true) {
             $instance->loop(function() use($instance) {
                 yield $instance->start();
             });
