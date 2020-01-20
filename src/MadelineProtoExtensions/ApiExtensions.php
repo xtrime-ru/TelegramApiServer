@@ -330,7 +330,7 @@ class ApiExtensions
                     );
                 }
 
-                return $this->downloadToResponse($info);
+                return yield $this->downloadToResponse($info);
             }
         );
     }
@@ -394,7 +394,7 @@ class ApiExtensions
                     $info = $infoFull;
                 }
 
-                return $this->downloadToResponse($info);
+                return yield $this->downloadToResponse($info);
             }
         );
     }
@@ -425,40 +425,53 @@ class ApiExtensions
         );
     }
 
-    public function downloadToResponse(array $info): array
+    /**
+     * Download to Amp HTTP response.
+     *
+     * @param array $info
+     *      Any downloadable array: message, media etc...
+     *
+     * @return Promise
+     */
+    public function downloadToResponse(array $info): Promise
     {
-        $range = $this->getByteRange($this->request->getHeader('Range'));
+        return call(function() use($info) {
+            if (empty($info['size'])) {
+                $info = yield $this->madelineProto->getDownloadInfo($info);
+            }
+            $range = $this->getByteRange($this->request->getHeader('Range'));
 
-        if ($range['end'] === -1) {
-            $range['end'] = $info['size'] - 1;
-        } else {
-            $range['end'] = min($range['end'], $info['size'] - 1);
-        }
+            if ($range['end'] === -1) {
+                $range['end'] = $info['size'] - 1;
+            } else {
+                $range['end'] = min($range['end'], $info['size'] - 1);
+            }
 
-        $stream = new IteratorStream(new Producer(function (callable $emit) use($info, $range) {
-            yield $this->madelineProto->downloadToCallable($info, static function($payload) use($emit) {
-                yield $emit($payload);
-                return strlen($payload);
-            }, null, false, $range['start'], $range['end'] + 1);
-        }));
+            $stream = new IteratorStream(new Producer(function (callable $emit) use($info, $range) {
+                yield $this->madelineProto->downloadToCallable($info, static function($payload) use($emit) {
+                    yield $emit($payload);
+                    return strlen($payload);
+                }, null, false, $range['start'], $range['end'] + 1);
+            }));
 
-        $headers = [
-            'Content-Type' => $info['mime'],
+            $headers = [
+                'Content-Type' => $info['mime'],
 //            'Accept-Ranges' => 'bytes',
 //            'Content-Transfer-Encoding'=> 'Binary',
-        ];
+            ];
 
-        if ($range['start'] > 0 || $range['end'] < $info['size'] - 1) {
-            $headers['Content-Length'] = ($range['end'] - $range['start'] + 1);
-            $headers['Content-Range'] = "bytes {$range['start']}-{$range['end']}/{$info['size']}";
-        } else {
-            $headers['Content-Length'] = $info['size'];
-        }
+            if ($range['start'] > 0 || $range['end'] < $info['size'] - 1) {
+                $headers['Content-Length'] = ($range['end'] - $range['start'] + 1);
+                $headers['Content-Range'] = "bytes {$range['start']}-{$range['end']}/{$info['size']}";
+            } else {
+                $headers['Content-Length'] = $info['size'];
+            }
 
-        return [
-            'headers' => $headers,
-            'stream' => $stream,
-        ];
+            return [
+                'headers' => $headers,
+                'stream' => $stream,
+            ];
+        });
     }
 
     private function getByteRange(?string $header) {
