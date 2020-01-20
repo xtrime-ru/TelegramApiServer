@@ -4,6 +4,9 @@ namespace TelegramApiServer;
 
 use Amp\Loop;
 use danog\MadelineProto;
+use danog\MadelineProto\MTProto;
+use InvalidArgumentException;
+use RuntimeException;
 use TelegramApiServer\EventObservers\EventHandler;
 
 class Client
@@ -61,12 +64,12 @@ class Client
         if ($directory && $directory !== '.' && !is_dir($directory)) {
             $parentDirectoryPermissions = fileperms($rootDir);
             if (!mkdir($directory, $parentDirectoryPermissions, true) && !is_dir($directory)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
+                throw new RuntimeException(sprintf('Directory "%s" was not created', $directory));
             }
         }
     }
 
-    public function connect(): void
+    public function connect()
     {
         //При каждой инициализации настройки обновляются из массива $config
         echo PHP_EOL . 'Starting MadelineProto...' . PHP_EOL;
@@ -74,7 +77,7 @@ class Client
 
         foreach ($this->sessionsFiles as $file) {
             $session = static::getSessionName($file);
-            $this->addSession($session);
+            $this->addSession($session, true);
         }
 
         $time = round(microtime(true) - $time, 3);
@@ -87,22 +90,28 @@ class Client
         ;
     }
 
-    public function addSession($session): void
+    public function addSession(string $session, bool $startSession = false)
     {
         $settings = (array) Config::getInstance()->get('telegram');
         $file = static::getSessionFile($session);
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
-        $instance->setEventHandler(EventHandler::class);
         $this->instances[$session] = $instance;
-        Loop::defer(static function() use($instance) {
-            $instance->loop(['async' => true]);
-        });
+        if ($instance->API->authorized === MTProto::LOGGED_IN) {
+            $instance->setEventHandler(EventHandler::class);
+            Loop::defer(static function() use($instance) {
+                $instance->loop(['async' => true]);
+            });
+        } else {
+            $instance->loop(function() use($instance) {
+                yield $instance->start();
+            });
+        }
     }
 
     public function removeSession($session) {
         if (empty($this->instances[$session])) {
-            throw new \InvalidArgumentException('Instance not found');
+            throw new InvalidArgumentException('Instance not found');
         }
 
         $this->instances[$session]->stop();
@@ -117,19 +126,19 @@ class Client
     public function getInstance(?string $session = null): MadelineProto\API
     {
         if (!$this->instances) {
-            throw new \RuntimeException('No sessions available. Use combinedApi or restart server with --session option');
+            throw new RuntimeException('No sessions available. Use combinedApi or restart server with --session option');
         }
 
         if (!$session) {
             if (count($this->instances) === 1) {
                 $session = (string) array_key_first($this->instances);
             } else {
-                throw new \InvalidArgumentException('Multiple sessions detected. Specify which session to use. See README for examples.');
+                throw new InvalidArgumentException('Multiple sessions detected. Specify which session to use. See README for examples.');
             }
         }
 
         if (empty($this->instances[$session])) {
-            throw new \InvalidArgumentException('Session not found.');
+            throw new InvalidArgumentException('Session not found.');
         }
 
         return $this->instances[$session];

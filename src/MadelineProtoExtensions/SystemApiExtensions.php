@@ -18,7 +18,7 @@ class SystemApiExtensions
 
     public function addSession(string $session)
     {
-        $this->client->addSession($session);
+        yield $this->client->addSession($session);
         return $this->getSessionList();
     }
 
