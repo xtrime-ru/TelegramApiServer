@@ -3,7 +3,6 @@
 namespace TelegramApiServer\Controllers;
 
 use Amp\ByteStream\ResourceInputStream;
-use Amp\Coroutine;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use Amp\Http\Server\Response;
@@ -21,7 +20,9 @@ abstract class AbstractApiController
     public const JSON_HEADER = ['Content-Type'=>'application/json;charset=utf-8'];
 
     protected Client $client;
+    protected Request $request;
     protected $extensionClass;
+
 
     public array $page = [
         'headers' => self::JSON_HEADER,
@@ -40,8 +41,8 @@ abstract class AbstractApiController
     {
         return new CallableRequestHandler(
             static function (Request $request) use($client, $extensionClass) {
-                $requestCallback = new static($client, $extensionClass);
-                $response = yield from $requestCallback->process($request);
+                $requestCallback = new static($client, $request, $extensionClass);
+                $response = yield from $requestCallback->process();
 
                 return new Response(
                     $requestCallback->page['code'],
@@ -52,9 +53,10 @@ abstract class AbstractApiController
         );
     }
 
-    public function __construct(Client $client, $extensionClass)
+    public function __construct(Client $client, Request $request, $extensionClass = null)
     {
         $this->client = $client;
+        $this->request = $request;
         $this->extensionClass = $extensionClass;
     }
 
@@ -63,33 +65,31 @@ abstract class AbstractApiController
      * @return ResourceInputStream|string
      * @throws \Throwable
      */
-    public function process(Request $request)
+    public function process()
     {
-        $body = '';
-        while ($chunk = yield $request->getBody()->read()) {
-            $body .= $chunk;
-        }
-
-        $this->resolvePath($request->getAttribute(Router::class));
-        $this->resolveRequest($request->getUri()->getQuery(), $body, $request->getHeader('Content-Type'));
+        $this->resolvePath($this->request->getAttribute(Router::class));
+        yield from $this->resolveRequest($this->request);
         yield from $this->generateResponse();
 
         return $this->getResponse();
     }
 
-
-
     /**
      * Получаем параметры из GET и POST
      *
-     * @param string $query
-     * @param string|null $body
-     * @param string|null $contentType
+     * @param Request $request
      *
      * @return AbstractApiController
      */
-    private function resolveRequest(string $query, $body, $contentType)
+    private function resolveRequest(Request $request)
     {
+        $query = $request->getUri()->getQuery();
+        $body = '';
+        while ($chunk = yield $request->getBody()->read()) {
+            $body .= $chunk;
+        }
+        $contentType = $request->getHeader('Content-Type');
+
         parse_str($query, $get);
 
         switch ($contentType) {
@@ -144,9 +144,9 @@ abstract class AbstractApiController
     protected function callApiCommon($madelineProto)
     {
         $pathCount = count($this->api);
-        if ($pathCount === 1 && is_callable([$this->extensionClass,$this->api[0]])) {
+        if ($pathCount === 1 && $this->extensionClass && is_callable([$this->extensionClass,$this->api[0]])) {
             /** @var ApiExtensions|SystemApiExtensions $madelineProtoExtensions */
-            $madelineProtoExtensions = new $this->extensionClass($madelineProto);
+            $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         } else {
             //Проверяем нет ли в MadilineProto такого метода.
@@ -204,7 +204,7 @@ abstract class AbstractApiController
         }
         if (isset($this->page['response']['stream'])) {
             $this->page['headers'] = $this->page['response']['headers'];
-            return new ResourceInputStream($this->page['response']['stream']);
+            return $this->page['response']['stream'];
         }
 
         $data = [
