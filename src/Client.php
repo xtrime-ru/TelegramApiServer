@@ -15,17 +15,6 @@ class Client
     public static string $sessionFolder = 'sessions';
     /** @var MadelineProto\API[] */
     public array $instances = [];
-    private array $sessionsFiles;
-
-    /**
-     * Client constructor.
-     *
-     * @param array $sessions
-     */
-    public function __construct(array $sessionsFiles)
-    {
-        $this->sessionsFiles = $sessionsFiles;
-    }
 
     /**
      * @param string|null $session
@@ -69,19 +58,19 @@ class Client
         }
     }
 
-    public function connect()
+    public function connect($sessionFiles)
     {
         //При каждой инициализации настройки обновляются из массива $config
         echo PHP_EOL . 'Starting MadelineProto...' . PHP_EOL;
         $time = microtime(true);
 
-        foreach ($this->sessionsFiles as $file) {
+        foreach ($sessionFiles as $file) {
             $session = static::getSessionName($file);
             $this->addSession($session, true);
         }
 
         $time = round(microtime(true) - $time, 3);
-        $sessionsCount = count($this->sessionsFiles);
+        $sessionsCount = count($sessionFiles);
 
         echo
             "\nTelegramApiServer ready."
@@ -109,7 +98,8 @@ class Client
         }
     }
 
-    public function removeSession($session) {
+    public function removeSession($session)
+    {
         if (empty($this->instances[$session])) {
             throw new InvalidArgumentException('Instance not found');
         }

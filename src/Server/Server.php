@@ -3,7 +3,6 @@
 namespace TelegramApiServer\Server;
 
 use Amp;
-use danog\MadelineProto\Tools;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
@@ -12,12 +11,14 @@ class Server
 {
     /**
      * Server constructor.
+     *
      * @param Client $client
      * @param array $options
+     * @param array|null $sessionFiles
      */
-    public function __construct(Client $client, array $options)
+    public function __construct(Client $client, array $options, ?array $sessionFiles)
     {
-        Amp\Loop::run(function () use ($client, $options) {
+        Amp\Loop::run(function () use ($client, $options, $sessionFiles) {
             $server = new Amp\Http\Server\Server(
                 $this->getServerAddresses(static::getConfig($options)),
                 (new Router($client))->getRouter(),
@@ -27,7 +28,7 @@ class Server
                     ->withBodySizeLimit(30*1024*1024)
             );
 
-            $client->connect();
+            $client->connect($sessionFiles);
             yield $server->start();
 
             $this->registerShutdown($server);
