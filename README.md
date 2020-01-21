@@ -106,8 +106,9 @@ Fast, simple, async php telegram api server:
 * Session management (**Use with caution, can be unstable**)
     
     **Examples:**
-    * Adding session: `http://127.0.0.1:9503/system/addInstance?session=users/xtrime`
-    * Removing session: `http://127.0.0.1:9503/system/removeInstance?session=users/xtrime`
+    * Session list: `http://127.0.0.1:9503/system/getSessionList`
+    * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
+    * Removing session: `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
        
     If there is no authorization in session, or session file is blank, authorization required:
     
