@@ -18,7 +18,7 @@ class SystemApiExtensions
 
     public function addSession(string $session)
     {
-        yield $this->client->addSession($session);
+        $this->client->addSession($session);
         return $this->getSessionList();
     }
 
@@ -34,7 +34,6 @@ class SystemApiExtensions
         $sessions = [];
         foreach ($this->client->instances as $session => $instance) {
             /** @var MadelineProto\API $instance */
-            $status = '';
             switch ($instance->API->authorized) {
                 case $instance->API::NOT_LOGGED_IN;
                     $status = 'NOT_LOGGED_IN';
