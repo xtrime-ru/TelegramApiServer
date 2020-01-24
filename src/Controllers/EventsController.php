@@ -59,7 +59,7 @@ class EventsController extends Websocket
             EventHandler::removeEventListener($clientId);
         });
 
-        EventHandler::addEventListener($clientId, function($update, string $session) use($clientId, $requestedSession) {
+        EventHandler::addEventListener($clientId, function($update, ?string $session) use($clientId, $requestedSession) {
             if ($requestedSession && $session !== $requestedSession) {
                 return;
             }

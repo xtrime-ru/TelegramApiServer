@@ -86,7 +86,7 @@ class Client
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
         $this->instances[$session] = $instance;
-        if ($instance->API->authorized === MTProto::LOGGED_IN) {
+        if (($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN) {
             $instance->setEventHandler(EventHandler::class);
             Loop::defer(static function() use($instance) {
                 $instance->loop(['async' => true]);
