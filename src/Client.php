@@ -86,15 +86,17 @@ class Client
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
         $this->instances[$session] = $instance;
-        if($startSession === true) {
+
+        $isLoggedIn = ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
+        if($isLoggedIn || $startSession === true) {
             $instance->loop(function() use($instance) {
                 yield $instance->start();
             });
         }
-        if (($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN) {
+        if ($isLoggedIn) {
             $instance->setEventHandler(EventHandler::class);
             Loop::defer(static function() use($instance) {
-                $instance->loop(['async' => true]);
+                $instance->loop();
             });
         }
     }
@@ -106,7 +108,7 @@ class Client
         }
 
         $this->instances[$session]->stop();
-        unset($this->instances[$session]);
+        unset($this->instances[$session], EventHandler::$instances[$session]);
     }
 
     /**

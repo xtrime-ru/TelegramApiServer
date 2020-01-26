@@ -3,6 +3,9 @@
 namespace TelegramApiServer\Server;
 
 use Amp;
+use Amp\Loop;
+use danog\MadelineProto\API;
+use danog\MadelineProto\Tools;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
@@ -18,7 +21,7 @@ class Server
      */
     public function __construct(Client $client, array $options, ?array $sessionFiles)
     {
-        Amp\Loop::run(function () use ($client, $options, $sessionFiles) {
+        Amp\Loop::defer(function () use ($client, $options, $sessionFiles) {
             $server = new Amp\Http\Server\Server(
                 $this->getServerAddresses(static::getConfig($options)),
                 (new Router($client))->getRouter(),
@@ -32,8 +35,12 @@ class Server
             yield $server->start();
 
             $this->registerShutdown($server);
-
         });
+
+        while (true) {
+            Amp\Loop::run();
+        }
+
     }
 
     private static function getServerAddresses(array $config): array
@@ -53,9 +60,9 @@ class Server
      */
     private static function registerShutdown(Amp\Http\Server\Server $server)
     {
-
         if (defined('SIGINT')) {
             Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
+                Logger::getInstance()->emergency('Got SIGINT');
                 Amp\Loop::cancel($watcherId);
                 yield $server->stop();
             });

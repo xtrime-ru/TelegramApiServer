@@ -2,10 +2,9 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
-use Amp\Loop;
+use danog\MadelineProto;
 use TelegramApiServer\Client;
 use function Amp\call;
-use \danog\MadelineProto;
 
 class SystemApiExtensions
 {
@@ -22,8 +21,7 @@ class SystemApiExtensions
         return $this->getSessionList();
     }
 
-
-    public function removeSession(string $session):array
+    public function removeSession(string $session): array
     {
         $this->client->removeSession($session);
         return $this->getSessionList();
@@ -62,7 +60,10 @@ class SystemApiExtensions
             ];
         }
 
-        return $sessions;
+        return [
+            'sessions' => $sessions,
+            'memory' => $this->bytesToHuman(memory_get_usage(true)),
+        ];
     }
 
     public function removeSessionFile($session)
@@ -74,5 +75,14 @@ class SystemApiExtensions
                 yield \Amp\File\unlink($file . '.lock');
             }
         });
+    }
+
+    private function bytesToHuman($bytes)
+    {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+        for ($i = 0; $bytes > 1024; $i++) {
+            $bytes /= 1024;
+        }
+        return round($bytes, 2) . ' ' . $units[$i];
     }
 }
