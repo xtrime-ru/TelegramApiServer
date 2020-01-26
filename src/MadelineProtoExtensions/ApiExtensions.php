@@ -10,6 +10,7 @@ use Amp\Producer;
 use Amp\Promise;
 use danog\MadelineProto\TL\Conversion\BotAPI;
 use OutOfRangeException;
+use TelegramApiServer\EventObservers\EventHandler;
 use UnexpectedValueException;
 use function Amp\call;
 use \danog\MadelineProto;
@@ -474,7 +475,13 @@ class ApiExtensions
         });
     }
 
-    private function getByteRange(?string $header) {
+    public function setEventHandler(): void
+    {
+        $this->madelineProto->setEventHandler(EventHandler::class);
+    }
+
+    private function getByteRange(?string $header): array
+    {
         $matches = [
             'start' => 0,
             'end' => -1

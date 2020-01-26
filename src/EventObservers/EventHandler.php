@@ -10,16 +10,18 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 {
     /** @var callable[] */
     public static array $eventListeners = [];
+    private string $sessionName;
 
-    public function __construct(?API $MadelineProto)
+    public function __construct(API $MadelineProto)
     {
         parent::__construct($MadelineProto);
-        echo 'Event observer CONSTRUCTED' . PHP_EOL;
+        $this->sessionName = Client::getSessionName($MadelineProto->session);
+        Logger::getInstance()->warning("Event observer CONSTRUCTED: {$this->sessionName}");
     }
 
     public function __destruct()
     {
-        echo 'Event observer DESTRUCTED' . PHP_EOL;
+        Logger::getInstance()->warning("Event observer DESTRUCTED {$this->sessionName}");
     }
 
     public static function addEventListener($clientId, callable $callback)
@@ -41,12 +43,11 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 
     public function onAny($update): void
     {
-        $session = Client::getSessionName($this->API->wrapper->session ?? null);
-        Logger::getInstance()->info("Received update from session: {$session}");
+        Logger::getInstance()->info("Received update from session: {$this->sessionName}");
 
         foreach (static::$eventListeners as $clientId => $callback) {
             Logger::getInstance()->notice("Pass update to callback. ClientId: {$clientId}");
-            $callback($update, $session);
+            $callback($update, $this->sessionName);
         }
     }
 }
