@@ -119,7 +119,7 @@ Fast, simple, async php telegram api server:
     * (optional) `http://127.0.0.1:9503/api/users/xtrime/completeSignup?firstName=MyExampleName`
     
     Bot:
-    * `http://127.0.0.1:9503/combinedApi/botLogin?token=34298141894:aflknsaflknLKNFS`
+    * `http://127.0.0.1:9503/api/bot/botLogin?token=34298141894:aflknsaflknLKNFS`
 * EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
     Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
     
