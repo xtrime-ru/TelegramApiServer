@@ -40,14 +40,14 @@ class Router
     {
         $authorization = new Authorization();
         $apiHandler = stack(ApiController::getRouterCallback($client, ApiExtensions::class), $authorization);
-        $combinedHandler = stack(SystemController::getRouterCallback($client, SystemApiExtensions::class), $authorization);
+        $systemApiHandler = stack(SystemController::getRouterCallback($client, SystemApiExtensions::class), $authorization);
         $eventsHandler = stack(EventsController::getRouterCallback($client), $authorization);
 
         foreach (['GET', 'POST'] as $method) {
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
             $this->router->addRoute($method, '/api/{session:.*?[^/]}/{method}[/]', $apiHandler);
 
-            $this->router->addRoute($method, '/system/{method}[/]', $combinedHandler);
+            $this->router->addRoute($method, '/system/{method}[/]', $systemApiHandler);
         }
 
         $this->router->addRoute('GET', '/events[/]', $eventsHandler);
