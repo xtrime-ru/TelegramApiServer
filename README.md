@@ -28,16 +28,17 @@ Fast, simple, async php telegram api server:
 
      _Optional:_
 1. Use supervisor to monitor and restart swoole/amphp servers. Example of `/etc/supervisor/conf.d/telegram_api_server.conf`: 
-     ```
-    [program:telegram_api_server]
-    command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramApiServer/server.php
+    ```
+    [program:telegram_client]
+    command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramApiServer/server.php --session=session
     numprocs=1
     directory=/home/admin/web/tg.i-c-a.su/TelegramApiServer/
     autostart=true
     autorestart=true
-    stdout_logfile=none
+    startretries=10
+    stdout_logfile=/var/log/telegram/stdout.log
     redirect_stderr=true
-     ```
+    ```
 
 ## Usage
 

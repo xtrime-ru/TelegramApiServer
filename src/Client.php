@@ -95,8 +95,22 @@ class Client
         }
         if ($isLoggedIn) {
             $instance->setEventHandler(EventHandler::class);
-            Loop::defer(static function() use($instance) {
-                $instance->loop();
+            Loop::defer(function() use($instance) {
+                $sessionName = self::getSessionName($instance->session);
+                try {
+                    $instance->loop();
+                } catch (\Throwable $e) {
+                    Logger::getInstance()->critical($e->getMessage(), [
+                        'session' => $sessionName,
+                        'exception' => [
+                            'message' => $e->getMessage(),
+                            'code' => $e->getCode(),
+                            'file' => $e->getFile(),
+                            'line' => $e->getLine(),
+                        ],
+                    ]);
+                    $this->removeSession($sessionName);
+                }
             });
         }
     }

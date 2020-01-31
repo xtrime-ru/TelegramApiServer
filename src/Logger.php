@@ -11,11 +11,11 @@
 
 namespace TelegramApiServer;
 
+use danog\MadelineProto;
 use DateTimeInterface;
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
-use danog\MadelineProto;
 use function get_class;
 use function gettype;
 use function is_object;
@@ -56,30 +56,24 @@ class Logger extends AbstractLogger
     private int $minLevelIndex;
     private array $formatter;
 
-    public static function getInstance(): Logger
-    {
-        if (!static::$instanse) {
-            $settings = Config::getInstance()->get('telegram');
-            //MadelineProto\Logger::$default = null;
-            //MadelineProto\Logger::constructorFromSettings($settings);
-
-            $conversionTable = array_flip(static::$madelineLevels);
-            $loggerLevel = $conversionTable[$settings['logger']['logger_level']];
-            static::$instanse = new static($loggerLevel);
-        }
-
-        return static::$instanse;
-    }
-
     protected function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
     {
         if (null === $minLevel) {
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
-                switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] : $_SERVER['SHELL_VERBOSITY'])) {
-                    case -1: $minLevel = LogLevel::ERROR; break;
-                    case 1: $minLevel = LogLevel::NOTICE; break;
-                    case 2: $minLevel = LogLevel::INFO; break;
-                    case 3: $minLevel = LogLevel::DEBUG; break;
+                switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] :
+                    $_SERVER['SHELL_VERBOSITY'])) {
+                    case -1:
+                        $minLevel = LogLevel::ERROR;
+                        break;
+                    case 1:
+                        $minLevel = LogLevel::NOTICE;
+                        break;
+                    case 2:
+                        $minLevel = LogLevel::INFO;
+                        break;
+                    case 3:
+                        $minLevel = LogLevel::DEBUG;
+                        break;
                 }
             }
         }
@@ -90,6 +84,19 @@ class Logger extends AbstractLogger
 
         $this->minLevelIndex = self::$levels[$minLevel];
         $this->formatter = $formatter ?: [$this, 'format'];
+    }
+
+    public static function getInstance(): Logger
+    {
+        if (!static::$instanse) {
+            $settings = Config::getInstance()->get('telegram');
+
+            $conversionTable = array_flip(static::$madelineLevels);
+            $loggerLevel = $conversionTable[$settings['logger']['logger_level']];
+            static::$instanse = new static($loggerLevel);
+        }
+
+        return static::$instanse;
     }
 
     /**
@@ -106,9 +113,8 @@ class Logger extends AbstractLogger
         }
 
         $formatter = $this->formatter;
-
-        echo $formatter($level, $message, $context) . PHP_EOL;
-        //MadelineProto\Logger::log($formatter($level, $message, $context), static::$madelineLevels[$level]);
+        /** @see Logger::format */
+        echo $formatter($level, $message, $context);
     }
 
     private function format(string $level, string $message, array $context): string
@@ -118,18 +124,34 @@ class Logger extends AbstractLogger
             foreach ($context as $key => $val) {
                 if (null === $val || is_scalar($val) || (is_object($val) && method_exists($val, '__toString'))) {
                     $replacements["{{$key}}"] = $val;
-                } elseif ($val instanceof DateTimeInterface) {
-                    $replacements["{{$key}}"] = $val->format(static::$dateTimeFormat);
-                } elseif (is_object($val)) {
-                    $replacements["{{$key}}"] = '[object '. get_class($val).']';
                 } else {
-                    $replacements["{{$key}}"] = '['. gettype($val).']';
+                    if ($val instanceof DateTimeInterface) {
+                        $replacements["{{$key}}"] = $val->format(static::$dateTimeFormat);
+                    } else {
+                        if (is_object($val)) {
+                            $replacements["{{$key}}"] = '[object ' . get_class($val) . ']';
+                        } else {
+                            $replacements["{{$key}}"] = '[' . gettype($val) . ']';
+                        }
+                    }
                 }
             }
 
             $message = strtr($message, $replacements);
         }
 
-        return sprintf('[%s] [%s] %s', date(static::$dateTimeFormat), $level, $message). PHP_EOL;
+        return sprintf(
+                '[%s] [%s] %s %s',
+                date(static::$dateTimeFormat),
+                $level,
+                $message,
+                $context ?
+                    "\n" .
+                    json_encode(
+                        $context,
+                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT| JSON_UNESCAPED_LINE_TERMINATORS
+                    )
+                    : ''
+            ) . PHP_EOL;
     }
 }

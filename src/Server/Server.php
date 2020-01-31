@@ -3,9 +3,6 @@
 namespace TelegramApiServer\Server;
 
 use Amp;
-use Amp\Loop;
-use danog\MadelineProto\API;
-use danog\MadelineProto\Tools;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
@@ -38,7 +35,18 @@ class Server
         });
 
         while (true) {
-            Amp\Loop::run();
+            try {
+                Amp\Loop::run();
+            } catch (\Throwable $e) {
+                Logger::getInstance()->critical($e->getMessage(), [
+                    'exception' => [
+                        'message' => $e->getMessage(),
+                        'code' => $e->getCode(),
+                        'file' => $e->getFile(),
+                        'line' => $e->getLine(),
+                    ],
+                ]);
+            }
         }
 
     }
