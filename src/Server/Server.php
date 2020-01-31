@@ -26,6 +26,8 @@ class Server
                 (new Amp\Http\Server\Options())
                     ->withCompression()
                     ->withBodySizeLimit(30*1024*1024)
+                    ->withHttp1Timeout(600)
+                    ->withHttp2Timeout(600)
             );
 
             $client->connect($sessionFiles);
