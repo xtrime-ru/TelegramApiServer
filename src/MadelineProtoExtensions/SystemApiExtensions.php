@@ -15,9 +15,9 @@ class SystemApiExtensions
         $this->client = $client;
     }
 
-    public function addSession(string $session)
+    public function addSession(string $session, array $settings = []): array
     {
-        $this->client->addSession($session);
+        $this->client->addSession($session, $settings);
         return $this->getSessionList();
     }
 

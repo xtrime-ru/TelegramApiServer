@@ -79,10 +79,11 @@ class Client
         ;
     }
 
-    public function addSession(string $session, bool $startSession = false)
+    public function addSession(string $session, array $settings = []): void
     {
         $settings = (array) Config::getInstance()->get('telegram');
         $file = static::getSessionFile($session);
+        $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
         $this->instances[$session] = $instance;

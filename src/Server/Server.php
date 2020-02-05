@@ -30,8 +30,8 @@ class Server
                     ->withHttp2Timeout(600)
             );
 
+            $server->start();
             $client->connect($sessionFiles);
-            yield $server->start();
 
             $this->registerShutdown($server);
         });

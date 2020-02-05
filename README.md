@@ -64,8 +64,9 @@ Fast, simple, async php telegram api server:
     Also  options can be set in .env file (see .env.example)
     ```
 1. Access telegram api directly with simple GET/POST requests.
-    
-    Its recommended to use http_build_query for GET requests.
+
+    Regular and application/json POST supported.
+    Its recommended to use http_build_query when using GET requests.
     
     **Rules:**
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
@@ -109,6 +110,7 @@ Fast, simple, async php telegram api server:
     **Examples:**
     * Session list: `http://127.0.0.1:9503/system/getSessionList`
     * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
+    * [optional] Adding session with custom settings: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
     * Removing session: `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
        
     If there is no authorization in session, or session file is blank, authorization required:
