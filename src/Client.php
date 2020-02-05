@@ -58,72 +58,57 @@ class Client
         }
     }
 
-    public function connect($sessionFiles)
+    private static function isInstanceLoggedIn($instance): bool
     {
-        //При каждой инициализации настройки обновляются из массива $config
-        echo PHP_EOL . 'Starting MadelineProto...' . PHP_EOL;
-        $time = microtime(true);
+        return ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
+    }
+
+    public function connect($sessionFiles): void
+    {
+        Logger::getInstance()->warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
         foreach ($sessionFiles as $file) {
             $session = static::getSessionName($file);
-            $this->addSession($session, true);
+            $this->addSession($session);
         }
+        $this->startSessions();
 
-        $time = round(microtime(true) - $time, 3);
         $sessionsCount = count($sessionFiles);
-
-        echo
+        Logger::getInstance()->warning(
             "\nTelegramApiServer ready."
             . "\nNumber of sessions: {$sessionsCount}."
-            . "\nElapsed time: {$time} sec.\n"
-        ;
+        );
     }
 
     public function addSession(string $session, array $settings = []): void
     {
-        $settings = (array) Config::getInstance()->get('telegram');
         $file = static::getSessionFile($session);
         $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
         $this->instances[$session] = $instance;
 
-        $isLoggedIn = ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
-        if($isLoggedIn || $startSession === true) {
-            $instance->loop(function() use($instance) {
-                yield $instance->start();
-            });
-        }
-        if ($isLoggedIn) {
-            $instance->setEventHandler(EventHandler::class);
-            Loop::defer(function() use($instance) {
-                $sessionName = self::getSessionName($instance->session);
-                try {
-                    $instance->loop();
-                } catch (\Throwable $e) {
-                    Logger::getInstance()->critical($e->getMessage(), [
-                        'session' => $sessionName,
-                        'exception' => [
-                            'message' => $e->getMessage(),
-                            'code' => $e->getCode(),
-                            'file' => $e->getFile(),
-                            'line' => $e->getLine(),
-                        ],
-                    ]);
-                    $this->removeSession($sessionName);
+        Loop::defer(
+            function() use ($instance) {
+                if (static::isInstanceLoggedIn($instance)) {
+                    $instance->setEventHandler(EventHandler::class);
+                    $this->loop($instance);
                 }
-            });
-        }
+            }
+        );
     }
 
-    public function removeSession($session)
+    public function removeSession($session): void
     {
         if (empty($this->instances[$session])) {
             throw new InvalidArgumentException('Instance not found');
         }
 
         $this->instances[$session]->stop();
-        unset($this->instances[$session], EventHandler::$instances[$session]);
+        unset(
+            $this->instances[$session],
+            EventHandler::$instances[$session]
+        );
     }
 
     /**
@@ -134,14 +119,18 @@ class Client
     public function getInstance(?string $session = null): MadelineProto\API
     {
         if (!$this->instances) {
-            throw new RuntimeException('No sessions available. Use combinedApi or restart server with --session option');
+            throw new RuntimeException(
+                'No sessions available. Use combinedApi or restart server with --session option'
+            );
         }
 
         if (!$session) {
             if (count($this->instances) === 1) {
                 $session = (string) array_key_first($this->instances);
             } else {
-                throw new InvalidArgumentException('Multiple sessions detected. Specify which session to use. See README for examples.');
+                throw new InvalidArgumentException(
+                    'Multiple sessions detected. Specify which session to use. See README for examples.'
+                );
             }
         }
 
@@ -150,6 +139,53 @@ class Client
         }
 
         return $this->instances[$session];
+    }
+
+    private function startSessions(): void
+    {
+        Loop::defer(
+            function() {
+                foreach ($this->instances as $instance) {
+                    if (!static::isInstanceLoggedIn($instance)) {
+                        $this->loop(
+                            $instance,
+                            static function() use ($instance) {
+                                yield $instance->start();
+                            }
+                        );
+                    }
+                }
+            }
+        );
+    }
+
+    private function loop(MadelineProto\API $instance, callable $callback = null): bool
+    {
+        $sessionName = self::getSessionName($instance->session);
+        try {
+            if ($callback) {
+                $instance->loop($callback);
+            } else {
+                $instance->loop();
+            }
+        } catch (\Throwable $e) {
+            Logger::getInstance()->critical(
+                $e->getMessage(),
+                [
+                    'session' => $sessionName,
+                    'exception' => [
+                        'message' => $e->getMessage(),
+                        'code' => $e->getCode(),
+                        'file' => $e->getFile(),
+                        'line' => $e->getLine(),
+                    ],
+                ]
+            )
+            ;
+            $this->removeSession($sessionName);
+            return false;
+        }
+        return true;
     }
 
 }
