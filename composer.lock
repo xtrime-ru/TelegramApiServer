@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20a324cd3b65147f692973b754565d28",
+    "content-hash": "fde2f21e919da4755aa6b9f1f24c217e",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1513,12 +1513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "36495bffe944538839b2aeb446c87ff086b4c32e"
+                "reference": "17bacd1389f090fd5a83cf04ff9018dda1bbaf5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/36495bffe944538839b2aeb446c87ff086b4c32e",
-                "reference": "36495bffe944538839b2aeb446c87ff086b4c32e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/17bacd1389f090fd5a83cf04ff9018dda1bbaf5e",
+                "reference": "17bacd1389f090fd5a83cf04ff9018dda1bbaf5e",
                 "shasum": ""
             },
             "require": {
@@ -1603,7 +1603,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-05T22:11:29+00:00"
+            "time": "2020-02-06T01:44:00+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -1684,16 +1684,16 @@
         },
         {
             "name": "danog/tg-file-decoder",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/tg-file-decoder.git",
-                "reference": "d1470cfafea46cf201e820a8e99670804bfb7bff"
+                "reference": "afcdb9a4a7239e36e8ab3b9a02db72eaa95db66e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/tg-file-decoder/zipball/d1470cfafea46cf201e820a8e99670804bfb7bff",
-                "reference": "d1470cfafea46cf201e820a8e99670804bfb7bff",
+                "url": "https://api.github.com/repos/danog/tg-file-decoder/zipball/afcdb9a4a7239e36e8ab3b9a02db72eaa95db66e",
+                "reference": "afcdb9a4a7239e36e8ab3b9a02db72eaa95db66e",
                 "shasum": ""
             },
             "require": {
@@ -1714,7 +1714,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "AGPLv3"
+                "AGPL-3.0-only"
             ],
             "authors": [
                 {
@@ -1733,7 +1733,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-03T22:58:17+00:00"
+            "time": "2020-02-06T16:11:19+00:00"
         },
         {
             "name": "danog/tgseclib",
@@ -2603,12 +2603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "af61943caaa512a4f00f1ee80e6e0cfec3fb63d1"
+                "reference": "7d271200b041d3e4be5927fdb03122508b9f8ebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/af61943caaa512a4f00f1ee80e6e0cfec3fb63d1",
-                "reference": "af61943caaa512a4f00f1ee80e6e0cfec3fb63d1",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/7d271200b041d3e4be5927fdb03122508b9f8ebb",
+                "reference": "7d271200b041d3e4be5927fdb03122508b9f8ebb",
                 "shasum": ""
             },
             "conflict": {
@@ -2647,7 +2647,11 @@
                 "drupal/drupal": ">=7,<7.69|>=8,<8.7.11|>=8.8,<8.8.1",
                 "endroid/qr-code-bundle": "<3.4.2",
                 "erusev/parsedown": "<1.7.2",
-                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.4",
+                "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1|>=5.4,<5.4.11.1|>=2017.12,<2017.12.0.1",
+                "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
+                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
+                "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2",
+                "ezsystems/ezplatform-user": ">=1,<1.0.1",
                 "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.13.1|>=6,<6.7.9.1|>=6.8,<6.13.5.1|>=7,<7.2.4.1|>=7.3,<7.3.2.1",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.12.3|>=2011,<2017.12.4.3|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
@@ -2828,7 +2832,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2020-02-05T14:02:42+00:00"
+            "time": "2020-02-06T16:34:55+00:00"
         }
     ],
     "aliases": [],

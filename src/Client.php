@@ -186,6 +186,9 @@ class Client
             )
             ;
             $this->removeSession($sessionName);
+            if (count($this->instances) === 0) {
+                throw new RuntimeException('Last session stopped. Need restart.');
+            }
             return false;
         }
         return true;
