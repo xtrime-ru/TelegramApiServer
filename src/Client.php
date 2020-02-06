@@ -82,6 +82,9 @@ class Client
 
     public function addSession(string $session, array $settings = []): void
     {
+        if (isset($this->instances[$session])) {
+            throw new InvalidArgumentException('Session already exists');
+        }
         $file = static::getSessionFile($session);
         $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
@@ -101,7 +104,7 @@ class Client
     public function removeSession($session): void
     {
         if (empty($this->instances[$session])) {
-            throw new InvalidArgumentException('Instance not found');
+            throw new InvalidArgumentException('Session not found');
         }
 
         $this->instances[$session]->stop();
