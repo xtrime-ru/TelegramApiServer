@@ -93,7 +93,7 @@ Fast, simple, async php telegram api server:
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
 ## Advanced features
-#### Uploading files.
+### Uploading files.
 
 To upload files from POST request use custom `uploadMediaForm` method:
 
@@ -129,7 +129,7 @@ curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
 ```
 Also see: https://docs.madelineproto.xyz/docs/FILES.html#uploading-files
 
-#### Downloading files
+### Downloading files
 
 ```
 curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
@@ -156,7 +156,7 @@ curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
 
 Also see: https://docs.madelineproto.xyz/docs/FILES.html#downloading-files
 
-#### Multiple sessions support. 
+### Multiple sessions support. 
 
 When running  multiple sessions, need to define which session to use for request.
 Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
@@ -170,7 +170,7 @@ Each session is stored in `sessions/{$session}.madeline`. Nested folders support
     * `--session=*` to use all `sessions/*.madeline` files.
     * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
 
-#### Session management
+### Session management
     
 **Examples:**
 * Session list: `http://127.0.0.1:9503/system/getSessionList`
@@ -193,7 +193,7 @@ After authorization eventHandler need to be set, to receive updates for new sess
 * `http://127.0.0.1:9503/api/users/xtrime/setEventHandler`
 * `http://127.0.0.1:9503/api/bot/setEventHandler`
 
-#### EventHandler updates via websocket.
+### EventHandler updates via websocket.
  
 Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
 Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
