@@ -40,7 +40,7 @@ class Server
             try {
                 Amp\Loop::run();
             } catch (\Throwable $e) {
-                Logger::getInstance()->critical($e->getMessage(), [
+                Logger::getInstance()->alert($e->getMessage(), [
                     'exception' => [
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),
@@ -48,6 +48,7 @@ class Server
                         'line' => $e->getLine(),
                     ],
                 ]);
+                exit;
             }
         }
 
@@ -75,6 +76,7 @@ class Server
                 Logger::getInstance()->emergency('Got SIGINT');
                 Amp\Loop::cancel($watcherId);
                 yield $server->stop();
+                exit;
             });
         }
     }

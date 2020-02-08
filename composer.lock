@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fde2f21e919da4755aa6b9f1f24c217e",
+    "content-hash": "adb3f78b0ae79061e4ad9976499da64b",
     "packages": [
         {
             "name": "amphp/amp",
@@ -675,6 +675,74 @@
                 "server"
             ],
             "time": "2020-01-04T18:10:10+00:00"
+        },
+        {
+            "name": "amphp/http-server-form-parser",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/http-server-form-parser.git",
+                "reference": "f26313797fb5ffd936c8fa865fde61523b6d05f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/f26313797fb5ffd936c8fa865fde61523b6d05f2",
+                "reference": "f26313797fb5ffd936c8fa865fde61523b6d05f2",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/byte-stream": "^1.3",
+                "amphp/http": "^1",
+                "amphp/http-server": "^2 || ^1 || ^0.8",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1.2",
+                "phpunit/phpunit": "^8 || ^7 || ^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Http\\Server\\FormParser\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                },
+                {
+                    "name": "Bob Weinand"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                }
+            ],
+            "description": "A form parser for Amp's HTTP parser.",
+            "homepage": "https://github.com/amphp/http-server-form-parser",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "form",
+                "http",
+                "non-blocking"
+            ],
+            "time": "2019-12-13T15:52:33+00:00"
         },
         {
             "name": "amphp/http-server-router",
@@ -1513,12 +1581,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "17bacd1389f090fd5a83cf04ff9018dda1bbaf5e"
+                "reference": "bdd86d4efbefe8a0ed840f25d7608df60ed9261a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/17bacd1389f090fd5a83cf04ff9018dda1bbaf5e",
-                "reference": "17bacd1389f090fd5a83cf04ff9018dda1bbaf5e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/bdd86d4efbefe8a0ed840f25d7608df60ed9261a",
+                "reference": "bdd86d4efbefe8a0ed840f25d7608df60ed9261a",
                 "shasum": ""
             },
             "require": {
@@ -1603,7 +1671,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-06T01:44:00+00:00"
+            "time": "2020-02-07T20:23:29+00:00"
         },
         {
             "name": "danog/magicalserializer",

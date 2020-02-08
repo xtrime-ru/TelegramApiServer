@@ -4,16 +4,18 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 
+use Amp\ByteStream\InMemoryStream;
 use Amp\ByteStream\IteratorStream;
+use Amp\Http\Server\FormParser\File;
 use Amp\Http\Server\Request;
 use Amp\Producer;
 use Amp\Promise;
+use danog\MadelineProto;
 use danog\MadelineProto\TL\Conversion\BotAPI;
 use OutOfRangeException;
 use TelegramApiServer\EventObservers\EventHandler;
 use UnexpectedValueException;
 use function Amp\call;
-use \danog\MadelineProto;
 
 class ApiExtensions
 {
@@ -21,11 +23,13 @@ class ApiExtensions
 
     private MadelineProto\Api $madelineProto;
     private Request $request;
+    private ?File $file;
 
-    public function __construct(MadelineProto\Api $madelineProto, Request $request)
+    public function __construct(MadelineProto\Api $madelineProto, Request $request, ?File $file)
     {
         $this->madelineProto = $madelineProto;
         $this->request = $request;
+        $this->file = $file;
     }
 
     /**
@@ -472,6 +476,39 @@ class ApiExtensions
                 'headers' => $headers,
                 'stream' => $stream,
             ];
+        });
+    }
+
+    /**
+     * Upload file from POST request.
+     * Response can be passed to 'media' field in messages.sendMedia.
+     *
+     * @return Promise
+     */
+    public function uploadMediaForm(): Promise
+    {
+        return call(function() {
+            $media = [];
+            if ($this->file !== null) {
+                $inputFile = yield $this->madelineProto->uploadFromStream(
+                    new InMemoryStream($this->file->getContents()),
+                    strlen($this->file->getContents()),
+                    $this->file->getMimeType(),
+                    $this->file->getName()
+                );
+                $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
+                $media = [
+                    'media' => [
+                        '_' => 'inputMediaUploadedDocument',
+                        'file' => $inputFile,
+                        'attributes' => [
+                            ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getName()]
+                        ]
+                    ]
+                ];
+            }
+
+            return $media;
         });
     }
 

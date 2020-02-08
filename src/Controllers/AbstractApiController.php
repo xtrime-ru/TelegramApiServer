@@ -3,6 +3,9 @@
 namespace TelegramApiServer\Controllers;
 
 use Amp\ByteStream\ResourceInputStream;
+use Amp\Http\Server\FormParser\BufferingParser;
+use Amp\Http\Server\FormParser\File;
+use Amp\Http\Server\FormParser\Form;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use Amp\Http\Server\Response;
@@ -21,6 +24,7 @@ abstract class AbstractApiController
 
     protected Client $client;
     protected Request $request;
+    protected ?File $file = null;
     protected $extensionClass;
 
 
@@ -68,7 +72,7 @@ abstract class AbstractApiController
     public function process()
     {
         $this->resolvePath($this->request->getAttribute(Router::class));
-        yield from $this->resolveRequest($this->request);
+        yield from $this->resolveRequest();
         yield from $this->generateResponse();
 
         return $this->getResponse();
@@ -77,26 +81,32 @@ abstract class AbstractApiController
     /**
      * Получаем параметры из GET и POST
      *
-     * @param Request $request
-     *
      * @return AbstractApiController
      */
-    private function resolveRequest(Request $request)
+    private function resolveRequest()
     {
-        $query = $request->getUri()->getQuery();
-        $body = '';
-        while ($chunk = yield $request->getBody()->read()) {
-            $body .= $chunk;
-        }
-        $contentType = $request->getHeader('Content-Type');
+        $query = $this->request->getUri()->getQuery();
+        $contentType = $this->request->getHeader('Content-Type');
 
         parse_str($query, $get);
 
-        switch ($contentType) {
-            case 'application/json':
+        switch (true) {
+            case $contentType === 'application/x-www-form-urlencoded':
+            case mb_strpos($contentType, 'multipart/form-data') !== false:
+                /** @var Form $form */
+                $form = yield (new BufferingParser())->parseForm($this->request);
+                $post = $form->getValues();
+                $fileName = array_key_first($form->getFiles());
+                if ($fileName) {
+                    $this->file = $form->getFile($fileName);
+                }
+                break;
+            case $contentType === 'application/json':
+                $body = yield $this->request->getBody()->buffer();
                 $post = json_decode($body, 1);
                 break;
             default:
+                $body = yield $this->request->getBody()->buffer();
                 parse_str($body, $post);
         }
 
@@ -146,7 +156,7 @@ abstract class AbstractApiController
         $pathCount = count($this->api);
         if ($pathCount === 1 && $this->extensionClass && is_callable([$this->extensionClass,$this->api[0]])) {
             /** @var ApiExtensions|SystemApiExtensions $madelineProtoExtensions */
-            $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request);
+            $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request, $this->file);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         } else {
             //Проверяем нет ли в MadilineProto такого метода.

@@ -14,7 +14,8 @@
     "amphp/websocket-server": "^2",
     "amphp/websocket-client": "dev-master#53f7883b325b09864095300ec8ff81e84e772c3b",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto":"dev-master"
+    "danog/madelineproto":"dev-master",
+    "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"

@@ -12,6 +12,7 @@ Fast, simple, async php telegram api server:
 * Full access to telegram api: bot and user
 * Multiple sessions
 * Stream media (view files in browser)
+* Upload media
 * Websocket endpoint for events
 
 **Architecture Example**
@@ -63,10 +64,10 @@ Fast, simple, async php telegram api server:
    
     Also  options can be set in .env file (see .env.example)
     ```
-1. Access telegram api directly with simple GET/POST requests.
+1. Access Telegram API with simple GET/POST requests.
 
     Regular and application/json POST supported.
-    Its recommended to use http_build_query when using GET requests.
+    Its recommended to use http_build_query, when using GET requests.
     
     **Rules:**
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
@@ -92,49 +93,115 @@ Fast, simple, async php telegram api server:
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
 ## Advanced features
+#### Uploading files.
 
-* Multiple sessions support. 
-    When running  multiple sessions, need to define which session to use for request.
-    Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
-    **Examples:**
-    * `php server.php --session=bot --session=users/xtrime --session=users/user1`
-    * `http://127.0.0.1:9503/api/bot/getSelf`
-    * `http://127.0.0.1:9503/api/users/xtrime/getSelf` 
-    * `http://127.0.0.1:9503/api/users/user1/getSelf`
-    * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
-    * glob syntax for sessions:
-        * `--session=*` to use all `sessions/*.madeline` files.
-        * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
-* Session management (**Use with caution, can be unstable**)
-    
-    **Examples:**
-    * Session list: `http://127.0.0.1:9503/system/getSessionList`
-    * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
-    * [optional] Adding session with custom settings: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
-    * Removing session: `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
-       
-    If there is no authorization in session, or session file is blank, authorization required:
-    
-    User: 
-    * `http://127.0.0.1:9503/api/users/xtrime/phoneLogin?phone=+7123...`
-    * `http://127.0.0.1:9503/api/users/xtrime/completePhoneLogin?code=123456`
-    * (optional) `http://127.0.0.1:9503/api/users/xtrime/complete2falogin?password=123456`
-    * (optional) `http://127.0.0.1:9503/api/users/xtrime/completeSignup?firstName=MyExampleName`
-    
-    Bot:
-    * `http://127.0.0.1:9503/api/bot/botLogin?token=34298141894:aflknsaflknLKNFS`
-    
-    After authorization eventHandler need to be set, to receive updates for new session in `/events` websocket:
-    * `http://127.0.0.1:9503/api/users/xtrime/setEventHandler`
-    * `http://127.0.0.1:9503/api/bot/setEventHandler`
+To upload files from POST request use custom `uploadMediaForm` method:
 
-* EventHandler updates via websocket. Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
-    Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
+`curl "http://127.0.0.1:9503/api/uploadMediaForm" -g -F "file=@/Users/xtrime/Downloads/test.txt"`
+Method supports `application/x-www-form-urlencoded` and `multipart/form-data`.
+
+Send result from `uploadMediaForm` to `messages.sendMedia`:
+```
+curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"data":{
+	    "peer": "@xtrime",
+        "media": {
+            "_": "inputMediaUploadedDocument",
+            "file": {
+                "_": "inputFile",
+                "id": 1164670976363200575,
+                "parts": 1,
+                "name": "test.txt",
+                "mime_type": "text/plain",
+                "md5_checksum": ""
+            },
+            "attributes": [
+                {
+                    "_": "documentAttributeFilename",
+                    "file_name": "test.txt"
+                }
+            ]
+        }
+    }
+}'
+```
+Also see: https://docs.madelineproto.xyz/docs/FILES.html#uploading-files
+
+#### Downloading files
+
+```
+curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "media": {
+        "_": "messageMediaDocument",
+        "document": {
+            "_": "document",
+            "id": 5470079466401169993,
+            "access_hash": -6754208767885394084,
+            "file_reference": {
+                "_": "bytes",
+                "bytes": "AkKdqJkAACnyXiaBgp3M3DfBh8C0+mGKXwSsGUY="
+            },
+            "date": 1551713685,
+            "mime_type": "video/mp4",
+            "size": 400967,
+            "dc_id": 2
+        }
+    }
+}'
+```
+
+Also see: https://docs.madelineproto.xyz/docs/FILES.html#downloading-files
+
+#### Multiple sessions support. 
+
+When running  multiple sessions, need to define which session to use for request.
+Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
+**Examples:**
+* `php server.php --session=bot --session=users/xtrime --session=users/user1`
+* `http://127.0.0.1:9503/api/bot/getSelf`
+* `http://127.0.0.1:9503/api/users/xtrime/getSelf` 
+* `http://127.0.0.1:9503/api/users/user1/getSelf`
+* sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
+* glob syntax for sessions:
+    * `--session=*` to use all `sessions/*.madeline` files.
+    * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
+
+#### Session management
     
-    When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
-    This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
-    
-    PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
+**Examples:**
+* Session list: `http://127.0.0.1:9503/system/getSessionList`
+* Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
+* [optional] Adding session with custom settings: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
+* Removing session: `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
+   
+If there is no authorization in session, or session file is blank, authorization required:
+
+User: 
+* `http://127.0.0.1:9503/api/users/xtrime/phoneLogin?phone=+7123...`
+* `http://127.0.0.1:9503/api/users/xtrime/completePhoneLogin?code=123456`
+* (optional) `http://127.0.0.1:9503/api/users/xtrime/complete2falogin?password=123456`
+* (optional) `http://127.0.0.1:9503/api/users/xtrime/completeSignup?firstName=MyExampleName`
+
+Bot:
+* `http://127.0.0.1:9503/api/bot/botLogin?token=34298141894:aflknsaflknLKNFS`
+
+After authorization eventHandler need to be set, to receive updates for new session in `/events` websocket:
+* `http://127.0.0.1:9503/api/users/xtrime/setEventHandler`
+* `http://127.0.0.1:9503/api/bot/setEventHandler`
+
+#### EventHandler updates via websocket.
+ 
+Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
+Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
+
+When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
+This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
+
+PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
 
 ## Contacts
 
