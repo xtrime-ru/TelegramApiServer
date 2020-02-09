@@ -1581,12 +1581,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "bdd86d4efbefe8a0ed840f25d7608df60ed9261a"
+                "reference": "e4d56f32c25367e2f5eb38ca2071967e8c88d144"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/bdd86d4efbefe8a0ed840f25d7608df60ed9261a",
-                "reference": "bdd86d4efbefe8a0ed840f25d7608df60ed9261a",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/e4d56f32c25367e2f5eb38ca2071967e8c88d144",
+                "reference": "e4d56f32c25367e2f5eb38ca2071967e8c88d144",
                 "shasum": ""
             },
             "require": {
@@ -1618,6 +1618,8 @@
                 "krakjoe/pthreads-polyfill": "*"
             },
             "require-dev": {
+                "amphp/http": "^1.6",
+                "amphp/http-server": "dev-master",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/websocket": "dev-master as 1",
                 "amphp/websocket-client": "dev-master as 1",
@@ -1671,7 +1673,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-07T20:23:29+00:00"
+            "time": "2020-02-09T18:29:34+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2034,23 +2036,21 @@
         },
         {
             "name": "league/uri",
-            "version": "6.1.1",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "ca30d887ad61ef59070171cacfa4b9dec5117f47"
+                "reference": "7b29ca33b287b4277d5ce7c26bc1be5d4118b484"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/ca30d887ad61ef59070171cacfa4b9dec5117f47",
-                "reference": "ca30d887ad61ef59070171cacfa4b9dec5117f47",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/7b29ca33b287b4277d5ce7c26bc1be5d4118b484",
+                "reference": "7b29ca33b287b4277d5ce7c26bc1be5d4118b484",
                 "shasum": ""
             },
             "require": {
-                "ext-fileinfo": "*",
                 "ext-json": "*",
-                "ext-mbstring": "*",
-                "league/uri-interfaces": "^2.0",
+                "league/uri-interfaces": "^2.1",
                 "php": "^7.2",
                 "psr/http-message": "^1.0"
             },
@@ -2065,6 +2065,7 @@
                 "phpunit/phpunit": "^7.0 | ^8.0"
             },
             "suggest": {
+                "ext-fileinfo": "Needed to create Data URI from a filepath",
                 "ext-intl": "Needed to improve host validation",
                 "league/uri-components": "Needed to easily manipulate URI objects"
             },
@@ -2113,20 +2114,20 @@
                 "url",
                 "ws"
             ],
-            "time": "2020-01-30T07:55:24+00:00"
+            "time": "2020-02-08T16:31:57+00:00"
         },
         {
             "name": "league/uri-interfaces",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-interfaces.git",
-                "reference": "ae2601a183ad14b73628a305c0f906c030757b39"
+                "reference": "0068a469958895ceaf3afcb489c0258adfa1e406"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/ae2601a183ad14b73628a305c0f906c030757b39",
-                "reference": "ae2601a183ad14b73628a305c0f906c030757b39",
+                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/0068a469958895ceaf3afcb489c0258adfa1e406",
+                "reference": "0068a469958895ceaf3afcb489c0258adfa1e406",
                 "shasum": ""
             },
             "require": {
@@ -2135,9 +2136,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
-                "phpstan/phpstan": "^0.11",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "phpstan/phpstan-strict-rules": "^0.11",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/phpunit": "^7.0|^8.0"
             },
             "type": "library",
@@ -2170,7 +2171,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-12-17T13:59:29+00:00"
+            "time": "2020-02-08T12:10:37+00:00"
         },
         {
             "name": "league/uri-parser",

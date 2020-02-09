@@ -16,7 +16,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
     public function __construct(API $MadelineProto)
     {
         $this->sessionName = Client::getSessionName($MadelineProto->session);
-        if (!isset(static::$instances[$this->sessionName])) {
+        if (empty(static::$instances[$this->sessionName])) {
             static::$instances[$this->sessionName] = true;
             parent::__construct($MadelineProto);
             Logger::getInstance()->warning("Event observer CONSTRUCTED: {$this->sessionName}");
@@ -29,7 +29,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         Logger::getInstance()->warning("Event observer DESTRUCTED: {$this->sessionName}");
     }
 
-    public static function addEventListener($clientId, callable $callback)
+    public static function addEventListener($clientId, callable $callback): void
     {
         Logger::getInstance()->notice("Add event listener. ClientId: {$clientId}");
         static::$eventListeners[$clientId] = $callback;

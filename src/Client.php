@@ -58,7 +58,7 @@ class Client
         }
     }
 
-    private static function isInstanceLoggedIn($instance): bool
+    private static function isSessionLoggedIn($instance): bool
     {
         return ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
     }
@@ -68,9 +68,11 @@ class Client
         Logger::getInstance()->warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
         foreach ($sessionFiles as $file) {
-            $session = static::getSessionName($file);
-            $this->addSession($session);
+            $sessionName = static::getSessionName($file);
+            $instance = $this->addSession($sessionName);
+            $this->runSession($instance);
         }
+
         $this->startSessions();
 
         $sessionsCount = count($sessionFiles);
@@ -80,7 +82,7 @@ class Client
         );
     }
 
-    public function addSession(string $session, array $settings = []): void
+    public function addSession(string $session, array $settings = []): MadelineProto\API
     {
         if (isset($this->instances[$session])) {
             throw new InvalidArgumentException('Session already exists');
@@ -89,16 +91,9 @@ class Client
         $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
-        $this->instances[$session] = $instance;
 
-        Loop::defer(
-            function() use ($instance) {
-                if (static::isInstanceLoggedIn($instance)) {
-                    $instance->setEventHandler(EventHandler::class);
-                    $this->loop($instance);
-                }
-            }
-        );
+        $this->instances[$session] = $instance;
+        return $instance;
     }
 
     public function removeSession($session): void
@@ -149,28 +144,39 @@ class Client
         Loop::defer(
             function() {
                 foreach ($this->instances as $instance) {
-                    if (!static::isInstanceLoggedIn($instance)) {
+                    if (!static::isSessionLoggedIn($instance)) {
                         $this->loop(
                             $instance,
                             static function() use ($instance) {
                                 yield $instance->start();
                             }
                         );
+                        $this->runSession($instance);
                     }
                 }
             }
         );
     }
 
-    private function loop(MadelineProto\API $instance, callable $callback = null): bool
+    private function runSession(MadelineProto\API $instance): void
     {
-        $sessionName = self::getSessionName($instance->session);
+        if (static::isSessionLoggedIn($instance)) {
+            Loop::defer(
+                function() use ($instance) {
+                    $instance->setEventHandler(EventHandler::class);
+                    while (true) {
+                        $this->loop($instance);
+                    }
+                }
+            );
+        }
+    }
+
+    private function loop(MadelineProto\API $instance, callable $callback = null): void
+    {
+        $sessionName = static::getSessionName($instance->session);
         try {
-            if ($callback) {
-                $instance->loop($callback);
-            } else {
-                $instance->loop();
-            }
+            $callback ? $instance->loop($callback) : $instance->loop();
         } catch (\Throwable $e) {
             Logger::getInstance()->critical(
                 $e->getMessage(),
@@ -183,15 +189,14 @@ class Client
                         'line' => $e->getLine(),
                     ],
                 ]
-            )
-            ;
-            $this->removeSession($sessionName);
-            if (count($this->instances) === 0) {
-                throw new RuntimeException('Last session stopped. Need restart.');
+            );
+            if (!static::isSessionLoggedIn($instance)) {
+                $this->removeSession($sessionName);
+                if (count($this->instances) === 0) {
+                    throw new RuntimeException('Last session stopped. Need restart.');
+                }
             }
-            return false;
         }
-        return true;
     }
 
 }
