@@ -141,6 +141,10 @@ abstract class AbstractApiController
             }
 
         } catch (\Throwable $e) {
+            error($e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
             $this->setError($e);
         }
 

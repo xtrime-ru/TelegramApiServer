@@ -4,7 +4,6 @@ namespace TelegramApiServer\EventObservers;
 
 use danog\MadelineProto\API;
 use TelegramApiServer\Client;
-use TelegramApiServer\Logger;
 
 class EventHandler extends \danog\MadelineProto\EventHandler
 {
@@ -17,19 +16,19 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         if (empty(static::$instances[$this->sessionName])) {
             static::$instances[$this->sessionName] = true;
             parent::__construct($MadelineProto);
-            Logger::warning("Event observer CONSTRUCTED: {$this->sessionName}");
+            warning("Event observer CONSTRUCTED: {$this->sessionName}");
         }
     }
 
     public function __destruct()
     {
         unset(static::$instances[$this->sessionName]);
-        Logger::warning("Event observer DESTRUCTED: {$this->sessionName}");
+        warning("Event observer DESTRUCTED: {$this->sessionName}");
     }
 
     public function onAny($update): void
     {
-        Logger::info("Received update from session: {$this->sessionName}");
+        info("Received update from session: {$this->sessionName}");
         EventObserver::notify($update, $this->sessionName);
     }
 }

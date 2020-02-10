@@ -6,6 +6,7 @@ use Amp\Loop;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
+use Psr\Log\LogLevel;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventHandler;
 
@@ -65,7 +66,7 @@ class Client
 
     public function connect($sessionFiles): void
     {
-        Logger::warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
+        warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
         foreach ($sessionFiles as $file) {
             $sessionName = static::getSessionName($file);
@@ -76,7 +77,7 @@ class Client
         $this->startSessions();
 
         $sessionsCount = count($sessionFiles);
-        Logger::warning(
+        warning(
             "\nTelegramApiServer ready."
             . "\nNumber of sessions: {$sessionsCount}."
         );
@@ -148,7 +149,14 @@ class Client
                         $this->loop(
                             $instance,
                             static function() use ($instance) {
+                                //Disable logging to stdout
+                                $logLevel = Logger::getInstance()->minLevelIndex;
+                                Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::EMERGENCY];
+
                                 yield $instance->start();
+
+                                //Enable logging to stdout
+                                Logger::getInstance()->minLevelIndex = $logLevel;
                             }
                         );
                         $this->runSession($instance);
@@ -164,9 +172,7 @@ class Client
             Loop::defer(
                 function() use ($instance) {
                     $instance->setEventHandler(EventHandler::class);
-                    while (true) {
-                        $this->loop($instance);
-                    }
+                    $this->loop($instance);
                 }
             );
         }
@@ -178,7 +184,7 @@ class Client
         try {
             $callback ? $instance->loop($callback) : $instance->loop();
         } catch (\Throwable $e) {
-            Logger::critical(
+            critical(
                 $e->getMessage(),
                 [
                     'session' => $sessionName,
@@ -190,11 +196,9 @@ class Client
                     ],
                 ]
             );
-            if (!static::isSessionLoggedIn($instance)) {
-                $this->removeSession($sessionName);
-                if (count($this->instances) === 0) {
-                    throw new RuntimeException('Last session stopped. Need restart.');
-                }
+            $this->removeSession($sessionName);
+            if (count($this->instances) === 0) {
+                throw new RuntimeException('Last session stopped. Need restart.');
             }
         }
     }

@@ -52,7 +52,7 @@ class Logger extends AbstractLogger
     ];
 
     private static string $dateTimeFormat = 'Y-m-d H:i:s';
-    private int $minLevelIndex;
+    public int $minLevelIndex;
     private array $formatter;
 
     protected function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
@@ -95,11 +95,6 @@ class Logger extends AbstractLogger
         }
 
         return static::$instanse;
-    }
-
-    public static function __callStatic($name, $arguments)
-    {
-        static::getInstance()->{$name}(...$arguments);
     }
 
     /**

@@ -40,7 +40,7 @@ class Server
             try {
                 Amp\Loop::run();
             } catch (\Throwable $e) {
-                Logger::getInstance()->alert($e->getMessage(), [
+                alert($e->getMessage(), [
                     'exception' => [
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),
@@ -73,7 +73,7 @@ class Server
     {
         if (defined('SIGINT')) {
             Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
-                Logger::getInstance()->emergency('Got SIGINT');
+                emergency('Got SIGINT');
                 Amp\Loop::cancel($watcherId);
                 yield $server->stop();
                 exit;

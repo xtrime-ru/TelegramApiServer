@@ -15,7 +15,16 @@ class LogObserver
         }
     }
 
-    public static function log(string $message, int $level) {
-        Logger::log(Logger::$madelineLevels[$level], $message);
+    /**
+     * @param mixed|array|string $message
+     * @param int $level
+     */
+    public static function log($message, int $level) {
+        if (is_array($message)) {
+            Logger::getInstance()->log(Logger::$madelineLevels[$level], '' ,$message);
+        } else {
+            Logger::getInstance()->log(Logger::$madelineLevels[$level], (string) $message);
+        }
+
     }
 }
