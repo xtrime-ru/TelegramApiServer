@@ -8,31 +8,32 @@ use Amp\Http\Server\Router;
 use Amp\Promise;
 use Amp\Success;
 use Amp\Websocket\Server\Websocket;
-use TelegramApiServer\Client;
+use Psr\Log\LogLevel;
+use TelegramApiServer\EventObservers\LogObserver;
+use TelegramApiServer\Logger;
 use function Amp\call;
 
-class LogsController extends Websocket
+class LogController extends Websocket
 {
-    private Client $client;
-
-    public static function getRouterCallback(Client $client): EventsController
+    public static function getRouterCallback(): LogController
     {
-        $class = new static();
-        $class->client = $client;
-        return $class;
+        return new static();
     }
 
     public function onHandshake(Request $request, Response $response): Promise
     {
+        $level = $request->getAttribute(Router::class)['level'] ?? LogLevel::DEBUG;
+        if (!isset(Logger::$levels[$level])) {
+            $response->setStatus(400);
+        }
         return new Success($response);
     }
 
     public function onConnect(\Amp\Websocket\Client $client, Request $request, Response $response): Promise
     {
         return call(function() use($client, $request) {
-            $requestedSession = $request->getAttribute(Router::class)['session'] ?? null;
-
-            $this->subscribeForUpdates($client, $requestedSession);
+            $level = $request->getAttribute(Router::class)['level'] ?? LogLevel::DEBUG;
+            $this->subscribeForUpdates($client, $level);
 
             while ($message = yield $client->receive()) {
                 // Messages received on the connection are ignored and discarded.
@@ -41,23 +42,24 @@ class LogsController extends Websocket
         });
     }
 
-    private function subscribeForUpdates(\Amp\Websocket\Client $client, ?string $requestedSession): void
+    private function subscribeForUpdates(\Amp\Websocket\Client $client, string $requestedLevel): void
     {
         $clientId = $client->getId();
 
         $client->onClose(static function() use($clientId) {
-            \TelegramApiServer\EventObservers\EventHandler::removeEventListener($clientId);
+            LogObserver::removeSubscriber($clientId);
         });
 
-        \TelegramApiServer\EventObservers\EventHandler::addEventListener($clientId, function($update, string $session) use($clientId, $requestedSession) {
-            if ($requestedSession && $session !== $requestedSession) {
+        LogObserver::addSubscriber($clientId, function(string $level, string $message, array $context = []) use($clientId, $requestedLevel) {
+            if ($requestedLevel && Logger::$levels[$level] < Logger::$levels[$requestedLevel]) {
                 return;
             }
             $update = [
                 'jsonrpc' => '2.0',
                 'result' => [
-                    'session' => $session,
-                    'update' => $update,
+                    'level' => $level,
+                    'message' => $message,
+                    'context' => $context
                 ],
                 'id' => null,
             ];

@@ -5,6 +5,7 @@ namespace TelegramApiServer\Server;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use TelegramApiServer\Client;
+use TelegramApiServer\Controllers\LogController;
 use TelegramApiServer\Controllers\SystemController;
 use TelegramApiServer\Controllers\ApiController;
 use TelegramApiServer\Controllers\EventsController;
@@ -42,6 +43,7 @@ class Router
         $apiHandler = stack(ApiController::getRouterCallback($client, ApiExtensions::class), $authorization);
         $systemApiHandler = stack(SystemController::getRouterCallback($client, SystemApiExtensions::class), $authorization);
         $eventsHandler = stack(EventsController::getRouterCallback($client), $authorization);
+        $logHandler = stack(LogController::getRouterCallback(), $authorization);
 
         foreach (['GET', 'POST'] as $method) {
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
@@ -52,6 +54,9 @@ class Router
 
         $this->router->addRoute('GET', '/events[/]', $eventsHandler);
         $this->router->addRoute('GET', '/events/{session:.*?[^/]}[/]', $eventsHandler);
+
+        $this->router->addRoute('GET', '/log[/]', $logHandler);
+        $this->router->addRoute('GET', '/log/{level:.*?[^/]}[/]', $logHandler);
     }
 
 

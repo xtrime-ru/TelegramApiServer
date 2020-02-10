@@ -65,7 +65,7 @@ class Client
 
     public function connect($sessionFiles): void
     {
-        Logger::getInstance()->warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
+        Logger::warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
         foreach ($sessionFiles as $file) {
             $sessionName = static::getSessionName($file);
@@ -76,7 +76,7 @@ class Client
         $this->startSessions();
 
         $sessionsCount = count($sessionFiles);
-        Logger::getInstance()->warning(
+        Logger::warning(
             "\nTelegramApiServer ready."
             . "\nNumber of sessions: {$sessionsCount}."
         );
@@ -178,7 +178,7 @@ class Client
         try {
             $callback ? $instance->loop($callback) : $instance->loop();
         } catch (\Throwable $e) {
-            Logger::getInstance()->critical(
+            Logger::critical(
                 $e->getMessage(),
                 [
                     'session' => $sessionName,

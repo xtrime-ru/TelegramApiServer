@@ -9,7 +9,7 @@ use Amp\Promise;
 use Amp\Success;
 use Amp\Websocket\Server\Websocket;
 use TelegramApiServer\Client;
-use TelegramApiServer\EventObservers\EventHandler;
+use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
 
 class EventsController extends Websocket
@@ -41,7 +41,6 @@ class EventsController extends Websocket
     {
         return call(function() use($client, $request) {
             $requestedSession = $request->getAttribute(Router::class)['session'] ?? null;
-
             $this->subscribeForUpdates($client, $requestedSession);
 
             while ($message = yield $client->receive()) {
@@ -56,10 +55,10 @@ class EventsController extends Websocket
         $clientId = $client->getId();
 
         $client->onClose(static function() use($clientId) {
-            EventHandler::removeEventListener($clientId);
+            EventObserver::removeSubscriber($clientId);
         });
 
-        EventHandler::addEventListener($clientId, function($update, ?string $session) use($clientId, $requestedSession) {
+        EventObserver::addSubscriber($clientId, function($update, ?string $session) use($clientId, $requestedSession) {
             if ($requestedSession && $session !== $requestedSession) {
                 return;
             }

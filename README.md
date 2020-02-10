@@ -193,15 +193,34 @@ After authorization eventHandler need to be set, to receive updates for new sess
 * `http://127.0.0.1:9503/api/users/xtrime/setEventHandler`
 * `http://127.0.0.1:9503/api/bot/setEventHandler`
 
-### EventHandler updates via websocket.
+### Websocket
+#### EventHandler updates (webhooks).
  
-Connect to `ws://127.0.0.1:9503/events`. You will get all events in json.
+Connect to `ws://127.0.0.1:9503/events` to get all events in json. 
+This is efficient alternative for webhooks.
 Each event is json object in [json-rpc 2.0 format](https://www.jsonrpc.org/specification#response_object). Example: 
 
-When using CombinedAPI (multiple accounts) name of session can be added to path of websocket endpoint: 
+When using multiple sessions, name of session can be added to path of websocket endpoint: 
 This endpoint will send events only from `users/xtrime` session: `ws://127.0.0.1:9503/events/users/xtrime`
 
 PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
+
+`php examples/websocket-events.php --url=ws://127.0.0.1:9503/events`
+
+#### Logs.
+
+Connect to `ws://127.0.0.1:9503/log[/%level%]` to get logs in real time.
+
+`%level%` is optional parameter to filter logs. 
+If filter is specified, then only messages with equal or greater level will be send.
+This endpoint will send only alert and emergency logs: `ws://127.0.0.1:9503/log/alert`
+
+Available levels: debug, info, notice, warning, error, critical, alert, emergency.
+
+PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
+
+`php examples/websocket-events.php --url=ws://127.0.0.1:9503/log`
+
 
 ## Contacts
 

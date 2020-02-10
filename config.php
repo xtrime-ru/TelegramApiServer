@@ -11,7 +11,8 @@ $settings = [
             'api_hash' => getenv('TELEGRAM_API_HASH'),
         ],
         'logger' => [ // Logger settings
-            'logger' => \danog\MadelineProto\Logger::ECHO_LOGGER, //  0 - Logs disabled, 3 - echo logs.
+            'logger' => \danog\MadelineProto\Logger::CALLABLE_LOGGER, //  0 - Logs disabled, 3 - echo logs.
+            'logger_param' => \TelegramApiServer\EventObservers\LogObserver::class . '::log',
             'logger_level' => getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
         'updates' => [

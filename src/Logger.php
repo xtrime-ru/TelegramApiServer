@@ -16,6 +16,7 @@ use DateTimeInterface;
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
+use TelegramApiServer\EventObservers\LogObserver;
 use function get_class;
 use function gettype;
 use function is_object;
@@ -30,7 +31,7 @@ class Logger extends AbstractLogger
 {
     private static ?Logger $instanse = null;
 
-    private static array $levels = [
+    public static array $levels = [
         LogLevel::DEBUG => 0,
         LogLevel::INFO => 1,
         LogLevel::NOTICE => 2,
@@ -41,15 +42,13 @@ class Logger extends AbstractLogger
         LogLevel::EMERGENCY => 7,
     ];
 
-    private static array $madelineLevels = [
-        LogLevel::DEBUG => MadelineProto\Logger::ULTRA_VERBOSE,
-        LogLevel::INFO => MadelineProto\Logger::VERBOSE,
-        LogLevel::NOTICE => MadelineProto\Logger::NOTICE,
-        LogLevel::WARNING => MadelineProto\Logger::WARNING,
-        LogLevel::ERROR => MadelineProto\Logger::ERROR,
-        LogLevel::CRITICAL => MadelineProto\Logger::FATAL_ERROR,
-        LogLevel::ALERT => MadelineProto\Logger::FATAL_ERROR,
-        LogLevel::EMERGENCY => MadelineProto\Logger::FATAL_ERROR,
+    public static array $madelineLevels = [
+        MadelineProto\Logger::ULTRA_VERBOSE => LogLevel::DEBUG,
+        MadelineProto\Logger::VERBOSE => LogLevel::INFO,
+        MadelineProto\Logger::NOTICE => LogLevel::NOTICE,
+        MadelineProto\Logger::WARNING => LogLevel::WARNING,
+        MadelineProto\Logger::ERROR => LogLevel::ERROR,
+        MadelineProto\Logger::FATAL_ERROR => LogLevel::CRITICAL,
     ];
 
     private static string $dateTimeFormat = 'Y-m-d H:i:s';
@@ -91,12 +90,16 @@ class Logger extends AbstractLogger
         if (!static::$instanse) {
             $settings = Config::getInstance()->get('telegram');
 
-            $conversionTable = array_flip(static::$madelineLevels);
-            $loggerLevel = $conversionTable[$settings['logger']['logger_level']];
+            $loggerLevel = static::$madelineLevels[$settings['logger']['logger_level']];
             static::$instanse = new static($loggerLevel);
         }
 
         return static::$instanse;
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        static::getInstance()->{$name}(...$arguments);
     }
 
     /**
@@ -107,6 +110,8 @@ class Logger extends AbstractLogger
         if (!isset(self::$levels[$level])) {
             throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $level));
         }
+
+        LogObserver::notify($level, $message, $context);
 
         if (self::$levels[$level] < $this->minLevelIndex) {
             return;
