@@ -149,7 +149,7 @@ class Logger extends AbstractLogger
                     "\n" .
                     json_encode(
                         $context,
-                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT| JSON_UNESCAPED_LINE_TERMINATORS
+                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT | JSON_UNESCAPED_LINE_TERMINATORS
                     )
                     : ''
             ) . PHP_EOL;
