@@ -5,10 +5,8 @@ namespace TelegramApiServer\MadelineProtoExtensions;
 
 
 use Amp\ByteStream\InMemoryStream;
-use Amp\ByteStream\IteratorStream;
 use Amp\Http\Server\FormParser\File;
 use Amp\Http\Server\Request;
-use Amp\Producer;
 use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\TL\Conversion\BotAPI;
@@ -440,43 +438,19 @@ class ApiExtensions
      */
     public function downloadToResponse(array $info): Promise
     {
-        return call(function() use($info) {
-            if (empty($info['size'])) {
-                $info = yield $this->madelineProto->getDownloadInfo($info);
-            }
-            $range = $this->getByteRange($this->request->getHeader('Range'));
+        return $this->madelineProto->downloadToResponse($info, $this->request);
+    }
 
-            if ($range['end'] === -1) {
-                $range['end'] = $info['size'] - 1;
-            } else {
-                $range['end'] = min($range['end'], $info['size'] - 1);
-            }
-
-            $stream = new IteratorStream(new Producer(function (callable $emit) use($info, $range) {
-                yield $this->madelineProto->downloadToCallable($info, static function($payload) use($emit) {
-                    yield $emit($payload);
-                    return strlen($payload);
-                }, null, false, $range['start'], $range['end'] + 1);
-            }));
-
-            $headers = [
-                'Content-Type' => $info['mime'],
-//            'Accept-Ranges' => 'bytes',
-//            'Content-Transfer-Encoding'=> 'Binary',
-            ];
-
-            if ($range['start'] > 0 || $range['end'] < $info['size'] - 1) {
-                $headers['Content-Length'] = ($range['end'] - $range['start'] + 1);
-                $headers['Content-Range'] = "bytes {$range['start']}-{$range['end']}/{$info['size']}";
-            } else {
-                $headers['Content-Length'] = $info['size'];
-            }
-
-            return [
-                'headers' => $headers,
-                'stream' => $stream,
-            ];
-        });
+    /**
+     * Адаптер для стандартного метода
+     *
+     * @param array $info
+     *
+     * @return Promise
+     */
+    public function downloadToBrowser(array $info): Promise
+    {
+        return $this->downloadToResponse($info);
     }
 
     /**
@@ -515,21 +489,6 @@ class ApiExtensions
     public function setEventHandler(): void
     {
         $this->madelineProto->setEventHandler(EventHandler::class);
-    }
-
-    private function getByteRange(?string $header): array
-    {
-        $matches = [
-            'start' => 0,
-            'end' => -1
-        ];
-        if ($header) {
-            preg_match("~bytes=(?'start'\d+)-(?'end'\d*)~", $header, $matches);
-        }
-        return [
-            'start' => (int) $matches['start'],
-            'end' =>  (int) $matches['end'] ?: -1
-        ];
     }
 
 }

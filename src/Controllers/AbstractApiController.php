@@ -48,6 +48,9 @@ abstract class AbstractApiController
                 $requestCallback = new static($client, $request, $extensionClass);
                 $response = yield from $requestCallback->process();
 
+                if ($response instanceof Response) {
+                    return $response;
+                }
                 return new Response(
                     $requestCallback->page['code'],
                     $requestCallback->page['headers'],
@@ -142,6 +145,7 @@ abstract class AbstractApiController
 
         } catch (\Throwable $e) {
             error($e->getMessage(), [
+                'exception' => get_class($e),
                 'file' => $e->getFile(),
                 'line' => $e->getLine()
             ]);
@@ -213,12 +217,12 @@ abstract class AbstractApiController
      */
     private function getResponse()
     {
+        if ($this->page['response'] instanceof Response) {
+            return $this->page['response'];
+        }
+
         if (!is_array($this->page['response'])) {
             $this->page['response'] = null;
-        }
-        if (isset($this->page['response']['stream'])) {
-            $this->page['headers'] = $this->page['response']['headers'];
-            return $this->page['response']['stream'];
         }
 
         $data = [
