@@ -35,7 +35,7 @@ class Authorization implements Middleware
 
     private function isIpAllowed(string $host): bool
     {
-        if (!in_array($host, $this->ipWhitelist, true)) {
+        if ($this->ipWhitelist && !in_array($host, $this->ipWhitelist, true)) {
             return false;
         }
         return true;
