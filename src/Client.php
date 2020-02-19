@@ -27,7 +27,7 @@ class Client
         if (!$session) {
             return null;
         }
-        $session = rtrim(trim($session), '/');
+        $session = trim(trim($session), '/');
         $session = static::$sessionFolder . '/' . $session . static::$sessionExtension;
         $session = str_replace('//', '/', $session);
         return $session;

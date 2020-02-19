@@ -68,7 +68,7 @@ foreach ($options['session'] as $session) {
 
     $session = TelegramApiServer\Client::getSessionFile($session);
 
-    if (preg_match('~['.preg_quote('*?[]!', '~').']~',$session)) {
+    if (preg_match('~[' . preg_quote('*?[]!', '~') . ']~', $session)) {
         $sessions = glob($session);
     } else {
         $sessions[] = $session;
@@ -76,7 +76,6 @@ foreach ($options['session'] as $session) {
 
     $sessions = array_filter($sessions);
     foreach ($sessions as $file) {
-        $file = str_replace('//','/', $file);
         TelegramApiServer\Client::checkOrCreateSessionFolder($file, __DIR__);
         $sessionFiles[$file] = null;
     }
