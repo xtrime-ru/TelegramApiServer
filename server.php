@@ -76,6 +76,7 @@ foreach ($options['session'] as $session) {
 
     $sessions = array_filter($sessions);
     foreach ($sessions as $file) {
+        $file = str_replace('//','/', $file);
         TelegramApiServer\Client::checkOrCreateSessionFolder($file, __DIR__);
         $sessionFiles[$file] = null;
     }
