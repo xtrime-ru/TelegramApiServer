@@ -25,7 +25,7 @@ class Config
      */
     private function __construct()
     {
-        $this->config = include __DIR__ . '/../config.php';
+        $this->config = include ROOT_DIR . '/config.php';
     }
 
     /**

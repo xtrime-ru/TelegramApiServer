@@ -48,11 +48,11 @@ class Client
         return $matches['sessionName'] ?? null;
     }
 
-    public static function checkOrCreateSessionFolder($session, $rootDir): void
+    public static function checkOrCreateSessionFolder($session): void
     {
         $directory = dirname($session);
         if ($directory && $directory !== '.' && !is_dir($directory)) {
-            $parentDirectoryPermissions = fileperms($rootDir);
+            $parentDirectoryPermissions = fileperms(ROOT_DIR);
             if (!mkdir($directory, $parentDirectoryPermissions, true) && !is_dir($directory)) {
                 throw new RuntimeException(sprintf('Directory "%s" was not created', $directory));
             }
@@ -89,6 +89,7 @@ class Client
             throw new InvalidArgumentException('Session already exists');
         }
         $file = static::getSessionFile($session);
+        static::checkOrCreateSessionFolder($file);
         $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);

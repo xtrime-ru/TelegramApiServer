@@ -3,9 +3,10 @@
 use TelegramApiServer\Migrations\SessionsMigration;
 use TelegramApiServer\Migrations\SwooleToAmpMigration;
 
-chdir(__DIR__);
+define('ROOT_DIR', __DIR__);
+chdir(ROOT_DIR);
 
-require_once __DIR__ . '/bootstrap.php';
+require_once ROOT_DIR . '/bootstrap.php';
 
 if (PHP_SAPI !== 'cli') {
     throw new RuntimeException('Start in CLI');
@@ -56,7 +57,7 @@ Example:
     exit;
 }
 
-SessionsMigration::move(__DIR__);
+SessionsMigration::move();
 SwooleToAmpMigration::check();
 
 $sessionFiles = [];
@@ -76,7 +77,6 @@ foreach ($options['session'] as $session) {
 
     $sessions = array_filter($sessions);
     foreach ($sessions as $file) {
-        TelegramApiServer\Client::checkOrCreateSessionFolder($file, __DIR__);
         $sessionFiles[$file] = null;
     }
 }
