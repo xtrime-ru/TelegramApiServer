@@ -7,20 +7,35 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use Amp\Success;
+use Amp\Websocket\Server\ClientHandler;
 use Amp\Websocket\Server\Websocket;
 use Psr\Log\LogLevel;
 use TelegramApiServer\EventObservers\LogObserver;
 use TelegramApiServer\Logger;
 use function Amp\call;
 
-class LogController extends Websocket
+class LogController implements ClientHandler
 {
-    public static function getRouterCallback(): LogController
+    private ?Websocket $endpoint;
+
+    public static function getRouterCallback(): Websocket
     {
-        return new static();
+        return new Websocket(new static());
     }
 
-    public function onHandshake(Request $request, Response $response): Promise
+    public function onStart(Websocket $endpoint): Promise
+    {
+        $this->endpoint = $endpoint;
+        return new Success;
+    }
+
+    public function onStop(Websocket $endpoint): Promise
+    {
+        $this->endpoint = null;
+        return new Success;
+    }
+
+    public function handleHandshake(Request $request, Response $response): Promise
     {
         $level = $request->getAttribute(Router::class)['level'] ?? LogLevel::DEBUG;
         if (!isset(Logger::$levels[$level])) {
@@ -29,7 +44,7 @@ class LogController extends Websocket
         return new Success($response);
     }
 
-    public function onConnect(\Amp\Websocket\Client $client, Request $request, Response $response): Promise
+    public function handleClient(\Amp\Websocket\Client $client, Request $request, Response $response): Promise
     {
         return call(function() use($client, $request) {
             $level = $request->getAttribute(Router::class)['level'] ?? LogLevel::DEBUG;
@@ -64,7 +79,7 @@ class LogController extends Websocket
                 'id' => null,
             ];
 
-            $this->multicast(
+            $this->endpoint->multicast(
                 json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |

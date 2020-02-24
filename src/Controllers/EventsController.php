@@ -7,23 +7,37 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use Amp\Success;
+use Amp\Websocket\Server\ClientHandler;
 use Amp\Websocket\Server\Websocket;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
 
-class EventsController extends Websocket
+class EventsController implements ClientHandler
 {
     private Client $client;
+    private ?Websocket $endpoint;
 
-    public static function getRouterCallback(Client $client): EventsController
+    public static function getRouterCallback(Client $client): Websocket
     {
         $class = new static();
         $class->client = $client;
-        return $class;
+        return  new Websocket($class);
     }
 
-    public function onHandshake(Request $request, Response $response): Promise
+    public function onStart(Websocket $endpoint): Promise
+    {
+        $this->endpoint = $endpoint;
+        return new Success;
+    }
+
+    public function onStop(Websocket $endpoint): Promise
+    {
+        $this->endpoint = null;
+        return new Success;
+    }
+
+    public function handleHandshake(Request $request, Response $response): Promise
     {
         try {
             $session = $request->getAttribute(Router::class)['session'] ?? null;
@@ -37,7 +51,7 @@ class EventsController extends Websocket
         return new Success($response);
     }
 
-    public function onConnect(\Amp\Websocket\Client $client, Request $request, Response $response): Promise
+    public function handleClient(\Amp\Websocket\Client $client, Request $request, Response $response): Promise
     {
         return call(function() use($client, $request) {
             $requestedSession = $request->getAttribute(Router::class)['session'] ?? null;
@@ -71,7 +85,7 @@ class EventsController extends Websocket
                 'id' => null,
             ];
 
-            $this->multicast(
+            $this->endpoint->multicast(
                 json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |

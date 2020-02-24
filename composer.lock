@@ -596,23 +596,23 @@
         },
         {
             "name": "amphp/http-server",
-            "version": "v2.0.0-rc4",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "2c3d5724b4b86f9a7fa7feed13a7c50e2bf8ad1b"
+                "reference": "5e75761240e33cc7c6ac9eff303aaf87df9125d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/2c3d5724b4b86f9a7fa7feed13a7c50e2bf8ad1b",
-                "reference": "2c3d5724b4b86f9a7fa7feed13a7c50e2bf8ad1b",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/5e75761240e33cc7c6ac9eff303aaf87df9125d9",
+                "reference": "5e75761240e33cc7c6ac9eff303aaf87df9125d9",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/byte-stream": "^1.3",
                 "amphp/hpack": "^3",
-                "amphp/http": "^1.6-rc1",
+                "amphp/http": "^1.6",
                 "amphp/socket": "^1",
                 "cash/lrucache": "^1",
                 "league/uri": "^6",
@@ -674,7 +674,7 @@
                 "non-blocking",
                 "server"
             ],
-            "time": "2020-01-04T18:10:10+00:00"
+            "time": "2020-02-18T15:52:29+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
@@ -809,29 +809,30 @@
         },
         {
             "name": "amphp/parallel",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parallel.git",
-                "reference": "53aa422eaf89a539b4df58284f7bdf5219e37f66"
+                "reference": "346d3f50939d3533a49ef161a0b9c8cca6eee809"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel/zipball/53aa422eaf89a539b4df58284f7bdf5219e37f66",
-                "reference": "53aa422eaf89a539b4df58284f7bdf5219e37f66",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/346d3f50939d3533a49ef161a0b9c8cca6eee809",
+                "reference": "346d3f50939d3533a49ef161a0b9c8cca6eee809",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
-                "amphp/byte-stream": "^1.5",
+                "amphp/byte-stream": "^1.6.1",
                 "amphp/parser": "^1",
                 "amphp/process": "^1",
-                "amphp/sync": "^1.0.1"
+                "amphp/sync": "^1.0.1",
+                "php": ">=7.1"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1",
-                "phpunit/phpunit": "^6"
+                "amphp/phpunit-util": "^1.1",
+                "phpunit/phpunit": "^8 || ^7"
             },
             "type": "library",
             "autoload": {
@@ -839,6 +840,8 @@
                     "Amp\\Parallel\\": "lib"
                 },
                 "files": [
+                    "lib/Context/functions.php",
+                    "lib/Sync/functions.php",
                     "lib/Worker/functions.php"
                 ]
             },
@@ -848,12 +851,12 @@
             ],
             "authors": [
                 {
-                    "name": "Stephen Coakley",
-                    "email": "me@stephencoakley.com"
-                },
-                {
                     "name": "Aaron Piotrowski",
                     "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Stephen Coakley",
+                    "email": "me@stephencoakley.com"
                 }
             ],
             "description": "Parallel processing component for Amp.",
@@ -865,7 +868,7 @@
                 "multi-processing",
                 "multi-threading"
             ],
-            "time": "2019-05-11T17:13:47+00:00"
+            "time": "2020-02-23T15:28:43+00:00"
         },
         {
             "name": "amphp/parser",
@@ -1283,16 +1286,16 @@
         },
         {
             "name": "amphp/websocket-server",
-            "version": "v2.0.0-rc1",
+            "version": "v2.0.0-rc2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-server.git",
-                "reference": "8c723e902a56a41eefbf30d7ee1475755743daa2"
+                "reference": "84b4923c64a2e1f9707ee712192e62b30d448d31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/8c723e902a56a41eefbf30d7ee1475755743daa2",
-                "reference": "8c723e902a56a41eefbf30d7ee1475755743daa2",
+                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/84b4923c64a2e1f9707ee712192e62b30d448d31",
+                "reference": "84b4923c64a2e1f9707ee712192e62b30d448d31",
                 "shasum": ""
             },
             "require": {
@@ -1302,7 +1305,7 @@
                 "amphp/http-server": "^2",
                 "amphp/socket": "^1",
                 "amphp/websocket": "^1",
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "require-dev": {
                 "amphp/http-client": "^4",
@@ -1310,11 +1313,9 @@
                 "amphp/http-server-static-content": "^1.0.4",
                 "amphp/log": "^1",
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/phpunit-util": "^1.1",
-                "infection/infection": "^0.9.3",
+                "amphp/phpunit-util": "^1.3",
                 "league/climate": "^3",
-                "league/uri-schemes": "^1.1",
-                "phpunit/phpunit": "^8 || ^7"
+                "phpunit/phpunit": "^9 || ^8 || ^7"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
@@ -1353,7 +1354,7 @@
                 "server",
                 "websocket"
             ],
-            "time": "2019-08-21T17:09:20+00:00"
+            "time": "2020-02-22T05:38:29+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -1581,12 +1582,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "ebd4245d9dca70ce9fbddb46ae8f749b189bd871"
+                "reference": "82599e686ebc1ab253089b3015b94143c9313853"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ebd4245d9dca70ce9fbddb46ae8f749b189bd871",
-                "reference": "ebd4245d9dca70ce9fbddb46ae8f749b189bd871",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/82599e686ebc1ab253089b3015b94143c9313853",
+                "reference": "82599e686ebc1ab253089b3015b94143c9313853",
                 "shasum": ""
             },
             "require": {
@@ -1673,7 +1674,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-15T21:03:41+00:00"
+            "time": "2020-02-23T18:30:11+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2672,12 +2673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0365bf26eddd4a8be9980d7dabf05ceb2aba2f02"
+                "reference": "1df6b9d09d2b074fd3f0f10a7696d9f797d4772c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0365bf26eddd4a8be9980d7dabf05ceb2aba2f02",
-                "reference": "0365bf26eddd4a8be9980d7dabf05ceb2aba2f02",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/1df6b9d09d2b074fd3f0f10a7696d9f797d4772c",
+                "reference": "1df6b9d09d2b074fd3f0f10a7696d9f797d4772c",
                 "shasum": ""
             },
             "conflict": {
@@ -2696,6 +2697,7 @@
                 "cakephp/cakephp": ">=1.3,<1.3.18|>=2,<2.4.99|>=2.5,<2.5.99|>=2.6,<2.6.12|>=2.7,<2.7.6|>=3,<3.5.18|>=3.6,<3.6.15|>=3.7,<3.7.7",
                 "cart2quote/module-quotation": ">=4.1.6,<=4.4.5|>=5,<5.4.4",
                 "cartalyst/sentry": "<=2.1.6",
+                "centreon/centreon": "<18.10.8|>=19,<19.4.5",
                 "cesnet/simplesamlphp-module-proxystatistics": "<3.1",
                 "codeigniter/framework": "<=3.0.6",
                 "composer/composer": "<=1-alpha.11",
@@ -2762,7 +2764,7 @@
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
                 "onelogin/php-saml": "<2.10.4",
-                "oneup/uploader-bundle": ">=1,<1.9.3|>=2,<2.1.5",
+                "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
@@ -2798,7 +2800,7 @@
                 "silverstripe/cms": "<4.3.6|>=4.4,<4.4.4",
                 "silverstripe/comments": ">=1.3,<1.9.99|>=2,<2.9.99|>=3,<3.1.1",
                 "silverstripe/forum": "<=0.6.1|>=0.7,<=0.7.3",
-                "silverstripe/framework": "<4.4.4",
+                "silverstripe/framework": "<4.4.5|>=4.5,<4.5.2",
                 "silverstripe/graphql": ">=2,<2.0.5|>=3,<3.1.2",
                 "silverstripe/registry": ">=2.1,<2.1.2|>=2.2,<2.2.1",
                 "silverstripe/restfulserver": ">=1,<1.0.9|>=2,<2.0.4",
@@ -2922,7 +2924,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2020-02-10T16:13:40+00:00"
+            "time": "2020-02-19T06:23:50+00:00"
         }
     ],
     "aliases": [],
