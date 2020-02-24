@@ -104,7 +104,13 @@ class Client
             throw new InvalidArgumentException('Session not found');
         }
 
+        $this->instances[$session]->setNoop();
         $this->instances[$session]->stop();
+
+        /** @see runSession() */
+        //Mark this session as not logged in, so no other actions will be made.
+        $this->instances[$session]->API->authorized = MTProto::NOT_LOGGED_IN;
+
         unset(
             $this->instances[$session],
             EventHandler::$instances[$session]
@@ -169,14 +175,14 @@ class Client
 
     private function runSession(MadelineProto\API $instance): void
     {
-        if (static::isSessionLoggedIn($instance)) {
-            Loop::defer(
-                function() use ($instance) {
+        Loop::defer(
+            function() use ($instance) {
+                if (static::isSessionLoggedIn($instance)) {
                     $instance->setEventHandler(EventHandler::class);
                     $this->loop($instance);
                 }
-            );
-        }
+            }
+        );
     }
 
     private function loop(MadelineProto\API $instance, callable $callback = null): void
