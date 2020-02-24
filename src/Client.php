@@ -178,6 +178,7 @@ class Client
         Loop::defer(
             function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
+                    yield $instance->start();
                     $instance->setEventHandler(EventHandler::class);
                     $this->loop($instance);
                 }
