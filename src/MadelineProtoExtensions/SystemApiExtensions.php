@@ -2,7 +2,9 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
+use Amp\Promise;
 use danog\MadelineProto;
+use danog\MadelineProto\MTProto;
 use TelegramApiServer\Client;
 use function Amp\call;
 
@@ -15,10 +17,13 @@ class SystemApiExtensions
         $this->client = $client;
     }
 
-    public function addSession(string $session, array $settings = []): array
+    public function addSession(string $session, array $settings = []): Promise
     {
-        $this->client->addSession($session, $settings);
-        return $this->getSessionList();
+        return call(function() use($session, $settings) {
+            $instance = $this->client->addSession($session, $settings);
+            yield $this->client->runSession($instance);
+            return $this->getSessionList();
+        });
     }
 
     public function removeSession(string $session): array
@@ -33,19 +38,19 @@ class SystemApiExtensions
         foreach ($this->client->instances as $session => $instance) {
             /** @var MadelineProto\API $instance */
             switch ($instance->API->authorized) {
-                case $instance->API::NOT_LOGGED_IN;
+                case MTProto::NOT_LOGGED_IN;
                     $status = 'NOT_LOGGED_IN';
                     break;
-                case $instance->API::WAITING_CODE:
+                case MTProto::WAITING_CODE:
                     $status = 'WAITING_CODE';
                     break;
-                case $instance->API::WAITING_PASSWORD:
+                case MTProto::WAITING_PASSWORD:
                     $status = 'WAITING_PASSWORD';
                     break;
-                case $instance->API::WAITING_SIGNUP:
+                case MTProto::WAITING_SIGNUP:
                     $status = 'WAITING_SIGNUP';
                     break;
-                case $instance->API::LOGGED_IN:
+                case MTProto::LOGGED_IN:
                     $status = 'LOGGED_IN';
                     break;
                 default:

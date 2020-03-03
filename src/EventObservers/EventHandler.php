@@ -2,7 +2,7 @@
 
 namespace TelegramApiServer\EventObservers;
 
-use danog\MadelineProto\API;
+use danog\MadelineProto\APIWrapper;
 use TelegramApiServer\Client;
 
 class EventHandler extends \danog\MadelineProto\EventHandler
@@ -10,7 +10,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
     public static array $instances = [];
     private string $sessionName;
 
-    public function __construct(API $MadelineProto)
+    public function __construct(APIWrapper $MadelineProto)
     {
         $this->sessionName = Client::getSessionName($MadelineProto->session);
         if (empty(static::$instances[$this->sessionName])) {

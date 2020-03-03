@@ -3,12 +3,14 @@
 namespace TelegramApiServer;
 
 use Amp\Loop;
+use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventHandler;
+use function Amp\call;
 
 class Client
 {
@@ -48,7 +50,7 @@ class Client
         return $matches['sessionName'] ?? null;
     }
 
-    public static function checkOrCreateSessionFolder($session): void
+    public static function checkOrCreateSessionFolder(string $session): void
     {
         $directory = dirname($session);
         if ($directory && $directory !== '.' && !is_dir($directory)) {
@@ -59,12 +61,12 @@ class Client
         }
     }
 
-    private static function isSessionLoggedIn($instance): bool
+    private static function isSessionLoggedIn(MadelineProto\API $instance): bool
     {
         return ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
     }
 
-    public function connect($sessionFiles): void
+    public function connect(array $sessionFiles): void
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
@@ -147,9 +149,9 @@ class Client
         return $this->instances[$session];
     }
 
-    private function startSessions(): void
+    private function startSessions(): Promise
     {
-        Loop::defer(
+        return call(
             function() {
                 foreach ($this->instances as $instance) {
                     if (!static::isSessionLoggedIn($instance)) {
@@ -173,14 +175,14 @@ class Client
         );
     }
 
-    private function runSession(MadelineProto\API $instance): void
+    public function runSession(MadelineProto\API $instance): Promise
     {
-        Loop::defer(
+        return call(
             function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
                     yield $instance->start();
-                    $instance->setEventHandler(EventHandler::class);
-                    $this->loop($instance);
+                    yield $instance->setEventHandler(EventHandler::class);
+                    Loop::defer(fn() => $this->loop($instance));
                 }
             }
         );

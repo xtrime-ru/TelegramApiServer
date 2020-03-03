@@ -447,16 +447,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.1.0",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9"
+                "reference": "fde074327fc3dc96ae580f41d61da03cb16e7095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9",
-                "reference": "a78fc655b4ab6a327ab210ce2d905ee1ce34d7a9",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/fde074327fc3dc96ae580f41d61da03cb16e7095",
+                "reference": "fde074327fc3dc96ae580f41d61da03cb16e7095",
                 "shasum": ""
             },
             "require": {
@@ -525,7 +525,7 @@
                 "non-blocking",
                 "rest"
             ],
-            "time": "2020-01-17T21:44:53+00:00"
+            "time": "2020-02-27T20:32:01+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -978,16 +978,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "cf56db51bff8570a0741f9de8f0922ef589642d3"
+                "reference": "020b65271596f84f4b3127d2eab81ad2790f9fb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/cf56db51bff8570a0741f9de8f0922ef589642d3",
-                "reference": "cf56db51bff8570a0741f9de8f0922ef589642d3",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/020b65271596f84f4b3127d2eab81ad2790f9fb6",
+                "reference": "020b65271596f84f4b3127d2eab81ad2790f9fb6",
                 "shasum": ""
             },
             "require": {
@@ -1005,6 +1005,11 @@
                 "phpunit/phpunit": "^6"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Amp\\Socket\\": "src"
@@ -1043,7 +1048,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2019-12-31T13:59:21+00:00"
+            "time": "2020-02-27T21:29:37+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1101,50 +1106,6 @@
                 "synchronization"
             ],
             "time": "2019-11-08T18:42:56+00:00"
-        },
-        {
-            "name": "amphp/uri",
-            "version": "v0.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/amphp/uri.git",
-                "reference": "30065946d5c69f44c8a47bf8838244029984ff61"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/amphp/uri/zipball/30065946d5c69f44c8a47bf8838244029984ff61",
-                "reference": "30065946d5c69f44c8a47bf8838244029984ff61",
-                "shasum": ""
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.3",
-                "phpunit/phpunit": "^6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Amp\\Uri\\": "src"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
-                    "name": "Daniel Lowrey"
-                }
-            ],
-            "description": "Uri Parser and Resolver.",
-            "homepage": "https://github.com/amphp/uri",
-            "time": "2019-05-13T18:25:34+00:00"
         },
         {
             "name": "amphp/websocket",
@@ -1582,12 +1543,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "82599e686ebc1ab253089b3015b94143c9313853"
+                "reference": "74187b81323f3529df2cb90eb3fbc2f9a64b5e8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/82599e686ebc1ab253089b3015b94143c9313853",
-                "reference": "82599e686ebc1ab253089b3015b94143c9313853",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/74187b81323f3529df2cb90eb3fbc2f9a64b5e8f",
+                "reference": "74187b81323f3529df2cb90eb3fbc2f9a64b5e8f",
                 "shasum": ""
             },
             "require": {
@@ -1598,7 +1559,6 @@
                 "amphp/http-client": "^4",
                 "amphp/http-client-cookies": "^1",
                 "amphp/socket": "^1",
-                "amphp/uri": "^0.1",
                 "danog/dns-over-https": "^0.2",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
@@ -1613,6 +1573,7 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-zlib": "*",
+                "league/uri": "^6",
                 "php": ">=7.4.0"
             },
             "conflict": {
@@ -1674,7 +1635,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-23T18:30:11+00:00"
+            "time": "2020-03-02T23:15:21+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2609,26 +2570,30 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "0176075a1b7ee9cf86f70143ec79edf7072c975a"
+                "reference": "32bd5ca5a4170f88e27073353013d210a3354ae9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/0176075a1b7ee9cf86f70143ec79edf7072c975a",
-                "reference": "0176075a1b7ee9cf86f70143ec79edf7072c975a",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/32bd5ca5a4170f88e27073353013d210a3354ae9",
+                "reference": "32bd5ca5a4170f88e27073353013d210a3354ae9",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5.9 || ^7.0",
-                "phpoption/phpoption": "^1.7.1",
+                "phpoption/phpoption": "^1.7.2",
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.3",
+                "ext-filter": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "suggest": {
+                "ext-filter": "Required to use the boolean validator."
             },
             "type": "library",
             "extra": {
@@ -2663,7 +2628,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-12-14T13:59:29+00:00"
+            "time": "2020-03-01T23:56:01+00:00"
         }
     ],
     "packages-dev": [
@@ -2673,12 +2638,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "1df6b9d09d2b074fd3f0f10a7696d9f797d4772c"
+                "reference": "f0eca1ac3194cc94726f0bb366672f38629272b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/1df6b9d09d2b074fd3f0f10a7696d9f797d4772c",
-                "reference": "1df6b9d09d2b074fd3f0f10a7696d9f797d4772c",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f0eca1ac3194cc94726f0bb366672f38629272b4",
+                "reference": "f0eca1ac3194cc94726f0bb366672f38629272b4",
                 "shasum": ""
             },
             "conflict": {
@@ -2693,6 +2658,7 @@
                 "bagisto/bagisto": "<0.1.5",
                 "bolt/bolt": "<3.6.10",
                 "brightlocal/phpwhois": "<=4.2.5",
+                "buddypress/buddypress": "<5.1.2",
                 "bugsnag/bugsnag-laravel": ">=2,<2.0.2",
                 "cakephp/cakephp": ">=1.3,<1.3.18|>=2,<2.4.99|>=2.5,<2.5.99|>=2.6,<2.6.12|>=2.7,<2.7.6|>=3,<3.5.18|>=3.6,<3.6.15|>=3.7,<3.7.7",
                 "cart2quote/module-quotation": ">=4.1.6,<=4.4.5|>=5,<5.4.4",
@@ -2721,15 +2687,15 @@
                 "drupal/core": ">=7,<7.69|>=8,<8.7.11|>=8.8,<8.8.1",
                 "drupal/drupal": ">=7,<7.69|>=8,<8.7.11|>=8.8,<8.8.1",
                 "endroid/qr-code-bundle": "<3.4.2",
-                "enshrined/svg-sanitize": "<0.12",
+                "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1|>=5.4,<5.4.11.1|>=2017.12,<2017.12.0.1",
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
                 "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
                 "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
-                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.13.1|>=6,<6.7.9.1|>=6.8,<6.13.5.1|>=7,<7.2.4.1|>=7.3,<7.3.2.1",
-                "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.12.3|>=2011,<2017.12.4.3|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3",
+                "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.1|>=6,<6.7.9.1|>=6.8,<6.13.6.2|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.6.2",
+                "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.1|>=2011,<2017.12.7.2|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.4.2",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
                 "firebase/php-jwt": "<2",
@@ -2796,7 +2762,7 @@
                 "serluck/phpwhois": "<=4.2.6",
                 "shopware/shopware": "<5.3.7",
                 "silverstripe/admin": ">=1.0.3,<1.0.4|>=1.1,<1.1.1",
-                "silverstripe/assets": ">=1,<1.3.5",
+                "silverstripe/assets": ">=1,<1.3.5|>=1.4,<1.4.4",
                 "silverstripe/cms": "<4.3.6|>=4.4,<4.4.4",
                 "silverstripe/comments": ">=1.3,<1.9.99|>=2,<2.9.99|>=3,<3.1.1",
                 "silverstripe/forum": "<=0.6.1|>=0.7,<=0.7.3",
@@ -2867,7 +2833,7 @@
                 "typo3/phar-stream-wrapper": ">=1,<2.1.1|>=3,<3.1.1",
                 "ua-parser/uap-php": "<3.8",
                 "usmanhalalit/pixie": "<1.0.3|>=2,<2.0.2",
-                "verot/class.upload.php": "<1.0.3|>=2,<2.0.4",
+                "verot/class.upload.php": "<=1.0.3|>=2,<=2.0.4",
                 "wallabag/tcpdf": "<6.2.22",
                 "willdurand/js-translation-bundle": "<2.1.1",
                 "yii2mod/yii2-cms": "<1.9.2",
@@ -2924,7 +2890,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2020-02-19T06:23:50+00:00"
+            "time": "2020-03-03T17:52:54+00:00"
         }
     ],
     "aliases": [],
