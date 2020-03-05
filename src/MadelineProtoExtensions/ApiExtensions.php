@@ -486,9 +486,9 @@ class ApiExtensions
         });
     }
 
-    public function setEventHandler(): void
+    public function setEventHandler(): Promise
     {
-        $this->madelineProto->setEventHandler(EventHandler::class);
+        return call(fn() => yield $this->madelineProto->setEventHandler(EventHandler::class));
     }
 
 }
