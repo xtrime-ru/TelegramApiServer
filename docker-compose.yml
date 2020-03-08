@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  telegram-api-server:
+    build: ./
+    image: telegram-api-server:latest
+    container_name: telegram-api-server
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9503:9503"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "1"

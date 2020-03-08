@@ -447,16 +447,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "fde074327fc3dc96ae580f41d61da03cb16e7095"
+                "reference": "7ab9ee09c29865133a54060267665c7ad7c6fb17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/fde074327fc3dc96ae580f41d61da03cb16e7095",
-                "reference": "fde074327fc3dc96ae580f41d61da03cb16e7095",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/7ab9ee09c29865133a54060267665c7ad7c6fb17",
+                "reference": "7ab9ee09c29865133a54060267665c7ad7c6fb17",
                 "shasum": ""
             },
             "require": {
@@ -525,7 +525,7 @@
                 "non-blocking",
                 "rest"
             ],
-            "time": "2020-02-27T20:32:01+00:00"
+            "time": "2020-03-07T18:12:27+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1482,6 +1482,70 @@
             "time": "2019-12-27T14:35:55+00:00"
         },
         {
+            "name": "danog/ipc",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/ipc.git",
+                "reference": "6971e4d61a5d61ba293f0ddf781ca67cd20c856f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/ipc/zipball/6971e4d61a5d61ba293f0ddf781ca67cd20c856f",
+                "reference": "6971e4d61a5d61ba293f0ddf781ca67cd20c856f",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/byte-stream": "^1",
+                "amphp/parser": "^1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "amphp/amp": "^2.4",
+                "amphp/parallel": "^1.3",
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.3",
+                "phpunit/phpunit": "^7 | ^8 | ^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Ipc\\": "lib"
+                },
+                "files": [
+                    "lib/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Stephen Coakley",
+                    "email": "me@stephencoakley.com"
+                }
+            ],
+            "description": "IPC component for Amp.",
+            "homepage": "https://github.com/danog/ipc",
+            "keywords": [
+                "async",
+                "asynchronous",
+                "concurrent",
+                "multi-processing",
+                "multi-threading"
+            ],
+            "time": "2020-03-06T13:15:43+00:00"
+        },
+        {
             "name": "danog/libdns-json",
             "version": "0.1.1",
             "source": {
@@ -1543,12 +1607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "32acc995811e4885dfbddc112c9a727030976f92"
+                "reference": "ce0e12c7472ebf57ec773905c9bf32d21bf2a023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/32acc995811e4885dfbddc112c9a727030976f92",
-                "reference": "32acc995811e4885dfbddc112c9a727030976f92",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ce0e12c7472ebf57ec773905c9bf32d21bf2a023",
+                "reference": "ce0e12c7472ebf57ec773905c9bf32d21bf2a023",
                 "shasum": ""
             },
             "require": {
@@ -1560,6 +1624,7 @@
                 "amphp/http-client-cookies": "^1",
                 "amphp/socket": "^1",
                 "danog/dns-over-https": "^0.2",
+                "danog/ipc": "^0.1",
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
                 "danog/tg-file-decoder": "^0.1",
@@ -1574,7 +1639,8 @@
                 "ext-xml": "*",
                 "ext-zlib": "*",
                 "league/uri": "^6",
-                "php": ">=7.4.0"
+                "php": ">=7.4.0",
+                "tivie/htaccess-parser": "^0.2.3"
             },
             "conflict": {
                 "krakjoe/pthreads-polyfill": "*"
@@ -1592,6 +1658,7 @@
                 "haydenpierce/class-finder": "^0.4",
                 "phpdocumentor/reflection-docblock": "^4.3",
                 "phpunit/phpunit": "^8",
+                "vimeo/psalm": "dev-master",
                 "vlucas/phpdotenv": "^3"
             },
             "suggest": {
@@ -1605,7 +1672,6 @@
                 "files": [
                     "src/BigIntegor.php",
                     "src/YieldReturnValue.php",
-                    "src/ReflectionGenerator.php",
                     "src/polyfill.php"
                 ]
             },
@@ -1635,7 +1701,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-03-04T00:08:19+00:00"
+            "time": "2020-03-08T16:36:29+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2567,6 +2633,51 @@
                 "portable"
             ],
             "time": "2020-01-13T11:15:53+00:00"
+        },
+        {
+            "name": "tivie/htaccess-parser",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tivie/php-htaccess-parser.git",
+                "reference": "36d89eeaa45c215a45e315765d7b64b333f5f8d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tivie/php-htaccess-parser/zipball/36d89eeaa45c215a45e315765d7b64b333f5f8d5",
+                "reference": "36d89eeaa45c215a45e315765d7b64b333f5f8d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.8.1",
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tivie\\HtaccessParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Estevão Soares dos Santos",
+                    "email": "estevao@soares-dos-santos.com"
+                }
+            ],
+            "description": "A .htaccess parser and validator implemented in PHP",
+            "homepage": "https://github.com/tivie/php-htaccess-parser",
+            "keywords": [
+                ".htaccess",
+                "htaccess"
+            ],
+            "time": "2017-10-21T03:19:48+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
