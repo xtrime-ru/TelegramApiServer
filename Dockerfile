@@ -3,9 +3,12 @@ FROM php:7.4-cli
 COPY . /app
 WORKDIR /app
 
-RUN pecl install apcu ev\
-    && docker-php-ext-enable apcu \
-    && docker-php-ext-enable ev \
+#Remove .git and other dirs and files
+RUN rm -rf .git/ .idea/ .DS_Store
+
+RUN pecl install apcu ev \
+    && docker-php-ext-enable apcu ev \
+    && echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/php.ini \
     && apt-get update && apt-get install git zip vim nano -y \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo
