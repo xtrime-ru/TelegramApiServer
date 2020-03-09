@@ -4,7 +4,7 @@ COPY . /app
 WORKDIR /app
 
 #Remove .git and other dirs and files
-RUN rm -rf .git/ .idea/ .DS_Store
+RUN rm -rf .git/ .idea/ .DS_Store sessions/ .env
 
 RUN pecl install apcu ev \
     && docker-php-ext-enable apcu ev \
@@ -21,7 +21,7 @@ RUN \
     | sed -e 's/IP_WHITELIST=127.0.0.1/IP_WHITELIST=/g' \
     > .env;
 
-VOLUME ["/app/sessions", "/app/.env:/app/.env"]
+VOLUME ["/app/sessions"]
 
 EXPOSE 9503
 
