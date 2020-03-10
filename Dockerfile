@@ -10,7 +10,7 @@ RUN echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/php.ini \
     && apt-get install git zip vim nano -y \
     && apt-get autoremove -y \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer global require hirak/prestissimo
+    && composer global require hirak/prestissimo \
     && composer install -o --no-dev
 
 VOLUME ["/app/sessions"]
