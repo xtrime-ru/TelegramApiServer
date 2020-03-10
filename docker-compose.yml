@@ -2,16 +2,16 @@ version: '3'
 services:
   telegram-api-server:
     build: ./
-    image: telegram-api-server:latest
+    image: xtrime/telegram-api-server:latest
     container_name: telegram-api-server
     restart: unless-stopped
     ports:
       - "127.0.0.1:9503:9503"
     volumes:
-      - ./sessions:/app/sessions
-      - ./.env:/app/.env
+      - ./:/app-host-link
+    working_dir: /app-host-link
     logging:
       driver: "json-file"
       options:
-        max-size: "1k"
-        max-file: "1"
+        max-size: "1024k"
+        max-file: "2"

@@ -3,11 +3,6 @@
 use TelegramApiServer\Migrations\SessionsMigration;
 use TelegramApiServer\Migrations\SwooleToAmpMigration;
 
-define('ROOT_DIR', __DIR__);
-chdir(ROOT_DIR);
-
-require_once ROOT_DIR . '/bootstrap.php';
-
 if (PHP_SAPI !== 'cli') {
     throw new RuntimeException('Start in CLI');
 }
@@ -17,6 +12,7 @@ $longopts = [
     'address::', // ip адресс сервера, необязательное значение
     'port::',  // порт сервера, необязательное значение
     'session::', //префикс session файла
+    'docker::', //сгенерировать docker-совместимый .env
     'help', //нужна ли справка?
 ];
 $options = getopt($shortopts, $longopts);
@@ -24,6 +20,7 @@ $options = [
     'address' => $options['address'] ?? $options['a'] ?? '',
     'port' => $options['port'] ?? $options['p'] ?? '',
     'session' => (array) ($options['session'] ?? $options['s'] ?? []),
+    'docker' => isset($options['docker']),
     'help' => isset($options['help']),
 ];
 
@@ -47,6 +44,8 @@ Options:
                     Nested folders supported.
                     See README for more examples.
 
+        --docker    Modify/Generate Docker compatible .env at first run
+
 Also all options can be set in .env file (see .env.example)
 
 Example:
@@ -56,6 +55,8 @@ Example:
     echo $help;
     exit;
 }
+
+require_once __DIR__ . '/bootstrap.php';
 
 SessionsMigration::move();
 SwooleToAmpMigration::check();

@@ -193,6 +193,8 @@ After authorization eventHandler need to be set, to receive updates for new sess
 * `http://127.0.0.1:9503/api/users/xtrime/setEventHandler`
 * `http://127.0.0.1:9503/api/bot/setEventHandler`
 
+Save new session to file immediately: `http://127.0.0.1:9503/api/bot/serialize`
+
 ### Websocket
 #### EventHandler updates (webhooks).
  
