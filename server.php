@@ -78,13 +78,11 @@ foreach ($options['session'] as $session) {
     }
 
     $sessions = array_filter($sessions);
-    foreach ($sessions as $file) {
-        $sessionFiles[$file] = null;
-    }
+    $sessions = array_unique($sessions);
 }
 
 new TelegramApiServer\Server\Server(
     new TelegramApiServer\Client(),
     $options,
-    array_keys($sessionFiles)
+    $sessions
 );

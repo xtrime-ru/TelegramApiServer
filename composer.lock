@@ -679,16 +679,16 @@
         },
         {
             "name": "amphp/http-server-form-parser",
-            "version": "v1.1.3",
+            "version": "v1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-form-parser.git",
-                "reference": "f26313797fb5ffd936c8fa865fde61523b6d05f2"
+                "reference": "657d945ebc4d5a3b1ea7b1d25c52fb2fdb118f1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/f26313797fb5ffd936c8fa865fde61523b6d05f2",
-                "reference": "f26313797fb5ffd936c8fa865fde61523b6d05f2",
+                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/657d945ebc4d5a3b1ea7b1d25c52fb2fdb118f1d",
+                "reference": "657d945ebc4d5a3b1ea7b1d25c52fb2fdb118f1d",
                 "shasum": ""
             },
             "require": {
@@ -696,12 +696,13 @@
                 "amphp/byte-stream": "^1.3",
                 "amphp/http": "^1",
                 "amphp/http-server": "^2 || ^1 || ^0.8",
-                "php": ">=7"
+                "php": ">=7.1"
             },
             "require-dev": {
+                "amphp/log": "^1.0",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1.2",
-                "phpunit/phpunit": "^8 || ^7 || ^6"
+                "phpunit/phpunit": "^9 || ^8 || ^7 || ^6"
             },
             "type": "library",
             "autoload": {
@@ -743,7 +744,7 @@
                 "http",
                 "non-blocking"
             ],
-            "time": "2019-12-13T15:52:33+00:00"
+            "time": "2020-03-24T20:17:15+00:00"
         },
         {
             "name": "amphp/http-server-router",
@@ -1608,12 +1609,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "ae00a307a0de4713753922ff1c41848d0707c809"
+                "reference": "6720ffff7989215b3828399b84f45878f3f0aa30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ae00a307a0de4713753922ff1c41848d0707c809",
-                "reference": "ae00a307a0de4713753922ff1c41848d0707c809",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/6720ffff7989215b3828399b84f45878f3f0aa30",
+                "reference": "6720ffff7989215b3828399b84f45878f3f0aa30",
                 "shasum": ""
             },
             "require": {
@@ -1703,7 +1704,7 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-03-20T15:24:20+00:00"
+            "time": "2020-03-28T10:42:02+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2539,16 +2540,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
                 "shasum": ""
             },
             "require": {
@@ -2582,20 +2583,20 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-11-01T11:05:21+00:00"
+            "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
                 "shasum": ""
             },
             "require": {
@@ -2607,7 +2608,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -2640,7 +2641,21 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
             "name": "tivie/htaccess-parser",
@@ -2689,16 +2704,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v4.1.2",
+            "version": "v4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "939dfda2d7267ac8fc53ac3d642b5de357554c39"
+                "reference": "88f7acc95150bca002a498899f8b52f318e444c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/939dfda2d7267ac8fc53ac3d642b5de357554c39",
-                "reference": "939dfda2d7267ac8fc53ac3d642b5de357554c39",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/88f7acc95150bca002a498899f8b52f318e444c2",
+                "reference": "88f7acc95150bca002a498899f8b52f318e444c2",
                 "shasum": ""
             },
             "require": {
@@ -2709,10 +2724,12 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.3",
                 "ext-filter": "*",
+                "ext-pcre": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
             },
             "suggest": {
-                "ext-filter": "Required to use the boolean validator."
+                "ext-filter": "Required to use the boolean validator.",
+                "ext-pcre": "Required to use most of the library."
             },
             "type": "library",
             "extra": {
@@ -2753,7 +2770,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-03-12T13:44:15+00:00"
+            "time": "2020-03-27T23:37:15+00:00"
         }
     ],
     "packages-dev": [
