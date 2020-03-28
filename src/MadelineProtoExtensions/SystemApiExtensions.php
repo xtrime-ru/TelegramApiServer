@@ -6,6 +6,7 @@ use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
 use TelegramApiServer\Client;
+use TelegramApiServer\Files;
 use function Amp\call;
 
 class SystemApiExtensions
@@ -60,7 +61,7 @@ class SystemApiExtensions
 
             $sessions[$session] = [
                 'session' => $session,
-                'file' => Client::getSessionFile($session),
+                'file' => Files::getSessionFile($session),
                 'status' => $status,
             ];
         }
@@ -74,7 +75,7 @@ class SystemApiExtensions
     public function removeSessionFile($session)
     {
         return call(static function() use($session) {
-            $file = Client::getSessionFile($session);
+            $file = Files::getSessionFile($session);
             if (is_file($file)) {
                 yield \Amp\File\unlink($file);
                 yield \Amp\File\unlink($file . '.lock');

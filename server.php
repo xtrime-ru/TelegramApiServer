@@ -1,5 +1,6 @@
 <?php
 
+use TelegramApiServer\Files;
 use TelegramApiServer\Migrations\SessionsMigration;
 use TelegramApiServer\Migrations\SwooleToAmpMigration;
 
@@ -68,10 +69,10 @@ foreach ($options['session'] as $session) {
         throw new InvalidArgumentException('Session name specified as directory');
     }
 
-    $session = TelegramApiServer\Client::getSessionFile($session);
+    $session = Files::getSessionFile($session);
 
     if (preg_match('~[' . preg_quote('*?[]!', '~') . ']~', $session)) {
-        $sessions = glob($session);
+        $sessions = Files::globRecursive($session);
     } else {
         $sessions[] = $session;
     }

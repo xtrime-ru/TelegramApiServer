@@ -3,7 +3,7 @@
 namespace TelegramApiServer\EventObservers;
 
 use danog\MadelineProto\APIWrapper;
-use TelegramApiServer\Client;
+use TelegramApiServer\Files;
 
 class EventHandler extends \danog\MadelineProto\EventHandler
 {
@@ -12,7 +12,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 
     public function __construct(APIWrapper $MadelineProto)
     {
-        $this->sessionName = Client::getSessionName($MadelineProto->session);
+        $this->sessionName = Files::getSessionName($MadelineProto->session);
         if (empty(static::$instances[$this->sessionName])) {
             static::$instances[$this->sessionName] = true;
             parent::__construct($MadelineProto);

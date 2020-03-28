@@ -14,52 +14,8 @@ use function Amp\call;
 
 class Client
 {
-    public static string $sessionExtension = '.madeline';
-    public static string $sessionFolder = 'sessions';
     /** @var MadelineProto\API[] */
     public array $instances = [];
-
-    /**
-     * @param string|null $session
-     *
-     * @return string|null
-     */
-    public static function getSessionFile(?string $session): ?string
-    {
-        if (!$session) {
-            return null;
-        }
-        $session = trim(trim($session), '/');
-        $session = static::$sessionFolder . '/' . $session . static::$sessionExtension;
-        $session = str_replace('//', '/', $session);
-        return $session;
-    }
-
-    public static function getSessionName(?string $sessionFile): ?string
-    {
-        if (!$sessionFile) {
-            return null;
-        }
-
-        preg_match(
-            '~' . static::$sessionFolder . "/(?'sessionName'.*?)" . static::$sessionExtension . '$~',
-            $sessionFile,
-            $matches
-        );
-
-        return $matches['sessionName'] ?? null;
-    }
-
-    public static function checkOrCreateSessionFolder(string $session): void
-    {
-        $directory = dirname($session);
-        if ($directory && $directory !== '.' && !is_dir($directory)) {
-            $parentDirectoryPermissions = fileperms(ROOT_DIR);
-            if (!mkdir($directory, $parentDirectoryPermissions, true) && !is_dir($directory)) {
-                throw new RuntimeException(sprintf('Directory "%s" was not created', $directory));
-            }
-        }
-    }
 
     private static function isSessionLoggedIn(MadelineProto\API $instance): bool
     {
@@ -71,7 +27,7 @@ class Client
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
         foreach ($sessionFiles as $file) {
-            $sessionName = static::getSessionName($file);
+            $sessionName = Files::getSessionName($file);
             $instance = $this->addSession($sessionName);
             $this->runSession($instance);
         }
@@ -90,8 +46,8 @@ class Client
         if (isset($this->instances[$session])) {
             throw new InvalidArgumentException('Session already exists');
         }
-        $file = static::getSessionFile($session);
-        static::checkOrCreateSessionFolder($file);
+        $file = Files::getSessionFile($session);
+        Files::checkOrCreateSessionFolder($file);
         $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
@@ -190,7 +146,7 @@ class Client
 
     private function loop(MadelineProto\API $instance, callable $callback = null): void
     {
-        $sessionName = static::getSessionName($instance->session);
+        $sessionName = Files::getSessionName($instance->session);
         try {
             $callback ? $instance->loop($callback) : $instance->loop();
         } catch (\Throwable $e) {
