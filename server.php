@@ -62,7 +62,7 @@ require_once __DIR__ . '/bootstrap.php';
 SessionsMigration::move();
 SwooleToAmpMigration::check();
 
-$sessionFiles = [];
+$sessions = [];
 foreach ($options['session'] as $session) {
     $session = trim($session);
     if (mb_substr($session, -1) === '/') {
