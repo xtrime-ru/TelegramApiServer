@@ -330,7 +330,13 @@ class ApiExtensions
                 if ($message['media']['_'] !== 'messageMediaWebPage') {
                     $info = yield $this->madelineProto->getDownloadInfo($message);
                 } else {
-                    return new Response(302, ['Location' => $message['media']['webpage']['embed_url']]);
+                    $webpage = $message['media']['webpage'];
+                    if (!empty($webpage['embed_url'])) {
+                        return new Response(302, ['Location' => $webpage['embed_url']]);
+                    } else {
+                        $info = yield $this->madelineProto->getDownloadInfo($webpage['photo']);
+                    }
+
                 }
 
                 if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
