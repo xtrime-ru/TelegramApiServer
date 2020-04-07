@@ -20,10 +20,13 @@ Fast, simple, async php telegram api server:
  
 ## Installation
 
+Docker: https://hub.docker.com/r/xtrime/telegram-api-server
+
+Manual: 
 1. Git clone this repo
 1. `composer install -o --no-dev` to install required libs
 1. Create .env from .env.example
-1. Fill variables in .env
+1. Fill .env
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/) or leave blank.
    MadelineProto will generate them on start.
 
