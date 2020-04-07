@@ -7,6 +7,7 @@ namespace TelegramApiServer\MadelineProtoExtensions;
 use Amp\ByteStream\InMemoryStream;
 use Amp\Http\Server\FormParser\File;
 use Amp\Http\Server\Request;
+use Amp\Http\Server\Response;
 use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\TL\Conversion\BotAPI;
@@ -97,14 +98,14 @@ class ApiExtensions
      *
      * @return bool
      */
-    private static function hasMedia(array $message = []): bool
+    private static function hasMedia(array $message = [], bool $allowWebPage = false): bool
     {
         $mediaType = $message['media']['_'] ?? null;
-        if (
-            $mediaType === null
-            || $mediaType === 'messageMediaWebPage'
-        ) {
+        if ($mediaType === null) {
             return false;
+        }
+        if ($mediaType === 'messageMediaWebPage') {
+            return $allowWebPage;
         }
 
         return true;
@@ -301,7 +302,7 @@ class ApiExtensions
      *
      * @param array $data
      *
-     * @return Promise
+     * @return Promise<Response>
      */
     public function getMedia(array $data): Promise
     {
@@ -322,11 +323,15 @@ class ApiExtensions
                     throw new UnexpectedValueException('Empty message');
                 }
 
-                if (!static::hasMedia($message)) {
+                if (!static::hasMedia($message, true)) {
                     throw new UnexpectedValueException('Message has no media');
                 }
 
-                $info = yield $this->madelineProto->getDownloadInfo($message);
+                if ($message['media']['_'] !== 'messageMediaWebPage') {
+                    $info = yield $this->madelineProto->getDownloadInfo($message);
+                } else {
+                    return new Response(302, ['Location' => $message['media']['webpage']['embed_url']]);
+                }
 
                 if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
                     throw new OutOfRangeException(
@@ -364,7 +369,7 @@ class ApiExtensions
                     throw new UnexpectedValueException('Empty message');
                 }
 
-                if (!static::hasMedia($message)) {
+                if (!static::hasMedia($message, true)) {
                     throw new UnexpectedValueException('Message has no media');
                 }
 
@@ -387,6 +392,10 @@ class ApiExtensions
 
                 }
                 $info = yield $this->madelineProto->getDownloadInfo($thumb);
+
+                if ($media['_'] === 'webPage') {
+                    $media = $media['photo'];
+                }
 
                 //Фикс для LAYER 100+
                 //TODO: Удалить, когда снова станет доступна загрузка photoSize
