@@ -146,8 +146,9 @@ abstract class AbstractApiController
         } catch (\Throwable $e) {
             error($e->getMessage(), [
                 'exception' => get_class($e),
+                'code' => $e->getCode(),
                 'file' => $e->getFile(),
-                'line' => $e->getLine()
+                'line' => $e->getLine(),
             ]);
             $this->setError($e);
         }
@@ -202,8 +203,11 @@ abstract class AbstractApiController
         }
 
         $this->page['errors'][] = [
-            'code' => $errorCode,
             'message' => $e->getMessage(),
+            'exception' => get_class($e),
+            'code' => $e->getCode(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
         ];
 
         return $this;

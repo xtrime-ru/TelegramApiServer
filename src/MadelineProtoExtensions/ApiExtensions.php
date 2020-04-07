@@ -97,15 +97,16 @@ class ApiExtensions
      *
      * @return bool
      */
-    private static function hasMedia(array $message = [], bool $allowWebPage = true): bool
+    private static function hasMedia(array $message = []): bool
     {
-        $media = $message['media'] ?? [];
-        if (empty($media['_'])) {
+        $mediaType = $message['media']['_'] ?? null;
+        if (
+            $mediaType === null
+            || $mediaType === 'messageMediaWebPage'
+        ) {
             return false;
         }
-        if ($media['_'] === 'messageMediaWebPage') {
-            return $allowWebPage;
-        }
+
         return true;
     }
 
@@ -194,7 +195,7 @@ class ApiExtensions
                         'peer' => $data['to_peer'],
                         'entities' => $message['entities'] ?? [],
                     ];
-                    if (static::hasMedia($message, false)) {
+                    if (static::hasMedia($message)) {
                         $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
                         $result[] = yield $this->sendMedia($messageData);
                     } else {

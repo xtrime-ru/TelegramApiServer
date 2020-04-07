@@ -155,7 +155,7 @@ class Client
                 [
                     'session' => $sessionName,
                     'exception' => [
-                        'message' => $e->getMessage(),
+                        'exception' => get_class($e),
                         'code' => $e->getCode(),
                         'file' => $e->getFile(),
                         'line' => $e->getLine(),

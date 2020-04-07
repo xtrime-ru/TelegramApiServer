@@ -42,7 +42,6 @@ class Server
             } catch (\Throwable $e) {
                 alert($e->getMessage(), [
                     'exception' => [
-                        'message' => $e->getMessage(),
                         'code' => $e->getCode(),
                         'file' => $e->getFile(),
                         'line' => $e->getLine(),
