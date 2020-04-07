@@ -104,7 +104,7 @@ class ApiExtensions
         if ($mediaType === null) {
             return false;
         }
-        if ($mediaType === 'messageMediaWebPage') {
+        if ($mediaType === 'messageMediaWebPage' && !empty($message['media']['webpage']['photo'])) {
             return $allowWebPage;
         }
 
