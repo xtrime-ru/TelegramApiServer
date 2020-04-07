@@ -333,10 +333,13 @@ class ApiExtensions
                     $webpage = $message['media']['webpage'];
                     if (!empty($webpage['embed_url'])) {
                         return new Response(302, ['Location' => $webpage['embed_url']]);
-                    } else {
+                    } elseif(!empty($webpage['document'])) {
+                        $info = yield $this->madelineProto->getDownloadInfo($webpage['document']);
+                    } elseif(!empty($webpage['photo'])) {
                         $info = yield $this->madelineProto->getDownloadInfo($webpage['photo']);
+                    } else {
+                        return yield $this->getMediaPreview($data);
                     }
-
                 }
 
                 if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
