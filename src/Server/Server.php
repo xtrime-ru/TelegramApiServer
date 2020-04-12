@@ -47,7 +47,10 @@ class Server
                         'line' => $e->getLine(),
                     ],
                 ]);
-                exit;
+
+                foreach ($client->getBrokenSessions() as $session) {
+                    $client->removeSession($session);
+                }
             }
         }
 

@@ -153,7 +153,7 @@ class Client
             critical(
                 $e->getMessage(),
                 [
-                    'session' => $sessionName,
+                    'probable_session' => $sessionName,
                     'exception' => [
                         'exception' => get_class($e),
                         'code' => $e->getCode(),
@@ -162,11 +162,26 @@ class Client
                     ],
                 ]
             );
-            $this->removeSession($sessionName);
-            if (count($this->instances) === 0) {
-                throw new RuntimeException('Last session stopped. Need restart.');
+            foreach ($this->getBrokenSessions() as $session) {
+                $this->removeSession($session);
             }
         }
+    }
+
+    public function getBrokenSessions(): array
+    {
+        $brokenSessions = [];
+        foreach ($this->instances as $session => $instance) {
+            warning("Checking session: {$session}");
+            try {
+                $instance->getSelf(['async' => false]);
+            } catch (\Throwable $e) {
+                warning("Session is broken: {$session}");
+                $brokenSessions[] = $session;
+            }
+        }
+
+        return $brokenSessions;
     }
 
 }
