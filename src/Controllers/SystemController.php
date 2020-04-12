@@ -3,6 +3,7 @@
 namespace TelegramApiServer\Controllers;
 
 use Amp\Promise;
+use TelegramApiServer\Client;
 
 class SystemController extends AbstractApiController
 {
@@ -23,7 +24,7 @@ class SystemController extends AbstractApiController
      */
     protected function callApi()
     {
-        $madelineProtoExtensions = new $this->extensionClass($this->client);
+        $madelineProtoExtensions = new $this->extensionClass(Client::getInstance());
         $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         return $result;
     }

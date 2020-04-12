@@ -82,7 +82,6 @@ foreach ($options['session'] as $session) {
 }
 
 new TelegramApiServer\Server\Server(
-    new TelegramApiServer\Client(),
     $options,
     $sessions
 );

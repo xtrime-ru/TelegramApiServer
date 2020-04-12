@@ -12,16 +12,15 @@ class Server
     /**
      * Server constructor.
      *
-     * @param Client $client
      * @param array $options
      * @param array|null $sessionFiles
      */
-    public function __construct(Client $client, array $options, ?array $sessionFiles)
+    public function __construct(array $options, ?array $sessionFiles)
     {
-        Amp\Loop::defer(function () use ($client, $options, $sessionFiles) {
+        Amp\Loop::defer(function () use ($options, $sessionFiles) {
             $server = new Amp\Http\Server\Server(
                 $this->getServerAddresses(static::getConfig($options)),
-                (new Router($client))->getRouter(),
+                (new Router())->getRouter(),
                 Logger::getInstance(),
                 (new Amp\Http\Server\Options())
                     ->withCompression()
@@ -31,7 +30,7 @@ class Server
             );
 
             $server->start();
-            $client->connect($sessionFiles);
+            Client::getInstance()->connect($sessionFiles);
 
             $this->registerShutdown($server);
         });
@@ -41,15 +40,11 @@ class Server
                 Amp\Loop::run();
             } catch (\Throwable $e) {
                 alert($e->getMessage(), [
-                    'exception' => [
-                        'code' => $e->getCode(),
-                        'file' => $e->getFile(),
-                        'line' => $e->getLine(),
-                    ],
+                    'exception' => Logger::getExceptionAsArray($e),
                 ]);
 
-                foreach ($client->getBrokenSessions() as $session) {
-                    $client->removeSession($session);
+                foreach (Client::getInstance()->getBrokenSessions() as $session) {
+                    Client::getInstance()->removeSession($session);
                 }
             }
         }

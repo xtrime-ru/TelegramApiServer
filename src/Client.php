@@ -10,12 +10,21 @@ use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventHandler;
+use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
 
 class Client
 {
+    public static Client $self;
     /** @var MadelineProto\API[] */
     public array $instances = [];
+
+    public static function getInstance(): Client {
+        if (empty(static::$self)) {
+            static::$self = new static();
+        }
+        return static::$self;
+    }
 
     private static function isSessionLoggedIn(MadelineProto\API $instance): bool
     {
@@ -62,17 +71,14 @@ class Client
             throw new InvalidArgumentException('Session not found');
         }
 
-        $this->instances[$session]->setNoop();
+        EventObserver::stopEventHandler($session);
         $this->instances[$session]->stop();
 
         /** @see runSession() */
         //Mark this session as not logged in, so no other actions will be made.
         $this->instances[$session]->API->authorized = MTProto::NOT_LOGGED_IN;
 
-        unset(
-            $this->instances[$session],
-            EventHandler::$instances[$session]
-        );
+        unset($this->instances[$session]);
     }
 
     /**
@@ -80,11 +86,11 @@ class Client
      *
      * @return MadelineProto\API
      */
-    public function getInstance(?string $session = null): MadelineProto\API
+    public function getSession(?string $session = null): MadelineProto\API
     {
         if (!$this->instances) {
             throw new RuntimeException(
-                'No sessions available. Use combinedApi or restart server with --session option'
+                'No sessions available. Call /system/addSession?session=%session_name% or restart server with --session option'
             );
         }
 
@@ -137,7 +143,6 @@ class Client
             function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
                     yield $instance->start();
-                    yield $instance->setEventHandler(EventHandler::class);
                     Loop::defer(fn() => $this->loop($instance));
                 }
             }
@@ -154,12 +159,7 @@ class Client
                 $e->getMessage(),
                 [
                     'probable_session' => $sessionName,
-                    'exception' => [
-                        'exception' => get_class($e),
-                        'code' => $e->getCode(),
-                        'file' => $e->getFile(),
-                        'line' => $e->getLine(),
-                    ],
+                    'exception' => Logger::getExceptionAsArray($e),
                 ]
             );
             foreach ($this->getBrokenSessions() as $session) {

@@ -154,4 +154,14 @@ class Logger extends AbstractLogger
                     : ''
             ) . PHP_EOL;
     }
+
+    public static function getExceptionAsArray(\Throwable $exception) {
+        return [
+            'exception' => get_class($exception),
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'code' => $exception->getCode(),
+        ];
+    }
 }

@@ -7,31 +7,31 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use Amp\Success;
+use Amp\Websocket\Client as WebsocketClient;
 use Amp\Websocket\Server\ClientHandler;
-use Amp\Websocket\Server\Websocket;
+use Amp\Websocket\Server\Websocket as WebsocketServer;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
 
 class EventsController implements ClientHandler
 {
-    private Client $client;
-    private ?Websocket $endpoint;
+    private ?WebsocketServer $endpoint;
 
-    public static function getRouterCallback(Client $client): Websocket
+
+    public static function getRouterCallback(): WebsocketServer
     {
         $class = new static();
-        $class->client = $client;
-        return  new Websocket($class);
+        return  new WebsocketServer($class);
     }
 
-    public function onStart(Websocket $endpoint): Promise
+    public function onStart(WebsocketServer $endpoint): Promise
     {
         $this->endpoint = $endpoint;
         return new Success;
     }
 
-    public function onStop(Websocket $endpoint): Promise
+    public function onStop(WebsocketServer $endpoint): Promise
     {
         $this->endpoint = null;
         return new Success;
@@ -42,7 +42,7 @@ class EventsController implements ClientHandler
         try {
             $session = $request->getAttribute(Router::class)['session'] ?? null;
             if ($session) {
-                $this->client->getInstance($session);
+                Client::getInstance()->getSession($session);
             }
         }  catch (\Throwable $e){
             $response->setStatus(400);
@@ -51,11 +51,11 @@ class EventsController implements ClientHandler
         return new Success($response);
     }
 
-    public function handleClient(\Amp\Websocket\Client $client, Request $request, Response $response): Promise
+    public function handleClient(WebsocketClient $client, Request $request, Response $response): Promise
     {
         return call(function() use($client, $request) {
             $requestedSession = $request->getAttribute(Router::class)['session'] ?? null;
-            $this->subscribeForUpdates($client, $requestedSession);
+            yield from $this->subscribeForUpdates($client, $requestedSession);
 
             while ($message = yield $client->receive()) {
                 // Messages received on the connection are ignored and discarded.
@@ -64,12 +64,15 @@ class EventsController implements ClientHandler
         });
     }
 
-    private function subscribeForUpdates(\Amp\Websocket\Client $client, ?string $requestedSession): void
+    private function subscribeForUpdates(WebsocketClient $client, ?string $requestedSession): \Generator
     {
         $clientId = $client->getId();
 
-        $client->onClose(static function() use($clientId) {
+        yield EventObserver::startEventHandler($requestedSession);
+
+        $client->onClose(static function() use($clientId, $requestedSession) {
             EventObserver::removeSubscriber($clientId);
+            EventObserver::stopEventHandler($requestedSession);
         });
 
         EventObserver::addSubscriber($clientId, function($update, ?string $session) use($clientId, $requestedSession) {

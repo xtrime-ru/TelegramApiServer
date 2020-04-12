@@ -4,7 +4,6 @@ namespace TelegramApiServer\Server;
 
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
-use TelegramApiServer\Client;
 use TelegramApiServer\Controllers\LogController;
 use TelegramApiServer\Controllers\SystemController;
 use TelegramApiServer\Controllers\ApiController;
@@ -18,10 +17,10 @@ class Router
 {
     private \Amp\Http\Server\Router $router;
 
-    public function __construct(Client $client)
+    public function __construct()
     {
         $this->router = new \Amp\Http\Server\Router();
-        $this->setRoutes($client);
+        $this->setRoutes();
         $this->setFallback();
     }
 
@@ -37,12 +36,12 @@ class Router
         }));
     }
 
-    private function setRoutes($client): void
+    private function setRoutes(): void
     {
         $authorization = new Authorization();
-        $apiHandler = stack(ApiController::getRouterCallback($client, ApiExtensions::class), $authorization);
-        $systemApiHandler = stack(SystemController::getRouterCallback($client, SystemApiExtensions::class), $authorization);
-        $eventsHandler = stack(EventsController::getRouterCallback($client), $authorization);
+        $apiHandler = stack(ApiController::getRouterCallback(ApiExtensions::class), $authorization);
+        $systemApiHandler = stack(SystemController::getRouterCallback(SystemApiExtensions::class), $authorization);
+        $eventsHandler = stack(EventsController::getRouterCallback(), $authorization);
         $logHandler = stack(LogController::getRouterCallback(), $authorization);
 
         foreach (['GET', 'POST'] as $method) {

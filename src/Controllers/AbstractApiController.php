@@ -14,7 +14,7 @@ use Amp\Promise;
 use danog\MadelineProto\API;
 use danog\MadelineProto\CombinedAPI;
 use danog\MadelineProto\TON\API as TonAPI;
-use TelegramApiServer\Client;
+use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 
@@ -22,7 +22,6 @@ abstract class AbstractApiController
 {
     public const JSON_HEADER = ['Content-Type'=>'application/json;charset=utf-8'];
 
-    protected Client $client;
     protected Request $request;
     protected ?File $file = null;
     protected $extensionClass;
@@ -41,11 +40,11 @@ abstract class AbstractApiController
     abstract protected function resolvePath(array $path);
     abstract protected function callApi();
 
-    public static function getRouterCallback(Client $client, $extensionClass): CallableRequestHandler
+    public static function getRouterCallback($extensionClass): CallableRequestHandler
     {
         return new CallableRequestHandler(
-            static function (Request $request) use($client, $extensionClass) {
-                $requestCallback = new static($client, $request, $extensionClass);
+            static function (Request $request) use($extensionClass) {
+                $requestCallback = new static($request, $extensionClass);
                 $response = yield from $requestCallback->process();
 
                 if ($response instanceof Response) {
@@ -60,9 +59,8 @@ abstract class AbstractApiController
         );
     }
 
-    public function __construct(Client $client, Request $request, $extensionClass = null)
+    public function __construct(Request $request, $extensionClass = null)
     {
-        $this->client = $client;
         $this->request = $request;
         $this->extensionClass = $extensionClass;
     }
@@ -144,12 +142,7 @@ abstract class AbstractApiController
             }
 
         } catch (\Throwable $e) {
-            error($e->getMessage(), [
-                'exception' => get_class($e),
-                'code' => $e->getCode(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-            ]);
+            error($e->getMessage(), Logger::getExceptionAsArray($e));
             $this->setError($e);
         }
 
@@ -202,13 +195,7 @@ abstract class AbstractApiController
             $this->setPageCode(400);
         }
 
-        $this->page['errors'][] = [
-            'message' => $e->getMessage(),
-            'exception' => get_class($e),
-            'code' => $e->getCode(),
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-        ];
+        $this->page['errors'][] = Logger::getExceptionAsArray($e);
 
         return $this;
     }
