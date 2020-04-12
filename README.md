@@ -192,10 +192,6 @@ User:
 Bot:
 * `http://127.0.0.1:9503/api/bot/botLogin?token=34298141894:aflknsaflknLKNFS`
 
-After authorization eventHandler need to be set, to receive updates for new session in `/events` websocket:
-* `http://127.0.0.1:9503/api/users/xtrime/setEventHandler`
-* `http://127.0.0.1:9503/api/bot/setEventHandler`
-
 Save new session to file immediately: `http://127.0.0.1:9503/api/bot/serialize`
 
 ### Websocket
