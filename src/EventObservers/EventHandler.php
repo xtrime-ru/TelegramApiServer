@@ -23,6 +23,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
     public function __destruct()
     {
         unset(static::$instances[$this->sessionName]);
+        $this->setNoop();
         warning("Event observer DESTRUCTED: {$this->sessionName}");
     }
 
