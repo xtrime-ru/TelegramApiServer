@@ -71,7 +71,7 @@ class Client
             throw new InvalidArgumentException('Session not found');
         }
 
-        EventObserver::stopEventHandler($session, true);
+        EventObserver::stopEventHandler($session);
         $this->instances[$session]->stop();
 
         /** @see runSession() */
@@ -124,7 +124,7 @@ class Client
                                 $logLevel = Logger::getInstance()->minLevelIndex;
                                 Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::EMERGENCY];
 
-                                $instance->start(['async'=>false]);
+                                yield $instance->start();
 
                                 //Enable logging to stdout
                                 Logger::getInstance()->minLevelIndex = $logLevel;
@@ -142,7 +142,7 @@ class Client
         return call(
             function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
-                    $instance->start(['async'=>false]);
+                    yield $instance->start();
                     Loop::defer(fn() => $this->loop($instance));
                 }
             }
@@ -152,21 +152,34 @@ class Client
     private function loop(MadelineProto\API $instance, callable $callback = null): void
     {
         $sessionName = Files::getSessionName($instance->session);
+        $this->getSessionState($instance);
         try {
             $callback ? $instance->loop($callback) : $instance->loop();
         } catch (\Throwable $e) {
             critical(
                 $e->getMessage(),
                 [
+                    'probable_session' => $sessionName,
                     'exception' => Logger::getExceptionAsArray($e),
                 ]
             );
-            foreach ($this->getBrokenSessions() as $session) {
-                $this->removeSession($session);
-            }
+
         }
     }
-
+    public function getSessionState(MadelineProto\API $instance): bool {
+        warning("Checking session {$instance->session}");
+        $instance->async(false);
+        try {
+            $test = $instance->users->getUsers(["id"=>[777000]]);
+        } catch (\danog\MadelineProto\RPCErrorException $e) {
+            critical("Something went wrong on session {$instance->session}. Deleting him..");
+            $this->removeSession($instance->session);
+            return false;
+        }
+        $instance->async(true);
+        critical("Checking {$instance->session} finished without errors.");
+        return true;        
+    }
     public function getBrokenSessions(): array
     {
         $brokenSessions = [];
