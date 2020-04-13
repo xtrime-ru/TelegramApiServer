@@ -145,7 +145,7 @@ class Client
                         while (static::isSessionLoggedIn($instance)) {
                             try {
                                 $instance->loop();
-                                warning('Update loop stopped: ' . $instance->session);
+                                warning('Update loop stopped: ' . Files::getSessionName($instance->session));
                             } catch (\Throwable $e) {
                                 error('Error in Madeline Loop.', Logger::getExceptionAsArray($e));
                                 Client::getInstance()->removeBrokenSessions();

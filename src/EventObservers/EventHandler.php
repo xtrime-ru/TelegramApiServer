@@ -31,6 +31,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         if (empty(static::$instances[$this->sessionName])) {
             warning("Sending stop signal: {$this->sessionName}");
             $this->stop();
+            $this->unsetEventHandler();
             $this->setNoop();
             return;
         }
