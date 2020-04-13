@@ -21,9 +21,8 @@ $root = __DIR__;
 
 //Config init
 {
-
     if (!getenv('SERVER_ADDRESS')) {
-        if ($options['docker'] || !file_exists(ROOT_DIR . '/.env')) {
+        if ($options['docker']) {
             $envSource = file_exists(ROOT_DIR . '/.env') ? ROOT_DIR . '/.env' : ROOT_DIR . '/.env.example';
             $envContent = file_get_contents($envSource);
             $envContent = str_replace(
@@ -32,6 +31,8 @@ $root = __DIR__;
                 $envContent
             );
             file_put_contents(ROOT_DIR . '/.env', $envContent);
+        } elseif (!file_exists(ROOT_DIR . '/.env')) {
+            copy( ROOT_DIR . '/.env.example', ROOT_DIR . '/.env');
         }
 
         Dotenv\Dotenv::createImmutable(ROOT_DIR)->load();
