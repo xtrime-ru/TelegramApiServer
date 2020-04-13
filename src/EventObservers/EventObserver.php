@@ -65,7 +65,7 @@ class EventObserver
         });
     }
 
-    public static function stopEventHandler(?string $requestedSession = null): void
+    public static function stopEventHandler(?string $requestedSession = null, bool $force = false): void
     {
         $sessions = [];
         if ($requestedSession === null) {
@@ -75,7 +75,7 @@ class EventObserver
         }
         foreach ($sessions as $session) {
             static::removeSessionClient($session);
-            if (empty(static::$sessionClients[$session])) {
+            if (empty(static::$sessionClients[$session]) || $force) {
                 warning("Stop EventHandler: {$session}");
                 Client::getInstance()->getSession($session)->setNoop();
                 unset(EventHandler::$instances[$session]);

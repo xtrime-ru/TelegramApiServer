@@ -71,7 +71,7 @@ class Client
             throw new InvalidArgumentException('Session not found');
         }
 
-        EventObserver::stopEventHandler($session);
+        EventObserver::stopEventHandler($session, true);
         $this->instances[$session]->stop();
 
         /** @see runSession() */
