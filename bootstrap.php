@@ -37,17 +37,18 @@ $root = __DIR__;
 {
 
     if (!getenv('SERVER_ADDRESS')) {
-        if ($options['docker'] && !file_exists(ROOT_DIR . '/.env')) {
+        if (!file_exists(ROOT_DIR . '/.env')) {
             $envSource = file_exists(ROOT_DIR . '/.env') ? ROOT_DIR . '/.env' : ROOT_DIR . '/.env.example';
             $envContent = file_get_contents($envSource);
-            $envContent = str_replace(
-                ['SERVER_ADDRESS=127.0.0.1', 'IP_WHITELIST=127.0.0.1'],
-                ['SERVER_ADDRESS=0.0.0.0', 'IP_WHITELIST='],
-                $envContent
-            );
+            if (isset($options['docker'])) {
+                $envContent = str_replace(
+                    ['SERVER_ADDRESS=127.0.0.1', 'IP_WHITELIST=127.0.0.1'],
+                    ['SERVER_ADDRESS=0.0.0.0', 'IP_WHITELIST='],
+                    $envContent
+                );
+            }
             file_put_contents(ROOT_DIR . '/.env', $envContent);
         }
-
         Dotenv\Dotenv::createImmutable(ROOT_DIR)->load();
     }
 }
