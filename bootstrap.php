@@ -23,7 +23,7 @@ $root = __DIR__;
 {
 
     if (!getenv('SERVER_ADDRESS')) {
-        if ($options['docker'] || !file_exists(ROOT_DIR . '/.env')) {
+        if ($options['docker'] && !file_exists(ROOT_DIR . '/.env')) {
             $envSource = file_exists(ROOT_DIR . '/.env') ? ROOT_DIR . '/.env' : ROOT_DIR . '/.env.example';
             $envContent = file_get_contents($envSource);
             $envContent = str_replace(
