@@ -124,7 +124,7 @@ class Client
                                 $logLevel = Logger::getInstance()->minLevelIndex;
                                 Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::EMERGENCY];
 
-                                yield $instance->start();
+                                $instance->start(['async'=>false]);
 
                                 //Enable logging to stdout
                                 Logger::getInstance()->minLevelIndex = $logLevel;
@@ -142,7 +142,7 @@ class Client
         return call(
             function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
-                    yield $instance->start();
+                    $instance->start(['async'=>false]);
                     Loop::defer(fn() => $this->loop($instance));
                 }
             }
@@ -158,7 +158,6 @@ class Client
             critical(
                 $e->getMessage(),
                 [
-                    'probable_session' => $sessionName,
                     'exception' => Logger::getExceptionAsArray($e),
                 ]
             );
