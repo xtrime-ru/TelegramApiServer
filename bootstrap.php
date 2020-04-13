@@ -10,7 +10,21 @@ $root = __DIR__;
         if (file_exists(__DIR__ . '/../../..' . '/vendor/autoload.php')) {
             $root = __DIR__ . '/../../..';
         } else {
-            system('composer install -o --no-dev');
+            if (system("composer 2>/dev/null") == "") {
+                $mdn = getpwd();
+                chdir(dirname(__FILE__));
+                echo("Installing composer..".PHP_EOL);
+                $actual_sha = file_get_contents("https://composer.github.io/installer.sig");
+                copy('https://getcomposer.org/installer', './composer-setup.php');
+                if (hash_file('sha384', './composer-setup.php') == $actual_sha) {
+                    system("php ./composer-setup.php");
+                    unlink("composer-setup.php");
+                }
+                echo("Installation is finished.");
+                system('php composer.phar install -o --no-dev');
+                chdir($mdn);
+            }
+            else system('composer install -o --no-dev');
         }
     }
 
@@ -23,7 +37,7 @@ $root = __DIR__;
 {
 
     if (!getenv('SERVER_ADDRESS')) {
-        if ($options['docker'] || !file_exists(ROOT_DIR . '/.env')) {
+        if ($options['docker'] && !file_exists(ROOT_DIR . '/.env')) {
             $envSource = file_exists(ROOT_DIR . '/.env') ? ROOT_DIR . '/.env' : ROOT_DIR . '/.env.example';
             $envContent = file_get_contents($envSource);
             $envContent = str_replace(
