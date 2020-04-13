@@ -73,7 +73,6 @@ class Client
         }
 
         EventObserver::stopEventHandler($session, true);
-        $this->instances[$session]->stop();
 
         /** @see startLoggedInSession() */
         //Mark this session as not logged in, so no other actions will be made.
@@ -141,6 +140,17 @@ class Client
             static function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
                     yield $instance->start();
+                    Loop::defer(static function() use($instance) {
+                        while (static::isSessionLoggedIn($instance)) {
+                            try {
+                                $instance->loop();
+                                warning('Update loop stopped: ' . $instance->session);
+                            } catch (\Throwable $e) {
+                                error('Error in Madeline Loop.', Logger::getExceptionAsArray($e));
+                                Client::getInstance()->removeBrokenSessions();
+                            }
+                        }
+                    });
                 }
             }
         );

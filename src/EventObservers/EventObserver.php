@@ -53,8 +53,8 @@ class EventObserver
                 static::addSessionClient($session);
                 if (static::$sessionClients[$session] === 1) {
                     warning("Start EventHandler: {$session}");
-                    $instance = Client::getInstance()->getSession($session);
                     try {
+                        $instance = Client::getInstance()->getSession($session);
                         yield $instance->setEventHandler(EventHandler::class);
                     } catch (\Throwable $e) {
                         static::removeSessionClient($session);
@@ -63,8 +63,6 @@ class EventObserver
                             'exception' => Logger::getExceptionAsArray($e)
                         ]);
                     }
-
-                    static::startEventLoop($instance, $session);
                 }
             }
         });
@@ -82,26 +80,11 @@ class EventObserver
             static::removeSessionClient($session);
             if (empty(static::$sessionClients[$session]) || $force) {
                 warning("Stopping EventHandler: {$session}");
+                /** @see \TelegramApiServer\EventObservers\EventHandler::onAny */
                 unset(EventHandler::$instances[$session], static::$sessionClients[$session]);
             }
         }
 
-    }
-
-    private static function startEventLoop(API $instance, string $session): void
-    {
-        Loop::defer(static function() use($instance, $session) {
-            while (static::$sessionClients[$session] > 0) {
-                try {
-                    $instance->loop();
-                    Client::getInstance()->getSession($session)->setNoop();
-                    warning("Update loop stopped: {$session}");
-                } catch (\Throwable $e) {
-                    error('Error in events update loop. Restart.');
-                    Client::getInstance()->removeBrokenSessions();
-                }
-            }
-        });
     }
 
 }

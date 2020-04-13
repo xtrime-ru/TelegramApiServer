@@ -39,7 +39,7 @@ class Server
             try {
                 Amp\Loop::run();
             } catch (\Throwable $e) {
-                alert($e->getMessage(), [
+                alert('Error in main Amp Loop', [
                     'exception' => Logger::getExceptionAsArray($e),
                 ]);
 

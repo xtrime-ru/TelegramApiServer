@@ -31,9 +31,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         if (empty(static::$instances[$this->sessionName])) {
             warning("Sending stop signal: {$this->sessionName}");
             $this->stop();
-            /** @uses \TelegramApiServer\EventObservers\EventObserver::startEventLoop
-             *         После остановки loop() будет выполнен код из коллбека.
-             */
+            $this->setNoop();
             return;
         }
         info("Received update from session: {$this->sessionName}");
