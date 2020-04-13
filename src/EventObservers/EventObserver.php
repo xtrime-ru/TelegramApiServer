@@ -3,7 +3,9 @@
 namespace TelegramApiServer\EventObservers;
 
 
+use Amp\Loop;
 use Amp\Promise;
+use danog\MadelineProto\API;
 use TelegramApiServer\Client;
 use TelegramApiServer\Logger;
 use function Amp\call;
@@ -50,9 +52,10 @@ class EventObserver
             foreach ($sessions as $session) {
                 static::addSessionClient($session);
                 if (static::$sessionClients[$session] === 1) {
+                    warning("Start EventHandler: {$session}");
+                    $instance = Client::getInstance()->getSession($session);
                     try {
-                        warning("Start EventHandler: {$session}");
-                        yield Client::getInstance()->getSession($session)->setEventHandler(EventHandler::class);
+                        yield $instance->setEventHandler(EventHandler::class);
                     } catch (\Throwable $e) {
                         static::removeSessionClient($session);
                         error('Cant set EventHandler', [
@@ -60,6 +63,8 @@ class EventObserver
                             'exception' => Logger::getExceptionAsArray($e)
                         ]);
                     }
+
+                    static::startEventLoop($instance, $session);
                 }
             }
         });
@@ -76,12 +81,27 @@ class EventObserver
         foreach ($sessions as $session) {
             static::removeSessionClient($session);
             if (empty(static::$sessionClients[$session]) || $force) {
-                warning("Stop EventHandler: {$session}");
-                Client::getInstance()->getSession($session)->setNoop();
-                unset(EventHandler::$instances[$session]);
+                warning("Stopping EventHandler: {$session}");
+                unset(EventHandler::$instances[$session], static::$sessionClients[$session]);
             }
         }
 
+    }
+
+    private static function startEventLoop(API $instance, string $session): void
+    {
+        Loop::defer(static function() use($instance, $session) {
+            while (static::$sessionClients[$session] > 0) {
+                try {
+                    $instance->loop();
+                    Client::getInstance()->getSession($session)->setNoop();
+                    warning("Update loop stopped: {$session}");
+                } catch (\Throwable $e) {
+                    error('Error in events update loop. Restart.');
+                    Client::getInstance()->removeBrokenSessions();
+                }
+            }
+        });
     }
 
 }

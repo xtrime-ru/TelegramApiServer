@@ -28,6 +28,14 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 
     public function onAny($update): void
     {
+        if (empty(static::$instances[$this->sessionName])) {
+            warning("Sending stop signal: {$this->sessionName}");
+            $this->stop();
+            /** @uses \TelegramApiServer\EventObservers\EventObserver::startEventLoop
+             *         После остановки loop() будет выполнен код из коллбека.
+             */
+            return;
+        }
         info("Received update from session: {$this->sessionName}");
         EventObserver::notify($update, $this->sessionName);
     }

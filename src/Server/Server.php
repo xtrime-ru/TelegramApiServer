@@ -43,9 +43,7 @@ class Server
                     'exception' => Logger::getExceptionAsArray($e),
                 ]);
 
-                foreach (Client::getInstance()->getBrokenSessions() as $session) {
-                    Client::getInstance()->removeSession($session);
-                }
+                Client::getInstance()->removeBrokenSessions();
             }
         }
 

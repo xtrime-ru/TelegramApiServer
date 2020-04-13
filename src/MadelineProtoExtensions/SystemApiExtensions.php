@@ -22,7 +22,7 @@ class SystemApiExtensions
     {
         return call(function() use($session, $settings) {
             $instance = $this->client->addSession($session, $settings);
-            yield $this->client->runSession($instance);
+            yield $this->client->startLoggedInSession($instance);
             return $this->getSessionList();
         });
     }

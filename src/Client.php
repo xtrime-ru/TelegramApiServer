@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer;
 
+use Amp\Delayed;
 use Amp\Loop;
 use Amp\Promise;
 use danog\MadelineProto;
@@ -9,7 +10,6 @@ use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use RuntimeException;
-use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
 
@@ -18,6 +18,7 @@ class Client
     public static Client $self;
     /** @var MadelineProto\API[] */
     public array $instances = [];
+    private bool $sessionCheckRunning = false;
 
     public static function getInstance(): Client {
         if (empty(static::$self)) {
@@ -38,10 +39,10 @@ class Client
         foreach ($sessionFiles as $file) {
             $sessionName = Files::getSessionName($file);
             $instance = $this->addSession($sessionName);
-            $this->runSession($instance);
+            $this->startLoggedInSession($instance);
         }
 
-        $this->startSessions();
+        $this->startNotLoggedInSessions();
 
         $sessionsCount = count($sessionFiles);
         warning(
@@ -74,7 +75,7 @@ class Client
         EventObserver::stopEventHandler($session, true);
         $this->instances[$session]->stop();
 
-        /** @see runSession() */
+        /** @see startLoggedInSession() */
         //Mark this session as not logged in, so no other actions will be made.
         $this->instances[$session]->API->authorized = MTProto::NOT_LOGGED_IN;
 
@@ -111,76 +112,80 @@ class Client
         return $this->instances[$session];
     }
 
-    private function startSessions(): Promise
+    private function startNotLoggedInSessions(): Promise
     {
         return call(
             function() {
                 foreach ($this->instances as $instance) {
                     if (!static::isSessionLoggedIn($instance)) {
-                        $this->loop(
-                            $instance,
-                            static function() use ($instance) {
-                                //Disable logging to stdout
-                                $logLevel = Logger::getInstance()->minLevelIndex;
-                                Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::EMERGENCY];
+                        {
+                            //Disable logging to stdout
+                            $logLevel = Logger::getInstance()->minLevelIndex;
+                            Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::EMERGENCY];
 
-                                $instance->start(['async'=>false]);
+                            yield $instance->start();
 
-                                //Enable logging to stdout
-                                Logger::getInstance()->minLevelIndex = $logLevel;
-                            }
-                        );
-                        $this->runSession($instance);
+                            //Enable logging to stdout
+                            Logger::getInstance()->minLevelIndex = $logLevel;
+                        }
+                        $this->startLoggedInSession($instance);
                     }
                 }
             }
         );
     }
 
-    public function runSession(MadelineProto\API $instance): Promise
+    public function startLoggedInSession(MadelineProto\API $instance): Promise
     {
         return call(
-            function() use ($instance) {
+            static function() use ($instance) {
                 if (static::isSessionLoggedIn($instance)) {
-                    $instance->start(['async'=>false]);
-                    Loop::defer(fn() => $this->loop($instance));
+                    yield $instance->start();
                 }
             }
         );
     }
 
-    private function loop(MadelineProto\API $instance, callable $callback = null): void
+    public function removeBrokenSessions(): void
     {
-        $sessionName = Files::getSessionName($instance->session);
-        try {
-            $callback ? $instance->loop($callback) : $instance->loop();
-        } catch (\Throwable $e) {
-            critical(
-                $e->getMessage(),
-                [
-                    'exception' => Logger::getExceptionAsArray($e),
-                ]
-            );
-            foreach ($this->getBrokenSessions() as $session) {
-                $this->removeSession($session);
+        Loop::defer(function() {
+            if (!$this->sessionCheckRunning) {
+                $this->sessionCheckRunning = true;
+                foreach (yield static::getInstance()->getBrokenSessions() as $session) {
+                    static::getInstance()->removeSession($session);
+                }
+                $this->sessionCheckRunning = false;
             }
-        }
+        });
     }
 
-    public function getBrokenSessions(): array
+    private function getBrokenSessions(): Promise
     {
-        $brokenSessions = [];
-        foreach ($this->instances as $session => $instance) {
-            warning("Checking session: {$session}");
-            try {
-                $instance->getSelf(['async' => false]);
-            } catch (\Throwable $e) {
-                warning("Session is broken: {$session}");
-                $brokenSessions[] = $session;
+        return call(function() {
+            $brokenSessions = [];
+            foreach ($this->instances as $session => $instance) {
+                if (!static::checkSession($session, $instance)) {
+                    $brokenSessions[] = $session;
+                    yield new Delayed(1000);
+                }
             }
+
+            return $brokenSessions;
+        });
+
+    }
+
+    private static function checkSession(string $session, MadelineProto\API $instance): bool
+    {
+        warning("Checking session: {$session}");
+        try {
+            $instance->getSelf(['async' => false]);
+        } catch (\Throwable $e) {
+            error("Session is broken: {$session}");
+            return false;
         }
 
-        return $brokenSessions;
+        return true;
     }
 
 }
