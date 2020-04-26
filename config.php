@@ -34,6 +34,16 @@ $settings = [
             'serialization_interval' => 300,
             'cleanup_before_serialization' => true,
         ],
+        'db' => [
+            'type' => getenv('DB_TYPE'),
+            'mysql' => [
+                'host' => getenv('MYSQL_HOST'),
+                'port' => (int) getenv('MYSQL_PORT'),
+                'user' => getenv('MYSQL_USER'),
+                'password' => getenv('MYSQL_PASSWORD'),
+                'database' => getenv('MYSQL_DATABASE')
+            ]
+        ],
         'download'=>[
             'report_broken_media' => false,
         ]
