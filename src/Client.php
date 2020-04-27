@@ -42,7 +42,7 @@ class Client
             $this->startLoggedInSession($sessionName);
         }
 
-        $this->startNotLoggedInSessions();
+        Loop::defer(fn() => yield $this->startNotLoggedInSessions());
 
         $sessionsCount = count($sessionFiles);
         warning(

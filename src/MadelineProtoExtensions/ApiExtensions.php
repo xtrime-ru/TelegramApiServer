@@ -79,11 +79,12 @@ class ApiExtensions
         return call(
             function() use ($data) {
                 $response = yield $this->getHistory($data);
-
-                foreach ($response['messages'] as &$message) {
-                    $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
+                if (!empty($response['messages'])) {
+                    foreach ($response['messages'] as &$message) {
+                        $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
+                    }
+                    unset($message);
                 }
-                unset($message);
 
                 return $response;
             }
