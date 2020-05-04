@@ -41,7 +41,9 @@ $settings = [
                 'port' => (int) getenv('MYSQL_PORT'),
                 'user' => getenv('MYSQL_USER'),
                 'password' => getenv('MYSQL_PASSWORD'),
-                'database' => getenv('MYSQL_DATABASE')
+                'database' => getenv('MYSQL_DATABASE'),
+                'max_connections' => (int) getenv('MYSQL_MAX_CONNECTIONS'),
+                'idle_timeout' => (int) getenv('MYSQL_IDLE_TIMEOUT'),
             ]
         ],
         'download'=>[
