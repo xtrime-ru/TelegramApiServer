@@ -61,7 +61,7 @@ class ApiExtensions
                 'limit' => 0,
                 'max_id' => 0,
                 'min_id' => 0,
-                'hash' => 0,
+                'hash' => [],
             ],
             $data
         );
@@ -127,20 +127,37 @@ class ApiExtensions
             'messageEntityUrl' => '<a href="%s" target="_blank" rel="nofollow">%s</a>',
         ];
 
-        $entities = array_reverse($entities);
-        foreach ($entities as $entity) {
+        foreach ($entities as $key => &$entity) {
             if (isset($html[$entity['_']])) {
+
                 $text = static::mbSubstr($message, $entity['offset'], $entity['length']);
 
+                $template = $html[$entity['_']];
                 if (in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
-                    $textFormate = sprintf($html[$entity['_']], $entity['url'] ?? $text, $text);
+                    $textFormated = sprintf($template, strip_tags($entity['url'] ?? $text), $text);
                 } else {
-                    $textFormate = sprintf($html[$entity['_']], $text);
+                    $textFormated = sprintf($template, $text);
                 }
 
-                $message = static::substringReplace($message, $textFormate, $entity['offset'], $entity['length']);
+                $message = static::substringReplace($message, $textFormated, $entity['offset'], $entity['length']);
+
+                //Увеличим оффсеты всех следующих entity
+                foreach ($entities as $nextKey => &$nextEntity) {
+                    if ($nextKey <= $key) {
+                        continue;
+                    }
+                    if ($nextEntity['offset'] < ($entity['offset'] + $entity['length'])) {
+                        $nextEntity['offset'] += static::mbStrlen(
+                            preg_replace('~(\>).*<\/.*$~', '$1', $textFormated)
+                        );
+                    } else {
+                        $nextEntity['offset'] += static::mbStrlen($textFormated) - static::mbStrlen($text);
+                    }
+                }
+                unset($nextEntity);
             }
         }
+        unset($entity);
         $message = nl2br($message);
         return $message;
     }
