@@ -3,9 +3,8 @@
 namespace TelegramApiServer\Controllers;
 
 use Amp\ByteStream\ResourceInputStream;
-use Amp\Http\Server\FormParser\BufferingParser;
-use Amp\Http\Server\FormParser\File;
-use Amp\Http\Server\FormParser\Form;
+use Amp\Http\Server\FormParser\StreamedField;
+use Amp\Http\Server\FormParser\StreamingParser;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use Amp\Http\Server\Response;
@@ -23,7 +22,7 @@ abstract class AbstractApiController
     public const JSON_HEADER = ['Content-Type'=>'application/json;charset=utf-8'];
 
     protected Request $request;
-    protected ?File $file = null;
+    protected ?StreamedField $file = null;
     protected $extensionClass;
 
 
@@ -94,12 +93,20 @@ abstract class AbstractApiController
         switch (true) {
             case $contentType === 'application/x-www-form-urlencoded':
             case mb_strpos($contentType, 'multipart/form-data') !== false:
-                /** @var Form $form */
-                $form = yield (new BufferingParser())->parseForm($this->request);
-                $post = $form->getValues();
-                $fileName = array_key_first($form->getFiles());
-                if ($fileName) {
-                    $this->file = $form->getFile($fileName);
+                $form = (new StreamingParser())->parseForm($this->request);
+                $post = [];
+
+                while (yield $form->advance()) {
+                    /** @var StreamedField $field */
+                    $field = $form->getCurrent();
+                    if ($field->isFile()) {
+                        $this->file = $field;
+                        //We need to break loop without getting file
+                        //All other post field will be omitted, hope we dont need them :)
+                        break;
+                    } else {
+                        $post[$field->getName()] = yield $field->buffer();
+                    }
                 }
                 break;
             case $contentType === 'application/json':

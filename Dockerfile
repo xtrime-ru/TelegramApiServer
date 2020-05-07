@@ -3,8 +3,7 @@ FROM php:7.4-cli
 COPY . /app
 WORKDIR /app
 
-RUN echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/php.ini \
-    && pecl install apcu ev \
+RUN pecl install apcu ev \
     && docker-php-ext-enable apcu ev \
     && apt-get update && apt-get upgrade -y \
     && apt-get install git zip vim nano -y \

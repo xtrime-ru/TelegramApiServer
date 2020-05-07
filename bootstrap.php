@@ -39,6 +39,11 @@ $root = __DIR__;
     }
 }
 
+$memoryLimit = getenv('MEMORY_LIMIT');
+if ($memoryLimit !== false) {
+    ini_set('memory_limit', $memoryLimit);
+}
+
 if (!function_exists('debug')) {
     function debug(string $message, array $context) {
         Logger::getInstance()->debug($message, $context);

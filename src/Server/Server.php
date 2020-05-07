@@ -24,7 +24,7 @@ class Server
                 Logger::getInstance(),
                 (new Amp\Http\Server\Options())
                     ->withCompression()
-                    ->withBodySizeLimit(30*1024*1024)
+                    ->withBodySizeLimit(2*1000*1024*1024)//2Gb
                     ->withHttp1Timeout(600)
                     ->withHttp2Timeout(600)
             );

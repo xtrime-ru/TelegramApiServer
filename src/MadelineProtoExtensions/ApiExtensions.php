@@ -4,8 +4,8 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 
-use Amp\ByteStream\InMemoryStream;
-use Amp\Http\Server\FormParser\File;
+use Amp\ByteStream\IteratorStream;
+use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Promise;
@@ -22,9 +22,9 @@ class ApiExtensions
 
     private MadelineProto\Api $madelineProto;
     private Request $request;
-    private ?File $file;
+    private ?StreamedField $file;
 
-    public function __construct(MadelineProto\Api $madelineProto, Request $request, ?File $file)
+    public function __construct(MadelineProto\Api $madelineProto, Request $request, ?StreamedField $file)
     {
         $this->madelineProto = $madelineProto;
         $this->request = $request;
@@ -484,10 +484,10 @@ class ApiExtensions
             $media = [];
             if ($this->file !== null) {
                 $inputFile = yield $this->madelineProto->uploadFromStream(
-                    new InMemoryStream($this->file->getContents()),
-                    strlen($this->file->getContents()),
+                    $this->file,
+                    0,
                     $this->file->getMimeType(),
-                    $this->file->getName()
+                    $this->file->getFilename()
                 );
                 $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
                 $media = [
@@ -495,7 +495,7 @@ class ApiExtensions
                         '_' => 'inputMediaUploadedDocument',
                         'file' => $inputFile,
                         'attributes' => [
-                            ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getName()]
+                            ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getFilename()]
                         ]
                     ]
                 ];
