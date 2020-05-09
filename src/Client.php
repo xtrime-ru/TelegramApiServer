@@ -38,8 +38,8 @@ class Client
 
         foreach ($sessionFiles as $file) {
             $sessionName = Files::getSessionName($file);
-            $instance = $this->addSession($sessionName);
-            $this->startLoggedInSession($instance);
+            $this->addSession($sessionName);
+            $this->startLoggedInSession($sessionName);
         }
 
         $this->startNotLoggedInSessions();
@@ -67,7 +67,7 @@ class Client
         return $instance;
     }
 
-    public function removeSession($session): void
+    public function removeSession(string $session): void
     {
         if (empty($this->instances[$session])) {
             throw new InvalidArgumentException('Session not found');
@@ -75,11 +75,12 @@ class Client
 
         EventObserver::stopEventHandler($session, true);
 
-        /** @see startLoggedInSession() */
-        //Mark this session as not logged in, so no other actions will be made.
-        $this->instances[$session]->API->authorized = MTProto::NOT_LOGGED_IN;
-
+        $instance = $this->instances[$session];
         unset($this->instances[$session]);
+
+        $instance->unsetEventHandler();
+        $instance->stop();
+        gc_collect_cycles();
     }
 
     /**
@@ -116,7 +117,7 @@ class Client
     {
         return call(
             function() {
-                foreach ($this->instances as $instance) {
+                foreach ($this->instances as $name => $instance) {
                     if (!static::isSessionLoggedIn($instance)) {
                         {
                             //Disable logging to stdout
@@ -128,24 +129,25 @@ class Client
                             //Enable logging to stdout
                             Logger::getInstance()->minLevelIndex = $logLevel;
                         }
-                        $this->startLoggedInSession($instance);
+                        $this->startLoggedInSession($name);
                     }
                 }
             }
         );
     }
 
-    public function startLoggedInSession(MadelineProto\API $instance): Promise
+    public function startLoggedInSession(string $sessionName): Promise
     {
         return call(
-            static function() use ($instance) {
-                if (static::isSessionLoggedIn($instance)) {
-                    yield $instance->start();
-                    Loop::defer(static function() use($instance) {
-                        while (static::isSessionLoggedIn($instance)) {
+            function() use ($sessionName) {
+                if (static::isSessionLoggedIn($this->instances[$sessionName])) {
+                    yield $this->instances[$sessionName]->start();
+                    Loop::defer(function() use($sessionName) {
+                        while (!empty($this->instances[$sessionName]) && static::isSessionLoggedIn($this->instances[$sessionName])) {
                             try {
-                                $instance->loop();
-                                warning('Update loop stopped: ' . Files::getSessionName($instance->session));
+                                warning('Loop started: ' . $sessionName);
+                                $this->instances[$sessionName]->loop();
+                                warning('Loop stopped: ' . $sessionName);
                             } catch (\Throwable $e) {
                                 error('Error in Madeline Loop.', Logger::getExceptionAsArray($e));
                                 Client::getInstance()->removeBrokenSessions();

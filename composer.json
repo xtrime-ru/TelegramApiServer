@@ -12,7 +12,7 @@
     "amphp/http-server": "^2",
     "amphp/http-server-router": "^1",
     "amphp/websocket-server": "^2",
-    "amphp/websocket-client": "dev-master#53f7883b325b09864095300ec8ff81e84e772c3b",
+    "amphp/websocket-client": "dev-master",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"dev-master",
     "amphp/http-server-form-parser": "^1.1"
@@ -32,5 +32,10 @@
     "psr-4": {
       "TelegramApiServer\\": "src/"
     }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "cd vendor/danog/madelineproto/ && git submodule init && git submodule update"
+    ]
   }
 }

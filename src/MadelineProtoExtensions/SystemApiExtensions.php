@@ -21,8 +21,8 @@ class SystemApiExtensions
     public function addSession(string $session, array $settings = []): Promise
     {
         return call(function() use($session, $settings) {
-            $instance = $this->client->addSession($session, $settings);
-            yield $this->client->startLoggedInSession($instance);
+            $this->client->addSession($session, $settings);
+            yield $this->client->startLoggedInSession($session);
             return $this->getSessionList();
         });
     }

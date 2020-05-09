@@ -29,8 +29,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
     public function onAny($update): void
     {
         if (empty(static::$instances[$this->sessionName])) {
-            warning("Sending stop signal: {$this->sessionName}");
-            $this->stop();
+            warning("unsetEventHandler: {$this->sessionName}");
             $this->unsetEventHandler();
             return;
         }

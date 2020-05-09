@@ -60,7 +60,7 @@ class EventObserver
                         static::removeSessionClient($session);
                         error('Cant set EventHandler', [
                             'session' => $session,
-                            'exception' => Logger::getExceptionAsArray($e)
+                            'exception' => Logger::getExceptionAsArray($e),
                         ]);
                     }
                 }
