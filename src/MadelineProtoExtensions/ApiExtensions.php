@@ -225,18 +225,21 @@ class ApiExtensions
      */
     public function sendMedia(array $data): Promise
     {
-        $data = array_merge(
-            [
-                'peer' => '',
-                'message' => '',
-                'media' => [],
-                'reply_to_msg_id' => 0,
-                'parse_mode' => 'HTML',
-            ],
-            $data
-        );
+        return call(function() use($data) {
+            $data = array_merge(
+                [
+                    'peer' => '',
+                    'message' => '',
+                    'media' => [],
+                    'reply_to_msg_id' => 0,
+                    'parse_mode' => 'HTML',
+                ],
+                $data,
+                yield $this->uploadMediaForm()
+            );
 
-        return $this->madelineProto->messages->sendMedia($data);
+            return yield $this->madelineProto->messages->sendMedia($data);
+        });
     }
 
     /**

@@ -98,39 +98,44 @@ Manual:
 ## Advanced features
 ### Uploading files.
 
-To upload files from POST request use custom `uploadMediaForm` method:
-
-`curl "http://127.0.0.1:9503/api/uploadMediaForm" -g -F "file=@/Users/xtrime/Downloads/test.txt"`
-Method supports `application/x-www-form-urlencoded` and `multipart/form-data`.
-
-Send result from `uploadMediaForm` to `messages.sendMedia`:
-```
-curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
---header 'Content-Type: application/json' \
---data-raw '{
-	"data":{
-	    "peer": "@xtrime",
-        "media": {
-            "_": "inputMediaUploadedDocument",
-            "file": {
-                "_": "inputFile",
-                "id": 1164670976363200575,
-                "parts": 1,
-                "name": "test.txt",
-                "mime_type": "text/plain",
-                "md5_checksum": ""
-            },
-            "attributes": [
-                {
-                    "_": "documentAttributeFilename",
-                    "file_name": "test.txt"
-                }
-            ]
+There are few options to upload and send media files:
+- Custom method `sendMedia` supports upload from form:
+    ```
+    curl "http://127.0.0.1:9503/api/sendMedia?data[peer]=xtrime&data[message]=Hello" -g \
+    -F "file=@/Users/xtrime/Downloads/test.txt"
+    ```
+- use custom `uploadMediaForm` method and then pass result to `messages.sendMedia`:
+    1. `curl "http://127.0.0.1:9503/api/uploadMediaForm" -g -F "file=@/Users/xtrime/Downloads/test.txt"`
+    Method supports `application/x-www-form-urlencoded` and `multipart/form-data`.
+    
+    2. Send result from `uploadMediaForm` to `messages.sendMedia` or `sendMedia`:
+    ```
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "data":{
+            "peer": "@xtrime",
+            "media": {
+                "_": "inputMediaUploadedDocument",
+                "file": {
+                    "_": "inputFile",
+                    "id": 1164670976363200575,
+                    "parts": 1,
+                    "name": "test.txt",
+                    "mime_type": "text/plain",
+                    "md5_checksum": ""
+                },
+                "attributes": [
+                    {
+                        "_": "documentAttributeFilename",
+                        "file_name": "test.txt"
+                    }
+                ]
+            }
         }
-    }
-}'
-```
-Also see: https://docs.madelineproto.xyz/docs/FILES.html#uploading-files
+    }'
+    ```
+- See other options: https://docs.madelineproto.xyz/docs/FILES.html#uploading-files
 
 ### Downloading files
 
@@ -162,7 +167,7 @@ Also see: https://docs.madelineproto.xyz/docs/FILES.html#downloading-files
 ### Multiple sessions support. 
 
 When running  multiple sessions, need to define which session to use for request.
-Each session is stored in `sessions/{$session}.madeline`. Nested folders supported.
+Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
 **Examples:**
 * `php server.php --session=bot --session=users/xtrime --session=users/user1`
 * `http://127.0.0.1:9503/api/bot/getSelf`
@@ -170,7 +175,7 @@ Each session is stored in `sessions/{$session}.madeline`. Nested folders support
 * `http://127.0.0.1:9503/api/users/user1/getSelf`
 * sessions file paths are: `sessions/bot.madeline`, `sessions/users/xtrime.madeline` and `sessions/users/user1.madeline`
 * glob syntax for sessions:
-    * `--session=*` to use all `sessions/*.madeline` files.
+    * `--session=*` to use all `sessions/*.madeline` files (in subfolders too).
     * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
 
 ### Session management
@@ -179,7 +184,9 @@ Each session is stored in `sessions/{$session}.madeline`. Nested folders support
 * Session list: `http://127.0.0.1:9503/system/getSessionList`
 * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
 * [optional] Adding session with custom settings: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
-* Removing session: `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
+* Removing session (session file will remain): `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
+* Remove session file: `http://127.0.0.1:9503/system/removeSessionFile?session=users/xtrime`
+    Don`t forget to logout first!
    
 If there is no authorization in session, or session file is blank, authorization required:
 
