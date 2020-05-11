@@ -142,6 +142,7 @@ class Client
             function() use ($sessionName) {
                 if (static::isSessionLoggedIn($this->instances[$sessionName])) {
                     yield $this->instances[$sessionName]->start();
+                    $this->instances[$sessionName]->unsetEventHandler();
                     Loop::defer(function() use($sessionName) {
                         while (!empty($this->instances[$sessionName]) && static::isSessionLoggedIn($this->instances[$sessionName])) {
                             try {
