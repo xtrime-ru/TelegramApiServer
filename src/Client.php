@@ -60,7 +60,9 @@ class Client
         Files::checkOrCreateSessionFolder($file);
         $settings = array_replace_recursive((array) Config::getInstance()->get('telegram'), $settings);
         $instance = new MadelineProto\API($file, $settings);
-        $instance->unsetEventHandler();
+        if (self::isSessionLoggedIn($instance)) {
+            $instance->unsetEventHandler();
+        }
         $instance->async(true);
 
         $this->instances[$session] = $instance;
