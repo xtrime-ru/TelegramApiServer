@@ -20,18 +20,27 @@ Fast, simple, async php telegram api server:
  
 ## Installation
 
-Docker: https://hub.docker.com/r/xtrime/telegram-api-server
+Docker: 
+* `docker-compose up` to build and start docker. Current folder will be linked inside.
+* Prebuild image: https://hub.docker.com/r/xtrime/telegram-api-server
 
 Manual: 
-1. Git clone this repo
+1. Git clone this repo or run `composer create-project xtrime-ru/telegramapiserver`
+1. `cd telegramapiserver`
 1. `composer install -o --no-dev` to install required libs
+1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/). 
+    Only one app_id needed for any amount of users and bots.
 1. Create .env from .env.example
 1. Fill .env
-1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/) or leave blank.
-   MadelineProto will generate them on start.
+1. Start TelegramApiServer (TAS) in cli and authorize your session:
+    - `php server.php --session=session`
+    - chose manual mode
+    - follow instructions
+1. Ctrl + c to end TAS
+1. Run TAS in screen, tmux, supervisor (see below) or docker.
 
      _Optional:_
-1. Use supervisor to monitor and restart swoole/amphp servers. Example of `/etc/supervisor/conf.d/telegram_api_server.conf`: 
+1. Use [http://supervisord.org](supervisor) to monitor and restart swoole/amphp servers. Example of `/etc/supervisor/conf.d/telegram_api_server.conf`: 
     ```
     [program:telegram_client]
     command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramApiServer/server.php --session=session
