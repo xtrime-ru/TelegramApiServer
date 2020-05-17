@@ -3,6 +3,7 @@
 use TelegramApiServer\Logger;
 
 $root = __DIR__;
+const ENV_VERSION='1';
 
 //Composer init
 {
@@ -37,6 +38,14 @@ $root = __DIR__;
         }
 
         Dotenv\Dotenv::createImmutable(ROOT_DIR, $envFile)->load();
+
+        if (getenv('VERSION') !== ENV_VERSION) {
+            Logger::getInstance()->critical('Env version mismatch. Update .env from .env.example.', [
+                'VERSION in .env' => getenv('VERSION'),
+                'required' => ENV_VERSION
+            ]);
+            throw new RuntimeException('.env version mismatch');
+        }
     }
 }
 

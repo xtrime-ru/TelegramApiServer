@@ -44,6 +44,7 @@ $settings = [
                 'database' => getenv('MYSQL_DATABASE'),
                 'max_connections' => (int) getenv('MYSQL_MAX_CONNECTIONS'),
                 'idle_timeout' => (int) getenv('MYSQL_IDLE_TIMEOUT'),
+                'cache_ttl' => getenv('MYSQL_CACHE_TTL'),
             ]
         ],
         'download'=>[
