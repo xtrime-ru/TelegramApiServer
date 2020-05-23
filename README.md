@@ -160,12 +160,18 @@ curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
             "access_hash": -6754208767885394084,
             "file_reference": {
                 "_": "bytes",
-                "bytes": "AkKdqJkAACnyXiaBgp3M3DfBh8C0+mGKXwSsGUY="
+                "bytes": "AkKdqJkAACnyXshwzMhdzeC5RkdVZeh58sAB/UU="
             },
             "date": 1551713685,
             "mime_type": "video/mp4",
             "size": 400967,
-            "dc_id": 2
+            "dc_id": 2,
+            "attributes": [
+                {
+                    "_": "documentAttributeFilename",
+                    "file_name": "одолдол.mp4"
+                }
+            ]
         }
     }
 }'
