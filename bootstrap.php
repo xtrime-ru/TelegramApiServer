@@ -22,20 +22,21 @@ $root = __DIR__;
 //Config init
 {
     if (!getenv('SERVER_ADDRESS')) {
+        $envFile = '.env';
         if ($options['docker']) {
-            $envSource = file_exists(ROOT_DIR . '/.env') ? ROOT_DIR . '/.env' : ROOT_DIR . '/.env.example';
-            $envContent = file_get_contents($envSource);
-            $envContent = str_replace(
-                ['SERVER_ADDRESS=127.0.0.1', 'IP_WHITELIST=127.0.0.1'],
-                ['SERVER_ADDRESS=0.0.0.0', 'IP_WHITELIST='],
-                $envContent
-            );
-            file_put_contents(ROOT_DIR . '/.env', $envContent);
-        } elseif (!file_exists(ROOT_DIR . '/.env')) {
-            copy( ROOT_DIR . '/.env.example', ROOT_DIR . '/.env');
+            $envFile .= '.docker';
         }
 
-        Dotenv\Dotenv::createImmutable(ROOT_DIR)->load();
+        $envPath = ROOT_DIR . '/' . $envFile;
+        $envPathExample = $envPath . '.example';
+
+        if (!is_file($envPath) || filesize($envPath) === 0) {
+            //Dont use copy because of docker symlinks
+            $envContent = file_get_contents($envPathExample);
+            file_put_contents($envPath, $envContent);
+        }
+
+        Dotenv\Dotenv::createImmutable(ROOT_DIR, $envFile)->load();
     }
 }
 

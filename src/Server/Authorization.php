@@ -17,6 +17,10 @@ class Authorization implements Middleware
     public function __construct()
     {
         $this->ipWhitelist = (array) Config::getInstance()->get('api.ip_whitelist', []);
+        //Add self ip for docker.
+        if (\count($this->ipWhitelist) > 0) {
+            $this->ipWhitelist[] = getHostByName(php_uname('n'));
+        }
     }
 
     public function handleRequest(Request $request, RequestHandler $next): Promise {
