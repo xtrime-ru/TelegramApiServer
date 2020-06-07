@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   telegram-api-server:
     build: ./
@@ -29,3 +29,6 @@ services:
       - ./.mysql:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+networks:
+  default:
+    name: telegram-api-server
