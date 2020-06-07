@@ -10,8 +10,22 @@ services:
     volumes:
       - ./:/app-host-link
     working_dir: /app-host-link
+    depends_on:
+      - mysql
+    environment:
+      WAIT_HOSTS: mysql:3306
     logging:
       driver: "json-file"
       options:
         max-size: "1024k"
         max-file: "2"
+  mysql:
+    image: mariadb:10.4
+    container_name: telegram-api-server-mysql
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9507:3306"
+    volumes:
+      - ./.mysql:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
