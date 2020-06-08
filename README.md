@@ -44,7 +44,7 @@ Fast, simple, async php telegram api server:
     * docker: 
         1. Start: `docker-compose up`
         1. Connect to docker container: `bash bin/docker-exec.sh`
-        1. Start another instance with different port: `php server.php --port=9500 --session=session`
+        1. Start another instance with different port: `php server.php --docker --port=9500 --session=session`
     * manual:
         1. `php server.php --session=session`
 1. Authorize your session:
