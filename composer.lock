@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "877345d8ecbc0435bbe435a8c1a4abd6",
+    "content-hash": "2421a8f40cc9f35bd6c33abb6ef1657a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -824,6 +824,61 @@
             "time": "2019-08-21T15:51:20+00:00"
         },
         {
+            "name": "amphp/mysql",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/mysql.git",
+                "reference": "cbef7dccaf076218470267a2739aa0f3b49511f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/mysql/zipball/cbef7dccaf076218470267a2739aa0f3b49511f1",
+                "reference": "cbef7dccaf076218470267a2739aa0f3b49511f1",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/file": "^1 || ^0.3.5",
+                "amphp/socket": "^1",
+                "amphp/sql": "^1",
+                "amphp/sql-common": "^1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1.2",
+                "ext-openssl": "*",
+                "phpbench/phpbench": "^0.13.0",
+                "phpunit/phpunit": "^8 || ^7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Mysql\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                }
+            ],
+            "description": "Asynchronous MySQL client for PHP based on Amp.",
+            "time": "2019-12-10T11:02:12+00:00"
+        },
+        {
             "name": "amphp/parallel",
             "version": "v1.4.0",
             "source": {
@@ -1120,6 +1175,95 @@
                 "tls"
             ],
             "time": "2020-02-27T21:29:37+00:00"
+        },
+        {
+            "name": "amphp/sql",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/sql.git",
+                "reference": "0445ac35623a18105efeac93364288434430a4d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/sql/zipball/0445ac35623a18105efeac93364288434430a4d8",
+                "reference": "0445ac35623a18105efeac93364288434430a4d8",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Sql\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Asynchronous SQL client for Amp.",
+            "homepage": "http://amphp.org",
+            "keywords": [
+                "async",
+                "asynchronous",
+                "database",
+                "db",
+                "sql"
+            ],
+            "time": "2019-09-26T16:23:02+00:00"
+        },
+        {
+            "name": "amphp/sql-common",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/sql-common.git",
+                "reference": "6bd462b80f440a06165b49bedeb868e549a6284a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/sql-common/zipball/6bd462b80f440a06165b49bedeb868e549a6284a",
+                "reference": "6bd462b80f440a06165b49bedeb868e549a6284a",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2",
+                "amphp/sql": "^1",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.3",
+                "phpunit/phpunit": "^6 || ^7 || ^8 || ^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Sql\\Common\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Common classes for non-blocking SQL implementations.",
+            "homepage": "http://amphp.org",
+            "keywords": [
+                "async",
+                "asynchronous",
+                "database",
+                "db",
+                "sql"
+            ],
+            "time": "2020-03-04T18:01:46+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1676,16 +1820,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "dev-db",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "ddc81d87648fad3200434e75c910ef29c56e36f5"
+                "url": "https://github.com/xtrime-ru/MadelineProto.git",
+                "reference": "2aab5e8cc8e02666d8089b48434dbc8580b0916d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ddc81d87648fad3200434e75c910ef29c56e36f5",
-                "reference": "ddc81d87648fad3200434e75c910ef29c56e36f5",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/2aab5e8cc8e02666d8089b48434dbc8580b0916d",
+                "reference": "2aab5e8cc8e02666d8089b48434dbc8580b0916d",
                 "shasum": ""
             },
             "require": {
@@ -1695,6 +1839,7 @@
                 "amphp/file": "^1",
                 "amphp/http-client": "^4",
                 "amphp/http-client-cookies": "^1",
+                "amphp/mysql": "^2.0",
                 "amphp/socket": "^1",
                 "danog/dns-over-https": "^0.2",
                 "danog/ipc": "^0.1",
@@ -1749,7 +1894,46 @@
                     "src/polyfill.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "danog\\MadelineProto\\Test\\": "tests/danog/"
+                }
+            },
+            "scripts": {
+                "post-autoload-dump": [
+                    "git submodule init && git submodule update"
+                ],
+                "build": [
+                    "@docs",
+                    "@cs-fix",
+                    "@psalm"
+                ],
+                "check": [
+                    "@cs",
+                    "@test"
+                ],
+                "test-php7": [
+                    "tests/test-conversion.sh 70"
+                ],
+                "test-php56": [
+                    "tests/test-conversion.sh 5"
+                ],
+                "cs": [
+                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff --dry-run"
+                ],
+                "cs-fix": [
+                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff"
+                ],
+                "psalm": [
+                    "psalm"
+                ],
+                "docs": [
+                    "php tools/build_docs.php"
+                ],
+                "test": [
+                    "@php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text --config tests/phpunit.xml"
+                ]
+            },
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -1763,19 +1947,22 @@
             "homepage": "https://docs.madelineproto.xyz",
             "keywords": [
                 "GB",
-                "Messenger",
+                "PHP",
                 "audio",
                 "bytes",
                 "client",
                 "files",
+                "messenger",
                 "mtproto",
-                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "time": "2020-05-23T12:08:04+00:00"
+            "support": {
+                "source": "https://github.com/xtrime-ru/MadelineProto/tree/db"
+            },
+            "time": "2020-06-07T18:56:54+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2785,28 +2972,28 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v4.1.6",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "0b32505d67c1abbfa829283c86bfc0642a661bf6"
+                "reference": "db63b2ea280fdcf13c4ca392121b0b2450b51193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/0b32505d67c1abbfa829283c86bfc0642a661bf6",
-                "reference": "0b32505d67c1abbfa829283c86bfc0642a661bf6",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/db63b2ea280fdcf13c4ca392121b0b2450b51193",
+                "reference": "db63b2ea280fdcf13c4ca392121b0b2450b51193",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5.9 || ^7.0 || ^8.0",
-                "phpoption/phpoption": "^1.7.2",
-                "symfony/polyfill-ctype": "^1.9"
+                "phpoption/phpoption": "^1.7.3",
+                "symfony/polyfill-ctype": "^1.16"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.3",
+                "bamarni/composer-bin-plugin": "^1.4.1",
                 "ext-filter": "*",
                 "ext-pcre": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.7.27 || ^6.5.6 || ^7.0"
             },
             "suggest": {
                 "ext-filter": "Required to use the boolean validator.",
@@ -2855,7 +3042,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-23T09:43:32+00:00"
+            "time": "2020-06-07T18:25:35+00:00"
         }
     ],
     "packages-dev": [
