@@ -49,9 +49,12 @@ const ENV_VERSION='1';
     }
 }
 
-$memoryLimit = getenv('MEMORY_LIMIT');
-if ($memoryLimit !== false) {
+if ($memoryLimit = getenv('MEMORY_LIMIT')) {
     ini_set('memory_limit', $memoryLimit);
+}
+
+if ($timezone = getenv('TIMEZONE')) {
+    date_default_timezone_set($timezone);
 }
 
 if (!function_exists('debug')) {
