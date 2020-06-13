@@ -22,7 +22,6 @@ Fast, simple, async php telegram api server:
 ## Installation
 
 ### Docker: 
-* `docker pull xtrime/telegram-api-server`
 * `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
 * `cd TelegramApiServer`
 * Start container: `docker-compose up` 
@@ -31,7 +30,7 @@ Fast, simple, async php telegram api server:
 
 ### Manual: 
 1. `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
-1. `cd telegramapiserver`
+1. `cd TelegramApiServer`
 1. `composer install -o --no-dev`
 1. `php server.php`
 

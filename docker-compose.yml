@@ -1,7 +1,6 @@
 version: '3.5'
 services:
   telegram-api-server:
-    build: ./
     image: xtrime/telegram-api-server:latest
     container_name: telegram-api-server
     restart: unless-stopped
