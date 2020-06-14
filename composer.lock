@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2421a8f40cc9f35bd6c33abb6ef1657a",
+    "content-hash": "877345d8ecbc0435bbe435a8c1a4abd6",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1820,16 +1820,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-db",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "321787f718364b8f40165188e3019816cf0b8382"
+                "url": "https://github.com/danog/MadelineProto.git",
+                "reference": "cbd1a6ce00122f1123eb8dac379dc1c9ccb2ea88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/321787f718364b8f40165188e3019816cf0b8382",
-                "reference": "321787f718364b8f40165188e3019816cf0b8382",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/cbd1a6ce00122f1123eb8dac379dc1c9ccb2ea88",
+                "reference": "cbd1a6ce00122f1123eb8dac379dc1c9ccb2ea88",
                 "shasum": ""
             },
             "require": {
@@ -1894,46 +1894,7 @@
                     "src/polyfill.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "danog\\MadelineProto\\Test\\": "tests/danog/"
-                }
-            },
-            "scripts": {
-                "post-autoload-dump": [
-                    "git submodule init && git submodule update"
-                ],
-                "build": [
-                    "@docs",
-                    "@cs-fix",
-                    "@psalm"
-                ],
-                "check": [
-                    "@cs",
-                    "@test"
-                ],
-                "test-php7": [
-                    "tests/test-conversion.sh 70"
-                ],
-                "test-php56": [
-                    "tests/test-conversion.sh 5"
-                ],
-                "cs": [
-                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff --dry-run"
-                ],
-                "cs-fix": [
-                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff"
-                ],
-                "psalm": [
-                    "psalm"
-                ],
-                "docs": [
-                    "php tools/build_docs.php"
-                ],
-                "test": [
-                    "@php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text --config tests/phpunit.xml"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -1947,22 +1908,19 @@
             "homepage": "https://docs.madelineproto.xyz",
             "keywords": [
                 "GB",
-                "PHP",
+                "Messenger",
                 "audio",
                 "bytes",
                 "client",
                 "files",
-                "messenger",
                 "mtproto",
+                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "support": {
-                "source": "https://github.com/xtrime-ru/MadelineProto/tree/db"
-            },
-            "time": "2020-06-10T21:23:35+00:00"
+            "time": "2020-06-14T11:52:24+00:00"
         },
         {
             "name": "danog/magicalserializer",
