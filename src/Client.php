@@ -125,7 +125,7 @@ class Client
                             //Disable logging to stdout
                             $logLevel = Logger::getInstance()->minLevelIndex;
                             Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::EMERGENCY];
-
+                            $instance->echo("Authorizing session: {$name}\n");
                             yield $instance->start();
 
                             //Enable logging to stdout
