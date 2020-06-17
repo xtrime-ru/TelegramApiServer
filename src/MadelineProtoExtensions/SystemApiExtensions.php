@@ -38,7 +38,8 @@ class SystemApiExtensions
         $sessions = [];
         foreach ($this->client->instances as $session => $instance) {
             /** @var MadelineProto\API $instance */
-            switch ($instance->API->authorized) {
+            $authorized = $instance->API->authorized ?? null;
+            switch ($authorized) {
                 case MTProto::NOT_LOGGED_IN;
                     $status = 'NOT_LOGGED_IN';
                     break;
@@ -54,8 +55,11 @@ class SystemApiExtensions
                 case MTProto::LOGGED_IN:
                     $status = 'LOGGED_IN';
                     break;
+                case null:
+                    $status = 'LOADING';
+                    break;
                 default:
-                    $status = $instance->API->authorized;
+                    $status = $authorized;
                     break;
             }
 

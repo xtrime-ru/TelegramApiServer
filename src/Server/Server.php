@@ -29,7 +29,7 @@ class Server
                     ->withHttp2Timeout(600)
             );
 
-            Client::getInstance()->connect($sessionFiles);
+            yield from Client::getInstance()->connect($sessionFiles);
             $server->start();
 
             $this->registerShutdown($server);

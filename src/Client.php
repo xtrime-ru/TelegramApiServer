@@ -32,15 +32,18 @@ class Client
         return ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
     }
 
-    public function connect(array $sessionFiles): void
+    public function connect(array $sessionFiles): \Generator
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
+        $promises = [];
         foreach ($sessionFiles as $file) {
             $sessionName = Files::getSessionName($file);
             $this->addSession($sessionName);
-            $this->startLoggedInSession($sessionName);
+            $promises[] = $this->startLoggedInSession($sessionName);
         }
+
+        yield from $promises;
 
         Loop::defer(fn() => yield $this->startNotLoggedInSessions());
 
