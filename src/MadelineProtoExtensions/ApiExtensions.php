@@ -497,32 +497,31 @@ class ApiExtensions
      * Upload file from POST request.
      * Response can be passed to 'media' field in messages.sendMedia.
      *
+     * @throws \InvalidArgumentException
      * @return Promise
      */
     public function uploadMediaForm(): Promise
     {
+        if (empty($this->file)) {
+            throw new \InvalidArgumentException('File not found');
+        }
         return call(function() {
-            $media = [];
-            if ($this->file !== null) {
-                $inputFile = yield $this->madelineProto->uploadFromStream(
-                    $this->file,
-                    0,
-                    $this->file->getMimeType(),
-                    $this->file->getFilename()
-                );
-                $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
-                $media = [
-                    'media' => [
-                        '_' => 'inputMediaUploadedDocument',
-                        'file' => $inputFile,
-                        'attributes' => [
-                            ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getFilename()]
-                        ]
+            $inputFile = yield $this->madelineProto->uploadFromStream(
+                $this->file,
+                0,
+                $this->file->getMimeType(),
+                $this->file->getFilename()
+            );
+            $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
+            return [
+                'media' => [
+                    '_' => 'inputMediaUploadedDocument',
+                    'file' => $inputFile,
+                    'attributes' => [
+                        ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getFilename()]
                     ]
-                ];
-            }
-
-            return $media;
+                ]
+            ];
         });
     }
 
