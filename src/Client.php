@@ -27,7 +27,7 @@ class Client
         return static::$self;
     }
 
-    private static function isSessionLoggedIn(MadelineProto\API $instance): bool
+    public static function isSessionLoggedIn(MadelineProto\API $instance): bool
     {
         return ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
     }
@@ -83,8 +83,11 @@ class Client
         $instance = $this->instances[$session];
         unset($this->instances[$session]);
 
-        $instance->unsetEventHandler();
-        $instance->stop();
+        if (!empty($instance->API)) {
+            $instance->unsetEventHandler();
+            $instance->stop();
+        }
+        unset($instance);
         gc_collect_cycles();
     }
 

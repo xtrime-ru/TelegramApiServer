@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
+use Amp\Delayed;
 use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
@@ -21,7 +22,18 @@ class SystemApiExtensions
     public function addSession(string $session, array $settings = []): Promise
     {
         return call(function() use($session, $settings) {
-            $this->client->addSession($session, $settings);
+            $instance = $this->client->addSession($session, $settings);
+            $fullSettings = $instance->API ? $instance->getSettings() : null;
+            if (
+                (
+                    empty($fullSettings['app_info']['api_id']) ||
+                    empty($fullSettings['app_info']['api_hash'])
+                ) &&
+                !Client::isSessionLoggedIn($instance)
+            ) {
+                $this->removeSession($session);
+                throw new \RuntimeException('No api_id or api_hash provided');
+            }
             yield $this->client->startLoggedInSession($session);
             return $this->getSessionList();
         });
