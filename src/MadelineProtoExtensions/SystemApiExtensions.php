@@ -2,7 +2,6 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
-use Amp\Delayed;
 use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
@@ -32,6 +31,7 @@ class SystemApiExtensions
                 !Client::isSessionLoggedIn($instance)
             ) {
                 $this->removeSession($session);
+                $this->unlinkSessionFile($session);
                 throw new \RuntimeException('No api_id or api_hash provided');
             }
             yield $this->client->startLoggedInSession($session);
@@ -88,7 +88,7 @@ class SystemApiExtensions
         ];
     }
 
-    public function removeSessionFile($session)
+    public function unlinkSessionFile($session): Promise
     {
         return call(static function() use($session) {
             $file = Files::getSessionFile($session);
@@ -99,7 +99,7 @@ class SystemApiExtensions
         });
     }
 
-    private function bytesToHuman($bytes)
+    private function bytesToHuman($bytes): string
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
         for ($i = 0; $bytes > 1024; $i++) {

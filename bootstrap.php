@@ -23,15 +23,17 @@ const ENV_VERSION='1';
 //Config init
 {
     if (!getenv('SERVER_ADDRESS')) {
-        $envFile = '.env';
-        if ($options['docker']) {
-            $envFile .= '.docker';
+        $envFile = $options['env'];
+        if (empty($envFile)) {
+            throw new InvalidArgumentException('Env file not defined');
         }
-
         $envPath = ROOT_DIR . '/' . $envFile;
         $envPathExample = $envPath . '.example';
 
         if (!is_file($envPath) || filesize($envPath) === 0) {
+            if (!is_file($envPathExample) || filesize($envPathExample) === 0) {
+                throw new InvalidArgumentException("Env files not found or empty: {$envPath}, {$envPathExample}");
+            }
             //Dont use copy because of docker symlinks
             $envContent = file_get_contents($envPathExample);
             file_put_contents($envPath, $envContent);
@@ -40,7 +42,7 @@ const ENV_VERSION='1';
         Dotenv\Dotenv::createImmutable(ROOT_DIR, $envFile)->load();
 
         if (getenv('VERSION') !== ENV_VERSION) {
-            Logger::getInstance()->critical('Env version mismatch. Update .env from .env.example.', [
+            Logger::getInstance()->critical("Env version mismatch. Update {$envPath} from {$envPathExample}", [
                 'VERSION in .env' => getenv('VERSION'),
                 'required' => ENV_VERSION
             ]);

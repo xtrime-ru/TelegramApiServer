@@ -57,7 +57,7 @@ Fast, simple, async php telegram api server:
 
 1. Run server/parser
     ```
-    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]
+    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]  [-e=|--env=.env] [--docker]
     
     Options:
             --help      Show this message
@@ -70,11 +70,16 @@ Fast, simple, async php telegram api server:
         -s  --session   Name for session file (optional)
                         Multiple sessions can be specified: "--session=user --session=bot"
                         
-                        Each session is stored in `sessions/%session%.madeline`. 
+                        Each session is stored in `sessions/{$session}.madeline`. 
                         Nested folders supported.
                         See README for more examples.
-   
-    Also  options can be set in .env file (see .env.example)
+    
+        -e  --env       .env file name. (default: .env). 
+                        Helpful when need multiple instances with different settings
+        
+            --docker    Apply some settings for docker: add docker network to whitelist.
+    
+    Also some options can be set in .env file (see .env.example)
     ```
 1. Access Telegram API with simple GET/POST requests.
 
@@ -206,7 +211,7 @@ curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
 
 Also see: https://docs.madelineproto.xyz/docs/FILES.html#downloading-files
 
-### Multiple sessions support. 
+### Multiple sessions support
 
 When running  multiple sessions, need to define which session to use for request.
 Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
@@ -220,6 +225,12 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
     * `--session=*` to use all `sessions/*.madeline` files (in subfolders too).
     * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
 
+### Different settings for sessions
+Use `--env` argument to define the relative path to env file.
+Example: ```php server.php --env=.env```, ```php server.php --env=sessions/.env.session```
+This is helpful to define unique settings for different instances of TelegramApiServer. 
+You can start multiple instances of TelegramApiServer with different sessions on different ports with their own settings.
+
 ### Session management
     
 **Examples:**
@@ -227,8 +238,8 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
 * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
 * [optional] Adding session with custom settings: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
 * Removing session (session file will remain): `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
-* Remove session file: `http://127.0.0.1:9503/system/removeSessionFile?session=users/xtrime`
-    Don`t forget to logout first!
+* Remove session file: `http://127.0.0.1:9503/system/unlinkSessionFile?session=users/xtrime`
+    Don`t forget to logout and call removeSession first!
    
 If there is no authorization in session, or session file is blank, authorization required:
 

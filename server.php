@@ -8,12 +8,13 @@ if (PHP_SAPI !== 'cli') {
     throw new RuntimeException('Start in CLI');
 }
 
-$shortopts = 'a::p::s::';
+$shortopts = 'a::p::s::e::';
 $longopts = [
-    'address::', // ip адресс сервера, необязательное значение
-    'port::',  // порт сервера, необязательное значение
+    'address::', // ip адресс сервера
+    'port::',  // порт сервера
     'session::', //префикс session файла
-    'docker::', //сгенерировать docker-совместимый .env
+    'env::', //путь до .env файла
+    'docker::', //включить настройки для запуска внутри docker
     'help', //нужна ли справка?
 ];
 $options = getopt($shortopts, $longopts);
@@ -21,6 +22,7 @@ $options = [
     'address' => $options['address'] ?? $options['a'] ?? '',
     'port' => $options['port'] ?? $options['p'] ?? '',
     'session' => (array) ($options['session'] ?? $options['s'] ?? []),
+    'env' => $options['env'] ?? $options['e'] ?? '.env',
     'docker' => isset($options['docker']),
     'help' => isset($options['help']),
 ];
@@ -28,7 +30,7 @@ $options = [
 if ($options['help']) {
     $help = 'Fast, simple, async php telegram parser: MadelineProto + Swoole Server
 
-usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]
+usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]  [-e=|--env=.env] [--docker]
 
 Options:
         --help      Show this message
@@ -45,9 +47,12 @@ Options:
                     Nested folders supported.
                     See README for more examples.
 
-        --docker    Modify/Generate Docker compatible .env at first run
+    -e  --env       .env file name. (default: .env). 
+                    Helpful when need multiple instances with different settings
+    
+        --docker    Apply some settings for docker: add docker network to whitelist.
 
-Also all options can be set in .env file (see .env.example)
+Also some options can be set in .env file (see .env.example)
 
 Example:
     php server.php
