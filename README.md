@@ -321,9 +321,9 @@ PHP websocket client example: [websocket-events.php](https://github.com/xtrime-r
 
 ## Contacts
 
-* Telegram: 
-    * Author: [@xtrime](tg://resolve?domain=xtrime)
-    * [MadelineProto and Amp Support Groups](tg://resolve?domain=pwrtelegramgroup)
+* Telegram:   
+    * Author: [@xtrime](https://t.me/xtrime)  
+    * [MadelineProto and Amp Support Groups](https://t.me/pwrtelegramgroup)
 * Email: alexander(at)i-c-a.su
 * Donations:
     * BTC: `1BE1nitXgEAxg7A5tgec67ucNryQwusoiP`
