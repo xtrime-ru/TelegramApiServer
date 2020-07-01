@@ -22,13 +22,22 @@ Fast, simple, async php telegram api server:
 ## Installation
 
 ### Docker: 
-* `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
-* `cd TelegramApiServer`
-* Start container: `docker-compose up` 
-
+1. `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
+1. `cd TelegramApiServer`
+1. Start container: `docker-compose up`  
     Folder will be linked inside container to store all necessary data: sessions, env, db.
 
 ### Manual: 
+1. Requirements: 
+    * ssh / cli
+    * php 7.4
+    * composer
+    * git
+    * Mysql/MariaDB (optional)
+    * [MadelindeProto Requirements](https://docs.madelineproto.xyz/docs/REQUIREMENTS.html)
+    * [Amp Requirements](https://github.com/amphp/amp#requirements)
+    * XAMPP (for Windows)
+    
 1. `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
 1. `cd TelegramApiServer`
 1. `composer install -o --no-dev`
@@ -141,7 +150,7 @@ Fast, simple, async php telegram api server:
 
 There are few options to upload and send media files:
 - Custom method `sendMedia` supports upload from form:
-    ```
+    ```shell script
     curl "http://127.0.0.1:9503/api/sendMedia?data[peer]=xtrime&data[message]=Hello" -g \
     -F "file=@/Users/xtrime/Downloads/test.txt"
     ```
@@ -150,7 +159,7 @@ There are few options to upload and send media files:
     Method supports `application/x-www-form-urlencoded` and `multipart/form-data`.
     
     2. Send result from `uploadMediaForm` to `messages.sendMedia` or `sendMedia`:
-    ```
+    ```shell script
     curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -180,7 +189,7 @@ There are few options to upload and send media files:
 
 ### Downloading files
 
-```
+```shell script
 curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -226,17 +235,40 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
     * `--session=users/* --session=bots/*`  to use all session files from `sessions/bots` and `sessions/users` folders. 
 
 ### Different settings for sessions
-Use `--env` argument to define the relative path to env file.
-Example: ```php server.php --env=.env```, ```php server.php --env=sessions/.env.session```
-This is helpful to define unique settings for different instances of TelegramApiServer. 
-You can start multiple instances of TelegramApiServer with different sessions on different ports with their own settings.
+* Use `--env` argument to define the relative path to env file.
+    Example: ```php server.php --env=.env```, ```php server.php --env=sessions/.env.session```   
+    This is helpful to define unique settings for different instances of TelegramApiServer.  
+    You can start multiple instances of TelegramApiServer with different sessions on different ports with their own settings.
+
+* Another way to manage settings - put %sessionName%.settings.json in sessions folder. 
+    Example of `session.settings.json` to add proxy for the one session:
+
+    ```json
+    {
+        "connection_settings": {
+            "all": {
+                "proxy": "\\SocksProxy",
+                "proxy_extra": {
+                    "address": "127.0.0.1",
+                    "port": 1234,
+                    "username": "user",
+                    "password": "pass"
+                }
+            }
+        }
+    }
+    ```
+    Methods to work with settings files:
+    * `http://127.0.0.1:9503/system/saveSessionSettings?session=session&settings[app_info][app_id]=xxx&settings[app_info][app_hash]=xxx`
+    * `http://127.0.0.1:9503/system/unlinkSessionSettings?session=session`
+* Provide settings as second argument when adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
+    These settings will be saved into json file and will apply after the restart. 
 
 ### Session management
     
 **Examples:**
 * Session list: `http://127.0.0.1:9503/system/getSessionList`
 * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
-* [optional] Adding session with custom settings: `http://127.0.0.1:9503/system/addSession?session=users/xtrime&settings[app_info][app_id]=xxx&&settings[app_info][app_hash]=xxx`
 * Removing session (session file will remain): `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
 * Remove session file: `http://127.0.0.1:9503/system/unlinkSessionFile?session=users/xtrime`
     Don`t forget to logout and call removeSession first!
@@ -285,7 +317,9 @@ PHP websocket client example: [websocket-events.php](https://github.com/xtrime-r
 
 ## Contacts
 
-* Telegram: [@xtrime](tg://resolve?domain=xtrime)
+* Telegram: 
+    * Author: [@xtrime](tg://resolve?domain=xtrime)
+    * [MadelineProto and Amp Support Groups](tg://resolve?domain=pwrtelegramgroup)
 * Email: alexander(at)i-c-a.su
 * Donations:
     * BTC: `1BE1nitXgEAxg7A5tgec67ucNryQwusoiP`

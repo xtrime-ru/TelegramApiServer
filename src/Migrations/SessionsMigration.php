@@ -8,9 +8,9 @@ class SessionsMigration
 {
     public static function move($rootDir = ROOT_DIR)
     {
-        foreach (glob("$rootDir/*" . Files::$sessionExtension) as $oldFile) {
+        foreach (glob("$rootDir/*" . Files::SESSION_EXTENSION) as $oldFile) {
             preg_match(
-                '~^' . "{$rootDir}(?'session'.*)" . preg_quote(Files::$sessionExtension, '\\') . '$~',
+                '~^' . "{$rootDir}(?'session'.*)" . preg_quote(Files::SESSION_EXTENSION, '\\') . '$~',
                 $oldFile,
                 $matches
             );

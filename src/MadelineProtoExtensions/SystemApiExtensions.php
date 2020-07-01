@@ -90,12 +90,36 @@ class SystemApiExtensions
 
     public function unlinkSessionFile($session): Promise
     {
-        return call(static function() use($session) {
+        return call(function() use($session) {
             $file = Files::getSessionFile($session);
+
             if (is_file($file)) {
                 yield \Amp\File\unlink($file);
                 yield \Amp\File\unlink($file . '.lock');
             }
+
+            yield from $this->unlinkSessionSettings($session);
+
+            return 'ok';
+        });
+    }
+
+    public function saveSessionSettings(string $session, array $settings = [])
+    {
+        Files::saveSessionSettings($session, $settings);
+
+        return 'ok';
+    }
+
+    public function unlinkSessionSettings($session): Promise
+    {
+        return call(static function() use($session) {
+            $settings = Files::getSessionFile($session, Files::SETTINGS_EXTENSION);
+            if (is_file($settings)) {
+                yield \Amp\File\unlink($settings);
+            }
+
+            return 'ok';
         });
     }
 
