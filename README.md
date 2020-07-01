@@ -140,10 +140,14 @@ Fast, simple, async php telegram api server:
     1. View/control processes: `supervisorctl`
     
 ## Update
-* `git fetch && git reset --hard origin/master`
+* `git pull` or `git fetch && git reset --hard origin/master`
 * `composer install -o --no-dev`
 * Compare `.env.docker` or `.env` with corresponding `.env.example`. Update if needed.
-* `docker-compose restart` or `supervisorctl restart telegram_api_server`
+* Docker: 
+    * `docker-compose pull`
+    * `docker-compose down`
+    * `docker-compose up`
+* Manual: `supervisorctl restart telegram_api_server`
     
 ## Advanced features
 ### Uploading files.
