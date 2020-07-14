@@ -282,16 +282,16 @@
         },
         {
             "name": "amphp/file",
-            "version": "v1.0.0",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/file.git",
-                "reference": "80cfffa8238f4ccfe2bcf425bcc18fd3a8cb5eeb"
+                "reference": "54dcef2a3e38f445ae78ea44ff12c95738e46420"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/file/zipball/80cfffa8238f4ccfe2bcf425bcc18fd3a8cb5eeb",
-                "reference": "80cfffa8238f4ccfe2bcf425bcc18fd3a8cb5eeb",
+                "url": "https://api.github.com/repos/amphp/file/zipball/54dcef2a3e38f445ae78ea44ff12c95738e46420",
+                "reference": "54dcef2a3e38f445ae78ea44ff12c95738e46420",
                 "shasum": ""
             },
             "require": {
@@ -303,9 +303,16 @@
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
+                "ext-eio": "^2",
+                "ext-uv": "^0.3 || ^0.2",
                 "phpunit/phpunit": "^8 || ^7"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Amp\\File\\": "src"
@@ -345,7 +352,13 @@
                 "non-blocking",
                 "static"
             ],
-            "time": "2019-09-14T03:09:41+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-14T15:15:32+00:00"
         },
         {
             "name": "amphp/hpack",
@@ -456,16 +469,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "fa7925363e6d5a0d0d337e2e6eb1affb93cf226e"
+                "reference": "ba5d824253c282e1865ad95f9aaaa1db50a67f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/fa7925363e6d5a0d0d337e2e6eb1affb93cf226e",
-                "reference": "fa7925363e6d5a0d0d337e2e6eb1affb93cf226e",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/ba5d824253c282e1865ad95f9aaaa1db50a67f09",
+                "reference": "ba5d824253c282e1865ad95f9aaaa1db50a67f09",
                 "shasum": ""
             },
             "require": {
@@ -542,7 +555,13 @@
                 "non-blocking",
                 "rest"
             ],
-            "time": "2020-06-16T20:45:05+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-10T16:49:21+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1467,12 +1486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "a867e63773f83e6cb573cd9fede7bfd20a786d98"
+                "reference": "173b54137cdcd4288702f615f05c1029e613ba37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/a867e63773f83e6cb573cd9fede7bfd20a786d98",
-                "reference": "a867e63773f83e6cb573cd9fede7bfd20a786d98",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/173b54137cdcd4288702f615f05c1029e613ba37",
+                "reference": "173b54137cdcd4288702f615f05c1029e613ba37",
                 "shasum": ""
             },
             "require": {
@@ -1531,7 +1550,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "time": "2020-06-25T21:45:12+00:00"
+            "time": "2020-07-05T17:36:04+00:00"
         },
         {
             "name": "amphp/websocket-server",
@@ -1539,12 +1558,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-server.git",
-                "reference": "ebccbdb792568039105db749f0e2ec3ac6182cf8"
+                "reference": "f5e27858f2b9a37e909a3d96b50ab3420842e5b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/ebccbdb792568039105db749f0e2ec3ac6182cf8",
-                "reference": "ebccbdb792568039105db749f0e2ec3ac6182cf8",
+                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/f5e27858f2b9a37e909a3d96b50ab3420842e5b1",
+                "reference": "f5e27858f2b9a37e909a3d96b50ab3420842e5b1",
                 "shasum": ""
             },
             "require": {
@@ -1604,20 +1623,26 @@
                 "server",
                 "websocket"
             ],
-            "time": "2020-07-01T16:35:04+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-08T17:10:06+00:00"
         },
         {
             "name": "amphp/windows-registry",
-            "version": "v0.3.2",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/windows-registry.git",
-                "reference": "834af7a30ad7c006b0326ccd2686ddc6e6943366"
+                "reference": "0f56438b9197e224325e88f305346f0221df1f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/windows-registry/zipball/834af7a30ad7c006b0326ccd2686ddc6e6943366",
-                "reference": "834af7a30ad7c006b0326ccd2686ddc6e6943366",
+                "url": "https://api.github.com/repos/amphp/windows-registry/zipball/0f56438b9197e224325e88f305346f0221df1f71",
+                "reference": "0f56438b9197e224325e88f305346f0221df1f71",
                 "shasum": ""
             },
             "require": {
@@ -1645,7 +1670,13 @@
                 }
             ],
             "description": "Windows Registry Reader.",
-            "time": "2018-10-24T03:34:54+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-10T16:13:29+00:00"
         },
         {
             "name": "cash/lrucache",
@@ -1772,16 +1803,16 @@
         },
         {
             "name": "danog/ipc",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/ipc.git",
-                "reference": "6971e4d61a5d61ba293f0ddf781ca67cd20c856f"
+                "reference": "787ca479efc4b6396a1c2a31dc777c667ccf3bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/ipc/zipball/6971e4d61a5d61ba293f0ddf781ca67cd20c856f",
-                "reference": "6971e4d61a5d61ba293f0ddf781ca67cd20c856f",
+                "url": "https://api.github.com/repos/danog/ipc/zipball/787ca479efc4b6396a1c2a31dc777c667ccf3bbd",
+                "reference": "787ca479efc4b6396a1c2a31dc777c667ccf3bbd",
                 "shasum": ""
             },
             "require": {
@@ -1832,7 +1863,7 @@
                 "multi-processing",
                 "multi-threading"
             ],
-            "time": "2020-03-06T13:15:43+00:00"
+            "time": "2020-07-11T15:50:06+00:00"
         },
         {
             "name": "danog/libdns-json",
@@ -1896,12 +1927,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "838cf11ff61a975121e11e50caa4e67c6819f192"
+                "reference": "cd1716645d7bd51cb2969101249fa178d8b88244"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/838cf11ff61a975121e11e50caa4e67c6819f192",
-                "reference": "838cf11ff61a975121e11e50caa4e67c6819f192",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/cd1716645d7bd51cb2969101249fa178d8b88244",
+                "reference": "cd1716645d7bd51cb2969101249fa178d8b88244",
                 "shasum": ""
             },
             "require": {
@@ -1946,10 +1977,12 @@
                 "danog/7to70": "^1",
                 "ennexa/amp-update-cache": "dev-master",
                 "ext-ctype": "*",
+                "friendsofphp/php-cs-fixer": "^2.16",
                 "haydenpierce/class-finder": "^0.4",
                 "phpdocumentor/reflection-docblock": "^4.3",
                 "phpstan/phpstan": "^0.12.14",
                 "phpunit/phpunit": "^8",
+                "squizlabs/php_codesniffer": "^3.5",
                 "vimeo/psalm": "dev-master",
                 "vlucas/phpdotenv": "^3"
             },
@@ -1964,6 +1997,7 @@
                 "files": [
                     "src/BigIntegor.php",
                     "src/YieldReturnValue.php",
+                    "src/danog/MadelineProto/Ipc/Runner/entry.php",
                     "src/polyfill.php"
                 ]
             },
@@ -1999,7 +2033,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-16T16:00:15+00:00"
+            "time": "2020-07-14T10:36:40+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3184,12 +3218,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f"
+                "reference": "881b9e4a8de3186c93904230bdf6344b685fe6a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6d2e5ab854782830911ddd33b7d4649b9f18c10f",
-                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/881b9e4a8de3186c93904230bdf6344b685fe6a5",
+                "reference": "881b9e4a8de3186c93904230bdf6344b685fe6a5",
                 "shasum": ""
             },
             "conflict": {
@@ -3258,6 +3292,7 @@
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
                 "fuel/core": "<1.8.1",
                 "getgrav/grav": "<1.7-beta.8",
+                "gos/web-socket-bundle": "<1.10.4|>=2,<2.6.1|>=3,<3.3",
                 "gree/jose": "<=2.2",
                 "gregwar/rst": "<1.0.3",
                 "guzzlehttp/guzzle": ">=4-rc.2,<4.2.4|>=5,<5.3.1|>=6,<6.2.1",
@@ -3283,8 +3318,9 @@
                 "magento/product-community-edition": ">=2,<2.2.10|>=2.3,<2.3.2-p.2",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
+                "nystudio107/craft-seomatic": "<3.3",
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
-                "october/october": ">=1.0.319,<1.0.466",
+                "october/october": ">=1.0.319,<1.0.467",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
@@ -3461,7 +3497,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-19T13:23:43+00:00"
+            "time": "2020-07-11T19:04:25+00:00"
         }
     ],
     "aliases": [],
