@@ -452,7 +452,7 @@ class ApiExtensions
         return call(
             function() use ($data) {
                 $peerInfo = yield $this->madelineProto->getInfo($data['peer']);
-                if ($peerInfo['type'] === 'channel') {
+                if (in_array($peerInfo['type'], ['channel', 'supergroup'])) {
                     $response = yield $this->madelineProto->channels->getMessages(
                         [
                             'channel' => $data['peer'],
