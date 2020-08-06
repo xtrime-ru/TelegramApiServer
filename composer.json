@@ -15,6 +15,7 @@
     "amphp/websocket-client": "dev-master",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"dev-master",
+    "danog/tgseclib": "^3",
     "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {
