@@ -4,7 +4,7 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 
-use Amp\ByteStream\IteratorStream;
+use Amp\Delayed;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
@@ -105,8 +105,11 @@ class ApiExtensions
         if ($mediaType === null) {
             return false;
         }
-        if ($mediaType === 'messageMediaWebPage' && !empty($message['media']['webpage']['photo'])) {
-            return $allowWebPage;
+        if (
+            $mediaType === 'messageMediaWebPage' &&
+            ($allowWebPage === false || empty($message['media']['webpage']['photo']))
+        ) {
+            return false;
         }
 
         return true;
@@ -207,18 +210,20 @@ class ApiExtensions
                     return $result;
                 }
 
-                foreach ($response['messages'] as $message) {
-                    usleep(random_int(300, 2000) * 1000);
+                foreach ($response['messages'] as $key => $message) {
                     $messageData = [
                         'message' => $message['message'] ?? '',
                         'peer' => $data['to_peer'],
                         'entities' => $message['entities'] ?? [],
                     ];
-                    if (static::hasMedia($message)) {
+                    if (static::hasMedia($message, false)) {
                         $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
                         $result[] = yield $this->sendMedia($messageData);
                     } else {
                         $result[] = yield $this->sendMessage($messageData);
+                    }
+                    if ($key > 0) {
+                        yield new Delayed(random_int(300, 2000));
                     }
                 }
 
@@ -252,9 +257,15 @@ class ApiExtensions
                     'reply_to_msg_id' => 0,
                     'parse_mode' => 'HTML',
                 ],
-                $data,
-                yield $this->uploadMediaForm()
+                $data
             );
+
+            if (!empty($this->file)) {
+                $data = array_merge(
+                    $data,
+                    yield $this->uploadMediaForm()
+                );
+            }
 
             return yield $this->madelineProto->messages->sendMedia($data);
         });
