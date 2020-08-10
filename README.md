@@ -51,12 +51,11 @@ Fast, simple, async php telegram api server:
 1. Start TelegramApiServer in cli:
     * docker: 
         1. Start: `docker-compose up`
-        1. Connect to docker container: `bash bin/docker-exec.sh`
-        1. Start another instance with different port: `php server.php --docker --port=9500 --session=session`
+        1. Start new shell and connect to docker container: `bash bin/docker-exec.sh`
+        1. Start another instance with different port inside new shell: `php server.php -p=9500 -s=session --docker -e=.env.docker`
     * manual:
         1. `php server.php --session=session`
 1. Authorize your session:
-    1. chose manual mode (`m`)
     1. Chose account type: user (`u`) or bot (`b`)
     1. Follow instructions
 1. Wait 10-30 seconds until authorization is end and exit with `Ctrl + C`.
