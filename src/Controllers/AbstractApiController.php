@@ -11,8 +11,6 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use danog\MadelineProto\API;
-use danog\MadelineProto\CombinedAPI;
-use danog\MadelineProto\TON\API as TonAPI;
 use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
@@ -23,7 +21,7 @@ abstract class AbstractApiController
 
     protected Request $request;
     protected ?StreamedField $file = null;
-    protected $extensionClass;
+    protected string $extensionClass;
 
 
     public array $page = [
@@ -39,7 +37,7 @@ abstract class AbstractApiController
     abstract protected function resolvePath(array $path);
     abstract protected function callApi();
 
-    public static function getRouterCallback($extensionClass): CallableRequestHandler
+    public static function getRouterCallback(string $extensionClass): CallableRequestHandler
     {
         return new CallableRequestHandler(
             static function (Request $request) use($extensionClass) {
@@ -58,7 +56,7 @@ abstract class AbstractApiController
         );
     }
 
-    public function __construct(Request $request, $extensionClass = null)
+    public function __construct(Request $request, string $extensionClass)
     {
         $this->request = $request;
         $this->extensionClass = $extensionClass;
@@ -81,9 +79,8 @@ abstract class AbstractApiController
     /**
      * Получаем параметры из GET и POST
      *
-     * @return AbstractApiController
      */
-    private function resolveRequest()
+    private function resolveRequest(): \Generator
     {
         $query = $this->request->getUri()->getQuery();
         $contentType = $this->request->getHeader('Content-Type');
@@ -121,18 +118,13 @@ abstract class AbstractApiController
         $this->parameters = array_merge((array) $post, $get);
         $this->parameters = array_values($this->parameters);
 
-        return $this;
     }
 
     /**
      * Получает посты для формирования ответа
      *
-     * @param Request $request
-     *
-     * @return void|\Generator
-     * @throws \Throwable
      */
-    private function generateResponse()
+    private function generateResponse(): \Generator
     {
         if ($this->page['code'] !== 200) {
             return;
@@ -155,15 +147,10 @@ abstract class AbstractApiController
 
     }
 
-    /**
-     * @param CombinedAPI|API|TonAPI $madelineProto
-     *
-     * @return mixed
-     */
-    protected function callApiCommon($madelineProto)
+    protected function callApiCommon(API $madelineProto)
     {
         $pathCount = count($this->api);
-        if ($pathCount === 1 && $this->extensionClass && is_callable([$this->extensionClass,$this->api[0]])) {
+        if ($pathCount === 1  && method_exists($this->extensionClass,$this->api[0])) {
             /** @var ApiExtensions|SystemApiExtensions $madelineProtoExtensions */
             $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request, $this->file);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);

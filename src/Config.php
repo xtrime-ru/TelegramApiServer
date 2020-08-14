@@ -9,7 +9,6 @@ class Config
     private static ?Config $instance = null;
     private array $config;
 
-
     public static function getInstance(): Config
     {
         if (null === static::$instance) {
@@ -26,20 +25,6 @@ class Config
     private function __construct()
     {
         $this->config = include ROOT_DIR . '/config.php';
-    }
-
-    /**
-     * prevent the instance from being cloned (which would create a second instance of it)
-     */
-    private function __clone()
-    {
-    }
-
-    /**
-     * prevent from being unserialized (which would create a second instance of it)
-     */
-    private function __wakeup()
-    {
     }
 
     /**
