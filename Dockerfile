@@ -6,9 +6,10 @@ WORKDIR /app
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /usr/local/bin/docker-compose-wait
 
 RUN apt-get update && apt-get upgrade -y \
+    && cp -a docker/php/conf.d/. "$PHP_INI_DIR/conf.d/" \
     && apt-get install apt-utils -y \
     && apt-get install git zip vim libzip-dev libgmp-dev libevent-dev libssl-dev libnghttp2-dev libffi-dev -y \
-    && docker-php-ext-install sockets zip gmp pcntl bcmath ffi \
+    && docker-php-ext-install -j$(nproc) sockets zip gmp pcntl bcmath ffi \
     && PHP_OPENSSL=yes pecl install ev event \
     && docker-php-ext-enable ev event \
     && docker-php-source delete \
@@ -16,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y \
     && chmod +x /usr/local/bin/docker-compose-wait \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer global require hirak/prestissimo \
-    && composer install -o --no-dev \
+    && composer install --no-dev \
     && composer clear
 
 VOLUME ["/app/sessions"]
