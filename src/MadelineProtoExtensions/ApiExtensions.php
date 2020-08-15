@@ -4,7 +4,6 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 
-use Amp\ByteStream\ResourceInputStream;
 use Amp\Delayed;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
@@ -430,15 +429,7 @@ class ApiExtensions
                         $thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
                         break;
                     default:
-                        $stream = fopen(ROOT_DIR . '/no-image.jpg', 'rb');
-                        return new Response(
-                            200,
-                            [
-                                'Content-Type' => 'image/jpeg',
-                                'Content-Length'=> fstat($stream)['size'],
-                            ],
-                            new ResourceInputStream($stream)
-                        );
+                        throw new UnexpectedValueException('Message has no preview');
 
                 }
                 $info = yield $this->madelineProto->getDownloadInfo($thumb);
