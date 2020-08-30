@@ -2,4 +2,5 @@ vendor
 .*
 *.madeline
 *.madeline.lock
+*.madeline.slock
 madeline.phar*
