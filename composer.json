@@ -5,6 +5,12 @@
   "homepage": "https://tg.i-c-a.su/",
   "license": "MIT",
   "keywords": ["telegram", "mtproto", "protocol", "client", "PHP", "amphp", "async", "daemon", "coroutine", "parser", "micro-service"],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "https://github.com/xtrime-ru/MadelineProto.git"
+    }
+  ],
   "require": {
     "php": ">=7.4.0",
     "ext-json": "*",
@@ -14,7 +20,7 @@
     "amphp/websocket-server": "dev-master",
     "amphp/websocket-client": "dev-master",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto":"dev-master",
+    "danog/madelineproto":"dev-new_db_properties",
     "danog/tgseclib": "^3",
     "amphp/http-server-form-parser": "^1.1"
   },
