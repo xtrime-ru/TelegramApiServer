@@ -415,22 +415,38 @@ class ApiExtensions
                 }
 
                 $media = $message['media'][array_key_last($message['media'])];
+                $thumb = null;
                 switch (true) {
                     case isset($media['sizes']):
-                        $thumb = $media['sizes'][array_key_last($media['sizes'])];
+                        foreach ($media['sizes'] as $size) {
+                            if ($size['_'] === 'photoSize') {
+                                $thumb = $size;
+                            }
+                        }
                         break;
                     case isset($media['thumb']['size']):
                         $thumb = $media['thumb'];
                         break;
                     case !empty($media['thumbs']):
-                        $thumb = $media['thumbs'][array_key_last($media['thumbs'])];
+                        foreach ($media['thumbs'] as $size) {
+                            if ($size['_'] === 'photoSize') {
+                                $thumb = $size;
+                            }
+                        }
                         break;
                     case isset($media['photo']['sizes']):
-                        $thumb = $media['photo']['sizes'][array_key_last($media['photo']['sizes'])];
+                        foreach ($media['photo']['sizes'] as $size) {
+                            if ($size['_'] === 'photoSize') {
+                                $thumb = $size;
+                            }
+                        }
                         break;
                     default:
                         throw new UnexpectedValueException('Message has no preview');
 
+                }
+                if (null === $thumb) {
+                    throw new UnexpectedValueException('Empty preview');
                 }
                 $info = yield $this->madelineProto->getDownloadInfo($thumb);
 
