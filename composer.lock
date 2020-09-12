@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c24c2d2d34b9baba485380ad4859480",
+    "content-hash": "5c7f2c233c20d70ced8e832eb6f64623",
     "packages": [
         {
             "name": "amphp/amp",
@@ -433,16 +433,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "8a1a1d6a78e6f432618aea02c6351602cf735cef"
+                "reference": "dfd33554b82a7d8f18cced56352bcc8270318dfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/8a1a1d6a78e6f432618aea02c6351602cf735cef",
-                "reference": "8a1a1d6a78e6f432618aea02c6351602cf735cef",
+                "url": "https://api.github.com/repos/amphp/http/zipball/dfd33554b82a7d8f18cced56352bcc8270318dfe",
+                "reference": "dfd33554b82a7d8f18cced56352bcc8270318dfe",
                 "shasum": ""
             },
             "require": {
@@ -478,7 +478,13 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
-            "time": "2020-01-14T17:41:56+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-11T18:23:42+00:00"
         },
         {
             "name": "amphp/http-client",
@@ -1213,6 +1219,69 @@
             "description": "Asynchronous process manager.",
             "homepage": "https://github.com/amphp/process",
             "time": "2019-02-26T16:33:03+00:00"
+        },
+        {
+            "name": "amphp/redis",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/redis.git",
+                "reference": "9f973427779b1fd824a9b9c2a9d051ab10eb0f2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/redis/zipball/9f973427779b1fd824a9b9c2a9d051ab10eb0f2c",
+                "reference": "9f973427779b1fd824a9b9c2a9d051ab10eb0f2c",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.2.1",
+                "amphp/cache": "^1.2.1",
+                "amphp/socket": "^1",
+                "amphp/sync": "^1.1",
+                "league/uri-parser": "^1.4",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "amphp/php-cs-fixer-config": "dev-master",
+                "amphp/phpunit-util": "^1.1.2",
+                "phpunit/phpunit": "^7 | ^8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Redis\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "A non-blocking Redis client for Amp.",
+            "homepage": "https://github.com/amphp/redis",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "client",
+                "redis"
+            ],
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-27T20:54:30+00:00"
         },
         {
             "name": "amphp/serialization",
@@ -2065,16 +2134,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-new_db_properties",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "f0afe4612c37d610e1d9c070f5b50d1339101f70"
+                "url": "https://github.com/danog/MadelineProto.git",
+                "reference": "1883416c7a26633da54f1d1f292fce727b459d4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/f0afe4612c37d610e1d9c070f5b50d1339101f70",
-                "reference": "f0afe4612c37d610e1d9c070f5b50d1339101f70",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/1883416c7a26633da54f1d1f292fce727b459d4b",
+                "reference": "1883416c7a26633da54f1d1f292fce727b459d4b",
                 "shasum": ""
             },
             "require": {
@@ -2087,6 +2156,7 @@
                 "amphp/log": "^1.1",
                 "amphp/mysql": "^2.0",
                 "amphp/postgres": "^1.2",
+                "amphp/redis": "^1.0",
                 "amphp/socket": "^1",
                 "danog/dns-over-https": "^0.2",
                 "danog/ipc": "^0.1",
@@ -2145,51 +2215,7 @@
                     "src/polyfill.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "danog\\MadelineProto\\Test\\": "tests/danog/"
-                },
-                "files": [
-                    "tools/build_docs/schemas.php",
-                    "tools/build_docs/merge.php",
-                    "tools/build_docs/layerUpgrade.php"
-                ]
-            },
-            "scripts": {
-                "post-autoload-dump": [
-                    "git submodule init && git submodule update"
-                ],
-                "build": [
-                    "@docs",
-                    "@cs-fix",
-                    "@psalm"
-                ],
-                "check": [
-                    "@cs",
-                    "@test"
-                ],
-                "test-php7": [
-                    "tests/test-conversion.sh 70"
-                ],
-                "test-php56": [
-                    "tests/test-conversion.sh 5"
-                ],
-                "cs": [
-                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff --dry-run"
-                ],
-                "cs-fix": [
-                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff"
-                ],
-                "psalm": [
-                    "psalm"
-                ],
-                "docs": [
-                    "php tools/build_docs.php"
-                ],
-                "test": [
-                    "@php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text --config tests/phpunit.xml"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-only"
             ],
@@ -2203,28 +2229,25 @@
             "homepage": "https://docs.madelineproto.xyz",
             "keywords": [
                 "GB",
-                "PHP",
+                "Messenger",
                 "audio",
                 "bytes",
                 "client",
                 "files",
-                "messenger",
                 "mtproto",
+                "php",
                 "protocol",
                 "stickers",
                 "telegram",
                 "video"
             ],
-            "support": {
-                "source": "https://github.com/xtrime-ru/MadelineProto/tree/new_db_properties"
-            },
             "funding": [
                 {
-                    "type": "github",
-                    "url": "https://github.com/danog"
+                    "url": "https://github.com/danog",
+                    "type": "github"
                 }
             ],
-            "time": "2020-08-31T00:09:42+00:00"
+            "time": "2020-09-12T17:08:14+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3409,12 +3432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "dbda10aea96678b6742e8f0109c1c7ac003a0f69"
+                "reference": "425be18066a07ae07112a0aec85bf16f9cd02ed1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/dbda10aea96678b6742e8f0109c1c7ac003a0f69",
-                "reference": "dbda10aea96678b6742e8f0109c1c7ac003a0f69",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/425be18066a07ae07112a0aec85bf16f9cd02ed1",
+                "reference": "425be18066a07ae07112a0aec85bf16f9cd02ed1",
                 "shasum": ""
             },
             "conflict": {
@@ -3448,6 +3471,7 @@
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "datadog/dd-trace": ">=0.30,<0.30.2",
                 "david-garcia/phpwhois": "<=4.3.1",
+                "derhansen/sf_event_mgt": "<4.3.1|>=5,<5.1.1",
                 "doctrine/annotations": ">=1,<1.2.7",
                 "doctrine/cache": ">=1,<1.3.2|>=1.4,<1.4.2",
                 "doctrine/common": ">=2,<2.4.3|>=2.5,<2.5.1",
@@ -3469,11 +3493,12 @@
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1|>=5.4,<5.4.11.1|>=2017.12,<2017.12.0.1",
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
                 "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
-                "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2",
+                "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2.1|>=5,<5.0.1|>=5.1,<5.1.1",
                 "ezsystems/ezplatform-kernel": ">=1,<1.0.2.1",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
                 "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.2|>=6,<6.7.9.1|>=6.8,<6.13.6.3|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.7.1",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.1|>=2011,<2017.12.7.2|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.4.2",
+                "ezsystems/platform-ui-assets-bundle": ">=4.2,<4.2.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
                 "firebase/php-jwt": "<2",
@@ -3531,6 +3556,7 @@
                 "paragonie/random_compat": "<2",
                 "paypal/merchant-sdk-php": "<3.12",
                 "pear/archive_tar": "<1.4.4",
+                "personnummer/personnummer": "<3.0.2",
                 "phpfastcache/phpfastcache": ">=5,<5.0.13",
                 "phpmailer/phpmailer": "<6.1.6",
                 "phpmussel/phpmussel": ">=1,<1.6",
@@ -3595,7 +3621,7 @@
                 "symfony/form": ">=2.3,<2.3.35|>=2.4,<2.6.12|>=2.7,<2.7.50|>=2.8,<2.8.49|>=3,<3.4.20|>=4,<4.0.15|>=4.1,<4.1.9|>=4.2,<4.2.1",
                 "symfony/framework-bundle": ">=2,<2.3.18|>=2.4,<2.4.8|>=2.5,<2.5.2|>=2.7,<2.7.51|>=2.8,<2.8.50|>=3,<3.4.26|>=4,<4.1.12|>=4.2,<4.2.7",
                 "symfony/http-foundation": ">=2,<2.8.52|>=3,<3.4.35|>=4,<4.2.12|>=4.3,<4.3.8|>=4.4,<4.4.7|>=5,<5.0.7",
-                "symfony/http-kernel": ">=2,<2.8.52|>=3,<3.4.35|>=4,<4.2.12|>=4.3,<4.3.8",
+                "symfony/http-kernel": ">=2,<2.8.52|>=3,<3.4.35|>=4,<4.2.12|>=4.3,<4.4.13|>=5,<5.1.5",
                 "symfony/intl": ">=2.7,<2.7.38|>=2.8,<2.8.31|>=3,<3.2.14|>=3.3,<3.3.13",
                 "symfony/mime": ">=4.3,<4.3.8",
                 "symfony/phpunit-bridge": ">=2.8,<2.8.50|>=3,<3.4.26|>=4,<4.1.12|>=4.2,<4.2.7",
@@ -3610,7 +3636,7 @@
                 "symfony/security-guard": ">=2.8,<2.8.41|>=3,<3.3.17|>=3.4,<3.4.11|>=4,<4.0.11",
                 "symfony/security-http": ">=2.3,<2.3.41|>=2.4,<2.7.51|>=2.8,<2.8.50|>=3,<3.4.26|>=4,<4.2.12|>=4.3,<4.3.8|>=4.4,<4.4.7|>=5,<5.0.7",
                 "symfony/serializer": ">=2,<2.0.11",
-                "symfony/symfony": ">=2,<2.8.52|>=3,<3.4.35|>=4,<4.2.12|>=4.3,<4.3.8|>=4.4,<4.4.7|>=5,<5.0.7",
+                "symfony/symfony": ">=2,<2.8.52|>=3,<3.4.35|>=4,<4.2.12|>=4.3,<4.4.13|>=5,<5.1.5",
                 "symfony/translation": ">=2,<2.0.17",
                 "symfony/validator": ">=2,<2.0.24|>=2.1,<2.1.12|>=2.2,<2.2.5|>=2.3,<2.3.3",
                 "symfony/var-exporter": ">=4.2,<4.2.12|>=4.3,<4.3.8",
@@ -3698,7 +3724,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-28T21:02:31+00:00"
+            "time": "2020-09-11T17:02:36+00:00"
         }
     ],
     "aliases": [],
