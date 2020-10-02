@@ -37,15 +37,15 @@ $settings = [
         ],
         'db' => [
             'type' => getenv('DB_TYPE'),
-            'mysql' => [
-                'host' => getenv('MYSQL_HOST'),
-                'port' => (int) getenv('MYSQL_PORT'),
-                'user' => getenv('MYSQL_USER'),
-                'password' => getenv('MYSQL_PASSWORD'),
-                'database' => getenv('MYSQL_DATABASE'),
-                'max_connections' => (int) getenv('MYSQL_MAX_CONNECTIONS'),
-                'idle_timeout' => (int) getenv('MYSQL_IDLE_TIMEOUT'),
-                'cache_ttl' => getenv('MYSQL_CACHE_TTL'),
+            getenv('DB_TYPE') => [
+                'host' => getenv('DB_HOST'),
+                'port' => (int) getenv('DB_PORT'),
+                'user' => getenv('DB_USER'),
+                'password' => getenv('DB_PASSWORD'),
+                'database' => getenv('DB_DATABASE'),
+                'max_connections' => (int) getenv('DB_MAX_CONNECTIONS'),
+                'idle_timeout' => (int) getenv('DB_IDLE_TIMEOUT'),
+                'cache_ttl' => getenv('DB_CACHE_TTL'),
             ]
         ],
         'download'=>[

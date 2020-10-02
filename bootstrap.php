@@ -1,6 +1,7 @@
 <?php
 
 use TelegramApiServer\Logger;
+use TelegramApiServer\Migrations\EnvUpgrade;
 
 $root = __DIR__;
 const ENV_VERSION='1';
@@ -23,6 +24,8 @@ const ENV_VERSION='1';
 //Config init
 {
     if (!getenv('SERVER_ADDRESS')) {
+        EnvUpgrade::mysqlToDbPrefix();
+
         $envFile = $options['env'];
         if (empty($envFile)) {
             throw new InvalidArgumentException('Env file not defined');
