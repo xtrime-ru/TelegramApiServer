@@ -49,6 +49,9 @@ $settings = [
         ],
         'download'=>[
             'report_broken_media' => false,
+        ],
+        'ipc' => [
+            'slow' => true
         ]
     ],
     'api' => [

@@ -1,6 +1,4 @@
 vendor
 .*
-*.madeline
-*.madeline.lock
-*.madeline.slock
+/sessions/*
 madeline.phar*
