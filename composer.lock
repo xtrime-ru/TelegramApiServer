@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c7f2c233c20d70ced8e832eb6f64623",
+    "content-hash": "b970e8526530b3a7dbf8444415275d9f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2134,16 +2134,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "dev-banned_session_handler_fix",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "58a3efacc6213f2eb90220f0a90b1cb807fca620"
+                "reference": "d5b5dc49e89a59ea153ad28fbdc5579bc7e9ae0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/58a3efacc6213f2eb90220f0a90b1cb807fca620",
-                "reference": "58a3efacc6213f2eb90220f0a90b1cb807fca620",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/d5b5dc49e89a59ea153ad28fbdc5579bc7e9ae0c",
+                "reference": "d5b5dc49e89a59ea153ad28fbdc5579bc7e9ae0c",
                 "shasum": ""
             },
             "require": {
@@ -2249,7 +2249,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-02T22:44:29+00:00"
+            "time": "2020-10-02T23:20:06+00:00"
         },
         {
             "name": "danog/magicalserializer",
