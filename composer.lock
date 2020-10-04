@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c7f2c233c20d70ced8e832eb6f64623",
+    "content-hash": "78591fa391209613f6a88440fc9bc16f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1630,16 +1630,16 @@
         },
         {
             "name": "amphp/websocket-client",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "fc1a4b7803f3387e3c7648439548847e7792673e"
+                "reference": "173b54137cdcd4288702f615f05c1029e613ba37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/fc1a4b7803f3387e3c7648439548847e7792673e",
-                "reference": "fc1a4b7803f3387e3c7648439548847e7792673e",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/173b54137cdcd4288702f615f05c1029e613ba37",
+                "reference": "173b54137cdcd4288702f615f05c1029e613ba37",
                 "shasum": ""
             },
             "require": {
@@ -1698,13 +1698,7 @@
                 "non-blocking",
                 "websocket"
             ],
-            "funding": [
-                {
-                    "url": "https://github.com/amphp",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-08-30T19:22:43+00:00"
+            "time": "2020-07-05T17:36:04+00:00"
         },
         {
             "name": "amphp/websocket-server",
@@ -2138,12 +2132,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "463e807dbec457bf61ac99dd47800cd97d5e71b6"
+                "reference": "e4aa39c6241cfab3f9c16f9bd64f7d8a0db9a190"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/463e807dbec457bf61ac99dd47800cd97d5e71b6",
-                "reference": "463e807dbec457bf61ac99dd47800cd97d5e71b6",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/e4aa39c6241cfab3f9c16f9bd64f7d8a0db9a190",
+                "reference": "e4aa39c6241cfab3f9c16f9bd64f7d8a0db9a190",
                 "shasum": ""
             },
             "require": {
@@ -2158,6 +2152,7 @@
                 "amphp/postgres": "^1.2",
                 "amphp/redis": "^1.0",
                 "amphp/socket": "^1",
+                "amphp/websocket-client": "^1.0",
                 "danog/dns-over-https": "^0.2",
                 "danog/ipc": "^0.1",
                 "danog/loop": "^0.1.0",
@@ -2187,8 +2182,6 @@
                 "amphp/http": "^1.6",
                 "amphp/http-server": "dev-master",
                 "amphp/php-cs-fixer-config": "dev-master",
-                "amphp/websocket": "dev-master as 1",
-                "amphp/websocket-client": "dev-master as 1",
                 "danog/7to5": "^1",
                 "danog/7to70": "^1",
                 "ennexa/amp-update-cache": "dev-master",
@@ -2249,7 +2242,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-02T23:49:46+00:00"
+            "time": "2020-10-04T17:25:49+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2330,16 +2323,16 @@
         },
         {
             "name": "danog/tg-file-decoder",
-            "version": "0.1.2",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/tg-file-decoder.git",
-                "reference": "afcdb9a4a7239e36e8ab3b9a02db72eaa95db66e"
+                "reference": "226ddc68dc7bb18c6a06ac2d33b3cce1174d67c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/tg-file-decoder/zipball/afcdb9a4a7239e36e8ab3b9a02db72eaa95db66e",
-                "reference": "afcdb9a4a7239e36e8ab3b9a02db72eaa95db66e",
+                "url": "https://api.github.com/repos/danog/tg-file-decoder/zipball/226ddc68dc7bb18c6a06ac2d33b3cce1174d67c2",
+                "reference": "226ddc68dc7bb18c6a06ac2d33b3cce1174d67c2",
                 "shasum": ""
             },
             "require": {
@@ -2379,7 +2372,13 @@
                 "telegram",
                 "video"
             ],
-            "time": "2020-02-06T16:11:19+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/danog",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-03T11:51:53+00:00"
         },
         {
             "name": "danog/tgseclib",
@@ -3852,7 +3851,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "amphp/websocket-server": 20,
-        "amphp/websocket-client": 20,
         "danog/madelineproto": 20,
         "roave/security-advisories": 20
     },

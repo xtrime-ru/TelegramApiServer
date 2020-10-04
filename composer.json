@@ -12,7 +12,7 @@
     "amphp/http-server": "^2",
     "amphp/http-server-router": "^1",
     "amphp/websocket-server": "dev-master",
-    "amphp/websocket-client": "dev-master",
+    "amphp/websocket-client": "^1",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"dev-master",
     "danog/tgseclib": "^3",
