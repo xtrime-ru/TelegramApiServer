@@ -159,16 +159,7 @@ class Client
                     yield $this->instances[$sessionName]->start();
                     $this->instances[$sessionName]->unsetEventHandler();
                     Loop::defer(function() use($sessionName) {
-                        while (!empty($this->instances[$sessionName]) && static::isSessionLoggedIn($this->instances[$sessionName])) {
-                            try {
-                                warning('Loop started: ' . $sessionName);
-                                $this->instances[$sessionName]->loop();
-                                warning('Loop stopped: ' . $sessionName);
-                            } catch (\Throwable $e) {
-                                error('Error in Madeline Loop.', Logger::getExceptionAsArray($e));
-                                Client::getInstance()->removeBrokenSessions();
-                            }
-                        }
+                        $this->instances[$sessionName]->loop();
                     });
                 }
             }

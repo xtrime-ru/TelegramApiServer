@@ -15,7 +15,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         $this->sessionName = Files::getSessionName($MadelineProto->session);
         if (empty(static::$instances[$this->sessionName])) {
             static::$instances[$this->sessionName] = true;
-            parent::__construct($MadelineProto);
+            parent::initInternal($MadelineProto);
             warning("Event observer CONSTRUCTED: {$this->sessionName}");
         }
     }
