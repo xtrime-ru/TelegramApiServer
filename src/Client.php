@@ -70,10 +70,10 @@ class Client
             Files::getSessionSettings($session),
         );
         $instance = new MadelineProto\API($file, $settings);
+        $instance->async(true);
         if (self::isSessionLoggedIn($instance)) {
             $instance->unsetEventHandler();
         }
-        $instance->async(true);
 
         $this->instances[$session] = $instance;
         return $instance;
