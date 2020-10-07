@@ -4,7 +4,6 @@ $settings = [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
         'port' => (string)getenv('SERVER_PORT'),
-        'exit_on_fatal_exception' => (bool) (getenv('EXIT_ON_FATAL_EXCEPTION') ?? true)
     ],
     'telegram' => [
         'app_info' => [ // obtained in https://my.telegram.org

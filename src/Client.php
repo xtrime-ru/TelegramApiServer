@@ -2,7 +2,6 @@
 
 namespace TelegramApiServer;
 
-use Amp\Delayed;
 use Amp\Loop;
 use Amp\Promise;
 use danog\MadelineProto;
@@ -12,13 +11,14 @@ use Psr\Log\LogLevel;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
+use function Amp\ParallelFunctions\parallelMap;
 
 class Client
 {
     public static Client $self;
     /** @var MadelineProto\API[] */
     public array $instances = [];
-    private bool $sessionCheckRunning = false;
+    private const HEALHT_CHECK_INTERVAL=10000;
 
     public static function getInstance(): Client {
         if (empty(static::$self)) {
@@ -35,6 +35,8 @@ class Client
     public function connect(array $sessionFiles): \Generator
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
+
+        $this->healthCheckLoop();
 
         $promises = [];
         foreach ($sessionFiles as $file) {
@@ -166,46 +168,34 @@ class Client
         );
     }
 
-    public function removeBrokenSessions(): void
+    public function healthCheckLoop(): void
     {
-        Loop::defer(function() {
-            if (!$this->sessionCheckRunning) {
-                $this->sessionCheckRunning = true;
-                foreach (yield static::getInstance()->getBrokenSessions() as $session) {
-                    static::getInstance()->removeSession($session);
-                }
-                $this->sessionCheckRunning = false;
-            }
-        });
-    }
-
-    private function getBrokenSessions(): Promise
-    {
-        return call(function() {
-            $brokenSessions = [];
-            foreach ($this->instances as $session => $instance) {
-                if (!static::checkSession($session, $instance)) {
-                    $brokenSessions[] = $session;
-                    yield new Delayed(1000);
-                }
-            }
-
-            return $brokenSessions;
-        });
-
-    }
-
-    private static function checkSession(string $session, MadelineProto\API $instance): bool
-    {
-        warning("Checking session: {$session}");
-        try {
-            $instance->getSelf(['async' => false]);
-        } catch (\Throwable $e) {
-            error("Session is broken: {$session}");
-            return false;
+        $host = (string) Config::getInstance()->get('server.address');
+        if ($host === '0.0.0.0') {
+            $host = '127.0.0.1';
         }
+        $port = (int) Config::getInstance()->get('server.port');
 
-        return true;
+        Loop::repeat(static::HEALHT_CHECK_INTERVAL, function() use($host, $port) {
+            $sessionsForCheck = [];
+            foreach ($this->instances as $sessionName => $API) {
+                if (static::isSessionLoggedIn($API)) {
+                    $sessionsForCheck[] = $sessionName;
+                }
+            }
+
+            $results = yield parallelMap($sessionsForCheck, function(string $sessionName) use($host, $port): array {
+                $url = "http://{$host}:{$port}/api/{$sessionName}/getSelf";
+                $self = file_get_contents($url, 0, stream_context_create(["http"=>["timeout"=>1]]));
+                return [$url, $self];
+            });
+            foreach ($results as [$url, $result]) {
+                if (!$result) {
+                    throw new RuntimeException("Failed health check: $url");
+                }
+            }
+
+        });
     }
 
 }

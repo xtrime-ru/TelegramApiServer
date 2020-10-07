@@ -36,22 +36,7 @@ class Server
         });
 
         while (true) {
-            if (Config::getInstance()->get('server.exit_on_fatal_exception')) {
-                Amp\Loop::run();
-            } else {
-                try {
-                    Amp\Loop::run();
-                } catch (\Throwable $e) {
-                    alert(
-                        'Error in main Amp Loop',
-                        [
-                            'exception' => Logger::getExceptionAsArray($e),
-                        ]
-                    );
-
-                    Client::getInstance()->removeBrokenSessions();
-                }
-            }
+            Amp\Loop::run();
         }
 
     }
