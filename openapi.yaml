@@ -1,0 +1,104 @@
+openapi: 3.0.1
+
+info:
+  title: Telegram Api Server
+  description: 'Fast, simple, async php telegram api server: MadelineProto + Amp HTTP
+    Server'
+  license:
+    name: MIT License
+    url: https://github.com/xtrime-ru/TelegramApiServer/blob/master/LICENSE
+  version: 1.10.4
+
+externalDocs:
+  description: Async PHP client/server API for the telegram MTProto protocol
+  url: https://github.com/danog/MadelineProto
+  
+servers:
+- url: https://example.com/
+- url: http://example.com/
+
+#security:
+#- basicAuth: []
+
+tags:
+- name: system
+  description: Everything about your system
+  externalDocs:
+    description: Find out more
+    url: https://github.com/xtrime-ru/TelegramApiServer#different-settings-for-sessions
+
+paths:
+  /system/getSessionList:
+    get:
+      tags:
+      - system
+      summary: Get session list
+      description: Multiple values
+      operationId: getSessionList
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionListResponse'
+
+components:
+  schemas:
+
+    Session:
+      type: object
+      properties:
+        session:
+          type: string
+        file:
+          type: string
+        status:
+          type: string
+          enum:
+          - NOT_LOGGED_IN
+          - WAITING_CODE
+          - WAITING_PASSWORD
+          - WAITING_SIGNUP
+          - LOGGED_IN
+          - LOADING
+
+    Sessions:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Session'
+
+    SessionList:
+      type: object
+      properties:
+        sessions:
+          $ref: '#/components/schemas/Sessions'
+        memory:
+          type: string
+
+    GetSessionListResponse:
+      description: Response for Foo service
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      properties:
+       response:
+          $ref: '#/components/schemas/SessionList'
+
+    ApiResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+            properties: {}
+        response:
+          type: object
+          properties: {}
+
+#  securitySchemes:
+#    basicAuth:
+#      type: http
+#      scheme: basic
