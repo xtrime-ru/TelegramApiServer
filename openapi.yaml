@@ -43,6 +43,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetSessionListResponse'
 
+
+  /system/addSession:
+    get:
+      tags:
+      - system
+      summary: Add session
+      description: Add session
+      operationId: addSession
+      parameters:
+        - in: query
+          name: session
+          schema:
+            type: string
+          required: true
+          description: Session name
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionListResponse'
+
 components:
   schemas:
 
