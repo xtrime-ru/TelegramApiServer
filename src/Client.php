@@ -19,6 +19,7 @@ class Client
     /** @var MadelineProto\API[] */
     public array $instances = [];
     private const HEALHT_CHECK_INTERVAL=10000;
+    private const HEALTH_CHECK_START_DELAY=60000;
 
     public static function getInstance(): Client {
         if (empty(static::$self)) {
@@ -36,7 +37,7 @@ class Client
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
-        $this->healthCheckLoop();
+        Loop::delay(static::HEALTH_CHECK_START_DELAY, fn() => $this->healthCheckLoop());
 
         $promises = [];
         foreach ($sessionFiles as $file) {

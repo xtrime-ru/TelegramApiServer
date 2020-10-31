@@ -82,6 +82,11 @@
                 "non-blocking",
                 "promise"
             ],
+            "support": {
+                "irc": "irc://irc.freenode.org/amphp",
+                "issues": "https://github.com/amphp/amp/issues",
+                "source": "https://github.com/amphp/amp/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -154,6 +159,11 @@
                 "non-blocking",
                 "stream"
             ],
+            "support": {
+                "irc": "irc://irc.freenode.org/amphp",
+                "issues": "https://github.com/amphp/byte-stream/issues",
+                "source": "https://github.com/amphp/byte-stream/tree/master"
+            },
             "time": "2020-06-29T18:35:05+00:00"
         },
         {
@@ -208,6 +218,11 @@
             ],
             "description": "A promise-aware caching API for Amp.",
             "homepage": "https://github.com/amphp/cache",
+            "support": {
+                "irc": "irc://irc.freenode.org/amphp",
+                "issues": "https://github.com/amphp/cache/issues",
+                "source": "https://github.com/amphp/cache/tree/v1.4.0"
+            },
             "time": "2020-04-19T16:10:08+00:00"
         },
         {
@@ -285,6 +300,10 @@
                 "dns",
                 "resolve"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/dns/issues",
+                "source": "https://github.com/amphp/dns/tree/v1.2.3"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -365,6 +384,10 @@
                 "non-blocking",
                 "static"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/file/issues",
+                "source": "https://github.com/amphp/file/tree/v1.0.2"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -429,6 +452,10 @@
                 "hpack",
                 "http-2"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/hpack/issues",
+                "source": "https://github.com/amphp/hpack/tree/v3.1.0"
+            },
             "time": "2020-01-11T19:33:14+00:00"
         },
         {
@@ -478,6 +505,10 @@
                 }
             ],
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
+            "support": {
+                "issues": "https://github.com/amphp/http/issues",
+                "source": "https://github.com/amphp/http/tree/v1.6.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -488,16 +519,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.5.0",
+            "version": "v4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "39099a5ad69379eb90f2ca83c082b276539328b9"
+                "reference": "47926d6055dc18fce1b6e822e3ec244df0fe4111"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/39099a5ad69379eb90f2ca83c082b276539328b9",
-                "reference": "39099a5ad69379eb90f2ca83c082b276539328b9",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/47926d6055dc18fce1b6e822e3ec244df0fe4111",
+                "reference": "47926d6055dc18fce1b6e822e3ec244df0fe4111",
                 "shasum": ""
             },
             "require": {
@@ -574,13 +605,17 @@
                 "non-blocking",
                 "rest"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/http-client/issues",
+                "source": "https://github.com/amphp/http-client/tree/v4.5.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
                     "type": "github"
                 }
             ],
-            "time": "2020-07-21T19:18:31+00:00"
+            "time": "2020-10-25T18:00:01+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -647,6 +682,10 @@
                 "cookies",
                 "http"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/http-client-cookies/issues",
+                "source": "https://github.com/amphp/http-client-cookies/tree/master"
+            },
             "time": "2019-12-21T17:05:53+00:00"
         },
         {
@@ -734,6 +773,10 @@
                 "non-blocking",
                 "server"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/http-server/issues",
+                "source": "https://github.com/amphp/http-server/tree/master"
+            },
             "time": "2020-06-20T14:40:33+00:00"
         },
         {
@@ -803,6 +846,10 @@
                 "http",
                 "non-blocking"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/http-server-form-parser/issues",
+                "source": "https://github.com/amphp/http-server-form-parser/tree/master"
+            },
             "time": "2020-03-24T20:17:15+00:00"
         },
         {
@@ -866,6 +913,10 @@
                 "router",
                 "server"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/http-server-router/issues",
+                "source": "https://github.com/amphp/http-server-router/tree/v1.0.2"
+            },
             "time": "2019-08-21T15:51:20+00:00"
         },
         {
@@ -927,6 +978,10 @@
                 "logging",
                 "non-blocking"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/log/issues",
+                "source": "https://github.com/amphp/log/tree/master"
+            },
             "time": "2019-09-04T15:31:40+00:00"
         },
         {
@@ -982,6 +1037,10 @@
                 }
             ],
             "description": "Asynchronous MySQL client for PHP based on Amp.",
+            "support": {
+                "issues": "https://github.com/amphp/mysql/issues",
+                "source": "https://github.com/amphp/mysql/tree/master"
+            },
             "time": "2019-12-10T11:02:12+00:00"
         },
         {
@@ -1046,6 +1105,10 @@
                 "multi-processing",
                 "multi-threading"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/parallel/issues",
+                "source": "https://github.com/amphp/parallel/tree/master"
+            },
             "time": "2020-04-27T15:12:37+00:00"
         },
         {
@@ -1093,6 +1156,10 @@
                 }
             ],
             "description": "Parallel processing made simple.",
+            "support": {
+                "issues": "https://github.com/amphp/parallel-functions/issues",
+                "source": "https://github.com/amphp/parallel-functions/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -1150,6 +1217,10 @@
                 "parser",
                 "stream"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/parser/issues",
+                "source": "https://github.com/amphp/parser/tree/is-valid"
+            },
             "time": "2017-06-06T05:29:10+00:00"
         },
         {
@@ -1210,6 +1281,10 @@
                 "postgre",
                 "postgresql"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/postgres/issues",
+                "source": "https://github.com/amphp/postgres/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -1271,6 +1346,10 @@
             ],
             "description": "Asynchronous process manager.",
             "homepage": "https://github.com/amphp/process",
+            "support": {
+                "issues": "https://github.com/amphp/process/issues",
+                "source": "https://github.com/amphp/process/tree/master"
+            },
             "time": "2019-02-26T16:33:03+00:00"
         },
         {
@@ -1328,6 +1407,10 @@
                 "client",
                 "redis"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/redis/issues",
+                "source": "https://github.com/amphp/redis/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -1388,6 +1471,10 @@
                 "serialization",
                 "serialize"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/serialization/issues",
+                "source": "https://github.com/amphp/serialization/tree/master"
+            },
             "time": "2020-03-25T21:39:07+00:00"
         },
         {
@@ -1463,6 +1550,10 @@
                 "tcp",
                 "tls"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/socket/issues",
+                "source": "https://github.com/amphp/socket/tree/master"
+            },
             "time": "2020-06-25T18:55:28+00:00"
         },
         {
@@ -1507,6 +1598,10 @@
                 "db",
                 "sql"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/sql/issues",
+                "source": "https://github.com/amphp/sql/tree/v1.0.1"
+            },
             "time": "2019-09-26T16:23:02+00:00"
         },
         {
@@ -1552,6 +1647,10 @@
                 "db",
                 "sql"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/sql-common/issues",
+                "source": "https://github.com/amphp/sql-common/tree/master"
+            },
             "time": "2020-03-04T18:01:46+00:00"
         },
         {
@@ -1610,6 +1709,10 @@
                 "semaphore",
                 "synchronization"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/sync/issues",
+                "source": "https://github.com/amphp/sync/tree/v1.4.0"
+            },
             "time": "2020-05-07T18:57:50+00:00"
         },
         {
@@ -1679,6 +1782,10 @@
                 "non-blocking",
                 "websocket"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/websocket/issues",
+                "source": "https://github.com/amphp/websocket/tree/v1.0.0"
+            },
             "time": "2020-06-25T21:14:23+00:00"
         },
         {
@@ -1751,6 +1858,10 @@
                 "non-blocking",
                 "websocket"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/websocket-client/issues",
+                "source": "https://github.com/amphp/websocket-client/tree/v1.0.0"
+            },
             "time": "2020-07-05T17:36:04+00:00"
         },
         {
@@ -1790,6 +1901,7 @@
             "suggest": {
                 "ext-zlib": "Required for compression"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1824,6 +1936,10 @@
                 "server",
                 "websocket"
             ],
+            "support": {
+                "issues": "https://github.com/amphp/websocket-server/issues",
+                "source": "https://github.com/amphp/websocket-server/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -1871,6 +1987,10 @@
                 }
             ],
             "description": "Windows Registry Reader.",
+            "support": {
+                "issues": "https://github.com/amphp/windows-registry/issues",
+                "source": "https://github.com/amphp/windows-registry/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/amphp",
@@ -1918,6 +2038,10 @@
                 "cache",
                 "lru"
             ],
+            "support": {
+                "issues": "https://github.com/cash/LRUCache/issues",
+                "source": "https://github.com/cash/LRUCache/tree/1.0.0"
+            },
             "time": "2013-09-20T18:59:12+00:00"
         },
         {
@@ -2000,6 +2124,10 @@
                 "https",
                 "resolve"
             ],
+            "support": {
+                "issues": "https://github.com/danog/dns-over-https/issues",
+                "source": "https://github.com/danog/dns-over-https/tree/0.2.6"
+            },
             "time": "2019-12-27T14:35:55+00:00"
         },
         {
@@ -2064,6 +2192,10 @@
                 "multi-processing",
                 "multi-threading"
             ],
+            "support": {
+                "issues": "https://github.com/danog/ipc/issues",
+                "source": "https://github.com/danog/ipc/tree/0.1.5"
+            },
             "time": "2020-09-25T14:50:16+00:00"
         },
         {
@@ -2120,6 +2252,10 @@
                 "libdns",
                 "message"
             ],
+            "support": {
+                "issues": "https://github.com/danog/LibDNSJson/issues",
+                "source": "https://github.com/danog/LibDNSJson/tree/master"
+            },
             "time": "2019-07-14T14:59:51+00:00"
         },
         {
@@ -2171,6 +2307,10 @@
                 "multi-processing",
                 "multi-threading"
             ],
+            "support": {
+                "issues": "https://github.com/danog/loop/issues",
+                "source": "https://github.com/danog/loop/tree/0.1.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/danog",
@@ -2185,12 +2325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "26a10f012ac120961e91a0953c1e12dacb372ea0"
+                "reference": "47b808ca9b555df4bacbed46c0c9524aed60b3a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/26a10f012ac120961e91a0953c1e12dacb372ea0",
-                "reference": "26a10f012ac120961e91a0953c1e12dacb372ea0",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/47b808ca9b555df4bacbed46c0c9524aed60b3a0",
+                "reference": "47b808ca9b555df4bacbed46c0c9524aed60b3a0",
                 "shasum": ""
             },
             "require": {
@@ -2250,6 +2390,7 @@
             "suggest": {
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)"
             },
+            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -2288,13 +2429,17 @@
                 "telegram",
                 "video"
             ],
+            "support": {
+                "issues": "https://github.com/danog/MadelineProto/issues",
+                "source": "https://github.com/danog/MadelineProto/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/danog",
                     "type": "github"
                 }
             ],
-            "time": "2020-10-18T18:43:07+00:00"
+            "time": "2020-10-23T16:19:20+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2335,6 +2480,10 @@
                 "threading",
                 "volatile"
             ],
+            "support": {
+                "issues": "https://github.com/danog/MagicalSerializer/issues",
+                "source": "https://github.com/danog/MagicalSerializer/tree/master"
+            },
             "time": "2018-02-20T10:35:49+00:00"
         },
         {
@@ -2371,6 +2520,10 @@
                 }
             ],
             "description": "Prime module capable of doing prime factorization of huge numbers very quickly.\"",
+            "support": {
+                "issues": "https://github.com/danog/PrimeModule/issues",
+                "source": "https://github.com/danog/PrimeModule/tree/1.0.3"
+            },
             "time": "2018-03-21T10:47:51+00:00"
         },
         {
@@ -2424,6 +2577,10 @@
                 "telegram",
                 "video"
             ],
+            "support": {
+                "issues": "https://github.com/danog/tg-file-decoder/issues",
+                "source": "https://github.com/danog/tg-file-decoder/tree/0.1.4"
+            },
             "funding": [
                 {
                     "url": "https://github.com/danog",
@@ -2524,6 +2681,10 @@
                 "x.509",
                 "x509"
             ],
+            "support": {
+                "issues": "https://github.com/danog/tgseclib/issues",
+                "source": "https://github.com/danog/tgseclib/tree/3"
+            },
             "time": "2019-12-18T13:00:20+00:00"
         },
         {
@@ -2564,6 +2725,10 @@
             "keywords": [
                 "dns"
             ],
+            "support": {
+                "issues": "https://github.com/DaveRandom/LibDNS/issues",
+                "source": "https://github.com/DaveRandom/LibDNS/tree/v2.0.2"
+            },
             "time": "2019-12-03T09:12:46+00:00"
         },
         {
@@ -2610,6 +2775,10 @@
                 "markdown",
                 "parser"
             ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
+            },
             "time": "2019-12-30T22:54:17+00:00"
         },
         {
@@ -2659,6 +2828,10 @@
                 "pem",
                 "x509"
             ],
+            "support": {
+                "issues": "https://github.com/kelunik/certificate/issues",
+                "source": "https://github.com/kelunik/certificate/tree/v1.1.2"
+            },
             "time": "2019-05-29T19:02:31+00:00"
         },
         {
@@ -2741,6 +2914,12 @@
                 "url",
                 "ws"
             ],
+            "support": {
+                "docs": "https://uri.thephpleague.com",
+                "forum": "https://thephpleague.slack.com",
+                "issues": "https://github.com/thephpleague/uri/issues",
+                "source": "https://github.com/thephpleague/uri/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://github.com/sponsors/nyamsprod",
@@ -2751,28 +2930,27 @@
         },
         {
             "name": "league/uri-interfaces",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-interfaces.git",
-                "reference": "0068a469958895ceaf3afcb489c0258adfa1e406"
+                "reference": "667f150e589d65d79c89ffe662e426704f84224f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/0068a469958895ceaf3afcb489c0258adfa1e406",
-                "reference": "0068a469958895ceaf3afcb489c0258adfa1e406",
+                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/667f150e589d65d79c89ffe662e426704f84224f",
+                "reference": "667f150e589d65d79c89ffe662e426704f84224f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^7.0|^8.0"
+                "phpstan/phpstan-strict-rules": "^0.12"
             },
             "type": "library",
             "extra": {
@@ -2804,7 +2982,17 @@
                 "uri",
                 "url"
             ],
-            "time": "2020-02-08T12:10:37+00:00"
+            "support": {
+                "issues": "https://github.com/thephpleague/uri-interfaces/issues",
+                "source": "https://github.com/thephpleague/uri-interfaces/tree/2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/nyamsprod",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-31T13:45:51+00:00"
         },
         {
             "name": "league/uri-parser",
@@ -2869,6 +3057,10 @@
                 "uri",
                 "url"
             ],
+            "support": {
+                "issues": "https://github.com/thephpleague/uri-parser/issues",
+                "source": "https://github.com/thephpleague/uri-parser/tree/master"
+            },
             "time": "2018-11-22T07:55:51+00:00"
         },
         {
@@ -2950,6 +3142,10 @@
                 "logging",
                 "psr-3"
             ],
+            "support": {
+                "issues": "https://github.com/Seldaek/monolog/issues",
+                "source": "https://github.com/Seldaek/monolog/tree/2.1.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/Seldaek",
@@ -3006,6 +3202,10 @@
                 "router",
                 "routing"
             ],
+            "support": {
+                "issues": "https://github.com/nikic/FastRoute/issues",
+                "source": "https://github.com/nikic/FastRoute/tree/master"
+            },
             "time": "2018-02-13T20:26:39+00:00"
         },
         {
@@ -3067,6 +3267,10 @@
                 "serialization",
                 "serialize"
             ],
+            "support": {
+                "issues": "https://github.com/opis/closure/issues",
+                "source": "https://github.com/opis/closure/tree/3.6.0"
+            },
             "time": "2020-10-11T21:42:15+00:00"
         },
         {
@@ -3130,6 +3334,11 @@
                 "hex2bin",
                 "rfc4648"
             ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/constant_time_encoding/issues",
+                "source": "https://github.com/paragonie/constant_time_encoding"
+            },
             "time": "2018-04-30T17:57:16+00:00"
         },
         {
@@ -3179,6 +3388,11 @@
                 "pseudorandom",
                 "random"
             ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
             "time": "2020-10-15T10:06:57+00:00"
         },
         {
@@ -3234,6 +3448,10 @@
                 "php",
                 "type"
             ],
+            "support": {
+                "issues": "https://github.com/schmittjoh/php-option/issues",
+                "source": "https://github.com/schmittjoh/php-option/tree/1.7.5"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -3294,6 +3512,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -3341,24 +3562,27 @@
                 "psr",
                 "psr-3"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.3"
+            },
             "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.18.1",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "1c302646f6efc070cd46856e600e5e0684d6b454"
+                "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/1c302646f6efc070cd46856e600e5e0684d6b454",
-                "reference": "1c302646f6efc070cd46856e600e5e0684d6b454",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f4ba089a5b6366e453971d3aad5fe8e897b37f41",
+                "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=7.1"
             },
             "suggest": {
                 "ext-ctype": "For best performance"
@@ -3366,7 +3590,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-main": "1.20-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -3403,6 +3627,9 @@
                 "polyfill",
                 "portable"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.20.0"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3417,24 +3644,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-14T12:35:20+00:00"
+            "time": "2020-10-23T14:02:19+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.18.1",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "a6977d63bf9a0ad4c65cd352709e230876f9904a"
+                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/a6977d63bf9a0ad4c65cd352709e230876f9904a",
-                "reference": "a6977d63bf9a0ad4c65cd352709e230876f9904a",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/39d483bdf39be819deabf04ec872eb0b2410b531",
+                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=7.1"
             },
             "suggest": {
                 "ext-mbstring": "For best performance"
@@ -3442,7 +3669,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-main": "1.20-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -3480,6 +3707,9 @@
                 "portable",
                 "shim"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.20.0"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3494,29 +3724,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-14T12:35:20+00:00"
+            "time": "2020-10-23T14:02:19+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.18.1",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "d87d5766cbf48d72388a9f6b85f280c8ad51f981"
+                "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/d87d5766cbf48d72388a9f6b85f280c8ad51f981",
-                "reference": "d87d5766cbf48d72388a9f6b85f280c8ad51f981",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
+                "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.8"
+                "php": ">=7.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-main": "1.20-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -3560,6 +3790,9 @@
                 "portable",
                 "shim"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.20.0"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3574,7 +3807,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-14T12:35:20+00:00"
+            "time": "2020-10-23T14:02:19+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3638,6 +3871,10 @@
                 "env",
                 "environment"
             ],
+            "support": {
+                "issues": "https://github.com/vlucas/phpdotenv/issues",
+                "source": "https://github.com/vlucas/phpdotenv/tree/4.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -3950,6 +4187,10 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
+            "support": {
+                "issues": "https://github.com/Roave/SecurityAdvisories/issues",
+                "source": "https://github.com/Roave/SecurityAdvisories/tree/latest"
+            },
             "funding": [
                 {
                     "url": "https://github.com/Ocramius",
@@ -3978,5 +4219,5 @@
         "ext-mbstring": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
