@@ -2,6 +2,7 @@ version: '3.5'
 services:
   telegram-api-server:
     image: xtrime/telegram-api-server:latest
+    build: .
     container_name: telegram-api-server
     restart: unless-stopped
     ports:
@@ -19,7 +20,7 @@ services:
         max-size: "1024k"
         max-file: "2"
   mysql:
-    image: mariadb:10.4
+    image: mariadb:10.5
     container_name: telegram-api-server-mysql
     restart: unless-stopped
     ports:

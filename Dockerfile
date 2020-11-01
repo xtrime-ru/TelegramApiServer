@@ -1,4 +1,4 @@
-FROM php:7.4-cli
+FROM php:7.4-zts
 
 COPY . /app
 WORKDIR /app
@@ -10,13 +10,12 @@ RUN apt-get update && apt-get upgrade -y \
     && apt-get install apt-utils -y \
     && apt-get install git zip vim libzip-dev libgmp-dev libevent-dev libssl-dev libnghttp2-dev libffi-dev -y \
     && docker-php-ext-install -j$(nproc) sockets zip gmp pcntl bcmath ffi \
-    && PHP_OPENSSL=yes pecl install ev event \
+    && PHP_OPENSSL=yes pecl install ev event parallel \
     && docker-php-ext-enable ev event \
     && docker-php-source delete \
     && apt-get autoremove --purge -y && apt-get autoclean -y && apt-get clean -y \
     && chmod +x /usr/local/bin/docker-compose-wait \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer global require hirak/prestissimo \
     && composer install --no-dev \
     && composer clear
 
