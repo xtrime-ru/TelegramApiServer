@@ -20,6 +20,10 @@ class SystemApiExtensions
 
     public function addSession(string $session, array $settings = []): Promise
     {
+        if (!empty($settings['app_info']['api_id'])) {
+            $settings['app_info']['api_id'] = (int) $settings['app_info']['api_id'];
+        }
+
         return call(function() use($session, $settings) {
             $instance = $this->client->addSession($session, $settings);
             $fullSettings = $instance->API ? $instance->getSettings() : null;
