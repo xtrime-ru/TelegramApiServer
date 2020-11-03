@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer;
 
+use Amp\Delayed;
 use Amp\Loop;
 use Amp\Promise;
 use danog\MadelineProto;
@@ -18,7 +19,7 @@ class Client
     public static Client $self;
     /** @var MadelineProto\API[] */
     public array $instances = [];
-    private const HEALHT_CHECK_INTERVAL=10000;
+    private const HEALHT_CHECK_INTERVAL=30000;
     private const HEALTH_CHECK_START_DELAY=60000;
 
     public static function getInstance(): Client {
@@ -46,7 +47,7 @@ class Client
             $promises[] = $this->startLoggedInSession($sessionName);
         }
 
-        yield from $promises;
+        yield $promises;
 
         Loop::defer(fn() => yield $this->startNotLoggedInSessions());
 
@@ -74,9 +75,6 @@ class Client
         );
         $instance = new MadelineProto\API($file, $settings);
         $instance->async(true);
-        if (self::isSessionLoggedIn($instance)) {
-            $instance->unsetEventHandler();
-        }
 
         $this->instances[$session] = $instance;
         return $instance;
@@ -136,6 +134,9 @@ class Client
         return call(
             function() {
                 foreach ($this->instances as $name => $instance) {
+                    while(null === $instance->API) {
+                        yield (new Delayed(100));
+                    }
                     if (!static::isSessionLoggedIn($instance)) {
                         {
                             //Disable logging to stdout
@@ -158,12 +159,12 @@ class Client
     {
         return call(
             function() use ($sessionName) {
+                while(null === $this->instances[$sessionName]->API) {
+                    yield (new Delayed(100));
+                }
                 if (static::isSessionLoggedIn($this->instances[$sessionName])) {
                     yield $this->instances[$sessionName]->start();
-                    $this->instances[$sessionName]->unsetEventHandler();
-                    Loop::defer(function() use($sessionName) {
-                        $this->instances[$sessionName]->loop();
-                    });
+                    $this->instances[$sessionName]->loopFork();
                 }
             }
         );

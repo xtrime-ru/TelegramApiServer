@@ -26,18 +26,20 @@ class SystemApiExtensions
 
         return call(function() use($session, $settings) {
             $instance = $this->client->addSession($session, $settings);
-            $fullSettings = $instance->API ? $instance->getSettings() : null;
-            if (
-                (
-                    empty($fullSettings['app_info']['api_id']) ||
-                    empty($fullSettings['app_info']['api_hash'])
-                ) &&
-                !Client::isSessionLoggedIn($instance)
-            ) {
+            /** @var null|MadelineProto\Settings $fullSettings */
+            $fullSettings = $instance->API ? yield $instance->getSettings() : null;
+            try {
+                if ($fullSettings !== null && !Client::isSessionLoggedIn($instance)) {
+                    $fullSettings->getAppInfo()->getApiId();
+                    $fullSettings->getAppInfo()->getApiHash();
+                }
+            } catch (\Throwable $e) {
+                unset($fullSettings, $instance);
                 $this->removeSession($session);
                 $this->unlinkSessionFile($session);
-                throw new \RuntimeException('No api_id or api_hash provided');
+                throw $e;
             }
+
             yield $this->client->startLoggedInSession($session);
             return $this->getSessionList();
         });
