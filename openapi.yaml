@@ -22,101 +22,40 @@ servers:
 
 tags:
 - name: system
-  description: Everything about your system
+  description: Different settings for sessions
   externalDocs:
     description: Find out more
     url: https://github.com/xtrime-ru/TelegramApiServer#different-settings-for-sessions
 
+- name: api
+  description: All methods from MadelineProto supported
+  externalDocs:
+    description: Methods List
+    url: https://docs.madelineproto.xyz/API_docs/methods/
+
+- name: login
+  description: Login methods from MadelineProto
+  externalDocs:
+    description: Methods List
+    url: https://docs.madelineproto.xyz/API_docs/methods/
+
 paths:
   /system/getSessionList:
-    get:
-      tags:
-      - system
-      summary: Get session list
-      description: Multiple values
-      operationId: getSessionList
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetSessionListResponse'
-
+    $ref: './openapi/paths/system/getSessionList.yaml'
 
   /system/addSession:
-    get:
-      tags:
-      - system
-      summary: Add session
-      description: Add session
-      operationId: addSession
-      parameters:
-        - in: query
-          name: session
-          schema:
-            type: string
-          required: true
-          description: Session name
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetSessionListResponse'
+    $ref: './openapi/paths/system/addSession.yaml'
 
-components:
-  schemas:
+  /api/{session}/phoneLogin:
+    $ref: './openapi/paths/api/phoneLogin.yaml'
 
-    Session:
-      type: object
-      properties:
-        session:
-          type: string
-        file:
-          type: string
-        status:
-          type: string
-          enum:
-          - NOT_LOGGED_IN
-          - WAITING_CODE
-          - WAITING_PASSWORD
-          - WAITING_SIGNUP
-          - LOGGED_IN
-          - LOADING
+  /api/{session}/completePhoneLogin:
+    $ref: './openapi/paths/api/completePhoneLogin.yaml'
 
-    SessionList:
-      type: object
-      properties:
-        sessions:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Session'
-        memory:
-          type: string
+  /api/{session}/completeSignup:
+    $ref: './openapi/paths/api/completeSignup.yaml'
 
-    GetSessionListResponse:
-      description: Response for Foo service
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
-      properties:
-       response:
-          $ref: '#/components/schemas/SessionList'
 
-    ApiResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        errors:
-          type: array
-          items:
-            type: object
-            properties: {}
-        response:
-          type: object
-          properties: {}
 
 #  securitySchemes:
 #    basicAuth:

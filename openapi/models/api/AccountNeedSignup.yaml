@@ -1,0 +1,41 @@
+type: object
+properties:
+  _:
+    type: string
+    default: "account.needSignup"
+  terms_of_service:
+    type: object
+    properties:
+      _:
+        type: string
+        default: "help.termsOfService"
+      popup:
+        type: boolean
+        default: false
+      id:
+        type: object
+        properties:
+          country:
+            type: string
+            example: "RU"
+          min_age:
+            type: boolean
+            default: false
+          terms_key:
+            type: string
+            example: "TERMS_OF_SERVICE"
+          terms_lang:
+            type: string
+            example: "en"
+          terms_version:
+            type: integer
+            default: 1
+          terms_hash:
+            type: string
+            default: "7dca806cb8d387c07c778ce9ef6aac04"
+      text:
+        type: string
+        default: "By signing up for Telegram, you agree not to:\n\n- Use our service to send spam or scam users.\n- Promote violence on publicly viewable Telegram bots, groups or channels.\n- Post pornographic content on publicly viewable Telegram bots, groups or channels.\n\nWe reserve the right to update these Terms of Service later."
+      entities:
+        type: array
+        items: {}

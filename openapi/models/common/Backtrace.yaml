@@ -1,0 +1,15 @@
+type: object
+properties:
+  file:
+    type: string
+  line:
+    type: integer
+  function:
+    type: string
+  class:
+    type: string
+  type:
+    type: string
+  args:
+    type: array
+    items: {}

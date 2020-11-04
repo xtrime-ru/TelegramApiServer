@@ -1,0 +1,9 @@
+SessionList:
+  type: object
+  properties:
+    sessions:
+      type: object
+      additionalProperties:
+        $ref: '../models/Session.yaml'
+    memory:
+      type: string

@@ -1,0 +1,6 @@
+in: path
+name: session
+schema:
+  type: string
+required: true
+description: Session name

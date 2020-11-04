@@ -1,0 +1,12 @@
+type: object
+properties:
+  success:
+    type: boolean
+  errors:
+    type: array
+    items:
+      type: object
+      properties: {}
+  response:
+    type: object
+    properties: {}

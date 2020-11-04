@@ -1,0 +1,29 @@
+type: object
+properties:
+  _:
+    type: string
+    default: "auth.sentCode"
+  type:
+    type: object
+    properties:
+      _:
+        type: string
+        default: "auth.sentCodeTypeSms"
+      length:
+        type: integer
+        example: 5
+  phone_code_hash:
+    type: string
+    example: "3aae168ea0609da27f"
+  next_type:
+    type: object
+    properties:
+      _:
+        type: string
+        default: "auth.codeTypeCall"
+  timeout:
+    type: integer
+    example: 120
+  phone_number:
+    type: string
+    example: "+79636025112"
