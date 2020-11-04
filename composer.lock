@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "f220a51458bf4dd0dedebb171ac3457813c72bbc"
+                "reference": "ecdc3c476b3ccff02f8e5d5bcc04f7ccfd18751c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/f220a51458bf4dd0dedebb171ac3457813c72bbc",
-                "reference": "f220a51458bf4dd0dedebb171ac3457813c72bbc",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/ecdc3c476b3ccff02f8e5d5bcc04f7ccfd18751c",
+                "reference": "ecdc3c476b3ccff02f8e5d5bcc04f7ccfd18751c",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/amphp",
                 "issues": "https://github.com/amphp/amp/issues",
-                "source": "https://github.com/amphp/amp/tree/master"
+                "source": "https://github.com/amphp/amp/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -93,7 +93,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-14T21:47:18+00:00"
+            "time": "2020-11-03T16:23:45+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -519,16 +519,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.5.1",
+            "version": "v4.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "47926d6055dc18fce1b6e822e3ec244df0fe4111"
+                "reference": "2af4024062abded1d529ca5712866bfcb12ad5a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/47926d6055dc18fce1b6e822e3ec244df0fe4111",
-                "reference": "47926d6055dc18fce1b6e822e3ec244df0fe4111",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/2af4024062abded1d529ca5712866bfcb12ad5a9",
+                "reference": "2af4024062abded1d529ca5712866bfcb12ad5a9",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v4.5.1"
+                "source": "https://github.com/amphp/http-client/tree/v4.5.2"
             },
             "funding": [
                 {
@@ -615,7 +615,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-25T18:00:01+00:00"
+            "time": "2020-11-03T07:54:59+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
