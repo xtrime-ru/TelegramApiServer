@@ -28,6 +28,9 @@ $settings = [
                     'username' => getenv('TELEGRAM_PROXY_USERNAME'),
                     'password' => getenv('TELEGRAM_PROXY_PASSWORD'),
                 ]
+            ],
+            'media_socket_count' => [
+                'max' => 50
             ]
         ],
         'serialization' => [
