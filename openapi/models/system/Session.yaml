@@ -1,16 +1,14 @@
-Session:
-  type: object
-  properties:
-    session:
-      type: string
-    file:
-      type: string
-    status:
-      type: string
-      enum:
-      - NOT_LOGGED_IN
-      - WAITING_CODE
-      - WAITING_PASSWORD
-      - WAITING_SIGNUP
-      - LOGGED_IN
-      - LOADING
+properties:
+  session:
+    type: string
+  file:
+    type: string
+  status:
+    type: string
+    enum:
+    - NOT_LOGGED_IN
+    - WAITING_CODE
+    - WAITING_PASSWORD
+    - WAITING_SIGNUP
+    - LOGGED_IN
+    - LOADING

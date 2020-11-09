@@ -1,5 +1,3 @@
-
-type: object
 description: Failed operation
 content:
   application/json:

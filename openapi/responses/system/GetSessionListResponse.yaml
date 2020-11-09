@@ -1,9 +1,7 @@
 description: Response for session list
 allOf:
-- $ref: '../common/ApiResponse.yaml'
-properties:
-  success:
-    type: boolean
-    default: true
-  response:
-    $ref: '../../models/system/SessionList.yaml'
+  - $ref: '../common/ApiResponse.yaml'
+  - type: object
+    properties:
+      response:
+        $ref: '../../models/system/SessionList.yaml'

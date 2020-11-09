@@ -1,0 +1,4 @@
+properties:
+  _:
+    type: string
+    default: "auth.codeTypeCall"

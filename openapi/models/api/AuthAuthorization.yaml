@@ -4,44 +4,4 @@ properties:
     type: string
     default: "auth.authorization"
   user:
-    type: object
-    properties:
-      _:
-        type: string
-        default: "user"
-      self:
-        type: boolean
-      contact:
-        type: boolean
-      mutual_contact:
-        type: boolean
-      deleted:
-        type: boolean
-      bot:
-        type: boolean
-      bot_chat_history:
-        type: boolean
-      bot_nochats:
-        type: boolean
-      verified:
-        type: boolean
-      restricted:
-        type: boolean
-      min:
-        type: boolean
-      bot_inline_geo:
-        type: boolean
-      support:
-        type: boolean
-      scam:
-        type: boolean
-      id:
-        type: integer
-      access_hash:
-        type: integer
-        example: 4963221948965825237
-      first_name:
-        type: string
-      phone:
-        type: string
-        example: "79636025112"
+    $ref: '../api/User.yaml'
