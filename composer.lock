@@ -2268,12 +2268,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "47b808ca9b555df4bacbed46c0c9524aed60b3a0"
+                "reference": "e73b0dc4888f4e6670b00b39276d705467166fe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/47b808ca9b555df4bacbed46c0c9524aed60b3a0",
-                "reference": "47b808ca9b555df4bacbed46c0c9524aed60b3a0",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/e73b0dc4888f4e6670b00b39276d705467166fe8",
+                "reference": "e73b0dc4888f4e6670b00b39276d705467166fe8",
                 "shasum": ""
             },
             "require": {
@@ -2382,7 +2382,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-23T16:19:20+00:00"
+            "time": "2020-11-09T10:07:14+00:00"
         },
         {
             "name": "danog/magicalserializer",
