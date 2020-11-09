@@ -9,15 +9,16 @@
     "php": ">=7.4.0",
     "ext-json": "*",
     "ext-mbstring": "*",
+    "ext-pcntl": "*",
     "amphp/http-server": "^2",
     "amphp/http-server-router": "^1",
     "amphp/websocket-server": "dev-master",
     "amphp/websocket-client": "^1",
+    "amphp/http-client": "^4",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"dev-master",
     "danog/tgseclib": "^3",
-    "amphp/http-server-form-parser": "^1.1",
-    "amphp/parallel-functions": "^1.0"
+    "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"

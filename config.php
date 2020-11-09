@@ -62,6 +62,11 @@ $settings = [
             )
         ),
     ],
+    'health_check' => [
+        'enabled' => (bool) filter_var((string)getenv('HEALTHCHECK_ENABLED'), FILTER_VALIDATE_BOOL),
+        'interval' => ((int) getenv('HEALTHCHECK_INTERVAL') ?: 30),
+        'timeout' => ((int) getenv('HEALTHCHECK_REQUEST_TIMEOUT') ?: 60),
+    ]
 ];
 
 if (empty($settings['telegram']['connection_settings']['all']['proxy_extra']['address'])) {

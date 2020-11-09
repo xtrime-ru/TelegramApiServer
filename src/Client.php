@@ -12,15 +12,12 @@ use Psr\Log\LogLevel;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
 use function Amp\call;
-use function Amp\ParallelFunctions\parallelMap;
 
 class Client
 {
     public static Client $self;
     /** @var MadelineProto\API[] */
     public array $instances = [];
-    private const HEALHT_CHECK_INTERVAL=30000;
-    private const HEALTH_CHECK_START_DELAY=60000;
 
     public static function getInstance(): Client {
         if (empty(static::$self)) {
@@ -37,8 +34,6 @@ class Client
     public function connect(array $sessionFiles): \Generator
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
-
-        Loop::delay(static::HEALTH_CHECK_START_DELAY, fn() => $this->healthCheckLoop());
 
         $promises = [];
         foreach ($sessionFiles as $file) {
@@ -168,36 +163,6 @@ class Client
                 }
             }
         );
-    }
-
-    public function healthCheckLoop(): void
-    {
-        $host = (string) Config::getInstance()->get('server.address');
-        if ($host === '0.0.0.0') {
-            $host = '127.0.0.1';
-        }
-        $port = (int) Config::getInstance()->get('server.port');
-
-        Loop::repeat(static::HEALHT_CHECK_INTERVAL, function() use($host, $port) {
-            $sessionsForCheck = [];
-            foreach ($this->instances as $sessionName => $API) {
-                if (static::isSessionLoggedIn($API)) {
-                    $sessionsForCheck[] = $sessionName;
-                }
-            }
-
-            $results = yield parallelMap($sessionsForCheck, function(string $sessionName) use($host, $port): array {
-                $url = "http://{$host}:{$port}/api/{$sessionName}/getSelf";
-                $self = file_get_contents($url, 0, stream_context_create(["http"=>["timeout"=>1]]));
-                return [$url, $self];
-            });
-            foreach ($results as [$url, $result]) {
-                if (!$result) {
-                    throw new RuntimeException("Failed health check: $url");
-                }
-            }
-
-        });
     }
 
 }
