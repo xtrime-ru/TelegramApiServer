@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb6403bce03f5cd7b09ff2d635439ebd",
+    "content-hash": "6c7173f3ac407cfc23ea57b3dfecec9d",
     "packages": [
         {
             "name": "amphp/amp",
@@ -986,33 +986,35 @@
         },
         {
             "name": "amphp/mysql",
-            "version": "v2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/mysql.git",
-                "reference": "cbef7dccaf076218470267a2739aa0f3b49511f1"
+                "reference": "03c69546c07cacf4cb09790e77f0777e9d3ae7f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/mysql/zipball/cbef7dccaf076218470267a2739aa0f3b49511f1",
-                "reference": "cbef7dccaf076218470267a2739aa0f3b49511f1",
+                "url": "https://api.github.com/repos/amphp/mysql/zipball/03c69546c07cacf4cb09790e77f0777e9d3ae7f7",
+                "reference": "03c69546c07cacf4cb09790e77f0777e9d3ae7f7",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
-                "amphp/file": "^1 || ^0.3.5",
                 "amphp/socket": "^1",
                 "amphp/sql": "^1",
                 "amphp/sql-common": "^1",
                 "php": ">=7.1"
             },
             "require-dev": {
+                "amphp/file": "^2 || ^1 || ^0.3.5",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1.2",
+                "amphp/process": "^1",
                 "ext-openssl": "*",
                 "phpbench/phpbench": "^0.13.0",
-                "phpunit/phpunit": "^8 || ^7"
+                "phpunit/phpunit": "^9 || ^8 || ^7"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1041,7 +1043,13 @@
                 "issues": "https://github.com/amphp/mysql/issues",
                 "source": "https://github.com/amphp/mysql/tree/master"
             },
-            "time": "2019-12-10T11:02:12+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-11-10T05:46:55+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -2268,12 +2276,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "e73b0dc4888f4e6670b00b39276d705467166fe8"
+                "reference": "651cebf6b7857379dca277e6775168ac59c3b63f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/e73b0dc4888f4e6670b00b39276d705467166fe8",
-                "reference": "e73b0dc4888f4e6670b00b39276d705467166fe8",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/651cebf6b7857379dca277e6775168ac59c3b63f",
+                "reference": "651cebf6b7857379dca277e6775168ac59c3b63f",
                 "shasum": ""
             },
             "require": {
@@ -2382,7 +2390,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-09T10:07:14+00:00"
+            "time": "2020-11-09T20:17:15+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -4096,11 +4104,19 @@
             "time": "2020-11-07T16:07:08+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "amphp/mysql",
+            "version": "9999999-dev",
+            "alias": "v2.99",
+            "alias_normalized": "2.99.0.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "amphp/websocket-server": 20,
         "danog/madelineproto": 20,
+        "amphp/mysql": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
