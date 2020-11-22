@@ -37,4 +37,4 @@ RUN touch '/app/sessions/.env.docker' && \
 
 EXPOSE 9503
 
-ENTRYPOINT docker-compose-wait && php server.php -e=.env.docker --docker -s=*
+ENTRYPOINT docker-compose-wait && nice -n 20 php server.php -e=.env.docker --docker -s=*
