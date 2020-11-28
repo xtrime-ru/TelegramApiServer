@@ -3,7 +3,7 @@ FROM php:7.4-zts
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /usr/local/bin/docker-compose-wait
 
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install apt-utils -y \
+    && apt-get install apt-utils procps -y \
     # Install main extension
     && apt-get install git zip vim libzip-dev libgmp-dev libevent-dev libssl-dev libnghttp2-dev libffi-dev -y \
     && docker-php-ext-install -j$(nproc) sockets zip gmp pcntl bcmath ffi \
