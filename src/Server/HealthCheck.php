@@ -37,9 +37,11 @@ class HealthCheck
         static::$requestTimeout = (int) Config::getInstance()->get('health_check.timeout');
 
         try {
-            Loop::delay(static::$checkInterval*1000, function() {
+            Loop::repeat(static::$checkInterval*1000, function() use($parentPid){
                 Logger::getInstance()->info('Start health check');
-
+                if (!self::isProcessAlive($parentPid)) {
+                    throw new RuntimeException('Parent process died');
+                }
                 $sessions = yield from static::getSessionList();
                 $sessionsForCheck = static::getLoggedInSessions($sessions);
                 $promises = [];
@@ -54,9 +56,14 @@ class HealthCheck
             Loop::run();
         } catch (\Throwable $e) {
             Logger::getInstance()->error($e->getMessage());
-            Logger::getInstance()->critical('Health check failed. Killing parent process');
-            exec("kill -9 $parentPid");
+            Logger::getInstance()->critical('Health check failed');
+            if (self::isProcessAlive($parentPid)) {
+                Logger::getInstance()->critical('Killing parent process');
+                exec("kill -9 $parentPid");
+            }
         }
+
+        Logger::getInstance()->critical('Health check process exit');
 
     }
 
@@ -111,5 +118,11 @@ class HealthCheck
             $response = yield $client->request($request);
             return yield $response->getBody()->buffer();
         });
+    }
+
+    private static function isProcessAlive(int $pid): bool
+    {
+        $result = exec("ps -p $pid | grep $pid");
+        return !empty($result);
     }
 }
