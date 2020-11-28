@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c7173f3ac407cfc23ea57b3dfecec9d",
+    "content-hash": "b43ec2deacbaeba571816b501d79e0b0",
     "packages": [
         {
             "name": "amphp/amp",
@@ -460,16 +460,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.6.1",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "dfd33554b82a7d8f18cced56352bcc8270318dfe"
+                "reference": "e2b75561011a9596e4574cc867e07a706d56394b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/dfd33554b82a7d8f18cced56352bcc8270318dfe",
-                "reference": "dfd33554b82a7d8f18cced56352bcc8270318dfe",
+                "url": "https://api.github.com/repos/amphp/http/zipball/e2b75561011a9596e4574cc867e07a706d56394b",
+                "reference": "e2b75561011a9596e4574cc867e07a706d56394b",
                 "shasum": ""
             },
             "require": {
@@ -507,7 +507,7 @@
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
             "support": {
                 "issues": "https://github.com/amphp/http/issues",
-                "source": "https://github.com/amphp/http/tree/v1.6.1"
+                "source": "https://github.com/amphp/http/tree/v1.6.3"
             },
             "funding": [
                 {
@@ -515,20 +515,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-11T18:23:42+00:00"
+            "time": "2020-11-28T17:04:34+00:00"
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.5.2",
+            "version": "v4.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "2af4024062abded1d529ca5712866bfcb12ad5a9"
+                "reference": "5f34c35e194b0f7b7fe07a3097f794e24f49cb0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/2af4024062abded1d529ca5712866bfcb12ad5a9",
-                "reference": "2af4024062abded1d529ca5712866bfcb12ad5a9",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/5f34c35e194b0f7b7fe07a3097f794e24f49cb0f",
+                "reference": "5f34c35e194b0f7b7fe07a3097f794e24f49cb0f",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v4.5.2"
+                "source": "https://github.com/amphp/http-client/tree/v4.5.3"
             },
             "funding": [
                 {
@@ -615,7 +615,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-03T07:54:59+00:00"
+            "time": "2020-11-22T20:45:00+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -986,7 +986,7 @@
         },
         {
             "name": "amphp/mysql",
-            "version": "dev-master",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/mysql.git",
@@ -1014,7 +1014,6 @@
                 "phpbench/phpbench": "^0.13.0",
                 "phpunit/phpunit": "^9 || ^8 || ^7"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1041,7 +1040,7 @@
             "description": "Asynchronous MySQL client for PHP based on Amp.",
             "support": {
                 "issues": "https://github.com/amphp/mysql/issues",
-                "source": "https://github.com/amphp/mysql/tree/master"
+                "source": "https://github.com/amphp/mysql/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -1557,16 +1556,16 @@
         },
         {
             "name": "amphp/sql-common",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql-common.git",
-                "reference": "6bd462b80f440a06165b49bedeb868e549a6284a"
+                "reference": "1c3b86970373d2ae00482300cae1442d4e9bd782"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql-common/zipball/6bd462b80f440a06165b49bedeb868e549a6284a",
-                "reference": "6bd462b80f440a06165b49bedeb868e549a6284a",
+                "url": "https://api.github.com/repos/amphp/sql-common/zipball/1c3b86970373d2ae00482300cae1442d4e9bd782",
+                "reference": "1c3b86970373d2ae00482300cae1442d4e9bd782",
                 "shasum": ""
             },
             "require": {
@@ -1600,9 +1599,15 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql-common/issues",
-                "source": "https://github.com/amphp/sql-common/tree/master"
+                "source": "https://github.com/amphp/sql-common/tree/v1.1.2"
             },
-            "time": "2020-03-04T18:01:46+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-11-09T23:11:50+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1668,16 +1673,16 @@
         },
         {
             "name": "amphp/websocket",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "ac4e9c53b35cd19351dc99c788f563f36fec9c6e"
+                "reference": "6752ecfcb4deba23b95ab3fbd0d427326fcac564"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/ac4e9c53b35cd19351dc99c788f563f36fec9c6e",
-                "reference": "ac4e9c53b35cd19351dc99c788f563f36fec9c6e",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/6752ecfcb4deba23b95ab3fbd0d427326fcac564",
+                "reference": "6752ecfcb4deba23b95ab3fbd0d427326fcac564",
                 "shasum": ""
             },
             "require": {
@@ -1735,9 +1740,15 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket/issues",
-                "source": "https://github.com/amphp/websocket/tree/v1.0.0"
+                "source": "https://github.com/amphp/websocket/tree/v1.0.1"
             },
-            "time": "2020-06-25T21:14:23+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-11-13T05:54:54+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -2276,12 +2287,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "651cebf6b7857379dca277e6775168ac59c3b63f"
+                "reference": "00150a10453950ed7b26b5ea36258fc278640c01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/651cebf6b7857379dca277e6775168ac59c3b63f",
-                "reference": "651cebf6b7857379dca277e6775168ac59c3b63f",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/00150a10453950ed7b26b5ea36258fc278640c01",
+                "reference": "00150a10453950ed7b26b5ea36258fc278640c01",
                 "shasum": ""
             },
             "require": {
@@ -2292,7 +2303,7 @@
                 "amphp/http-client": "^4",
                 "amphp/http-client-cookies": "^1",
                 "amphp/log": "^1.1",
-                "amphp/mysql": "^2.0",
+                "amphp/mysql": "^2",
                 "amphp/postgres": "^1.2",
                 "amphp/redis": "^1.0",
                 "amphp/socket": "^1",
@@ -2390,7 +2401,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-09T20:17:15+00:00"
+            "time": "2020-11-28T22:42:48+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2801,16 +2812,16 @@
         },
         {
             "name": "league/uri",
-            "version": "6.3.0",
+            "version": "6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "aa3babf16e9d7535544bd94e3def026ac56640f3"
+                "reference": "09da64118eaf4c5d52f9923a1e6a5be1da52fd9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/aa3babf16e9d7535544bd94e3def026ac56640f3",
-                "reference": "aa3babf16e9d7535544bd94e3def026ac56640f3",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/09da64118eaf4c5d52f9923a1e6a5be1da52fd9a",
+                "reference": "09da64118eaf4c5d52f9923a1e6a5be1da52fd9a",
                 "shasum": ""
             },
             "require": {
@@ -2827,12 +2838,14 @@
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
                 "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^8.0"
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "psr/http-factory": "^1.0"
             },
             "suggest": {
                 "ext-fileinfo": "Needed to create Data URI from a filepath",
                 "ext-intl": "Needed to improve host validation",
-                "league/uri-components": "Needed to easily manipulate URI objects"
+                "league/uri-components": "Needed to easily manipulate URI objects",
+                "psr/http-factory": "Needed to use the URI factory"
             },
             "type": "library",
             "extra": {
@@ -2883,7 +2896,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri/issues",
-                "source": "https://github.com/thephpleague/uri/tree/master"
+                "source": "https://github.com/thephpleague/uri/tree/6.4.0"
             },
             "funding": [
                 {
@@ -2891,7 +2904,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-13T17:18:44+00:00"
+            "time": "2020-11-22T14:29:11+00:00"
         },
         {
             "name": "league/uri-interfaces",
@@ -3794,12 +3807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "e440567339d5fe93d9525e377c5e686b0b08bcca"
+                "reference": "fa05999280434eacf621cc78ab9179d9394c7998"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/e440567339d5fe93d9525e377c5e686b0b08bcca",
-                "reference": "e440567339d5fe93d9525e377c5e686b0b08bcca",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fa05999280434eacf621cc78ab9179d9394c7998",
+                "reference": "fa05999280434eacf621cc78ab9179d9394c7998",
                 "shasum": ""
             },
             "conflict": {
@@ -3829,7 +3842,7 @@
                 "composer/composer": "<=1-alpha.11",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
                 "contao/core": ">=2,<3.5.39",
-                "contao/core-bundle": ">=4,<4.4.52|>=4.5,<4.9.6|= 4.10.0",
+                "contao/core-bundle": "= 4.10.0|>=4,<4.4.52|>=4.5,<4.9.6",
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "datadog/dd-trace": ">=0.30,<0.30.2",
                 "david-garcia/phpwhois": "<=4.3.1",
@@ -3845,8 +3858,8 @@
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dolibarr/dolibarr": "<11.0.4",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=7,<7.73|>=8,<8.8.10|>=8.9,<8.9.6|>=9,<9.0.6",
-                "drupal/drupal": ">=7,<7.73|>=8,<8.8.10|>=8.9,<8.9.6|>=9,<9.0.6",
+                "drupal/core": ">=7,<7.74|>=8,<8.8.11|>=8.9,<8.9.9|>=9,<9.0.8",
+                "drupal/drupal": ">=7,<7.74|>=8,<8.8.11|>=8.9,<8.9.9|>=9,<9.0.8",
                 "endroid/qr-code-bundle": "<3.4.2",
                 "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
@@ -3899,7 +3912,7 @@
                 "magento/magento1ee": ">=1,<1.14.4.3",
                 "magento/product-community-edition": ">=2,<2.2.10|>=2.3,<2.3.2-p.2",
                 "marcwillmann/turn": "<0.3.3",
-                "mediawiki/core": ">=1.31,<1.31.9|>=1.32,<1.32.4|>=1.33,<1.33.3|>=1.34,<1.34.3|>=1.34.99,<1.35",
+                "mediawiki/core": ">=1.27,<1.27.6|>=1.29,<1.29.3|>=1.30,<1.30.2|>=1.31,<1.31.9|>=1.32,<1.32.6|>=1.32.99,<1.33.3|>=1.33.99,<1.34.3|>=1.34.99,<1.35",
                 "mittwald/typo3_forum": "<1.2.1",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
@@ -3907,8 +3920,8 @@
                 "nette/nette": ">=2,<2.0.19|>=2.1,<2.1.13",
                 "nystudio107/craft-seomatic": "<3.3",
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
-                "october/backend": ">=1.0.319,<1.0.467",
-                "october/cms": ">=1.0.319,<1.0.466",
+                "october/backend": ">=1.0.319,<1.0.470",
+                "october/cms": "= 1.0.469|>=1.0.319,<1.0.469",
                 "october/october": ">=1.0.319,<1.0.466",
                 "october/rain": ">=1.0.319,<1.0.468",
                 "onelogin/php-saml": "<2.10.4",
@@ -3921,22 +3934,25 @@
                 "padraic/humbug_get_contents": "<1.1.2",
                 "pagarme/pagarme-php": ">=0,<3",
                 "paragonie/random_compat": "<2",
+                "passbolt/passbolt_api": "<2.11",
                 "paypal/merchant-sdk-php": "<3.12",
-                "pear/archive_tar": "<1.4.4",
+                "pear/archive_tar": "<1.4.11",
                 "personnummer/personnummer": "<3.0.2",
                 "phpfastcache/phpfastcache": ">=5,<5.0.13",
                 "phpmailer/phpmailer": "<6.1.6",
                 "phpmussel/phpmussel": ">=1,<1.6",
-                "phpmyadmin/phpmyadmin": "<4.9.2",
+                "phpmyadmin/phpmyadmin": "<4.9.6|>=5,<5.0.3",
                 "phpoffice/phpexcel": "<1.8.2",
                 "phpoffice/phpspreadsheet": "<1.8",
                 "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
                 "phpwhois/phpwhois": "<=4.2.5",
                 "phpxmlrpc/extras": "<0.6.1",
                 "pimcore/pimcore": "<6.3",
+                "pocketmine/pocketmine-mp": "<3.15.4",
                 "prestashop/autoupgrade": ">=4,<4.10.1",
                 "prestashop/contactform": ">1.0.1,<4.3",
                 "prestashop/gamification": "<2.3.2",
+                "prestashop/productcomments": ">=4,<4.2",
                 "prestashop/ps_facetedsearch": "<3.4.1",
                 "privatebin/privatebin": "<1.2.2|>=1.3,<1.3.2",
                 "propel/propel": ">=2-alpha.1,<=2-alpha.7",
@@ -3952,7 +3968,7 @@
                 "serluck/phpwhois": "<=4.2.6",
                 "shopware/core": "<=6.3.2",
                 "shopware/platform": "<=6.3.2",
-                "shopware/shopware": "<5.3.7",
+                "shopware/shopware": "<5.6.9",
                 "silverstripe/admin": ">=1.0.3,<1.0.4|>=1.1,<1.1.1",
                 "silverstripe/assets": ">=1,<1.4.7|>=1.5,<1.5.2",
                 "silverstripe/cms": "<4.3.6|>=4.4,<4.4.4",
@@ -4022,12 +4038,12 @@
                 "titon/framework": ">=0,<9.9.99",
                 "truckersmp/phpwhois": "<=4.3.1",
                 "twig/twig": "<1.38|>=2,<2.7",
-                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.30|>=9,<9.5.20|>=10,<10.4.6",
-                "typo3/cms-core": ">=8,<8.7.30|>=9,<9.5.20|>=10,<10.4.6",
+                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.38|>=9,<9.5.23|>=10,<10.4.10",
+                "typo3/cms-core": ">=8,<8.7.38|>=9,<9.5.23|>=10,<10.4.10",
                 "typo3/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.10|>=3.1,<3.1.7|>=3.2,<3.2.7|>=3.3,<3.3.5",
                 "typo3/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4",
                 "typo3/phar-stream-wrapper": ">=1,<2.1.1|>=3,<3.1.1",
-                "typo3fluid/fluid": ">=2,<2.0.5|>=2.1,<2.1.4|>=2.2,<2.2.1|>=2.3,<2.3.5|>=2.4,<2.4.1|>=2.5,<2.5.5|>=2.6,<2.6.1",
+                "typo3fluid/fluid": ">=2,<2.0.8|>=2.1,<2.1.7|>=2.2,<2.2.4|>=2.3,<2.3.7|>=2.4,<2.4.4|>=2.5,<2.5.11|>=2.6,<2.6.10",
                 "ua-parser/uap-php": "<3.8",
                 "usmanhalalit/pixie": "<1.0.3|>=2,<2.0.2",
                 "verot/class.upload.php": "<=1.0.3|>=2,<=2.0.4",
@@ -4101,22 +4117,14 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-07T16:07:08+00:00"
+            "time": "2020-11-26T07:02:13+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "amphp/mysql",
-            "version": "9999999-dev",
-            "alias": "v2.99",
-            "alias_normalized": "2.99.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "amphp/websocket-server": 20,
         "danog/madelineproto": 20,
-        "amphp/mysql": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

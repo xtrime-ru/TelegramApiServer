@@ -17,9 +17,7 @@
     "amphp/http-client": "^4",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto":"dev-master",
-    "danog/tgseclib": "^3",
-    "amphp/http-server-form-parser": "^1.1",
-    "amphp/mysql": "dev-master as v2.99"
+    "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
