@@ -11,9 +11,8 @@ RUN apt-get update && apt-get upgrade -y \
     && mkdir -p /usr/src/php/ext/ && cd /usr/src/php/ext/ \
     && pecl bundle event \
     && pecl bundle ev \
-    && pecl bundle parallel \
     && docker-php-ext-configure event --with-event-core --with-event-extra --with-event-pthreads \
-    && docker-php-ext-install -j$(nproc) ev event parallel \
+    && docker-php-ext-install -j$(nproc) ev event \
     # Install composer
     && chmod +x /usr/local/bin/docker-compose-wait \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -26,7 +25,7 @@ COPY . /app
 WORKDIR /app
 
 RUN cp -a docker/php/conf.d/. "$PHP_INI_DIR/conf.d/" \
-    && composer install --no-dev \
+    && composer install --no-dev --ignore-platform-reqs \
     && composer clear
 
 VOLUME ["/app/sessions"]

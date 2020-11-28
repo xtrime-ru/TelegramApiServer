@@ -30,7 +30,7 @@ Fast, simple, async php telegram api server:
 ### Manual: 
 1. Requirements: 
     * ssh / cli
-    * php 7.4
+    * php 7.4 or php 8
     * composer
     * git
     * Mysql/MariaDB (optional)
