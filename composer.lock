@@ -519,16 +519,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.5.3",
+            "version": "v4.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "5f34c35e194b0f7b7fe07a3097f794e24f49cb0f"
+                "reference": "00c610ab0b20d38ca4331c152abb71e9fa866eb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/5f34c35e194b0f7b7fe07a3097f794e24f49cb0f",
-                "reference": "5f34c35e194b0f7b7fe07a3097f794e24f49cb0f",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/00c610ab0b20d38ca4331c152abb71e9fa866eb0",
+                "reference": "00c610ab0b20d38ca4331c152abb71e9fa866eb0",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v4.5.3"
+                "source": "https://github.com/amphp/http-client/tree/v4.5.4"
             },
             "funding": [
                 {
@@ -615,20 +615,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-22T20:45:00+00:00"
+            "time": "2020-11-29T10:47:10+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client-cookies.git",
-                "reference": "06f32a7d208e20a0ce9f9ee42f7132f65d31724d"
+                "reference": "cd9ccc4d9106fef3f2a2bc10946108dbc62572c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/06f32a7d208e20a0ce9f9ee42f7132f65d31724d",
-                "reference": "06f32a7d208e20a0ce9f9ee42f7132f65d31724d",
+                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/cd9ccc4d9106fef3f2a2bc10946108dbc62572c5",
+                "reference": "cd9ccc4d9106fef3f2a2bc10946108dbc62572c5",
                 "shasum": ""
             },
             "require": {
@@ -686,7 +686,13 @@
                 "issues": "https://github.com/amphp/http-client-cookies/issues",
                 "source": "https://github.com/amphp/http-client-cookies/tree/master"
             },
-            "time": "2019-12-21T17:05:53+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-03-03T16:53:42+00:00"
         },
         {
             "name": "amphp/http-server",
@@ -1175,23 +1181,23 @@
         },
         {
             "name": "amphp/postgres",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/postgres.git",
-                "reference": "b027714d024dd1471d0a2282ad79800eef1cb408"
+                "reference": "b1a2f34817fb510a69b79cd56f2c98c4f4e9ff71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/postgres/zipball/b027714d024dd1471d0a2282ad79800eef1cb408",
-                "reference": "b027714d024dd1471d0a2282ad79800eef1cb408",
+                "url": "https://api.github.com/repos/amphp/postgres/zipball/b1a2f34817fb510a69b79cd56f2c98c4f4e9ff71",
+                "reference": "b1a2f34817fb510a69b79cd56f2c98c4f4e9ff71",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2",
                 "amphp/sql": "^1",
                 "amphp/sql-common": "^1",
-                "php": "^7.1"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "dev-master",
@@ -1233,7 +1239,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/postgres/issues",
-                "source": "https://github.com/amphp/postgres/tree/master"
+                "source": "https://github.com/amphp/postgres/tree/v1.3.2"
             },
             "funding": [
                 {
@@ -1241,7 +1247,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-11T15:49:51+00:00"
+            "time": "2020-12-06T22:12:22+00:00"
         },
         {
             "name": "amphp/process",
@@ -2287,12 +2293,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "00150a10453950ed7b26b5ea36258fc278640c01"
+                "reference": "23223561b955f6ad2cca70c33f5606a9844d067a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/00150a10453950ed7b26b5ea36258fc278640c01",
-                "reference": "00150a10453950ed7b26b5ea36258fc278640c01",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/23223561b955f6ad2cca70c33f5606a9844d067a",
+                "reference": "23223561b955f6ad2cca70c33f5606a9844d067a",
                 "shasum": ""
             },
             "require": {
@@ -2401,7 +2407,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-28T22:42:48+00:00"
+            "time": "2020-11-30T15:30:18+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3188,24 +3194,24 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v2.3.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2"
+                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
-                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
+                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7|^8"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6|^7",
-                "vimeo/psalm": "^1|^2|^3"
+                "phpunit/phpunit": "^6|^7|^8|^9",
+                "vimeo/psalm": "^1|^2|^3|^4"
             },
             "type": "library",
             "autoload": {
@@ -3251,7 +3257,7 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2019-11-06T19:20:29+00:00"
+            "time": "2020-12-06T15:14:20+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3807,12 +3813,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "fa05999280434eacf621cc78ab9179d9394c7998"
+                "reference": "676668eda60bb8a32bd2a4efcb12c96d6e1c4bc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fa05999280434eacf621cc78ab9179d9394c7998",
-                "reference": "fa05999280434eacf621cc78ab9179d9394c7998",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/676668eda60bb8a32bd2a4efcb12c96d6e1c4bc6",
+                "reference": "676668eda60bb8a32bd2a4efcb12c96d6e1c4bc6",
                 "shasum": ""
             },
             "conflict": {
@@ -3842,7 +3848,7 @@
                 "composer/composer": "<=1-alpha.11",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
                 "contao/core": ">=2,<3.5.39",
-                "contao/core-bundle": "= 4.10.0|>=4,<4.4.52|>=4.5,<4.9.6",
+                "contao/core-bundle": ">=4,<4.4.52|>=4.5,<4.9.6|= 4.10.0",
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "datadog/dd-trace": ">=0.30,<0.30.2",
                 "david-garcia/phpwhois": "<=4.3.1",
@@ -3864,6 +3870,7 @@
                 "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
                 "ezsystems/demobundle": ">=5.4,<5.4.6.1",
+                "ezsystems/ez-support-tools": ">=2.2,<2.2.3",
                 "ezsystems/ezdemo-ls-extension": ">=5.4,<5.4.2.1",
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1|>=5.4,<5.4.11.1|>=2017.12,<2017.12.0.1",
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
@@ -4117,7 +4124,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-26T07:02:13+00:00"
+            "time": "2020-12-02T06:02:50+00:00"
         }
     ],
     "aliases": [],
