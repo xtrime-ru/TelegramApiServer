@@ -273,9 +273,14 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
 * Session list: `http://127.0.0.1:9503/system/getSessionList`
 * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
 * Removing session (session file will remain): `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
+  Due to madelineProto issue its instance still might be in memory and continue working even after the remove.
 * Remove session file: `http://127.0.0.1:9503/system/unlinkSessionFile?session=users/xtrime`
     Don`t forget to logout and call removeSession first!
-   
+* Close TelegramApiServer (end process): `http://127.0.0.1:9503/system/exit`
+
+Full list of system methods available in [SystemApiExtensions class](https://github.com/xtrime-ru/TelegramApiServer/blob/master/src/MadelineProtoExtensions/SystemApiExtensions.php)
+
+### Authorizing session remotely 
 If there is no authorization in session, or session file is blank, authorization required:
 
 User: 
@@ -288,6 +293,8 @@ Bot:
 * `http://127.0.0.1:9503/api/bot/botLogin?token=34298141894:aflknsaflknLKNFS`
 
 Save new session to file immediately: `http://127.0.0.1:9503/api/bot/serialize`
+
+Also, session can be authorized in cli/shell on server start.
 
 ### Websocket
 #### EventHandler updates (webhooks).
@@ -316,6 +323,20 @@ Available levels: debug, info, notice, warning, error, critical, alert, emergenc
 PHP websocket client example: [websocket-events.php](https://github.com/xtrime-ru/TelegramApiServer/blob/master/examples/websocket-events.php)
 
 `php examples/websocket-events.php --url=ws://127.0.0.1:9503/log`
+
+
+### Custom methods
+
+TelegramApiServer extends madelineProto with some handful methods.   
+Full list of custom methods and their parameters available in [ApiExtensions class](https://github.com/xtrime-ru/TelegramApiServer/blob/master/src/MadelineProtoExtensions/ApiExtensions.php#L19)
+
+* `getHistory` - same as messages.getHistory, but all params exept peer is optional.
+* `getHistoryHtml` - message entities converted to html
+* `formatMessage` - converts entities to html
+* `copyMessages` - copy message from one peer to onother. Like forwardMessages, but without the link to original.
+* `getMedia` - download media to stream/browser
+* `getMediaPreview` - download media preview to stream/browser
+* `uploadMediaForm` - upload document from POST request.
 
 
 ## Contacts
