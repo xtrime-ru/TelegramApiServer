@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
+use Amp\Loop;
 use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
@@ -100,11 +101,16 @@ class SystemApiExtensions
             $file = Files::getSessionFile($session);
 
             if (is_file($file)) {
-                yield \Amp\File\unlink($file);
-                yield \Amp\File\unlink($file . '.lock');
+                $promises = [];
+                foreach (glob("$file*") as $file) {
+                    $promises[] = \Amp\File\unlink($file);
+                }
+                yield from $promises;
+            } else {
+                throw new \InvalidArgumentException('Session file not found');
             }
 
-            yield from $this->unlinkSessionSettings($session);
+            yield $this->unlinkSessionSettings($session);
 
             return 'ok';
         });
@@ -127,6 +133,11 @@ class SystemApiExtensions
 
             return 'ok';
         });
+    }
+
+    public function exit(): string {
+        Loop::defer(static fn() => exit());
+        return 'ok';
     }
 
     private function bytesToHuman($bytes): string
