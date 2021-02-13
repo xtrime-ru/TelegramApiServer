@@ -8,7 +8,7 @@ use TelegramApiServer\Files;
 class EventHandler extends \danog\MadelineProto\EventHandler
 {
     public static array $instances = [];
-    private string $sessionName;
+    private ?string $sessionName = null;
 
     public function __construct(APIWrapper $MadelineProto)
     {
