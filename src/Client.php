@@ -69,7 +69,6 @@ class Client
             Files::getSessionSettings($session),
         );
         $instance = new MadelineProto\API($file, $settings);
-        $instance->unsetEventHandler();
         $instance->async(true);
 
         $this->instances[$session] = $instance;
@@ -159,6 +158,9 @@ class Client
                     yield (new Delayed(100));
                 }
                 if (static::isSessionLoggedIn($this->instances[$sessionName])) {
+                    if (empty(EventObserver::$sessionClients[$sessionName])) {
+                        $this->instances[$sessionName]->unsetEventHandler();
+                    }
                     yield $this->instances[$sessionName]->start();
                     $this->instances[$sessionName]->loopFork();
                 }

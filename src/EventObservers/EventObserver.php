@@ -15,7 +15,7 @@ class EventObserver
     use ObserverTrait;
 
     /** @var int[]  */
-    private static array $sessionClients = [];
+    public static array $sessionClients = [];
 
     public static function notify(array $update, string $sessionName) {
         foreach (static::$subscribers as $clientId => $callback) {
