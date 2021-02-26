@@ -23,22 +23,25 @@ $options = [
 Amp\Loop::run(static function () use($options) {
     echo "Connecting to: {$options['url']}" . PHP_EOL;
 
-    try {
-        /** @var Connection $connection */
-        $connection = yield connect($options['url']);
+    while(true) {
+        try {
+            /** @var Connection $connection */
+            $connection = yield connect($options['url']);
 
-        $connection->onClose(static function() use($connection) {
-            printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
-        });
+            $connection->onClose(static function() use($connection) {
+                printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
+            });
 
-        echo 'Waiting for events...' . PHP_EOL;
-        while ($message = yield $connection->receive()) {
-            /** @var Message $message */
-            $payload = yield $message->buffer();
-            printf("Received event: %s\n", $payload);
+            echo 'Waiting for events...' . PHP_EOL;
+            while ($message = yield $connection->receive()) {
+                /** @var Message $message */
+                $payload = yield $message->buffer();
+                printf("Received event: %s\n", $payload);
+            }
+        } catch (\Throwable $e) {
+            printf("Error: %s\n", $e->getMessage());
         }
-    } catch (\Throwable $e) {
-        printf("Error: %s\n", $e->getMessage());
+        yield new Amp\Delayed(500);
     }
 
 });
