@@ -31,6 +31,8 @@ class EventsController implements ClientHandler
             $session = $request->getAttribute(Router::class)['session'] ?? null;
             if ($session) {
                 Client::getInstance()->getSession($session);
+            } elseif (empty(Client::getInstance()->instances)) {
+                throw new \RuntimeException('No sessions available');
             }
         }  catch (\Throwable $e){
             return $endpoint->getErrorHandler()->handleError(Status::NOT_FOUND, $e->getMessage());
