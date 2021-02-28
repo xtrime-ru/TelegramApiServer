@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f537d8248aecdecfc092940b1659417c",
+    "content-hash": "5fa0ed63fbd76ac91a5ff21c8cdb0a70",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2293,12 +2293,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "f021c2164796f8180ef0aac7771386e5ebe8fa64"
+                "reference": "4ef910e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/f021c2164796f8180ef0aac7771386e5ebe8fa64",
-                "reference": "f021c2164796f8180ef0aac7771386e5ebe8fa64",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/4ef910e7",
+                "reference": "4ef910e7",
                 "shasum": ""
             },
             "require": {
@@ -2356,7 +2356,8 @@
                 "vlucas/phpdotenv": "^3"
             },
             "suggest": {
-                "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)"
+                "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
+                "ext-pdo": "Install pdo extension to support database used as cache"
             },
             "type": "project",
             "autoload": {
@@ -2406,7 +2407,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-23T21:29:34+00:00"
+            "time": "2021-02-28T22:41:43+00:00"
         },
         {
             "name": "danog/magicalserializer",
