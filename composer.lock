@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fa0ed63fbd76ac91a5ff21c8cdb0a70",
+    "content-hash": "16ec6732f1828813570b50a338924d33",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2289,16 +2289,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-upload.getFile_fix",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "4ef910e7"
+                "reference": "7d56aa95ea25c5abf2fba247e996f5e5306b4990"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/4ef910e7",
-                "reference": "4ef910e7",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/7d56aa95ea25c5abf2fba247e996f5e5306b4990",
+                "reference": "7d56aa95ea25c5abf2fba247e996f5e5306b4990",
                 "shasum": ""
             },
             "require": {
@@ -2359,6 +2359,7 @@
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
                 "ext-pdo": "Install pdo extension to support database used as cache"
             },
+            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -2399,7 +2400,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/upload.getFile_fix"
+                "source": "https://github.com/danog/MadelineProto/tree/master"
             },
             "funding": [
                 {
@@ -2407,7 +2408,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-28T22:41:43+00:00"
+            "time": "2021-03-01T21:27:54+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3814,12 +3815,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "a6bfc5a1416f0dde1f53b7737b2cf983352737b8"
+                "reference": "0745f820eed6cb92603ca44a9c137ff8ce315e86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a6bfc5a1416f0dde1f53b7737b2cf983352737b8",
-                "reference": "a6bfc5a1416f0dde1f53b7737b2cf983352737b8",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0745f820eed6cb92603ca44a9c137ff8ce315e86",
+                "reference": "0745f820eed6cb92603ca44a9c137ff8ce315e86",
                 "shasum": ""
             },
             "conflict": {
@@ -3885,6 +3886,7 @@
                 "ezsystems/platform-ui-assets-bundle": ">=4.2,<4.2.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
+                "facade/ignition": "<=2.5.1,>=2.0|<=1.16.13",
                 "firebase/php-jwt": "<2",
                 "flarum/sticky": ">=0.1-beta.14,<=0.1-beta.15",
                 "flarum/tags": "<=0.1-beta.13",
@@ -4133,7 +4135,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-26T20:02:39+00:00"
+            "time": "2021-03-03T23:02:20+00:00"
         }
     ],
     "aliases": [],
