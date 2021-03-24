@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16ec6732f1828813570b50a338924d33",
+    "content-hash": "6f71aad97ce363d3baab54576c375ddc",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2293,12 +2293,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "677ddc4c8c44aac433a621169b5c36ca97e295a8"
+                "reference": "720ddac6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/677ddc4c8c44aac433a621169b5c36ca97e295a8",
-                "reference": "677ddc4c8c44aac433a621169b5c36ca97e295a8",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/720ddac6",
+                "reference": "720ddac6",
                 "shasum": ""
             },
             "require": {
