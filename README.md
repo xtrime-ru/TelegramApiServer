@@ -99,7 +99,12 @@ Fast, simple, async php telegram api server:
     * Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
     * <b>Important: api available only from ip in whitelist.</b> 
         By default it is: `127.0.0.1`
-        You can add client ip in .env file to `API_CLIENT_WHITELIST` (use json format)
+        You can add a client IP in .env file to `IP_WHITELIST` (separate with a comma)
+        
+        In docker version by default api available only from localhost (127.0.0.1).
+        To allow connections from the internet, need to change ports in docker-compose.yml to `9503:9503` and recreate the container: `docker-compose up -d`. 
+        This is very insecure, because this will open TAS port to anyone from the internet. 
+        Only protection is the `IP_WHITELIST`, and there are no warranties that it will secure your accounts.
     * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
         `http://127.0.0.1:9503/api/contacts.getContacts`
     * If method requires array of values, use any name of array, for example 'data': 
