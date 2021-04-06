@@ -163,6 +163,7 @@ class Client
                     }
                     yield $this->instances[$sessionName]->start();
                     $this->instances[$sessionName]->loopFork();
+					$this->instances[$sessionName]->echo("Started session: {$sessionName}\n");
                 }
             }
         );
