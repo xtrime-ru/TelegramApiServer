@@ -11,8 +11,8 @@ use Amp\Http\Server\Response;
 use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\TL\Conversion\BotAPI;
-use OutOfRangeException;
 use TelegramApiServer\EventObservers\EventHandler;
+use TelegramApiServer\Exceptions\MediaTooBig;
 use TelegramApiServer\Exceptions\NoMediaException;
 use function Amp\call;
 
@@ -375,7 +375,7 @@ class ApiExtensions
                 }
 
                 if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
-                    throw new OutOfRangeException(
+                    throw new MediaTooBig(
                         "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
                     );
                 }
@@ -524,13 +524,13 @@ class ApiExtensions
      * Upload file from POST request.
      * Response can be passed to 'media' field in messages.sendMedia.
      *
-     * @throws \InvalidArgumentException
      * @return Promise
+     * @throws NoMediaException
      */
     public function uploadMediaForm(): Promise
     {
         if (empty($this->file)) {
-            throw new \InvalidArgumentException('File not found');
+            throw new NoMediaException('File not found');
         }
         return call(function() {
             $inputFile = yield $this->madelineProto->uploadFromStream(
