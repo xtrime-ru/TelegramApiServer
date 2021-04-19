@@ -13,7 +13,7 @@ use danog\MadelineProto;
 use danog\MadelineProto\TL\Conversion\BotAPI;
 use OutOfRangeException;
 use TelegramApiServer\EventObservers\EventHandler;
-use UnexpectedValueException;
+use TelegramApiServer\Exceptions\NoMediaException;
 use function Amp\call;
 
 class ApiExtensions
@@ -352,11 +352,11 @@ class ApiExtensions
 
                 $message = $data['message'] ?: (yield $this->getMessages($data))['messages'][0] ?? null;
                 if (!$message || $message['_'] === 'messageEmpty') {
-                    throw new UnexpectedValueException('Empty message');
+                    throw new NoMediaException('Empty message');
                 }
 
                 if (!static::hasMedia($message, true)) {
-                    throw new UnexpectedValueException('Message has no media');
+                    throw new NoMediaException('Message has no media');
                 }
 
                 if ($message['media']['_'] !== 'messageMediaWebPage') {
@@ -407,11 +407,11 @@ class ApiExtensions
 
                 $message = $data['message'] ?: (yield $this->getMessages($data))['messages'][0] ?? null;
                 if (!$message || $message['_'] === 'messageEmpty') {
-                    throw new UnexpectedValueException('Empty message');
+                    throw new NoMediaException('Empty message');
                 }
 
                 if (!static::hasMedia($message, true)) {
-                    throw new UnexpectedValueException('Message has no media');
+                    throw new NoMediaException('Message has no media');
                 }
 
                 $media = $message['media'][array_key_last($message['media'])];
@@ -442,11 +442,11 @@ class ApiExtensions
                         }
                         break;
                     default:
-                        throw new UnexpectedValueException('Message has no preview');
+                        throw new NoMediaException('Message has no preview');
 
                 }
                 if (null === $thumb) {
-                    throw new UnexpectedValueException('Empty preview');
+                    throw new NoMediaException('Empty preview');
                 }
                 $info = yield $this->madelineProto->getDownloadInfo($thumb);
 

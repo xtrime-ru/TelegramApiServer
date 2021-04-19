@@ -11,6 +11,7 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Promise;
 use danog\MadelineProto\API;
+use TelegramApiServer\Exceptions\NoMediaException;
 use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
@@ -141,7 +142,11 @@ abstract class AbstractApiController
             }
 
         } catch (\Throwable $e) {
-            error($e->getMessage(), Logger::getExceptionAsArray($e));
+            if (!$e instanceof NoMediaException) {
+                error($e->getMessage(), Logger::getExceptionAsArray($e));
+            } else {
+                notice($e->getMessage());
+            }
             $this->setError($e);
         }
 
