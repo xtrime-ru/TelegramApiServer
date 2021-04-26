@@ -30,7 +30,7 @@ class SystemApiExtensions
             /** @var null|MadelineProto\Settings $fullSettings */
             $fullSettings = $instance->API ? yield $instance->getSettings() : null;
             try {
-                if ($fullSettings !== null && !Client::isSessionLoggedIn($instance)) {
+                if ($fullSettings !== null && ! yield from Client::isSessionLoggedIn($instance)) {
                     $fullSettings->getAppInfo()->getApiId();
                     $fullSettings->getAppInfo()->getApiHash();
                 }

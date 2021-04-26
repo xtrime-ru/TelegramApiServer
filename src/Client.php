@@ -26,9 +26,9 @@ class Client
         return static::$self;
     }
 
-    public static function isSessionLoggedIn(MadelineProto\API $instance): bool
+    public static function isSessionLoggedIn(MadelineProto\API $instance)
     {
-        return ($instance->API->authorized ?? MTProto::NOT_LOGGED_IN) === MTProto::LOGGED_IN;
+        return (bool) (yield  $instance->getSelf());
     }
 
     public function connect(array $sessionFiles): \Generator
@@ -132,7 +132,7 @@ class Client
                     while(null === $instance->API) {
                         yield (new Delayed(100));
                     }
-                    if (!static::isSessionLoggedIn($instance)) {
+                    if (! yield from static::isSessionLoggedIn($instance)) {
                         {
                             //Disable logging to stdout
                             $logLevel = Logger::getInstance()->minLevelIndex;
@@ -154,10 +154,7 @@ class Client
     {
         return call(
             function() use ($sessionName) {
-                while(null === $this->instances[$sessionName]->API) {
-                    yield (new Delayed(100));
-                }
-                if (static::isSessionLoggedIn($this->instances[$sessionName])) {
+                if (yield from static::isSessionLoggedIn($this->instances[$sessionName])) {
                     if (empty(EventObserver::$sessionClients[$sessionName])) {
                         $this->instances[$sessionName]->unsetEventHandler();
                     }

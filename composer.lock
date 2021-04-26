@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16ec6732f1828813570b50a338924d33",
+    "content-hash": "a66edfdcf351e52d84f6f49ff5cc1d6b",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2119,16 +2119,16 @@
         },
         {
             "name": "danog/ipc",
-            "version": "0.1.7",
+            "version": "0.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/ipc.git",
-                "reference": "a44e077f2d7791fd40ab4673cbf065705f81423c"
+                "reference": "be76cf8125edd9248e953a916a619fbe78fc0e1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/ipc/zipball/a44e077f2d7791fd40ab4673cbf065705f81423c",
-                "reference": "a44e077f2d7791fd40ab4673cbf065705f81423c",
+                "url": "https://api.github.com/repos/danog/ipc/zipball/be76cf8125edd9248e953a916a619fbe78fc0e1e",
+                "reference": "be76cf8125edd9248e953a916a619fbe78fc0e1e",
                 "shasum": ""
             },
             "require": {
@@ -2181,9 +2181,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/ipc/issues",
-                "source": "https://github.com/danog/ipc/tree/0.1.7"
+                "source": "https://github.com/danog/ipc/tree/0.1.11"
             },
-            "time": "2021-04-07T09:11:22+00:00"
+            "time": "2021-04-21T13:27:22+00:00"
         },
         {
             "name": "danog/libdns-json",
@@ -2247,16 +2247,16 @@
         },
         {
             "name": "danog/loop",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/loop.git",
-                "reference": "b008a45f2f192ce085e87bd2f4c6e3cf8a29bf7c"
+                "reference": "b1941cc6a7b2eede57d11a6ead464ee70793bc3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/loop/zipball/b008a45f2f192ce085e87bd2f4c6e3cf8a29bf7c",
-                "reference": "b008a45f2f192ce085e87bd2f4c6e3cf8a29bf7c",
+                "url": "https://api.github.com/repos/danog/loop/zipball/b1941cc6a7b2eede57d11a6ead464ee70793bc3f",
+                "reference": "b1941cc6a7b2eede57d11a6ead464ee70793bc3f",
                 "shasum": ""
             },
             "require": {
@@ -2296,7 +2296,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/loop/issues",
-                "source": "https://github.com/danog/loop/tree/0.1.0"
+                "source": "https://github.com/danog/loop/tree/0.1.1"
             },
             "funding": [
                 {
@@ -2304,20 +2304,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-24T17:32:12+00:00"
+            "time": "2021-04-21T13:41:15+00:00"
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-master",
+            "version": "dev-ipc_off",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "1584bf6fba8f9bb5f0552b8aaf6f2fc9f1dbd006"
+                "reference": "8b35d85d3109d17971b562ee5edc40220676d8dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/1584bf6fba8f9bb5f0552b8aaf6f2fc9f1dbd006",
-                "reference": "1584bf6fba8f9bb5f0552b8aaf6f2fc9f1dbd006",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/8b35d85d3109d17971b562ee5edc40220676d8dc",
+                "reference": "8b35d85d3109d17971b562ee5edc40220676d8dc",
                 "shasum": ""
             },
             "require": {
@@ -2377,7 +2377,6 @@
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
                 "ext-pdo": "Install pdo extension to support database used as cache"
             },
-            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -2418,7 +2417,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/6.0.28"
+                "source": "https://github.com/danog/MadelineProto/tree/ipc_off"
             },
             "funding": [
                 {
@@ -2426,7 +2425,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-18T21:54:35+00:00"
+            "time": "2021-04-26T21:03:07+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3888,12 +3887,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "593c4de369ca852cf3b86037f19435d47c136448"
+                "reference": "3c97c13698c448fdbbda20acb871884a2d8f45b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/593c4de369ca852cf3b86037f19435d47c136448",
-                "reference": "593c4de369ca852cf3b86037f19435d47c136448",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/3c97c13698c448fdbbda20acb871884a2d8f45b1",
+                "reference": "3c97c13698c448fdbbda20acb871884a2d8f45b1",
                 "shasum": ""
             },
             "conflict": {
@@ -4024,7 +4023,7 @@
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
-                "openmage/magento-lts": "<19.4.8|>=20,<20.0.4",
+                "openmage/magento-lts": "<=19.4.12|>=20,<=20.0.8",
                 "orchid/platform": ">=9,<9.4.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
@@ -4033,7 +4032,7 @@
                 "paragonie/random_compat": "<2",
                 "passbolt/passbolt_api": "<2.11",
                 "paypal/merchant-sdk-php": "<3.12",
-                "pear/archive_tar": "<1.4.12",
+                "pear/archive_tar": "<1.4.13",
                 "personnummer/personnummer": "<3.0.2",
                 "phpfastcache/phpfastcache": ">=5,<5.0.13",
                 "phpmailer/phpmailer": "<6.1.6",
@@ -4226,7 +4225,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-16T20:01:44+00:00"
+            "time": "2021-04-22T17:19:04+00:00"
         }
     ],
     "aliases": [],
