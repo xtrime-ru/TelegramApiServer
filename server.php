@@ -7,7 +7,7 @@ use TelegramApiServer\Migrations\SwooleToAmpMigration;
 use TelegramApiServer\Server\Fork;
 use TelegramApiServer\Server\HealthCheck;
 
-if (PHP_SAPI !== 'cli') {
+if (PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg') {
     throw new RuntimeException('Start in CLI');
 }
 

@@ -3,9 +3,12 @@
 namespace TelegramApiServer\Server;
 
 use Amp;
+use danog\MadelineProto\Ipc\Client as IpcClient;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
+
+use function Amp\Promise\wait;
 
 class Server
 {
@@ -29,10 +32,10 @@ class Server
                     ->withHttp2Timeout(600)
             );
 
+            $this->registerShutdown($server);
+
             yield from Client::getInstance()->connect($sessionFiles);
             $server->start();
-
-            $this->registerShutdown($server);
         });
 
         while (true) {
@@ -60,10 +63,14 @@ class Server
     {
         if (defined('SIGINT')) {
             Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
-                emergency('Got SIGINT');
+                emergency('Got SIGINT (TAS)');
                 Amp\Loop::cancel($watcherId);
-                yield $server->stop();
-                exit;
+                foreach (Client::getInstance()->instances as $instance) {
+                    if ($instance->API instanceof IpcClient) {
+                        wait($instance->API->stopIpcServer());
+                    }
+                }
+                wait($server->stop());
             });
         }
     }

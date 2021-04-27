@@ -6,7 +6,6 @@ use Amp\Delayed;
 use Amp\Loop;
 use Amp\Promise;
 use danog\MadelineProto;
-use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use RuntimeException;

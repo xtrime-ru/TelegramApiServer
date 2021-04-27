@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a66edfdcf351e52d84f6f49ff5cc1d6b",
+    "content-hash": "16ec6732f1828813570b50a338924d33",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2308,16 +2308,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-ipc_off",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "8b35d85d3109d17971b562ee5edc40220676d8dc"
+                "reference": "d29950a983565cda38d103835f9d066b891977b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/8b35d85d3109d17971b562ee5edc40220676d8dc",
-                "reference": "8b35d85d3109d17971b562ee5edc40220676d8dc",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/d29950a983565cda38d103835f9d066b891977b6",
+                "reference": "d29950a983565cda38d103835f9d066b891977b6",
                 "shasum": ""
             },
             "require": {
@@ -2377,6 +2377,7 @@
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
                 "ext-pdo": "Install pdo extension to support database used as cache"
             },
+            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -2417,7 +2418,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/ipc_off"
+                "source": "https://github.com/danog/MadelineProto/tree/6.0.44"
             },
             "funding": [
                 {
@@ -2425,7 +2426,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-26T21:03:07+00:00"
+            "time": "2021-04-25T22:18:36+00:00"
         },
         {
             "name": "danog/magicalserializer",
