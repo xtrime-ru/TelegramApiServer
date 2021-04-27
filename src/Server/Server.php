@@ -4,6 +4,7 @@ namespace TelegramApiServer\Server;
 
 use Amp;
 use danog\MadelineProto\Ipc\Client as IpcClient;
+use danog\MadelineProto\Shutdown;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
@@ -62,8 +63,9 @@ class Server
     private static function registerShutdown(Amp\Http\Server\Server $server)
     {
         if (defined('SIGINT')) {
-            Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
+            $watcherId = Amp\Loop::onSignal(SIGINT, $cb = static function () use ($server, &$watcherId) {
                 emergency('Got SIGINT (TAS)');
+                Shutdown::removeCallback('TAS');
                 Amp\Loop::cancel($watcherId);
                 foreach (Client::getInstance()->instances as $instance) {
                     if ($instance->API instanceof IpcClient) {
@@ -72,6 +74,7 @@ class Server
                 }
                 wait($server->stop());
             });
+            Shutdown::addCallback($cb, 'TAS');
         }
     }
 
