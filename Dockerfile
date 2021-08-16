@@ -1,6 +1,6 @@
-FROM php:8.0-zts
+FROM php:8.0-cli
 
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /usr/local/bin/docker-compose-wait
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /usr/local/bin/docker-compose-wait
 
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install apt-utils procps -y \
@@ -9,9 +9,7 @@ RUN apt-get update && apt-get upgrade -y \
     && docker-php-ext-install -j$(nproc) sockets zip gmp pcntl bcmath ffi mysqli pdo pdo_mysql \
     # Install additional extension
     && mkdir -p /usr/src/php/ext/ && cd /usr/src/php/ext/ \
-    #&& pecl bundle event \
     && pecl bundle ev \
-    #&& docker-php-ext-configure event --with-event-core --with-event-extra --with-event-pthreads \
     && docker-php-ext-install -j$(nproc) ev \
     # Install composer
     && chmod +x /usr/local/bin/docker-compose-wait \
@@ -25,14 +23,15 @@ COPY . /app
 WORKDIR /app
 
 RUN cp -a docker/php/conf.d/. "$PHP_INI_DIR/conf.d/" \
-    && composer install --no-dev --ignore-platform-reqs \
+    && composer install -o --no-dev \
     && composer clear
 
-VOLUME ["/app/sessions"]
-
 #Creating symlink to save .env in volume
-RUN touch '/app/sessions/.env.docker' && \
+RUN mkdir /app/sessions &&  \
+    touch '/app/sessions/.env.docker' && \
     ln -s '/app/sessions/.env.docker' '/app/.env.docker'
+
+VOLUME ["/app/sessions"]
 
 EXPOSE 9503
 
