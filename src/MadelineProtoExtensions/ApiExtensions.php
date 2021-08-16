@@ -460,7 +460,9 @@ class ApiExtensions
                     $infoFull = yield $this->madelineProto->getDownloadInfo($media);
                     $infoFull['InputFileLocation']['thumb_size'] = $info['thumb_size'];
                     $infoFull['size'] = $info['size'];
-                    $infoFull['mime'] = $info['mime'];
+                    $infoFull['mime'] = $info['mime'] ?? 'image/jpeg';
+                    $infoFull['name'] = 'thumb';
+                    $infoFull['ext'] = '.jpeg';
                     $info = $infoFull;
                 }
 
