@@ -19,7 +19,7 @@ services:
         max-size: "1024k"
         max-file: "2"
   mysql:
-    image: mariadb:10.5
+    image: mariadb:10.6
     container_name: telegram-api-server-mysql
     restart: unless-stopped
     ports:
@@ -28,6 +28,7 @@ services:
       - ./.mysql:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    command: ["mysqld", "--innodb-buffer-pool-size=16M"]
 networks:
   default:
     name: telegram-api-server
