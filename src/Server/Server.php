@@ -23,10 +23,11 @@ class Server
                 (new Router())->getRouter(),
                 Logger::getInstance(),
                 (new Amp\Http\Server\Options())
-                    ->withCompression()
-                    ->withBodySizeLimit(2*1000*1024*1024)//2Gb
+                    ->withoutCompression()
+                    ->withBodySizeLimit(2*1024*1024*1024)//2Gb
                     ->withHttp1Timeout(600)
                     ->withHttp2Timeout(600)
+                    ->withConnectionsPerIpLimit(PHP_INT_MAX)
             );
 
             yield from Client::getInstance()->connect($sessionFiles);
