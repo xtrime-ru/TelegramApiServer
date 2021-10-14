@@ -542,16 +542,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v4.6.1",
+            "version": "v4.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "fafc7a0e72eb103dcb54c3dbe94d2fc659e8e7e2"
+                "reference": "453f84f623e409889168351e60246f5feddc1b3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/fafc7a0e72eb103dcb54c3dbe94d2fc659e8e7e2",
-                "reference": "fafc7a0e72eb103dcb54c3dbe94d2fc659e8e7e2",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/453f84f623e409889168351e60246f5feddc1b3c",
+                "reference": "453f84f623e409889168351e60246f5feddc1b3c",
                 "shasum": ""
             },
             "require": {
@@ -630,7 +630,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v4.6.1"
+                "source": "https://github.com/amphp/http-client/tree/v4.6.2"
             },
             "funding": [
                 {
@@ -638,7 +638,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-07-12T20:15:05+00:00"
+            "time": "2021-10-09T14:11:46+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1281,16 +1281,16 @@
         },
         {
             "name": "amphp/process",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/process.git",
-                "reference": "b88c6aef75c0b22f6f021141dd2d5e7c5db4c124"
+                "reference": "3d36327bf9b4c158cf3010f8f65c00854ec3a8b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/process/zipball/b88c6aef75c0b22f6f021141dd2d5e7c5db4c124",
-                "reference": "b88c6aef75c0b22f6f021141dd2d5e7c5db4c124",
+                "url": "https://api.github.com/repos/amphp/process/zipball/3d36327bf9b4c158cf3010f8f65c00854ec3a8b7",
+                "reference": "3d36327bf9b4c158cf3010f8f65c00854ec3a8b7",
                 "shasum": ""
             },
             "require": {
@@ -1334,7 +1334,7 @@
             "homepage": "https://github.com/amphp/process",
             "support": {
                 "issues": "https://github.com/amphp/process/issues",
-                "source": "https://github.com/amphp/process/tree/v1.1.1"
+                "source": "https://github.com/amphp/process/tree/v1.1.2"
             },
             "funding": [
                 {
@@ -1342,20 +1342,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-30T20:04:22+00:00"
+            "time": "2021-10-08T15:55:53+00:00"
         },
         {
             "name": "amphp/redis",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/redis.git",
-                "reference": "9f973427779b1fd824a9b9c2a9d051ab10eb0f2c"
+                "reference": "b8910b1051b128105f0724b5c95c34db30bd1d45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/redis/zipball/9f973427779b1fd824a9b9c2a9d051ab10eb0f2c",
-                "reference": "9f973427779b1fd824a9b9c2a9d051ab10eb0f2c",
+                "url": "https://api.github.com/repos/amphp/redis/zipball/b8910b1051b128105f0724b5c95c34db30bd1d45",
+                "reference": "b8910b1051b128105f0724b5c95c34db30bd1d45",
                 "shasum": ""
             },
             "require": {
@@ -1401,7 +1401,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/redis/issues",
-                "source": "https://github.com/amphp/redis/tree/master"
+                "source": "https://github.com/amphp/redis/tree/v1.0.5"
             },
             "funding": [
                 {
@@ -1409,7 +1409,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-27T20:54:30+00:00"
+            "time": "2021-10-12T18:38:52+00:00"
         },
         {
             "name": "amphp/serialization",
@@ -2335,12 +2335,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "29f170f984585ec3f33d7417740c52e962dd6e6c"
+                "reference": "04a2f1b0219fd6d7f5658a9030f4750f5bf25374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/29f170f984585ec3f33d7417740c52e962dd6e6c",
-                "reference": "29f170f984585ec3f33d7417740c52e962dd6e6c",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/04a2f1b0219fd6d7f5658a9030f4750f5bf25374",
+                "reference": "04a2f1b0219fd6d7f5658a9030f4750f5bf25374",
                 "shasum": ""
             },
             "require": {
@@ -2446,7 +2446,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-05T22:18:02+00:00"
+            "time": "2021-10-14T22:31:47+00:00"
         },
         {
             "name": "danog/magicalserializer",
