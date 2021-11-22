@@ -39,7 +39,14 @@ const ENV_VERSION='1';
             }
             //Dont use copy because of docker symlinks
             $envContent = file_get_contents($envPathExample);
-            file_put_contents($envPath, $envContent);
+            if (strlen($envContent) > 0) {
+                $result = file_put_contents($envPath, $envContent);
+                if (!$result) {
+                    throw new RuntimeException("Cant write file: {$envPath}");
+                }
+            } else {
+                throw new RuntimeException("Cant read file: {$envPathExample}");
+            }
         }
 
         Dotenv\Dotenv::createImmutable(ROOT_DIR, $envFile)->load();
