@@ -1733,16 +1733,16 @@
         },
         {
             "name": "amphp/websocket",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "6752ecfcb4deba23b95ab3fbd0d427326fcac564"
+                "reference": "d0e61e3e34ac09ec230ae0eff2b8beaf8f83a8f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/6752ecfcb4deba23b95ab3fbd0d427326fcac564",
-                "reference": "6752ecfcb4deba23b95ab3fbd0d427326fcac564",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/d0e61e3e34ac09ec230ae0eff2b8beaf8f83a8f9",
+                "reference": "d0e61e3e34ac09ec230ae0eff2b8beaf8f83a8f9",
                 "shasum": ""
             },
             "require": {
@@ -1800,7 +1800,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket/issues",
-                "source": "https://github.com/amphp/websocket/tree/v1.0.1"
+                "source": "https://github.com/amphp/websocket/tree/v1.0.2"
             },
             "funding": [
                 {
@@ -1808,7 +1808,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-13T05:54:54+00:00"
+            "time": "2021-10-26T14:32:35+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -2340,12 +2340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "5e536e16cd24bbc0eca11dc3585356cfc02c4999"
+                "reference": "1c285ba908ae3d11127f2bdb362e139bc9e5ed19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/5e536e16cd24bbc0eca11dc3585356cfc02c4999",
-                "reference": "5e536e16cd24bbc0eca11dc3585356cfc02c4999",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/1c285ba908ae3d11127f2bdb362e139bc9e5ed19",
+                "reference": "1c285ba908ae3d11127f2bdb362e139bc9e5ed19",
                 "shasum": ""
             },
             "require": {
@@ -2378,7 +2378,7 @@
                 "ext-xml": "*",
                 "ext-zlib": "*",
                 "league/uri": "^6",
-                "php": ">=8.0",
+                "php-64bit": ">=8.0",
                 "psr/http-factory": "^1.0",
                 "psr/log": "^1",
                 "symfony/polyfill-mbstring": "*",
@@ -2393,7 +2393,8 @@
                 "danog/phpdoc": "^0.1.7",
                 "ext-ctype": "*",
                 "phabel/phabel": "^1",
-                "phpdocumentor/reflection-docblock": "^5.2"
+                "phpdocumentor/reflection-docblock": "^5.2",
+                "phpunit/phpunit": "^9"
             },
             "suggest": {
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
@@ -2451,7 +2452,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-25T21:57:23+00:00"
+            "time": "2021-12-03T19:33:45+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3922,12 +3923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "6f99479932347855a56d07958f3ac52e8261dda3"
+                "reference": "344cf93f6b42a7bcd6169654b64fb953a5a85bea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6f99479932347855a56d07958f3ac52e8261dda3",
-                "reference": "6f99479932347855a56d07958f3ac52e8261dda3",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/344cf93f6b42a7bcd6169654b64fb953a5a85bea",
+                "reference": "344cf93f6b42a7bcd6169654b64fb953a5a85bea",
                 "shasum": ""
             },
             "conflict": {
@@ -3946,7 +3947,7 @@
                 "bagisto/bagisto": "<0.1.5",
                 "barrelstrength/sprout-base-email": "<1.2.7",
                 "barrelstrength/sprout-forms": "<3.9",
-                "baserproject/basercms": "<=4.5",
+                "baserproject/basercms": "<4.5.4",
                 "billz/raspap-webgui": "<=2.6.6",
                 "bk2k/bootstrap-package": ">=7.1,<7.1.2|>=8,<8.0.8|>=9,<9.0.4|>=9.1,<9.1.3|>=10,<10.0.10|>=11,<11.0.3",
                 "bolt/bolt": "<3.7.2",
@@ -4002,10 +4003,11 @@
                 "ezsystems/ezdemo-ls-extension": ">=5.4,<5.4.2.1",
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1|>=5.4,<5.4.11.1|>=2017.12,<2017.12.0.1",
                 "ezsystems/ezplatform": "<=1.13.6|>=2,<=2.5.24",
-                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6",
+                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6|>=1.5,<=1.5.25",
                 "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2.1|>=5,<5.0.1|>=5.1,<5.1.1",
                 "ezsystems/ezplatform-kernel": "<=1.2.5|>=1.3,<=1.3.1",
                 "ezsystems/ezplatform-rest": ">=1.2,<=1.2.2|>=1.3,<1.3.8",
+                "ezsystems/ezplatform-richtext": ">=2.3,<=2.3.7",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
                 "ezsystems/ezpublish-kernel": "<=6.13.8.1|>=7,<=7.5.15.1",
                 "ezsystems/ezpublish-legacy": "<=2017.12.7.3|>=2018.6,<=2019.3.5.1",
@@ -4023,7 +4025,7 @@
                 "fooman/tcpdf": "<6.2.22",
                 "forkcms/forkcms": "<=5.9.2",
                 "fossar/tcpdf-parser": "<6.2.22",
-                "francoisjacquet/rosariosis": "<6.5.1",
+                "francoisjacquet/rosariosis": "<8.1.1",
                 "friendsofsymfony/oauth2-php": "<1.3",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
@@ -4188,7 +4190,7 @@
                 "socialiteproviders/steam": "<1.1",
                 "spoonity/tcpdf": "<6.2.22",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
-                "ssddanbrown/bookstack": "<21.0.3",
+                "ssddanbrown/bookstack": "<21.11.2",
                 "stormpath/sdk": ">=0,<9.9.99",
                 "studio-42/elfinder": "<2.1.59",
                 "subrion/cms": "<=4.2.1",
@@ -4338,7 +4340,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-24T20:15:37+00:00"
+            "time": "2021-12-02T18:18:00+00:00"
         }
     ],
     "aliases": [],
