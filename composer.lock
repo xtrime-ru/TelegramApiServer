@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b323c83194c4e8b4be1e6fcd840a76a9",
+    "content-hash": "a2e280bd5b97a40c3fa3d51c67f7e10a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2336,16 +2336,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-ipc_off",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "1c285ba908ae3d11127f2bdb362e139bc9e5ed19"
+                "reference": "cb7399b24ca6f15a60b2f30b54edb08735051822"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/1c285ba908ae3d11127f2bdb362e139bc9e5ed19",
-                "reference": "1c285ba908ae3d11127f2bdb362e139bc9e5ed19",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/cb7399b24ca6f15a60b2f30b54edb08735051822",
+                "reference": "cb7399b24ca6f15a60b2f30b54edb08735051822",
                 "shasum": ""
             },
             "require": {
@@ -2367,7 +2367,6 @@
                 "danog/magicalserializer": "^1.0",
                 "danog/primemodule": "^1",
                 "danog/tg-file-decoder": "^0.1",
-                "danog/tgseclib": "^3",
                 "erusev/parsedown": "^1.7",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
@@ -2379,6 +2378,7 @@
                 "ext-zlib": "*",
                 "league/uri": "^6",
                 "php-64bit": ">=8.0",
+                "phpseclib/phpseclib": "^3",
                 "psr/http-factory": "^1.0",
                 "psr/log": "^1",
                 "symfony/polyfill-mbstring": "*",
@@ -2394,12 +2394,16 @@
                 "ext-ctype": "*",
                 "phabel/phabel": "^1",
                 "phpdocumentor/reflection-docblock": "^5.2",
-                "phpunit/phpunit": "^9"
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
             },
             "suggest": {
+                "ext-gmp": "Install the gmp extension for faster crypto",
                 "ext-libtgvoip": "Install the php-libtgvoip extension to make phone calls (https://github.com/danog/php-libtgvoip)",
+                "ext-openssl": "Install the openssl extension for faster crypto",
                 "ext-pdo": "Install pdo extension to support database used as cache"
             },
+            "default-branch": true,
             "type": "project",
             "extra": {
                 "phabel": {
@@ -2444,7 +2448,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/ipc_off"
+                "source": "https://github.com/danog/MadelineProto/tree/7.0.12"
             },
             "funding": [
                 {
@@ -2452,7 +2456,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-03T19:33:45+00:00"
+            "time": "2021-12-10T19:06:29+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -2604,118 +2608,6 @@
                 }
             ],
             "time": "2021-08-14T15:11:43+00:00"
-        },
-        {
-            "name": "danog/tgseclib",
-            "version": "3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/danog/tgseclib.git",
-                "reference": "17df55ae63bd6839971e0bee27e94e998bebb16f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/danog/tgseclib/zipball/17df55ae63bd6839971e0bee27e94e998bebb16f",
-                "reference": "17df55ae63bd6839971e0bee27e94e998bebb16f",
-                "shasum": ""
-            },
-            "require": {
-                "paragonie/constant_time_encoding": "^1|^2",
-                "paragonie/random_compat": "^1.4|^2.0",
-                "php": ">=5.6.1"
-            },
-            "require-dev": {
-                "phing/phing": "~2.7",
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
-                "sami/sami": "~2.0",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "suggest": {
-                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
-                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
-                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
-                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "phpseclib/bootstrap.php"
-                ],
-                "psr-4": {
-                    "tgseclib\\": "phpseclib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jim Wigginton",
-                    "email": "terrafrost@php.net",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Patrick Monnerat",
-                    "email": "pm@datasphere.ch",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Andreas Fischer",
-                    "email": "bantu@phpbb.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Hans-Jürgen Petrich",
-                    "email": "petrich@tronic-media.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP Secure Communications Library (+Telegram-specific AES IGE primitives) - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
-            "homepage": "http://phpseclib.sourceforge.net",
-            "keywords": [
-                "BigInteger",
-                "aes",
-                "asn.1",
-                "asn1",
-                "blowfish",
-                "crypto",
-                "cryptography",
-                "encryption",
-                "rsa",
-                "security",
-                "sftp",
-                "signature",
-                "signing",
-                "ssh",
-                "twofish",
-                "x.509",
-                "x509"
-            ],
-            "support": {
-                "issues": "https://github.com/danog/tgseclib/issues",
-                "source": "https://github.com/danog/tgseclib/tree/3.0.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/terrafrost",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/phpseclib",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpseclib/phpseclib",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-11-07T20:12:19+00:00"
         },
         {
             "name": "daverandom/libdns",
@@ -3438,6 +3330,117 @@
                 }
             ],
             "time": "2021-08-28T21:27:29+00:00"
+        },
+        {
+            "name": "phpseclib/phpseclib",
+            "version": "3.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/phpseclib.git",
+                "reference": "89bfb45bd8b1abc3b37e910d57f5dbd3174f40fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/89bfb45bd8b1abc3b37e910d57f5dbd3174f40fb",
+                "reference": "89bfb45bd8b1abc3b37e910d57f5dbd3174f40fb",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/constant_time_encoding": "^1|^2",
+                "paragonie/random_compat": "^1.4|^2.0|^9.99.99",
+                "php": ">=5.6.1"
+            },
+            "require-dev": {
+                "phing/phing": "~2.7",
+                "phpunit/phpunit": "^5.7|^6.0|^9.4",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "suggest": {
+                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "phpseclib/bootstrap.php"
+                ],
+                "psr-4": {
+                    "phpseclib3\\": "phpseclib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Patrick Monnerat",
+                    "email": "pm@datasphere.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Andreas Fischer",
+                    "email": "bantu@phpbb.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hans-Jürgen Petrich",
+                    "email": "petrich@tronic-media.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+            "homepage": "http://phpseclib.sourceforge.net",
+            "keywords": [
+                "BigInteger",
+                "aes",
+                "asn.1",
+                "asn1",
+                "blowfish",
+                "crypto",
+                "cryptography",
+                "encryption",
+                "rsa",
+                "security",
+                "sftp",
+                "signature",
+                "signing",
+                "ssh",
+                "twofish",
+                "x.509",
+                "x509"
+            ],
+            "support": {
+                "issues": "https://github.com/phpseclib/phpseclib/issues",
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.12"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/terrafrost",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/phpseclib",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpseclib/phpseclib",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-28T23:46:03+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -4346,7 +4349,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danog/madelineproto": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
