@@ -88,6 +88,7 @@ class Client
         if (!empty($instance->API)) {
             $instance->unsetEventHandler();
             $instance->stop();
+            $instance->API->unreference();
         }
         unset($instance);
         gc_collect_cycles();
