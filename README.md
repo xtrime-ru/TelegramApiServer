@@ -123,7 +123,7 @@ Fast, simple, async php telegram api server:
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
 ## Run in background
-* Docker: `docker compose up -d`
+* Docker: `docker-compose up -d`
     Docker will monitor and restart containers.
 * Manual: 
     1. Use [http://supervisord.org](supervisor) to monitor and restart swoole/amphp servers. 
