@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e965c1e0661507c1b33ca570d87846f",
+    "content-hash": "79ed0a2cbc19c8aeb832db5ca9e98976",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2337,16 +2337,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "7.0.56.9999",
+            "version": "dev-TL136_min",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "0a41cd87484f2e27b713ad4c2992a3d0471d9496"
+                "reference": "92f577fbc41d9242c5830397db3780350efb5886"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0a41cd87484f2e27b713ad4c2992a3d0471d9496",
-                "reference": "0a41cd87484f2e27b713ad4c2992a3d0471d9496",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/92f577fbc41d9242c5830397db3780350efb5886",
+                "reference": "92f577fbc41d9242c5830397db3780350efb5886",
                 "shasum": ""
             },
             "require": {
@@ -2449,7 +2449,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/7.0.56.9999"
+                "source": "https://github.com/danog/MadelineProto/tree/TL136_min"
             },
             "funding": [
                 {
@@ -2457,7 +2457,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-02T10:44:18+00:00"
+            "time": "2022-02-14T00:07:28+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3715,12 +3715,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4381,6 +4381,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "danog/madelineproto": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
