@@ -4,7 +4,19 @@
   "type": "project",
   "homepage": "https://tg.i-c-a.su/",
   "license": "MIT",
-  "keywords": ["telegram", "mtproto", "client", "PHP", "amphp", "async", "daemon", "coroutine", "parser", "micro-service", "madelineproto"],
+  "keywords": [
+    "telegram",
+    "mtproto",
+    "client",
+    "PHP",
+    "amphp",
+    "async",
+    "daemon",
+    "coroutine",
+    "parser",
+    "micro-service",
+    "madelineproto"
+  ],
   "require": {
     "php": "~8.0",
     "ext-json": "*",
@@ -16,7 +28,7 @@
     "amphp/websocket-client": "^1",
     "amphp/http-client": "^4",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto":"dev-TL136_min",
+    "danog/madelineproto": "dev-stable",
     "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {
