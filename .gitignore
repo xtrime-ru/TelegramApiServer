@@ -1,4 +1,6 @@
-vendor
-.*
+vendor/
+.mysql/
+.env
+.env.docker
 /sessions/*
 madeline.phar*
