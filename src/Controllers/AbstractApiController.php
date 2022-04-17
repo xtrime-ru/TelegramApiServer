@@ -15,6 +15,7 @@ use TelegramApiServer\Exceptions\NoticeException;
 use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
+use function mb_strpos;
 
 abstract class AbstractApiController
 {
@@ -65,7 +66,7 @@ abstract class AbstractApiController
 
     /**
      * @param Request $request
-     * @return ResourceInputStream|string
+     * @return \Generator|Response|string
      * @throws \Throwable
      */
     public function process()
@@ -202,7 +203,7 @@ abstract class AbstractApiController
     /**
      * Кодирует ответ в нужный формат: json
      *
-     * @return string|ResourceInputStream
+     * @return Response|string
      * @throws \Throwable
      */
     private function getResponse()

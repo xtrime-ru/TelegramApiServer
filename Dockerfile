@@ -1,6 +1,7 @@
-FROM php:8.0-cli
+FROM php:8.1-cli
 
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /usr/local/bin/docker-compose-wait
+ADD docker/php/conf.d/. "$PHP_INI_DIR/conf.d/"
 
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install apt-utils procps -y \
@@ -24,20 +25,6 @@ RUN apt-get update && apt-get upgrade -y \
     && docker-php-source delete \
     && apt-get autoremove --purge -y && apt-get autoclean -y && apt-get clean -y \
     && rm -rf /usr/src
-
-COPY . /app
-WORKDIR /app
-
-RUN cp -a docker/php/conf.d/. "$PHP_INI_DIR/conf.d/" \
-    && composer install -o --no-dev \
-    && composer clear
-
-#Creating symlink to save .env in volume
-RUN mkdir /app/sessions &&  \
-    touch '/app/sessions/.env.docker' && \
-    ln -s '/app/sessions/.env.docker' '/app/.env.docker'
-
-VOLUME ["/app/sessions"]
 
 EXPOSE 9503
 

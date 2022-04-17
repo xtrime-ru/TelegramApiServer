@@ -1,7 +1,10 @@
-version: '3.5'
+version: '2.4'
 services:
   telegram-api-server:
     image: xtrime/telegram-api-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: telegram-api-server
     restart: unless-stopped
     ports:
@@ -19,7 +22,7 @@ services:
         max-size: "1024k"
         max-file: "2"
   mysql:
-    image: mariadb:10.6
+    image: mariadb:10.7
     container_name: telegram-api-server-mysql
     restart: unless-stopped
     ports:
