@@ -115,8 +115,11 @@ class ApiExtensions
         return true;
     }
 
-    public function formatMessage(string $message = null, array $entities = []): ?string
+    public function formatMessage(?string $message = null, array $entities = []): ?string
     {
+        if ($message === null) {
+            return null;
+        }
         $html = [
             'messageEntityItalic' => '<i>%s</i>',
             'messageEntityBold' => '<strong>%s</strong>',

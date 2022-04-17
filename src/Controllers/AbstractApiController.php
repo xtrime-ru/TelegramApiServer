@@ -85,7 +85,7 @@ abstract class AbstractApiController
     private function resolveRequest(): \Generator
     {
         $query = $this->request->getUri()->getQuery();
-        $contentType = $this->request->getHeader('Content-Type');
+        $contentType = (string)$this->request->getHeader('Content-Type');
 
         parse_str($query, $get);
 
