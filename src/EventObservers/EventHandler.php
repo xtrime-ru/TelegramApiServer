@@ -10,12 +10,11 @@ class EventHandler extends \danog\MadelineProto\EventHandler
     public static array $instances = [];
     private string $sessionName;
 
-    public function __construct(APIWrapper $MadelineProto)
+    public function onStart()
     {
-        $this->sessionName = Files::getSessionName($MadelineProto->session);
+        $this->sessionName = Files::getSessionName($this->API->wrapper->session);
         if (empty(static::$instances[$this->sessionName])) {
             static::$instances[$this->sessionName] = true;
-            parent::initInternal($MadelineProto);
             warning("Event observer CONSTRUCTED: {$this->sessionName}");
         }
     }
