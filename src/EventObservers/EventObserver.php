@@ -80,7 +80,7 @@ class EventObserver
             static::removeSessionClient($session);
             if (empty(static::$sessionClients[$session]) || $force) {
                 warning("Stopping EventHandler: {$session}");
-                /** @see \TelegramApiServer\EventObservers\EventHandler::onAny */
+                Client::getInstance()->instances[$session]->unsetEventHandler();
                 unset(EventHandler::$instances[$session], static::$sessionClients[$session]);
             }
         }

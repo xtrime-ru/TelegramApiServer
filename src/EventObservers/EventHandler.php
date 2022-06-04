@@ -28,13 +28,8 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         warning("Event observer DESTRUCTED: {$this->sessionName}");
     }
 
-    public function onAny($update): void
+    public function onAny($update)
     {
-        if (empty(static::$instances[$this->sessionName])) {
-            warning("unsetEventHandler: {$this->sessionName}");
-            $this->unsetEventHandler();
-            return;
-        }
         info("Received update from session: {$this->sessionName}");
         EventObserver::notify($update, $this->sessionName);
     }

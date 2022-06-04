@@ -6,6 +6,7 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Http\Status;
+use Amp\Loop;
 use Amp\Promise;
 use Amp\Success;
 use Amp\Websocket\Client as WebsocketClient;
@@ -18,6 +19,7 @@ use function Amp\call;
 
 class EventsController implements ClientHandler
 {
+    private const PING_INTERVAL_MS = 10_000;
 
     public static function getRouterCallback(): WebsocketServer
     {
@@ -60,7 +62,10 @@ class EventsController implements ClientHandler
 
         yield EventObserver::startEventHandler($requestedSession);
 
-        $client->onClose(static function() use($clientId, $requestedSession) {
+        $pingLoop = Loop::repeat(self::PING_INTERVAL_MS, static fn () => yield $client->ping());
+
+        $client->onClose(static function() use($clientId, $requestedSession, $pingLoop) {
+            Loop::cancel($pingLoop);
             EventObserver::removeSubscriber($clientId);
             EventObserver::stopEventHandler($requestedSession);
         });

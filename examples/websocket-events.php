@@ -7,8 +7,7 @@
 
 require 'vendor/autoload.php';
 
-use Amp\Loop;
-use Amp\Websocket\Client\Connection;
+use Amp\Websocket\Client\Rfc6455Connection;
 use Amp\Websocket\Message;
 use function Amp\Websocket\Client\connect;
 
@@ -26,17 +25,10 @@ Amp\Loop::run(static function () use ($options) {
 
     while (true) {
         try {
-            /** @var Connection $connection */
+            /** @var Rfc6455Connection $connection */
             $connection = yield connect($options['url']);
 
-            $repeat = Loop::repeat(5_000, function () use ($connection) {
-                echo 'ping' . PHP_EOL;
-                yield $connection->send('ping');
-            });
-
-            $connection->onClose(static function () use ($connection, &$repeat) {
-                Loop::cancel($repeat);
-                $repeat = null;
+            $connection->onClose(static function () use ($connection) {
                 printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
             });
 
@@ -47,9 +39,6 @@ Amp\Loop::run(static function () use ($options) {
                 printf("[%s] Received event: %s\n", date('Y-m-d H:i:s'), $payload);
             }
         } catch (\Throwable $e) {
-            if (!empty($repeat)) {
-                Loop::cancel($repeat);
-            }
             printf("Error: %s\n", $e->getMessage());
         }
         yield new Amp\Delayed(500);
