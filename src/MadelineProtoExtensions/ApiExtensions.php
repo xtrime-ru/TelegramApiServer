@@ -10,7 +10,7 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Promise;
 use danog\MadelineProto;
-use danog\MadelineProto\TL\Conversion\BotAPI;
+use danog\MadelineProto\StrTools;
 use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\Exceptions\MediaTooBig;
 use TelegramApiServer\Exceptions\NoMediaException;
@@ -18,7 +18,6 @@ use function Amp\call;
 
 class ApiExtensions
 {
-    use BotAPI;
 
     private MadelineProto\Api $madelineProto;
     private Request $request;
@@ -136,7 +135,7 @@ class ApiExtensions
         foreach ($entities as $key => &$entity) {
             if (isset($html[$entity['_']])) {
 
-                $text = static::mbSubstr($message, $entity['offset'], $entity['length']);
+                $text = StrTools::mbSubstr($message, $entity['offset'], $entity['length']);
 
                 $template = $html[$entity['_']];
                 if (in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
@@ -153,11 +152,11 @@ class ApiExtensions
                         continue;
                     }
                     if ($nextEntity['offset'] < ($entity['offset'] + $entity['length'])) {
-                        $nextEntity['offset'] += static::mbStrlen(
+                        $nextEntity['offset'] += StrTools::mbStrlen(
                             preg_replace('~(\>).*<\/.*$~', '$1', $textFormated)
                         );
                     } else {
-                        $nextEntity['offset'] += static::mbStrlen($textFormated) - static::mbStrlen($text);
+                        $nextEntity['offset'] += StrTools::mbStrlen($textFormated) - StrTools::mbStrlen($text);
                     }
                 }
                 unset($nextEntity);
@@ -170,8 +169,8 @@ class ApiExtensions
 
     private static function substringReplace(string $original, string $replacement, int $position, int $length): string
     {
-        $startString = static::mbSubstr($original, 0, $position);
-        $endString = static::mbSubstr($original, $position + $length, static::mbStrlen($original));
+        $startString = StrTools::mbSubstr($original, 0, $position);
+        $endString = StrTools::mbSubstr($original, $position + $length, StrTools::mbStrlen($original));
         return $startString . $replacement . $endString;
     }
 
