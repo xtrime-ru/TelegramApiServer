@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0e9091df5fdf3da55db5aaa29b01fb5",
+    "content-hash": "7ed8680412f85dd1a2d30068dee6a747",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2349,16 +2349,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-stable",
+            "version": "7.0.101.9999",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "3c979f74604c55446267f526d4457467d0665559"
+                "reference": "01a652b3ac71ab99ca178b1417aa774e3c76a8e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/3c979f74604c55446267f526d4457467d0665559",
-                "reference": "3c979f74604c55446267f526d4457467d0665559",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/01a652b3ac71ab99ca178b1417aa774e3c76a8e3",
+                "reference": "01a652b3ac71ab99ca178b1417aa774e3c76a8e3",
                 "shasum": ""
             },
             "require": {
@@ -2403,7 +2403,7 @@
                 "krakjoe/pthreads-polyfill": "*"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4",
+                "bamarni/composer-bin-plugin": "1.5.0",
                 "danog/phpdoc": "^0.1.7",
                 "ext-ctype": "*",
                 "phabel/phabel": "^1",
@@ -2419,7 +2419,6 @@
                 "ext-pdo": "Install pdo extension to support database used as cache",
                 "ext-primemodule": "Install the primemodule and FFI extensions to speed up MadelineProto (https://prime.madelineproto.xyz)"
             },
-            "default-branch": true,
             "type": "project",
             "extra": {
                 "phabel": {
@@ -2463,7 +2462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/stable"
+                "source": "https://github.com/danog/MadelineProto/tree/7.0.101.9999"
             },
             "funding": [
                 {
@@ -2471,7 +2470,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-16T16:10:58+00:00"
+            "time": "2022-07-18T12:41:49+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -4019,12 +4018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0144c1225b5e4da02cf2c27a0e2cb2705168c47c"
+                "reference": "cac27edea0578f194ba24dd8e0c4ee85ec622078"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0144c1225b5e4da02cf2c27a0e2cb2705168c47c",
-                "reference": "0144c1225b5e4da02cf2c27a0e2cb2705168c47c",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/cac27edea0578f194ba24dd8e0c4ee85ec622078",
+                "reference": "cac27edea0578f194ba24dd8e0c4ee85ec622078",
                 "shasum": ""
             },
             "conflict": {
@@ -4352,7 +4351,7 @@
                 "simplito/elliptic-php": "<1.0.6",
                 "slim/slim": "<2.6",
                 "smarty/smarty": "<3.1.45|>=4,<4.1.1",
-                "snipe/snipe-it": "<5.4.4|>= 6.0.0-RC-1, <= 6.0.0-RC-5",
+                "snipe/snipe-it": "<=6.0.2|>= 6.0.0-RC-1, <= 6.0.0-RC-5",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
                 "spipu/html2pdf": "<5.2.4",
@@ -4443,6 +4442,7 @@
                 "wikimedia/parsoid": "<0.12.2",
                 "willdurand/js-translation-bundle": "<2.1.1",
                 "wintercms/winter": "<1.0.475|>=1.1,<1.1.9",
+                "woocommerce/woocommerce": "<6.6",
                 "wp-cli/wp-cli": "<2.5",
                 "wp-graphql/wp-graphql": "<0.3.5",
                 "wpanel/wpanel4-cms": "<=4.3.1",
@@ -4521,13 +4521,12 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-15T22:04:13+00:00"
+            "time": "2022-07-21T22:04:13+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danog/madelineproto": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
