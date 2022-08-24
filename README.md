@@ -126,7 +126,7 @@ Fast, simple, async php telegram api server:
 * Docker: `docker-compose up -d`
     Docker will monitor and restart containers.
 * Manual: 
-    1. Use [http://supervisord.org](supervisor) to monitor and restart swoole/amphp servers. 
+    1. Use [supervisor](http://supervisord.org) to monitor and restart swoole/amphp servers. 
     1. `apt-get install supervisor`
     1. Put config file in `/etc/supervisor/conf.d/telegram_api_server.conf`. Example: 
     ```
@@ -289,7 +289,7 @@ Full list of system methods available in [SystemApiExtensions class](https://git
 If there is no authorization in session, or session file is blank, authorization required:
 
 User: 
-* `http://127.0.0.1:9503/api/users/xtrime/phoneLogin?phone=+7123...`
+* `http://127.0.0.1:9503/api/users/xtrime/phoneLogin?phone=%2B7123...`, %2B - is urlencoded "+" sign
 * `http://127.0.0.1:9503/api/users/xtrime/completePhoneLogin?code=123456`
 * (optional) `http://127.0.0.1:9503/api/users/xtrime/complete2falogin?password=123456`
 * (optional) `http://127.0.0.1:9503/api/users/xtrime/completeSignup?firstName=MyExampleName`
