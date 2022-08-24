@@ -59,7 +59,11 @@ class HealthCheck
             Logger::getInstance()->critical('Health check failed');
             if (self::isProcessAlive($parentPid)) {
                 Logger::getInstance()->critical('Killing parent process');
-                exec("kill -9 $parentPid");
+
+                exec("kill SIGINT $parentPid");
+                if (self::isProcessAlive($parentPid)) {
+                    exec("kill SIGKILL $parentPid");
+                }
             }
         }
 
