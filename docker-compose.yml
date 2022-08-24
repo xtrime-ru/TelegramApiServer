@@ -32,7 +32,7 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MARIADB_AUTO_UPGRADE: "1"
-    command: ["mysqld", "--innodb-buffer-pool-size=16M"]
+    command: ["mysqld", "--innodb-buffer-pool-size=16M", "--wait_timeout=65"]
 networks:
   default:
     name: telegram-api-server
