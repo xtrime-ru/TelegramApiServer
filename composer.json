@@ -28,7 +28,7 @@
     "amphp/websocket-client": "^1",
     "amphp/http-client": "^4",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto": "^7.0",
+    "danog/madelineproto": "dev-compress_db",
     "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ed8680412f85dd1a2d30068dee6a747",
+    "content-hash": "8dcff4517f5c5e1f48acf76f51ed0079",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2349,16 +2349,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "7.0.121.9999",
+            "version": "dev-compress_db",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "75e5e5cf610d462ad894c7db88833816e5499778"
+                "reference": "89b08f3092c1d7af56fd0ded323eb1107b9c228b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/75e5e5cf610d462ad894c7db88833816e5499778",
-                "reference": "75e5e5cf610d462ad894c7db88833816e5499778",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/89b08f3092c1d7af56fd0ded323eb1107b9c228b",
+                "reference": "89b08f3092c1d7af56fd0ded323eb1107b9c228b",
                 "shasum": ""
             },
             "require": {
@@ -2462,7 +2462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/7.0.121.9999"
+                "source": "https://github.com/danog/MadelineProto/tree/compress_db"
             },
             "funding": [
                 {
@@ -2470,7 +2470,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-15T15:43:32+00:00"
+            "time": "2022-08-24T20:32:06+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -4534,6 +4534,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "danog/madelineproto": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
