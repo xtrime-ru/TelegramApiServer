@@ -484,16 +484,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v1.6.3",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "e2b75561011a9596e4574cc867e07a706d56394b"
+                "reference": "b65454643a7e92c6f1f75e00acac0a0a676ec8be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/e2b75561011a9596e4574cc867e07a706d56394b",
-                "reference": "e2b75561011a9596e4574cc867e07a706d56394b",
+                "url": "https://api.github.com/repos/amphp/http/zipball/b65454643a7e92c6f1f75e00acac0a0a676ec8be",
+                "reference": "b65454643a7e92c6f1f75e00acac0a0a676ec8be",
                 "shasum": ""
             },
             "require": {
@@ -501,8 +501,8 @@
                 "php": ">=7.1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "dev-master",
-                "phpunit/phpunit": "^7 || ^6.5"
+                "amphp/php-cs-fixer-config": "^2-dev",
+                "phpunit/phpunit": "^9 || ^8 || ^7"
             },
             "type": "library",
             "extra": {
@@ -531,7 +531,7 @@
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
             "support": {
                 "issues": "https://github.com/amphp/http/issues",
-                "source": "https://github.com/amphp/http/tree/v1.6.3"
+                "source": "https://github.com/amphp/http/tree/v1.7.0"
             },
             "funding": [
                 {
@@ -539,7 +539,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-28T17:04:34+00:00"
+            "time": "2022-10-16T20:32:41+00:00"
         },
         {
             "name": "amphp/http-client",
@@ -2349,16 +2349,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "7.0.132",
+            "version": "7.0.138.9999",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "eb48fe6da562b03f22e5277e82ecb0971321c821"
+                "reference": "9be9f8d638597ef6da330398ae00168080cfec59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/eb48fe6da562b03f22e5277e82ecb0971321c821",
-                "reference": "eb48fe6da562b03f22e5277e82ecb0971321c821",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/9be9f8d638597ef6da330398ae00168080cfec59",
+                "reference": "9be9f8d638597ef6da330398ae00168080cfec59",
                 "shasum": ""
             },
             "require": {
@@ -2462,7 +2462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/7.0.132"
+                "source": "https://github.com/danog/MadelineProto/tree/7.0.138.9999"
             },
             "funding": [
                 {
@@ -2470,7 +2470,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-08T16:44:22+00:00"
+            "time": "2022-10-21T10:03:01+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -3364,16 +3364,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.16",
+            "version": "3.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "7181378909ed8890be4db53d289faac5b77f8b05"
+                "reference": "dbc2307d5c69aeb22db136c52e91130d7f2ca761"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/7181378909ed8890be4db53d289faac5b77f8b05",
-                "reference": "7181378909ed8890be4db53d289faac5b77f8b05",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/dbc2307d5c69aeb22db136c52e91130d7f2ca761",
+                "reference": "dbc2307d5c69aeb22db136c52e91130d7f2ca761",
                 "shasum": ""
             },
             "require": {
@@ -3454,7 +3454,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.16"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.17"
             },
             "funding": [
                 {
@@ -3470,7 +3470,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-05T18:03:08+00:00"
+            "time": "2022-10-24T10:51:50+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -3880,16 +3880,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v4.2.2",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "77e974614d2ead521f18069dccc571696f52b8dc"
+                "reference": "67a491df68208bef8c37092db11fa3885008efcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/77e974614d2ead521f18069dccc571696f52b8dc",
-                "reference": "77e974614d2ead521f18069dccc571696f52b8dc",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/67a491df68208bef8c37092db11fa3885008efcf",
+                "reference": "67a491df68208bef8c37092db11fa3885008efcf",
                 "shasum": ""
             },
             "require": {
@@ -3901,7 +3901,7 @@
                 "bamarni/composer-bin-plugin": "^1.4.1",
                 "ext-filter": "*",
                 "ext-pcre": "*",
-                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.21"
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.30"
             },
             "suggest": {
                 "ext-filter": "Required to use the boolean validator.",
@@ -3909,8 +3909,12 @@
             },
             "type": "library",
             "extra": {
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": true
+                },
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -3942,7 +3946,7 @@
             ],
             "support": {
                 "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/v4.2.2"
+                "source": "https://github.com/vlucas/phpdotenv/tree/v4.3.0"
             },
             "funding": [
                 {
@@ -3954,7 +3958,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-12T23:07:53+00:00"
+            "time": "2022-10-16T00:51:09+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -4022,12 +4026,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "b311503298c072e565411e3ef61c04519272473f"
+                "reference": "599b9d6746e56b67b187afed175dd02fb1a288fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/b311503298c072e565411e3ef61c04519272473f",
-                "reference": "b311503298c072e565411e3ef61c04519272473f",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/599b9d6746e56b67b187afed175dd02fb1a288fa",
+                "reference": "599b9d6746e56b67b187afed175dd02fb1a288fa",
                 "shasum": ""
             },
             "conflict": {
@@ -4166,7 +4170,7 @@
                 "gaoming13/wechat-php-sdk": "<=1.10.2",
                 "genix/cms": "<=1.1.11",
                 "getgrav/grav": "<1.7.34",
-                "getkirby/cms": "<3.5.8.1|>=3.6,<3.6.6.1|>=3.7,<3.7.4",
+                "getkirby/cms": "= 3.8.0|<3.5.8.2|>=3.6,<3.6.6.2|>=3.7,<3.7.5.1",
                 "getkirby/panel": "<2.5.14",
                 "getkirby/starterkit": "<=3.7.0.2",
                 "gilacms/gila": "<=1.11.4",
@@ -4241,6 +4245,9 @@
                 "matyhtf/framework": "<3.0.6",
                 "mautic/core": "<4.3|= 2.13.1",
                 "mediawiki/core": ">=1.27,<1.27.6|>=1.29,<1.29.3|>=1.30,<1.30.2|>=1.31,<1.31.9|>=1.32,<1.32.6|>=1.32.99,<1.33.3|>=1.33.99,<1.34.3|>=1.34.99,<1.35",
+                "melisplatform/melis-asset-manager": "<5.0.1",
+                "melisplatform/melis-cms": "<5.0.1",
+                "melisplatform/melis-front": "<5.0.1",
                 "mezzio/mezzio-swoole": "<3.7|>=4,<4.3",
                 "microweber/microweber": "<=1.3.1",
                 "miniorange/miniorange-saml": "<1.4.3",
@@ -4270,7 +4277,7 @@
                 "october/cms": "= 1.1.1|= 1.0.471|= 1.0.469|>=1.0.319,<1.0.469",
                 "october/october": ">=1.0.319,<1.0.466|>=2.1,<2.1.12",
                 "october/rain": "<1.0.472|>=1.1,<1.1.2",
-                "october/system": "<1.0.476|>=1.1,<1.1.12|>=2,<2.2.15",
+                "october/system": "<1.0.476|>=1.1,<1.1.12|>=2,<2.2.34|>=3,<3.0.66",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "open-web-analytics/open-web-analytics": "<1.7.4",
@@ -4278,7 +4285,7 @@
                 "openid/php-openid": "<2.3",
                 "openmage/magento-lts": "<19.4.15|>=20,<20.0.13",
                 "orchid/platform": ">=9,<9.4.4",
-                "oro/commerce": ">=5,<5.0.4",
+                "oro/commerce": ">=4.1,<5.0.6",
                 "oro/crm": ">=1.7,<1.7.4|>=3.1,<4.1.17|>=4.2,<4.2.7",
                 "oro/platform": ">=1.7,<1.7.4|>=3.1,<3.1.29|>=4.1,<4.1.17|>=4.2,<4.2.8",
                 "packbackbooks/lti-1-3-php-library": "<5",
@@ -4297,6 +4304,7 @@
                 "phpmailer/phpmailer": "<6.5",
                 "phpmussel/phpmussel": ">=1,<1.6",
                 "phpmyadmin/phpmyadmin": "<5.1.3",
+                "phpmyfaq/phpmyfaq": "<=3.1.7",
                 "phpoffice/phpexcel": "<1.8",
                 "phpoffice/phpspreadsheet": "<1.16",
                 "phpseclib/phpseclib": "<2.0.31|>=3,<3.0.7",
@@ -4427,6 +4435,7 @@
                 "thelia/thelia": ">=2.1-beta.1,<2.1.3",
                 "theonedemon/phpwhois": "<=4.2.5",
                 "thinkcmf/thinkcmf": "<=5.1.7",
+                "thorsten/phpmyfaq": "<=3.1.7",
                 "tinymce/tinymce": "<5.10",
                 "titon/framework": ">=0,<9.9.99",
                 "topthink/framework": "<=6.0.13",
@@ -4538,7 +4547,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-06T20:04:40+00:00"
+            "time": "2022-10-24T19:11:20+00:00"
         }
     ],
     "aliases": [],
