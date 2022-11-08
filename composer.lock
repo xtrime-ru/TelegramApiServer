@@ -2349,16 +2349,16 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "7.0.138.9999",
+            "version": "7.0.141",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "9be9f8d638597ef6da330398ae00168080cfec59"
+                "reference": "67a78c9d32ed68e5735ff7cb6c74a6a980a1fb0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/9be9f8d638597ef6da330398ae00168080cfec59",
-                "reference": "9be9f8d638597ef6da330398ae00168080cfec59",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/67a78c9d32ed68e5735ff7cb6c74a6a980a1fb0e",
+                "reference": "67a78c9d32ed68e5735ff7cb6c74a6a980a1fb0e",
                 "shasum": ""
             },
             "require": {
@@ -2390,7 +2390,7 @@
                 "ext-xml": "*",
                 "ext-zlib": "*",
                 "league/uri": "^6",
-                "php-64bit": ">=8.0",
+                "php-64bit": ">=8.1",
                 "phpseclib/phpseclib": "^3",
                 "psr/http-factory": "^1.0",
                 "psr/log": "^1|^2|^3",
@@ -2406,7 +2406,6 @@
                 "bamarni/composer-bin-plugin": "1.5.0",
                 "danog/phpdoc": "^0.1.7",
                 "ext-ctype": "*",
-                "phabel/phabel": "^1",
                 "phpdocumentor/reflection-docblock": "^5.2",
                 "phpunit/phpunit": "^9",
                 "roave/security-advisories": "dev-latest",
@@ -2462,7 +2461,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/7.0.138.9999"
+                "source": "https://github.com/danog/MadelineProto/tree/7.0.141"
             },
             "funding": [
                 {
@@ -2470,7 +2469,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-21T10:03:01+00:00"
+            "time": "2022-11-07T14:54:43+00:00"
         },
         {
             "name": "danog/magicalserializer",
@@ -4026,12 +4025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "599b9d6746e56b67b187afed175dd02fb1a288fa"
+                "reference": "964c5d9ca40d0ec72db203b3dd6382a30abef616"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/599b9d6746e56b67b187afed175dd02fb1a288fa",
-                "reference": "599b9d6746e56b67b187afed175dd02fb1a288fa",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/964c5d9ca40d0ec72db203b3dd6382a30abef616",
+                "reference": "964c5d9ca40d0ec72db203b3dd6382a30abef616",
                 "shasum": ""
             },
             "conflict": {
@@ -4048,12 +4047,14 @@
                 "amphp/http-client": ">=4,<4.4",
                 "anchorcms/anchor-cms": "<=0.12.7",
                 "andreapollastri/cipi": "<=3.1.15",
+                "apereo/phpcas": "<1.6",
                 "api-platform/core": ">=2.2,<2.2.10|>=2.3,<2.3.6",
                 "appwrite/server-ce": "<0.11.1|>=0.12,<0.12.2",
                 "area17/twill": "<1.2.5|>=2,<2.5.3",
                 "asymmetricrypt/asymmetricrypt": ">=0,<9.9.99",
                 "awesome-support/awesome-support": "<=6.0.7",
                 "aws/aws-sdk-php": ">=3,<3.2.1",
+                "badaso/core": "<2.6.1",
                 "bagisto/bagisto": "<0.1.5",
                 "barrelstrength/sprout-base-email": "<1.2.7",
                 "barrelstrength/sprout-forms": "<3.9",
@@ -4078,7 +4079,7 @@
                 "cart2quote/module-quotation": ">=4.1.6,<=4.4.5|>=5,<5.4.4",
                 "cartalyst/sentry": "<=2.1.6",
                 "catfan/medoo": "<1.7.5",
-                "centreon/centreon": "<21.4.16|>=21.10,<21.10.8|>=22,<22.4.1",
+                "centreon/centreon": "<22.10-beta.1",
                 "cesnet/simplesamlphp-module-proxystatistics": "<3.1",
                 "codeception/codeception": "<3.1.3|>=4,<4.1.22",
                 "codeigniter/framework": "<=3.0.6",
@@ -4165,7 +4166,7 @@
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
                 "friendsoftypo3/mediace": ">=7.6.2,<7.6.5",
                 "froala/wysiwyg-editor": "<3.2.7",
-                "froxlor/froxlor": "<0.10.38",
+                "froxlor/froxlor": "<0.10.39",
                 "fuel/core": "<1.8.1",
                 "gaoming13/wechat-php-sdk": "<=1.10.2",
                 "genix/cms": "<=1.1.11",
@@ -4197,7 +4198,7 @@
                 "illuminate/encryption": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
                 "illuminate/view": "<6.20.42|>=7,<7.30.6|>=8,<8.75",
                 "impresscms/impresscms": "<=1.4.3",
-                "in2code/femanager": "<5.5.1|>=6,<6.3.1",
+                "in2code/femanager": "<5.5.2|>=6,<6.3.3|>=7,<7.0.1",
                 "in2code/lux": "<17.6.1|>=18,<24.0.2",
                 "intelliants/subrion": "<=4.2.1",
                 "islandora/islandora": ">=2,<2.4.1",
@@ -4209,6 +4210,7 @@
                 "joomla/filter": "<1.4.4|>=2,<2.0.1",
                 "joomla/input": ">=2,<2.0.2",
                 "joomla/session": "<1.3.1",
+                "joyqi/hyper-down": "<=2.4.27",
                 "jsdecena/laracom": "<2.0.9",
                 "jsmitty12/phpwhois": "<5.1",
                 "kazist/phpwhois": "<=4.2.6",
@@ -4281,7 +4283,7 @@
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "open-web-analytics/open-web-analytics": "<1.7.4",
-                "opencart/opencart": "<=3.0.3.2",
+                "opencart/opencart": "<=3.0.3.7",
                 "openid/php-openid": "<2.3",
                 "openmage/magento-lts": "<19.4.15|>=20,<20.0.13",
                 "orchid/platform": ">=9,<9.4.4",
@@ -4313,7 +4315,7 @@
                 "phpwhois/phpwhois": "<=4.2.5",
                 "phpxmlrpc/extras": "<0.6.1",
                 "pimcore/data-hub": "<1.2.4",
-                "pimcore/pimcore": "<=10.5.6",
+                "pimcore/pimcore": "<10.5.9",
                 "pocketmine/bedrock-protocol": "<8.0.2",
                 "pocketmine/pocketmine-mp": "<4.7.2|>= 4.0.0-BETA5, < 4.4.2",
                 "pressbooks/pressbooks": "<5.18",
@@ -4327,6 +4329,7 @@
                 "prestashop/ps_facetedsearch": "<3.4.1",
                 "prestashop/ps_linklist": "<3.1",
                 "privatebin/privatebin": "<1.4",
+                "processwire/processwire": "<=3.0.200",
                 "propel/propel": ">=2-alpha.1,<=2-alpha.7",
                 "propel/propel1": ">=1,<=1.7.1",
                 "pterodactyl/panel": "<1.7",
@@ -4435,9 +4438,10 @@
                 "thelia/thelia": ">=2.1-beta.1,<2.1.3",
                 "theonedemon/phpwhois": "<=4.2.5",
                 "thinkcmf/thinkcmf": "<=5.1.7",
-                "thorsten/phpmyfaq": "<=3.1.7",
+                "thorsten/phpmyfaq": "<3.1.8",
                 "tinymce/tinymce": "<5.10",
                 "titon/framework": ">=0,<9.9.99",
+                "tobiasbg/tablepress": "<= 2.0-RC1",
                 "topthink/framework": "<=6.0.13",
                 "topthink/think": "<=6.0.9",
                 "topthink/thinkphp": "<=3.2.3",
@@ -4467,7 +4471,7 @@
                 "webcoast/deferred-image-processing": "<1.0.2",
                 "wikimedia/parsoid": "<0.12.2",
                 "willdurand/js-translation-bundle": "<2.1.1",
-                "wintercms/winter": "<1.0.475|>=1.1,<1.1.9",
+                "wintercms/winter": "<1.0.475|>=1.1,<1.1.10|>=1.2,<1.2.1",
                 "woocommerce/woocommerce": "<6.6",
                 "wp-cli/wp-cli": "<2.5",
                 "wp-graphql/wp-graphql": "<0.3.5",
@@ -4547,7 +4551,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-24T19:11:20+00:00"
+            "time": "2022-11-04T21:04:09+00:00"
         }
     ],
     "aliases": [],
