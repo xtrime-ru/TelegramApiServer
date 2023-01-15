@@ -18,7 +18,7 @@
     "madelineproto"
   ],
   "require": {
-    "php": "~8.0|~8.1",
+    "php": "^8.0",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pcntl": "*",
@@ -28,7 +28,7 @@
     "amphp/websocket-client": "^1",
     "amphp/http-client": "^4",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto": "v7.0.144",
+    "danog/madelineproto": "^v7.0.144",
     "amphp/http-server-form-parser": "^1.1"
   },
   "require-dev": {
