@@ -28,4 +28,4 @@ RUN apt-get update && apt-get upgrade -y \
 
 EXPOSE 9503
 
-ENTRYPOINT docker-compose-wait && nice -n 20 php server.php -e=.env.docker --docker -s=*
+ENTRYPOINT ["./entrypoint.sh"]

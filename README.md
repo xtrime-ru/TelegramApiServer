@@ -30,7 +30,7 @@ Fast, simple, async php telegram api server:
 ### Manual: 
 1. Requirements: 
     * ssh / cli
-    * php 7.4 or php 8
+    * php 8.1+
     * composer
     * git
     * Mysql/MariaDB (optional)
@@ -50,9 +50,7 @@ Fast, simple, async php telegram api server:
 1. Fill app_id and app_hash in `.env.docker` or `.env`.
 1. Start TelegramApiServer in cli:
     * docker: 
-        1. Start: `docker-compose up`
-        1. Start new shell and connect to docker container: `bash bin/docker-exec.sh`
-        1. Start another instance with different port inside new shell: `php server.php -p=9500 -s=session --docker -e=.env.docker`
+        1. Start container interactively: `docker-compose run --rm telegram-api-server`
     * manual:
         1. `php server.php --session=session`
 1. Authorize your session:
@@ -92,7 +90,7 @@ Fast, simple, async php telegram api server:
 1. Access Telegram API with simple GET/POST requests.
 
     Regular and application/json POST supported.
-    Its recommended to use http_build_query, when using GET requests.
+    It's recommended to use http_build_query, when using GET requests.
     
     **Rules:**
     * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
@@ -229,6 +227,9 @@ curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
 Also see: https://docs.madelineproto.xyz/docs/FILES.html#downloading-files
 
 ### Multiple sessions support
+**WARNING: running multiple sessions in one instance is unstable.**
+Crash/error in one session will crash all of them.
+Correct way: override docker-compose.yml and add containers with different ports and session names for each session.
 
 When running  multiple sessions, need to define which session to use for request.
 Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
@@ -273,7 +274,7 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
     These settings will be saved into json file and will apply after the restart. 
 
 ### Session management
-    
+
 **Examples:**
 * Session list: `http://127.0.0.1:9503/system/getSessionList`
 * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
@@ -285,7 +286,8 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
 
 Full list of system methods available in [SystemApiExtensions class](https://github.com/xtrime-ru/TelegramApiServer/blob/master/src/MadelineProtoExtensions/SystemApiExtensions.php)
 
-### Authorizing session remotely 
+### Authorizing session remotely
+WARNING: it is recomended to use interactive mode to authorize sessions!
 If there is no authorization in session, or session file is blank, authorization required:
 
 User: 

@@ -21,6 +21,8 @@ services:
       options:
         max-size: "1024k"
         max-file: "2"
+    command:
+      - "-s=session"
   mysql:
     image: mariadb:10.8
     container_name: telegram-api-server-mysql
