@@ -77,4 +77,8 @@ if (empty($settings['telegram']['connection_settings']['all']['proxy_extra']['ad
     $settings['telegram']['connection_settings']['all']['proxy_extra'] = [];
 }
 
+if (empty($settings['telegram']['app_info']['api_id'])) {
+    unset($settings['telegram']['app_info']);
+}
+
 return $settings;
