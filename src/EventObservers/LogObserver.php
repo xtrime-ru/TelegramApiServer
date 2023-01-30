@@ -25,7 +25,7 @@ class LogObserver
             Logger::getInstance()->log(Logger::$madelineLevels[$level], (string) $message);
         } else {
             if ($message instanceof \Throwable) {
-                $message = \TelegramApiServer\Logger::getExceptionAsArray($message);
+                $message = Logger::getExceptionAsArray($message);
             }
             if (is_array($message)) {
                 Logger::getInstance()->log(Logger::$madelineLevels[$level], '', $message);

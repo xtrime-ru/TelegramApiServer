@@ -2,6 +2,8 @@
 
 namespace TelegramApiServer;
 
+use RuntimeException;
+
 class Files
 {
 
@@ -27,7 +29,7 @@ class Files
         }
 
         preg_match(
-            '~' . static::SESSION_FOLDER . "/(?'sessionName'.*?)" . static::SESSION_EXTENSION . '$~',
+            '~' . static::SESSION_FOLDER . "/(?'sessionName'.*?)" . static::SESSION_EXTENSION . '~',
             $sessionFile,
             $matches
         );

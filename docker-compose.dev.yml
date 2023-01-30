@@ -1,0 +1,11 @@
+services:
+  api:
+    image: xtrime/telegram-api-server:dev
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - "127.0.0.1:9503:9503"
+      - "9003"
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"

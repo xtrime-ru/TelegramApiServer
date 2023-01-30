@@ -18,21 +18,18 @@
     "madelineproto"
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pcntl": "*",
-    "amphp/http-server": "^2",
-    "amphp/http-server-router": "^1",
-    "amphp/websocket-server": "^2",
-    "amphp/websocket-client": "^1",
-    "amphp/http-client": "^4",
+    "amphp/http-server": "^v3.x-dev",
+    "amphp/http": "^v2",
+    "amphp/http-server-router": "^2",
+    "amphp/http-server-form-parser": "^v2",
+    "amphp/websocket-server": "^v3",
+    "amphp/websocket-client": "^v2",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto": "v7.0.144",
-    "amphp/http-server-form-parser": "^1.1"
-  },
-  "require-dev": {
-    "roave/security-advisories": "dev-master"
+    "danog/madelineproto": "v8.x-dev"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

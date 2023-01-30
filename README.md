@@ -24,7 +24,7 @@ Fast, simple, async php telegram api server:
 ### Docker: 
 1. `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
 1. `cd TelegramApiServer`
-1. Start container: `docker-compose up`  
+1. Start container: `docker compose up`  
     Folder will be linked inside container to store all necessary data: sessions, env, db.
 
 ### Manual: 
@@ -50,7 +50,7 @@ Fast, simple, async php telegram api server:
 1. Fill app_id and app_hash in `.env.docker` or `.env`.
 1. Start TelegramApiServer in cli:
     * docker: 
-        1. Start container interactively: `docker-compose run --rm telegram-api-server`
+        1. Start container interactively: `docker compose run --rm api`
         2. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in command.
     * manual:
         1. `php server.php --session=session`
@@ -101,7 +101,7 @@ Fast, simple, async php telegram api server:
         You can add a client IP in .env file to `IP_WHITELIST` (separate with a comma)
         
         In docker version by default api available only from localhost (127.0.0.1).
-        To allow connections from the internet, need to change ports in docker-compose.yml to `9503:9503` and recreate the container: `docker-compose up -d`. 
+        To allow connections from the internet, need to change ports in docker-compose.yml to `9503:9503` and recreate the container: `docker compose up -d`. 
         This is very insecure, because this will open TAS port to anyone from the internet. 
         Only protection is the `IP_WHITELIST`, and there are no warranties that it will secure your accounts.
     * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
@@ -122,7 +122,7 @@ Fast, simple, async php telegram api server:
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
 
 ## Run in background
-* Docker: `docker-compose up -d`
+* Docker: `docker compose up -d`
     Docker will monitor and restart containers.
 * Manual: 
     1. Use [supervisor](http://supervisord.org) to monitor and restart swoole/amphp servers. 
@@ -147,9 +147,9 @@ Fast, simple, async php telegram api server:
 * `composer install -o --no-dev`
 * Compare `.env.docker` or `.env` with corresponding `.env.example`. Update if needed.
 * Docker: 
-    * `docker-compose pull`
-    * `docker-compose down`
-    * `docker-compose up`
+    * `docker compose pull`
+    * `docker compose down`
+    * `docker compose up`
 * Manual: `supervisorctl restart telegram_api_server`
     
 ## Advanced features

@@ -2,8 +2,10 @@
 
 namespace TelegramApiServer\Server;
 
+use Amp\Http\Server\ErrorHandler;
 use Amp\Http\Server\Request;
-use Amp\Http\Server\RequestHandler\CallableRequestHandler;
+use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
+use Amp\Http\Server\SocketHttpServer;
 use TelegramApiServer\Controllers\LogController;
 use TelegramApiServer\Controllers\SystemController;
 use TelegramApiServer\Controllers\ApiController;
@@ -17,9 +19,9 @@ class Router
 {
     private \Amp\Http\Server\Router $router;
 
-    public function __construct()
+    public function __construct(SocketHttpServer $server, ErrorHandler $errorHandler)
     {
-        $this->router = new \Amp\Http\Server\Router();
+        $this->router = new \Amp\Http\Server\Router($server, $errorHandler);
         $this->setRoutes();
         $this->setFallback();
     }
@@ -31,7 +33,7 @@ class Router
 
     private function setFallback(): void
     {
-        $this->router->setFallback(new CallableRequestHandler(static function (Request $request) {
+        $this->router->setFallback(new ClosureRequestHandler(static function (Request $request) {
             return ErrorResponses::get(Status::NOT_FOUND, 'Path not found');
         }));
     }

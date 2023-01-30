@@ -5,11 +5,14 @@
  * @see \TelegramApiServer\Controllers\EventsController
  */
 
+use Amp\Future;
+use Amp\Websocket\Client\WebsocketHandshake;
+use function Amp\async;
+use function Amp\delay;
+use function Amp\Websocket\Client\connect;
+
 require 'vendor/autoload.php';
 
-use Amp\Websocket\Client\Rfc6455Connection;
-use Amp\Websocket\Message;
-use function Amp\Websocket\Client\connect;
 
 $shortopts = 'u::';
 $longopts = [
@@ -20,28 +23,32 @@ $options = [
     'url' => $options['url'] ?? $options['u'] ?? 'ws://127.0.0.1:9503/events',
 ];
 
-Amp\Loop::run(static function () use ($options) {
-    echo "Connecting to: {$options['url']}" . PHP_EOL;
+echo "Connecting to: {$options['url']}" . PHP_EOL;
 
+async(function() use($options) {
     while (true) {
         try {
-            /** @var Rfc6455Connection $connection */
-            $connection = yield connect($options['url']);
+            $handshake = (new WebsocketHandshake($options['url']));
+
+            $connection = connect($handshake);
 
             $connection->onClose(static function () use ($connection) {
-                printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
+                if ($connection->isClosed()) {
+                    printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
+                }
             });
 
             echo 'Waiting for events...' . PHP_EOL;
-            while ($message = yield $connection->receive()) {
-                /** @var Message $message */
-                $payload = yield $message->buffer();
+            while ($message = $connection->receive()) {
+                $payload = $message->buffer();
                 printf("[%s] Received event: %s\n", date('Y-m-d H:i:s'), $payload);
             }
         } catch (\Throwable $e) {
             printf("Error: %s\n", $e->getMessage());
         }
-        yield new Amp\Delayed(500);
-    }
+        delay(0.1);
 
+    }
 });
+
+$signal = Amp\trapSignal([\SIGINT, \SIGTERM]);

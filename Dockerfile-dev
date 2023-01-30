@@ -1,0 +1,12 @@
+FROM xtrime/telegram-api-server:latest
+
+ADD docker/php/conf.d/. "$PHP_INI_DIR/conf.d/"
+
+RUN pecl install xdebug \
+    && echo "" >> "$PHP_INI_DIR/conf.d/xdebug.ini" \
+    && echo "zend_extension=xdebug.so" >> "$PHP_INI_DIR/conf.d/xdebug.ini"
+
+EXPOSE 9503
+EXPOSE 9003
+
+ENTRYPOINT ["./entrypoint.sh"]

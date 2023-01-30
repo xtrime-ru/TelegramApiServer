@@ -2,13 +2,14 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
-use Amp\Loop;
-use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
+use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Files;
-use function Amp\call;
+use function Amp\async;
+use function Amp\File\deleteFile;
+use function Amp\Future\awaitAll;
 
 class SystemApiExtensions
 {
@@ -19,31 +20,29 @@ class SystemApiExtensions
         $this->client = $client;
     }
 
-    public function addSession(string $session, array $settings = []): Promise
+    public function addSession(string $session, array $settings = []): array
     {
         if (!empty($settings['app_info']['api_id'])) {
             $settings['app_info']['api_id'] = (int) $settings['app_info']['api_id'];
         }
 
-        return call(function() use($session, $settings) {
-            $instance = $this->client->addSession($session, $settings);
-            /** @var null|MadelineProto\Settings $fullSettings */
-            $fullSettings = $instance->API ? yield $instance->getSettings() : null;
-            try {
-                if ($fullSettings !== null && ! yield from Client::isSessionLoggedIn($instance)) {
-                    $fullSettings->getAppInfo()->getApiId();
-                    $fullSettings->getAppInfo()->getApiHash();
-                }
-            } catch (\Throwable $e) {
-                unset($fullSettings, $instance);
-                $this->removeSession($session);
-                $this->unlinkSessionFile($session);
-                throw $e;
+        $instance = $this->client->addSession($session, $settings);
+        /** @var null|MadelineProto\Settings $fullSettings */
+        $fullSettings = $instance->getSettings();
+        try {
+            if ($fullSettings !== null && $instance->getAuthorization() !== MTProto::LOGGED_IN) {
+                $fullSettings->getAppInfo()->getApiId();
+                $fullSettings->getAppInfo()->getApiHash();
             }
+        } catch (\Throwable $e) {
+            unset($fullSettings, $instance);
+            $this->removeSession($session);
+            $this->unlinkSessionFile($session);
+            throw $e;
+        }
 
-            yield $this->client->startLoggedInSession($session);
-            return $this->getSessionList();
-        });
+        $this->client->startLoggedInSession($session);
+        return $this->getSessionList();
     }
 
     public function removeSession(string $session): array
@@ -95,25 +94,23 @@ class SystemApiExtensions
         ];
     }
 
-    public function unlinkSessionFile($session): Promise
+    public function unlinkSessionFile($session): string
     {
-        return call(function() use($session) {
-            $file = Files::getSessionFile($session);
+        $file = Files::getSessionFile($session);
 
-            if (is_file($file)) {
-                $promises = [];
-                foreach (glob("$file*") as $file) {
-                    $promises[] = \Amp\File\unlink($file);
-                }
-                yield from $promises;
-            } else {
-                throw new \InvalidArgumentException('Session file not found');
+        if (is_file($file)) {
+            $futures = [];
+            foreach (glob("$file*") as $file) {
+                $futures[] = async(fn()=>deleteFile($file));
             }
+            awaitAll($futures);
+        } else {
+            throw new \InvalidArgumentException('Session file not found');
+        }
 
-            yield $this->unlinkSessionSettings($session);
+        $this->unlinkSessionSettings($session);
 
-            return 'ok';
-        });
+        return 'ok';
     }
 
     public function saveSessionSettings(string $session, array $settings = [])
@@ -123,20 +120,18 @@ class SystemApiExtensions
         return 'ok';
     }
 
-    public function unlinkSessionSettings($session): Promise
+    public function unlinkSessionSettings($session): string
     {
-        return call(static function() use($session) {
-            $settings = Files::getSessionFile($session, Files::SETTINGS_EXTENSION);
-            if (is_file($settings)) {
-                yield \Amp\File\unlink($settings);
-            }
+        $settings = Files::getSessionFile($session, Files::SETTINGS_EXTENSION);
+        if (is_file($settings)) {
+            deleteFile($settings);
+        }
 
-            return 'ok';
-        });
+        return 'ok';
     }
 
     public function exit(): string {
-        Loop::defer(static fn() => exit());
+        EventLoop::defer(static fn() => exit());
         return 'ok';
     }
 

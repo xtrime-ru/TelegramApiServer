@@ -122,6 +122,9 @@ class Logger extends AbstractLogger
         if (false !== strpos($message, '{')) {
             $replacements = [];
             foreach ($context as $key => $val) {
+                if ($val instanceof \Throwable) {
+                    $context[$key] = self::getExceptionAsArray($val);
+                }
                 if (null === $val || is_scalar($val) || (is_object($val) && method_exists($val, '__toString'))) {
                     $replacements["{{$key}}"] = $val;
                 } else {
@@ -149,7 +152,7 @@ class Logger extends AbstractLogger
                     "\n" .
                     json_encode(
                         $context,
-                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT | JSON_UNESCAPED_LINE_TERMINATORS
+                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT | JSON_UNESCAPED_LINE_TERMINATORS | JSON_UNESCAPED_SLASHES
                     )
                     : ''
             ) . PHP_EOL;
@@ -163,6 +166,7 @@ class Logger extends AbstractLogger
             'line' => $exception->getLine(),
             'code' => $exception->getCode(),
             'backtrace' => array_slice($exception->getTrace(), 0, 3),
+            'previous exception' => $exception->getPrevious(),
         ];
     }
 }

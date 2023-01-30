@@ -74,7 +74,7 @@ StartUpFixes::fix();
 $mainProcessPid = getmypid();
 
 if (Config::getInstance()->get('health_check.enabled')) {
-    Fork::run(function() use($mainProcessPid) {
+    Fork::run(static function() use($mainProcessPid) {
         HealthCheck::start($mainProcessPid);
     });
 }

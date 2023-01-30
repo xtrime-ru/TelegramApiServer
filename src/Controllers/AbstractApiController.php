@@ -2,14 +2,13 @@
 
 namespace TelegramApiServer\Controllers;
 
-use Amp\ByteStream\ResourceInputStream;
+use Amp\Future;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\FormParser\StreamingParser;
 use Amp\Http\Server\Request;
-use Amp\Http\Server\RequestHandler\CallableRequestHandler;
+use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
-use Amp\Promise;
 use danog\MadelineProto\API;
 use TelegramApiServer\Exceptions\NoticeException;
 use TelegramApiServer\Logger;
@@ -19,7 +18,7 @@ use function mb_strpos;
 
 abstract class AbstractApiController
 {
-    public const JSON_HEADER = ['Content-Type'=>'application/json;charset=utf-8'];
+    public const JSON_HEADER = ['Content-Type' => 'application/json;charset=utf-8'];
 
     protected Request $request;
     protected ?StreamedField $file = null;
@@ -37,14 +36,15 @@ abstract class AbstractApiController
     protected array $api;
 
     abstract protected function resolvePath(array $path);
+
     abstract protected function callApi();
 
-    public static function getRouterCallback(string $extensionClass): CallableRequestHandler
+    public static function getRouterCallback(string $extensionClass): ClosureRequestHandler
     {
-        return new CallableRequestHandler(
-            static function (Request $request) use($extensionClass) {
+        return new ClosureRequestHandler(
+            static function (Request $request) use ($extensionClass) {
                 $requestCallback = new static($request, $extensionClass);
-                $response = yield from $requestCallback->process();
+                $response = $requestCallback->process();
 
                 if ($response instanceof Response) {
                     return $response;
@@ -65,15 +65,14 @@ abstract class AbstractApiController
     }
 
     /**
-     * @param Request $request
-     * @return \Generator|Response|string
+     * @return Response|string
      * @throws \Throwable
      */
     public function process()
     {
         $this->resolvePath($this->request->getAttribute(Router::class));
-        yield from $this->resolveRequest();
-        yield from $this->generateResponse();
+        $this->resolveRequest();
+        $this->generateResponse();
 
         return $this->getResponse();
     }
@@ -82,7 +81,7 @@ abstract class AbstractApiController
      * Получаем параметры из GET и POST
      *
      */
-    private function resolveRequest(): \Generator
+    private function resolveRequest(): void
     {
         $query = $this->request->getUri()->getQuery();
         $contentType = (string)$this->request->getHeader('Content-Type');
@@ -95,29 +94,29 @@ abstract class AbstractApiController
                 $form = (new StreamingParser())->parseForm($this->request);
                 $post = [];
 
-                while (yield $form->advance()) {
+                while ($form->continue()) {
                     /** @var StreamedField $field */
-                    $field = $form->getCurrent();
+                    $field = $form->getValue();
                     if ($field->isFile()) {
                         $this->file = $field;
                         //We need to break loop without getting file
                         //All other post field will be omitted, hope we dont need them :)
                         break;
                     } else {
-                        $post[$field->getName()] = yield $field->buffer();
+                        $post[$field->getName()] = $field->buffer();
                     }
                 }
                 break;
             case $contentType === 'application/json':
-                $body = yield $this->request->getBody()->buffer();
+                $body = $this->request->getBody()->buffer();
                 $post = json_decode($body, 1);
                 break;
             default:
-                $body = yield $this->request->getBody()->buffer();
+                $body = $this->request->getBody()->buffer();
                 parse_str($body, $post);
         }
 
-        $this->parameters = array_merge((array) $post, $get);
+        $this->parameters = array_merge((array)$post, $get);
         $this->parameters = array_values($this->parameters);
 
     }
@@ -126,7 +125,7 @@ abstract class AbstractApiController
      * Получает посты для формирования ответа
      *
      */
-    private function generateResponse(): \Generator
+    private function generateResponse(): void
     {
         if ($this->page['code'] !== 200) {
             return;
@@ -138,8 +137,8 @@ abstract class AbstractApiController
         try {
             $this->page['response'] = $this->callApi();
 
-            if ($this->page['response'] instanceof Promise) {
-                $this->page['response'] = yield $this->page['response'];
+            if ($this->page['response'] instanceof Future) {
+                $this->page['response'] = $this->page['response']->await();
             }
 
         } catch (\Throwable $e) {
@@ -156,7 +155,7 @@ abstract class AbstractApiController
     protected function callApiCommon(API $madelineProto)
     {
         $pathCount = count($this->api);
-        if ($pathCount === 1  && method_exists($this->extensionClass,$this->api[0])) {
+        if ($pathCount === 1 && method_exists($this->extensionClass, $this->api[0])) {
             /** @var ApiExtensions|SystemApiExtensions $madelineProtoExtensions */
             $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request, $this->file);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
@@ -204,9 +203,9 @@ abstract class AbstractApiController
      * Кодирует ответ в нужный формат: json
      *
      * @return Response|string
-     * @throws \Throwable
+     * @throws \JsonException
      */
-    private function getResponse()
+    private function getResponse(): string|Response
     {
         if ($this->page['response'] instanceof Response) {
             return $this->page['response'];
