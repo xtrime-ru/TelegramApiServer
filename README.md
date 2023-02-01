@@ -46,11 +46,12 @@ Fast, simple, async php telegram api server:
 ## First start
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/). 
     Only one app_id needed for any amount of users and bots.
-1. Create .env file: `cp .env.docker.exaple .env.docker` or `cp .env.exaple .env`
+1. Create .env file: `cp .env.docker.example .env.docker` or `cp .env.example .env`
 1. Fill app_id and app_hash in `.env.docker` or `.env`.
 1. Start TelegramApiServer in cli:
     * docker: 
         1. Start container interactively: `docker-compose run --rm telegram-api-server`
+        2. If you need to start multiple sessions, do it one-by-one, like this: `docker-compose run --rm telegram-api-server --session=user1`
     * manual:
         1. `php server.php --session=session`
 1. Authorize your session:
