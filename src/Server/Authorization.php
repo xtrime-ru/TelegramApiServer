@@ -39,7 +39,7 @@ class Authorization implements Middleware
     {
         global $options;
         if ($options['docker']) {
-            $isSameNetwork = abs(ip2long($host) - $this->selfIp) < 10;
+            $isSameNetwork = abs(ip2long($host) - $this->selfIp) < 256;
             if ($isSameNetwork) {
                 return true;
             }
