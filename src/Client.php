@@ -8,12 +8,8 @@ use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
-use Revolt\EventLoop;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
-use function Amp\async;
-use function Amp\Future\await;
-use function Amp\Future\awaitAll;
 
 class Client
 {
@@ -21,7 +17,8 @@ class Client
     /** @var API[] */
     public array $instances = [];
 
-	public static function getInstance(): Client {
+    public static function getInstance(): Client
+    {
         if (empty(static::$self)) {
             static::$self = new static();
         }
@@ -59,7 +56,7 @@ class Client
             Files::saveSessionSettings($session, $settings);
         }
         $settings = array_replace_recursive(
-            (array) Config::getInstance()->get('telegram'),
+            (array)Config::getInstance()->get('telegram'),
             Files::getSessionSettings($session),
         );
         $instance = new API($file, $settings);
@@ -101,7 +98,7 @@ class Client
 
         if (!$session) {
             if (count($this->instances) === 1) {
-                $session = (string) array_key_first($this->instances);
+                $session = (string)array_key_first($this->instances);
             } else {
                 throw new InvalidArgumentException(
                     'Multiple sessions detected. Specify which session to use. See README for examples.'

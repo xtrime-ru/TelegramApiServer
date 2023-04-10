@@ -5,16 +5,18 @@ namespace TelegramApiServer\Controllers;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
-use Amp\Http\Status;
+use Amp\Http\HttpStatus;
 use Amp\Websocket\Server\Websocket as WebsocketServer;
 use Amp\Websocket\Server\WebsocketClientGateway;
 use Amp\Websocket\Server\WebsocketClientHandler;
 use Amp\Websocket\Server\WebsocketHandshakeHandler;
 use Amp\Websocket\WebsocketClient;
 use Revolt\EventLoop;
+use RuntimeException;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventObserver;
 use TelegramApiServer\Logger;
+use Throwable;
 
 class EventsController implements WebsocketClientHandler, WebsocketHandshakeHandler
 {
@@ -44,10 +46,10 @@ class EventsController implements WebsocketClientHandler, WebsocketHandshakeHand
             if ($session) {
                 Client::getInstance()->getSession($session);
             } elseif (empty(Client::getInstance()->instances)) {
-                throw new \RuntimeException('No sessions available');
+                throw new RuntimeException('No sessions available');
             }
-        }  catch (\Throwable $e){
-            $response->setStatus(Status::NOT_FOUND);
+        } catch (Throwable $e) {
+            $response->setStatus(HttpStatus::NOT_FOUND);
             $response->setBody($e->getMessage());
         }
 
@@ -61,7 +63,7 @@ class EventsController implements WebsocketClientHandler, WebsocketHandshakeHand
         $this->gateway->addClient($client);
 
         while ($message = $client->receive()) {
-            notice('Recieved websocket message: '  . $message->buffer());
+            notice('Recieved websocket message: ' . $message->buffer());
             // Messages received on the connection are ignored and discarded.
             // Messages must be received properly to maintain connection with client (ping-pong check).
         }
@@ -73,15 +75,15 @@ class EventsController implements WebsocketClientHandler, WebsocketHandshakeHand
 
         EventObserver::startEventHandler($requestedSession);
 
-        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn () => $client->ping());
+        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn() => $client->ping());
 
-        $client->onClose(static function() use($clientId, $requestedSession, $pingLoop) {
+        $client->onClose(static function () use ($clientId, $requestedSession, $pingLoop) {
             EventLoop::cancel($pingLoop);
             EventObserver::removeSubscriber($clientId);
             EventObserver::stopEventHandler($requestedSession);
         });
 
-        EventObserver::addSubscriber($clientId, function($update, ?string $session) use($clientId, $requestedSession) {
+        EventObserver::addSubscriber($clientId, function ($update, ?string $session) use ($clientId, $requestedSession) {
             if ($requestedSession && $session !== $requestedSession) {
                 return;
             }

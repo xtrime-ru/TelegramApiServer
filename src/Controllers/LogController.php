@@ -6,15 +6,24 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Websocket\Server\Websocket;
+use Amp\Websocket\Server\WebsocketClientGateway;
 use Amp\Websocket\Server\WebsocketClientHandler;
 use Amp\Websocket\Server\WebsocketHandshakeHandler;
 use Amp\Websocket\WebsocketClient;
 use Psr\Log\LogLevel;
+use Revolt\EventLoop;
 use TelegramApiServer\EventObservers\LogObserver;
 use TelegramApiServer\Logger;
 
 class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
 {
+    private const PING_INTERVAL_MS = 10_000;
+    private WebsocketClientGateway $gateway;
+
+    public function __construct()
+    {
+        $this->gateway = new WebsocketClientGateway();
+    }
 
     public static function getRouterCallback(): Websocket
     {
@@ -38,7 +47,8 @@ class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
     public function handleClient(WebsocketClient $client, Request $request, Response $response): void
     {
         $level = $request->getAttribute(Router::class)['level'] ?? LogLevel::DEBUG;
-        static::subscribeForUpdates($client, $level);
+        $this->subscribeForUpdates($client, $level);
+        $this->gateway->addClient($client);
 
         while ($message = $client->receive()) {
             notice('Recived log websocket message: ' . $message->buffer());
@@ -47,15 +57,18 @@ class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
         }
     }
 
-    private static function subscribeForUpdates(WebsocketClient $client, string $requestedLevel): void
+    private function subscribeForUpdates(WebsocketClient $client, string $requestedLevel): void
     {
         $clientId = $client->getId();
 
-        $client->onClose(static function() use($clientId) {
+        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn() => $client->ping());
+
+        $client->onClose(static function () use ($clientId, $pingLoop) {
+            EventLoop::cancel($pingLoop);
             LogObserver::removeSubscriber($clientId);
         });
 
-        LogObserver::addSubscriber($clientId, static function(string $level, string $message, array $context = []) use($endpoint, $clientId, $requestedLevel) {
+        LogObserver::addSubscriber($clientId, function (string $level, string $message, array $context = []) use ($clientId, $requestedLevel) {
             if ($requestedLevel && Logger::$levels[$level] < Logger::$levels[$requestedLevel]) {
                 return;
             }
@@ -69,7 +82,7 @@ class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
                 'id' => null,
             ];
 
-            $endpoint->multicast(
+            $this->gateway->multicast(
                 json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |

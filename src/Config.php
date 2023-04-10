@@ -39,7 +39,7 @@ class Config
 
     private function findByKey($key)
     {
-        $key = (string) $key;
+        $key = (string)$key;
         $path = explode('.', $key);
 
         $value = &$this->config;

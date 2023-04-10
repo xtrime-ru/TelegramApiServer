@@ -10,10 +10,13 @@ use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use danog\MadelineProto\API;
+use JsonException;
 use TelegramApiServer\Exceptions\NoticeException;
 use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
+use Throwable;
+use UnexpectedValueException;
 use function mb_strpos;
 
 abstract class AbstractApiController
@@ -66,7 +69,7 @@ abstract class AbstractApiController
 
     /**
      * @return Response|string
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function process()
     {
@@ -141,7 +144,7 @@ abstract class AbstractApiController
                 $this->page['response'] = $this->page['response']->await();
             }
 
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             if (!$e instanceof NoticeException) {
                 error($e->getMessage(), Logger::getExceptionAsArray($e));
             } else {
@@ -172,7 +175,7 @@ abstract class AbstractApiController
                     $result = $madelineProto->{$this->api[0]}->{$this->api[1]}->{$this->api[2]}(...$this->parameters);
                     break;
                 default:
-                    throw new \UnexpectedValueException('Incorrect method format');
+                    throw new UnexpectedValueException('Incorrect method format');
             }
         }
 
@@ -180,12 +183,12 @@ abstract class AbstractApiController
     }
 
     /**
-     * @param \Throwable $e
+     * @param Throwable $e
      *
      * @return AbstractApiController
-     * @throws \Throwable
+     * @throws Throwable
      */
-    private function setError(\Throwable $e): self
+    private function setError(Throwable $e): self
     {
         $errorCode = $e->getCode();
         if ($errorCode >= 400 && $errorCode < 500) {
@@ -203,7 +206,7 @@ abstract class AbstractApiController
      * Кодирует ответ в нужный формат: json
      *
      * @return Response|string
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function getResponse(): string|Response
     {

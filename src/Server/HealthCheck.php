@@ -9,6 +9,8 @@ use Revolt\EventLoop;
 use RuntimeException;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
+use Throwable;
+use UnexpectedValueException;
 use function Amp\async;
 use function Amp\Future\awaitAll;
 
@@ -28,17 +30,17 @@ class HealthCheck
      */
     public static function start(int $parentPid): void
     {
-        static::$host = (string) Config::getInstance()->get('server.address');
+        static::$host = (string)Config::getInstance()->get('server.address');
         if (static::$host === '0.0.0.0') {
             static::$host = '127.0.0.1';
         }
-        static::$port = (int) Config::getInstance()->get('server.port');
+        static::$port = (int)Config::getInstance()->get('server.port');
 
-        static::$checkInterval = (int) Config::getInstance()->get('health_check.interval');
-        static::$requestTimeout = (int) Config::getInstance()->get('health_check.timeout');
+        static::$checkInterval = (int)Config::getInstance()->get('health_check.interval');
+        static::$requestTimeout = (int)Config::getInstance()->get('health_check.timeout');
 
         try {
-            EventLoop::repeat(static::$checkInterval, static function() use($parentPid) {
+            EventLoop::repeat(static::$checkInterval, static function () use ($parentPid) {
                 Logger::getInstance()->info('Start health check');
                 if (!self::isProcessAlive($parentPid)) {
                     throw new RuntimeException('Parent process died');
@@ -54,7 +56,7 @@ class HealthCheck
                 Logger::getInstance()->info('Health check ok. Sessions checked: ' . count($sessionsForCheck));
             });
             EventLoop::run();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Logger::getInstance()->error($e->getMessage());
             Logger::getInstance()->critical('Health check failed');
             if (self::isProcessAlive($parentPid)) {
@@ -78,7 +80,7 @@ class HealthCheck
         $response = static::sendRequest($url);
 
         if ($response === false) {
-            throw new \UnexpectedValueException('No response from /system');
+            throw new UnexpectedValueException('No response from /system');
         }
 
         return json_decode($response, true, 10, JSON_THROW_ON_ERROR)['response']['sessions'];
@@ -98,7 +100,7 @@ class HealthCheck
 
     private static function checkSession(string $sessionName): Future
     {
-        return async(function() use($sessionName) {
+        return async(function () use ($sessionName) {
             $url = sprintf("http://%s:%s/api/%s/getSelf", static::$host, static::$port, $sessionName);
             $response = static::sendRequest($url);
             $response = json_decode($response, true, 10, JSON_THROW_ON_ERROR);

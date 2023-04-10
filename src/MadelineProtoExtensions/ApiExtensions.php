@@ -211,7 +211,7 @@ class ApiExtensions
                 $result[] = $this->sendMessage($messageData);
             }
             if ($key > 0) {
-                delay(random_int(300, 2000)/1000);
+                delay(random_int(300, 2000) / 1000);
             }
         }
 
@@ -343,9 +343,9 @@ class ApiExtensions
             $webpage = $message['media']['webpage'];
             if (!empty($webpage['embed_url'])) {
                 return new Response(302, ['Location' => $webpage['embed_url']]);
-            } elseif(!empty($webpage['document'])) {
+            } elseif (!empty($webpage['document'])) {
                 $info = $this->madelineProto->getDownloadInfo($webpage['document']);
-            } elseif(!empty($webpage['photo'])) {
+            } elseif (!empty($webpage['photo'])) {
                 $info = $this->madelineProto->getDownloadInfo($webpage['photo']);
             } else {
                 return $this->getMediaPreview($data);
@@ -451,11 +451,11 @@ class ApiExtensions
             $response = $this->madelineProto->channels->getMessages(
                 [
                     'channel' => $data['peer'],
-                    'id' => (array) $data['id'],
+                    'id' => (array)$data['id'],
                 ]
             );
         } else {
-            $response = $this->madelineProto->messages->getMessages(['id' => (array) $data['id']]);
+            $response = $this->madelineProto->messages->getMessages(['id' => (array)$data['id']]);
         }
 
         return $response;

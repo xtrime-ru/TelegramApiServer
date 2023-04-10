@@ -12,6 +12,9 @@ use Amp\Sync\LocalSemaphore;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
+use function sprintf;
+use const SIGINT;
+use const SIGTERM;
 
 class Server
 {
@@ -33,7 +36,7 @@ class Server
                 logger: Logger::getInstance(),
                 streamTimeout: 600,
                 connectionTimeout: 60,
-                bodySizeLimit: 5*(1024**3), //5Gb
+                bodySizeLimit: 5 * (1024 ** 3), //5Gb
             )
         );
 
@@ -58,8 +61,8 @@ class Server
     {
         if (defined('SIGINT')) {
             // Await SIGINT or SIGTERM to be received.
-            $signal = Amp\trapSignal([\SIGINT, \SIGTERM]);
-            info(\sprintf("Received signal %d, stopping HTTP server", $signal));
+            $signal = Amp\trapSignal([SIGINT, SIGTERM]);
+            info(sprintf("Received signal %d, stopping HTTP server", $signal));
             $server->stop();
         }
     }
@@ -72,7 +75,7 @@ class Server
      */
     private function getConfig(array $config = []): array
     {
-        $config =  array_filter($config);
+        $config = array_filter($config);
 
         $config = array_merge(
             Config::getInstance()->get('server', []),

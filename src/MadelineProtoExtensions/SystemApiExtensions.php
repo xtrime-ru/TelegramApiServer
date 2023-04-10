@@ -4,9 +4,11 @@ namespace TelegramApiServer\MadelineProtoExtensions;
 
 use danog\MadelineProto;
 use danog\MadelineProto\MTProto;
+use InvalidArgumentException;
 use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Files;
+use Throwable;
 use function Amp\async;
 use function Amp\File\deleteFile;
 use function Amp\Future\awaitAll;
@@ -23,7 +25,7 @@ class SystemApiExtensions
     public function addSession(string $session, array $settings = []): array
     {
         if (!empty($settings['app_info']['api_id'])) {
-            $settings['app_info']['api_id'] = (int) $settings['app_info']['api_id'];
+            $settings['app_info']['api_id'] = (int)$settings['app_info']['api_id'];
         }
 
         $instance = $this->client->addSession($session, $settings);
@@ -34,7 +36,7 @@ class SystemApiExtensions
                 $fullSettings->getAppInfo()->getApiId();
                 $fullSettings->getAppInfo()->getApiHash();
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             unset($fullSettings, $instance);
             $this->removeSession($session);
             $this->unlinkSessionFile($session);
@@ -101,11 +103,11 @@ class SystemApiExtensions
         if (is_file($file)) {
             $futures = [];
             foreach (glob("$file*") as $file) {
-                $futures[] = async(fn()=>deleteFile($file));
+                $futures[] = async(fn() => deleteFile($file));
             }
             awaitAll($futures);
         } else {
-            throw new \InvalidArgumentException('Session file not found');
+            throw new InvalidArgumentException('Session file not found');
         }
 
         $this->unlinkSessionSettings($session);
@@ -130,7 +132,8 @@ class SystemApiExtensions
         return 'ok';
     }
 
-    public function exit(): string {
+    public function exit(): string
+    {
         EventLoop::defer(static fn() => exit());
         return 'ok';
     }

@@ -7,15 +7,17 @@ use danog\MadelineProto\APIWrapper;
 use ReflectionProperty;
 use TelegramApiServer\Client;
 use TelegramApiServer\Logger;
+use Throwable;
 
 class EventObserver
 {
     use ObserverTrait;
 
-    /** @var int[]  */
+    /** @var int[] */
     public static array $sessionClients = [];
 
-    public static function notify(array $update, string $sessionName) {
+    public static function notify(array $update, string $sessionName)
+    {
         foreach (static::$subscribers as $clientId => $callback) {
             notice("Pass update to callback. ClientId: {$clientId}");
             $callback($update, $sessionName);
@@ -56,7 +58,7 @@ class EventObserver
                     /** @var APIWrapper $wrapper */
                     $wrapper = $property->getValue($instance);
                     $wrapper->getAPI()->setEventHandler(EventHandler::class);
-                } catch (\Throwable $e) {
+                } catch (Throwable $e) {
                     static::removeSessionClient($session);
                     error('Cant set EventHandler', [
                         'session' => $session,

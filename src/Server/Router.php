@@ -6,11 +6,11 @@ use Amp\Http\Server\ErrorHandler;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
 use Amp\Http\Server\SocketHttpServer;
-use TelegramApiServer\Controllers\LogController;
-use TelegramApiServer\Controllers\SystemController;
+use Amp\Http\HttpStatus;
 use TelegramApiServer\Controllers\ApiController;
 use TelegramApiServer\Controllers\EventsController;
-use Amp\Http\Status;
+use TelegramApiServer\Controllers\LogController;
+use TelegramApiServer\Controllers\SystemController;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 use function Amp\Http\Server\Middleware\stack;
@@ -34,7 +34,7 @@ class Router
     private function setFallback(): void
     {
         $this->router->setFallback(new ClosureRequestHandler(static function (Request $request) {
-            return ErrorResponses::get(Status::NOT_FOUND, 'Path not found');
+            return ErrorResponses::get(HttpStatus::NOT_FOUND, 'Path not found');
         }));
     }
 

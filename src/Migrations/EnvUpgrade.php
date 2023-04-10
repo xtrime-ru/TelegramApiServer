@@ -4,7 +4,8 @@ namespace TelegramApiServer\Migrations;
 
 class EnvUpgrade
 {
-    public static function mysqlToDbPrefix() {
+    public static function mysqlToDbPrefix()
+    {
         foreach (glob(ROOT_DIR . '/.env*') as $envFile) {
 
             $text = file_get_contents($envFile);

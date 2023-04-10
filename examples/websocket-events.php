@@ -5,7 +5,6 @@
  * @see \TelegramApiServer\Controllers\EventsController
  */
 
-use Amp\Future;
 use Amp\Websocket\Client\WebsocketHandshake;
 use function Amp\async;
 use function Amp\delay;
@@ -25,7 +24,7 @@ $options = [
 
 echo "Connecting to: {$options['url']}" . PHP_EOL;
 
-async(function() use($options) {
+async(function () use ($options) {
     while (true) {
         try {
             $handshake = (new WebsocketHandshake($options['url']));
@@ -43,7 +42,7 @@ async(function() use($options) {
                 $payload = $message->buffer();
                 printf("[%s] Received event: %s\n", date('Y-m-d H:i:s'), $payload);
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             printf("Error: %s\n", $e->getMessage());
         }
         delay(0.1);
@@ -51,4 +50,4 @@ async(function() use($options) {
     }
 });
 
-$signal = Amp\trapSignal([\SIGINT, \SIGTERM]);
+$signal = Amp\trapSignal([SIGINT, SIGTERM]);
