@@ -814,12 +814,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-form-parser.git",
-                "reference": "43ef1a70a69465b4a5dadfcda78c54125f721fd5"
+                "reference": "547c1d0f16b248cdf8c8092fea390812eec6a8a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/43ef1a70a69465b4a5dadfcda78c54125f721fd5",
-                "reference": "43ef1a70a69465b4a5dadfcda78c54125f721fd5",
+                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/547c1d0f16b248cdf8c8092fea390812eec6a8a5",
+                "reference": "547c1d0f16b248cdf8c8092fea390812eec6a8a5",
                 "shasum": ""
             },
             "require": {
@@ -888,7 +888,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-02T05:07:33+00:00"
+            "time": "2023-04-10T20:57:17+00:00"
         },
         {
             "name": "amphp/http-server-router",
@@ -2452,12 +2452,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "31eff9db1fe27b60a84d35da3844fb8ee18e43bf"
+                "reference": "f4413860c742bc4d098a39e4235258b09a5b4728"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/31eff9db1fe27b60a84d35da3844fb8ee18e43bf",
-                "reference": "31eff9db1fe27b60a84d35da3844fb8ee18e43bf",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/f4413860c742bc4d098a39e4235258b09a5b4728",
+                "reference": "f4413860c742bc4d098a39e4235258b09a5b4728",
                 "shasum": ""
             },
             "require": {
@@ -2563,7 +2563,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/8.0.0-beta68"
+                "source": "https://github.com/danog/MadelineProto/tree/v8"
             },
             "funding": [
                 {
@@ -2571,7 +2571,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-03T10:07:27+00:00"
+            "time": "2023-04-11T08:50:45+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3625,21 +3625,21 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
+                "reference": "e616d01114759c4c489f93b099585439f795fe35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
+                "reference": "e616d01114759c4c489f93b099585439f795fe35",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -3659,7 +3659,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interfaces for PSR-7 HTTP message factories",
@@ -3674,9 +3674,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/master"
+                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
             },
-            "time": "2019-04-30T12:38:16+00:00"
+            "time": "2023-04-10T20:10:41+00:00"
         },
         {
             "name": "psr/http-message",
