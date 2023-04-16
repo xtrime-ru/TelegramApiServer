@@ -21,47 +21,44 @@ Fast, simple, async php telegram api server:
  
 ## Installation
 
-### Docker: 
-1. `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
-1. `cd TelegramApiServer`
-1. Start container: `docker compose up`  
-    Folder will be linked inside container to store all necessary data: sessions, env, db.
+```shell
+git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer
+cd TelegramApiServer
+cp .env.docker.example .env.docker
+docker compose pull
+```
 
-### Manual: 
-1. Requirements: 
-    * ssh / cli
-    * php 8.1+
-    * composer
-    * git
-    * Mysql/MariaDB (optional)
-    * [MadelindeProto Requirements](https://docs.madelineproto.xyz/docs/REQUIREMENTS.html)
-    * [Amp Requirements](https://github.com/amphp/amp#requirements)
-    * XAMPP (for Windows)
-    
-1. `git clone https://github.com/xtrime-ru/TelegramApiServer.git TelegramApiServer`
-1. `cd TelegramApiServer`
-1. `composer install -o --no-dev`
-1. `php server.php`
-
-## First start
+## Authorization
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/). 
     Only one app_id needed for any amount of users and bots.
-1. Create .env file: `cp .env.docker.example .env.docker` or `cp .env.example .env`
 1. Fill app_id and app_hash in `.env.docker` or `.env`.
 1. Start TelegramApiServer in cli:
-    * docker: 
         1. Start container interactively: `docker compose run --rm api`
-        2. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in command.
-    * manual:
-        1. `php server.php --session=session`
+        2. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in `command`.
 1. Authorize your session:
     1. Chose account type: user (`u`) or bot (`b`)
     1. Follow instructions
-1. Wait 10-30 seconds until authorization is end and exit with `Ctrl + C`.
-1. Run TAS in screen, tmux, supervisor (see below) or docker.
+1. Wait 10-30 seconds until session is started.
+   You will see logs:
+   ```text
+   TelegramApiServer ready. 
+   Number of sessions: 1.
+   ```
+1. Exit with `Ctrl + C` 
+1. Run container in background `docker compose up -d`.
+
+## Update
+* `git pull` or `git fetch && git reset --hard origin/master`
+* `rm -rf vendor/`
+* Compare `.env.docker` or `.env` with corresponding `.env.example`. Update if needed.
+* Recreate containers:
+  ```shell
+  docker compose pull
+  docker compose down
+  docker compose up -d
+  ```
 
 ## Usage
-
 1. Run server/parser
     ```
     usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]  [-e=|--env=.env] [--docker]
@@ -89,7 +86,6 @@ Fast, simple, async php telegram api server:
     Also some options can be set in .env file (see .env.example)
     ```
 1. Access Telegram API with simple GET/POST requests.
-
     Regular and application/json POST supported.
     It's recommended to use http_build_query, when using GET requests.
     
@@ -120,37 +116,6 @@ Fast, simple, async php telegram api server:
     * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
     * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
-
-## Run in background
-* Docker: `docker compose up -d`
-    Docker will monitor and restart containers.
-* Manual: 
-    1. Use [supervisor](http://supervisord.org) to monitor and restart swoole/amphp servers. 
-    1. `apt-get install supervisor`
-    1. Put config file in `/etc/supervisor/conf.d/telegram_api_server.conf`. Example: 
-    ```
-    [program:telegram_api_server]
-    command=/usr/bin/php /home/admin/web/tg.i-c-a.su/TelegramApiServer/server.php --session=*
-    numprocs=1
-    directory=/home/admin/web/tg.i-c-a.su/TelegramApiServer/
-    autostart=true
-    autorestart=true
-    startretries=10
-    stdout_logfile=/var/log/telegram/stdout.log
-    redirect_stderr=true
-    ```
-    1. Load new config: `supervisorctl update`
-    1. View/control processes: `supervisorctl`
-    
-## Update
-* `git pull` or `git fetch && git reset --hard origin/master`
-* `composer install -o --no-dev`
-* Compare `.env.docker` or `.env` with corresponding `.env.example`. Update if needed.
-* Docker: 
-    * `docker compose pull`
-    * `docker compose down`
-    * `docker compose up`
-* Manual: `supervisorctl restart telegram_api_server`
     
 ## Advanced features
 ### Uploading files.
@@ -346,10 +311,10 @@ Full list of custom methods and their parameters available in [ApiExtensions cla
 * `getMediaPreview` - download media preview to stream/browser
 * `uploadMediaForm` - upload document from POST request.
 
-
 ## Contacts
 
 * Telegram:   
     * Author: [@xtrime](https://t.me/xtrime)  
     * [MadelineProto and Amp Support Groups](https://t.me/pwrtelegramgroup)
+    * Use madelineProto support groups to get support for TelegramApiServer.
 * Email: alexander(at)i-c-a.su
