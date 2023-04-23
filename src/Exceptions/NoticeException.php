@@ -2,7 +2,9 @@
 
 namespace TelegramApiServer\Exceptions;
 
-class NoticeException extends \Exception
+use Exception;
+
+class NoticeException extends Exception
 {
 
 }

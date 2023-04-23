@@ -17,6 +17,7 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
 use TelegramApiServer\EventObservers\LogObserver;
+use Throwable;
 use function get_class;
 use function gettype;
 use function is_object;
@@ -59,7 +60,7 @@ class Logger extends AbstractLogger
     {
         if (null === $minLevel) {
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
-                switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] :
+                switch ((int)(isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] :
                     $_SERVER['SHELL_VERBOSITY'])) {
                     case -1:
                         $minLevel = LogLevel::ERROR;
@@ -122,6 +123,9 @@ class Logger extends AbstractLogger
         if (false !== strpos($message, '{')) {
             $replacements = [];
             foreach ($context as $key => $val) {
+                if ($val instanceof Throwable) {
+                    $context[$key] = self::getExceptionAsArray($val);
+                }
                 if (null === $val || is_scalar($val) || (is_object($val) && method_exists($val, '__toString'))) {
                     $replacements["{{$key}}"] = $val;
                 } else {
@@ -149,13 +153,14 @@ class Logger extends AbstractLogger
                     "\n" .
                     json_encode(
                         $context,
-                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT | JSON_UNESCAPED_LINE_TERMINATORS
+                        JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT | JSON_UNESCAPED_LINE_TERMINATORS | JSON_UNESCAPED_SLASHES
                     )
                     : ''
             ) . PHP_EOL;
     }
 
-    public static function getExceptionAsArray(\Throwable $exception) {
+    public static function getExceptionAsArray(Throwable $exception)
+    {
         return [
             'exception' => get_class($exception),
             'message' => $exception->getMessage(),
@@ -163,6 +168,7 @@ class Logger extends AbstractLogger
             'line' => $exception->getLine(),
             'code' => $exception->getCode(),
             'backtrace' => array_slice($exception->getTrace(), 0, 3),
+            'previous exception' => $exception->getPrevious(),
         ];
     }
 }

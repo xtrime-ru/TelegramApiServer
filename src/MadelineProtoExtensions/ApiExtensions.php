@@ -4,17 +4,16 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 
-use Amp\Delayed;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
-use Amp\Promise;
 use danog\MadelineProto;
 use danog\MadelineProto\StrTools;
+use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\Exceptions\MediaTooBig;
 use TelegramApiServer\Exceptions\NoMediaException;
-use function Amp\call;
+use function Amp\delay;
 
 class ApiExtensions
 {
@@ -47,9 +46,8 @@ class ApiExtensions
      * ]
      * </pre>
      *
-     * @return MadelineProto\messages|Promise
      */
-    public function getHistory(array $data): Promise
+    public function getHistory(array $data)
     {
         $data = array_merge(
             [
@@ -68,26 +66,17 @@ class ApiExtensions
         return $this->madelineProto->messages->getHistory($data);
     }
 
-    /**
-     * @param array $data
-     *
-     * @return Promise
-     */
-    public function getHistoryHtml(array $data): Promise
+    public function getHistoryHtml(array $data): array
     {
-        return call(
-            function() use ($data) {
-                $response = yield $this->getHistory($data);
-                if (!empty($response['messages'])) {
-                    foreach ($response['messages'] as &$message) {
-                        $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
-                    }
-                    unset($message);
-                }
-
-                return $response;
+        $response = $this->getHistory($data);
+        if (!empty($response['messages'])) {
+            foreach ($response['messages'] as &$message) {
+                $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
             }
-        );
+            unset($message);
+        }
+
+        return $response;
     }
 
     /**
@@ -186,52 +175,47 @@ class ApiExtensions
      * ]
      * </pre>
      *
-     * @return Promise
      */
-    public function copyMessages(array $data): Promise
+    public function copyMessages(array $data)
     {
-        return call(
-            function() use ($data) {
-                $data = array_merge(
-                    [
-                        'from_peer' => '',
-                        'to_peer' => '',
-                        'id' => [],
-                    ],
-                    $data
-                );
-
-                $response = yield $this->madelineProto->channels->getMessages(
-                    [
-                        'channel' => $data['from_peer'],
-                        'id' => $data['id'],
-                    ]
-                );
-                $result = [];
-                if (!$response || !is_array($response) || !array_key_exists('messages', $response)) {
-                    return $result;
-                }
-
-                foreach ($response['messages'] as $key => $message) {
-                    $messageData = [
-                        'message' => $message['message'] ?? '',
-                        'peer' => $data['to_peer'],
-                        'entities' => $message['entities'] ?? [],
-                    ];
-                    if (static::hasMedia($message, false)) {
-                        $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
-                        $result[] = yield $this->sendMedia($messageData);
-                    } else {
-                        $result[] = yield $this->sendMessage($messageData);
-                    }
-                    if ($key > 0) {
-                        yield new Delayed(random_int(300, 2000));
-                    }
-                }
-
-                return $result;
-            }
+        $data = array_merge(
+            [
+                'from_peer' => '',
+                'to_peer' => '',
+                'id' => [],
+            ],
+            $data
         );
+
+        $response = $this->madelineProto->channels->getMessages(
+            [
+                'channel' => $data['from_peer'],
+                'id' => $data['id'],
+            ]
+        );
+        $result = [];
+        if (!$response || !is_array($response) || !array_key_exists('messages', $response)) {
+            return $result;
+        }
+
+        foreach ($response['messages'] as $key => $message) {
+            $messageData = [
+                'message' => $message['message'] ?? '',
+                'peer' => $data['to_peer'],
+                'entities' => $message['entities'] ?? [],
+            ];
+            if (static::hasMedia($message, false)) {
+                $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
+                $result[] = $this->sendMedia($messageData);
+            } else {
+                $result[] = $this->sendMessage($messageData);
+            }
+            if ($key > 0) {
+                delay(random_int(300, 2000) / 1000);
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -246,31 +230,28 @@ class ApiExtensions
      * ]
      * </pre>
      *
-     * @return MadelineProto\updates|Promise
      */
-    public function sendMedia(array $data): Promise
+    public function sendMedia(array $data): array
     {
-        return call(function() use($data) {
+        $data = array_merge(
+            [
+                'peer' => '',
+                'message' => '',
+                'media' => [],
+                'reply_to_msg_id' => 0,
+                'parse_mode' => 'HTML',
+            ],
+            $data
+        );
+
+        if (!empty($this->file)) {
             $data = array_merge(
-                [
-                    'peer' => '',
-                    'message' => '',
-                    'media' => [],
-                    'reply_to_msg_id' => 0,
-                    'parse_mode' => 'HTML',
-                ],
-                $data
+                $data,
+                $this->uploadMediaForm()
             );
+        }
 
-            if (!empty($this->file)) {
-                $data = array_merge(
-                    $data,
-                    yield $this->uploadMediaForm()
-                );
-            }
-
-            return yield $this->madelineProto->messages->sendMedia($data);
-        });
+        return $this->madelineProto->messages->sendMedia(...$data);
     }
 
     /**
@@ -284,7 +265,6 @@ class ApiExtensions
      * ]
      * </pre>
      *
-     * @return Promise|MadelineProto\updates
      */
     public function sendMessage(array $data)
     {
@@ -314,9 +294,8 @@ class ApiExtensions
      * ]
      * </pre>
      *
-     * @return Promise
      */
-    public function searchGlobal(array $data): Promise
+    public function searchGlobal(array $data): array
     {
         $data = array_merge(
             [
@@ -328,7 +307,7 @@ class ApiExtensions
             ],
             $data
         );
-        return $this->madelineProto->messages->searchGlobal($data);
+        return $this->madelineProto->messages->searchGlobal(...$data);
     }
 
     /**
@@ -336,167 +315,150 @@ class ApiExtensions
      *
      * @param array $data
      *
-     * @return Promise<Response>
      */
-    public function getMedia(array $data): Promise
+    public function getMedia(array $data): Response
     {
-        return call(
-            function() use ($data) {
-                $data = array_merge(
-                    [
-                        'peer' => '',
-                        'id' => [0],
-                        'message' => [],
-                        'size_limit' => 0,
-                    ],
-                    $data
-                );
-
-                $message = $data['message'] ?: (yield $this->getMessages($data))['messages'][0] ?? null;
-                if (!$message || $message['_'] === 'messageEmpty') {
-                    throw new NoMediaException('Empty message');
-                }
-
-                if (!static::hasMedia($message, true)) {
-                    throw new NoMediaException('Message has no media');
-                }
-
-                if ($message['media']['_'] !== 'messageMediaWebPage') {
-                    $info = yield $this->madelineProto->getDownloadInfo($message);
-                } else {
-                    $webpage = $message['media']['webpage'];
-                    if (!empty($webpage['embed_url'])) {
-                        return new Response(302, ['Location' => $webpage['embed_url']]);
-                    } elseif(!empty($webpage['document'])) {
-                        $info = yield $this->madelineProto->getDownloadInfo($webpage['document']);
-                    } elseif(!empty($webpage['photo'])) {
-                        $info = yield $this->madelineProto->getDownloadInfo($webpage['photo']);
-                    } else {
-                        return yield $this->getMediaPreview($data);
-                    }
-                }
-
-                if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
-                    throw new MediaTooBig(
-                        "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
-                    );
-                }
-
-                return yield $this->downloadToResponse($info);
-            }
+        $data = array_merge(
+            [
+                'peer' => '',
+                'id' => [0],
+                'message' => [],
+                'size_limit' => 0,
+            ],
+            $data
         );
+
+        $message = $data['message'] ?: ($this->getMessages($data))['messages'][0] ?? null;
+        if (!$message || $message['_'] === 'messageEmpty') {
+            throw new NoMediaException('Empty message');
+        }
+
+        if (!static::hasMedia($message, true)) {
+            throw new NoMediaException('Message has no media');
+        }
+
+        if ($message['media']['_'] !== 'messageMediaWebPage') {
+            $info = $this->madelineProto->getDownloadInfo($message);
+        } else {
+            $webpage = $message['media']['webpage'];
+            if (!empty($webpage['embed_url'])) {
+                return new Response(302, ['Location' => $webpage['embed_url']]);
+            } elseif (!empty($webpage['document'])) {
+                $info = $this->madelineProto->getDownloadInfo($webpage['document']);
+            } elseif (!empty($webpage['photo'])) {
+                $info = $this->madelineProto->getDownloadInfo($webpage['photo']);
+            } else {
+                return $this->getMediaPreview($data);
+            }
+        }
+
+        if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
+            throw new MediaTooBig(
+                "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
+            );
+        }
+
+        return $this->downloadToResponse($info);
     }
 
     /**
      * Загружает превью медиафайла из указанного сообщения в поток
      *
-     * @param array $data
-     *
-     * @return Promise
      */
-    public function getMediaPreview(array $data): Promise
+    public function getMediaPreview(array $data): Response
     {
-        return call(
-            function() use ($data) {
-                $data = array_merge(
-                    [
-                        'peer' => '',
-                        'id' => [0],
-                        'message' => [],
-                    ],
-                    $data
-                );
-
-                $message = $data['message'] ?: (yield $this->getMessages($data))['messages'][0] ?? null;
-                if (!$message || $message['_'] === 'messageEmpty') {
-                    throw new NoMediaException('Empty message');
-                }
-
-                if (!static::hasMedia($message, true)) {
-                    throw new NoMediaException('Message has no media');
-                }
-
-                $media = $message['media'][array_key_last($message['media'])];
-                $thumb = null;
-                switch (true) {
-                    case isset($media['sizes']):
-                        foreach ($media['sizes'] as $size) {
-                            if ($size['_'] === 'photoSize') {
-                                $thumb = $size;
-                            }
-                        }
-                        break;
-                    case isset($media['thumb']['size']):
-                        $thumb = $media['thumb'];
-                        break;
-                    case !empty($media['thumbs']):
-                        foreach ($media['thumbs'] as $size) {
-                            if ($size['_'] === 'photoSize') {
-                                $thumb = $size;
-                            }
-                        }
-                        break;
-                    case isset($media['photo']['sizes']):
-                        foreach ($media['photo']['sizes'] as $size) {
-                            if ($size['_'] === 'photoSize') {
-                                $thumb = $size;
-                            }
-                        }
-                        break;
-                    default:
-                        throw new NoMediaException('Message has no preview');
-
-                }
-                if (null === $thumb) {
-                    throw new NoMediaException('Empty preview');
-                }
-                $info = yield $this->madelineProto->getDownloadInfo($thumb);
-
-                if ($media['_'] === 'webPage') {
-                    $media = $media['photo'];
-                }
-
-                //Фикс для LAYER 100+
-                //TODO: Удалить, когда снова станет доступна загрузка photoSize
-                if (isset($info['thumb_size'])) {
-                    $infoFull = yield $this->madelineProto->getDownloadInfo($media);
-                    $infoFull['InputFileLocation']['thumb_size'] = $info['thumb_size'];
-                    $infoFull['size'] = $info['size'];
-                    $infoFull['mime'] = $info['mime'] ?? 'image/jpeg';
-                    $infoFull['name'] = 'thumb';
-                    $infoFull['ext'] = '.jpeg';
-                    $info = $infoFull;
-                }
-
-                return yield $this->downloadToResponse($info);
-            }
+        $data = array_merge(
+            [
+                'peer' => '',
+                'id' => [0],
+                'message' => [],
+            ],
+            $data
         );
+
+        $message = $data['message'] ?: ($this->getMessages($data))['messages'][0] ?? null;
+        if (!$message || $message['_'] === 'messageEmpty') {
+            throw new NoMediaException('Empty message');
+        }
+
+        if (!static::hasMedia($message, true)) {
+            throw new NoMediaException('Message has no media');
+        }
+
+        $media = $message['media'][array_key_last($message['media'])];
+        $thumb = null;
+        switch (true) {
+            case isset($media['sizes']):
+                foreach ($media['sizes'] as $size) {
+                    if ($size['_'] === 'photoSize') {
+                        $thumb = $size;
+                    }
+                }
+                break;
+            case isset($media['thumb']['size']):
+                $thumb = $media['thumb'];
+                break;
+            case !empty($media['thumbs']):
+                foreach ($media['thumbs'] as $size) {
+                    if ($size['_'] === 'photoSize') {
+                        $thumb = $size;
+                    }
+                }
+                break;
+            case isset($media['photo']['sizes']):
+                foreach ($media['photo']['sizes'] as $size) {
+                    if ($size['_'] === 'photoSize') {
+                        $thumb = $size;
+                    }
+                }
+                break;
+            default:
+                throw new NoMediaException('Message has no preview');
+
+        }
+        if (null === $thumb) {
+            throw new NoMediaException('Empty preview');
+        }
+        $info = $this->madelineProto->getDownloadInfo($thumb);
+
+        if ($media['_'] === 'webPage') {
+            $media = $media['photo'];
+        }
+
+        //Фикс для LAYER 100+
+        //TODO: Удалить, когда снова станет доступна загрузка photoSize
+        if (isset($info['thumb_size'])) {
+            $infoFull = $this->madelineProto->getDownloadInfo($media);
+            $infoFull['InputFileLocation']['thumb_size'] = $info['thumb_size'];
+            $infoFull['size'] = $info['size'];
+            $infoFull['mime'] = $info['mime'] ?? 'image/jpeg';
+            $infoFull['name'] = 'thumb';
+            $infoFull['ext'] = '.jpeg';
+            $info = $infoFull;
+        }
+
+        return $this->downloadToResponse($info);
     }
 
     /**
      * @param array $data
      *
-     * @return Promise
      */
-    public function getMessages(array $data): Promise
+    public function getMessages(array $data): array
     {
-        return call(
-            function() use ($data) {
-                $peerInfo = yield $this->madelineProto->getInfo($data['peer']);
-                if (in_array($peerInfo['type'], ['channel', 'supergroup'])) {
-                    $response = yield $this->madelineProto->channels->getMessages(
-                        [
-                            'channel' => $data['peer'],
-                            'id' => (array) $data['id'],
-                        ]
-                    );
-                } else {
-                    $response = yield $this->madelineProto->messages->getMessages(['id' => (array) $data['id']]);
-                }
+        $peerInfo = $this->madelineProto->getInfo($data['peer']);
+        if (in_array($peerInfo['type'], ['channel', 'supergroup'])) {
+            $response = $this->madelineProto->channels->getMessages(
+                [
+                    'channel' => $data['peer'],
+                    'id' => (array)$data['id'],
+                ]
+            );
+        } else {
+            $response = $this->madelineProto->messages->getMessages(['id' => (array)$data['id']]);
+        }
 
-                return $response;
-            }
-        );
+        return $response;
     }
 
     /**
@@ -505,9 +467,9 @@ class ApiExtensions
      * @param array $info
      *      Any downloadable array: message, media etc...
      *
-     * @return Promise
+     * @return Response
      */
-    public function downloadToResponse(array $info): Promise
+    public function downloadToResponse(array $info): Response
     {
         return $this->madelineProto->downloadToResponse($info, $this->request);
     }
@@ -515,11 +477,8 @@ class ApiExtensions
     /**
      * Адаптер для стандартного метода
      *
-     * @param array $info
-     *
-     * @return Promise
      */
-    public function downloadToBrowser(array $info): Promise
+    public function downloadToBrowser(array $info): Response
     {
         return $this->downloadToResponse($info);
     }
@@ -528,37 +487,34 @@ class ApiExtensions
      * Upload file from POST request.
      * Response can be passed to 'media' field in messages.sendMedia.
      *
-     * @return Promise
      * @throws NoMediaException
      */
-    public function uploadMediaForm(): Promise
+    public function uploadMediaForm(): array
     {
         if (empty($this->file)) {
             throw new NoMediaException('File not found');
         }
-        return call(function() {
-            $inputFile = yield $this->madelineProto->uploadFromStream(
-                $this->file,
-                0,
-                $this->file->getMimeType(),
-                $this->file->getFilename()
-            );
-            $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
-            return [
-                'media' => [
-                    '_' => 'inputMediaUploadedDocument',
-                    'file' => $inputFile,
-                    'attributes' => [
-                        ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getFilename()]
-                    ]
+        $inputFile = $this->madelineProto->uploadFromStream(
+            $this->file,
+            0,
+            $this->file->getMimeType(),
+            $this->file->getFilename()
+        );
+        $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
+        return [
+            'media' => [
+                '_' => 'inputMediaUploadedDocument',
+                'file' => $inputFile,
+                'attributes' => [
+                    ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getFilename()]
                 ]
-            ];
-        });
+            ]
+        ];
     }
 
-    public function setEventHandler(): Promise
+    public function setEventHandler(): void
     {
-        return call(fn() => yield $this->madelineProto->setEventHandler(EventHandler::class));
+        Client::getWrapper($this->madelineProto)->getAPI()->setEventHandler(EventHandler::class);
     }
 
 }

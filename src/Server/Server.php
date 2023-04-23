@@ -3,9 +3,18 @@
 namespace TelegramApiServer\Server;
 
 use Amp;
+use Amp\Http\Server\DefaultErrorHandler;
+use Amp\Http\Server\Driver\ConnectionLimitingServerSocketFactory;
+use Amp\Http\Server\Driver\DefaultHttpDriverFactory;
+use Amp\Http\Server\SocketHttpServer;
+use Amp\Socket\InternetAddress;
+use Amp\Sync\LocalSemaphore;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
+use function sprintf;
+use const SIGINT;
+use const SIGTERM;
 
 class Server
 {
@@ -17,55 +26,44 @@ class Server
      */
     public function __construct(array $options, ?array $sessionFiles)
     {
-        Amp\Loop::defer(function () use ($options, $sessionFiles) {
-            $server = new Amp\Http\Server\Server(
-                $this->getServerAddresses(static::getConfig($options)),
-                (new Router())->getRouter(),
-                Logger::getInstance(),
-                (new Amp\Http\Server\Options())
-                    ->withoutCompression()
-                    ->withBodySizeLimit(2*1024*1024*1024)//2Gb
-                    ->withHttp1Timeout(600)
-                    ->withHttp2Timeout(600)
-                    ->withConnectionsPerIpLimit(PHP_INT_MAX)
-            );
+        $server = new SocketHttpServer(
+            logger: Logger::getInstance(),
+            serverSocketFactory: new ConnectionLimitingServerSocketFactory(new LocalSemaphore(1000)),
+            clientFactory: new Amp\Http\Server\Driver\SocketClientFactory(
+                logger: Logger::getInstance(),
+            ),
+            httpDriverFactory: new DefaultHttpDriverFactory(
+                logger: Logger::getInstance(),
+                streamTimeout: 600,
+                connectionTimeout: 60,
+                bodySizeLimit: 5 * (1024 ** 3), //5Gb
+            )
+        );
 
-            yield from Client::getInstance()->connect($sessionFiles);
-            $server->start();
+        $config = self::getConfig($options);
+        $server->expose(new InternetAddress($config['address'], $config['port']));
+        Client::getInstance()->connect($sessionFiles);
+        $errorHandler = new DefaultErrorHandler();
+        $server->start((new Router($server, $errorHandler))->getRouter(), $errorHandler);
 
-            $this->registerShutdown($server);
-        });
-
-        while (true) {
-            Amp\Loop::run();
-        }
+        self::registerShutdown($server);
 
     }
 
-    private static function getServerAddresses(array $config): array
-    {
-        return [
-            Amp\Socket\Server::listen("{$config['address']}:{$config['port']}"),
-        ];
-    }
 
     /**
      * Stop the server gracefully when SIGINT is received.
      * This is technically optional, but it is best to call Server::stop().
      *
-     * @param Amp\Http\Server\Server $server
      *
-     * @throws Amp\Loop\UnsupportedFeatureException
      */
-    private static function registerShutdown(Amp\Http\Server\Server $server)
+    private static function registerShutdown(SocketHttpServer $server)
     {
         if (defined('SIGINT')) {
-            Amp\Loop::onSignal(SIGINT, static function (string $watcherId) use ($server) {
-                emergency('Got SIGINT');
-                Amp\Loop::cancel($watcherId);
-                yield $server->stop();
-                exit;
-            });
+            // Await SIGINT or SIGTERM to be received.
+            $signal = Amp\trapSignal([SIGINT, SIGTERM]);
+            info(sprintf("Received signal %d, stopping HTTP server", $signal));
+            $server->stop();
         }
     }
 
@@ -77,7 +75,7 @@ class Server
      */
     private function getConfig(array $config = []): array
     {
-        $config =  array_filter($config);
+        $config = array_filter($config);
 
         $config = array_merge(
             Config::getInstance()->get('server', []),

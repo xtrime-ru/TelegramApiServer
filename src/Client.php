@@ -2,48 +2,40 @@
 
 namespace TelegramApiServer;
 
-use Amp\Delayed;
-use Amp\Loop;
-use Amp\Promise;
-use danog\MadelineProto;
+use danog\MadelineProto\API;
+use danog\MadelineProto\APIWrapper;
+use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
+use ReflectionProperty;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
-use function Amp\call;
 
 class Client
 {
     public static Client $self;
-    /** @var MadelineProto\API[] */
+    /** @var API[] */
     public array $instances = [];
 
-    public static function getInstance(): Client {
+    public static function getInstance(): Client
+    {
         if (empty(static::$self)) {
             static::$self = new static();
         }
         return static::$self;
     }
 
-    public static function isSessionLoggedIn(MadelineProto\API $instance)
-    {
-        return (bool) (yield  $instance->getSelf());
-    }
-
-    public function connect(array $sessionFiles): \Generator
+    public function connect(array $sessionFiles)
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
 
-        $promises = [];
         foreach ($sessionFiles as $file) {
             $sessionName = Files::getSessionName($file);
             $this->addSession($sessionName);
-            $promises[] = $this->startLoggedInSession($sessionName);
+            $this->startLoggedInSession($sessionName);
         }
 
-        yield $promises;
-
-        Loop::defer(fn() => yield $this->startNotLoggedInSessions());
+        $this->startNotLoggedInSessions();
 
         $sessionsCount = count($sessionFiles);
         warning(
@@ -52,7 +44,7 @@ class Client
         );
     }
 
-    public function addSession(string $session, array $settings = []): MadelineProto\API
+    public function addSession(string $session, array $settings = []): API
     {
         if (isset($this->instances[$session])) {
             throw new InvalidArgumentException('Session already exists');
@@ -64,11 +56,10 @@ class Client
             Files::saveSessionSettings($session, $settings);
         }
         $settings = array_replace_recursive(
-            (array) Config::getInstance()->get('telegram'),
+            (array)Config::getInstance()->get('telegram'),
             Files::getSessionSettings($session),
         );
-        $instance = new MadelineProto\API($file, $settings);
-        $instance->async(true);
+        $instance = new API($file, $settings);
 
         $this->instances[$session] = $instance;
         return $instance;
@@ -87,8 +78,6 @@ class Client
 
         if (!empty($instance->API)) {
             $instance->unsetEventHandler();
-            $instance->stop();
-            $instance->API->unreference();
         }
         unset($instance);
         gc_collect_cycles();
@@ -97,9 +86,9 @@ class Client
     /**
      * @param string|null $session
      *
-     * @return MadelineProto\API
+     * @return API
      */
-    public function getSession(?string $session = null): MadelineProto\API
+    public function getSession(?string $session = null): API
     {
         if (!$this->instances) {
             throw new RuntimeException(
@@ -109,7 +98,7 @@ class Client
 
         if (!$session) {
             if (count($this->instances) === 1) {
-                $session = (string) array_key_first($this->instances);
+                $session = (string)array_key_first($this->instances);
             } else {
                 throw new InvalidArgumentException(
                     'Multiple sessions detected. Specify which session to use. See README for examples.'
@@ -124,46 +113,42 @@ class Client
         return $this->instances[$session];
     }
 
-    private function startNotLoggedInSessions(): Promise
+    private function startNotLoggedInSessions(): void
     {
-        return call(
-            function() {
-                foreach ($this->instances as $name => $instance) {
-                    while(null === $instance->API) {
-                        yield (new Delayed(100));
-                    }
-                    if (! yield from static::isSessionLoggedIn($instance)) {
-                        {
-                            //Disable logging to stdout
-                            $logLevel = Logger::getInstance()->minLevelIndex;
-                            Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::ERROR];
-                            $instance->echo("Authorizing session: {$name}\n");
-                            yield $instance->start();
+        foreach ($this->instances as $name => $instance) {
+            if ($instance->getAuthorization() !== MTProto::LOGGED_IN) {
+                {
+                    //Disable logging to stdout
+                    $logLevel = Logger::getInstance()->minLevelIndex;
+                    Logger::getInstance()->minLevelIndex = Logger::$levels[LogLevel::ERROR];
+                    $instance->echo("Authorizing session: {$name}\n");
+                    $instance->start();
 
-                            //Enable logging to stdout
-                            Logger::getInstance()->minLevelIndex = $logLevel;
-                        }
-                        $this->startLoggedInSession($name);
-                    }
+                    //Enable logging to stdout
+                    Logger::getInstance()->minLevelIndex = $logLevel;
                 }
+                $this->startLoggedInSession($name);
             }
-        );
+        }
     }
 
-    public function startLoggedInSession(string $sessionName): Promise
+    public function startLoggedInSession(string $sessionName): void
     {
-        return call(
-            function() use ($sessionName) {
-                if (yield from static::isSessionLoggedIn($this->instances[$sessionName])) {
-                    if (empty(EventObserver::$sessionClients[$sessionName])) {
-                        $this->instances[$sessionName]->unsetEventHandler();
-                    }
-                    yield $this->instances[$sessionName]->start();
-                    $this->instances[$sessionName]->loopFork();
-					$this->instances[$sessionName]->echo("Started session: {$sessionName}\n");
-                }
+        if ($this->instances[$sessionName]->getAuthorization() === MTProto::LOGGED_IN) {
+            if (empty(EventObserver::$sessionClients[$sessionName])) {
+                $this->instances[$sessionName]->unsetEventHandler();
             }
-        );
+            $this->instances[$sessionName]->start();
+            $this->instances[$sessionName]->echo("Started session: {$sessionName}\n");
+        }
+    }
+
+    public static function getWrapper(API $madelineProto): APIWrapper
+    {
+        $property = new ReflectionProperty($madelineProto, "wrapper");
+        /** @var APIWrapper $wrapper */
+        $wrapper = $property->getValue($madelineProto);
+        return $wrapper;
     }
 
 }

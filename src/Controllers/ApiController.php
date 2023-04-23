@@ -2,7 +2,7 @@
 
 namespace TelegramApiServer\Controllers;
 
-use Amp\Promise;
+use Exception;
 use TelegramApiServer\Client;
 
 class ApiController extends AbstractApiController
@@ -23,8 +23,7 @@ class ApiController extends AbstractApiController
     }
 
     /**
-     * @return mixed|Promise
-     * @throws \Exception
+     * @throws Exception
      */
     protected function callApi()
     {

@@ -2,7 +2,6 @@
 
 namespace TelegramApiServer\EventObservers;
 
-use danog\MadelineProto\APIWrapper;
 use TelegramApiServer\Files;
 
 class EventHandler extends \danog\MadelineProto\EventHandler
@@ -12,7 +11,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 
     public function onStart()
     {
-        $this->sessionName = Files::getSessionName($this->API->wrapper->session);
+        $this->sessionName = Files::getSessionName($this->wrapper->getSession()->getSessionPath());
         if (empty(static::$instances[$this->sessionName])) {
             static::$instances[$this->sessionName] = true;
             warning("Event observer CONSTRUCTED: {$this->sessionName}");

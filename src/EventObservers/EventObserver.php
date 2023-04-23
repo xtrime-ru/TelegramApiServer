@@ -3,21 +3,21 @@
 namespace TelegramApiServer\EventObservers;
 
 
-use Amp\Loop;
-use Amp\Promise;
-use danog\MadelineProto\API;
+use danog\MadelineProto\APIWrapper;
+use ReflectionProperty;
 use TelegramApiServer\Client;
 use TelegramApiServer\Logger;
-use function Amp\call;
+use Throwable;
 
 class EventObserver
 {
     use ObserverTrait;
 
-    /** @var int[]  */
+    /** @var int[] */
     public static array $sessionClients = [];
 
-    public static function notify(array $update, string $sessionName) {
+    public static function notify(array $update, string $sessionName)
+    {
         foreach (static::$subscribers as $clientId => $callback) {
             notice("Pass update to callback. ClientId: {$clientId}");
             $callback($update, $sessionName);
@@ -39,33 +39,34 @@ class EventObserver
         }
     }
 
-    public static function startEventHandler(?string $requestedSession = null): Promise
+    public static function startEventHandler(?string $requestedSession = null): void
     {
-        return call(static function() use($requestedSession) {
-            $sessions = [];
-            if ($requestedSession === null) {
-                $sessions = array_keys(Client::getInstance()->instances);
-            } else {
-                $sessions[] = $requestedSession;
-            }
+        $sessions = [];
+        if ($requestedSession === null) {
+            $sessions = array_keys(Client::getInstance()->instances);
+        } else {
+            $sessions[] = $requestedSession;
+        }
 
-            foreach ($sessions as $session) {
-                static::addSessionClient($session);
-                if (static::$sessionClients[$session] === 1) {
-                    warning("Start EventHandler: {$session}");
-                    try {
-                        $instance = Client::getInstance()->getSession($session);
-                        yield $instance->setEventHandler(EventHandler::class);
-                    } catch (\Throwable $e) {
-                        static::removeSessionClient($session);
-                        error('Cant set EventHandler', [
-                            'session' => $session,
-                            'exception' => Logger::getExceptionAsArray($e),
-                        ]);
-                    }
+        foreach ($sessions as $session) {
+            static::addSessionClient($session);
+            if (static::$sessionClients[$session] === 1) {
+                warning("Start EventHandler: {$session}");
+                try {
+                    $instance = Client::getInstance()->getSession($session);
+                    $property = new ReflectionProperty($instance, "wrapper");
+                    /** @var APIWrapper $wrapper */
+                    $wrapper = $property->getValue($instance);
+                    $wrapper->getAPI()->setEventHandler(EventHandler::class);
+                } catch (Throwable $e) {
+                    static::removeSessionClient($session);
+                    error('Cant set EventHandler', [
+                        'session' => $session,
+                        'exception' => Logger::getExceptionAsArray($e),
+                    ]);
                 }
             }
-        });
+        }
     }
 
     public static function stopEventHandler(?string $requestedSession = null, bool $force = false): void

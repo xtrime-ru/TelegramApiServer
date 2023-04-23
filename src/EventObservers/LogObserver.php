@@ -3,6 +3,7 @@
 namespace TelegramApiServer\EventObservers;
 
 use TelegramApiServer\Logger;
+use Throwable;
 
 class LogObserver
 {
@@ -22,10 +23,10 @@ class LogObserver
     public static function log($message, int $level)
     {
         if (is_scalar($message)) {
-            Logger::getInstance()->log(Logger::$madelineLevels[$level], (string) $message);
+            Logger::getInstance()->log(Logger::$madelineLevels[$level], (string)$message);
         } else {
-            if ($message instanceof \Throwable) {
-                $message = \TelegramApiServer\Logger::getExceptionAsArray($message);
+            if ($message instanceof Throwable) {
+                $message = Logger::getExceptionAsArray($message);
             }
             if (is_array($message)) {
                 Logger::getInstance()->log(Logger::$madelineLevels[$level], '', $message);

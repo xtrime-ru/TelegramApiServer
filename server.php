@@ -25,7 +25,7 @@ $options = getopt($shortopts, $longopts);
 $options = [
     'address' => $options['address'] ?? $options['a'] ?? '',
     'port' => $options['port'] ?? $options['p'] ?? '',
-    'session' => (array) ($options['session'] ?? $options['s'] ?? []),
+    'session' => (array)($options['session'] ?? $options['s'] ?? []),
     'env' => $options['env'] ?? $options['e'] ?? '.env',
     'docker' => isset($options['docker']),
     'help' => isset($options['help']),
@@ -74,7 +74,7 @@ StartUpFixes::fix();
 $mainProcessPid = getmypid();
 
 if (Config::getInstance()->get('health_check.enabled')) {
-    Fork::run(function() use($mainProcessPid) {
+    Fork::run(static function () use ($mainProcessPid) {
         HealthCheck::start($mainProcessPid);
     });
 }
