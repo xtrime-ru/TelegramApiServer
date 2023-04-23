@@ -474,16 +474,16 @@
         },
         {
             "name": "amphp/http",
-            "version": "v2.0.0-beta.3",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http.git",
-                "reference": "90b524d58461c0a47e18d15a9cdce3ebb2f94166"
+                "reference": "f8bb94a2b079aa8e30ad78b5374df787a2122dfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http/zipball/90b524d58461c0a47e18d15a9cdce3ebb2f94166",
-                "reference": "90b524d58461c0a47e18d15a9cdce3ebb2f94166",
+                "url": "https://api.github.com/repos/amphp/http/zipball/f8bb94a2b079aa8e30ad78b5374df787a2122dfe",
+                "reference": "f8bb94a2b079aa8e30ad78b5374df787a2122dfe",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                 "amphp/parser": "^1.1",
                 "league/uri-components": "^2.4",
                 "php": ">=8.1",
-                "psr/http-message": "^1"
+                "psr/http-message": "^1 || ^2"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "^2",
@@ -526,7 +526,7 @@
             "description": "Basic HTTP primitives which can be shared by servers and clients.",
             "support": {
                 "issues": "https://github.com/amphp/http/issues",
-                "source": "https://github.com/amphp/http/tree/v2.0.0-beta.3"
+                "source": "https://github.com/amphp/http/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -534,20 +534,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-08T14:32:00+00:00"
+            "time": "2023-04-12T19:20:53+00:00"
         },
         {
             "name": "amphp/http-client",
-            "version": "v5.0.0-beta.10",
+            "version": "v5.0.0-beta.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "1e1fc7d70023f62aa35f85531ef00cf3aaa0b222"
+                "reference": "0fd30c4ff2231b044ead0e7a5d3aedafcbca59b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/1e1fc7d70023f62aa35f85531ef00cf3aaa0b222",
-                "reference": "1e1fc7d70023f62aa35f85531ef00cf3aaa0b222",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/0fd30c4ff2231b044ead0e7a5d3aedafcbca59b1",
+                "reference": "0fd30c4ff2231b044ead0e7a5d3aedafcbca59b1",
                 "shasum": ""
             },
             "require": {
@@ -559,13 +559,14 @@
                 "amphp/socket": "^2",
                 "amphp/sync": "^2",
                 "league/uri": "^6",
+                "league/uri-components": "^2.4",
                 "php": ">=8.1",
                 "psr/http-message": "^1",
                 "revolt/event-loop": "^1"
             },
             "require-dev": {
                 "amphp/file": "^3",
-                "amphp/http-server": "^3",
+                "amphp/http-server": "^3-dev",
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "ext-json": "*",
@@ -623,7 +624,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.10"
+                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.11"
             },
             "funding": [
                 {
@@ -631,7 +632,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-09T15:03:50+00:00"
+            "time": "2023-04-13T05:19:15+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -716,12 +717,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "76c48d8e5295f2cf20b41fc3dfccc7cb6ae9bb4d"
+                "reference": "b86f0d43418dc8141ad4bf5f821a23f7d3abf639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/76c48d8e5295f2cf20b41fc3dfccc7cb6ae9bb4d",
-                "reference": "76c48d8e5295f2cf20b41fc3dfccc7cb6ae9bb4d",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/b86f0d43418dc8141ad4bf5f821a23f7d3abf639",
+                "reference": "b86f0d43418dc8141ad4bf5f821a23f7d3abf639",
                 "shasum": ""
             },
             "require": {
@@ -731,7 +732,7 @@
                 "amphp/hpack": "^3",
                 "amphp/http": "^2",
                 "amphp/pipeline": "^1",
-                "amphp/socket": "^2",
+                "amphp/socket": "^2.1",
                 "amphp/sync": "^2",
                 "league/uri": "^6",
                 "league/uri-interfaces": "^2.3",
@@ -798,7 +799,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server/issues",
-                "source": "https://github.com/amphp/http-server/tree/3.x"
+                "source": "https://github.com/amphp/http-server/tree/v3.0.0-beta.8"
             },
             "funding": [
                 {
@@ -806,30 +807,30 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-09T16:12:16+00:00"
+            "time": "2023-04-22T14:22:35+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
-            "version": "v2.x-dev",
+            "version": "v2.0.0-beta.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-form-parser.git",
-                "reference": "547c1d0f16b248cdf8c8092fea390812eec6a8a5"
+                "reference": "42193795723ea72e950b74f0a9075bb794c542f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/547c1d0f16b248cdf8c8092fea390812eec6a8a5",
-                "reference": "547c1d0f16b248cdf8c8092fea390812eec6a8a5",
+                "url": "https://api.github.com/repos/amphp/http-server-form-parser/zipball/42193795723ea72e950b74f0a9075bb794c542f0",
+                "reference": "42193795723ea72e950b74f0a9075bb794c542f0",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/byte-stream": "^2",
-                "amphp/http": "^2-dev",
+                "amphp/http": "^2",
                 "amphp/http-server": "^3",
                 "amphp/pipeline": "^1",
                 "php": ">=8.1",
-                "revolt/event-loop": "^1 || ^0.2.4"
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
                 "amphp/log": "^2",
@@ -880,7 +881,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server-form-parser/issues",
-                "source": "https://github.com/amphp/http-server-form-parser/tree/v2"
+                "source": "https://github.com/amphp/http-server-form-parser/tree/v2.0.0-beta.3"
             },
             "funding": [
                 {
@@ -888,20 +889,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-10T20:57:17+00:00"
+            "time": "2023-04-22T15:36:02+00:00"
         },
         {
             "name": "amphp/http-server-router",
-            "version": "v2.0.0-beta.2",
+            "version": "v2.0.0-beta.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server-router.git",
-                "reference": "01ba5e8c92a1d8290fc7cc8a0c1685da501c67df"
+                "reference": "d08be2868ca5e0a0882b6149c3e2546b1e2b3a53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server-router/zipball/01ba5e8c92a1d8290fc7cc8a0c1685da501c67df",
-                "reference": "01ba5e8c92a1d8290fc7cc8a0c1685da501c67df",
+                "url": "https://api.github.com/repos/amphp/http-server-router/zipball/d08be2868ca5e0a0882b6149c3e2546b1e2b3a53",
+                "reference": "d08be2868ca5e0a0882b6149c3e2546b1e2b3a53",
                 "shasum": ""
             },
             "require": {
@@ -956,7 +957,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server-router/issues",
-                "source": "https://github.com/amphp/http-server-router/tree/v2.0.0-beta.2"
+                "source": "https://github.com/amphp/http-server-router/tree/v2.0.0-beta.3"
             },
             "funding": [
                 {
@@ -964,7 +965,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-02T01:05:48+00:00"
+            "time": "2023-04-22T15:05:05+00:00"
         },
         {
             "name": "amphp/log",
@@ -2452,12 +2453,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "f4413860c742bc4d098a39e4235258b09a5b4728"
+                "reference": "ed02391d0039f178f232b3a5ab1d677a8d325ae2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/f4413860c742bc4d098a39e4235258b09a5b4728",
-                "reference": "f4413860c742bc4d098a39e4235258b09a5b4728",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ed02391d0039f178f232b3a5ab1d677a8d325ae2",
+                "reference": "ed02391d0039f178f232b3a5ab1d677a8d325ae2",
                 "shasum": ""
             },
             "require": {
@@ -2483,6 +2484,7 @@
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
                 "ext-filter": "*",
+                "ext-gmp": "*",
                 "ext-hash": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
@@ -2571,20 +2573,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-11T08:50:45+00:00"
+            "time": "2023-04-23T12:32:38+00:00"
         },
         {
             "name": "danog/primemodule",
-            "version": "1.0.11.9999",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/PrimeModule.git",
-                "reference": "2328b1ec43b4a2a318602f4b16d6bf628ca96d04"
+                "reference": "1fcfddc25347ed21de26150ba1fbe95b0a2b2862"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/PrimeModule/zipball/2328b1ec43b4a2a318602f4b16d6bf628ca96d04",
-                "reference": "2328b1ec43b4a2a318602f4b16d6bf628ca96d04",
+                "url": "https://api.github.com/repos/danog/PrimeModule/zipball/1fcfddc25347ed21de26150ba1fbe95b0a2b2862",
+                "reference": "1fcfddc25347ed21de26150ba1fbe95b0a2b2862",
                 "shasum": ""
             },
             "require": {
@@ -2620,9 +2622,9 @@
             "description": "Prime module capable of doing prime factorization of huge numbers very quickly.\"",
             "support": {
                 "issues": "https://github.com/danog/PrimeModule/issues",
-                "source": "https://github.com/danog/PrimeModule/tree/1.0.11.9999"
+                "source": "https://github.com/danog/PrimeModule/tree/1.0.12"
             },
-            "time": "2022-12-03T20:53:15+00:00"
+            "time": "2023-04-12T14:19:15+00:00"
         },
         {
             "name": "danog/tg-file-decoder",
