@@ -1949,29 +1949,29 @@
         },
         {
             "name": "amphp/websocket-client",
-            "version": "v2.0.0-beta.2",
+            "version": "v2.0.0-beta.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "fee0aa6ae98efb0a4eea588382f64e11aa248498"
+                "reference": "24daf3cb8cbf25aa3d16a9434ca72e0af9b005b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/fee0aa6ae98efb0a4eea588382f64e11aa248498",
-                "reference": "fee0aa6ae98efb0a4eea588382f64e11aa248498",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/24daf3cb8cbf25aa3d16a9434ca72e0af9b005b5",
+                "reference": "24daf3cb8cbf25aa3d16a9434ca72e0af9b005b5",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/byte-stream": "^2",
-                "amphp/http": "^2-dev",
+                "amphp/http": "^2",
                 "amphp/http-client": "^5",
                 "amphp/socket": "^2",
                 "amphp/websocket": "^2",
                 "league/uri": "^6",
                 "php": ">=8.1",
                 "psr/http-message": "^1",
-                "revolt/event-loop": "^1 || ^0.2.4"
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
                 "amphp/http-server": "^3",
@@ -2021,7 +2021,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket-client/issues",
-                "source": "https://github.com/amphp/websocket-client/tree/v2.0.0-beta.2"
+                "source": "https://github.com/amphp/websocket-client/tree/v2.0.0-beta.3"
             },
             "funding": [
                 {
@@ -2029,7 +2029,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-06T05:26:05+00:00"
+            "time": "2023-04-26T03:42:33+00:00"
         },
         {
             "name": "amphp/websocket-server",
@@ -2453,12 +2453,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "537299b5a3b60c35b5134ff75b8780f60ee9d2a0"
+                "reference": "4bba26df105bacb801c1654e1f3440008cd7bc58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/537299b5a3b60c35b5134ff75b8780f60ee9d2a0",
-                "reference": "537299b5a3b60c35b5134ff75b8780f60ee9d2a0",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/4bba26df105bacb801c1654e1f3440008cd7bc58",
+                "reference": "4bba26df105bacb801c1654e1f3440008cd7bc58",
                 "shasum": ""
             },
             "require": {
@@ -2573,7 +2573,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-23T20:05:03+00:00"
+            "time": "2023-04-26T11:26:29+00:00"
         },
         {
             "name": "danog/primemodule",
