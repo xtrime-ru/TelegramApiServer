@@ -18,10 +18,6 @@ $settings = [
             'logger_param' => LogObserver::class . '::log',
             'logger_level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
-        'updates' => [
-            'handle_updates' => true, // Should I handle updates?
-            'handle_old_updates' => false, // Should I handle old updates on startup?
-        ],
         'connection_settings' => [
             'all' => [
                 'proxy' => '\SocksProxy',
@@ -33,12 +29,11 @@ $settings = [
                 ]
             ],
             'media_socket_count' => [
-                'max' => 50
+                'max' => 1000,
             ]
         ],
         'serialization' => [
-            'serialization_interval' => 30,
-            'cleanup_before_serialization' => true,
+            'serialization_interval' => 60,
         ],
         'db' => [
             'type' => getenv('DB_TYPE'),
@@ -56,9 +51,6 @@ $settings = [
         'download' => [
             'report_broken_media' => false,
         ],
-        'ipc' => [
-            'slow' => true
-        ]
     ],
     'api' => [
         'ip_whitelist' => array_filter(
