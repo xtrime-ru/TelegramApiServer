@@ -11,6 +11,7 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use danog\MadelineProto\API;
 use JsonException;
+use TelegramApiServer\Client;
 use TelegramApiServer\Exceptions\NoticeException;
 use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
@@ -163,6 +164,11 @@ abstract class AbstractApiController
             $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request, $this->file);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         } else {
+			if ($this->api[0] === 'API') {
+				$madelineProto = Client::getWrapper($madelineProto)->getAPI();
+				array_shift($this->api);
+				$pathCount = count($this->api);
+			}
             //Проверяем нет ли в MadilineProto такого метода.
             switch ($pathCount) {
                 case 1:
