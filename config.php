@@ -29,7 +29,7 @@ $settings = [
                 ]
             ],
             'media_socket_count' => [
-                'max' => 1000,
+                'max' => 10,
             ]
         ],
         'serialization' => [
