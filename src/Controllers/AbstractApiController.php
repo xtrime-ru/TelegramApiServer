@@ -164,11 +164,11 @@ abstract class AbstractApiController
             $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request, $this->file);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         } else {
-			if ($this->api[0] === 'API') {
-				$madelineProto = Client::getWrapper($madelineProto)->getAPI();
-				array_shift($this->api);
-				$pathCount = count($this->api);
-			}
+            if ($this->api[0] === 'API') {
+                $madelineProto = Client::getWrapper($madelineProto)->getAPI();
+                array_shift($this->api);
+                $pathCount = count($this->api);
+            }
             //Проверяем нет ли в MadilineProto такого метода.
             switch ($pathCount) {
                 case 1:
@@ -237,6 +237,7 @@ abstract class AbstractApiController
             $data,
             JSON_THROW_ON_ERROR |
             JSON_INVALID_UTF8_SUBSTITUTE |
+            JSON_PARTIAL_OUTPUT_ON_ERROR |
             JSON_PRETTY_PRINT |
             JSON_UNESCAPED_SLASHES |
             JSON_UNESCAPED_UNICODE
