@@ -13,6 +13,7 @@ use Throwable;
 use UnexpectedValueException;
 use function Amp\async;
 use function Amp\Future\awaitAll;
+use function Amp\trapSignal;
 
 class HealthCheck
 {
@@ -39,8 +40,8 @@ class HealthCheck
         static::$checkInterval = (int)Config::getInstance()->get('health_check.interval');
         static::$requestTimeout = (int)Config::getInstance()->get('health_check.timeout');
 
-        try {
-            EventLoop::repeat(static::$checkInterval, static function () use ($parentPid) {
+        EventLoop::repeat(static::$checkInterval, static function () use ($parentPid) {
+            try {
                 Logger::getInstance()->info('Start health check');
                 if (!self::isProcessAlive($parentPid)) {
                     throw new RuntimeException('Parent process died');
@@ -54,21 +55,22 @@ class HealthCheck
                 awaitAll($futures);
 
                 Logger::getInstance()->info('Health check ok. Sessions checked: ' . count($sessionsForCheck));
-            });
-            EventLoop::run();
-        } catch (Throwable $e) {
-            Logger::getInstance()->error($e->getMessage());
-            Logger::getInstance()->critical('Health check failed');
-            if (self::isProcessAlive($parentPid)) {
-                Logger::getInstance()->critical('Killing parent process');
-
-                exec("kill -2 $parentPid");
+            } catch (Throwable $e) {
+                Logger::getInstance()->error($e->getMessage());
+                Logger::getInstance()->critical('Health check failed');
                 if (self::isProcessAlive($parentPid)) {
-                    exec("kill -9 $parentPid");
-                }
-            }
-        }
+                    Logger::getInstance()->critical('Killing parent process');
 
+                    exec("kill -2 $parentPid");
+                    if (self::isProcessAlive($parentPid)) {
+                        exec("kill -9 $parentPid");
+                    }
+                }
+                exit(1);
+            }
+        });
+
+        trapSignal([SIGINT, SIGTERM]);
         Logger::getInstance()->critical('Health check process exit');
 
     }
