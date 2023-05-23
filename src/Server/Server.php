@@ -45,7 +45,6 @@ class Server
         Client::getInstance()->connect($sessionFiles);
         $errorHandler = new DefaultErrorHandler();
         $server->start((new Router($server, $errorHandler))->getRouter(), $errorHandler);
-
         self::registerShutdown($server);
 
     }

@@ -1,5 +1,6 @@
 <?php
 
+use Revolt\EventLoop;
 use TelegramApiServer\Logger;
 use TelegramApiServer\Migrations\EnvUpgrade;
 
@@ -61,9 +62,13 @@ const ENV_VERSION='1';
     }
 }
 
-if ($memoryLimit = getenv('MEMORY_LIMIT')) {
-    ini_set('memory_limit', $memoryLimit);
-}
+$setMemLimit = function() {
+    if ($memoryLimit = getenv('MEMORY_LIMIT')) {
+        ini_set('memory_limit', $memoryLimit);
+    }
+};
+$setMemLimit();
+EventLoop::repeat(60.0, $setMemLimit);
 
 if ($timezone = getenv('TIMEZONE')) {
     date_default_timezone_set($timezone);
