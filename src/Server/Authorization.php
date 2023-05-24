@@ -2,11 +2,11 @@
 
 namespace TelegramApiServer\Server;
 
+use Amp\Http\HttpStatus;
 use Amp\Http\Server\Middleware;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler;
 use Amp\Http\Server\Response;
-use Amp\Http\Status;
 use TelegramApiServer\Config;
 
 class Authorization implements Middleware
@@ -20,13 +20,13 @@ class Authorization implements Middleware
         $this->selfIp = ip2long(getHostByName(php_uname('n')));
     }
 
-    public function handleRequest(Request $request, RequestHandler $next): Response
+    public function handleRequest(Request $request, RequestHandler $requestHandler): Response
     {
         $host = explode(':', $request->getClient()->getRemoteAddress()->toString())[0];
         if ($this->isIpAllowed($host)) {
-            $response = $next->handleRequest($request);
+            $response = $requestHandler->handleRequest($request);
         } else {
-            $response = ErrorResponses::get(Status::FORBIDDEN, 'Your host is not allowed: ' . $host);
+            $response = ErrorResponses::get(HttpStatus::FORBIDDEN, 'Your host is not allowed: ' . $host);
         }
 
         return $response;
