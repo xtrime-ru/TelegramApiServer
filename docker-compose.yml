@@ -33,6 +33,7 @@ services:
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
       MARIADB_AUTO_UPGRADE: 'yes'
     command:
+     - --skip-grant-tables
      - --innodb-buffer-pool-size=32M
      - --wait_timeout=65
 networks:
