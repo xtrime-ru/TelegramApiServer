@@ -2452,12 +2452,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "ea44d93f1c5a8898f25bc5fd04a097de835e7acc"
+                "reference": "2217a8160fed2fe7204ca5f4d51249eecf9493d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ea44d93f1c5a8898f25bc5fd04a097de835e7acc",
-                "reference": "ea44d93f1c5a8898f25bc5fd04a097de835e7acc",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/2217a8160fed2fe7204ca5f4d51249eecf9493d8",
+                "reference": "2217a8160fed2fe7204ca5f4d51249eecf9493d8",
                 "shasum": ""
             },
             "require": {
@@ -2508,7 +2508,8 @@
                 "danog/phpdoc": "^0.1.7",
                 "dg/bypass-finals": "dev-master",
                 "ext-ctype": "*",
-                "phpdocumentor/reflection-docblock": "^5.2",
+                "phpdocumentor/reflection-docblock": "dev-master",
+                "phpdocumentor/type-resolver": "1.x-dev@dev",
                 "phpunit/phpunit": "^9",
                 "roave/security-advisories": "dev-latest",
                 "symfony/yaml": "^6.0"
@@ -2572,7 +2573,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-22T17:44:42+00:00"
+            "time": "2023-05-26T23:27:05+00:00"
         },
         {
             "name": "danog/primemodule",
