@@ -2452,12 +2452,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "2217a8160fed2fe7204ca5f4d51249eecf9493d8"
+                "reference": "edacca9f3d97ac95d7749cfcebeb644fea99ee21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/2217a8160fed2fe7204ca5f4d51249eecf9493d8",
-                "reference": "2217a8160fed2fe7204ca5f4d51249eecf9493d8",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/edacca9f3d97ac95d7749cfcebeb644fea99ee21",
+                "reference": "edacca9f3d97ac95d7749cfcebeb644fea99ee21",
                 "shasum": ""
             },
             "require": {
@@ -2565,7 +2565,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/v8"
+                "source": "https://github.com/danog/MadelineProto/tree/8.0.0-beta82"
             },
             "funding": [
                 {
@@ -2573,20 +2573,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-26T23:27:05+00:00"
+            "time": "2023-05-27T17:11:44+00:00"
         },
         {
             "name": "danog/primemodule",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/PrimeModule.git",
-                "reference": "1fcfddc25347ed21de26150ba1fbe95b0a2b2862"
+                "reference": "e7ebfc1ea64c24186e49064cd4b76bc76c28600e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/PrimeModule/zipball/1fcfddc25347ed21de26150ba1fbe95b0a2b2862",
-                "reference": "1fcfddc25347ed21de26150ba1fbe95b0a2b2862",
+                "url": "https://api.github.com/repos/danog/PrimeModule/zipball/e7ebfc1ea64c24186e49064cd4b76bc76c28600e",
+                "reference": "e7ebfc1ea64c24186e49064cd4b76bc76c28600e",
                 "shasum": ""
             },
             "require": {
@@ -2622,9 +2622,9 @@
             "description": "Prime module capable of doing prime factorization of huge numbers very quickly.\"",
             "support": {
                 "issues": "https://github.com/danog/PrimeModule/issues",
-                "source": "https://github.com/danog/PrimeModule/tree/1.0.12"
+                "source": "https://github.com/danog/PrimeModule/tree/1.0.13"
             },
-            "time": "2023-04-12T14:19:15+00:00"
+            "time": "2023-05-27T14:41:40+00:00"
         },
         {
             "name": "danog/tg-file-decoder",
