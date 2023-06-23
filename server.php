@@ -74,6 +74,9 @@ StartUpFixes::fix();
 $mainProcessPid = getmypid();
 
 if (Config::getInstance()->get('health_check.enabled')) {
+    if (!defined('SIGINT')) {
+        throw new RuntimeException('pcintl required for healthcheck. Use docker.');
+    }
     Fork::run(static function () use ($mainProcessPid) {
         HealthCheck::start($mainProcessPid);
     });

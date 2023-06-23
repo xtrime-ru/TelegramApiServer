@@ -6,6 +6,7 @@
  */
 
 use Amp\Websocket\Client\WebsocketHandshake;
+use Revolt\EventLoop;
 use function Amp\async;
 use function Amp\delay;
 use function Amp\Websocket\Client\connect;
@@ -50,4 +51,8 @@ async(function () use ($options) {
     }
 });
 
-$signal = Amp\trapSignal([SIGINT, SIGTERM]);
+if (defined('SIGINT')) {
+    $signal = Amp\trapSignal([SIGINT, SIGTERM]);
+} else {
+    EventLoop::run();
+}

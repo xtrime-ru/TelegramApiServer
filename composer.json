@@ -21,7 +21,6 @@
     "php": "^8.1",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "ext-pcntl": "*",
     "amphp/http-server": "^v3.x-dev",
     "amphp/http": "^v2",
     "amphp/http-server-router": "^2",
@@ -30,6 +29,9 @@
     "amphp/websocket-client": "^v2",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto": "v8.x-dev"
+  },
+  "suggest": {
+    "ext-pcntl": "Install pcintl for propper signal handling and healthcheck (enabled in .env)"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

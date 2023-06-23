@@ -9,6 +9,7 @@ use Amp\Http\Server\Driver\DefaultHttpDriverFactory;
 use Amp\Http\Server\SocketHttpServer;
 use Amp\Socket\InternetAddress;
 use Amp\Sync\LocalSemaphore;
+use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
@@ -62,6 +63,10 @@ class Server
             // Await SIGINT or SIGTERM to be received.
             $signal = Amp\trapSignal([SIGINT, SIGTERM]);
             info(sprintf("Received signal %d, stopping HTTP server", $signal));
+            $server->stop();
+        } else {
+            EventLoop::run();
+            info("Stopping http server");
             $server->stop();
         }
     }
