@@ -3,7 +3,7 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 use danog\MadelineProto;
-use danog\MadelineProto\MTProto;
+use danog\MadelineProto\API;
 use InvalidArgumentException;
 use Revolt\EventLoop;
 use TelegramApiServer\Client;
@@ -32,7 +32,7 @@ class SystemApiExtensions
         /** @var null|MadelineProto\Settings $fullSettings */
         $fullSettings = $instance->getSettings();
         try {
-            if ($fullSettings !== null && $instance->getAuthorization() !== MTProto::LOGGED_IN) {
+            if ($fullSettings !== null && $instance->getAuthorization() !== API::LOGGED_IN) {
                 $fullSettings->getAppInfo()->getApiId();
                 $fullSettings->getAppInfo()->getApiHash();
             }
@@ -57,22 +57,22 @@ class SystemApiExtensions
     {
         $sessions = [];
         foreach ($this->client->instances as $session => $instance) {
-            /** @var MadelineProto\API $instance */
+            /** @var API $instance */
             $authorized = $instance->API->authorized ?? null;
             switch ($authorized) {
-                case MTProto::NOT_LOGGED_IN;
+                case API::NOT_LOGGED_IN;
                     $status = 'NOT_LOGGED_IN';
                     break;
-                case MTProto::WAITING_CODE:
+                case API::WAITING_CODE:
                     $status = 'WAITING_CODE';
                     break;
-                case MTProto::WAITING_PASSWORD:
+                case API::WAITING_PASSWORD:
                     $status = 'WAITING_PASSWORD';
                     break;
-                case MTProto::WAITING_SIGNUP:
+                case API::WAITING_SIGNUP:
                     $status = 'WAITING_SIGNUP';
                     break;
-                case MTProto::LOGGED_IN:
+                case API::LOGGED_IN:
                     $status = 'LOGGED_IN';
                     break;
                 case null:

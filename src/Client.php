@@ -4,7 +4,6 @@ namespace TelegramApiServer;
 
 use danog\MadelineProto\API;
 use danog\MadelineProto\APIWrapper;
-use danog\MadelineProto\MTProto;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
@@ -116,7 +115,7 @@ class Client
     private function startNotLoggedInSessions(): void
     {
         foreach ($this->instances as $name => $instance) {
-            if ($instance->getAuthorization() !== MTProto::LOGGED_IN) {
+            if ($instance->getAuthorization() !== API::LOGGED_IN) {
                 {
                     //Disable logging to stdout
                     $logLevel = Logger::getInstance()->minLevelIndex;
@@ -134,7 +133,7 @@ class Client
 
     public function startLoggedInSession(string $sessionName): void
     {
-        if ($this->instances[$sessionName]->getAuthorization() === MTProto::LOGGED_IN) {
+        if ($this->instances[$sessionName]->getAuthorization() === API::LOGGED_IN) {
             if (empty(EventObserver::$sessionClients[$sessionName])) {
                 $this->instances[$sessionName]->unsetEventHandler();
             }
