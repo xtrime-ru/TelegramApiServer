@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad486b083ffb76c3b96979c0bf925f5f",
+    "content-hash": "e40b582b83978f01d9ae3a52870ca190",
     "packages": [
         {
             "name": "amphp/amp",
@@ -717,12 +717,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "b86f0d43418dc8141ad4bf5f821a23f7d3abf639"
+                "reference": "b9f6a9e039dd5b9ecc224c6e46d1a410691bbdca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/b86f0d43418dc8141ad4bf5f821a23f7d3abf639",
-                "reference": "b86f0d43418dc8141ad4bf5f821a23f7d3abf639",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/b9f6a9e039dd5b9ecc224c6e46d1a410691bbdca",
+                "reference": "b9f6a9e039dd5b9ecc224c6e46d1a410691bbdca",
                 "shasum": ""
             },
             "require": {
@@ -799,7 +799,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server/issues",
-                "source": "https://github.com/amphp/http-server/tree/v3.0.0-beta.8"
+                "source": "https://github.com/amphp/http-server/tree/3.x"
             },
             "funding": [
                 {
@@ -807,7 +807,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-22T14:22:35+00:00"
+            "time": "2023-06-03T16:00:02+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
@@ -1736,16 +1736,16 @@
         },
         {
             "name": "amphp/sql-common",
-            "version": "v2.0.0-beta.5",
+            "version": "v2.0.0-beta.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql-common.git",
-                "reference": "aeab5d741043cc39685563ab827e26a69b75e2d7"
+                "reference": "a6cef9fb4c9d87e9ab7d40c762ef490dda43f04f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql-common/zipball/aeab5d741043cc39685563ab827e26a69b75e2d7",
-                "reference": "aeab5d741043cc39685563ab827e26a69b75e2d7",
+                "url": "https://api.github.com/repos/amphp/sql-common/zipball/a6cef9fb4c9d87e9ab7d40c762ef490dda43f04f",
+                "reference": "a6cef9fb4c9d87e9ab7d40c762ef490dda43f04f",
                 "shasum": ""
             },
             "require": {
@@ -1780,7 +1780,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql-common/issues",
-                "source": "https://github.com/amphp/sql-common/tree/v2.0.0-beta.5"
+                "source": "https://github.com/amphp/sql-common/tree/v2.0.0-beta.6"
             },
             "funding": [
                 {
@@ -1788,7 +1788,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-07T12:42:32+00:00"
+            "time": "2023-06-17T15:45:22+00:00"
         },
         {
             "name": "amphp/sync",
@@ -2168,6 +2168,60 @@
             "time": "2023-01-09T22:29:20+00:00"
         },
         {
+            "name": "bacon/bacon-qr-code",
+            "version": "2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "8674e51bb65af933a5ffaf1c308a660387c35c22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/8674e51bb65af933a5ffaf1c308a660387c35c22",
+                "reference": "8674e51bb65af933a5ffaf1c308a660387c35c22",
+                "shasum": ""
+            },
+            "require": {
+                "dasprid/enum": "^1.0.3",
+                "ext-iconv": "*",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "phly/keep-a-changelog": "^2.1",
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "spatie/phpunit-snapshot-assertions": "^4.2.9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "suggest": {
+                "ext-imagick": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BaconQrCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "support": {
+                "issues": "https://github.com/Bacon/BaconQrCode/issues",
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.8"
+            },
+            "time": "2022-12-07T17:46:57+00:00"
+        },
+        {
             "name": "danog/dns-over-https",
             "version": "v1.0.0-beta4",
             "source": {
@@ -2452,12 +2506,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "edacca9f3d97ac95d7749cfcebeb644fea99ee21"
+                "reference": "a157f277c15a793773a936c1882c2976bce955b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/edacca9f3d97ac95d7749cfcebeb644fea99ee21",
-                "reference": "edacca9f3d97ac95d7749cfcebeb644fea99ee21",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/a157f277c15a793773a936c1882c2976bce955b9",
+                "reference": "a157f277c15a793773a936c1882c2976bce955b9",
                 "shasum": ""
             },
             "require": {
@@ -2474,6 +2528,7 @@
                 "amphp/redis": "^2",
                 "amphp/socket": "^2",
                 "amphp/websocket-client": "^2",
+                "bacon/bacon-qr-code": "^2.0",
                 "danog/dns-over-https": "^1",
                 "danog/ipc": "^1",
                 "danog/loop": "^1",
@@ -2483,7 +2538,6 @@
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
                 "ext-filter": "*",
-                "ext-gmp": "*",
                 "ext-hash": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
@@ -2516,9 +2570,9 @@
             },
             "suggest": {
                 "ext-ffi": "Install the primemodule and FFI extensions to speed up MadelineProto (https://prime.madelineproto.xyz)",
-                "ext-gmp": "Install the gmp extension for faster crypto",
+                "ext-gmp": "Install the gmp extension to speed up authorization",
                 "ext-openssl": "Install the openssl extension for faster crypto",
-                "ext-pdo": "Install the pdo extension to store session data on MySQL or PostgreSQL",
+                "ext-pdo": "Install the pdo extension to store session data on MySQL",
                 "ext-primemodule": "Install the primemodule and FFI extensions to speed up MadelineProto (https://prime.madelineproto.xyz)"
             },
             "default-branch": true,
@@ -2565,7 +2619,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/8.0.0-beta82"
+                "source": "https://github.com/danog/MadelineProto/tree/v8"
             },
             "funding": [
                 {
@@ -2573,7 +2627,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-27T17:11:44+00:00"
+            "time": "2023-07-04T17:48:23+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2688,6 +2742,56 @@
                 }
             ],
             "time": "2022-11-16T16:22:45+00:00"
+        },
+        {
+            "name": "dasprid/enum",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DASPRiD/Enum.git",
+                "reference": "8e6b6ea76eabbf19ea2bf5b67b98e1860474012f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/8e6b6ea76eabbf19ea2bf5b67b98e1860474012f",
+                "reference": "8e6b6ea76eabbf19ea2bf5b67b98e1860474012f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1 <9.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DASPRiD\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP 7.1 enum implementation",
+            "keywords": [
+                "enum",
+                "map"
+            ],
+            "support": {
+                "issues": "https://github.com/DASPRiD/Enum/issues",
+                "source": "https://github.com/DASPRiD/Enum/tree/1.0.4"
+            },
+            "time": "2023-03-01T18:44:03+00:00"
         },
         {
             "name": "daverandom/libdns",
@@ -3174,16 +3278,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "3.3.1",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "9b5daeaffce5b926cac47923798bba91059e60e2"
+                "reference": "e2392369686d420ca32df3803de28b5d6f76867d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9b5daeaffce5b926cac47923798bba91059e60e2",
-                "reference": "9b5daeaffce5b926cac47923798bba91059e60e2",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e2392369686d420ca32df3803de28b5d6f76867d",
+                "reference": "e2392369686d420ca32df3803de28b5d6f76867d",
                 "shasum": ""
             },
             "require": {
@@ -3198,7 +3302,7 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "elasticsearch/elasticsearch": "^7 || ^8",
                 "ext-json": "*",
-                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
+                "graylog2/gelf-php": "^1.4.2 || ^2.0",
                 "guzzlehttp/guzzle": "^7.4.5",
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
@@ -3206,7 +3310,7 @@
                 "phpstan/phpstan": "^1.9",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.4",
-                "phpunit/phpunit": "^9.5.26",
+                "phpunit/phpunit": "^10.1",
                 "predis/predis": "^1.1 || ^2",
                 "ruflin/elastica": "^7",
                 "symfony/mailer": "^5.4 || ^6",
@@ -3259,7 +3363,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/3.3.1"
+                "source": "https://github.com/Seldaek/monolog/tree/3.4.0"
             },
             "funding": [
                 {
@@ -3271,7 +3375,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-06T13:46:10+00:00"
+            "time": "2023-06-21T08:46:11+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -3517,16 +3621,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.19",
+            "version": "3.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "cc181005cf548bfd8a4896383bb825d859259f95"
+                "reference": "543a1da81111a0bfd6ae7bbc2865c5e89ed3fc67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/cc181005cf548bfd8a4896383bb825d859259f95",
-                "reference": "cc181005cf548bfd8a4896383bb825d859259f95",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/543a1da81111a0bfd6ae7bbc2865c5e89ed3fc67",
+                "reference": "543a1da81111a0bfd6ae7bbc2865c5e89ed3fc67",
                 "shasum": ""
             },
             "require": {
@@ -3607,7 +3711,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.19"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.20"
             },
             "funding": [
                 {
@@ -3623,7 +3727,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-05T17:13:09+00:00"
+            "time": "2023-06-13T06:30:34+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -4173,8 +4277,7 @@
     "platform": {
         "php": "^8.1",
         "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-pcntl": "*"
+        "ext-mbstring": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
