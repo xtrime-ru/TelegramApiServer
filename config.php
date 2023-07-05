@@ -23,7 +23,7 @@ $settings = [
         ],
         'connection_settings' => [
             'all' => [
-                'drop_timeout' => 2,
+                'drop_timeout' => 10,
                 'proxy' => '\SocksProxy',
                 'proxy_extra' => [
                     'address' => (string)getenv('TELEGRAM_PROXY_ADDRESS'),
