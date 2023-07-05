@@ -18,8 +18,12 @@ $settings = [
             'logger_param' => LogObserver::class . '::log',
             'logger_level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
+        'flood_timeout' => [
+            'wait_if_lt' => 5,
+        ],
         'connection_settings' => [
             'all' => [
+                'drop_timeout' => 2,
                 'proxy' => '\SocksProxy',
                 'proxy_extra' => [
                     'address' => (string)getenv('TELEGRAM_PROXY_ADDRESS'),
