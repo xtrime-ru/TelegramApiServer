@@ -57,8 +57,7 @@ class SystemApiExtensions
     {
         $sessions = [];
         foreach ($this->client->instances as $session => $instance) {
-            /** @var API $instance */
-            $authorized = $instance->API->authorized ?? null;
+            $authorized = $instance->getAuthorization();
             switch ($authorized) {
                 case API::NOT_LOGGED_IN;
                     $status = 'NOT_LOGGED_IN';
