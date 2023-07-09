@@ -23,7 +23,7 @@ services:
     command:
       - "-s=session"
   mysql:
-    image: mariadb:10.8
+    image: mariadb:11.0
     restart: unless-stopped
     ports:
       - "127.0.0.1:9507:3306"
