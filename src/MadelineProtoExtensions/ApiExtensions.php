@@ -517,4 +517,16 @@ class ApiExtensions
         Client::getWrapper($this->madelineProto)->getAPI()->setEventHandler(EventHandler::class);
     }
 
+    public function getUpdates(array $params): array  {
+        foreach ($params as $key => $value) {
+            $params[$key] = match($key) {
+                'offset', 'limit' => (int) $value,
+                'timeout' => (float) $value,
+                default => throw new \InvalidArgumentException("Unknown parameter: {$key}"),
+            };
+        }
+
+        return $this->madelineProto->getUpdates($params);
+    }
+
 }

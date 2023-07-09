@@ -118,6 +118,18 @@ docker compose pull
     * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
     
 ## Advanced features
+### Get events/updates
+Telegram is event driven platform. For example:  every time your account receives a message you immediately get an update.
+There are multiple ways of [getting updates](https://docs.madelineproto.xyz/docs/UPDATES.html) in TelegramApiServer / MadelineProto:  
+    1. [Websocket](#eventhandler-updates-webhooks)  
+    2. Long Polling:   
+        send request to getUpdates endpoint  
+        `curl "127.0.0.1:9503/api/getUpdates?data[limit]=3&data[offset]=0&data[timeout]=10.0" -g`  
+    3. Webhook: 
+        Redirect all updates to your endpoint, just like bot api!  
+        `curl "127.0.0.1:9503/api/setWebhook?url=http%3A%2F%2Fexample.com%2Fsome_webhook" -g `  
+        Example uses urlencoded url in query.
+
 ### Uploading files.
 
 There are few options to upload and send media files:
