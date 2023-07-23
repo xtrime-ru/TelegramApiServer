@@ -19,11 +19,11 @@ $settings = [
             'logger_level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
         'flood_timeout' => [
-            'wait_if_lt' => 5,
+            'wait_if_lt' => 10,
         ],
         'connection_settings' => [
             'all' => [
-                'drop_timeout' => 10,
+                'drop_timeout' => 30,
                 'proxy' => '\SocksProxy',
                 'proxy_extra' => [
                     'address' => (string)getenv('TELEGRAM_PROXY_ADDRESS'),

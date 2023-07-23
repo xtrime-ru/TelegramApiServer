@@ -2506,12 +2506,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "7e69782e742e9006de134651931241214080bf31"
+                "reference": "6e3312917e5374f5747c6dd2db6da561f8ec70da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/7e69782e742e9006de134651931241214080bf31",
-                "reference": "7e69782e742e9006de134651931241214080bf31",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/6e3312917e5374f5747c6dd2db6da561f8ec70da",
+                "reference": "6e3312917e5374f5747c6dd2db6da561f8ec70da",
                 "shasum": ""
             },
             "require": {
@@ -2534,7 +2534,6 @@
                 "danog/loop": "^1",
                 "danog/primemodule": "^1",
                 "danog/tg-file-decoder": "^0.1",
-                "erusev/parsedown": "^1.7",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
                 "ext-filter": "*",
@@ -2628,7 +2627,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-09T23:50:47+00:00"
+            "time": "2023-07-23T14:33:02+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2837,56 +2836,6 @@
                 "source": "https://github.com/DaveRandom/LibDNS/tree/v2.0.3"
             },
             "time": "2022-09-20T18:15:38+00:00"
-        },
-        {
-            "name": "erusev/parsedown",
-            "version": "1.7.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
-                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Parsedown": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "Parser for Markdown.",
-            "homepage": "http://parsedown.org",
-            "keywords": [
-                "markdown",
-                "parser"
-            ],
-            "support": {
-                "issues": "https://github.com/erusev/parsedown/issues",
-                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
-            },
-            "time": "2019-12-30T22:54:17+00:00"
         },
         {
             "name": "kelunik/certificate",
@@ -3946,16 +3895,16 @@
         },
         {
             "name": "revolt/event-loop",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "9ac31d36635c60a9b28bb2a476384c5ec55c95cc"
+                "reference": "b018d0ff141636d69a8054194675fe0050cf3aa9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/9ac31d36635c60a9b28bb2a476384c5ec55c95cc",
-                "reference": "9ac31d36635c60a9b28bb2a476384c5ec55c95cc",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/b018d0ff141636d69a8054194675fe0050cf3aa9",
+                "reference": "b018d0ff141636d69a8054194675fe0050cf3aa9",
                 "shasum": ""
             },
             "require": {
@@ -4012,9 +3961,9 @@
             ],
             "support": {
                 "issues": "https://github.com/revoltphp/event-loop/issues",
-                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.1"
+                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.2"
             },
-            "time": "2023-04-02T16:25:26+00:00"
+            "time": "2023-07-20T20:16:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
