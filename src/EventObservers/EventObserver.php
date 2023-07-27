@@ -57,6 +57,7 @@ class EventObserver
                     $property = new ReflectionProperty($instance, "wrapper");
                     /** @var APIWrapper $wrapper */
                     $wrapper = $property->getValue($instance);
+                    EventHandler::cachePlugins(EventHandler::class);
                     $wrapper->getAPI()->setEventHandler(EventHandler::class);
                 } catch (Throwable $e) {
                     static::removeSessionClient($session);
