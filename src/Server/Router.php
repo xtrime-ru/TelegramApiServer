@@ -11,9 +11,10 @@ use TelegramApiServer\Controllers\ApiController;
 use TelegramApiServer\Controllers\EventsController;
 use TelegramApiServer\Controllers\LogController;
 use TelegramApiServer\Controllers\SystemController;
+use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
-use function Amp\Http\Server\Middleware\stack;
+use function Amp\Http\Server\Middleware\stackMiddleware;
 
 class Router
 {
@@ -21,7 +22,11 @@ class Router
 
     public function __construct(SocketHttpServer $server, ErrorHandler $errorHandler)
     {
-        $this->router = new \Amp\Http\Server\Router($server, $errorHandler);
+        $this->router = new \Amp\Http\Server\Router(
+            httpServer: $server,
+            logger: Logger::getInstance(),
+            errorHandler: $errorHandler,
+        );
         $this->setRoutes();
         $this->setFallback();
     }
@@ -41,10 +46,10 @@ class Router
     private function setRoutes(): void
     {
         $authorization = new Authorization();
-        $apiHandler = stack(ApiController::getRouterCallback(ApiExtensions::class), $authorization);
-        $systemApiHandler = stack(SystemController::getRouterCallback(SystemApiExtensions::class), $authorization);
-        $eventsHandler = stack(EventsController::getRouterCallback(), $authorization);
-        $logHandler = stack(LogController::getRouterCallback(), $authorization);
+        $apiHandler = stackMiddleware(ApiController::getRouterCallback(ApiExtensions::class), $authorization);
+        $systemApiHandler = stackMiddleware(SystemController::getRouterCallback(SystemApiExtensions::class), $authorization);
+        $eventsHandler = stackMiddleware(EventsController::getRouterCallback(), $authorization);
+        $logHandler = stackMiddleware(LogController::getRouterCallback(), $authorization);
 
         foreach (['GET', 'POST'] as $method) {
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
