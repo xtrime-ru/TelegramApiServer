@@ -401,16 +401,16 @@
         },
         {
             "name": "amphp/hpack",
-            "version": "v3.1.2",
+            "version": "v3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/hpack.git",
-                "reference": "500aa8e42b025c1a4aa15e91e9defeb8d4397517"
+                "reference": "65b34cb8dec9ea1bbd6d23e3c06c8601fc051548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/hpack/zipball/500aa8e42b025c1a4aa15e91e9defeb8d4397517",
-                "reference": "500aa8e42b025c1a4aa15e91e9defeb8d4397517",
+                "url": "https://api.github.com/repos/amphp/hpack/zipball/65b34cb8dec9ea1bbd6d23e3c06c8601fc051548",
+                "reference": "65b34cb8dec9ea1bbd6d23e3c06c8601fc051548",
                 "shasum": ""
             },
             "require": {
@@ -462,7 +462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/hpack/issues",
-                "source": "https://github.com/amphp/hpack/tree/v3.1.2"
+                "source": "https://github.com/amphp/hpack/tree/v3.1.3"
             },
             "funding": [
                 {
@@ -470,7 +470,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-31T23:43:59+00:00"
+            "time": "2023-08-13T16:26:34+00:00"
         },
         {
             "name": "amphp/http",
@@ -2507,12 +2507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "fdcc9f7244c651b57bd4f3c1944d4f5d193843cd"
+                "reference": "726a6ba1e27716c2214bd5535284853649a261a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/fdcc9f7244c651b57bd4f3c1944d4f5d193843cd",
-                "reference": "fdcc9f7244c651b57bd4f3c1944d4f5d193843cd",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/726a6ba1e27716c2214bd5535284853649a261a2",
+                "reference": "726a6ba1e27716c2214bd5535284853649a261a2",
                 "shasum": ""
             },
             "require": {
@@ -2626,7 +2626,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-13T15:59:20+00:00"
+            "time": "2023-08-13T16:41:37+00:00"
         },
         {
             "name": "danog/primemodule",
