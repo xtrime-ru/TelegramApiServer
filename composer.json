@@ -28,7 +28,7 @@
     "amphp/websocket-server": "^v3",
     "amphp/websocket-client": "^v2",
     "vlucas/phpdotenv": "^4",
-    "danog/madelineproto": "v8.x-dev"
+    "danog/madelineproto": "dev-v8_fix_cleanup"
   },
   "suggest": {
     "ext-pcntl": "Install pcintl for propper signal handling and healthcheck (enabled in .env)"

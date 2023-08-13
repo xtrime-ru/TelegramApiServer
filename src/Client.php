@@ -159,7 +159,7 @@ class Client
 
         foreach ($settings as $key => $value) {
             if (is_array($value)) {
-                if ($key === 'db') {
+                if ($key === 'db' && isset($value['type'])) {
                     $type = match ($value['type']) {
                         'memory' => new Settings\Database\Memory(),
                         'mysql' => new Settings\Database\Mysql(),
@@ -168,13 +168,15 @@ class Client
                     };
                     $settingsObject->setDb($type);
                     self::getSettingsFromArray($value[$value['type']], $type);
-                    continue;
+                    unset($value[$value['type']], $value['type']);
+                    if (count($value) === 0) {
+                        continue;
+                    }
                 }
 
                 $method = 'get' . ucfirst(str_replace('_', '', ucwords($key, '_')));
                 self::getSettingsFromArray($value, $settingsObject->$method());
             } else {
-
                 $method = 'set' . ucfirst(str_replace('_', '', ucwords($key, '_')));
                 $settingsObject->$method($value);
             }

@@ -29,15 +29,16 @@ $settings = [
             'interval' => 60,
         ],
         'db' => [
-            'type' => getenv('DB_TYPE'),
+            'enable_min_db' => (bool)filter_var((string)getenv('DB_ENABLE_MIN_DATABASE'), FILTER_VALIDATE_BOOL),
+            'type' => (string)getenv('DB_TYPE'),
             getenv('DB_TYPE') => [
-                'uri' => 'tcp://' . getenv('DB_HOST') . ':' . getenv('DB_PORT'),
-                'username' => getenv('DB_USER'),
-                'password' => getenv('DB_PASSWORD'),
-                'database' => getenv('DB_DATABASE'),
+                'uri' => 'tcp://' . getenv('DB_HOST') . ':' . (int)getenv('DB_PORT'),
+                'username' => (string)getenv('DB_USER'),
+                'password' => (string)getenv('DB_PASSWORD'),
+                'database' => (string)getenv('DB_DATABASE'),
                 'max_connections' => (int)getenv('DB_MAX_CONNECTIONS'),
                 'idle_timeout' => (int)getenv('DB_IDLE_TIMEOUT'),
-                'cache_ttl' => getenv('DB_CACHE_TTL'),
+                'cache_ttl' => (string)getenv('DB_CACHE_TTL'),
                 'serializer' => danog\MadelineProto\Settings\Database\SerializerType::from('serialize'),
             ]
         ],
@@ -49,7 +50,7 @@ $settings = [
         'ip_whitelist' => array_filter(
             array_map(
                 'trim',
-                explode(',', getenv('IP_WHITELIST'))
+                explode(',', (string)getenv('IP_WHITELIST'))
             )
         ),
     ],
