@@ -14,46 +14,34 @@ $settings = [
             'api_hash' => (string)getenv('TELEGRAM_API_HASH'),
         ],
         'logger' => [ // Logger settings
-            'logger' => Logger::CALLABLE_LOGGER, //  0 - Logs disabled, 3 - echo logs.
-            'logger_param' => LogObserver::class . '::log',
-            'logger_level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
+            'type' => Logger::CALLABLE_LOGGER, //  0 - Logs disabled, 3 - echo logs.
+            'extra' => LogObserver::class . '::log',
+            'level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
-        'flood_timeout' => [
-            'wait_if_lt' => 10,
+        'rpc' => [
+            'flood_timeout' => 10,
+            'rpc_drop_timeout' => 30,
         ],
-        'connection_settings' => [
-            'all' => [
-                'drop_timeout' => 30,
-                'proxy' => '\SocksProxy',
-                'proxy_extra' => [
-                    'address' => (string)getenv('TELEGRAM_PROXY_ADDRESS'),
-                    'port' => (int)getenv('TELEGRAM_PROXY_PORT'),
-                    'username' => getenv('TELEGRAM_PROXY_USERNAME'),
-                    'password' => getenv('TELEGRAM_PROXY_PASSWORD'),
-                ]
-            ],
-            'media_socket_count' => [
-                'max' => 10,
-            ]
+        'connection' => [
+            'max_media_socket_count' => 10
         ],
         'serialization' => [
-            'serialization_interval' => 60,
+            'interval' => 60,
         ],
         'db' => [
             'type' => getenv('DB_TYPE'),
             getenv('DB_TYPE') => [
-                'host' => (string)getenv('DB_HOST'),
-                'port' => (int)getenv('DB_PORT'),
-                'user' => getenv('DB_USER'),
+                'uri' => 'tcp://' . getenv('DB_HOST') . ':' . getenv('DB_PORT'),
+                'username' => getenv('DB_USER'),
                 'password' => getenv('DB_PASSWORD'),
                 'database' => getenv('DB_DATABASE'),
                 'max_connections' => (int)getenv('DB_MAX_CONNECTIONS'),
                 'idle_timeout' => (int)getenv('DB_IDLE_TIMEOUT'),
                 'cache_ttl' => getenv('DB_CACHE_TTL'),
-                'serializer' => 'serialize',
+                'serializer' => danog\MadelineProto\Settings\Database\SerializerType::from('serialize'),
             ]
         ],
-        'download' => [
+        'files' => [
             'report_broken_media' => false,
         ],
     ],
@@ -71,11 +59,6 @@ $settings = [
         'timeout' => ((int)getenv('HEALTHCHECK_REQUEST_TIMEOUT') ?: 60),
     ]
 ];
-
-if (empty($settings['telegram']['connection_settings']['all']['proxy_extra']['address'])) {
-    $settings['telegram']['connection_settings']['all']['proxy'] = '\Socket';
-    $settings['telegram']['connection_settings']['all']['proxy_extra'] = [];
-}
 
 if (empty($settings['telegram']['app_info']['api_id'])) {
     throw new InvalidArgumentException('Need to fill TELEGRAM_API_ID in .env.docker or .env');

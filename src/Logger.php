@@ -91,7 +91,7 @@ class Logger extends AbstractLogger
         if (!static::$instanse) {
             $settings = Config::getInstance()->get('telegram');
 
-            $loggerLevel = static::$madelineLevels[$settings['logger']['logger_level']];
+            $loggerLevel = static::$madelineLevels[$settings['logger']['level']];
             static::$instanse = new static($loggerLevel);
         }
 

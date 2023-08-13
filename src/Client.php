@@ -4,6 +4,8 @@ namespace TelegramApiServer;
 
 use danog\MadelineProto\API;
 use danog\MadelineProto\APIWrapper;
+use danog\MadelineProto\Settings;
+use danog\MadelineProto\SettingsAbstract;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
@@ -58,7 +60,10 @@ class Client
             (array)Config::getInstance()->get('telegram'),
             Files::getSessionSettings($session),
         );
-        $instance = new API($file, $settings);
+
+        $settingsObject = self::getSettingsFromArray($settings);
+
+        $instance = new API($file, $settingsObject);
 
         $this->instances[$session] = $instance;
         return $instance;
@@ -149,5 +154,33 @@ class Client
         $wrapper = $property->getValue($madelineProto);
         return $wrapper;
     }
+
+    private static function getSettingsFromArray(array $settings, SettingsAbstract $settingsObject = new Settings()): SettingsAbstract {
+
+        foreach ($settings as $key => $value) {
+            if (is_array($value)) {
+                if ($key === 'db') {
+                    $type = match ($value['type']) {
+                        'memory' => new Settings\Database\Memory(),
+                        'mysql' => new Settings\Database\Mysql(),
+                        'postgres' => new Settings\Database\Postgres(),
+                        'redis' => new Settings\Database\Redis(),
+                    };
+                    $settingsObject->setDb($type);
+                    self::getSettingsFromArray($value[$value['type']], $type);
+                    continue;
+                }
+
+                $method = 'get' . ucfirst(str_replace('_', '', ucwords($key, '_')));
+                self::getSettingsFromArray($value, $settingsObject->$method());
+            } else {
+
+                $method = 'set' . ucfirst(str_replace('_', '', ucwords($key, '_')));
+                $settingsObject->$method($value);
+            }
+        }
+        return $settingsObject;
+    }
+
 
 }
