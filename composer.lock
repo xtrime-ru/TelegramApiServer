@@ -401,16 +401,16 @@
         },
         {
             "name": "amphp/hpack",
-            "version": "v3.1.3",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/hpack.git",
-                "reference": "65b34cb8dec9ea1bbd6d23e3c06c8601fc051548"
+                "reference": "5835a1414a52892562338dc76c2df926fa52a480"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/hpack/zipball/65b34cb8dec9ea1bbd6d23e3c06c8601fc051548",
-                "reference": "65b34cb8dec9ea1bbd6d23e3c06c8601fc051548",
+                "url": "https://api.github.com/repos/amphp/hpack/zipball/5835a1414a52892562338dc76c2df926fa52a480",
+                "reference": "5835a1414a52892562338dc76c2df926fa52a480",
                 "shasum": ""
             },
             "require": {
@@ -462,7 +462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/hpack/issues",
-                "source": "https://github.com/amphp/hpack/tree/v3.1.3"
+                "source": "https://github.com/amphp/hpack/tree/v3.1.5"
             },
             "funding": [
                 {
@@ -470,7 +470,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-13T16:26:34+00:00"
+            "time": "2023-08-15T19:29:20+00:00"
         },
         {
             "name": "amphp/http",
@@ -538,16 +538,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v5.0.0-beta.12",
+            "version": "v5.0.0-beta.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "4a962fe1d96ca0ca956401f08eb3eb72e90e5d2b"
+                "reference": "fd5b005d9799aab0e67764cf889586660516cd14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/4a962fe1d96ca0ca956401f08eb3eb72e90e5d2b",
-                "reference": "4a962fe1d96ca0ca956401f08eb3eb72e90e5d2b",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/fd5b005d9799aab0e67764cf889586660516cd14",
+                "reference": "fd5b005d9799aab0e67764cf889586660516cd14",
                 "shasum": ""
             },
             "require": {
@@ -558,9 +558,11 @@
                 "amphp/pipeline": "^1",
                 "amphp/socket": "^2",
                 "amphp/sync": "^2",
-                "league/uri": "^6",
+                "league/uri": "^6 | ^7",
+                "league/uri-components": "^2.4 | ^7",
                 "php": ">=8.1",
-                "psr/http-message": "^1 | ^2"
+                "psr/http-message": "^1 | ^2",
+                "revolt/event-loop": "^1"
             },
             "require-dev": {
                 "amphp/file": "^3",
@@ -622,7 +624,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.12"
+                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.13"
             },
             "funding": [
                 {
@@ -630,7 +632,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-05T15:21:21+00:00"
+            "time": "2023-08-15T20:25:04+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -2507,19 +2509,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "e2d5fa405430228807b89d3e6ea722e7a9322678"
+                "reference": "e20fe4b400059c3f4f1dab2713a9e171f8b8faea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/e2d5fa405430228807b89d3e6ea722e7a9322678",
-                "reference": "e2d5fa405430228807b89d3e6ea722e7a9322678",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/e20fe4b400059c3f4f1dab2713a9e171f8b8faea",
+                "reference": "e20fe4b400059c3f4f1dab2713a9e171f8b8faea",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/byte-stream": "^2",
                 "amphp/dns": "^2",
-                "amphp/file": "^3",
+                "amphp/file": "^3.0.1",
                 "amphp/http": "^2",
                 "amphp/http-client": "^5",
                 "amphp/http-client-cookies": "^2",
@@ -2564,10 +2566,11 @@
                 "danog/phpdoc": "^0.1.7",
                 "dg/bypass-finals": "dev-master",
                 "ext-ctype": "*",
+                "leproxy/leproxy": "^0.2.2",
                 "phpdocumentor/reflection-docblock": "dev-master",
                 "phpdocumentor/type-resolver": "1.x-dev@dev",
                 "phpunit/phpunit": "^9",
-                "roave/security-advisories": "dev-latest",
+                "revolt/event-loop-adapter-react": "^1",
                 "symfony/yaml": "^6.0"
             },
             "suggest": {
@@ -2585,6 +2588,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/polyfill.php"
+                ],
                 "psr-4": {
                     "danog\\MadelineProto\\": "src"
                 }
@@ -2625,7 +2631,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-13T23:10:13+00:00"
+            "time": "2023-08-16T15:14:36+00:00"
         },
         {
             "name": "danog/primemodule",
