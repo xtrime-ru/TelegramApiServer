@@ -168,7 +168,7 @@ class Client
                     };
                     $settingsObject->setDb($type);
                     self::getSettingsFromArray($value[$value['type']], $type);
-                    unset($value[$value['type']], $value['type']);
+                    unset($value['type'], $value['mysql'], $value['memory'], $value['postgres'], $value['redis']);
                     if (count($value) === 0) {
                         continue;
                     }
