@@ -167,8 +167,13 @@ class Client
                         'redis' => new Settings\Database\Redis(),
                     };
                     $settingsObject->setDb($type);
-                    self::getSettingsFromArray($value[$value['type']], $type);
-                    unset($value['type'], $value['mysql'], $value['memory'], $value['postgres'], $value['redis']);
+                    if ($value['type'] === 'memory') {
+                        self::getSettingsFromArray([], $type);
+                    } else {
+                        self::getSettingsFromArray($value[$value['type']], $type);
+                    }
+
+                    unset($value[$value['type']], $value['type'],);
                     if (count($value) === 0) {
                         continue;
                     }
