@@ -1602,16 +1602,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "70a72fb8b4fbc0117b65c6fb927651ecb8a4b325"
+                "reference": "3418a0c5c0d4978b0e8e0619ce1da0851c4053d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/70a72fb8b4fbc0117b65c6fb927651ecb8a4b325",
-                "reference": "70a72fb8b4fbc0117b65c6fb927651ecb8a4b325",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/3418a0c5c0d4978b0e8e0619ce1da0851c4053d3",
+                "reference": "3418a0c5c0d4978b0e8e0619ce1da0851c4053d3",
                 "shasum": ""
             },
             "require": {
@@ -1620,7 +1620,8 @@
                 "amphp/dns": "^2",
                 "ext-openssl": "*",
                 "kelunik/certificate": "^1.1",
-                "league/uri": "^6.5",
+                "league/uri": "^6.5 | ^7",
+                "league/uri-interfaces": "^2.3 | ^7",
                 "php": ">=8.1",
                 "revolt/event-loop": "^1 || ^0.2"
             },
@@ -1673,7 +1674,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/v2.1.0"
+                "source": "https://github.com/amphp/socket/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -1681,7 +1682,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-06T16:56:35+00:00"
+            "time": "2023-08-19T15:28:34+00:00"
         },
         {
             "name": "amphp/sql",
@@ -1795,16 +1796,16 @@
         },
         {
             "name": "amphp/sync",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sync.git",
-                "reference": "ad8a0e80cc586cece4f8ce57460f8bbf442ba8fc"
+                "reference": "50ddc7392cc8034b3e4798cef3cc90d3f4c0441c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sync/zipball/ad8a0e80cc586cece4f8ce57460f8bbf442ba8fc",
-                "reference": "ad8a0e80cc586cece4f8ce57460f8bbf442ba8fc",
+                "url": "https://api.github.com/repos/amphp/sync/zipball/50ddc7392cc8034b3e4798cef3cc90d3f4c0441c",
+                "reference": "50ddc7392cc8034b3e4798cef3cc90d3f4c0441c",
                 "shasum": ""
             },
             "require": {
@@ -1858,7 +1859,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sync/issues",
-                "source": "https://github.com/amphp/sync/tree/v2.0.0"
+                "source": "https://github.com/amphp/sync/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -1866,7 +1867,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-30T22:11:37+00:00"
+            "time": "2023-08-19T13:53:40+00:00"
         },
         {
             "name": "amphp/websocket",
@@ -2509,12 +2510,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "3e854f4d2f2139a2a78591869bbda362109a229a"
+                "reference": "47737ffb8c779c83e27cee5ded7a4ebab6d01086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/3e854f4d2f2139a2a78591869bbda362109a229a",
-                "reference": "3e854f4d2f2139a2a78591869bbda362109a229a",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/47737ffb8c779c83e27cee5ded7a4ebab6d01086",
+                "reference": "47737ffb8c779c83e27cee5ded7a4ebab6d01086",
                 "shasum": ""
             },
             "require": {
@@ -2631,7 +2632,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-17T15:29:46+00:00"
+            "time": "2023-08-19T22:47:23+00:00"
         },
         {
             "name": "danog/primemodule",
