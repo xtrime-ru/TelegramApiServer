@@ -64,6 +64,7 @@ class Client
         $settingsObject = self::getSettingsFromArray($settings);
 
         $instance = new API($file, $settingsObject);
+        $instance->updateSettings($settingsObject);
 
         $this->instances[$session] = $instance;
         return $instance;
