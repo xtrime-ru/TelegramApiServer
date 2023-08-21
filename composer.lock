@@ -717,12 +717,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "33bd2a0c272e16cb51493f0aaabd11c7a9da73ef"
+                "reference": "4e6e8b1e23c55ff8b1377f6eaccda3f49894723e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/33bd2a0c272e16cb51493f0aaabd11c7a9da73ef",
-                "reference": "33bd2a0c272e16cb51493f0aaabd11c7a9da73ef",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/4e6e8b1e23c55ff8b1377f6eaccda3f49894723e",
+                "reference": "4e6e8b1e23c55ff8b1377f6eaccda3f49894723e",
                 "shasum": ""
             },
             "require": {
@@ -807,7 +807,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-31T23:21:23+00:00"
+            "time": "2023-08-20T19:03:40+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
@@ -2515,12 +2515,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "d1f1cce9467b9e67392d4d1d101d11815d9a1e00"
+                "reference": "dc34a380b3dd936c0dfc753dc89aa7389d5ac377"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/d1f1cce9467b9e67392d4d1d101d11815d9a1e00",
-                "reference": "d1f1cce9467b9e67392d4d1d101d11815d9a1e00",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/dc34a380b3dd936c0dfc753dc89aa7389d5ac377",
+                "reference": "dc34a380b3dd936c0dfc753dc89aa7389d5ac377",
                 "shasum": ""
             },
             "require": {
@@ -2637,7 +2637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-20T16:38:06+00:00"
+            "time": "2023-08-21T13:09:02+00:00"
         },
         {
             "name": "danog/primemodule",
