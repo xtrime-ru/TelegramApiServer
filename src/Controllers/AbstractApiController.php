@@ -4,7 +4,7 @@ namespace TelegramApiServer\Controllers;
 
 use Amp\Future;
 use Amp\Http\Server\FormParser\StreamedField;
-use Amp\Http\Server\FormParser\StreamingParser;
+use Amp\Http\Server\FormParser\StreamingFormParser;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
 use Amp\Http\Server\Response;
@@ -18,6 +18,7 @@ use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 use Throwable;
 use UnexpectedValueException;
+use function Amp\delay;
 use function mb_strpos;
 
 abstract class AbstractApiController
@@ -95,7 +96,7 @@ abstract class AbstractApiController
         switch (true) {
             case $contentType === 'application/x-www-form-urlencoded':
             case mb_strpos($contentType, 'multipart/form-data') !== false:
-                $form = (new StreamingParser())->parseForm($this->request);
+                $form = (new StreamingFormParser())->parseForm($this->request);
                 $post = [];
 
                 while ($form->continue()) {

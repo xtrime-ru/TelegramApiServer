@@ -15,7 +15,7 @@ $settings = [
         ],
         'logger' => [ // Logger settings
             'type' => Logger::CALLABLE_LOGGER, //  0 - Logs disabled, 3 - echo logs.
-            'extra' => LogObserver::class . '::log',
+            'extra' => LogObserver::log(...),
             'level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
         'rpc' => [
@@ -53,6 +53,7 @@ $settings = [
                 explode(',', (string)getenv('IP_WHITELIST'))
             )
         ),
+        'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
     ],
     'health_check' => [
         'enabled' => (bool)filter_var((string)getenv('HEALTHCHECK_ENABLED'), FILTER_VALIDATE_BOOL),
