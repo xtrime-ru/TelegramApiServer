@@ -10,6 +10,7 @@ use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
 use RuntimeException;
+use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\EventObservers\EventObserver;
 
 class Client
@@ -140,7 +141,13 @@ class Client
     public function startLoggedInSession(string $sessionName): void
     {
         if ($this->instances[$sessionName]->getAuthorization() === API::LOGGED_IN) {
-            if (empty(EventObserver::$sessionClients[$sessionName])) {
+            if (
+                empty(EventObserver::$sessionClients[$sessionName])
+                && (
+                    $this->instances[$sessionName]->getEventHandler() instanceof EventHandler
+                    || $this->instances[$sessionName]->getEventHandler() instanceof \__PHP_Incomplete_Class
+                )
+            ) {
                 $this->instances[$sessionName]->unsetEventHandler();
             }
             $this->instances[$sessionName]->start();
