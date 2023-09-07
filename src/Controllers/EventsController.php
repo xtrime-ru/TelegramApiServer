@@ -6,6 +6,7 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Http\HttpStatus;
+use Amp\Http\Server\SocketHttpServer;
 use Amp\Websocket\Server\Websocket as WebsocketServer;
 use Amp\Websocket\Server\WebsocketClientGateway;
 use Amp\Websocket\Server\WebsocketClientHandler;
@@ -28,10 +29,11 @@ class EventsController implements WebsocketClientHandler, WebsocketHandshakeHand
         $this->gateway = new WebsocketClientGateway();
     }
 
-    public static function getRouterCallback(): WebsocketServer
+    public static function getRouterCallback(SocketHttpServer $server): WebsocketServer
     {
         $class = new static();
         return new WebsocketServer(
+            httpServer: $server,
             logger: Logger::getInstance(),
             handshakeHandler: $class,
             clientHandler: $class,
@@ -96,7 +98,7 @@ class EventsController implements WebsocketClientHandler, WebsocketHandshakeHand
                 'id' => null,
             ];
 
-            $this->gateway->multicast(
+            $this->gateway->multicastText(
                 json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |

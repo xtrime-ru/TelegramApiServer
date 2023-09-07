@@ -25,7 +25,7 @@
     "amphp/http": "^v2",
     "amphp/http-server-router": "^2",
     "amphp/http-server-form-parser": "^v2",
-    "amphp/websocket-server": "^v3",
+    "amphp/websocket-server": "3.x-dev",
     "amphp/websocket-client": "^v2",
     "vlucas/phpdotenv": "^4",
     "danog/madelineproto": "dev-v8_fix_cleanup"

@@ -5,6 +5,7 @@ namespace TelegramApiServer\Controllers;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
+use Amp\Http\Server\SocketHttpServer;
 use Amp\Websocket\Server\Websocket;
 use Amp\Websocket\Server\WebsocketClientGateway;
 use Amp\Websocket\Server\WebsocketClientHandler;
@@ -25,10 +26,11 @@ class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
         $this->gateway = new WebsocketClientGateway();
     }
 
-    public static function getRouterCallback(): Websocket
+    public static function getRouterCallback(SocketHttpServer $server): Websocket
     {
         $class = new static();
         return new Websocket(
+            httpServer: $server,
             logger: Logger::getInstance(),
             handshakeHandler: $class,
             clientHandler: $class,
@@ -82,7 +84,7 @@ class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
                 'id' => null,
             ];
 
-            $this->gateway->multicast(
+            $this->gateway->multicastText(
                 json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |

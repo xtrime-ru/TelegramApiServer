@@ -19,9 +19,11 @@ use function Amp\Http\Server\Middleware\stackMiddleware;
 class Router
 {
     private \Amp\Http\Server\Router $router;
+    private SocketHttpServer $server;
 
     public function __construct(SocketHttpServer $server, ErrorHandler $errorHandler)
     {
+        $this->server = $server;
         $this->router = new \Amp\Http\Server\Router(
             httpServer: $server,
             logger: Logger::getInstance(),
@@ -48,8 +50,8 @@ class Router
         $authorization = new Authorization();
         $apiHandler = stackMiddleware(ApiController::getRouterCallback(ApiExtensions::class), $authorization);
         $systemApiHandler = stackMiddleware(SystemController::getRouterCallback(SystemApiExtensions::class), $authorization);
-        $eventsHandler = stackMiddleware(EventsController::getRouterCallback(), $authorization);
-        $logHandler = stackMiddleware(LogController::getRouterCallback(), $authorization);
+        $eventsHandler = stackMiddleware(EventsController::getRouterCallback($this->server), $authorization);
+        $logHandler = stackMiddleware(LogController::getRouterCallback($this->server), $authorization);
 
         foreach (['GET', 'POST'] as $method) {
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
