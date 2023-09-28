@@ -34,7 +34,7 @@ async(function () use ($options) {
 
             $connection->onClose(static function () use ($connection) {
                 if ($connection->isClosed()) {
-                    printf("Connection closed. Reason: %s\n", $connection->getCloseReason());
+                    printf("Connection closed. Reason: %s\n", $connection->getCloseInfo()->getReason());
                 }
             });
 

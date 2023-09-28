@@ -6,24 +6,27 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Http\Server\SocketHttpServer;
+use Amp\Websocket\Server\Rfc6455Acceptor;
 use Amp\Websocket\Server\Websocket;
+use Amp\Websocket\Server\WebsocketAcceptor;
 use Amp\Websocket\Server\WebsocketClientGateway;
 use Amp\Websocket\Server\WebsocketClientHandler;
-use Amp\Websocket\Server\WebsocketHandshakeHandler;
 use Amp\Websocket\WebsocketClient;
 use Psr\Log\LogLevel;
 use Revolt\EventLoop;
 use TelegramApiServer\EventObservers\LogObserver;
 use TelegramApiServer\Logger;
 
-class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
+class LogController implements WebsocketClientHandler, WebsocketAcceptor
 {
     private const PING_INTERVAL_MS = 10_000;
     private WebsocketClientGateway $gateway;
+    private Rfc6455Acceptor $handshake;
 
     public function __construct()
     {
         $this->gateway = new WebsocketClientGateway();
+        $this->handshake = new Rfc6455Acceptor();
     }
 
     public static function getRouterCallback(SocketHttpServer $server): Websocket
@@ -32,16 +35,18 @@ class LogController implements WebsocketClientHandler, WebsocketHandshakeHandler
         return new Websocket(
             httpServer: $server,
             logger: Logger::getInstance(),
-            handshakeHandler: $class,
+            acceptor: $class,
             clientHandler: $class,
         );
     }
 
-    public function handleHandshake(Request $request, Response $response): Response
+    public function handleHandshake(Request $request): Response
     {
         $level = $request->getAttribute(Router::class)['level'] ?? LogLevel::DEBUG;
         if (!isset(Logger::$levels[$level])) {
-            $response->setStatus(400);
+            $response = new Response(400);
+        } else {
+            $response = $this->handshake->handleHandshake($request);
         }
         return $response;
     }

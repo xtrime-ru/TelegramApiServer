@@ -7,10 +7,11 @@ use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
 use Amp\Http\HttpStatus;
 use Amp\Http\Server\SocketHttpServer;
+use Amp\Websocket\Server\Rfc6455Acceptor;
 use Amp\Websocket\Server\Websocket as WebsocketServer;
+use Amp\Websocket\Server\WebsocketAcceptor;
 use Amp\Websocket\Server\WebsocketClientGateway;
 use Amp\Websocket\Server\WebsocketClientHandler;
-use Amp\Websocket\Server\WebsocketHandshakeHandler;
 use Amp\Websocket\WebsocketClient;
 use Revolt\EventLoop;
 use RuntimeException;
@@ -19,29 +20,31 @@ use TelegramApiServer\EventObservers\EventObserver;
 use TelegramApiServer\Logger;
 use Throwable;
 
-class EventsController implements WebsocketClientHandler, WebsocketHandshakeHandler
+class EventsController implements WebsocketClientHandler, WebsocketAcceptor
 {
     private const PING_INTERVAL_MS = 10_000;
     private WebsocketClientGateway $gateway;
+    private Rfc6455Acceptor $handshake;
 
     public function __construct()
     {
         $this->gateway = new WebsocketClientGateway();
+        $this->handshake = new Rfc6455Acceptor();
     }
 
     public static function getRouterCallback(SocketHttpServer $server): WebsocketServer
     {
         $class = new static();
+
         return new WebsocketServer(
             httpServer: $server,
             logger: Logger::getInstance(),
-            handshakeHandler: $class,
+            acceptor: $class,
             clientHandler: $class,
-
         );
     }
 
-    public function handleHandshake(Request $request, Response $response): Response
+    public function handleHandshake(Request $request): Response
     {
         try {
             $session = $request->getAttribute(Router::class)['session'] ?? null;
@@ -50,7 +53,9 @@ class EventsController implements WebsocketClientHandler, WebsocketHandshakeHand
             } elseif (empty(Client::getInstance()->instances)) {
                 throw new RuntimeException('No sessions available');
             }
+            $response = $this->handshake->handleHandshake($request);
         } catch (Throwable $e) {
+            $response = new Response();
             $response->setStatus(HttpStatus::NOT_FOUND);
             $response->setBody($e->getMessage());
         }
