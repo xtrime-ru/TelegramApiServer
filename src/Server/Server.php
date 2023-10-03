@@ -6,6 +6,7 @@ use Amp;
 use Amp\Http\Server\DefaultErrorHandler;
 use Amp\Http\Server\Driver\ConnectionLimitingServerSocketFactory;
 use Amp\Http\Server\Driver\DefaultHttpDriverFactory;
+use Amp\Http\Server\Request;
 use Amp\Http\Server\SocketHttpServer;
 use Amp\Socket\InternetAddress;
 use Amp\Sync\LocalSemaphore;
@@ -87,6 +88,20 @@ class Server
         );
 
         return $config;
+    }
+
+    public static function getClientIp(Request $request): string
+    {
+        $remote = $request->getClient()->getRemoteAddress()->toString();
+        $hostArray = explode(':', $remote);
+        if (count($hostArray) >= 2) {
+            $port = (int)array_pop($hostArray);
+            if ($port > 0 && $port <= 65353) {
+                $remote = implode(':', $hostArray);
+            }
+        }
+
+        return $remote;
     }
 
 }

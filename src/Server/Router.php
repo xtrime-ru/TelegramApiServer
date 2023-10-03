@@ -47,11 +47,14 @@ class Router
 
     private function setRoutes(): void
     {
-        $authorization = new Authorization();
-        $apiHandler = stackMiddleware(ApiController::getRouterCallback(ApiExtensions::class), $authorization);
-        $systemApiHandler = stackMiddleware(SystemController::getRouterCallback(SystemApiExtensions::class), $authorization);
-        $eventsHandler = stackMiddleware(EventsController::getRouterCallback($this->server), $authorization);
-        $logHandler = stackMiddleware(LogController::getRouterCallback($this->server), $authorization);
+        $middlewares = [
+            new AccessLoggerMiddleware(Logger::getInstance()),
+            new Authorization()
+        ];
+        $apiHandler = stackMiddleware(ApiController::getRouterCallback(ApiExtensions::class), ...$middlewares);
+        $systemApiHandler = stackMiddleware(SystemController::getRouterCallback(SystemApiExtensions::class), ...$middlewares);
+        $eventsHandler = stackMiddleware(EventsController::getRouterCallback($this->server), ...$middlewares);
+        $logHandler = stackMiddleware(LogController::getRouterCallback($this->server), ...$middlewares);
 
         foreach (['GET', 'POST'] as $method) {
             $this->router->addRoute($method, '/api/{method}[/]', $apiHandler);
