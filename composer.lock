@@ -540,16 +540,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v5.0.0-beta.17",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "9cd91e1f8ec9242fcfda12781f1c124e33ab87bd"
+                "reference": "03476991480578deb2058b926c1be1479129779f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/9cd91e1f8ec9242fcfda12781f1c124e33ab87bd",
-                "reference": "9cd91e1f8ec9242fcfda12781f1c124e33ab87bd",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/03476991480578deb2058b926c1be1479129779f",
+                "reference": "03476991480578deb2058b926c1be1479129779f",
                 "shasum": ""
             },
             "require": {
@@ -623,7 +623,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v5.0.0-beta.17"
+                "source": "https://github.com/amphp/http-client/tree/v5.0.0"
             },
             "funding": [
                 {
@@ -631,31 +631,31 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-05T20:56:21+00:00"
+            "time": "2023-10-08T16:24:43+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
-            "version": "v2.0.0-beta.2",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client-cookies.git",
-                "reference": "ee07882d39818aef0556da13eeb050178f91d3a3"
+                "reference": "4124b37ffa4d15034e70d5d30e6fb9605ed6c1a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/ee07882d39818aef0556da13eeb050178f91d3a3",
-                "reference": "ee07882d39818aef0556da13eeb050178f91d3a3",
+                "url": "https://api.github.com/repos/amphp/http-client-cookies/zipball/4124b37ffa4d15034e70d5d30e6fb9605ed6c1a7",
+                "reference": "4124b37ffa4d15034e70d5d30e6fb9605ed6c1a7",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/dns": "^2",
-                "amphp/http": "^2-dev",
+                "amphp/http": "^2",
                 "amphp/http-client": "^5",
                 "amphp/sync": "^2",
                 "ext-filter": "*",
                 "php": ">=8.1",
-                "psr/http-message": "^1"
+                "psr/http-message": "^1|^2"
             },
             "conflict": {
                 "amphp/file": "<3 || >=4"
@@ -700,7 +700,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client-cookies/issues",
-                "source": "https://github.com/amphp/http-client-cookies/tree/v2.0.0-beta.2"
+                "source": "https://github.com/amphp/http-client-cookies/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -708,7 +708,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T00:13:11+00:00"
+            "time": "2023-10-08T17:29:36+00:00"
         },
         {
             "name": "amphp/http-server",
@@ -1956,23 +1956,23 @@
         },
         {
             "name": "amphp/websocket-client",
-            "version": "2.x-dev",
+            "version": "v2.0.0-beta.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "846373b90f056c64792b9a2ec2d094d1e5f00ab8"
+                "reference": "f6d27ccfffb7991d1c6927dfda7ccf81a6fdf069"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/846373b90f056c64792b9a2ec2d094d1e5f00ab8",
-                "reference": "846373b90f056c64792b9a2ec2d094d1e5f00ab8",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/f6d27ccfffb7991d1c6927dfda7ccf81a6fdf069",
+                "reference": "f6d27ccfffb7991d1c6927dfda7ccf81a6fdf069",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/byte-stream": "^2",
                 "amphp/http": "^2",
-                "amphp/http-client": "^5-dev",
+                "amphp/http-client": "^5",
                 "amphp/socket": "^2",
                 "amphp/websocket": "^2",
                 "league/uri": "^6.8 | ^7.1",
@@ -1984,12 +1984,11 @@
                 "amphp/http-server": "^3",
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
-                "amphp/websocket-server": "^3-dev",
+                "amphp/websocket-server": "^3",
                 "phpunit/phpunit": "^9",
                 "psalm/phar": "^5.4",
                 "psr/log": "^1"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -2029,7 +2028,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket-client/issues",
-                "source": "https://github.com/amphp/websocket-client/tree/2.x"
+                "source": "https://github.com/amphp/websocket-client/tree/v2.0.0-beta.4"
             },
             "funding": [
                 {
@@ -2037,7 +2036,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-09T16:09:04+00:00"
+            "time": "2023-10-20T03:01:02+00:00"
         },
         {
             "name": "amphp/websocket-server",
@@ -2517,12 +2516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "847bbf1cb3ae1cd4c68e3305b9da80b43e715e54"
+                "reference": "9a2b5a9cfaa1ea7e4333350a804351fcc565c5c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/847bbf1cb3ae1cd4c68e3305b9da80b43e715e54",
-                "reference": "847bbf1cb3ae1cd4c68e3305b9da80b43e715e54",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/9a2b5a9cfaa1ea7e4333350a804351fcc565c5c5",
+                "reference": "9a2b5a9cfaa1ea7e4333350a804351fcc565c5c5",
                 "shasum": ""
             },
             "require": {
@@ -2638,7 +2637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-06T21:06:46+00:00"
+            "time": "2023-10-20T21:01:52+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3728,16 +3727,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.1",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "shasum": ""
             },
             "require": {
@@ -3746,7 +3745,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -3761,7 +3760,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -3775,9 +3774,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/1.1"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "time": "2023-04-04T09:50:52+00:00"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/log",
