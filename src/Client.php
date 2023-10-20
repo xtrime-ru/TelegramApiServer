@@ -142,11 +142,7 @@ class Client
     {
         if ($this->instances[$sessionName]->getAuthorization() === API::LOGGED_IN) {
             if (
-                empty(EventObserver::$sessionClients[$sessionName])
-                && (
-                    $this->instances[$sessionName]->getEventHandler() instanceof EventHandler
-                    || $this->instances[$sessionName]->getEventHandler() instanceof \__PHP_Incomplete_Class
-                )
+                $this->instances[$sessionName]->getEventHandler() instanceof \__PHP_Incomplete_Class
             ) {
                 $this->instances[$sessionName]->unsetEventHandler();
             }
