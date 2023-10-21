@@ -1875,16 +1875,16 @@
         },
         {
             "name": "amphp/websocket",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "f40de822dde0dfe4273e7d6ee4306dbc4d363d44"
+                "reference": "49e6e4349453e799f1db3a350d23bd0aae9725dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/f40de822dde0dfe4273e7d6ee4306dbc4d363d44",
-                "reference": "f40de822dde0dfe4273e7d6ee4306dbc4d363d44",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/49e6e4349453e799f1db3a350d23bd0aae9725dd",
+                "reference": "49e6e4349453e799f1db3a350d23bd0aae9725dd",
                 "shasum": ""
             },
             "require": {
@@ -1944,7 +1944,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket/issues",
-                "source": "https://github.com/amphp/websocket/tree/v2.0.1"
+                "source": "https://github.com/amphp/websocket/tree/v2.0.2"
             },
             "funding": [
                 {
@@ -1952,7 +1952,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-14T04:17:20+00:00"
+            "time": "2023-10-21T17:09:30+00:00"
         },
         {
             "name": "amphp/websocket-client",
@@ -2040,16 +2040,16 @@
         },
         {
             "name": "amphp/websocket-server",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-server.git",
-                "reference": "8a57456e4afc5594514923ebd1ace2e6b46b9e78"
+                "reference": "904902cc0e60950e10b4fb7fa3cb054f5e0c0b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/8a57456e4afc5594514923ebd1ace2e6b46b9e78",
-                "reference": "8a57456e4afc5594514923ebd1ace2e6b46b9e78",
+                "url": "https://api.github.com/repos/amphp/websocket-server/zipball/904902cc0e60950e10b4fb7fa3cb054f5e0c0b6a",
+                "reference": "904902cc0e60950e10b4fb7fa3cb054f5e0c0b6a",
                 "shasum": ""
             },
             "require": {
@@ -2115,7 +2115,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket-server/issues",
-                "source": "https://github.com/amphp/websocket-server/tree/v3.0.0"
+                "source": "https://github.com/amphp/websocket-server/tree/v3.0.1"
             },
             "funding": [
                 {
@@ -2123,7 +2123,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-09T15:46:35+00:00"
+            "time": "2023-10-21T17:10:20+00:00"
         },
         {
             "name": "amphp/windows-registry",
@@ -2516,12 +2516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "9a2b5a9cfaa1ea7e4333350a804351fcc565c5c5"
+                "reference": "0de810c8042f35f39d26e4d173942d847b005423"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/9a2b5a9cfaa1ea7e4333350a804351fcc565c5c5",
-                "reference": "9a2b5a9cfaa1ea7e4333350a804351fcc565c5c5",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0de810c8042f35f39d26e4d173942d847b005423",
+                "reference": "0de810c8042f35f39d26e4d173942d847b005423",
                 "shasum": ""
             },
             "require": {
@@ -2637,7 +2637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-20T21:01:52+00:00"
+            "time": "2023-10-21T17:27:13+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3562,16 +3562,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.23",
+            "version": "3.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "866cc78fbd82462ffd880e3f65692afe928bed50"
+                "reference": "33fa69b2514a61138dd48e7a49f99445711e0ad0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/866cc78fbd82462ffd880e3f65692afe928bed50",
-                "reference": "866cc78fbd82462ffd880e3f65692afe928bed50",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/33fa69b2514a61138dd48e7a49f99445711e0ad0",
+                "reference": "33fa69b2514a61138dd48e7a49f99445711e0ad0",
                 "shasum": ""
             },
             "require": {
@@ -3652,7 +3652,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.23"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.33"
             },
             "funding": [
                 {
@@ -3668,7 +3668,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-18T17:22:01+00:00"
+            "time": "2023-10-21T14:00:39+00:00"
         },
         {
             "name": "psr/http-factory",
