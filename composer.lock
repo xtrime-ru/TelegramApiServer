@@ -1690,16 +1690,16 @@
         },
         {
             "name": "amphp/sql",
-            "version": "v2.0.0-beta.4",
+            "version": "v2.0.0-beta.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql.git",
-                "reference": "2eeb178acaf0d83191d3cf9b397a79dfc50d9b5f"
+                "reference": "2cd168c4a22925c24b74259ecf98ce39f5a73e50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql/zipball/2eeb178acaf0d83191d3cf9b397a79dfc50d9b5f",
-                "reference": "2eeb178acaf0d83191d3cf9b397a79dfc50d9b5f",
+                "url": "https://api.github.com/repos/amphp/sql/zipball/2cd168c4a22925c24b74259ecf98ce39f5a73e50",
+                "reference": "2cd168c4a22925c24b74259ecf98ce39f5a73e50",
                 "shasum": ""
             },
             "require": {
@@ -1732,7 +1732,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql/issues",
-                "source": "https://github.com/amphp/sql/tree/v2.0.0-beta.4"
+                "source": "https://github.com/amphp/sql/tree/v2.0.0-beta.5"
             },
             "funding": [
                 {
@@ -1740,7 +1740,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-16T03:38:22+00:00"
+            "time": "2023-10-22T03:09:29+00:00"
         },
         {
             "name": "amphp/sql-common",
@@ -2516,12 +2516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "0de810c8042f35f39d26e4d173942d847b005423"
+                "reference": "94e3b43834472ce6c52713bff17cfb82d3937828"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0de810c8042f35f39d26e4d173942d847b005423",
-                "reference": "0de810c8042f35f39d26e4d173942d847b005423",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/94e3b43834472ce6c52713bff17cfb82d3937828",
+                "reference": "94e3b43834472ce6c52713bff17cfb82d3937828",
                 "shasum": ""
             },
             "require": {
@@ -2557,7 +2557,7 @@
                 "phpseclib/phpseclib": "^3.0.22",
                 "psr/http-factory": "^1.0",
                 "psr/log": "^3",
-                "revolt/event-loop": "^1.0.3",
+                "revolt/event-loop": "^1.0.4",
                 "symfony/polyfill-mbstring": "*",
                 "webmozart/assert": "^1.11"
             },
@@ -2637,7 +2637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-21T17:27:13+00:00"
+            "time": "2023-10-23T15:26:21+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3830,16 +3830,16 @@
         },
         {
             "name": "revolt/event-loop",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "0fe2d31e1cddd26664e55d383d3d5da613334c03"
+                "reference": "40292c18e53d9a1b7e6c807f4fda5908552e1ba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/0fe2d31e1cddd26664e55d383d3d5da613334c03",
-                "reference": "0fe2d31e1cddd26664e55d383d3d5da613334c03",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/40292c18e53d9a1b7e6c807f4fda5908552e1ba5",
+                "reference": "40292c18e53d9a1b7e6c807f4fda5908552e1ba5",
                 "shasum": ""
             },
             "require": {
@@ -3896,9 +3896,9 @@
             ],
             "support": {
                 "issues": "https://github.com/revoltphp/event-loop/issues",
-                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.3"
+                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.4"
             },
-            "time": "2023-07-29T17:07:12+00:00"
+            "time": "2023-10-22T03:19:00+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
