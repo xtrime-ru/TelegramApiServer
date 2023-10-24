@@ -30,6 +30,7 @@ $settings = [
         ],
         'db' => [
             'enable_min_db' => (bool)filter_var((string)getenv('DB_ENABLE_MIN_DATABASE'), FILTER_VALIDATE_BOOL),
+            'enable_file_reference_db' => (bool)filter_var((string)getenv('DB_ENABLE_FILE_REFERENCE_DATABASE'), FILTER_VALIDATE_BOOL),
             'type' => (string)getenv('DB_TYPE'),
             getenv('DB_TYPE') => [
                 'uri' => 'tcp://' . getenv('DB_HOST') . ':' . (int)getenv('DB_PORT'),
