@@ -26,7 +26,7 @@ $settings = [
             'max_media_socket_count' => 10
         ],
         'serialization' => [
-            'interval' => 60,
+            'interval' => 600,
         ],
         'db' => [
             'enable_min_db' => (bool)filter_var((string)getenv('DB_ENABLE_MIN_DATABASE'), FILTER_VALIDATE_BOOL),
