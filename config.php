@@ -19,7 +19,7 @@ $settings = [
             'level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
         'rpc' => [
-            'flood_timeout' => 10,
+            'flood_timeout' => 5,
             'rpc_drop_timeout' => 11,
         ],
         'connection' => [
