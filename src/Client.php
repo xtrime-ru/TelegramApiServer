@@ -62,7 +62,7 @@ class Client
             Files::getSessionSettings($session),
         );
 
-        $settingsObject = self::getSettingsFromArray($settings);
+        $settingsObject = self::getSettingsFromArray($session, $settings);
 
         $instance = new API($file, $settingsObject);
         $instance->updateSettings($settingsObject);
@@ -159,8 +159,7 @@ class Client
         return $wrapper;
     }
 
-    private static function getSettingsFromArray(array $settings, SettingsAbstract $settingsObject = new Settings()): SettingsAbstract {
-
+    private static function getSettingsFromArray(string $session, array $settings, SettingsAbstract $settingsObject = new Settings()): SettingsAbstract {
         foreach ($settings as $key => $value) {
             if (is_array($value)) {
                 if ($key === 'db' && isset($value['type'])) {
@@ -171,10 +170,12 @@ class Client
                         'redis' => new Settings\Database\Redis(),
                     };
                     $settingsObject->setDb($type);
-                    if ($value['type'] === 'memory') {
-                        self::getSettingsFromArray([], $type);
+
+                    if ($type instanceof Settings\Database\Memory) {
+                        self::getSettingsFromArray($session, [], $type);
                     } else {
-                        self::getSettingsFromArray($value[$value['type']], $type);
+                        $type->setEphemeralFilesystemPrefix($session);
+                        self::getSettingsFromArray($session, $value[$value['type']], $type);
                     }
 
                     unset($value[$value['type']], $value['type'],);
@@ -184,7 +185,7 @@ class Client
                 }
 
                 $method = 'get' . ucfirst(str_replace('_', '', ucwords($key, '_')));
-                self::getSettingsFromArray($value, $settingsObject->$method());
+                self::getSettingsFromArray($session, $value, $settingsObject->$method());
             } else {
                 $method = 'set' . ucfirst(str_replace('_', '', ucwords($key, '_')));
                 $settingsObject->$method($value);

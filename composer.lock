@@ -89,16 +89,16 @@
         },
         {
             "name": "amphp/byte-stream",
-            "version": "v2.0.2",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/byte-stream.git",
-                "reference": "408a3b4fc4f4c7604575dc8704f18c1bd91c3ceb"
+                "reference": "0a4b0e80dad92c75e6131f8ad253919211540338"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/408a3b4fc4f4c7604575dc8704f18c1bd91c3ceb",
-                "reference": "408a3b4fc4f4c7604575dc8704f18c1bd91c3ceb",
+                "url": "https://api.github.com/repos/amphp/byte-stream/zipball/0a4b0e80dad92c75e6131f8ad253919211540338",
+                "reference": "0a4b0e80dad92c75e6131f8ad253919211540338",
                 "shasum": ""
             },
             "require": {
@@ -152,7 +152,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/byte-stream/issues",
-                "source": "https://github.com/amphp/byte-stream/tree/v2.0.2"
+                "source": "https://github.com/amphp/byte-stream/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -160,7 +160,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-01T04:41:26+00:00"
+            "time": "2023-11-19T14:34:16+00:00"
         },
         {
             "name": "amphp/cache",
@@ -229,16 +229,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "e42876aa8306c754abd1b3e71a44e13066909fd1"
+                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/e42876aa8306c754abd1b3e71a44e13066909fd1",
-                "reference": "e42876aa8306c754abd1b3e71a44e13066909fd1",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/c3b518f321f26e786554480de580f06b9f34d1cd",
+                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd",
                 "shasum": ""
             },
             "require": {
@@ -305,7 +305,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2.0.1"
+                "source": "https://github.com/amphp/dns/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -313,7 +313,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-21T16:00:09+00:00"
+            "time": "2023-11-18T15:49:57+00:00"
         },
         {
             "name": "amphp/file",
@@ -2516,12 +2516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "6200e8613a8c55287e99599db67677205cfc3b4d"
+                "reference": "4ddfc859ee3837b8f32c53a57e7ed8d94b39c094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/6200e8613a8c55287e99599db67677205cfc3b4d",
-                "reference": "6200e8613a8c55287e99599db67677205cfc3b4d",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/4ddfc859ee3837b8f32c53a57e7ed8d94b39c094",
+                "reference": "4ddfc859ee3837b8f32c53a57e7ed8d94b39c094",
                 "shasum": ""
             },
             "require": {
@@ -2557,7 +2557,7 @@
                 "phpseclib/phpseclib": "^3.0.22",
                 "psr/http-factory": "^1.0",
                 "psr/log": "^3",
-                "revolt/event-loop": "^1.0.4",
+                "revolt/event-loop": "^1.0.5",
                 "symfony/polyfill-mbstring": "*",
                 "webmozart/assert": "^1.11"
             },
@@ -2637,7 +2637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-17T22:18:17+00:00"
+            "time": "2023-11-19T17:54:55+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3830,16 +3830,16 @@
         },
         {
             "name": "revolt/event-loop",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "40292c18e53d9a1b7e6c807f4fda5908552e1ba5"
+                "reference": "fce6063869513de56f639aa522b2ef2fedbf8d73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/40292c18e53d9a1b7e6c807f4fda5908552e1ba5",
-                "reference": "40292c18e53d9a1b7e6c807f4fda5908552e1ba5",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/fce6063869513de56f639aa522b2ef2fedbf8d73",
+                "reference": "fce6063869513de56f639aa522b2ef2fedbf8d73",
                 "shasum": ""
             },
             "require": {
@@ -3849,7 +3849,7 @@
                 "ext-json": "*",
                 "jetbrains/phpstorm-stubs": "^2019.3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.7"
+                "psalm/phar": "^5.15"
             },
             "type": "library",
             "extra": {
@@ -3896,9 +3896,9 @@
             ],
             "support": {
                 "issues": "https://github.com/revoltphp/event-loop/issues",
-                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.4"
+                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.5"
             },
-            "time": "2023-10-22T03:19:00+00:00"
+            "time": "2023-11-19T14:45:35+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
