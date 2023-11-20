@@ -65,17 +65,17 @@ class SystemApiExtensions
                 case API::WAITING_CODE:
                     $status = 'WAITING_CODE';
                     break;
-                case API::WAITING_PASSWORD:
-                    $status = 'WAITING_PASSWORD';
-                    break;
                 case API::WAITING_SIGNUP:
                     $status = 'WAITING_SIGNUP';
+                    break;
+                case API::WAITING_PASSWORD:
+                    $status = 'WAITING_PASSWORD';
                     break;
                 case API::LOGGED_IN:
                     $status = 'LOGGED_IN';
                     break;
-                case null:
-                    $status = 'LOADING';
+                case API::LOGGED_OUT:
+                    $status = 'LOGGED_OUT';
                     break;
                 default:
                     $status = $authorized;
