@@ -1,10 +1,10 @@
-FROM php:8.2-cli
+FROM php:8.3-cli
 
 RUN apt-get update && apt-get upgrade -y
 RUN true \
     # Install main extension
-    && apt-get install procps git zip vim libzip-dev libgmp-dev libevent-dev libssl-dev libnghttp2-dev libffi-dev -y \
-    && docker-php-ext-install -j$(nproc) sockets zip gmp pcntl bcmath ffi mysqli pdo pdo_mysql \
+    && apt-get install procps git zip vim libzip-dev libgmp-dev libevent-dev libssl-dev libnghttp2-dev libffi-dev libicu-dev libonig-dev libxml2-dev libpng-dev -y \
+    && docker-php-ext-install -j$(nproc) sockets bcmath mysqli pdo_mysql pcntl ffi intl gmp zip gd \
     # Install additional extension
     && mkdir -p /usr/src/php/ext/ && cd /usr/src/php/ext/ \
     && pecl bundle ev-beta && pecl bundle eio-beta \
