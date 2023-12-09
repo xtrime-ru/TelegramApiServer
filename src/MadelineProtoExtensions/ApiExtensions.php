@@ -8,7 +8,9 @@ use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use danog\MadelineProto;
+use danog\MadelineProto\PeerNotInDbException;
 use danog\MadelineProto\StrTools;
+use http\Exception\InvalidArgumentException;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\Exceptions\MediaTooBig;
@@ -527,6 +529,41 @@ class ApiExtensions
         }
 
         return $this->madelineProto->getUpdates($params);
+    }
+
+    public function unsubscribeFromUpdates(?string $channel = null): array {
+        $inputChannelId = null;
+        if ($channel) {
+            $id = (string) $this->madelineProto->getId($channel);
+
+            $inputChannelId = (int)str_replace(['-100', '-'], '', $id);
+            if (!$inputChannelId) {
+                throw new InvalidArgumentException('Invalid id');
+            }
+        }
+        $counter = 0;
+        foreach (Client::getWrapper($this->madelineProto)->getAPI()->feeders as $channelId => $_) {
+            if ($channelId === 0) {
+                continue;
+            }
+            if ($inputChannelId && $inputChannelId !== $channelId) {
+                continue;
+            }
+            Client::getWrapper($this->madelineProto)->getAPI()->feeders[$channelId]->stop();
+            Client::getWrapper($this->madelineProto)->getAPI()->updaters[$channelId]->stop();
+            unset(
+                Client::getWrapper($this->madelineProto)->getAPI()->feeders[$channelId],
+                Client::getWrapper($this->madelineProto)->getAPI()->updaters[$channelId]
+            );
+            Client::getWrapper($this->madelineProto)->getAPI()->getChannelStates()->remove($channelId);
+            $counter++;
+        }
+
+
+        return [
+            'disabled_update_loops' => $counter,
+            'current_update_loops' => count(Client::getWrapper($this->madelineProto)->getAPI()->feeders),
+        ];
     }
 
 }
