@@ -5,6 +5,7 @@ namespace TelegramApiServer;
 use danog\MadelineProto\API;
 use danog\MadelineProto\APIWrapper;
 use danog\MadelineProto\Settings;
+use danog\MadelineProto\Settings\Database\SerializerType;
 use danog\MadelineProto\SettingsAbstract;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
@@ -187,6 +188,9 @@ class Client
                 $method = 'get' . ucfirst(str_replace('_', '', ucwords($key, '_')));
                 self::getSettingsFromArray($session, $value, $settingsObject->$method());
             } else {
+                if ($key === 'serializer' && is_string($value)) {
+                    $value = SerializerType::from($value);
+                }
                 $method = 'set' . ucfirst(str_replace('_', '', ucwords($key, '_')));
                 $settingsObject->$method($value);
             }

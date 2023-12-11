@@ -7,8 +7,8 @@ RUN true \
     && docker-php-ext-install -j$(nproc) sockets bcmath mysqli pdo_mysql pcntl ffi intl gmp zip gd \
     # Install additional extension
     && mkdir -p /usr/src/php/ext/ && cd /usr/src/php/ext/ \
-    && pecl bundle ev-beta && pecl bundle eio-beta \
-    && docker-php-ext-install -j$(nproc) ev eio \
+    && pecl bundle ev-beta && pecl bundle eio-beta && pecl bundle igbinary \
+    && docker-php-ext-install -j$(nproc) ev eio igbinary \
     # Install PrimeModule for AuthKey generation speedup
     && git clone https://github.com/danog/PrimeModule-ext \
     && cd PrimeModule-ext && make -j$(nproc) \
