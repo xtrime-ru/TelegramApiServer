@@ -23,7 +23,17 @@ $settings = [
             'rpc_drop_timeout' => 11,
         ],
         'connection' => [
-            'max_media_socket_count' => 10
+            'max_media_socket_count' => 10,
+            'proxies' => [
+                '\danog\MadelineProto\Stream\Proxy\SocksProxy' => [
+                    [
+                        "address" => (string)getenv('TELEGRAM_PROXY_ADDRESS'),
+                        "port"=> (int)getenv('TELEGRAM_PROXY_PORT'),
+                        "username"=> (string)getenv('TELEGRAM_PROXY_USERNAME'),
+                        "password"=> (string)getenv('TELEGRAM_PROXY_PASSWORD'),
+                    ],
+                ]
+            ]
         ],
         'serialization' => [
             'interval' => 600,
@@ -62,6 +72,10 @@ $settings = [
         'timeout' => ((int)getenv('HEALTHCHECK_REQUEST_TIMEOUT') ?: 60),
     ]
 ];
+
+if (empty($settings['telegram']['connection']['proxies']['\danog\MadelineProto\Stream\Proxy\SocksProxy'][0]['address'])) {
+    $settings['telegram']['connection']['proxies'] = [];
+}
 
 if (empty($settings['telegram']['app_info']['api_id'])) {
     throw new InvalidArgumentException('Need to fill TELEGRAM_API_ID in .env.docker or .env');

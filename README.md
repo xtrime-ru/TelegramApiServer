@@ -232,15 +232,24 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
 
     ```json
     {
-        "connection_settings": {
-            "all": {
-                "proxy": "\\SocksProxy",
-                "proxy_extra": {
-                    "address": "127.0.0.1",
-                    "port": 1234,
-                    "username": "user",
-                    "password": "pass"
-                }
+        "connection": {
+            "proxies": {
+                "\\danog\\MadelineProto\\Stream\\Proxy\\SocksProxy": [
+                    {
+                      "address": "127.0.0.1",
+                      "port": 1234,
+                      "username": "user",
+                      "password": "pass"
+                    }
+                ],
+                "\\danog\\MadelineProto\\Stream\\Proxy\\HttpProxy": [
+                    {
+                      "address": "127.0.0.1",
+                      "port": 1234,
+                      "username": "user",
+                      "password": "pass"
+                    }
+                ]
             }
         }
     }

@@ -161,7 +161,7 @@ class Client
 
     private static function getSettingsFromArray(string $session, array $settings, SettingsAbstract $settingsObject = new Settings()): SettingsAbstract {
         foreach ($settings as $key => $value) {
-            if (is_array($value)) {
+            if (is_array($value) && $key !== 'proxies') {
                 if ($key === 'db' && isset($value['type'])) {
                     $type = match ($value['type']) {
                         'memory' => new Settings\Database\Memory(),
