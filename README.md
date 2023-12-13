@@ -31,8 +31,7 @@ docker compose pull
 ## Authorization
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/). 
     Only one app_id needed for any amount of users and bots.
-1. Create `.env.docker` from `.env.docker.example`: `cp .env.docker.example .env.docker`.
-2. Fill app_id and app_hash in `.env.docker`.
+1. Fill app_id and app_hash in `.env.docker`.
 1. Start TelegramApiServer in cli:
         1. Start container interactively: `docker compose run --rm api`
         2. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in `command`.
