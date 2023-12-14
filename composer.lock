@@ -540,16 +540,16 @@
         },
         {
             "name": "amphp/http-client",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-client.git",
-                "reference": "03476991480578deb2058b926c1be1479129779f"
+                "reference": "9b42ca1a5af9abd1dd8c3f9e45c2bb15957361b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-client/zipball/03476991480578deb2058b926c1be1479129779f",
-                "reference": "03476991480578deb2058b926c1be1479129779f",
+                "url": "https://api.github.com/repos/amphp/http-client/zipball/9b42ca1a5af9abd1dd8c3f9e45c2bb15957361b7",
+                "reference": "9b42ca1a5af9abd1dd8c3f9e45c2bb15957361b7",
                 "shasum": ""
             },
             "require": {
@@ -623,7 +623,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-client/issues",
-                "source": "https://github.com/amphp/http-client/tree/v5.0.0"
+                "source": "https://github.com/amphp/http-client/tree/v5.0.1"
             },
             "funding": [
                 {
@@ -631,7 +631,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-08T16:24:43+00:00"
+            "time": "2023-12-11T03:48:12+00:00"
         },
         {
             "name": "amphp/http-client-cookies",
@@ -1045,16 +1045,16 @@
         },
         {
             "name": "amphp/mysql",
-            "version": "v3.0.0-beta.6",
+            "version": "v3.0.0-beta.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/mysql.git",
-                "reference": "8a7d4ac964d7efd3f83f4a0a05fa3af2b6978a8f"
+                "reference": "90f99de80638e2ef486f786a047a15ab2d114d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/mysql/zipball/8a7d4ac964d7efd3f83f4a0a05fa3af2b6978a8f",
-                "reference": "8a7d4ac964d7efd3f83f4a0a05fa3af2b6978a8f",
+                "url": "https://api.github.com/repos/amphp/mysql/zipball/90f99de80638e2ef486f786a047a15ab2d114d5e",
+                "reference": "90f99de80638e2ef486f786a047a15ab2d114d5e",
                 "shasum": ""
             },
             "require": {
@@ -1062,8 +1062,8 @@
                 "amphp/parser": "^1.1",
                 "amphp/pipeline": "^1",
                 "amphp/socket": "^2",
-                "amphp/sql": "^2",
-                "amphp/sql-common": "^2",
+                "amphp/sql": "^2-beta.6",
+                "amphp/sql-common": "^2-beta.7",
                 "php": ">=8.1"
             },
             "require-dev": {
@@ -1103,7 +1103,7 @@
             "description": "Asynchronous MySQL client for PHP based on Amp.",
             "support": {
                 "issues": "https://github.com/amphp/mysql/issues",
-                "source": "https://github.com/amphp/mysql/tree/v3.0.0-beta.6"
+                "source": "https://github.com/amphp/mysql/tree/v3.0.0-beta.7"
             },
             "funding": [
                 {
@@ -1111,7 +1111,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-07T13:48:11+00:00"
+            "time": "2023-12-10T03:54:20+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1327,32 +1327,32 @@
         },
         {
             "name": "amphp/postgres",
-            "version": "v2.0.0-beta.4",
+            "version": "v2.0.0-beta.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/postgres.git",
-                "reference": "4e23b380a9cecdcc7c0ba8a99814c227284aa07c"
+                "reference": "ca59db500abc05f1f89424ce734f97989a791e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/postgres/zipball/4e23b380a9cecdcc7c0ba8a99814c227284aa07c",
-                "reference": "4e23b380a9cecdcc7c0ba8a99814c227284aa07c",
+                "url": "https://api.github.com/repos/amphp/postgres/zipball/ca59db500abc05f1f89424ce734f97989a791e8a",
+                "reference": "ca59db500abc05f1f89424ce734f97989a791e8a",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
                 "amphp/pipeline": "^1",
-                "amphp/sql": "^2",
-                "amphp/sql-common": "^2",
+                "amphp/sql": "^2-beta.6",
+                "amphp/sql-common": "^2-beta.7",
                 "php": ">=8.1"
             },
             "require-dev": {
-                "amphp/php-cs-fixer-config": "^2-dev",
+                "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "ext-pgsql": "*",
                 "ext-pq": "*",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "^5.11"
             },
             "type": "library",
             "autoload": {
@@ -1387,7 +1387,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/postgres/issues",
-                "source": "https://github.com/amphp/postgres/tree/v2.0.0-beta.4"
+                "source": "https://github.com/amphp/postgres/tree/v2.0.0-beta.5"
             },
             "funding": [
                 {
@@ -1395,7 +1395,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-07T05:05:00+00:00"
+            "time": "2023-12-09T15:40:47+00:00"
         },
         {
             "name": "amphp/process",
@@ -1690,16 +1690,16 @@
         },
         {
             "name": "amphp/sql",
-            "version": "v2.0.0-beta.5",
+            "version": "v2.0.0-beta.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql.git",
-                "reference": "2cd168c4a22925c24b74259ecf98ce39f5a73e50"
+                "reference": "94798059de6953707fc6e517bba42483bb5e5bf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql/zipball/2cd168c4a22925c24b74259ecf98ce39f5a73e50",
-                "reference": "2cd168c4a22925c24b74259ecf98ce39f5a73e50",
+                "url": "https://api.github.com/repos/amphp/sql/zipball/94798059de6953707fc6e517bba42483bb5e5bf7",
+                "reference": "94798059de6953707fc6e517bba42483bb5e5bf7",
                 "shasum": ""
             },
             "require": {
@@ -1732,7 +1732,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql/issues",
-                "source": "https://github.com/amphp/sql/tree/v2.0.0-beta.5"
+                "source": "https://github.com/amphp/sql/tree/v2.0.0-beta.6"
             },
             "funding": [
                 {
@@ -1740,25 +1740,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-22T03:09:29+00:00"
+            "time": "2023-12-08T23:57:41+00:00"
         },
         {
             "name": "amphp/sql-common",
-            "version": "v2.0.0-beta.6",
+            "version": "v2.0.0-beta.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql-common.git",
-                "reference": "a6cef9fb4c9d87e9ab7d40c762ef490dda43f04f"
+                "reference": "ad61674a3137808add3a294ba86bf18496e4a1d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql-common/zipball/a6cef9fb4c9d87e9ab7d40c762ef490dda43f04f",
-                "reference": "a6cef9fb4c9d87e9ab7d40c762ef490dda43f04f",
+                "url": "https://api.github.com/repos/amphp/sql-common/zipball/ad61674a3137808add3a294ba86bf18496e4a1d5",
+                "reference": "ad61674a3137808add3a294ba86bf18496e4a1d5",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
-                "amphp/sql": "^2",
+                "amphp/sql": "^2-beta.6",
                 "php": ">=8.1"
             },
             "require-dev": {
@@ -1788,7 +1788,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql-common/issues",
-                "source": "https://github.com/amphp/sql-common/tree/v2.0.0-beta.6"
+                "source": "https://github.com/amphp/sql-common/tree/v2.0.0-beta.8"
             },
             "funding": [
                 {
@@ -1796,7 +1796,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-17T15:45:22+00:00"
+            "time": "2023-12-12T22:35:15+00:00"
         },
         {
             "name": "amphp/sync",
@@ -2516,12 +2516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "982df5aec9973a032bb3327c162eb6f028e1692e"
+                "reference": "f62e6c15ddf40f250587551db9f4ff20bf2f07ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/982df5aec9973a032bb3327c162eb6f028e1692e",
-                "reference": "982df5aec9973a032bb3327c162eb6f028e1692e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/f62e6c15ddf40f250587551db9f4ff20bf2f07ca",
+                "reference": "f62e6c15ddf40f250587551db9f4ff20bf2f07ca",
                 "shasum": ""
             },
             "require": {
@@ -2638,7 +2638,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-07T13:35:29+00:00"
+            "time": "2023-12-14T00:56:48+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3315,16 +3315,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.17.1",
+            "version": "v4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d"
+                "reference": "1bcbb2179f97633e98bbbc87044ee2611c7d7999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
-                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1bcbb2179f97633e98bbbc87044ee2611c7d7999",
+                "reference": "1bcbb2179f97633e98bbbc87044ee2611c7d7999",
                 "shasum": ""
             },
             "require": {
@@ -3365,9 +3365,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.17.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.18.0"
             },
-            "time": "2023-08-13T19:53:39+00:00"
+            "time": "2023-12-10T21:03:43+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
