@@ -25,7 +25,6 @@ const ENV_VERSION='1';
 //Config init
 {
     if (!getenv('SERVER_ADDRESS')) {
-        EnvUpgrade::mysqlToDbPrefix();
 
         $envFile = $options['env'];
         if (empty($envFile)) {

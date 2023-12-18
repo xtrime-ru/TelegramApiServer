@@ -68,8 +68,6 @@ Example:
 
 require_once __DIR__ . '/bootstrap.php';
 
-SessionsMigration::move();
-SwooleToAmpMigration::check();
 StartUpFixes::fix();
 $mainProcessPid = getmypid();
 
