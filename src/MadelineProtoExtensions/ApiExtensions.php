@@ -517,9 +517,11 @@ class ApiExtensions
     public function setEventHandler(): void
     {
         Client::getWrapper($this->madelineProto)->getAPI()->setEventHandler(EventHandler::class);
+        Client::getWrapper($this->madelineProto)->serialize();
     }
 
-    public function getUpdates(array $params): array  {
+    public function getUpdates(array $params): array
+    {
         foreach ($params as $key => $value) {
             $params[$key] = match($key) {
                 'offset', 'limit' => (int) $value,
@@ -529,6 +531,18 @@ class ApiExtensions
         }
 
         return $this->madelineProto->getUpdates($params);
+    }
+
+    public function setNoop(): void
+    {
+        $this->madelineProto->setNoop();
+        Client::getWrapper($this->madelineProto)->serialize();
+    }
+
+    public function setWebhook(string $url): void
+    {
+        $this->madelineProto->setWebhook($url);
+        Client::getWrapper($this->madelineProto)->serialize();
     }
 
     public function unsubscribeFromUpdates(?string $channel = null): array {
