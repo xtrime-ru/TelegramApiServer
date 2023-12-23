@@ -68,7 +68,7 @@ Example:
 
 require_once __DIR__ . '/bootstrap.php';
 
-StartUpFixes::fix();
+
 $mainProcessPid = getmypid();
 
 if (Config::getInstance()->get('health_check.enabled')) {
@@ -97,6 +97,11 @@ foreach ($options['session'] as $session) {
 
     $sessions = array_filter($sessions);
     $sessions = array_unique($sessions);
+}
+
+StartUpFixes::fix();
+foreach ($sessions as $session) {
+    StartUpFixes::removeBrokenIpc($session);
 }
 
 new TelegramApiServer\Server\Server(
