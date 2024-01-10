@@ -317,16 +317,16 @@
         },
         {
             "name": "amphp/file",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/file.git",
-                "reference": "efeb737b1f19a7fcfe8a763c5ef2ad80dbac93dd"
+                "reference": "45d8d84c4496c695cf2ca2bf05f236a3e36c3558"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/file/zipball/efeb737b1f19a7fcfe8a763c5ef2ad80dbac93dd",
-                "reference": "efeb737b1f19a7fcfe8a763c5ef2ad80dbac93dd",
+                "url": "https://api.github.com/repos/amphp/file/zipball/45d8d84c4496c695cf2ca2bf05f236a3e36c3558",
+                "reference": "45d8d84c4496c695cf2ca2bf05f236a3e36c3558",
                 "shasum": ""
             },
             "require": {
@@ -390,7 +390,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/file/issues",
-                "source": "https://github.com/amphp/file/tree/v3.0.1"
+                "source": "https://github.com/amphp/file/tree/v3.0.2"
             },
             "funding": [
                 {
@@ -398,7 +398,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-23T18:54:06+00:00"
+            "time": "2023-12-27T22:52:04+00:00"
         },
         {
             "name": "amphp/hpack",
@@ -712,16 +712,16 @@
         },
         {
             "name": "amphp/http-server",
-            "version": "v3.2.0",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/http-server.git",
-                "reference": "0f658ebb8dcc0d352b26f8021288ff101e3888b5"
+                "reference": "4b580fec9ecb7d24a080c8d3b47404cb76759fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/http-server/zipball/0f658ebb8dcc0d352b26f8021288ff101e3888b5",
-                "reference": "0f658ebb8dcc0d352b26f8021288ff101e3888b5",
+                "url": "https://api.github.com/repos/amphp/http-server/zipball/4b580fec9ecb7d24a080c8d3b47404cb76759fca",
+                "reference": "4b580fec9ecb7d24a080c8d3b47404cb76759fca",
                 "shasum": ""
             },
             "require": {
@@ -797,7 +797,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/http-server/issues",
-                "source": "https://github.com/amphp/http-server/tree/v3.2.0"
+                "source": "https://github.com/amphp/http-server/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -805,7 +805,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-24T23:40:38+00:00"
+            "time": "2023-12-28T23:14:52+00:00"
         },
         {
             "name": "amphp/http-server-form-parser",
@@ -1045,16 +1045,16 @@
         },
         {
             "name": "amphp/mysql",
-            "version": "v3.0.0-beta.8",
+            "version": "v3.0.0-beta.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/mysql.git",
-                "reference": "e95eee910fdab24e26d4d0e86d6120e790d88c9b"
+                "reference": "c0144febfe9c53f923454eb06a28272d70322e31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/mysql/zipball/e95eee910fdab24e26d4d0e86d6120e790d88c9b",
-                "reference": "e95eee910fdab24e26d4d0e86d6120e790d88c9b",
+                "url": "https://api.github.com/repos/amphp/mysql/zipball/c0144febfe9c53f923454eb06a28272d70322e31",
+                "reference": "c0144febfe9c53f923454eb06a28272d70322e31",
                 "shasum": ""
             },
             "require": {
@@ -1103,7 +1103,7 @@
             "description": "Asynchronous MySQL client for PHP based on Amp.",
             "support": {
                 "issues": "https://github.com/amphp/mysql/issues",
-                "source": "https://github.com/amphp/mysql/tree/v3.0.0-beta.8"
+                "source": "https://github.com/amphp/mysql/tree/v3.0.0-beta.9"
             },
             "funding": [
                 {
@@ -1111,20 +1111,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-17T16:54:19+00:00"
+            "time": "2023-12-30T18:35:57+00:00"
         },
         {
             "name": "amphp/parallel",
-            "version": "v2.2.4",
+            "version": "v2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parallel.git",
-                "reference": "8b8f33a742c2ba63a8bfff664f5836c26f1996ed"
+                "reference": "5aeaad20297507cc754859236720501b54306eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel/zipball/8b8f33a742c2ba63a8bfff664f5836c26f1996ed",
-                "reference": "8b8f33a742c2ba63a8bfff664f5836c26f1996ed",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/5aeaad20297507cc754859236720501b54306eba",
+                "reference": "5aeaad20297507cc754859236720501b54306eba",
                 "shasum": ""
             },
             "require": {
@@ -1143,7 +1143,7 @@
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "^5.18"
             },
             "type": "library",
             "autoload": {
@@ -1186,7 +1186,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/parallel/issues",
-                "source": "https://github.com/amphp/parallel/tree/v2.2.4"
+                "source": "https://github.com/amphp/parallel/tree/v2.2.6"
             },
             "funding": [
                 {
@@ -1194,7 +1194,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-29T04:21:30+00:00"
+            "time": "2024-01-07T18:12:13+00:00"
         },
         {
             "name": "amphp/parser",
@@ -1606,16 +1606,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "88ca6d2cfec2f40b1c7beac7316a26cd916fd209"
+                "reference": "eb6c5e6baae5aebd9a209f50e81bff38c7efef97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/88ca6d2cfec2f40b1c7beac7316a26cd916fd209",
-                "reference": "88ca6d2cfec2f40b1c7beac7316a26cd916fd209",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/eb6c5e6baae5aebd9a209f50e81bff38c7efef97",
+                "reference": "eb6c5e6baae5aebd9a209f50e81bff38c7efef97",
                 "shasum": ""
             },
             "require": {
@@ -1678,7 +1678,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/v2.2.1"
+                "source": "https://github.com/amphp/socket/tree/v2.2.2"
             },
             "funding": [
                 {
@@ -1686,7 +1686,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-16T00:08:33+00:00"
+            "time": "2023-12-31T18:12:01+00:00"
         },
         {
             "name": "amphp/sql",
@@ -1744,16 +1744,16 @@
         },
         {
             "name": "amphp/sql-common",
-            "version": "v2.0.0-beta.9",
+            "version": "v2.0.0-beta.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql-common.git",
-                "reference": "891749895e5de6fa7f38b1bc016f8d00a8dc8d3f"
+                "reference": "5d7dce71ba6618b46c23e2770b9d765f7fcc2653"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql-common/zipball/891749895e5de6fa7f38b1bc016f8d00a8dc8d3f",
-                "reference": "891749895e5de6fa7f38b1bc016f8d00a8dc8d3f",
+                "url": "https://api.github.com/repos/amphp/sql-common/zipball/5d7dce71ba6618b46c23e2770b9d765f7fcc2653",
+                "reference": "5d7dce71ba6618b46c23e2770b9d765f7fcc2653",
                 "shasum": ""
             },
             "require": {
@@ -1788,7 +1788,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql-common/issues",
-                "source": "https://github.com/amphp/sql-common/tree/v2.0.0-beta.9"
+                "source": "https://github.com/amphp/sql-common/tree/v2.0.0-beta.10"
             },
             "funding": [
                 {
@@ -1796,7 +1796,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-17T16:24:08+00:00"
+            "time": "2023-12-30T17:18:49+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1875,16 +1875,16 @@
         },
         {
             "name": "amphp/websocket",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket.git",
-                "reference": "49e6e4349453e799f1db3a350d23bd0aae9725dd"
+                "reference": "1dc9d2c3b9b10965510d2762181254d825098419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket/zipball/49e6e4349453e799f1db3a350d23bd0aae9725dd",
-                "reference": "49e6e4349453e799f1db3a350d23bd0aae9725dd",
+                "url": "https://api.github.com/repos/amphp/websocket/zipball/1dc9d2c3b9b10965510d2762181254d825098419",
+                "reference": "1dc9d2c3b9b10965510d2762181254d825098419",
                 "shasum": ""
             },
             "require": {
@@ -1900,7 +1900,7 @@
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "^5.18"
             },
             "suggest": {
                 "ext-zlib": "Required for compression"
@@ -1944,7 +1944,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket/issues",
-                "source": "https://github.com/amphp/websocket/tree/v2.0.2"
+                "source": "https://github.com/amphp/websocket/tree/v2.0.3"
             },
             "funding": [
                 {
@@ -1952,41 +1952,41 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-21T17:09:30+00:00"
+            "time": "2023-12-28T23:16:28+00:00"
         },
         {
             "name": "amphp/websocket-client",
-            "version": "v2.0.0-beta.4",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/websocket-client.git",
-                "reference": "f6d27ccfffb7991d1c6927dfda7ccf81a6fdf069"
+                "reference": "87a5d324997421c79cafbacb9a0f870f95fd42e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/f6d27ccfffb7991d1c6927dfda7ccf81a6fdf069",
-                "reference": "f6d27ccfffb7991d1c6927dfda7ccf81a6fdf069",
+                "url": "https://api.github.com/repos/amphp/websocket-client/zipball/87a5d324997421c79cafbacb9a0f870f95fd42e9",
+                "reference": "87a5d324997421c79cafbacb9a0f870f95fd42e9",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3",
-                "amphp/byte-stream": "^2",
-                "amphp/http": "^2",
+                "amphp/byte-stream": "^2.1",
+                "amphp/http": "^2.1",
                 "amphp/http-client": "^5",
-                "amphp/socket": "^2",
+                "amphp/socket": "^2.2",
                 "amphp/websocket": "^2",
-                "league/uri": "^6.8 | ^7.1",
+                "league/uri": "^6.8|^7.1",
                 "php": ">=8.1",
-                "psr/http-message": "^1 | ^2",
+                "psr/http-message": "^1|^2",
                 "revolt/event-loop": "^1"
             },
             "require-dev": {
                 "amphp/http-server": "^3",
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
-                "amphp/websocket-server": "^3",
+                "amphp/websocket-server": "^3|^4",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4",
+                "psalm/phar": "^5.18",
                 "psr/log": "^1"
             },
             "type": "library",
@@ -2028,7 +2028,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/websocket-client/issues",
-                "source": "https://github.com/amphp/websocket-client/tree/v2.0.0-beta.4"
+                "source": "https://github.com/amphp/websocket-client/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -2036,7 +2036,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-20T03:01:02+00:00"
+            "time": "2023-12-28T01:48:55+00:00"
         },
         {
             "name": "amphp/websocket-server",
@@ -3563,16 +3563,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.34",
+            "version": "3.0.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "56c79f16a6ae17e42089c06a2144467acc35348a"
+                "reference": "4b1827beabce71953ca479485c0ae9c51287f2fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/56c79f16a6ae17e42089c06a2144467acc35348a",
-                "reference": "56c79f16a6ae17e42089c06a2144467acc35348a",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/4b1827beabce71953ca479485c0ae9c51287f2fe",
+                "reference": "4b1827beabce71953ca479485c0ae9c51287f2fe",
                 "shasum": ""
             },
             "require": {
@@ -3653,7 +3653,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.34"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.35"
             },
             "funding": [
                 {
@@ -3669,7 +3669,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-11-27T11:13:31+00:00"
+            "time": "2023-12-29T01:59:53+00:00"
         },
         {
             "name": "psr/http-factory",
