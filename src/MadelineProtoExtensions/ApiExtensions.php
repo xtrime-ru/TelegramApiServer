@@ -520,6 +520,12 @@ class ApiExtensions
         Client::getWrapper($this->madelineProto)->serialize();
     }
 
+    public function serialize(): void
+    {
+        Client::getWrapper($this->madelineProto)->serialize();
+    }
+
+
     public function getUpdates(array $params): array
     {
         foreach ($params as $key => $value) {
