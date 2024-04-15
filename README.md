@@ -58,64 +58,58 @@ docker compose pull
   docker compose up -d
   ```
 
-## Usage
-1. Run server/parser
-    ```
-    usage: php server.php [--help] [-a=|--address=127.0.0.1] [-p=|--port=9503] [-s=|--session=]  [-e=|--env=.env] [--docker]
-    
-    Options:
-            --help      Show this message
-            
-        -a  --address   Server ip (optional) (default: 127.0.0.1)
-                        To listen external connections use 0.0.0.0 and fill IP_WHITELIST in .env
-                        
-        -p  --port      Server port (optional) (default: 9503)
-        
-        -s  --session   Name for session file (optional)
-                        Multiple sessions can be specified: "--session=user --session=bot"
-                        
-                        Each session is stored in `sessions/{$session}.madeline`. 
-                        Nested folders supported.
-                        See README for more examples.
-    
-        -e  --env       .env file name. (default: .env). 
-                        Helpful when need multiple instances with different settings
-        
-            --docker    Apply some settings for docker: add docker network to whitelist.
-    
-    Also some options can be set in .env file (see .env.example)
-    ```
-1. Access Telegram API with simple GET/POST requests.
-    Regular and application/json POST supported.
-    It's recommended to use http_build_query, when using GET requests.
-    
-    **Rules:**
-    * All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
-    * Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
-    * <b>Important: api available only from ip in whitelist.</b> 
-        By default it is: `127.0.0.1`
-        You can add a client IP in .env file to `IP_WHITELIST` (separate with a comma)
-        
-        In docker version by default api available only from localhost (127.0.0.1).
-        To allow connections from the internet, need to change ports in docker-compose.yml to `9503:9503` and recreate the container: `docker compose up -d`. 
-        This is very insecure, because this will open TAS port to anyone from the internet. 
-        Only protection is the `IP_WHITELIST`, and there are no warranties that it will secure your accounts.
-    * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
-        `http://127.0.0.1:9503/api/contacts.getContacts`
-    * If method requires array of values, use any name of array, for example 'data': 
-        `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
-    * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
-        `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
+## Security
+Please be careful with settings, otherwise you can expose your telegram session and lose control.
+Default settings allow to access API only from localhost/127.0.0.1.
 
-    **Examples:**
-    * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
-    * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
-    * repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
-    * get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
-    * get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
-    * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
-    * sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
-    * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
+.env settings:
+- `IP_WHITELIST` - allow specific IP's to make requests without password.
+- `PASSWORDS` - protect your api with basic auth.  
+  Request with correct username and password overrides IP_WHITELIST.
+  If you specify password, then `IP_WHITELIST` is ignored
+  How to make requests with basic auth: 
+  ```shell
+  curl --user 'username:password' "http://127.0.0.1:9503/getSelf"
+  curl "http://username:password@127.0.0.1:9503/getSelf"
+  ```
+
+docker-compose.yml:
+- `port` - port forwarding rules from host to docker container.
+  Remove 127.0.0.1 to listen all interfaces and forward all requests to container.
+  Make sure to use IP_WHITELIST and/or PASSWORDS settings to protect your account.
+
+## Usage
+Access Telegram API with simple GET/POST requests.
+Regular and application/json POST supported.
+It's recommended to use http_build_query, when using GET requests.
+    
+**Rules:**
+* All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
+* Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
+* <b>Important: api available only from ip in whitelist.</b> 
+    By default it is: `127.0.0.1`
+    You can add a client IP in .env file to `IP_WHITELIST` (separate with a comma)
+    
+    In docker version by default api available only from localhost (127.0.0.1).
+    To allow connections from the internet, need to change ports in docker-compose.yml to `9503:9503` and recreate the container: `docker compose up -d`. 
+    This is very insecure, because this will open TAS port to anyone from the internet. 
+    Only protection is the `IP_WHITELIST`, and there are no warranties that it will secure your accounts.
+* If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
+    `http://127.0.0.1:9503/api/contacts.getContacts`
+* If method requires array of values, use any name of array, for example 'data': 
+    `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
+* If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
+    `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
+
+**Examples:**
+* get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
+* get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
+* repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
+* get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
+* get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
+* search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
+* sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
+* copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
     
 ## Advanced features
 ### Get events/updates

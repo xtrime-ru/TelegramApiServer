@@ -64,6 +64,7 @@ $settings = [
                 explode(',', (string)getenv('IP_WHITELIST'))
             )
         ),
+        'passwords' => (array)json_decode((string)getenv('PASSWORDS'), true),
         'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
     ],
     'health_check' => [
