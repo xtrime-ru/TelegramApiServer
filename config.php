@@ -7,6 +7,7 @@ $settings = [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
         'port' => (int)getenv('SERVER_PORT'),
+        'real_ip_header' => (string)(getenv('REAL_IP_HEADER') ?? ''),
     ],
     'telegram' => [
         'app_info' => [ // obtained in https://my.telegram.org
@@ -67,11 +68,6 @@ $settings = [
         'passwords' => (array)json_decode((string)getenv('PASSWORDS'), true),
         'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
     ],
-    'health_check' => [
-        'enabled' => (bool)filter_var((string)getenv('HEALTHCHECK_ENABLED'), FILTER_VALIDATE_BOOL),
-        'interval' => ((int)getenv('HEALTHCHECK_INTERVAL') ?: 30),
-        'timeout' => ((int)getenv('HEALTHCHECK_REQUEST_TIMEOUT') ?: 60),
-    ]
 ];
 
 if (empty($settings['telegram']['connection']['proxies']['\danog\MadelineProto\Stream\Proxy\SocksProxy'][0]['address'])) {

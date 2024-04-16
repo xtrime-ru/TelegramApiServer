@@ -1,12 +1,7 @@
 <?php
 
-use TelegramApiServer\Config;
 use TelegramApiServer\Files;
-use TelegramApiServer\Migrations\SessionsMigration;
 use TelegramApiServer\Migrations\StartUpFixes;
-use TelegramApiServer\Migrations\SwooleToAmpMigration;
-use TelegramApiServer\Server\Fork;
-use TelegramApiServer\Server\HealthCheck;
 
 if (PHP_SAPI !== 'cli') {
     throw new RuntimeException('Start in CLI');
@@ -67,18 +62,6 @@ Example:
 }
 
 require_once __DIR__ . '/bootstrap.php';
-
-
-$mainProcessPid = getmypid();
-
-if (Config::getInstance()->get('health_check.enabled')) {
-    if (!defined('SIGINT')) {
-        throw new RuntimeException('pcintl required for healthcheck. Use docker.');
-    }
-    Fork::run(static function () use ($mainProcessPid) {
-        HealthCheck::start($mainProcessPid);
-    });
-}
 
 $sessions = [];
 foreach ($options['session'] as $session) {

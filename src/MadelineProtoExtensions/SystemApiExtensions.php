@@ -22,6 +22,22 @@ class SystemApiExtensions
         $this->client = $client;
     }
 
+    /**
+     * @return array<string, array>
+     */
+    public function healthcheck(): array
+    {
+        $results = [];
+        ['sessions' => $sessions] = $this->getSessionList();
+        foreach ($sessions as $sessionKey => $session) {
+            $instance = $this->client->instances[$sessionKey];
+            if ($instance->getAuthorization() === API::LOGGED_IN) {
+                $results[$sessionKey] = $instance->fullGetSelf();
+            }
+        }
+        return $results;
+    }
+
     public function addSession(string $session, array $settings = []): array
     {
         if (!empty($settings['app_info']['api_id'])) {

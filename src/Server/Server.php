@@ -92,13 +92,25 @@ class Server
 
     public static function getClientIp(Request $request): string
     {
-        $remote = $request->getClient()->getRemoteAddress()->toString();
-        $hostArray = explode(':', $remote);
-        if (count($hostArray) >= 2) {
-            $port = (int)array_pop($hostArray);
-            if ($port > 0 && $port <= 65353) {
-                $remote = implode(':', $hostArray);
+        $realIpHeader = Config::getInstance()->get('server.real_ip_header');
+        if ($realIpHeader) {
+            $remote = $request->getHeader($realIpHeader);
+            if (!$remote) {
+                GOTO DIRECT;
             }
+            $tmp = explode(',', $remote);
+            $remote = trim(end($tmp));
+        } else {
+            DIRECT:
+            $remote = $request->getClient()->getRemoteAddress()->toString();
+            $hostArray = explode(':', $remote);
+            if (count($hostArray) >= 2) {
+                $port = (int)array_pop($hostArray);
+                if ($port > 0 && $port <= 65353) {
+                    $remote = implode(':', $hostArray);
+                }
+            }
+
         }
 
         return $remote;

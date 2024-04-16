@@ -30,7 +30,11 @@ class Authorization implements Middleware
 
     public function handleRequest(Request $request, RequestHandler $requestHandler): Response
     {
-        [$host] = explode(':', $request->getClient()->getRemoteAddress()->toString(), 2);
+        $host = Server::getClientIp($request);
+
+        if ($this->isLocal($host)) {
+            return $requestHandler->handleRequest($request);
+        }
 
         if ($this->passwords) {
             $header = (string)$request->getHeader('Authorization');
@@ -54,6 +58,19 @@ class Authorization implements Middleware
 
     private function isIpAllowed(string $host): bool
     {
+
+
+        if ($this->ipWhitelist && !in_array($host, $this->ipWhitelist, true)) {
+            return false;
+        }
+        return true;
+    }
+
+    private function isLocal(string $host): bool {
+        if ($host === '127.0.0.1' || $host === 'localhost') {
+            return true;
+        }
+
         global $options;
         if ($options['docker']) {
             $isSameNetwork = abs(ip2long($host) - $this->selfIp) < 256;
@@ -61,10 +78,6 @@ class Authorization implements Middleware
                 return true;
             }
         }
-
-        if ($this->ipWhitelist && !in_array($host, $this->ipWhitelist, true)) {
-            return false;
-        }
-        return true;
+        return false;
     }
 }

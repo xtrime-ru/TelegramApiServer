@@ -115,11 +115,8 @@ It's recommended to use http_build_query, when using GET requests.
 ### Get events/updates
 Telegram is event driven platform. For example:  every time your account receives a message you immediately get an update.
 There are multiple ways of [getting updates](https://docs.madelineproto.xyz/docs/UPDATES.html) in TelegramApiServer / MadelineProto:  
-    1. [Websocket](#eventhandler-updates-webhooks)  
-    2. Long Polling:   
-        send request to getUpdates endpoint  
-        `curl "127.0.0.1:9503/api/getUpdates?data[limit]=3&data[offset]=0&data[timeout]=10.0" -g`  
-    3. Webhook: 
+    1. [Websocket](#eventhandler-updates-webhooks)
+    2. Webhook: 
         Redirect all updates to your endpoint, just like bot api!  
         `curl "127.0.0.1:9503/api/setWebhook?url=http%3A%2F%2Fexample.com%2Fsome_webhook" -g `  
         Example uses urlencoded url in query.
@@ -199,9 +196,35 @@ curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
 Also see: https://docs.madelineproto.xyz/docs/FILES.html#downloading-files
 
 ### Multiple sessions support
-**WARNING: running multiple sessions in one instance is unstable.**
+Its recommended to run every session in separate container. 
+
+To add more containers create `docker-compose.override.yml` file.
+Docker will [automatically merge](https://docs.docker.com/compose/multiple-compose-files/merge/) it with default docker-compose file.
+
+Example of `docker-compose.override.yml` with two additional containers/sessions (3 in total):
+```yaml
+services:
+    api-2:
+        extends:
+            file: docker-compose.base.yml
+            service: base-api
+        ports:
+            - "127.0.0.1:9512:9503"
+        command:
+            - "-s=session-2"
+    api-3:
+        extends:
+            file: docker-compose.base.yml
+            service: base-api
+        ports:
+            - "127.0.0.1:9513:9503"
+        command:
+            - "-s=session-3"
+
+```
+### Multiple sessions in one container (deprecated)
+**WARNING: running multiple sessions in one instance/container is unstable.**
 Crash/error in one session will crash all of them.
-Correct way: override docker-compose.yml and add containers with different ports and session names for each session.
 
 When running  multiple sessions, need to define which session to use for request.
 Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
@@ -259,10 +282,10 @@ Each session stored in `sessions/{$session}.madeline`. Nested folders supported.
 **Examples:**
 * Session list: `http://127.0.0.1:9503/system/getSessionList`
 * Adding session: `http://127.0.0.1:9503/system/addSession?session=users/xtrime`
-* Removing session (session file will remain): `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
-  Due to madelineProto issue its instance still might be in memory and continue working even after the remove.
-* Remove session file: `http://127.0.0.1:9503/system/unlinkSessionFile?session=users/xtrime`
-    Don`t forget to logout and call removeSession first!
+* ~~Removing session (session file will remain): `http://127.0.0.1:9503/system/removeSession?session=users/xtrime`
+  Due to madelineProto issue its instance still might be in memory and continue working even after the remove.~~
+* ~~Remove session file: `http://127.0.0.1:9503/system/unlinkSessionFile?session=users/xtrime`
+    Don`t forget to logout and call removeSession first!~~
 * Close TelegramApiServer (end process): `http://127.0.0.1:9503/system/exit`
 
 Full list of system methods available in [SystemApiExtensions class](https://github.com/xtrime-ru/TelegramApiServer/blob/master/src/MadelineProtoExtensions/SystemApiExtensions.php)
