@@ -8,12 +8,10 @@ use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use danog\MadelineProto;
-use danog\MadelineProto\PeerNotInDbException;
 use danog\MadelineProto\StrTools;
 use http\Exception\InvalidArgumentException;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventHandler;
-use TelegramApiServer\Exceptions\MediaTooBig;
 use TelegramApiServer\Exceptions\NoMediaException;
 use function Amp\delay;
 
@@ -31,46 +29,9 @@ class ApiExtensions
         $this->file = $file;
     }
 
-    /**
-     * Получает последние сообщения из указанных каналов
-     *
-     * @param array $data
-     * <pre>
-     * [
-     *     'peer' => '',
-     *     'offset_id' => 0, // (optional)
-     *     'offset_date' => 0, // (optional)
-     *     'add_offset' => 0, // (optional)
-     *     'limit' => 0, // (optional)
-     *     'max_id' => 0, // (optional)
-     *     'min_id' => 0, // (optional)
-     *     'hash' => 0, // (optional)
-     * ]
-     * </pre>
-     *
-     */
-    public function getHistory(array $data)
-    {
-        $data = array_merge(
-            [
-                'peer' => '',
-                'offset_id' => 0,
-                'offset_date' => 0,
-                'add_offset' => 0,
-                'limit' => 0,
-                'max_id' => 0,
-                'min_id' => 0,
-                'hash' => [],
-            ],
-            $data
-        );
-
-        return $this->madelineProto->messages->getHistory($data);
-    }
-
     public function getHistoryHtml(array $data): array
     {
-        $response = $this->getHistory($data);
+        $response = $this->madelineProto->messages->getHistory(...$data);
         if (!empty($response['messages'])) {
             foreach ($response['messages'] as &$message) {
                 $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
@@ -208,9 +169,9 @@ class ApiExtensions
             ];
             if (static::hasMedia($message, false)) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
-                $result[] = $this->sendMedia($messageData);
+                $result[] = $this->madelineProto->messages->sendMedia(...$messageData);
             } else {
-                $result[] = $this->sendMessage($messageData);
+                $result[] = $this->madelineProto->messages->sendMessage(...$messageData);
             }
             if ($key > 0) {
                 delay(random_int(300, 2000) / 1000);
@@ -218,98 +179,6 @@ class ApiExtensions
         }
 
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * <pre>
-     * [
-     *  'peer' => '',
-     *  'message' => '',      // Текст сообщения,
-     *  'media' => [],      // MessageMedia, Update, Message or InputMedia
-     *  'reply_to_msg_id' => 0,       // (optional)
-     *  'parse_mode' => 'HTML',  // (optional)
-     * ]
-     * </pre>
-     *
-     */
-    public function sendMedia(array $data): array
-    {
-        $data = array_merge(
-            [
-                'peer' => '',
-                'message' => '',
-                'media' => [],
-                'reply_to_msg_id' => 0,
-                'parse_mode' => 'HTML',
-            ],
-            $data
-        );
-
-        if (!empty($this->file)) {
-            $data = array_merge(
-                $data,
-                $this->uploadMediaForm()
-            );
-        }
-
-        return $this->madelineProto->messages->sendMedia(...$data);
-    }
-
-    /**
-     * @param array $data
-     * <pre>
-     * [
-     *  'peer' => '',
-     *  'message' => '',      // Текст сообщения
-     *  'reply_to_msg_id' => 0,       // (optional)
-     *  'parse_mode' => 'HTML',  // (optional)
-     * ]
-     * </pre>
-     *
-     */
-    public function sendMessage(array $data)
-    {
-        $data = array_merge(
-            [
-                'peer' => '',
-                'message' => '',
-                'reply_to_msg_id' => 0,
-                'parse_mode' => 'HTML',
-            ],
-            $data
-        );
-
-        return $this->madelineProto->messages->sendMessage($data);
-    }
-
-    /**
-     * @param array $data
-     * <pre>
-     * [
-     *  'folder_id' => 0, // Id папки (optional)
-     *  'q'  => '',  //Поисковый запрос
-     *  'offset_rate' => 0,   // (optional)
-     *  'offset_peer' => null, // (optional)
-     *  'offset_id' => 0,   // (optional)
-     *  'limit' => 10,  // (optional)
-     * ]
-     * </pre>
-     *
-     */
-    public function searchGlobal(array $data): array
-    {
-        $data = array_merge(
-            [
-
-                'q' => '',
-                'offset_rate' => 0,
-                'offset_id' => 0,
-                'limit' => 10,
-            ],
-            $data
-        );
-        return $this->madelineProto->messages->searchGlobal(...$data);
     }
 
     /**
@@ -325,7 +194,6 @@ class ApiExtensions
                 'peer' => '',
                 'id' => [0],
                 'message' => [],
-                'size_limit' => 0,
             ],
             $data
         );
@@ -354,11 +222,6 @@ class ApiExtensions
             }
         }
 
-        if ($data['size_limit'] && $info['size'] > $data['size_limit']) {
-            throw new MediaTooBig(
-                "Media exceeds size limit. Size: {$info['size']} bytes; limit: {$data['size_limit']} bytes"
-            );
-        }
 
         return $this->downloadToResponse($info);
     }
@@ -442,10 +305,6 @@ class ApiExtensions
         return $this->downloadToResponse($info);
     }
 
-    /**
-     * @param array $data
-     *
-     */
     public function getMessages(array $data): array
     {
         $peerInfo = $this->madelineProto->getInfo($data['peer']);

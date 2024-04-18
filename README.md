@@ -115,11 +115,14 @@ It's recommended to use http_build_query, when using GET requests.
 ### Get events/updates
 Telegram is event driven platform. For example:  every time your account receives a message you immediately get an update.
 There are multiple ways of [getting updates](https://docs.madelineproto.xyz/docs/UPDATES.html) in TelegramApiServer / MadelineProto:  
-    1. [Websocket](#eventhandler-updates-webhooks)
-    2. Webhook: 
-        Redirect all updates to your endpoint, just like bot api!  
-        `curl "127.0.0.1:9503/api/setWebhook?url=http%3A%2F%2Fexample.com%2Fsome_webhook" -g `  
-        Example uses urlencoded url in query.
+1. [Websocket](#eventhandler-updates-webhooks)  
+2. Long Polling:   
+send request to getUpdates endpoint  
+`curl "127.0.0.1:9503/api/getUpdates?data[limit]=3&data[offset]=0&data[timeout]=10.0" -g`  
+3. Webhook:
+Redirect all updates to your endpoint, just like bot api!  
+`curl "127.0.0.1:9503/api/setWebhook?url=http%3A%2F%2Fexample.com%2Fsome_webhook" -g `  
+Example uses urlencoded url in query.
 
 ### Uploading files.
 
@@ -341,7 +344,6 @@ PHP websocket client example: [websocket-events.php](https://github.com/xtrime-r
 TelegramApiServer extends madelineProto with some handful methods.   
 Full list of custom methods and their parameters available in [ApiExtensions class](https://github.com/xtrime-ru/TelegramApiServer/blob/master/src/MadelineProtoExtensions/ApiExtensions.php#L19)
 
-* `getHistory` - same as messages.getHistory, but all params exept peer is optional.
 * `getHistoryHtml` - message entities converted to html
 * `formatMessage` - converts entities to html
 * `copyMessages` - copy message from one peer to onother. Like forwardMessages, but without the link to original.
