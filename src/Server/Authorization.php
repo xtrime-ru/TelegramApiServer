@@ -24,7 +24,7 @@ class Authorization implements Middleware
         $this->ipWhitelist = (array)Config::getInstance()->get('api.ip_whitelist', []);
         $this->passwords = Config::getInstance()->get('api.passwords', []);
         if (!$this->ipWhitelist && !$this->passwords) {
-            throw new \InvalidArgumentException('API is unprotected! Please specify IP_WHITELIST or PASSWORD in .env.docker');
+            error('API is unprotected! Please specify IP_WHITELIST or PASSWORD in .env.docker');
         }
     }
 

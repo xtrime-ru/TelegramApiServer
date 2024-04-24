@@ -32,7 +32,7 @@ class SystemApiExtensions
         foreach ($sessions as $sessionKey => $session) {
             $instance = $this->client->instances[$sessionKey];
             if ($instance->getAuthorization() === API::LOGGED_IN) {
-                $results[$sessionKey] = $instance->fullGetSelf();
+                $results[$sessionKey] = $instance->getSelf();
             }
         }
         return $results;
