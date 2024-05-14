@@ -45,5 +45,10 @@
     "psr-4": {
       "TelegramApiServer\\": "src/"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/thanks": false
+    }
   }
 }
