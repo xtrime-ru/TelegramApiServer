@@ -12,6 +12,8 @@ services:
       - "9003"
     environment:
       PHP_IDE_CONFIG: "serverName=Docker"
+    command:
+      - "-s=session"
   mysql:
     extends:
       file: docker-compose.base.yml
