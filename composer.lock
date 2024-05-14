@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7999d0b15d74aafe194545856812c5d7",
+    "content-hash": "fa0829731f1399d1872730a90911afc8",
     "packages": [
         {
             "name": "amphp/amp",
@@ -229,16 +229,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v2.1.2",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/amphp/dns.git",
-                "reference": "04c88e67bef804203df934703bd422ea72f46b0e"
+                "url": "https://github.com/xtrime-ru/dns.git",
+                "reference": "2a70849cdcf5eb961574fee3b33915e2bebb4b70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/04c88e67bef804203df934703bd422ea72f46b0e",
-                "reference": "04c88e67bef804203df934703bd422ea72f46b0e",
+                "url": "https://api.github.com/repos/xtrime-ru/dns/zipball/2a70849cdcf5eb961574fee3b33915e2bebb4b70",
+                "reference": "2a70849cdcf5eb961574fee3b33915e2bebb4b70",
                 "shasum": ""
             },
             "require": {
@@ -258,16 +258,36 @@
                 "phpunit/phpunit": "^9",
                 "psalm/phar": "5.20"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
                 "psr-4": {
                     "Amp\\Dns\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Amp\\Dns\\Test\\": "test"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "check": [
+                    "@cs",
+                    "@test"
+                ],
+                "cs": [
+                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff --dry-run"
+                ],
+                "cs-fix": [
+                    "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -v --diff"
+                ],
+                "test": [
+                    "@php -dzend.assertions=1 -dassert.exception=1 ./vendor/bin/phpunit --coverage-text"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -304,16 +324,9 @@
                 "resolve"
             ],
             "support": {
-                "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2.1.2"
+                "source": "https://github.com/xtrime-ru/dns/tree/2.x"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/amphp",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-04-19T03:49:29+00:00"
+            "time": "2024-05-14T16:13:20+00:00"
         },
         {
             "name": "amphp/file",
@@ -4561,7 +4574,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danog/madelineproto": 20
+        "danog/madelineproto": 20,
+        "amphp/dns": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
