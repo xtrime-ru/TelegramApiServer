@@ -2646,12 +2646,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "050d934015299689b11f1b14cd0055b07aa03694"
+                "reference": "550d9dac8776ca711b7cae3b16176fa6cf98bb69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/050d934015299689b11f1b14cd0055b07aa03694",
-                "reference": "050d934015299689b11f1b14cd0055b07aa03694",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/550d9dac8776ca711b7cae3b16176fa6cf98bb69",
+                "reference": "550d9dac8776ca711b7cae3b16176fa6cf98bb69",
                 "shasum": ""
             },
             "require": {
@@ -2766,7 +2766,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-23T15:33:19+00:00"
+            "time": "2024-05-31T12:59:29+00:00"
         },
         {
             "name": "danog/primemodule",
