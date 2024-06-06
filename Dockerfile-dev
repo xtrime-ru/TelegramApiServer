@@ -2,11 +2,11 @@ FROM xtrime/telegram-api-server:latest
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
+RUN echo "opcache.jit=disable" >> "$PHP_INI_DIR/conf.d/xdebug.ini"
+
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions xdebug && \
-    rm /usr/local/bin/install-php-extensions && \
-    echo "" >> "$PHP_INI_DIR/conf.d/xdebug.ini" && \
-    echo "zend_extension=xdebug.so" >> "$PHP_INI_DIR/conf.d/xdebug.ini"
+    rm /usr/local/bin/install-php-extensions
 
 ADD docker/php/conf.d/. "$PHP_INI_DIR/conf.d/"
 
