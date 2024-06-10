@@ -1,4 +1,4 @@
-FROM hub.madelineproto.xyz/danog/madelineproto:latest
+FROM danog/madelineproto:latest
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
