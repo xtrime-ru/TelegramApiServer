@@ -8,7 +8,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions xdebug && \
     rm /usr/local/bin/install-php-extensions
 
-ADD docker/php/conf.d/. "$PHP_INI_DIR/conf.d/"
+ADD dev/. "$PHP_INI_DIR/conf.d/"
 
 EXPOSE 9503
 EXPOSE 9003
