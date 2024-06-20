@@ -70,6 +70,7 @@ class Server
             info("Stopping http server");
             $server->stop();
         }
+        Logger::finalize();
     }
 
     /**

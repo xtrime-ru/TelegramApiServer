@@ -11,6 +11,8 @@
 
 namespace TelegramApiServer;
 
+use Amp\ByteStream\Pipe;
+use Amp\ByteStream\WritableStream;
 use danog\MadelineProto;
 use DateTimeInterface;
 use Psr\Log\AbstractLogger;
@@ -18,6 +20,10 @@ use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
 use TelegramApiServer\EventObservers\LogObserver;
 use Throwable;
+
+use function Amp\async;
+use function Amp\ByteStream\getStdout;
+use function Amp\ByteStream\pipe;
 use function get_class;
 use function gettype;
 use function is_object;
@@ -56,6 +62,12 @@ class Logger extends AbstractLogger
     public int $minLevelIndex;
     private array $formatter;
 
+    private WritableStream $stdout;
+    /**
+     * @var array<int, list{WritableStream, \Amp\Future}>
+     */
+    private static array $closePromises = [];
+
     protected function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
     {
         if (null === $minLevel) {
@@ -83,7 +95,18 @@ class Logger extends AbstractLogger
         }
 
         $this->minLevelIndex = self::$levels[$minLevel];
-        $this->formatter = $formatter ?: [$this, 'format'];
+        $this->formatter = $formatter ?: $this->format(...);
+        $pipe = new Pipe(PHP_INT_MAX);
+        $this->stdout = $pipe->getSink();
+        $source = $pipe->getSource();
+        $promise = async(static function () use ($source, &$promise): void {
+            try {
+                pipe($source, getStdout());
+            } finally {
+                unset(self::$closePromises[spl_object_id($promise)]);
+            }
+        });
+        self::$closePromises[spl_object_id($promise)] = [$this->stdout, $promise];
     }
 
     public static function getInstance(): Logger
@@ -114,8 +137,23 @@ class Logger extends AbstractLogger
         }
 
         $formatter = $this->formatter;
-        /** @see Logger::format */
-        echo $formatter($level, $message, $context);
+        $data = $formatter($level, $message, $context);;
+        try {
+            $this->stdout->write($data);
+        } catch (\Throwable) {
+            echo $data;
+        }
+    }
+
+    /**
+     * @internal Internal function used to flush the log buffer on shutdown.
+     */
+    public static function finalize(): void
+    {
+        foreach (self::$closePromises as [$stdout, $promise]) {
+            $stdout->close();
+            $promise->await();
+        }
     }
 
     private function format(string $level, string $message, array $context): string
