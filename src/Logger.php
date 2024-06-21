@@ -94,7 +94,7 @@ class Logger extends AbstractLogger
             throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $minLevel));
         }
 
-        $this->minLevelIndex = self::$levels[$minLevel];
+        $this->minLevelIndex = max(self::$levels[$minLevel], self::$levels[self::$madelineLevels[MadelineProto\Logger::VERBOSE]]);
         $this->formatter = $formatter ?: $this->format(...);
         $pipe = new Pipe(PHP_INT_MAX);
         $this->stdout = $pipe->getSink();
