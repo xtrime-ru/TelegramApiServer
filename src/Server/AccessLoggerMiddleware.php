@@ -58,7 +58,7 @@ class AccessLoggerMiddleware implements Middleware
             ],
         ];
 
-        $level = $status < 400 ? LogLevel::INFO : LogLevel::NOTICE;
+        $level = $status < 400 ? LogLevel::DEBUG : LogLevel::INFO;
 
         $this->logger->log(
             $level,
