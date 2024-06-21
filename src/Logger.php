@@ -60,7 +60,7 @@ class Logger extends AbstractLogger
 
     private static string $dateTimeFormat = 'Y-m-d H:i:s';
     public int $minLevelIndex;
-    private array $formatter;
+    private \Closure $formatter;
 
     private WritableStream $stdout;
     /**
@@ -68,7 +68,7 @@ class Logger extends AbstractLogger
      */
     private static array $closePromises = [];
 
-    protected function __construct(string $minLevel = LogLevel::WARNING, callable $formatter = null)
+    protected function __construct(string $minLevel = LogLevel::WARNING, \Closure $formatter = null)
     {
         if (null === $minLevel) {
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
