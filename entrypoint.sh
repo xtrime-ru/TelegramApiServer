@@ -8,5 +8,7 @@ if [ "$VERSION" != "$CURRENT_VERSION" ]; then
     exit 1
 fi
 
+composer update
+
 docker-compose-wait \
 && nice -n 20 php server.php -e=.env.docker --docker "$@"
