@@ -52,6 +52,7 @@ class Client
 
     public function addSession(string $session, array $settings = []): API
     {
+        $this->mutex ??= new LocalKeyedMutex;
         $lock = $this->mutex->acquire($session);
         if (isset($this->instances[$session])) {
             throw new InvalidArgumentException('Session already exists');
