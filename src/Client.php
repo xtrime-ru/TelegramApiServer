@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer;
 
+use Amp\Sync\LocalKeyedMutex;
 use danog\MadelineProto\API;
 use danog\MadelineProto\APIWrapper;
 use danog\MadelineProto\Settings;
@@ -47,8 +48,11 @@ class Client
         );
     }
 
+    private LocalKeyedMutex $mutex;
+
     public function addSession(string $session, array $settings = []): API
     {
+        $lock = $this->mutex->acquire($session);
         if (isset($this->instances[$session])) {
             throw new InvalidArgumentException('Session already exists');
         }
