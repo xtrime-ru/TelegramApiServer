@@ -4,7 +4,7 @@ namespace TelegramApiServer\Exceptions;
 
 use Exception;
 
-final class NoticeException extends Exception
+class NoticeException extends Exception
 {
 
 }
