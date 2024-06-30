@@ -3,6 +3,8 @@
 use danog\MadelineProto\Logger;
 use TelegramApiServer\EventObservers\LogObserver;
 
+use function Amp\Socket\SocketAddress\fromString;
+
 $settings = [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
@@ -69,6 +71,10 @@ $settings = [
         'passwords' => (array)json_decode((string)getenv('PASSWORDS'), true),
         'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
     ],
+    'metrics' => [
+        'enable_prometheus_collection' => (bool)getenv("PROMETHEUS_BIND_TO"),
+        'bind_to' => getenv("PROMETHEUS_BIND_TO") ? fromString(getenv("PROMETHEUS_BIND_TO")) : null
+    ]
 ];
 
 if (empty($settings['telegram']['connection']['proxies']['\danog\MadelineProto\Stream\Proxy\SocksProxy'][0]['address'])) {
