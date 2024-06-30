@@ -15,7 +15,7 @@ use RuntimeException;
 use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\EventObservers\EventObserver;
 
-class Client
+final class Client
 {
     public static Client $self;
     /** @var API[] */

@@ -4,7 +4,7 @@ namespace TelegramApiServer\Migrations;
 
 use danog\MadelineProto\Magic;
 
-class StartUpFixes
+final class StartUpFixes
 {
     public static function fix(): void
     {

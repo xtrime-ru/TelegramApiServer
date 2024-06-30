@@ -9,7 +9,7 @@ use TelegramApiServer\Client;
 use TelegramApiServer\Logger;
 use Throwable;
 
-class EventObserver
+final class EventObserver
 {
     use ObserverTrait;
 

@@ -5,7 +5,7 @@ namespace TelegramApiServer\Controllers;
 use Exception;
 use TelegramApiServer\Client;
 
-class SystemController extends AbstractApiController
+final class SystemController extends AbstractApiController
 {
     /**
      * Получаем параметры из uri

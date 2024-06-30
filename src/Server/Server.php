@@ -18,7 +18,7 @@ use function sprintf;
 use const SIGINT;
 use const SIGTERM;
 
-class Server
+final class Server
 {
     /**
      * Server constructor.

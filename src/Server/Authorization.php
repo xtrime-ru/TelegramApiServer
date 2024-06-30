@@ -9,7 +9,7 @@ use Amp\Http\Server\RequestHandler;
 use Amp\Http\Server\Response;
 use TelegramApiServer\Config;
 
-class Authorization implements Middleware
+final class Authorization implements Middleware
 {
     private array $ipWhitelist;
     private int $selfIp;

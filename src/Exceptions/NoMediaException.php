@@ -2,7 +2,7 @@
 
 namespace TelegramApiServer\Exceptions;
 
-class NoMediaException extends NoticeException
+final class NoMediaException extends NoticeException
 {
 
 }

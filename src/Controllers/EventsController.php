@@ -20,7 +20,7 @@ use TelegramApiServer\EventObservers\EventObserver;
 use TelegramApiServer\Logger;
 use Throwable;
 
-class EventsController implements WebsocketClientHandler, WebsocketAcceptor
+final class EventsController implements WebsocketClientHandler, WebsocketAcceptor
 {
     private const PING_INTERVAL_MS = 10_000;
     private WebsocketClientGateway $gateway;

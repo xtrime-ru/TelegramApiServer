@@ -4,7 +4,7 @@
 namespace TelegramApiServer;
 
 
-class Config
+final class Config
 {
     private static ?Config $instance = null;
     private array $config;

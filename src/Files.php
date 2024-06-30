@@ -4,7 +4,7 @@ namespace TelegramApiServer;
 
 use RuntimeException;
 
-class Files
+final class Files
 {
 
     public const SESSION_EXTENSION = '.madeline';

@@ -5,7 +5,7 @@ namespace TelegramApiServer\Server;
 use Amp\Http\Server\Response;
 use TelegramApiServer\Controllers\AbstractApiController;
 
-class ErrorResponses
+final class ErrorResponses
 {
     /**
      * @param int $status

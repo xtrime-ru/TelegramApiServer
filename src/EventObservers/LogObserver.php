@@ -5,7 +5,7 @@ namespace TelegramApiServer\EventObservers;
 use TelegramApiServer\Logger;
 use Throwable;
 
-class LogObserver
+final class LogObserver
 {
     use ObserverTrait;
 

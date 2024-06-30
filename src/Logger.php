@@ -34,7 +34,7 @@ use const PHP_EOL;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class Logger extends AbstractLogger
+final class Logger extends AbstractLogger
 {
     private static ?Logger $instanse = null;
 

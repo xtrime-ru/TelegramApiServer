@@ -16,7 +16,7 @@ use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 use function Amp\Http\Server\Middleware\stackMiddleware;
 
-class Router
+final class Router
 {
     private \Amp\Http\Server\Router $router;
     private SocketHttpServer $server;

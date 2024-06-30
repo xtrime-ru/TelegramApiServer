@@ -15,7 +15,7 @@ use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\Exceptions\NoMediaException;
 use function Amp\delay;
 
-class ApiExtensions
+final class ApiExtensions
 {
 
     private MadelineProto\Api $madelineProto;

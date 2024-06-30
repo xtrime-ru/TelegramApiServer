@@ -17,7 +17,7 @@ use Revolt\EventLoop;
 use TelegramApiServer\EventObservers\LogObserver;
 use TelegramApiServer\Logger;
 
-class LogController implements WebsocketClientHandler, WebsocketAcceptor
+final class LogController implements WebsocketClientHandler, WebsocketAcceptor
 {
     private const PING_INTERVAL_MS = 10_000;
     private WebsocketClientGateway $gateway;

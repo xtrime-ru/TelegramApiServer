@@ -4,7 +4,7 @@ namespace TelegramApiServer\EventObservers;
 
 use TelegramApiServer\Files;
 
-class EventHandler extends \danog\MadelineProto\EventHandler
+final class EventHandler extends \danog\MadelineProto\EventHandler
 {
     public static array $instances = [];
     private string $sessionName;

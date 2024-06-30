@@ -15,7 +15,7 @@ use function Amp\async;
 use function Amp\delay;
 use function Amp\Future\awaitAll;
 
-class ApiController extends AbstractApiController
+final class ApiController extends AbstractApiController
 {
 
     private ?string $session = '';

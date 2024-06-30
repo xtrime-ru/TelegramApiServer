@@ -13,7 +13,7 @@ use function Amp\async;
 use function Amp\File\deleteFile;
 use function Amp\Future\awaitAll;
 
-class SystemApiExtensions
+final class SystemApiExtensions
 {
     private Client $client;
 
