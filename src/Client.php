@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer;
 
@@ -12,7 +12,6 @@ use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
 use RuntimeException;
-use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\EventObservers\EventObserver;
 
 final class Client
@@ -41,7 +40,7 @@ final class Client
 
         $this->startNotLoggedInSessions();
 
-        $sessionsCount = count($sessionFiles);
+        $sessionsCount = \count($sessionFiles);
         warning(
             "\nTelegramApiServer ready."
             . "\nNumber of sessions: {$sessionsCount}."
@@ -63,8 +62,8 @@ final class Client
         if ($settings) {
             Files::saveSessionSettings($session, $settings);
         }
-        $settings = array_replace_recursive(
-            (array)Config::getInstance()->get('telegram'),
+        $settings = \array_replace_recursive(
+            (array) Config::getInstance()->get('telegram'),
             Files::getSessionSettings($session),
         );
 
@@ -92,14 +91,9 @@ final class Client
             $instance->unsetEventHandler();
         }
         unset($instance);
-        gc_collect_cycles();
+        \gc_collect_cycles();
     }
 
-    /**
-     * @param string|null $session
-     *
-     * @return API
-     */
     public function getSession(?string $session = null): API
     {
         if (!$this->instances) {
@@ -109,8 +103,8 @@ final class Client
         }
 
         if (!$session) {
-            if (count($this->instances) === 1) {
-                $session = (string)array_key_first($this->instances);
+            if (\count($this->instances) === 1) {
+                $session = (string) \array_key_first($this->instances);
             } else {
                 throw new InvalidArgumentException(
                     'Multiple sessions detected. Specify which session to use. See README for examples.'
@@ -165,9 +159,10 @@ final class Client
         return $wrapper;
     }
 
-    private static function getSettingsFromArray(string $session, array $settings, SettingsAbstract $settingsObject = new Settings()): SettingsAbstract {
+    private static function getSettingsFromArray(string $session, array $settings, SettingsAbstract $settingsObject = new Settings()): SettingsAbstract
+    {
         foreach ($settings as $key => $value) {
-            if (is_array($value) && $key !== 'proxies') {
+            if (\is_array($value) && $key !== 'proxies') {
                 if ($key === 'db' && isset($value['type'])) {
                     $type = match ($value['type']) {
                         'memory' => new Settings\Database\Memory(),
@@ -185,23 +180,22 @@ final class Client
                     }
 
                     unset($value[$value['type']], $value['type'],);
-                    if (count($value) === 0) {
+                    if (\count($value) === 0) {
                         continue;
                     }
                 }
 
-                $method = 'get' . ucfirst(str_replace('_', '', ucwords($key, '_')));
+                $method = 'get' . \ucfirst(\str_replace('_', '', \ucwords($key, '_')));
                 self::getSettingsFromArray($session, $value, $settingsObject->$method());
             } else {
-                if ($key === 'serializer' && is_string($value)) {
+                if ($key === 'serializer' && \is_string($value)) {
                     $value = SerializerType::from($value);
                 }
-                $method = 'set' . ucfirst(str_replace('_', '', ucwords($key, '_')));
+                $method = 'set' . \ucfirst(\str_replace('_', '', \ucwords($key, '_')));
                 $settingsObject->$method($value);
             }
         }
         return $settingsObject;
     }
-
 
 }

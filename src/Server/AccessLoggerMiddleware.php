@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Server;
 
@@ -20,7 +20,7 @@ final class AccessLoggerMiddleware implements Middleware
     {
 
         $method = $request->getMethod();
-        $uri = (string)$request->getUri();
+        $uri = (string) $request->getUri();
         $protocolVersion = $request->getProtocolVersion();
         $remote = Server::getClientIp($request);
 

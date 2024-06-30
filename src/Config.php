@@ -1,8 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer;
-
 
 final class Config
 {
@@ -20,7 +18,7 @@ final class Config
 
     /**
      * is not allowed to call from outside to prevent from creating multiple instances,
-     * to use the singleton, you have to obtain the instance from Singleton::getInstance() instead
+     * to use the singleton, you have to obtain the instance from Singleton::getInstance() instead.
      */
     private function __construct()
     {
@@ -39,12 +37,12 @@ final class Config
 
     private function findByKey($key)
     {
-        $key = (string)$key;
-        $path = explode('.', $key);
+        $key = (string) $key;
+        $path = \explode('.', $key);
 
         $value = &$this->config;
         foreach ($path as $pathKey) {
-            if (!is_array($value) || !array_key_exists($pathKey, $value)) {
+            if (!\is_array($value) || !\array_key_exists($pathKey, $value)) {
                 return null;
             }
             $value = &$value[$pathKey];

@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\EventObservers;
-
 
 use danog\MadelineProto\APIWrapper;
 use ReflectionProperty;
@@ -43,7 +42,7 @@ final class EventObserver
     {
         $sessions = [];
         if ($requestedSession === null) {
-            $sessions = array_keys(Client::getInstance()->instances);
+            $sessions = \array_keys(Client::getInstance()->instances);
         } else {
             $sessions[] = $requestedSession;
         }
@@ -74,7 +73,7 @@ final class EventObserver
     {
         $sessions = [];
         if ($requestedSession === null) {
-            $sessions = array_keys(Client::getInstance()->instances);
+            $sessions = \array_keys(Client::getInstance()->instances);
         } else {
             $sessions[] = $requestedSession;
         }

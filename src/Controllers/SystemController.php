@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Controllers;
 
@@ -8,18 +8,16 @@ use TelegramApiServer\Client;
 final class SystemController extends AbstractApiController
 {
     /**
-     * Получаем параметры из uri
+     * Получаем параметры из uri.
      *
-     * @param array $path
      *
      */
     protected function resolvePath(array $path): void
     {
-        $this->api = explode('.', $path['method'] ?? '');
+        $this->api = \explode('.', $path['method'] ?? '');
     }
 
     /**
-     * @return mixed
      * @throws Exception
      */
     protected function callApi()

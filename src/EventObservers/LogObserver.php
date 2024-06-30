@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\EventObservers;
 
@@ -18,22 +18,22 @@ final class LogObserver
 
     /**
      * @param mixed|array|string $message
-     * @param int $level
      */
     public static function log($message, int $level)
     {
-        if (is_scalar($message)) {
-            Logger::getInstance()->log(Logger::$madelineLevels[$level], (string)$message);
+        if (\is_scalar($message)) {
+            Logger::getInstance()->log(Logger::$madelineLevels[$level], (string) $message);
         } else {
             if ($message instanceof Throwable) {
                 $message = Logger::getExceptionAsArray($message);
             }
-            if (is_array($message)) {
+            if (\is_array($message)) {
                 Logger::getInstance()->log(Logger::$madelineLevels[$level], '', $message);
             } else {
                 Logger::getInstance()->log(
                     Logger::$madelineLevels[$level],
-                    json_encode($message,
+                    \json_encode(
+                        $message,
                         JSON_UNESCAPED_UNICODE |
                         JSON_PRETTY_PRINT |
                         JSON_INVALID_UTF8_SUBSTITUTE |

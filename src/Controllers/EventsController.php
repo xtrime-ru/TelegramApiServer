@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Controllers;
 
+use Amp\Http\HttpStatus;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use Amp\Http\Server\Router;
-use Amp\Http\HttpStatus;
 use Amp\Http\Server\SocketHttpServer;
 use Amp\Websocket\Server\Rfc6455Acceptor;
 use Amp\Websocket\Server\Websocket as WebsocketServer;
@@ -82,7 +82,7 @@ final class EventsController implements WebsocketClientHandler, WebsocketAccepto
 
         EventObserver::startEventHandler($requestedSession);
 
-        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn() => $client->ping());
+        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn () => $client->ping());
 
         $client->onClose(static function () use ($clientId, $requestedSession, $pingLoop) {
             EventLoop::cancel($pingLoop);
@@ -104,7 +104,7 @@ final class EventsController implements WebsocketClientHandler, WebsocketAccepto
             ];
 
             $this->gateway->multicastText(
-                json_encode(
+                \json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |
                     JSON_INVALID_UTF8_SUBSTITUTE |

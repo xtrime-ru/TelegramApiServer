@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Server;
 
@@ -8,17 +8,15 @@ use TelegramApiServer\Controllers\AbstractApiController;
 final class ErrorResponses
 {
     /**
-     * @param int $status
      * @param string|array $message
      *
-     * @return Response
      */
     public static function get(int $status, $message): Response
     {
         return new Response(
             $status,
             AbstractApiController::JSON_HEADER,
-            json_encode(
+            \json_encode(
                 [
                     'success' => false,
                     'errors' => [

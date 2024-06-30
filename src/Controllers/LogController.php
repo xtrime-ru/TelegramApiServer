@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Controllers;
 
@@ -68,7 +68,7 @@ final class LogController implements WebsocketClientHandler, WebsocketAcceptor
     {
         $clientId = $client->getId();
 
-        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn() => $client->ping());
+        $pingLoop = EventLoop::repeat(self::PING_INTERVAL_MS, static fn () => $client->ping());
 
         $client->onClose(static function () use ($clientId, $pingLoop) {
             EventLoop::cancel($pingLoop);
@@ -90,7 +90,7 @@ final class LogController implements WebsocketClientHandler, WebsocketAcceptor
             ];
 
             $this->gateway->multicastText(
-                json_encode(
+                \json_encode(
                     $update,
                     JSON_THROW_ON_ERROR |
                     JSON_INVALID_UTF8_SUBSTITUTE |

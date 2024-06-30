@@ -1,19 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Controllers;
 
-use Amp\Sync\LocalKeyedMutex;
-use Amp\Sync\LocalMutex;
-use Amp\Sync\StaticKeyMutex;
-use Amp\Sync\SyncException;
 use Exception;
-use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
-use TelegramApiServer\Logger;
-use function Amp\async;
-use function Amp\delay;
-use function Amp\Future\awaitAll;
 
 final class ApiController extends AbstractApiController
 {
@@ -21,15 +12,14 @@ final class ApiController extends AbstractApiController
     private ?string $session = '';
 
     /**
-     * Получаем параметры из uri
+     * Получаем параметры из uri.
      *
-     * @param array $path
      *
      */
     protected function resolvePath(array $path): void
     {
         $this->session = $path['session'] ?? null;
-        $this->api = explode('.', $path['method'] ?? '');
+        $this->api = \explode('.', $path['method'] ?? '');
     }
 
     /**

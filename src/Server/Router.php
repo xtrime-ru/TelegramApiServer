@@ -1,12 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Server;
 
+use Amp\Http\HttpStatus;
 use Amp\Http\Server\ErrorHandler;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\ClosureRequestHandler;
 use Amp\Http\Server\SocketHttpServer;
-use Amp\Http\HttpStatus;
 use TelegramApiServer\Controllers\ApiController;
 use TelegramApiServer\Controllers\EventsController;
 use TelegramApiServer\Controllers\LogController;
@@ -69,6 +69,5 @@ final class Router
         $this->router->addRoute('GET', '/log[/]', $logHandler);
         $this->router->addRoute('GET', '/log/{level:.*?[^/]}[/]', $logHandler);
     }
-
 
 }

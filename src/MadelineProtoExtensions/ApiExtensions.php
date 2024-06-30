@@ -1,8 +1,6 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\MadelineProtoExtensions;
-
 
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
@@ -43,12 +41,9 @@ final class ApiExtensions
     }
 
     /**
-     * Проверяет есть ли подходящие медиа у сообщения
+     * Проверяет есть ли подходящие медиа у сообщения.
      *
-     * @param array $message
-     * @param bool $allowWebPage
      *
-     * @return bool
      */
     private static function hasMedia(array $message = [], bool $allowWebPage = false): bool
     {
@@ -90,10 +85,10 @@ final class ApiExtensions
                 $text = StrTools::mbSubstr($message, $entity['offset'], $entity['length']);
 
                 $template = $html[$entity['_']];
-                if (in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
-                    $textFormated = sprintf($template, strip_tags($entity['url'] ?? $text), $text);
+                if (\in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
+                    $textFormated = \sprintf($template, \strip_tags($entity['url'] ?? $text), $text);
                 } else {
-                    $textFormated = sprintf($template, $text);
+                    $textFormated = \sprintf($template, $text);
                 }
 
                 $message = self::substringReplace($message, $textFormated, $entity['offset'], $entity['length']);
@@ -105,7 +100,7 @@ final class ApiExtensions
                     }
                     if ($nextEntity['offset'] < ($entity['offset'] + $entity['length'])) {
                         $nextEntity['offset'] += StrTools::mbStrlen(
-                            preg_replace('~(\>).*<\/.*$~', '$1', $textFormated)
+                            \preg_replace('~(\>).*<\/.*$~', '$1', $textFormated)
                         );
                     } else {
                         $nextEntity['offset'] += StrTools::mbStrlen($textFormated) - StrTools::mbStrlen($text);
@@ -115,7 +110,7 @@ final class ApiExtensions
             }
         }
         unset($entity);
-        $message = nl2br($message);
+        $message = \nl2br($message);
         return $message;
     }
 
@@ -127,7 +122,7 @@ final class ApiExtensions
     }
 
     /**
-     * Пересылает сообщения без ссылки на оригинал
+     * Пересылает сообщения без ссылки на оригинал.
      *
      * @param array $data
      * <pre>
@@ -141,7 +136,7 @@ final class ApiExtensions
      */
     public function copyMessages(array $data)
     {
-        $data = array_merge(
+        $data = \array_merge(
             [
                 'from_peer' => '',
                 'to_peer' => '',
@@ -157,7 +152,7 @@ final class ApiExtensions
             ]
         );
         $result = [];
-        if (!$response || !is_array($response) || !array_key_exists('messages', $response)) {
+        if (!$response || !\is_array($response) || !\array_key_exists('messages', $response)) {
             return $result;
         }
 
@@ -174,7 +169,7 @@ final class ApiExtensions
                 $result[] = $this->madelineProto->messages->sendMessage(...$messageData);
             }
             if ($key > 0) {
-                delay(random_int(300, 2000) / 1000);
+                delay(\random_int(300, 2000) / 1000);
             }
         }
 
@@ -182,14 +177,13 @@ final class ApiExtensions
     }
 
     /**
-     * Загружает медиафайл из указанного сообщения в поток
+     * Загружает медиафайл из указанного сообщения в поток.
      *
-     * @param array $data
      *
      */
     public function getMedia(array $data): Response
     {
-        $data = array_merge(
+        $data = \array_merge(
             [
                 'peer' => '',
                 'id' => [0],
@@ -222,17 +216,16 @@ final class ApiExtensions
             }
         }
 
-
         return $this->downloadToResponse($info);
     }
 
     /**
-     * Загружает превью медиафайла из указанного сообщения в поток
+     * Загружает превью медиафайла из указанного сообщения в поток.
      *
      */
     public function getMediaPreview(array $data): Response
     {
-        $data = array_merge(
+        $data = \array_merge(
             [
                 'peer' => '',
                 'id' => [0],
@@ -250,7 +243,7 @@ final class ApiExtensions
             throw new NoMediaException('Message has no media');
         }
 
-        $media = $message['media'][array_key_last($message['media'])];
+        $media = $message['media'][\array_key_last($message['media'])];
         $thumb = null;
         switch (true) {
             case isset($media['sizes']):
@@ -308,15 +301,15 @@ final class ApiExtensions
     public function getMessages(array $data): array
     {
         $peerInfo = $this->madelineProto->getInfo($data['peer']);
-        if (in_array($peerInfo['type'], ['channel', 'supergroup'])) {
+        if (\in_array($peerInfo['type'], ['channel', 'supergroup'])) {
             $response = $this->madelineProto->channels->getMessages(
                 [
                     'channel' => $data['peer'],
-                    'id' => (array)$data['id'],
+                    'id' => (array) $data['id'],
                 ]
             );
         } else {
-            $response = $this->madelineProto->messages->getMessages(['id' => (array)$data['id']]);
+            $response = $this->madelineProto->messages->getMessages(['id' => (array) $data['id']]);
         }
 
         return $response;
@@ -328,7 +321,6 @@ final class ApiExtensions
      * @param array $info
      *      Any downloadable array: message, media etc...
      *
-     * @return Response
      */
     public function downloadToResponse(array $info): Response
     {
@@ -336,7 +328,7 @@ final class ApiExtensions
     }
 
     /**
-     * Адаптер для стандартного метода
+     * Адаптер для стандартного метода.
      *
      */
     public function downloadToBrowser(array $info): Response
@@ -361,7 +353,7 @@ final class ApiExtensions
             $this->file->getMimeType(),
             $this->file->getFilename()
         );
-        $inputFile['id'] = unpack('P', $inputFile['id'])['1'];
+        $inputFile['id'] = \unpack('P', $inputFile['id'])['1'];
         return [
             'media' => [
                 '_' => 'inputMediaUploadedDocument',
@@ -383,7 +375,6 @@ final class ApiExtensions
     {
         Client::getWrapper($this->madelineProto)->serialize();
     }
-
 
     public function getUpdates(array $params): array
     {
@@ -410,12 +401,13 @@ final class ApiExtensions
         Client::getWrapper($this->madelineProto)->serialize();
     }
 
-    public function unsubscribeFromUpdates(?string $channel = null): array {
+    public function unsubscribeFromUpdates(?string $channel = null): array
+    {
         $inputChannelId = null;
         if ($channel) {
             $id = (string) $this->madelineProto->getId($channel);
 
-            $inputChannelId = (int)str_replace(['-100', '-'], '', $id);
+            $inputChannelId = (int) \str_replace(['-100', '-'], '', $id);
             if (!$inputChannelId) {
                 throw new InvalidArgumentException('Invalid id');
             }
@@ -438,10 +430,9 @@ final class ApiExtensions
             $counter++;
         }
 
-
         return [
             'disabled_update_loops' => $counter,
-            'current_update_loops' => count(Client::getWrapper($this->madelineProto)->getAPI()->feeders),
+            'current_update_loops' => \count(Client::getWrapper($this->madelineProto)->getAPI()->feeders),
         ];
     }
 

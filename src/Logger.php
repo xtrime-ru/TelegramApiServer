@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Symfony package.
@@ -21,13 +21,10 @@ use Psr\Log\LogLevel;
 use TelegramApiServer\EventObservers\LogObserver;
 use Throwable;
 
+use const PHP_EOL;
 use function Amp\async;
 use function Amp\ByteStream\getStdout;
 use function Amp\ByteStream\pipe;
-use function get_class;
-use function gettype;
-use function is_object;
-use const PHP_EOL;
 
 /**
  * Minimalist PSR-3 logger designed to write in stderr or any other stream.
@@ -68,11 +65,11 @@ final class Logger extends AbstractLogger
      */
     private static array $closePromises = [];
 
-    protected function __construct(string $minLevel = LogLevel::WARNING, \Closure $formatter = null)
+    protected function __construct(string $minLevel = LogLevel::WARNING, ?\Closure $formatter = null)
     {
         if (null === $minLevel) {
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
-                switch ((int)(isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] :
+                switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] :
                     $_SERVER['SHELL_VERBOSITY'])) {
                     case -1:
                         $minLevel = LogLevel::ERROR;
@@ -91,10 +88,10 @@ final class Logger extends AbstractLogger
         }
 
         if (!isset(self::$levels[$minLevel])) {
-            throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $minLevel));
+            throw new InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $minLevel));
         }
 
-        $this->minLevelIndex = min(self::$levels[$minLevel], self::$levels[self::$madelineLevels[MadelineProto\Logger::VERBOSE]]);
+        $this->minLevelIndex = \min(self::$levels[$minLevel], self::$levels[self::$madelineLevels[MadelineProto\Logger::VERBOSE]]);
         $this->formatter = $formatter ?: $this->format(...);
         $pipe = new Pipe(PHP_INT_MAX);
         $this->stdout = $pipe->getSink();
@@ -103,10 +100,10 @@ final class Logger extends AbstractLogger
             try {
                 pipe($source, getStdout());
             } finally {
-                unset(self::$closePromises[spl_object_id($promise)]);
+                unset(self::$closePromises[\spl_object_id($promise)]);
             }
         });
-        self::$closePromises[spl_object_id($promise)] = [$this->stdout, $promise];
+        self::$closePromises[\spl_object_id($promise)] = [$this->stdout, $promise];
     }
 
     public static function getInstance(): Logger
@@ -127,7 +124,7 @@ final class Logger extends AbstractLogger
     public function log($level, $message, array $context = []): void
     {
         if (!isset(self::$levels[$level])) {
-            throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $level));
+            throw new InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
         }
 
         LogObserver::notify($level, $message, $context);
@@ -137,7 +134,8 @@ final class Logger extends AbstractLogger
         }
 
         $formatter = $this->formatter;
-        $data = $formatter($level, $message, $context);;
+        $data = $formatter($level, $message, $context);
+        ;
         try {
             $this->stdout->write($data);
         } catch (\Throwable) {
@@ -158,54 +156,54 @@ final class Logger extends AbstractLogger
 
     private function format(string $level, string $message, array $context): string
     {
-        if (false !== strpos($message, '{')) {
+        if (false !== \strpos($message, '{')) {
             $replacements = [];
             foreach ($context as $key => $val) {
                 if ($val instanceof Throwable) {
                     $context[$key] = self::getExceptionAsArray($val);
                 }
-                if (null === $val || is_scalar($val) || (is_object($val) && method_exists($val, '__toString'))) {
+                if (null === $val || \is_scalar($val) || (\is_object($val) && \method_exists($val, '__toString'))) {
                     $replacements["{{$key}}"] = $val;
                 } else {
                     if ($val instanceof DateTimeInterface) {
                         $replacements["{{$key}}"] = $val->format(self::$dateTimeFormat);
                     } else {
-                        if (is_object($val)) {
-                            $replacements["{{$key}}"] = '[object ' . get_class($val) . ']';
+                        if (\is_object($val)) {
+                            $replacements["{{$key}}"] = '[object ' . \get_class($val) . ']';
                         } else {
-                            $replacements["{{$key}}"] = '[' . gettype($val) . ']';
+                            $replacements["{{$key}}"] = '[' . \gettype($val) . ']';
                         }
                     }
                 }
             }
 
-            $message = strtr($message, $replacements);
+            $message = \strtr($message, $replacements);
         }
 
-        return sprintf(
-                '[%s] [%s] %s %s',
-                date(self::$dateTimeFormat),
-                $level,
-                $message,
-                $context ?
+        return \sprintf(
+            '[%s] [%s] %s %s',
+            \date(self::$dateTimeFormat),
+            $level,
+            $message,
+            $context ?
                     "\n" .
-                    json_encode(
+                    \json_encode(
                         $context,
                         JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRETTY_PRINT | JSON_UNESCAPED_LINE_TERMINATORS | JSON_UNESCAPED_SLASHES
                     )
                     : ''
-            ) . PHP_EOL;
+        ) . PHP_EOL;
     }
 
     public static function getExceptionAsArray(Throwable $exception)
     {
         return [
-            'exception' => get_class($exception),
+            'exception' => \get_class($exception),
             'message' => $exception->getMessage(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
             'code' => $exception->getCode(),
-            'backtrace' => array_slice($exception->getTrace(), 0, 3),
+            'backtrace' => \array_slice($exception->getTrace(), 0, 3),
             'previous exception' => $exception->getPrevious(),
         ];
     }

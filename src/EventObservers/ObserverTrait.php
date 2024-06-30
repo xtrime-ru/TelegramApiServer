@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\EventObservers;
-
 
 trait ObserverTrait
 {
@@ -18,7 +17,7 @@ trait ObserverTrait
     {
         notice("Removing listener: {$clientId}");
         unset(self::$subscribers[$clientId]);
-        $listenersCount = count(self::$subscribers);
+        $listenersCount = \count(self::$subscribers);
         notice("Event listeners left: {$listenersCount}");
         if ($listenersCount === 0) {
             self::$subscribers = [];

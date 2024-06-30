@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
- * Get all updates from MadelineProto EventHandler running inside TelegramApiServer via websocket
+ * Get all updates from MadelineProto EventHandler running inside TelegramApiServer via websocket.
  * @see \TelegramApiServer\Controllers\EventsController
  */
 
@@ -12,7 +12,6 @@ use function Amp\delay;
 use function Amp\Websocket\Client\connect;
 
 require 'vendor/autoload.php';
-
 
 $shortopts = 'u::';
 $longopts = [
