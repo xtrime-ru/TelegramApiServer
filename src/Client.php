@@ -14,6 +14,8 @@ use ReflectionProperty;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
 
+use function Amp\Socket\SocketAddress\fromString;
+
 final class Client
 {
     public static Client $self;
