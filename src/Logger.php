@@ -111,14 +111,14 @@ class Logger extends AbstractLogger
 
     public static function getInstance(): Logger
     {
-        if (!static::$instanse) {
+        if (!self::$instanse) {
             $settings = Config::getInstance()->get('telegram');
 
-            $loggerLevel = static::$madelineLevels[$settings['logger']['level']];
-            static::$instanse = new static($loggerLevel);
+            $loggerLevel = self::$madelineLevels[$settings['logger']['level']];
+            self::$instanse = new static($loggerLevel);
         }
 
-        return static::$instanse;
+        return self::$instanse;
     }
 
     /**
@@ -168,7 +168,7 @@ class Logger extends AbstractLogger
                     $replacements["{{$key}}"] = $val;
                 } else {
                     if ($val instanceof DateTimeInterface) {
-                        $replacements["{{$key}}"] = $val->format(static::$dateTimeFormat);
+                        $replacements["{{$key}}"] = $val->format(self::$dateTimeFormat);
                     } else {
                         if (is_object($val)) {
                             $replacements["{{$key}}"] = '[object ' . get_class($val) . ']';
@@ -184,7 +184,7 @@ class Logger extends AbstractLogger
 
         return sprintf(
                 '[%s] [%s] %s %s',
-                date(static::$dateTimeFormat),
+                date(self::$dateTimeFormat),
                 $level,
                 $message,
                 $context ?

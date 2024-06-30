@@ -11,7 +11,7 @@ class LogObserver
 
     public static function notify(string $level, string $message, array $context = []): void
     {
-        foreach (static::$subscribers as $clientId => $callback) {
+        foreach (self::$subscribers as $clientId => $callback) {
             $callback($level, $message, $context);
         }
     }

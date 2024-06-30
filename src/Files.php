@@ -29,7 +29,7 @@ class Files
         }
 
         preg_match(
-            '~' . static::SESSION_FOLDER . "/(?'sessionName'.*?)" . static::SESSION_EXTENSION . '~',
+            '~' . self::SESSION_FOLDER . "/(?'sessionName'.*?)" . self::SESSION_EXTENSION . '~',
             $sessionFile,
             $matches
         );
@@ -50,14 +50,14 @@ class Files
             return null;
         }
         $session = trim(trim($session), '/');
-        $session = static::SESSION_FOLDER . '/' . $session . $extension;
+        $session = self::SESSION_FOLDER . '/' . $session . $extension;
         $session = str_replace('//', '/', $session);
         return $session;
     }
 
     public static function getSessionSettings(string $session): array
     {
-        $settingsFile = static::getSessionFile($session, static::SETTINGS_EXTENSION);
+        $settingsFile = self::getSessionFile($session, self::SETTINGS_EXTENSION);
         $settings = [];
         if (file_exists($settingsFile)) {
             $settings = json_decode(
@@ -73,7 +73,7 @@ class Files
 
     public static function saveSessionSettings(string $session, array $settings = []): void
     {
-        $settingsFile = static::getSessionFile($session, static::SETTINGS_EXTENSION);
+        $settingsFile = self::getSessionFile($session, self::SETTINGS_EXTENSION);
         file_put_contents(
             $settingsFile,
             json_encode(
@@ -91,7 +91,7 @@ class Files
     {
         $files = glob($pattern, $flags) ?: [];
         foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
-            $files = [...$files, ...static::globRecursive($dir . '/' . basename($pattern), $flags)];
+            $files = [...$files, ...self::globRecursive($dir . '/' . basename($pattern), $flags)];
         }
         return $files;
     }

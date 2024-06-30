@@ -96,7 +96,7 @@ class ApiExtensions
                     $textFormated = sprintf($template, $text);
                 }
 
-                $message = static::substringReplace($message, $textFormated, $entity['offset'], $entity['length']);
+                $message = self::substringReplace($message, $textFormated, $entity['offset'], $entity['length']);
 
                 //Увеличим оффсеты всех следующих entity
                 foreach ($entities as $nextKey => &$nextEntity) {
@@ -167,7 +167,7 @@ class ApiExtensions
                 'peer' => $data['to_peer'],
                 'entities' => $message['entities'] ?? [],
             ];
-            if (static::hasMedia($message, false)) {
+            if (self::hasMedia($message, false)) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
                 $result[] = $this->madelineProto->messages->sendMedia(...$messageData);
             } else {
@@ -203,7 +203,7 @@ class ApiExtensions
             throw new NoMediaException('Empty message');
         }
 
-        if (!static::hasMedia($message, true)) {
+        if (!self::hasMedia($message, true)) {
             throw new NoMediaException('Message has no media');
         }
 
@@ -246,7 +246,7 @@ class ApiExtensions
             throw new NoMediaException('Empty message');
         }
 
-        if (!static::hasMedia($message, true)) {
+        if (!self::hasMedia($message, true)) {
             throw new NoMediaException('Message has no media');
         }
 

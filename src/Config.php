@@ -11,11 +11,11 @@ class Config
 
     public static function getInstance(): Config
     {
-        if (null === static::$instance) {
-            static::$instance = new static();
+        if (null === self::$instance) {
+            self::$instance = new static();
         }
 
-        return static::$instance;
+        return self::$instance;
     }
 
     /**

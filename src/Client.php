@@ -23,10 +23,10 @@ class Client
 
     public static function getInstance(): Client
     {
-        if (empty(static::$self)) {
-            static::$self = new static();
+        if (empty(self::$self)) {
+            self::$self = new static();
         }
-        return static::$self;
+        return self::$self;
     }
 
     public function connect(array $sessionFiles)
