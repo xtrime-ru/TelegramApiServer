@@ -8,4 +8,6 @@ RUN echo 1.0.0 > /tas_version
 
 EXPOSE 9503
 
+ENV UV_USE_IO_URING=0
+
 ENTRYPOINT ["./entrypoint.sh"]
