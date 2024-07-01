@@ -60,6 +60,10 @@ $settings = [
             'report_broken_media' => false,
             'download_parallel_chunks' => 20,
         ],
+        'metrics' => [
+            'enable_prometheus_collection' => true, //(bool)getenv("PROMETHEUS_BIND_TO"),
+            'metrics_bind_to' => fromString("0.0.0.0:12345")
+        ]
     ],
     'api' => [
         'ip_whitelist' => array_filter(
@@ -71,10 +75,6 @@ $settings = [
         'passwords' => (array)json_decode((string)getenv('PASSWORDS'), true),
         'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
     ],
-    'metrics' => [
-        'enable_prometheus_collection' => (bool)getenv("PROMETHEUS_BIND_TO"),
-        'bind_to' => getenv("PROMETHEUS_BIND_TO") ? fromString(getenv("PROMETHEUS_BIND_TO")) : null
-    ]
 ];
 
 if (empty($settings['telegram']['connection']['proxies']['\danog\MadelineProto\Stream\Proxy\SocksProxy'][0]['address'])) {
