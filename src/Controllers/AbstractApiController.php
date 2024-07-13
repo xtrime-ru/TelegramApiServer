@@ -215,10 +215,6 @@ abstract class AbstractApiController
             return $this->page['response'];
         }
 
-        if (!\is_array($this->page['response']) && !\is_scalar($this->page['response'])) {
-            $this->page['response'] = null;
-        }
-
         $data = [
             'success' => $this->page['success'],
             'errors' => $this->page['errors'],
