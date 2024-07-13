@@ -92,7 +92,7 @@ abstract class AbstractApiController
 
         switch (true) {
             case $contentType === 'application/x-www-form-urlencoded':
-            case \mb_strpos($contentType, 'multipart/form-data') !== false:
+            case \str_contains($contentType, 'multipart/form-data'):
                 $form = (new StreamingFormParser())->parseForm($this->request);
                 $post = [];
 
