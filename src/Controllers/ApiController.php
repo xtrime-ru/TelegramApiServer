@@ -2,12 +2,14 @@
 
 namespace TelegramApiServer\Controllers;
 
+use Amp\DeferredFuture;
 use Exception;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
 use function Amp\async;
 use function Amp\delay;
+use function Amp\Future\await;
 use function Amp\Future\awaitAll;
 
 final class ApiController extends AbstractApiController
@@ -39,18 +41,22 @@ final class ApiController extends AbstractApiController
         }
 
         //GROUP REQUESTS IN BULKS
-        static $futures = [];
+        /** @var ?DeferredFuture $lock */
+        static $lock = null;
 
-        $futures[] = $future = async($this->callApiCommon(...), $madelineProto);
-        delay($this->waitNextTick());
-
-        if ($futures) {
-            awaitAll($futures);
-            Logger::getInstance()->notice("Executed bulk requests:" . count($futures));
-            $futures = [];
+        if (!$lock) {
+            try {
+                $lock = new DeferredFuture();
+                delay($this->waitNextTick());
+                $lock->complete();
+            } finally {
+                $lock = null;
+            }
+        } else {
+            $lock->getFuture()->await();
         }
 
-        return $future->await();
+        return $this->callApiCommon($madelineProto);
     }
 
     /**
