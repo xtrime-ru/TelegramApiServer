@@ -203,8 +203,8 @@ final class Logger extends AbstractLogger
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
             'code' => $exception->getCode(),
-            'backtrace' => \array_slice($exception->getTrace(), 0, 3),
-            'previous exception' => $exception->getPrevious(),
+            'backtrace' => array_slice($exception->getTrace(), 0, 3),
+            'previous_exception' => $exception->getPrevious(),
         ];
     }
 }

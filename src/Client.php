@@ -11,8 +11,11 @@ use danog\MadelineProto\SettingsAbstract;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
+use Revolt\EventLoop;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
+use function Amp\async;
+use function Amp\delay;
 
 final class Client
 {
@@ -31,6 +34,10 @@ final class Client
     public function connect(array $sessionFiles)
     {
         warning(PHP_EOL . 'Starting MadelineProto...' . PHP_EOL);
+
+        $this->setFatalErrorHandler();
+
+        EventLoop::queue(fn() => throw new \Exception('test'));
 
         foreach ($sessionFiles as $file) {
             $sessionName = Files::getSessionName($file);
@@ -198,4 +205,64 @@ final class Client
         return $settingsObject;
     }
 
+    private function setFatalErrorHandler(): void
+    {
+
+        $token = Config::getInstance()->get('error.bot_token');
+        $peers = Config::getInstance()->get('error.peers');
+        $resume = Config::getInstance()->get('error.resume_on_error');
+
+        $currentHandler = EventLoop::getErrorHandler();
+        EventLoop::setErrorHandler(static fn(\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $resume));
+    }
+
+    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, bool $resume): void {
+        if ($currentHandler) {
+            $currentHandler($e);
+        }
+        if ($e->getPrevious()) {
+            self::errorHandler($e->getPrevious(), $currentHandler, $token, $peers, true);
+        }
+        if ($peers && $token) {
+            try {
+                $ch = curl_init("https://api.telegram.org/bot$token/sendMessage");
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+
+                foreach ($peers as $peer) {
+                    $exceptionArray = Logger::getExceptionAsArray($e);
+                    unset($exceptionArray['previous_exception']);
+
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+                        'chat_id' => $peer,
+                        'text' => "```json\n" .
+                            json_encode($exceptionArray, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) .
+                            "\n```"
+                        ,
+                        'parse_mode' => 'MarkdownV2',
+                    ]));
+
+                    $response = curl_exec($ch);
+                    if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
+                        Logger::getInstance()->error('Error notification bot response', [
+                            'response' => $response,
+                            'error_code' => curl_errno($ch),
+                            'error' => curl_error($ch),
+                        ]);
+                    }
+
+                }
+            } catch (\Throwable $curlException) {
+                Logger::getInstance()->error($curlException);
+            }
+        }
+
+        if (!$resume) {
+            throw $e;
+        }
+    }
 }
