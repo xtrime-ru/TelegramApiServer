@@ -3,6 +3,8 @@
 use danog\MadelineProto\Logger;
 use TelegramApiServer\EventObservers\LogObserver;
 
+use function Amp\Socket\SocketAddress\fromString;
+
 $settings = [
     'server' => [
         'address' => (string)getenv('SERVER_ADDRESS'),
@@ -71,6 +73,10 @@ $settings = [
             'report_broken_media' => false,
             'download_parallel_chunks' => 20,
         ],
+        'metrics' => [
+            'enable_prometheus_collection' => true, //(bool)getenv("PROMETHEUS_BIND_TO"),
+            'metrics_bind_to' => fromString("0.0.0.0:12345")
+        ]
     ],
     'api' => [
         'ip_whitelist' => array_filter(

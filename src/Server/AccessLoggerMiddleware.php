@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Server;
 
@@ -9,7 +9,7 @@ use Amp\Http\Server\Response;
 use Psr\Log\LoggerInterface as PsrLogger;
 use Psr\Log\LogLevel;
 
-class AccessLoggerMiddleware implements Middleware
+final class AccessLoggerMiddleware implements Middleware
 {
     public function __construct(
         private readonly PsrLogger $logger,
@@ -20,7 +20,7 @@ class AccessLoggerMiddleware implements Middleware
     {
 
         $method = $request->getMethod();
-        $uri = (string)$request->getUri();
+        $uri = (string) $request->getUri();
         $protocolVersion = $request->getProtocolVersion();
         $remote = Server::getClientIp($request);
 
@@ -58,7 +58,7 @@ class AccessLoggerMiddleware implements Middleware
             ],
         ];
 
-        $level = $status < 400 ? LogLevel::INFO : LogLevel::NOTICE;
+        $level = $status < 400 ? LogLevel::DEBUG : LogLevel::INFO;
 
         $this->logger->log(
             $level,

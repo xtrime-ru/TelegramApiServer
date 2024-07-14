@@ -4,7 +4,7 @@ namespace TelegramApiServer\EventObservers;
 
 use TelegramApiServer\Files;
 
-class EventHandler extends \danog\MadelineProto\EventHandler
+final class EventHandler extends \danog\MadelineProto\EventHandler
 {
     public static array $instances = [];
     private string $sessionName;
@@ -12,8 +12,8 @@ class EventHandler extends \danog\MadelineProto\EventHandler
     public function onStart()
     {
         $this->sessionName = Files::getSessionName($this->wrapper->getSession()->getSessionPath());
-        if (empty(static::$instances[$this->sessionName])) {
-            static::$instances[$this->sessionName] = true;
+        if (empty(self::$instances[$this->sessionName])) {
+            self::$instances[$this->sessionName] = true;
             warning("Event observer CONSTRUCTED: {$this->sessionName}");
         }
     }
@@ -23,7 +23,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
         if (empty($this->sessionName)) {
             return;
         }
-        unset(static::$instances[$this->sessionName]);
+        unset(self::$instances[$this->sessionName]);
         warning("Event observer DESTRUCTED: {$this->sessionName}");
     }
 

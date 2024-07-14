@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Controllers;
 
@@ -18,8 +18,6 @@ use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 use Throwable;
 use UnexpectedValueException;
-use function Amp\delay;
-use function mb_strpos;
 
 abstract class AbstractApiController
 {
@@ -28,7 +26,6 @@ abstract class AbstractApiController
     protected Request $request;
     protected ?StreamedField $file = null;
     protected string $extensionClass;
-
 
     public array $page = [
         'headers' => self::JSON_HEADER,
@@ -83,19 +80,19 @@ abstract class AbstractApiController
     }
 
     /**
-     * Получаем параметры из GET и POST
+     * Получаем параметры из GET и POST.
      *
      */
     private function resolveRequest(): void
     {
         $query = $this->request->getUri()->getQuery();
-        $contentType = (string)$this->request->getHeader('Content-Type');
+        $contentType = (string) $this->request->getHeader('Content-Type');
 
-        parse_str($query, $get);
+        \parse_str($query, $get);
 
         switch (true) {
             case $contentType === 'application/x-www-form-urlencoded':
-            case mb_strpos($contentType, 'multipart/form-data') !== false:
+            case \str_contains($contentType, 'multipart/form-data'):
                 $form = (new StreamingFormParser())->parseForm($this->request);
                 $post = [];
 
@@ -107,27 +104,27 @@ abstract class AbstractApiController
                         //We need to break loop without getting file
                         //All other post field will be omitted, hope we dont need them :)
                         break;
-                    } else {
-                        $post[$field->getName()] = $field->buffer();
                     }
+                    $post[$field->getName()] = $field->buffer();
+
                 }
                 break;
             case $contentType === 'application/json':
                 $body = $this->request->getBody()->buffer();
-                $post = json_decode($body, 1);
+                $post = \json_decode($body, true);
                 break;
             default:
                 $body = $this->request->getBody()->buffer();
-                parse_str($body, $post);
+                \parse_str($body, $post);
         }
 
-        $this->parameters = array_merge((array)$post, $get);
-        $this->parameters = array_values($this->parameters);
+        $this->parameters = \array_merge((array) $post, $get);
+        $this->parameters = \array_values($this->parameters);
 
     }
 
     /**
-     * Получает посты для формирования ответа
+     * Получает посты для формирования ответа.
      *
      */
     private function generateResponse(): void
@@ -159,16 +156,16 @@ abstract class AbstractApiController
 
     protected function callApiCommon(API $madelineProto)
     {
-        $pathCount = count($this->api);
-        if ($pathCount === 1 && method_exists($this->extensionClass, $this->api[0])) {
+        $pathCount = \count($this->api);
+        if ($pathCount === 1 && \method_exists($this->extensionClass, $this->api[0])) {
             /** @var ApiExtensions|SystemApiExtensions $madelineProtoExtensions */
             $madelineProtoExtensions = new $this->extensionClass($madelineProto, $this->request, $this->file);
             $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
         } else {
             if ($this->api[0] === 'API') {
                 $madelineProto = Client::getWrapper($madelineProto)->getAPI();
-                array_shift($this->api);
-                $pathCount = count($this->api);
+                \array_shift($this->api);
+                $pathCount = \count($this->api);
             }
             //Проверяем нет ли в MadilineProto такого метода.
             switch ($pathCount) {
@@ -190,9 +187,7 @@ abstract class AbstractApiController
     }
 
     /**
-     * @param Throwable $e
      *
-     * @return AbstractApiController
      * @throws Throwable
      */
     private function setError(Throwable $e): self
@@ -210,9 +205,8 @@ abstract class AbstractApiController
     }
 
     /**
-     * Кодирует ответ в нужный формат: json
+     * Кодирует ответ в нужный формат: json.
      *
-     * @return Response|string
      * @throws JsonException
      */
     private function getResponse(): string|Response
@@ -230,7 +224,7 @@ abstract class AbstractApiController
             $data['success'] = true;
         }
 
-        $result = json_encode(
+        $result = \json_encode(
             $data,
             JSON_THROW_ON_ERROR |
             JSON_INVALID_UTF8_SUBSTITUTE |
@@ -244,11 +238,9 @@ abstract class AbstractApiController
     }
 
     /**
-     * Устанавливает http код ответа (200, 400, 404 и тд.)
+     * Устанавливает http код ответа (200, 400, 404 и тд.).
      *
-     * @param int $code
      *
-     * @return AbstractApiController
      */
     private function setPageCode(int $code): self
     {

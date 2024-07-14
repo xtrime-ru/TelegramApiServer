@@ -5,6 +5,7 @@ services:
       service: base-api
     ports:
       - "127.0.0.1:9503:9503"
+      - "12345:12345"
     command:
       - "-s=session"
   mysql:

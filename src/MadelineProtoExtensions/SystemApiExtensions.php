@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
@@ -13,7 +13,7 @@ use function Amp\async;
 use function Amp\File\deleteFile;
 use function Amp\Future\awaitAll;
 
-class SystemApiExtensions
+final class SystemApiExtensions
 {
     private Client $client;
 
@@ -41,7 +41,7 @@ class SystemApiExtensions
     public function addSession(string $session, array $settings = []): array
     {
         if (!empty($settings['app_info']['api_id'])) {
-            $settings['app_info']['api_id'] = (int)$settings['app_info']['api_id'];
+            $settings['app_info']['api_id'] = (int) $settings['app_info']['api_id'];
         }
 
         $instance = $this->client->addSession($session, $settings);
@@ -75,7 +75,7 @@ class SystemApiExtensions
         foreach ($this->client->instances as $session => $instance) {
             $authorized = $instance->getAuthorization();
             switch ($authorized) {
-                case API::NOT_LOGGED_IN;
+                case API::NOT_LOGGED_IN:
                     $status = 'NOT_LOGGED_IN';
                     break;
                 case API::WAITING_CODE:
@@ -107,7 +107,7 @@ class SystemApiExtensions
 
         return [
             'sessions' => $sessions,
-            'memory' => $this->bytesToHuman(memory_get_usage(true)),
+            'memory' => $this->bytesToHuman(\memory_get_usage(true)),
         ];
     }
 
@@ -115,10 +115,10 @@ class SystemApiExtensions
     {
         $file = Files::getSessionFile($session);
 
-        if (is_file($file)) {
+        if (\is_file($file)) {
             $futures = [];
-            foreach (glob("$file*") as $file) {
-                $futures[] = async(fn() => deleteFile($file));
+            foreach (\glob("$file*") as $file) {
+                $futures[] = async(fn () => deleteFile($file));
             }
             awaitAll($futures);
         } else {
@@ -140,7 +140,7 @@ class SystemApiExtensions
     public function unlinkSessionSettings($session): string
     {
         $settings = Files::getSessionFile($session, Files::SETTINGS_EXTENSION);
-        if (is_file($settings)) {
+        if (\is_file($settings)) {
             deleteFile($settings);
         }
 
@@ -149,7 +149,7 @@ class SystemApiExtensions
 
     public function exit(): string
     {
-        EventLoop::defer(static fn() => exit());
+        EventLoop::defer(static fn () => exit());
         return 'ok';
     }
 
@@ -159,6 +159,6 @@ class SystemApiExtensions
         for ($i = 0; $bytes > 1024; $i++) {
             $bytes /= 1024;
         }
-        return round($bytes, 2) . ' ' . $units[$i];
+        return \round($bytes, 2) . ' ' . $units[$i];
     }
 }

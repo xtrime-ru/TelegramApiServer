@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-curl": "*",
@@ -32,11 +32,14 @@
     "amphp/http": "^v2",
     "amphp/http-server-router": "^2",
     "amphp/http-server-form-parser": "^v2",
-    "amphp/websocket-server": "^v3",
+    "amphp/websocket-server": "^3.0.1",
     "amphp/websocket-client": "^v2",
-    "vlucas/phpdotenv": "^4",
+    "vlucas/phpdotenv": "^4.3",
     "danog/madelineproto": "dev-v8_fix_cleanup",
     "amphp/dns": "2.x-dev"
+  },
+  "require-dev": {
+    "amphp/php-cs-fixer-config": "^2.0.1"
   },
   "suggest": {
     "ext-pcntl": "Install pcintl for propper signal handling and healthcheck (enabled in .env)"
@@ -58,5 +61,8 @@
     "allow-plugins": {
       "symfony/thanks": false
     }
+  },
+  "scripts": {
+    "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v"
   }
 }

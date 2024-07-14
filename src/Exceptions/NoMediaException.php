@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace TelegramApiServer\Exceptions;
 
-class NoMediaException extends NoticeException
+final class NoMediaException extends NoticeException
 {
 
 }
