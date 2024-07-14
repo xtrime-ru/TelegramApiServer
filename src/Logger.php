@@ -168,7 +168,7 @@ class Logger extends AbstractLogger
             'line' => $exception->getLine(),
             'code' => $exception->getCode(),
             'backtrace' => array_slice($exception->getTrace(), 0, 3),
-            'previous exception' => $exception->getPrevious(),
+            'previous_exception' => $exception->getPrevious(),
         ];
     }
 }
