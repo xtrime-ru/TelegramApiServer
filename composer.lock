@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9e9ba3184bce93fe3654528621101f4",
+    "content-hash": "dc5798d52e4ed25349fd1c90bf88660d",
     "packages": [
         {
             "name": "amphp/amp",
@@ -232,7 +232,7 @@
             "version": "2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/xtrime-ru/dns.git",
+                "url": "git@github.com:xtrime-ru/dns.git",
                 "reference": "037b762d95f7d9e855b9c6736c0ccc4adcb8921e"
             },
             "dist": {
@@ -323,10 +323,7 @@
                 "dns",
                 "resolve"
             ],
-            "support": {
-                "source": "https://github.com/xtrime-ru/dns/tree/2.x"
-            },
-            "time": "2024-05-14T18:13:22+00:00"
+            "time": "2024-05-14T16:09:55+00:00"
         },
         {
             "name": "amphp/file",
@@ -6889,7 +6886,8 @@
     "platform": {
         "php": "^8.2",
         "ext-json": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-curl": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
