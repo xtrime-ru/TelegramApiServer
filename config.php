@@ -9,6 +9,19 @@ $settings = [
         'port' => (int)getenv('SERVER_PORT'),
         'real_ip_header' => (string)(getenv('REAL_IP_HEADER') ?? ''),
     ],
+    'error' => [
+        'bot_token' => (string)getenv('ERROR_NOTIFICATION_BOT_TOKEN'),
+        'peers' => array_filter(
+            array_map(
+                static function(string $peer): string|int {
+                    $peer = trim($peer);
+                    return is_numeric($peer) ? (int)$peer : $peer;
+                },
+                explode(',', (string)getenv('ERROR_NOTIFICATION_PEERS'))
+            ),
+        ),
+        'resume_on_error' => ((bool)getenv('RESUME_ON_ERROR'))
+    ],
     'telegram' => [
         'app_info' => [ // obtained in https://my.telegram.org
             'api_id' => (int)getenv('TELEGRAM_API_ID'),
