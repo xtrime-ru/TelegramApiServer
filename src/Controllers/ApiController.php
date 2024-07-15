@@ -3,14 +3,11 @@
 namespace TelegramApiServer\Controllers;
 
 use Amp\DeferredFuture;
+use Amp\Future;
 use Exception;
+use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
-use TelegramApiServer\Logger;
-use function Amp\async;
-use function Amp\delay;
-use function Amp\Future\await;
-use function Amp\Future\awaitAll;
 
 final class ApiController extends AbstractApiController
 {
@@ -28,6 +25,7 @@ final class ApiController extends AbstractApiController
         $this->api = \explode('.', $path['method'] ?? '');
     }
 
+    private static ?Future $w = null;
     /**
      * @throws Exception
      */
@@ -40,40 +38,16 @@ final class ApiController extends AbstractApiController
             return $this->callApiCommon($madelineProto);
         }
 
-        //GROUP REQUESTS IN BULKS
-        /** @var ?DeferredFuture $lock */
-        static $lock = null;
-
-        if (!$lock) {
-            try {
-                $lock = new DeferredFuture();
-                delay($this->waitNextTick());
-                $lock->complete();
-            } finally {
-                $lock = null;
-            }
-        } else {
-            $lock->getFuture()->await();
+        if (!self::$w) {
+            $f = new DeferredFuture;
+            self::$w = $f->getFuture();
+            EventLoop::delay(0.001, static function () use ($f): void {
+                self::$w = null;
+                $f->complete();
+            });
         }
+        self::$w->await();
 
         return $this->callApiCommon($madelineProto);
-    }
-
-    /**
-     * Sync threads execution via time ticks
-     * Need to enable madelineProto futures bulk execution
-     * @param float $tick interval of execution in seconds.
-     */
-    protected function waitNextTick(float $tick = 0.5): float {
-        $tickMs = (int)($tick * 1000);
-        $now = (int)(microtime(true) * 1000);
-        $currentTick = intdiv((int)(microtime(true) * 1000), $tickMs);
-        $nextTick = ($currentTick + 1);
-        $nextTickTime = $nextTick * $tickMs;
-        $wait = round(($nextTickTime - $now)/1000, 3);
-
-        Logger::getInstance()->notice("Waiting $wait seconds before tick");
-
-        return $wait;
     }
 }
