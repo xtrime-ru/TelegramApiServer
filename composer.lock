@@ -232,7 +232,7 @@
             "version": "2.x-dev",
             "source": {
                 "type": "git",
-                "url": "git@github.com:xtrime-ru/dns.git",
+                "url": "https://github.com/xtrime-ru/dns.git",
                 "reference": "037b762d95f7d9e855b9c6736c0ccc4adcb8921e"
             },
             "dist": {
@@ -323,7 +323,10 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2024-05-14T16:09:55+00:00"
+            "support": {
+                "source": "https://github.com/xtrime-ru/dns/tree/2.x"
+            },
+            "time": "2024-05-14T18:13:22+00:00"
         },
         {
             "name": "amphp/file",
@@ -2643,12 +2646,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "ddb2bb5a2358cc62cb8d0f847710e2cccb106390"
+                "reference": "0f6247971e31d16ff1172723787deb96a3364f40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ddb2bb5a2358cc62cb8d0f847710e2cccb106390",
-                "reference": "ddb2bb5a2358cc62cb8d0f847710e2cccb106390",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/0f6247971e31d16ff1172723787deb96a3364f40",
+                "reference": "0f6247971e31d16ff1172723787deb96a3364f40",
                 "shasum": ""
             },
             "require": {
@@ -2763,7 +2766,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-10T14:36:36+00:00"
+            "time": "2024-07-15T11:29:33+00:00"
         },
         {
             "name": "danog/primemodule",
