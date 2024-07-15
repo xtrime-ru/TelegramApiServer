@@ -15,6 +15,7 @@ use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
 use const SIGINT;
+use const SIGQUIT;
 use const SIGTERM;
 
 final class Server
@@ -58,7 +59,7 @@ final class Server
     {
         if (\defined('SIGINT')) {
             // Await SIGINT or SIGTERM to be received.
-            $signal = Amp\trapSignal([SIGINT, SIGTERM]);
+            $signal = Amp\trapSignal([SIGINT, SIGTERM, SIGQUIT]);
             info(\sprintf("Received signal %d, stopping HTTP server", $signal));
             $server->stop();
         } else {
