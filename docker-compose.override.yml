@@ -1,0 +1,74 @@
+services:
+  api:
+    extends:
+      file: docker-compose.base.yml
+      service: base-api
+    container_name: ${API_CONTAINER_NAME}
+    env_file:
+      - path: ./.env
+      - path: ./.env.main
+    ports: !override
+      - "${SERVERIP}:${MAIN_PORT}:9503"
+    volumes:
+      - ./:/app-host-link
+      - ./sessions/main/:/app-host-link/sessions
+    command: !override
+      - "-s=*"
+  bot-api:
+    extends:
+      file: docker-compose.base.yml
+      service: base-api
+    container_name: ${BOT_CONTAINER_NAME}
+    ports: !override
+      - "${SERVERIP}:${BOT_PORT}:9503"
+    volumes:
+      - ./:/app-host-link
+      - ./sessions/bots/:/app-host-link/sessions
+    env_file:
+      - path: ./.env
+      - path: ./.env.bots
+    command: !override
+      - "-s=*"
+  ad-api:
+    extends:
+      file: docker-compose.base.yml
+      service: base-api
+    container_name: ${AD_CONTAINER_NAME}
+    ports: !override
+      - "${SERVERIP}:${AD_PORT}:9503"
+    env_file:
+      - path: ./.env
+      - path: ./.env.ads
+    volumes:
+      - ./:/app-host-link
+      - ./sessions/ads/:/app-host-link/sessions
+    command: !override
+      - "-s=*"
+  user-api:
+    extends:
+      file: docker-compose.base.yml
+      service: base-api
+    container_name: ${USER_CONTAINER_NAME}
+    ports: !override
+      - "${SERVERIP}:${USER_PORT}:9503"
+    env_file:
+      - path: ./.env
+      - path: ./.env.users
+    volumes:
+      - ./:/app-host-link
+      - ./sessions/users/:/app-host-link/sessions
+    command: !override
+      - "-s=*"
+  mysql:
+    extends:
+      file: docker-compose.base.yml
+      service: base-mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
+    ports: !override
+      - "${SERVERIP}:${MYSQL_PORT}:3306"
+    command: !override
+      - --skip-grant-tables
+      - --innodb-buffer-pool-size=512M
+      - --wait_timeout=90
+      - --max_allowed_packet=256M
+      - --max_connections=100000

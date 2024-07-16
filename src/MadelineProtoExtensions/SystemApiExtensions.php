@@ -100,7 +100,7 @@ final class SystemApiExtensions
 
             $sessions[$session] = [
                 'session' => $session,
-                'file' => Files::getSessionFile($session),
+                'file' => Files::getSessionFile((string)$session),
                 'status' => $status,
             ];
         }

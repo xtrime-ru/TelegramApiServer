@@ -36,7 +36,7 @@ $settings = [
         ],
         'rpc' => [
             'flood_timeout' => 5,
-            'rpc_drop_timeout' => 20,
+            'rpc_drop_timeout' => (int)(getenv('RPC_DROP_TIMEOUT')?:20),
         ],
         'connection' => [
             'max_media_socket_count' => 10,
@@ -74,8 +74,8 @@ $settings = [
             'download_parallel_chunks' => 20,
         ],
         'metrics' => [
-            'enable_prometheus_collection' => true, //(bool)getenv("PROMETHEUS_BIND_TO"),
-            'metrics_bind_to' => fromString("0.0.0.0:12345")
+            'enable_prometheus_collection' => false, //(bool)getenv("PROMETHEUS_BIND_TO"),
+            'metrics_bind_to' => null //fromString("0.0.0.0:12345")
         ]
     ],
     'api' => [
@@ -88,6 +88,17 @@ $settings = [
         'passwords' => (array)json_decode((string)getenv('PASSWORDS'), true),
         'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
     ],
+    'laravel'=>[
+        'reported_peers'=>array_filter(
+            array_map(
+                'trim',
+                explode(',', (string)getenv('REPORTED_PEERS'))
+            )
+        ),
+        'redis_url'=>(string)getenv('REDIS_URL'),
+        'auto_start'=>(bool)filter_var((string)getenv('AUTO_START'), FILTER_VALIDATE_BOOL),
+        'handle_old_data'=>(bool)filter_var((string)getenv('HANDLE_OLD_DATA'), FILTER_VALIDATE_BOOL),
+    ]
 ];
 
 if (empty($settings['telegram']['connection']['proxies']['\danog\MadelineProto\Stream\Proxy\SocksProxy'][0]['address'])) {
