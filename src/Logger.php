@@ -7,9 +7,11 @@ use DateTimeInterface;
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
+use Revolt\EventLoop;
 use TelegramApiServer\EventObservers\LogObserver;
 use Throwable;
 
+use function Amp\ByteStream\getStderr;
 use const PHP_EOL;
 
 final class Logger extends AbstractLogger
@@ -97,8 +99,7 @@ final class Logger extends AbstractLogger
             return;
         }
 
-        $formatter = $this->formatter;
-        echo $formatter($level, $message, $context);
+        getStderr()->write(($this->formatter)($level, $message, $context));
     }
 
     private function format(string $level, string $message, array $context): string
