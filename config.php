@@ -22,6 +22,7 @@ $settings = [
                 explode(',', (string)getenv('ERROR_NOTIFICATION_PEERS'))
             ),
         ),
+        'prefix' => (string)getenv('ERROR_NOTIFICATION_PREFIX'),
         'resume_on_error' => ((bool)getenv('RESUME_ON_ERROR'))
     ],
     'telegram' => [

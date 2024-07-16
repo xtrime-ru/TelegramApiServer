@@ -2,12 +2,17 @@
 
 namespace TelegramApiServer;
 
+use Amp\Future\UnhandledFutureError;
+use Amp\SignalException;
+use Amp\Sql\SqlException;
 use Amp\Sync\LocalKeyedMutex;
 use danog\MadelineProto\API;
 use danog\MadelineProto\APIWrapper;
+use danog\MadelineProto\SecurityException;
 use danog\MadelineProto\Settings;
 use danog\MadelineProto\Settings\Database\SerializerType;
 use danog\MadelineProto\SettingsAbstract;
+use Exception;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;
@@ -206,19 +211,24 @@ final class Client
 
         $token = Config::getInstance()->get('error.bot_token');
         $peers = Config::getInstance()->get('error.peers');
+        $prefix = Config::getInstance()->get('error.prefix');
         $resume = Config::getInstance()->get('error.resume_on_error');
 
         $currentHandler = EventLoop::getErrorHandler();
-        EventLoop::setErrorHandler(static fn (\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $resume));
+        EventLoop::setErrorHandler(static fn (\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $prefix, $resume));
     }
 
-    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, bool $resume): void
+    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, string $prefix, bool $resume): void
     {
+        if ($e instanceof UnhandledFutureError) {
+            $e = $e->getPrevious();
+        }
+
         if ($currentHandler) {
             $currentHandler($e);
         }
         if ($e->getPrevious()) {
-            self::errorHandler($e->getPrevious(), $currentHandler, $token, $peers, true);
+            self::errorHandler($e->getPrevious(), $currentHandler, $token, $peers, $prefix, true);
         }
         if ($peers && $token) {
             try {
@@ -230,24 +240,41 @@ final class Client
                 \curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
                 \curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
+                $encoded = function(string $input): string {
+                    return str_replace(['<', '>', '&'], ['&lt;', '&gt;', '&amp;'], $input);
+                };
+
                 foreach ($peers as $peer) {
                     $exceptionArray = Logger::getExceptionAsArray($e);
                     unset($exceptionArray['previous_exception']);
 
+                    $text = <<<HTML
+                        $prefix
+                        message: {$encoded($e->getMessage())}
+                        
+                        <pre>
+                            <code class="json">
+                            {$encoded(\json_encode($exceptionArray, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT))}
+                            </code>
+                        </pre>
+                        HTML
+                    ;
                     \curl_setopt($ch, CURLOPT_POSTFIELDS, \json_encode([
                         'chat_id' => $peer,
-                        'text' => "```json\n" .
-                            \json_encode($exceptionArray, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) .
-                            "\n```",
-                        'parse_mode' => 'MarkdownV2',
+                        'text' => trim($text),
+                        'parse_mode' => 'html',
                     ]));
 
                     $response = \curl_exec($ch);
-                    if (\curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
+                    $responseJson = \json_decode($response, true);
+                    if (\curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200 || $responseJson['ok'] !== true) {
                         Logger::getInstance()->error('Error notification bot response', [
-                            'response' => $response,
-                            'error_code' => \curl_errno($ch),
-                            'error' => \curl_error($ch),
+                            'status' => \curl_getinfo($ch, CURLINFO_HTTP_CODE),
+                            'response' => $responseJson ?: $response,
+                            'curl_error' => [
+                                'code' => \curl_errno($ch),
+                                'message' => \curl_error($ch),
+                            ],
                         ]);
                     }
 
@@ -259,6 +286,13 @@ final class Client
 
         if (!$resume) {
             throw $e;
+        } else {
+            if ($e instanceof SecurityException || $e instanceof SignalException || $e instanceof SqlException) {
+                throw $e;
+            }
+            if (str_starts_with($e->getMessage(), 'Could not connect to DC ')) {
+                throw $e;
+            }
         }
     }
 }
