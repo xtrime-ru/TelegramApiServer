@@ -1,12 +1,7 @@
 <?php
 
-use Amp\Future\UnhandledFutureError;
-use Amp\SignalException;
-use Amp\Sql\SqlException;
-use danog\MadelineProto\SecurityException;
 use Revolt\EventLoop;
 use TelegramApiServer\Logger;
-use TelegramApiServer\Migrations\EnvUpgrade;
 
 $root = __DIR__;
 const ENV_VERSION='1';
@@ -117,16 +112,3 @@ if (!function_exists('emergency')) {
         Logger::getInstance()->emergency($message, $context);
     }
 }
-
-EventLoop::setErrorHandler(function (\Throwable $e) {
-    if ($e instanceof UnhandledFutureError) {
-        $e = $e->getPrevious();
-    }
-    if ($e instanceof SecurityException || $e instanceof SignalException || $e instanceof SqlException) {
-        throw $e;
-    }
-    if (str_starts_with($e->getMessage(), 'Could not connect to DC ')) {
-        throw $e;
-    }
-    emergency((string) $e);
-});

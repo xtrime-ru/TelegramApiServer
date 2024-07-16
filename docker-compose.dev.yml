@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-dev
+    volumes:
+      - ./dev/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     ports:
       - "127.0.0.1:9503:9503"
       - "9003"
