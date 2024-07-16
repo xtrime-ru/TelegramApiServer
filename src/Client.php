@@ -14,8 +14,6 @@ use ReflectionProperty;
 use Revolt\EventLoop;
 use RuntimeException;
 use TelegramApiServer\EventObservers\EventObserver;
-use function Amp\async;
-use function Amp\delay;
 
 final class Client
 {
@@ -214,10 +212,11 @@ final class Client
         $resume = Config::getInstance()->get('error.resume_on_error');
 
         $currentHandler = EventLoop::getErrorHandler();
-        EventLoop::setErrorHandler(static fn(\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $resume));
+        EventLoop::setErrorHandler(static fn (\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $resume));
     }
 
-    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, bool $resume): void {
+    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, bool $resume): void
+    {
         if ($currentHandler) {
             $currentHandler($e);
         }
@@ -226,33 +225,32 @@ final class Client
         }
         if ($peers && $token) {
             try {
-                $ch = curl_init("https://api.telegram.org/bot$token/sendMessage");
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $ch = \curl_init("https://api.telegram.org/bot$token/sendMessage");
+                \curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                \curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,1);
-                curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                \curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+                \curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
                 foreach ($peers as $peer) {
                     $exceptionArray = Logger::getExceptionAsArray($e);
                     unset($exceptionArray['previous_exception']);
 
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+                    \curl_setopt($ch, CURLOPT_POSTFIELDS, \json_encode([
                         'chat_id' => $peer,
                         'text' => "```json\n" .
-                            json_encode($exceptionArray, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) .
-                            "\n```"
-                        ,
+                            \json_encode($exceptionArray, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) .
+                            "\n```",
                         'parse_mode' => 'MarkdownV2',
                     ]));
 
-                    $response = curl_exec($ch);
-                    if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
+                    $response = \curl_exec($ch);
+                    if (\curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
                         Logger::getInstance()->error('Error notification bot response', [
                             'response' => $response,
-                            'error_code' => curl_errno($ch),
-                            'error' => curl_error($ch),
+                            'error_code' => \curl_errno($ch),
+                            'error' => \curl_error($ch),
                         ]);
                     }
 
