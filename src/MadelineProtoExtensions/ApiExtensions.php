@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
@@ -7,15 +7,15 @@ use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use danog\MadelineProto;
 use danog\MadelineProto\StrTools;
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\Exceptions\NoMediaException;
+
 use function Amp\delay;
 
 final class ApiExtensions
 {
-
     private MadelineProto\Api $madelineProto;
     private Request $request;
     private ?StreamedField $file;
@@ -382,7 +382,7 @@ final class ApiExtensions
             $params[$key] = match($key) {
                 'offset', 'limit' => (int) $value,
                 'timeout' => (float) $value,
-                default => throw new \InvalidArgumentException("Unknown parameter: {$key}"),
+                default => throw new InvalidArgumentException("Unknown parameter: {$key}"),
             };
         }
 

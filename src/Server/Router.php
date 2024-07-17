@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer\Server;
 
@@ -14,6 +14,7 @@ use TelegramApiServer\Controllers\SystemController;
 use TelegramApiServer\Logger;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
+
 use function Amp\Http\Server\Middleware\stackMiddleware;
 
 final class Router

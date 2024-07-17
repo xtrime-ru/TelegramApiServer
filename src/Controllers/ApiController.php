@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer\Controllers;
 
@@ -11,7 +11,6 @@ use TelegramApiServer\Config;
 
 final class ApiController extends AbstractApiController
 {
-
     private ?string $session = '';
 
     /**
@@ -39,7 +38,7 @@ final class ApiController extends AbstractApiController
         }
 
         if (!self::$w) {
-            $f = new DeferredFuture;
+            $f = new DeferredFuture();
             self::$w = $f->getFuture();
             EventLoop::delay($tick, static function () use ($f): void {
                 $f->complete();

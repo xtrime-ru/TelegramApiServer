@@ -63,6 +63,6 @@
     }
   },
   "scripts": {
-    "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v"
+    "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v  --rules='{\"@PSR12\": true, \"declare_strict_types\": false}' ."
   }
 }

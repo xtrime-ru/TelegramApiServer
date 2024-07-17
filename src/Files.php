@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer;
 
@@ -6,7 +6,6 @@ use RuntimeException;
 
 final class Files
 {
-
     public const SESSION_EXTENSION = '.madeline';
     public const SETTINGS_EXTENSION = '.settings.json';
     private const SESSION_FOLDER = 'sessions';

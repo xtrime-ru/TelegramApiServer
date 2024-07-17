@@ -15,7 +15,7 @@ $settings = [
         'bot_token' => (string)getenv('ERROR_NOTIFICATION_BOT_TOKEN'),
         'peers' => array_filter(
             array_map(
-                static function(string $peer): string|int {
+                static function (string $peer): string|int {
                     $peer = trim($peer);
                     return is_numeric($peer) ? (int)$peer : $peer;
                 },
@@ -45,9 +45,9 @@ $settings = [
                 '\danog\MadelineProto\Stream\Proxy\SocksProxy' => [
                     [
                         "address" => (string)getenv('TELEGRAM_PROXY_ADDRESS'),
-                        "port"=> (int)getenv('TELEGRAM_PROXY_PORT'),
-                        "username"=> (string)getenv('TELEGRAM_PROXY_USERNAME'),
-                        "password"=> (string)getenv('TELEGRAM_PROXY_PASSWORD'),
+                        "port" => (int)getenv('TELEGRAM_PROXY_PORT'),
+                        "username" => (string)getenv('TELEGRAM_PROXY_USERNAME'),
+                        "password" => (string)getenv('TELEGRAM_PROXY_PASSWORD'),
                     ],
                 ]
             ]

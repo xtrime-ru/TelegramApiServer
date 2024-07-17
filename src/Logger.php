@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer;
 
@@ -12,6 +12,7 @@ use TelegramApiServer\EventObservers\LogObserver;
 use Throwable;
 
 use function Amp\ByteStream\getStderr;
+
 use const PHP_EOL;
 
 final class Logger extends AbstractLogger

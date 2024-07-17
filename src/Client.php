@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer;
 
@@ -59,7 +59,7 @@ final class Client
 
     public function addSession(string $session, array $settings = []): API
     {
-        self::$mutex ??= new LocalKeyedMutex;
+        self::$mutex ??= new LocalKeyedMutex();
         $lock = self::$mutex->acquire($session);
         if (isset($this->instances[$session])) {
             throw new InvalidArgumentException('Session already exists');
@@ -240,7 +240,7 @@ final class Client
                 \curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
                 \curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
-                $encoded = function(string $input): string {
+                $encoded = function (string $input): string {
                     return str_replace(['<', '>', '&'], ['&lt;', '&gt;', '&amp;'], $input);
                 };
 
@@ -254,7 +254,7 @@ final class Client
                         
                         <pre>
                             <code class="json">
-                            {$encoded(\json_encode($exceptionArray, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT))}
+                            {$encoded(\json_encode($exceptionArray, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT))}
                             </code>
                         </pre>
                         HTML

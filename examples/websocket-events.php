@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 /**
  * Get all updates from MadelineProto EventHandler running inside TelegramApiServer via websocket.
@@ -7,6 +7,7 @@
 
 use Amp\Websocket\Client\WebsocketHandshake;
 use Revolt\EventLoop;
+
 use function Amp\async;
 use function Amp\delay;
 use function Amp\Websocket\Client\connect;

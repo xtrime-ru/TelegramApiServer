@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
@@ -9,6 +9,7 @@ use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Files;
 use Throwable;
+
 use function Amp\async;
 use function Amp\File\deleteFile;
 use function Amp\Future\awaitAll;

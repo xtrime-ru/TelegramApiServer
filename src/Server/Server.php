@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace TelegramApiServer\Server;
 
@@ -14,6 +14,7 @@ use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
 use TelegramApiServer\Logger;
+
 use const SIGINT;
 use const SIGQUIT;
 use const SIGTERM;
@@ -67,7 +68,6 @@ final class Server
             info("Stopping http server");
             $server->stop();
         }
-        Logger::finalize();
     }
 
     /**
