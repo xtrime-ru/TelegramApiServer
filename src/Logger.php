@@ -99,8 +99,11 @@ final class Logger extends AbstractLogger
         if (self::$levels[$level] < $this->minLevelIndex) {
             return;
         }
-
-        getStderr()->write(($this->formatter)($level, $message, $context));
+        try {
+            getStderr()->write(($this->formatter)($level, $message, $context));
+        } catch (\Throwable) {
+            echo ($this->formatter)($level, $message, $context) . PHP_EOL;
+        }
     }
 
     private function format(string $level, string $message, array $context): string

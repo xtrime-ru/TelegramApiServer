@@ -12,7 +12,6 @@ use danog\MadelineProto\SecurityException;
 use danog\MadelineProto\Settings;
 use danog\MadelineProto\Settings\Database\SerializerType;
 use danog\MadelineProto\SettingsAbstract;
-use Exception;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionProperty;

@@ -52,12 +52,9 @@ final class EventObserver
             if (self::$sessionClients[$session] === 1) {
                 warning("Start EventHandler: {$session}");
                 try {
-                    $instance = Client::getInstance()->getSession($session);
-                    $property = new ReflectionProperty($instance, "wrapper");
-                    /** @var APIWrapper $wrapper */
-                    $wrapper = $property->getValue($instance);
                     EventHandler::cachePlugins(EventHandler::class);
-                    $wrapper->getAPI()->setEventHandler(EventHandler::class);
+                    $instance = Client::getInstance()->getSession($session);
+                    Client::getWrapper($instance)->getAPI()->setEventHandler(EventHandler::class);
                 } catch (Throwable $e) {
                     self::removeSessionClient($session);
                     error('Cant set EventHandler', [
