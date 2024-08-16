@@ -105,10 +105,10 @@ It's recommended to use http_build_query, when using GET requests.
 * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
 * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
 * repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
-* get messages from channel/user: `http://127.0.0.1:9503/api/getHistory/?data[peer]=@breakingmash&data[limit]=10`
+* get messages from channel/user: `http://127.0.0.1:9503/api/messages.getHistory/?data[peer]=@breakingmash&data[limit]=10`
 * get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
 * search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
-* sendMessage: `http://127.0.0.1:9503/api/sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
+* sendMessage: `http://127.0.0.1:9503/api/messages.sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
 * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
     
 ## Advanced features
@@ -129,7 +129,7 @@ Example uses urlencoded url in query.
 There are few options to upload and send media files:
 - Custom method `sendMedia` supports upload from form:
     ```shell script
-    curl "http://127.0.0.1:9503/api/sendMedia?data[peer]=xtrime&data[message]=Hello" -g \
+    curl "http://127.0.0.1:9503/api/messages.sendMedia?data[peer]=xtrime&data[message]=Hello" -g \
     -F "file=@/Users/xtrime/Downloads/test.txt"
     ```
 - use custom `uploadMediaForm` method and then pass result to `messages.sendMedia`:
