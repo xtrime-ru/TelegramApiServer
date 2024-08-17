@@ -75,8 +75,8 @@ $settings = [
             'download_parallel_chunks' => 20,
         ],
         'metrics' => [
-            'enable_prometheus_collection' => true, //(bool)getenv("PROMETHEUS_BIND_TO"),
-            'metrics_bind_to' => fromString("0.0.0.0:12345")
+            'enable_prometheus_collection' => (bool)getenv("PROMETHEUS_ENABLE"),
+            'metrics_bind_to' => fromString((string)getenv("PROMETHEUS_BIND_TO")),
         ]
     ],
     'api' => [

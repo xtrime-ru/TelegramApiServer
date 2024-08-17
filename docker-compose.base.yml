@@ -24,7 +24,7 @@ services:
       timeout: 30s
       retries: 1
   base-mysql:
-    image: mariadb:11.1
+    image: mariadb:11.4
     restart: unless-stopped
     volumes:
       - ./.mysql:/var/lib/mysql
