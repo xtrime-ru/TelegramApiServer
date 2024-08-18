@@ -17,6 +17,7 @@ use Psr\Log\LogLevel;
 use ReflectionProperty;
 use Revolt\EventLoop;
 use RuntimeException;
+use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\EventObservers\EventObserver;
 
 final class Client
@@ -148,11 +149,7 @@ final class Client
     public function startLoggedInSession(string $sessionName): void
     {
         if ($this->instances[$sessionName]->getAuthorization() === API::LOGGED_IN) {
-            if (
-                $this->instances[$sessionName]->getEventHandler() instanceof \__PHP_Incomplete_Class
-            ) {
-                $this->instances[$sessionName]->unsetEventHandler();
-            }
+            EventHandler::cachePlugins(EventHandler::class);
             $this->instances[$sessionName]->start();
             $this->instances[$sessionName]->echo("Started session: {$sessionName}\n");
         }

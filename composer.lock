@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc5798d52e4ed25349fd1c90bf88660d",
+    "content-hash": "c4f466ac2e8d88035f620e533f7fac12",
     "packages": [
         {
             "name": "amphp/amp",
@@ -330,16 +330,16 @@
         },
         {
             "name": "amphp/file",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/file.git",
-                "reference": "1d51235bd8cb4973c7908e645b62c638d8c081fe"
+                "reference": "58c8efefb8808d25456ef3ef4a628645442578a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/file/zipball/1d51235bd8cb4973c7908e645b62c638d8c081fe",
-                "reference": "1d51235bd8cb4973c7908e645b62c638d8c081fe",
+                "url": "https://api.github.com/repos/amphp/file/zipball/58c8efefb8808d25456ef3ef4a628645442578a2",
+                "reference": "58c8efefb8808d25456ef3ef4a628645442578a2",
                 "shasum": ""
             },
             "require": {
@@ -403,7 +403,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/file/issues",
-                "source": "https://github.com/amphp/file/tree/v3.1.0"
+                "source": "https://github.com/amphp/file/tree/v3.1.1"
             },
             "funding": [
                 {
@@ -411,7 +411,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-21T14:53:24+00:00"
+            "time": "2024-08-15T15:04:06+00:00"
         },
         {
             "name": "amphp/hpack",
@@ -2642,23 +2642,23 @@
         },
         {
             "name": "danog/madelineproto",
-            "version": "dev-v8_fix_cleanup",
+            "version": "dev-v8-tas",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "d07a17a4430dc71b2d413eedd41c799912d82554"
+                "reference": "c0615445857ce41a56ac153b7eb97119796b93bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/d07a17a4430dc71b2d413eedd41c799912d82554",
-                "reference": "d07a17a4430dc71b2d413eedd41c799912d82554",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/c0615445857ce41a56ac153b7eb97119796b93bf",
+                "reference": "c0615445857ce41a56ac153b7eb97119796b93bf",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^3.0.2",
                 "amphp/byte-stream": "^2.1.1",
-                "amphp/dns": "^2.1.2",
-                "amphp/file": "^3.1.0",
+                "amphp/dns": "^2.2.0",
+                "amphp/file": "^3.1.1",
                 "amphp/http": "^2.1.1",
                 "amphp/http-client": "^5.1.0",
                 "amphp/http-client-cookies": "^2",
@@ -2666,7 +2666,7 @@
                 "amphp/log": "^2",
                 "amphp/mysql": "^3",
                 "amphp/postgres": "^2",
-                "amphp/redis": "^2",
+                "amphp/redis": "^2.0.1",
                 "amphp/socket": "^2.3.1",
                 "amphp/websocket-client": "^2",
                 "bacon/bacon-qr-code": "^3",
@@ -2677,7 +2677,7 @@
                 "danog/loop": "^1.1.1",
                 "danog/primemodule": "^1.0.13",
                 "danog/telegram-entities": "^1.0.4",
-                "danog/tg-dialog-id": "^1.0.1",
+                "danog/tg-dialog-id": "^1.1.0",
                 "danog/tg-file-decoder": "^1.0.1",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
@@ -2687,9 +2687,9 @@
                 "ext-xml": "*",
                 "ext-zlib": "*",
                 "league/uri": "^7.4.1",
-                "nikic/php-parser": "^5.0.2",
+                "nikic/php-parser": "^5.1.0",
                 "php-64bit": ">=8.2",
-                "phpseclib/phpseclib": "^3.0.37",
+                "phpseclib/phpseclib": "^3.0.41",
                 "psr/http-factory": "^1.1.0",
                 "psr/log": "^3",
                 "revolt/event-loop": "^1.0.6",
@@ -2707,9 +2707,9 @@
                 "danog/phpdoc": "^0.1.24",
                 "dg/bypass-finals": "dev-master",
                 "ext-ctype": "*",
-                "phpunit/phpunit": "^9.6.19",
+                "phpunit/phpunit": "^9.6.20",
                 "revolt/event-loop-adapter-react": "^1.1.1",
-                "symfony/yaml": "^6.4.7",
+                "symfony/yaml": "^6.4.8",
                 "vimeo/psalm": "dev-master"
             },
             "suggest": {
@@ -2758,7 +2758,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/MadelineProto/issues",
-                "source": "https://github.com/danog/MadelineProto/tree/v8_fix_cleanup"
+                "source": "https://github.com/danog/MadelineProto/tree/v8-tas"
             },
             "funding": [
                 {
@@ -2766,7 +2766,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-11T17:21:30+00:00"
+            "time": "2024-08-18T15:25:17+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2878,16 +2878,16 @@
         },
         {
             "name": "danog/tg-dialog-id",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/tg-dialog-id.git",
-                "reference": "1bc37a5e599347d3b3c5f078d231b4edc161ae80"
+                "reference": "6118fe5ad17b068237a43262d459664869affcc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/tg-dialog-id/zipball/1bc37a5e599347d3b3c5f078d231b4edc161ae80",
-                "reference": "1bc37a5e599347d3b3c5f078d231b4edc161ae80",
+                "url": "https://api.github.com/repos/danog/tg-dialog-id/zipball/6118fe5ad17b068237a43262d459664869affcc0",
+                "reference": "6118fe5ad17b068237a43262d459664869affcc0",
                 "shasum": ""
             },
             "require": {
@@ -2920,7 +2920,7 @@
             "description": "A library to work with Telegram bot API dialog IDs",
             "support": {
                 "issues": "https://github.com/danog/tg-dialog-id/issues",
-                "source": "https://github.com/danog/tg-dialog-id/tree/1.0.1"
+                "source": "https://github.com/danog/tg-dialog-id/tree/1.1.0"
             },
             "funding": [
                 {
@@ -2928,7 +2928,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-10T12:25:19+00:00"
+            "time": "2024-08-16T12:08:16+00:00"
         },
         {
             "name": "danog/tg-file-decoder",
@@ -3803,16 +3803,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.40",
+            "version": "3.0.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "3dd2561d14ed48c03fc30322df1ad46dbac85ea6"
+                "reference": "621c73f7dcb310b61de34d1da4c4204e8ace6ceb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/3dd2561d14ed48c03fc30322df1ad46dbac85ea6",
-                "reference": "3dd2561d14ed48c03fc30322df1ad46dbac85ea6",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/621c73f7dcb310b61de34d1da4c4204e8ace6ceb",
+                "reference": "621c73f7dcb310b61de34d1da4c4204e8ace6ceb",
                 "shasum": ""
             },
             "require": {
@@ -3893,7 +3893,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.40"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.41"
             },
             "funding": [
                 {
@@ -3909,7 +3909,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-08-11T16:34:00+00:00"
+            "time": "2024-08-12T00:13:54+00:00"
         },
         {
             "name": "promphp/prometheus_client_php",
