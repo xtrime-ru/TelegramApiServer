@@ -83,7 +83,9 @@ foreach ($options['session'] as $session) {
 }
 
 StartUpFixes::fix();
-
+foreach ($sessions as $session) {
+    StartUpFixes::removeBrokenIpc($session);
+}
 new TelegramApiServer\Server\Server(
     $options,
     $sessions

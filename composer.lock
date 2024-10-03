@@ -1758,16 +1758,16 @@
         },
         {
             "name": "amphp/sql-common",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql-common.git",
-                "reference": "996b8ad67410a20f0df0e2315a174b4c58f21e1a"
+                "reference": "85449d526f33e1b24a17ae0f1b729536707b165b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql-common/zipball/996b8ad67410a20f0df0e2315a174b4c58f21e1a",
-                "reference": "996b8ad67410a20f0df0e2315a174b4c58f21e1a",
+                "url": "https://api.github.com/repos/amphp/sql-common/zipball/85449d526f33e1b24a17ae0f1b729536707b165b",
+                "reference": "85449d526f33e1b24a17ae0f1b729536707b165b",
                 "shasum": ""
             },
             "require": {
@@ -1802,7 +1802,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql-common/issues",
-                "source": "https://github.com/amphp/sql-common/tree/v2.0.0"
+                "source": "https://github.com/amphp/sql-common/tree/v2.0.1"
             },
             "funding": [
                 {
@@ -1810,7 +1810,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-10T15:22:18+00:00"
+            "time": "2024-10-02T20:30:11+00:00"
         },
         {
             "name": "amphp/sync",
@@ -2193,16 +2193,16 @@
         },
         {
             "name": "bacon/bacon-qr-code",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "510de6eca6248d77d31b339d62437cc995e2fb41"
+                "reference": "f9cc1f52b5a463062251d666761178dbdb6b544f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/510de6eca6248d77d31b339d62437cc995e2fb41",
-                "reference": "510de6eca6248d77d31b339d62437cc995e2fb41",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/f9cc1f52b5a463062251d666761178dbdb6b544f",
+                "reference": "f9cc1f52b5a463062251d666761178dbdb6b544f",
                 "shasum": ""
             },
             "require": {
@@ -2241,9 +2241,9 @@
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "support": {
                 "issues": "https://github.com/Bacon/BaconQrCode/issues",
-                "source": "https://github.com/Bacon/BaconQrCode/tree/v3.0.0"
+                "source": "https://github.com/Bacon/BaconQrCode/tree/v3.0.1"
             },
-            "time": "2024-04-18T11:16:25+00:00"
+            "time": "2024-10-01T13:55:55+00:00"
         },
         {
             "name": "danog/async-orm",
@@ -2646,12 +2646,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "5939f0dcd3133fc4ec00f4e3f4a4bbbddbfd243e"
+                "reference": "2a3188f343ce5558eeb99076af0cd3239ca7072d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/5939f0dcd3133fc4ec00f4e3f4a4bbbddbfd243e",
-                "reference": "5939f0dcd3133fc4ec00f4e3f4a4bbbddbfd243e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/2a3188f343ce5558eeb99076af0cd3239ca7072d",
+                "reference": "2a3188f343ce5558eeb99076af0cd3239ca7072d",
                 "shasum": ""
             },
             "require": {
@@ -2670,7 +2670,7 @@
                 "amphp/socket": "^2.3.1",
                 "amphp/websocket-client": "^2",
                 "bacon/bacon-qr-code": "^3",
-                "danog/async-orm": "^1.0.2",
+                "danog/async-orm": "^1.1.0",
                 "danog/better-prometheus": "^0.1.1",
                 "danog/dns-over-https": "^1",
                 "danog/ipc": "^1",
@@ -2687,11 +2687,11 @@
                 "ext-xml": "*",
                 "ext-zlib": "*",
                 "league/uri": "^7.4.1",
-                "nikic/php-parser": "^5.1.0",
+                "nikic/php-parser": "^5.2.0",
                 "php-64bit": ">=8.2",
-                "phpseclib/phpseclib": "^3.0.41",
+                "phpseclib/phpseclib": "^3.0.42",
                 "psr/http-factory": "^1.1.0",
-                "psr/log": "^3",
+                "psr/log": "^3.0.2",
                 "revolt/event-loop": "^1.0.6",
                 "symfony/polyfill-mbstring": "*",
                 "webmozart/assert": "^1.11"
@@ -2707,9 +2707,9 @@
                 "danog/phpdoc": "^0.1.24",
                 "dg/bypass-finals": "dev-master",
                 "ext-ctype": "*",
-                "phpunit/phpunit": "^9.6.20",
+                "phpunit/phpunit": "^9.6.21",
                 "revolt/event-loop-adapter-react": "^1.1.1",
-                "symfony/yaml": "^6.4.8",
+                "symfony/yaml": "^6.4.12",
                 "vimeo/psalm": "dev-master"
             },
             "suggest": {
@@ -2766,7 +2766,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-27T18:50:22+00:00"
+            "time": "2024-09-28T07:35:08+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -3553,16 +3553,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.2.0",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb"
+                "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
-                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3abf7425cd284141dc5d8d14a9ee444de3345d1a",
+                "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a",
                 "shasum": ""
             },
             "require": {
@@ -3605,9 +3605,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.2.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.0"
             },
-            "time": "2024-09-15T16:40:33+00:00"
+            "time": "2024-09-29T13:56:26+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
