@@ -17,12 +17,6 @@
     "micro-service",
     "madelineproto"
   ],
-  "repositories": [
-    {
-      "type": "github",
-      "url": "https://github.com/xtrime-ru/dns"
-    }
-  ],
   "require": {
     "php": "^8.2",
     "ext-json": "*",
