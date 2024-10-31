@@ -243,7 +243,12 @@ final class ApiExtensions
             throw new NoMediaException('Message has no media');
         }
 
-        $media = $message['media'][\array_key_last($message['media'])];
+        $media = match ($message['media']['_']) {
+            'messageMediaPhoto' => $message['media']['photo'],
+            'messageMediaDocument' => $message['media']['document'],
+            'messageMediaWebPage' => $message['media']['webpage'],
+        };
+
         $thumb = null;
         switch (true) {
             case isset($media['sizes']):
