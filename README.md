@@ -29,6 +29,8 @@ docker compose pull
 ```
 
 ## Authorization
+Please only use old and valid accounts. All new accounts will be banned by telegram.
+If your account was banned read this: https://docs.madelineproto.xyz/docs/LOGIN.html#getting-permission-to-use-the-telegram-api
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/). 
     Only one app_id needed for any amount of users and bots.
 1. Fill app_id and app_hash in `.env.docker`.
@@ -36,8 +38,11 @@ docker compose pull
         1. Start container interactively: `docker compose run --rm api`
         2. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in `command`.
 1. Authorize your session:
-    1. After promt fill your phone number, or bot hash.
-    1. Follow instructions
+    1. After promt, fill your phone number, or bot hash.
+    1. You will receive telegram code. Type it in.
+       If you're not receiving code - your server IP or hosting may be blocked by telegram. 
+       Try another server or change server IP.
+    1. If you have 2fa enabled - enter 2fa passord.
 1. Wait 10-30 seconds until session is started.
    You will see logs:
    ```text
