@@ -1,0 +1,7 @@
+properties:
+  app_id:
+    type: integer
+    description: App api_id
+  app_hash:
+    type: string
+    description: App api_hash
