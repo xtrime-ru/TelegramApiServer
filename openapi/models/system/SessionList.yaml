@@ -1,0 +1,7 @@
+properties:
+  sessions:
+    type: object
+    additionalProperties:
+      $ref: '../system/Session.yaml'
+  memory:
+    type: string
