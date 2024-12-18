@@ -233,12 +233,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "b7515c1c41e12cbd09b1ab76872bf0b04e949142"
+                "reference": "f2ed903c0a522593c7c552fa5b1e20dfe7ba1ec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/b7515c1c41e12cbd09b1ab76872bf0b04e949142",
-                "reference": "b7515c1c41e12cbd09b1ab76872bf0b04e949142",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/f2ed903c0a522593c7c552fa5b1e20dfe7ba1ec6",
+                "reference": "f2ed903c0a522593c7c552fa5b1e20dfe7ba1ec6",
                 "shasum": ""
             },
             "require": {
@@ -315,7 +315,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-11T15:10:35+00:00"
+            "time": "2024-12-17T05:20:18+00:00"
         },
         {
             "name": "amphp/file",
@@ -2583,12 +2583,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "a8ef54df3230d4ac42f399045f037430b0791bf4"
+                "reference": "ef4adcb251713239eb40d6ae041e3aa805b8b7a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/a8ef54df3230d4ac42f399045f037430b0791bf4",
-                "reference": "a8ef54df3230d4ac42f399045f037430b0791bf4",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/ef4adcb251713239eb40d6ae041e3aa805b8b7a3",
+                "reference": "ef4adcb251713239eb40d6ae041e3aa805b8b7a3",
                 "shasum": ""
             },
             "require": {
@@ -2703,7 +2703,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-16T11:50:20+00:00"
+            "time": "2024-12-18T10:46:10+00:00"
         },
         {
             "name": "danog/primemodule",
