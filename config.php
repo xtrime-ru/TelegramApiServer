@@ -76,7 +76,7 @@ $settings = [
         ],
         'metrics' => [
             'enable_prometheus_collection' => (bool)getenv("PROMETHEUS_ENABLE"),
-            'metrics_bind_to' => fromString((string)getenv("PROMETHEUS_BIND_TO")),
+            'metrics_bind_to' => (bool)getenv("PROMETHEUS_ENABLE") ? fromString((string)getenv("PROMETHEUS_BIND_TO")) : null,
         ]
     ],
     'api' => [
