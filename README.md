@@ -74,7 +74,7 @@ Default settings allow to access API only from localhost/127.0.0.1.
   If you specify password, then `IP_WHITELIST` is ignored
   How to make requests with basic auth: 
   ```shell
-  curl --user 'username:password' "http://127.0.0.1:9503/getSelf"
+  curl --user username:password "http://127.0.0.1:9503/getSelf"
   curl "http://username:password@127.0.0.1:9503/getSelf"
   ```
 
