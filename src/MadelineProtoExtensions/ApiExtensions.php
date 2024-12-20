@@ -440,5 +440,31 @@ final class ApiExtensions
             'current_update_loops' => \count(Client::getWrapper($this->madelineProto)->getAPI()->feeders),
         ];
     }
+	
+	public function sendVideo(array $data): MadelineProto\EventHandler\Message
+	{
+		$fileClass = '\\danog\\MadelineProto\\' . $data['file']['_'];
+		switch ($data['file']['_']) {
+			case 'LocalFile': case 'RemoteUrl': {
+			unset($data['file']['_']);
+			$data['file'] = new $fileClass(...$data['file']);
+			break;
+		}
+			default: {
+				throw new InvalidArgumentException("supported file types: LocalFile, RemoteUrl");
+			}
+		}
+		
+		if(isset($data['parseMode'])) {
+			$data['parseMode'] = match ($data['parseMode']) {
+				'HTML' => \danog\MadelineProto\ParseMode::HTML,
+				'MARKDOWN' => \danog\MadelineProto\ParseMode::MARKDOWN,
+				'TEXT' => \danog\MadelineProto\ParseMode::TEXT,
+				default => throw new InvalidArgumentException("supported parseMode types: HTML, MARKDOWN, TEXT"),
+			};
+		}
+		
+		return $this->madelineProto->sendVideo(...$data);
+	}
 
 }
