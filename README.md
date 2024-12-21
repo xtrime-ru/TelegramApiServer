@@ -132,6 +132,38 @@ Example uses urlencoded url in query.
 ### Uploading files.
 
 There are few options to upload and send media files:
+
+- Custom method `sendVideo` to send video by url or local path
+    ```shell script
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "data": {
+            "peer": "@xtrime",
+            "file": {
+                "_": "RemoteUrl",
+                "url": "https://domain.site/storage/video.mp4"
+            },
+            'parseMode' => 'HTML',
+            "caption": "<b>caption text</b>"
+        }
+    }'
+    ```
+  ```shell script
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "data": {
+            "peer": "@xtrime",
+            "file": {
+                "_": "LocalFile",
+                "file": realpath('path/to/file.mp4')
+            },
+            "caption": "caption text"
+        }
+    }'
+    ```
+
 - Custom method `sendMedia` supports upload from form:
     ```shell script
     curl "http://127.0.0.1:9503/api/messages.sendMedia?data[peer]=xtrime&data[message]=Hello" -g \
