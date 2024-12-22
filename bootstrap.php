@@ -48,7 +48,7 @@ const ENV_VERSION = '1';
             }
         }
 
-        Dotenv\Dotenv::createImmutable(ROOT_DIR, $envFile)->load();
+        Dotenv\Dotenv::createUnsafeImmutable(ROOT_DIR, $envFile)->load();
 
         if (getenv('VERSION') !== ENV_VERSION) {
             Logger::getInstance()->critical("Env version mismatch. Update {$envPath} from {$envPathExample}", [
