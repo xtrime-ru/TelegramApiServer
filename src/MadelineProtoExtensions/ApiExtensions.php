@@ -2,10 +2,13 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
+use Amp\ByteStream\ReadableBuffer;
+use Amp\ByteStream\WritableResourceStream;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use danog\MadelineProto;
+use danog\MadelineProto\ParseMode;
 use danog\MadelineProto\StrTools;
 use InvalidArgumentException;
 use TelegramApiServer\Client;
@@ -443,25 +446,30 @@ final class ApiExtensions
 	
 	public function sendVideo(array $data): MadelineProto\EventHandler\Message
 	{
-		$fileClass = '\\danog\\MadelineProto\\' . $data['file']['_'];
-		switch ($data['file']['_']) {
-			case 'LocalFile': case 'RemoteUrl': {
-			unset($data['file']['_']);
-			$data['file'] = new $fileClass(...$data['file']);
-			break;
-		}
-			default: {
-				throw new InvalidArgumentException("supported file types: LocalFile, RemoteUrl");
-			}
-		}
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+
+        foreach (['file', 'thumb'] as $key) {
+            if (!empty($data[$key])) {
+                if (is_array($data[$key]) && !empty($data[$key]['_'])) {
+                    $type = $data[$key]['_'];
+                    unset($data[$key]['_']);
+                    $data[$key] = match ($type) {
+                        'LocalFile' => new MadelineProto\LocalFile(...$data[$key]),
+                        'RemoteUrl' => new MadelineProto\RemoteUrl(...$data[$key]),
+                        'BotApiFieldId' => new MadelineProto\BotApiFileId(...$data[$key]),
+                        default => throw new InvalidArgumentException("Unknown type: {$type}"),
+                    };
+                } elseif (is_string($data[$key])) {
+                    $data[$key] = new ReadableBuffer($data[$key]);
+                }
+            }
+        }
 		
 		if(isset($data['parseMode'])) {
-			$data['parseMode'] = match ($data['parseMode']) {
-				'HTML' => \danog\MadelineProto\ParseMode::HTML,
-				'MARKDOWN' => \danog\MadelineProto\ParseMode::MARKDOWN,
-				'TEXT' => \danog\MadelineProto\ParseMode::TEXT,
-				default => throw new InvalidArgumentException("supported parseMode types: HTML, MARKDOWN, TEXT"),
-			};
+			$data['parseMode'] = ParseMode::from($data['parseMode']);
 		}
 		
 		return $this->madelineProto->sendVideo(...$data);

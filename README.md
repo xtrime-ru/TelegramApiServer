@@ -150,18 +150,8 @@ There are few options to upload and send media files:
     }'
     ```
   ```shell script
-    curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo' \
-    --header 'Content-Type: application/json' \
-    --data-raw '{
-        "data": {
-            "peer": "@xtrime",
-            "file": {
-                "_": "LocalFile",
-                "file": realpath('path/to/file.mp4')
-            },
-            "caption": "caption text"
-        }
-    }'
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo/?data[peer]=xtrime&data[caption]=hey' -g \
+    -F "file=@ADM-RaceWay-24-08-2014.mp4"
     ```
 
 - Custom method `sendMedia` supports upload from form:
