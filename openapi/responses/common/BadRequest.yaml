@@ -1,0 +1,5 @@
+description: Failed operation
+content:
+  application/json:
+    schema:
+      $ref: '../common/BadRequestResponse.yaml'
