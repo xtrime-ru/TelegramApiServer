@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-cli-alpine
 
 RUN apk add --no-cache make g++ && \
     curl -sSLf https://github.com/danog/PrimeModule-ext/archive/refs/tags/2.0.tar.gz | tar -xz && \
@@ -26,6 +26,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY --from=ghcr.io/ufoscout/docker-compose-wait:latest /wait /usr/local/bin/docker-compose-wait
 
 RUN echo 1.0.0 > /tas_version
+
+ADD docker/php/php.ini $PHP_INI_DIR/php.ini
 
 EXPOSE 9503
 

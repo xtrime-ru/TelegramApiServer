@@ -2,14 +2,10 @@ FROM xtrime/telegram-api-server:latest
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-RUN echo "opcache.jit=disable" > "$PHP_INI_DIR/conf.d/tmp.ini"
+RUN chmod +x /usr/local/bin/install-php-extensions \
+    && install-php-extensions xdebug
 
-RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions xdebug && \
-    rm /usr/local/bin/install-php-extensions && \
-    rm $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini && \
-    rm $PHP_INI_DIR/conf.d/tmp.ini
-
+ADD dev/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
 
 EXPOSE 9503
 EXPOSE 9003
