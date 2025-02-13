@@ -11,4 +11,4 @@ fi
 composer install
 
 docker-compose-wait \
-&& nice -n 19 php server.php -e=.env.docker --docker "$@"
+&& php server.php -e=.env.docker --docker "$@"
