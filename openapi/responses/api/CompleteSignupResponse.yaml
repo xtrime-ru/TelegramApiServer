@@ -1,0 +1,9 @@
+description: Auth sent code response
+allOf:
+- $ref: '../common/ApiResponse.yaml'
+properties:
+  success:
+    type: boolean
+    default: true
+  response:
+    $ref: '../../models/api/AuthAuthorization.yaml'
