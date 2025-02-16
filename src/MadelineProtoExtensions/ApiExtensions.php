@@ -35,7 +35,11 @@ final class ApiExtensions
         $response = $this->madelineProto->messages->getHistory(...$data);
         if (!empty($response['messages'])) {
             foreach ($response['messages'] as &$message) {
-                $message['message'] = $this->formatMessage($message['message'] ?? null, $message['entities'] ?? []);
+                if (empty($message['entities'])) {
+                    $message['message'] = StrTools::htmlEscape($message['message'] ?? '');
+                } else {
+                    $message['message'] = StrTools::entitiesToHtml($message['message'] ?? '', $message['entities'], true);
+                }
             }
             unset($message);
         }
@@ -62,66 +66,6 @@ final class ApiExtensions
         }
 
         return true;
-    }
-
-    public function formatMessage(?string $message = null, array $entities = []): ?string
-    {
-        if ($message === null) {
-            return null;
-        }
-        $html = [
-            'messageEntityItalic' => '<i>%s</i>',
-            'messageEntityBold' => '<strong>%s</strong>',
-            'messageEntityCode' => '<code>%s</code>',
-            'messageEntityPre' => '<pre>%s</pre>',
-            'messageEntityStrike' => '<strike>%s</strike>',
-            'messageEntityUnderline' => '<u>%s</u>',
-            'messageEntityBlockquote' => '<blockquote>%s</blockquote>',
-            'messageEntityTextUrl' => '<a href="%s" target="_blank" rel="nofollow">%s</a>',
-            'messageEntityMention' => '<a href="tg://resolve?domain=%s" rel="nofollow">%s</a>',
-            'messageEntityUrl' => '<a href="%s" target="_blank" rel="nofollow">%s</a>',
-        ];
-
-        foreach ($entities as $key => &$entity) {
-            if (isset($html[$entity['_']])) {
-
-                $text = StrTools::mbSubstr($message, $entity['offset'], $entity['length']);
-
-                $template = $html[$entity['_']];
-                if (\in_array($entity['_'], ['messageEntityTextUrl', 'messageEntityMention', 'messageEntityUrl'])) {
-                    $textFormated = \sprintf($template, \strip_tags($entity['url'] ?? $text), $text);
-                } else {
-                    $textFormated = \sprintf($template, $text);
-                }
-
-                $message = self::substringReplace($message, $textFormated, $entity['offset'], $entity['length']);
-
-                //Увеличим оффсеты всех следующих entity
-                foreach ($entities as $nextKey => &$nextEntity) {
-                    if ($nextKey <= $key) {
-                        continue;
-                    }
-                    if ($nextEntity['offset'] < ($entity['offset'] + $entity['length'])) {
-                        $nextEntity['offset'] += StrTools::mbStrlen(
-                            \preg_replace('~(\>).*<\/.*$~', '$1', $textFormated)
-                        );
-                    } else {
-                        $nextEntity['offset'] += StrTools::mbStrlen($textFormated) - StrTools::mbStrlen($text);
-                    }
-                }
-                unset($nextEntity);
-            }
-        }
-        unset($entity);
-        $message = \nl2br($message);
-        return $message;
-    }
-
-    private static function substringReplace(string $original, string $replacement, int $position, int $length): string
-    {
-        $startString = StrTools::mbSubstr($original, 0, $position);
-        $endString = StrTools::mbSubstr($original, $position + $length, StrTools::mbStrlen($original));
-        return $startString . $replacement . $endString;
     }
 
     /**
