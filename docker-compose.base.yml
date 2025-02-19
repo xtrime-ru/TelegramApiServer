@@ -1,5 +1,5 @@
 services:
-  base-api:
+  api:
     image: xtrime/telegram-api-server:latest
     init: true
     build:
@@ -23,7 +23,7 @@ services:
       interval: 60s
       timeout: 30s
       retries: 1
-  base-mysql:
+  mysql:
     image: mariadb:11.4
     restart: unless-stopped
     volumes:

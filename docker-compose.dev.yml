@@ -2,7 +2,7 @@ services:
   api:
     extends:
       file: docker-compose.base.yml
-      service: base-api
+      service: api
     image: xtrime/telegram-api-server:dev
     build:
       context: .
@@ -19,7 +19,7 @@ services:
   mysql:
     extends:
       file: docker-compose.base.yml
-      service: base-mysql
+      service: mysql
     ports:
       - "127.0.0.1:9507:3306"
 networks:
