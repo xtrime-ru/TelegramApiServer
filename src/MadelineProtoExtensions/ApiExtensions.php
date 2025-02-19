@@ -35,11 +35,11 @@ final class ApiExtensions
         $response = $this->madelineProto->messages->getHistory(...$data);
         if (!empty($response['messages'])) {
             foreach ($response['messages'] as &$message) {
-                if (empty($message['entities'])) {
-                    $message['message'] = StrTools::htmlEscape($message['message'] ?? '');
-                } else {
-                    $message['message'] = StrTools::entitiesToHtml($message['message'] ?? '', $message['entities'], true);
-                }
+                $message['message'] = StrTools::entitiesToHtml(
+                    $message['message'] ?? '',
+                    $message['entities'] ?? [],
+                    true
+                );
             }
             unset($message);
         }
