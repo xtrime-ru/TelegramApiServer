@@ -16,6 +16,8 @@ services:
       PHP_IDE_CONFIG: "serverName=Docker"
     command:
       - "-s=session"
+    depends_on:
+      - mysql
   mysql:
     extends:
       file: docker-compose.base.yml

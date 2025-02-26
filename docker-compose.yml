@@ -7,6 +7,8 @@ services:
       - "127.0.0.1:9503:9503"
     command:
       - "-s=session"
+    depends_on:
+      - mysql
   mysql:
     extends:
       file: docker-compose.base.yml
