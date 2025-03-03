@@ -133,31 +133,43 @@ Example uses urlencoded url in query.
 
 There are few options to upload and send media files:
 
-- Custom method `sendVideo` to send video by url or local path
+- Custom method `sendVideo` to send video by url or local path, remote url, or stream.
+  RemoteUrl:
     ```shell script
     curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo' \
     --header 'Content-Type: application/json' \
     --data-raw '{
         "data": {
-            "peer": "@xtrime",
+            "peer": "me",
             "file": {
                 "_": "RemoteUrl",
                 "url": "https://domain.site/storage/video.mp4"
             },
-            'parseMode' => 'HTML',
+            "parseMode": "HTML",
             "caption": "<b>caption text</b>"
         }
     }'
     ```
+  Stream upload from client:
   ```shell script
-    curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo/?data[peer]=xtrime&data[caption]=hey' -g \
-    -F "file=@ADM-RaceWay-24-08-2014.mp4"
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument/?data[peer]=me&data[caption]=hey' -g \
+    -F "file=@screenshot.png"
     ```
-
-- Custom method `sendMedia` supports upload from form:
-    ```shell script
-    curl "http://127.0.0.1:9503/api/messages.sendMedia?data[peer]=xtrime&data[message]=Hello" -g \
-    -F "file=@/Users/xtrime/Downloads/test.txt"
+  Local file on server:
+   ```shell script
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "data": {
+            "peer": "me",
+            "file": {
+                "_": "LocalUrl",
+                "file": "faust.txt"
+            },
+            "parseMode":  "HTML",
+            "caption": "<b>caption text</b>"
+        }
+    }'
     ```
 - use custom `uploadMediaForm` method and then pass result to `messages.sendMedia`:
     1. `curl "http://127.0.0.1:9503/api/uploadMediaForm" -g -F "file=@/Users/xtrime/Downloads/test.txt"`
@@ -169,7 +181,7 @@ There are few options to upload and send media files:
     --header 'Content-Type: application/json' \
     --data-raw '{
         "data":{
-            "peer": "@xtrime",
+            "peer": "me",
             "media": {
                 "_": "inputMediaUploadedDocument",
                 "file": {

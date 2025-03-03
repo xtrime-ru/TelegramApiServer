@@ -3,6 +3,7 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 use Amp\ByteStream\ReadableBuffer;
+use Amp\ByteStream\ReadableStream;
 use Amp\ByteStream\WritableResourceStream;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
@@ -276,7 +277,7 @@ final class ApiExtensions
      */
     public function downloadToResponse(array $info): Response
     {
-        return $this->madelineProto->downloadToResponse($info, $this->request);
+        return $this->madelineProto->messages->sendMedia($info, $this->request);
     }
 
     /**
@@ -299,7 +300,7 @@ final class ApiExtensions
         if (empty($this->file)) {
             throw new NoMediaException('File not found');
         }
-        $inputFile = $this->madelineProto->uploadFromStream(
+        $inputFile = $this->madelineProto->messages->sendMedia(
             $this->file,
             0,
             $this->file->getMimeType(),
@@ -397,26 +398,96 @@ final class ApiExtensions
 
         foreach (['file', 'thumb'] as $key) {
             if (!empty($data[$key])) {
-                if (is_array($data[$key]) && !empty($data[$key]['_'])) {
-                    $type = $data[$key]['_'];
-                    unset($data[$key]['_']);
-                    $data[$key] = match ($type) {
-                        'LocalFile' => new MadelineProto\LocalFile(...$data[$key]),
-                        'RemoteUrl' => new MadelineProto\RemoteUrl(...$data[$key]),
-                        'BotApiFieldId' => new MadelineProto\BotApiFileId(...$data[$key]),
-                        default => throw new InvalidArgumentException("Unknown type: {$type}"),
-                    };
-                } elseif (is_string($data[$key])) {
-                    $data[$key] = new ReadableBuffer($data[$key]);
-                }
+                $data[$key] = self::getMadelineMediaObject($data[$key]);
             }
         }
-		
-		if(isset($data['parseMode'])) {
-			$data['parseMode'] = ParseMode::from($data['parseMode']);
-		}
-		
-		return $this->madelineProto->sendVideo(...$data);
+
+        if (isset($data['parseMode'])) {
+            $data['parseMode'] = ParseMode::from($data['parseMode']);
+        }
+
+        return $this->madelineProto->sendVideo(...$data);
 	}
+
+    public function sendPhoto(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendPhoto(...$data);
+    }
+
+    public function sendSticker(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendSticker(...$data);
+    }
+
+    public function sendVoice(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendVoice(...$data);
+    }
+
+    public function sendAudio(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendAudio(...$data);
+    }
+
+    public function sendDocument(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendDocument(...$data);
+    }
+
+    public function sendDocumentPhoto(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendDocumentPhoto(...$data);
+    }
+
+    public function sendGif(array $data): MadelineProto\EventHandler\Message
+    {
+        if (!empty($this->file)) {
+            $data['file'] = $this->file;
+            $data['fileName'] = $this->file->getFilename();
+        }
+        return $this->madelineProto->sendGif(...$data);
+    }
+
+    private static function getMadelineMediaObject(string |array | StreamedField | null $input): MadelineProto\LocalFile|MadelineProto\RemoteUrl|MadelineProto\BotApiFileId|ReadableBuffer|ReadableStream|null
+    {
+        if (is_array($input) && !empty($input['_'])) {
+            $type = $input['_'];
+            unset($input['_']);
+            return match ($type) {
+                'LocalFile' => new MadelineProto\LocalFile(...$input),
+                'RemoteUrl' => new MadelineProto\RemoteUrl(...$input),
+                'BotApiFieldId' => new MadelineProto\BotApiFileId(...$input),
+                default => throw new InvalidArgumentException("Unknown type: {$type}"),
+            };
+        } elseif (is_string($input)) {
+            return new ReadableBuffer($input);
+        } else {
+            return $input;
+        }
+    }
 
 }
