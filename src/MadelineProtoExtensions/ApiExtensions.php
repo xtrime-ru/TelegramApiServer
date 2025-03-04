@@ -277,7 +277,7 @@ final class ApiExtensions
      */
     public function downloadToResponse(array $info): Response
     {
-        return $this->madelineProto->messages->sendMedia($info, $this->request);
+        return $this->madelineProto->downloadToResponse($info, $this->request);
     }
 
     /**
