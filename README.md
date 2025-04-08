@@ -89,7 +89,7 @@ Regular and application/json POST supported.
 It's recommended to use http_build_query, when using GET requests.
     
 **Rules:**
-* All methods from MadelineProto supported: [Methods List](https://docs.madelineproto.xyz/API_docs/methods/)
+* All methods from MadelineProto supported: [Method List](https://docs.madelineproto.xyz/API_docs/methods/)
 * Url: `http://%address%:%port%/api[/%session%]/%class%.%method%/?%param%=%val%`
 * <b>Important: api available only from ip in whitelist.</b> 
     By default it is: `127.0.0.1`
@@ -102,19 +102,19 @@ It's recommended to use http_build_query, when using GET requests.
 * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
     `http://127.0.0.1:9503/api/contacts.getContacts`
 * If method requires array of values, use any name of array, for example 'data': 
-    `?data[peer]=@xtrime&data[message]=Hello!`. Order of parameters does't matter in this case.
+    `?peer=@xtrime&message=Hello!`. Order of parameters does't matter in this case.
 * If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
     `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
 
 **Examples:**
 * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
 * get_info about currect account: `http://127.0.0.1:9503/api/getSelf`
-* repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id]=1234`
-* get messages from channel/user: `http://127.0.0.1:9503/api/messages.getHistory/?data[peer]=@breakingmash&data[limit]=10`
-* get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?data[peer]=@breakingmash&data[limit]=10`
-* search: `http://127.0.0.1:9503/api/searchGlobal/?data[q]=Hello%20World&data[limit]=10`
-* sendMessage: `http://127.0.0.1:9503/api/messages.sendMessage/?data[peer]=@xtrime&data[message]=Hello!`
-* copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?data[from_peer]=@xtrime&data[to_peer]=@xtrime&data[id][0]=1`
+* repost: `http://127.0.0.1:9503/api/messages.forwardMessages/?from_peer=@xtrime&to_peer=@xtrime&id=1234`
+* get messages from channel/user: `http://127.0.0.1:9503/api/messages.getHistory/?peer=@breakingmash&limit=10`
+* get messages with text in HTML: `http://127.0.0.1:9503/api/getHistoryHtml/?peer=@breakingmash&limit=10`
+* search: `http://127.0.0.1:9503/api/searchGlobal/?q=Hello%20World&limit=10`
+* sendMessage: `http://127.0.0.1:9503/api/messages.sendMessage/?peer=@xtrime&message=Hello!`
+* copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?from_peer=@xtrime&to_peer=@xtrime&id[0]=1`
     
 ## Advanced features
 ### Get events/updates
@@ -123,7 +123,7 @@ There are multiple ways of [getting updates](https://docs.madelineproto.xyz/docs
 1. [Websocket](#eventhandler-updates-webhooks)  
 2. Long Polling:   
 send request to getUpdates endpoint  
-`curl "127.0.0.1:9503/api/getUpdates?data[limit]=3&data[offset]=0&data[timeout]=10.0" -g`  
+`curl "127.0.0.1:9503/api/getUpdates?limit=3&offset=0&timeout=10.0" -g`  
 3. Webhook:
 Redirect all updates to your endpoint, just like bot api!  
 `curl "127.0.0.1:9503/api/setWebhook?url=http%3A%2F%2Fexample.com%2Fsome_webhook" -g `  
@@ -133,42 +133,40 @@ Example uses urlencoded url in query.
 
 There are few options to upload and send media files:
 
-- Custom method `sendVideo` to send video by url or local path, remote url, or stream.
+- Custom method `sendDocument`/`sendVideo`/etc ([full list here](https://docs.madelineproto.xyz/docs/FILES.html)) to send document/video/audio/voice/etc by url or local path, remote url, or stream.
+  Stream upload from client:
+  ```shell script
+    curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument' -g \
+    -F file=@screenshot.png \
+    -F peer=me \
+    -F caption=key
+    ```
   RemoteUrl:
     ```shell script
     curl --location --request POST 'http://127.0.0.1:9503/api/sendVideo' \
     --header 'Content-Type: application/json' \
     --data-raw '{
-        "data": {
-            "peer": "me",
-            "file": {
-                "_": "RemoteUrl",
-                "url": "https://domain.site/storage/video.mp4"
-            },
-            "parseMode": "HTML",
-            "caption": "<b>caption text</b>"
-        }
+        "peer": "me",
+        "file": {
+            "_": "RemoteUrl",
+            "url": "https://domain.site/storage/video.mp4"
+        },
+        "parseMode": "HTML",
+        "caption": "<b>caption text</b>"
     }'
-    ```
-  Stream upload from client:
-  ```shell script
-    curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument/?data[peer]=me&data[caption]=hey' -g \
-    -F "file=@screenshot.png"
     ```
   Local file on server:
    ```shell script
     curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument' \
     --header 'Content-Type: application/json' \
     --data-raw '{
-        "data": {
-            "peer": "me",
-            "file": {
-                "_": "LocalUrl",
-                "file": "faust.txt"
-            },
-            "parseMode":  "HTML",
-            "caption": "<b>caption text</b>"
-        }
+        "peer": "me",
+        "file": {
+            "_": "LocalUrl",
+            "file": "faust.txt"
+        },
+        "parseMode":  "HTML",
+        "caption": "<b>caption text</b>"
     }'
     ```
 - use custom `uploadMediaForm` method and then pass result to `messages.sendMedia`:
@@ -180,25 +178,23 @@ There are few options to upload and send media files:
     curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
     --header 'Content-Type: application/json' \
     --data-raw '{
-        "data":{
-            "peer": "me",
-            "media": {
-                "_": "inputMediaUploadedDocument",
-                "file": {
-                    "_": "inputFile",
-                    "id": 1164670976363200575,
-                    "parts": 1,
-                    "name": "test.txt",
-                    "mime_type": "text/plain",
-                    "md5_checksum": ""
-                },
-                "attributes": [
-                    {
-                        "_": "documentAttributeFilename",
-                        "file_name": "test.txt"
-                    }
-                ]
-            }
+        "peer": "me",
+        "media": {
+            "_": "inputMediaUploadedDocument",
+            "file": {
+                "_": "inputFile",
+                "id": 1164670976363200575,
+                "parts": 1,
+                "name": "test.txt",
+                "mime_type": "text/plain",
+                "md5_checksum": ""
+            },
+            "attributes": [
+                {
+                    "_": "documentAttributeFilename",
+                    "file_name": "test.txt"
+                }
+            ]
         }
     }'
     ```

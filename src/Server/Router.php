@@ -52,8 +52,8 @@ final class Router
             new AccessLoggerMiddleware(Logger::getInstance()),
             new Authorization()
         ];
-        $apiHandler = stackMiddleware(ApiController::getRouterCallback(ApiExtensions::class), ...$middlewares);
-        $systemApiHandler = stackMiddleware(SystemController::getRouterCallback(SystemApiExtensions::class), ...$middlewares);
+        $apiHandler = stackMiddleware(ApiController::getRouterCallback(), ...$middlewares);
+        $systemApiHandler = stackMiddleware(SystemController::getRouterCallback(), ...$middlewares);
         $eventsHandler = stackMiddleware(EventsController::getRouterCallback($this->server), ...$middlewares);
         $logHandler = stackMiddleware(LogController::getRouterCallback($this->server), ...$middlewares);
 
