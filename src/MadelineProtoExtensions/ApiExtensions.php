@@ -286,14 +286,16 @@ final class ApiExtensions
      *
      * @throws NoMediaException
      */
-    public function uploadMediaForm(API $madelineProto, ReadableStream $file, ?string $fileName): array
+    public function uploadMediaForm(API $madelineProto, ReadableStream $file, string $mimeType, ?string $fileName): array
     {
         if ($fileName === null) {
             throw new AssertionError("No file name was provided!");
         }
-        $inputFile = $madelineProto->upload(
+        $inputFile = $madelineProto->uploadFromStream(
             $file,
-            $fileName ?? '',
+            0,
+            $mimeType,
+            $fileName ?? ''
         );
         $inputFile['id'] = \unpack('P', $inputFile['id'])['1'];
         return [
