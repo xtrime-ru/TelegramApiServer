@@ -107,12 +107,13 @@ abstract class AbstractApiController
 
                 foreach ($form as $field) {
                     if ($field->isFile()) {
-                        $params[$field->getName()] = $field;
                         if ($field->getName() === 'file') {
+                            $params[$field->getName()] = $field;
                             $params['fileName'] = $field->getFilename();
                             $params['mimeType'] = $field->getMimeType();
                             break;
                         }
+                        $params[$field->getName()] = new ReadableBuffer($field->buffer());
                     } else {
                         $params[$field->getName()] = $field->buffer();
                     }
