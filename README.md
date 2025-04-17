@@ -166,35 +166,6 @@ There are few options to upload and send media files:
         "caption": "<b>caption text</b>"
     }'
     ```
-- use custom `uploadMediaForm` method and then pass result to `messages.sendMedia`:
-    1. `curl "http://127.0.0.1:9503/api/uploadMediaForm" -g -F "file=@/Users/xtrime/Downloads/test.txt"`
-    Method supports `application/x-www-form-urlencoded` and `multipart/form-data`.
-    
-    2. Send result from `uploadMediaForm` to `messages.sendMedia` or `sendMedia`:
-    ```shell script
-    curl --location --request POST 'http://127.0.0.1:9503/api/sendMedia' \
-    --header 'Content-Type: application/json' \
-    --data-raw '{
-        "peer": "me",
-        "media": {
-            "_": "inputMediaUploadedDocument",
-            "file": {
-                "_": "inputFile",
-                "id": 1164670976363200575,
-                "parts": 1,
-                "name": "test.txt",
-                "mime_type": "text/plain",
-                "md5_checksum": ""
-            },
-            "attributes": [
-                {
-                    "_": "documentAttributeFilename",
-                    "file_name": "test.txt"
-                }
-            ]
-        }
-    }'
-    ```
 - See other options: https://docs.madelineproto.xyz/docs/FILES.html#uploading-files
 
 ### Downloading files
