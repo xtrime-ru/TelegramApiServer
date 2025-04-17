@@ -300,7 +300,7 @@ final class ApiExtensions
         if (empty($this->file)) {
             throw new NoMediaException('File not found');
         }
-        $inputFile = $this->madelineProto->messages->sendMedia(
+        $inputFile = $this->madelineProto->uploadFromStream(
             $this->file,
             0,
             $this->file->getMimeType(),
