@@ -101,7 +101,7 @@ It's recommended to use http_build_query, when using GET requests.
     Only protection is the `IP_WHITELIST`, and there are no warranties that it will secure your accounts.
 * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
     `http://127.0.0.1:9503/api/contacts.getContacts`
-* When passing files in POST forms, they must always come **last** in the field list, and all fields after the file will be ignored.
+* When passing files in POST forms, if the name of the field is `file`, it must always come **last** in the field list, and all fields after `file` will be ignored (this limit is not present for file fields named in another way, such as thumbnail fields).
 
 **Examples:**
 * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
