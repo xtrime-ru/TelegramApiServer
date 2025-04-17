@@ -101,10 +101,7 @@ It's recommended to use http_build_query, when using GET requests.
     Only protection is the `IP_WHITELIST`, and there are no warranties that it will secure your accounts.
 * If method is inside class (messages, contacts and etc.) use '.' to separate class from method: 
     `http://127.0.0.1:9503/api/contacts.getContacts`
-* If method requires array of values, use any name of array, for example 'data': 
-    `?peer=@xtrime&message=Hello!`. Order of parameters does't matter in this case.
-* If method requires one or multiple separate parameters (not inside array) then pass parameters with any names but **in strict order**: 
-    `http://127.0.0.1:9503/api/getInfo/?id=@xtrime` or `http://127.0.0.1:9503/api/getInfo/?abcd=@xtrime` works the same
+* When passing files in POST forms, they must always come **last** in the field list, and all fields after the file will be ignored.
 
 **Examples:**
 * get_info about channel/user: `http://127.0.0.1:9503/api/getInfo/?id=@xtrime`
@@ -137,9 +134,9 @@ There are few options to upload and send media files:
   Stream upload from client:
   ```shell script
     curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument' -g \
-    -F file=@screenshot.png \
     -F peer=me \
     -F caption=key
+    -F file=@screenshot.png \
     ```
   RemoteUrl:
     ```shell script
