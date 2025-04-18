@@ -135,8 +135,8 @@ There are few options to upload and send media files:
   ```shell script
     curl --location --request POST 'http://127.0.0.1:9503/api/sendDocument' -g \
     -F peer=me \
-    -F caption=key
-    -F file=@screenshot.png \
+    -F caption=key \
+    -F file=@screenshot.png
     ```
   RemoteUrl:
     ```shell script

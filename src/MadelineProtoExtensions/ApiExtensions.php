@@ -2,22 +2,15 @@
 
 namespace TelegramApiServer\MadelineProtoExtensions;
 
-use Amp\ByteStream\ReadableBuffer;
 use Amp\ByteStream\ReadableStream;
-use Amp\ByteStream\WritableResourceStream;
-use Amp\Http\Server\FormParser\StreamedField;
-use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use AssertionError;
-use danog\MadelineProto;
 use danog\MadelineProto\API;
-use danog\MadelineProto\ParseMode;
 use danog\MadelineProto\StrTools;
 use InvalidArgumentException;
 use TelegramApiServer\Client;
 use TelegramApiServer\EventObservers\EventHandler;
 use TelegramApiServer\Exceptions\NoMediaException;
-
 use function Amp\delay;
 
 final class ApiExtensions
@@ -249,11 +242,11 @@ final class ApiExtensions
             $response = $madelineProto->channels->getMessages(
                 [
                     'channel' => $data['peer'],
-                    'id' => (array) $data['id'],
+                    'id' => (array)$data['id'],
                 ]
             );
         } else {
-            $response = $madelineProto->messages->getMessages(['id' => (array) $data['id']]);
+            $response = $madelineProto->messages->getMessages(['id' => (array)$data['id']]);
         }
 
         return $response;
@@ -285,6 +278,7 @@ final class ApiExtensions
      * Response can be passed to 'media' field in messages.sendMedia.
      *
      * @throws NoMediaException
+     * @deprecated use SendDocument
      */
     public function uploadMediaForm(API $madelineProto, ReadableStream $file, string $mimeType, ?string $fileName): array
     {
@@ -323,9 +317,9 @@ final class ApiExtensions
     public function getUpdates(API $madelineProto, array $params): array
     {
         foreach ($params as $key => $value) {
-            $params[$key] = match($key) {
-                'offset', 'limit' => (int) $value,
-                'timeout' => (float) $value,
+            $params[$key] = match ($key) {
+                'offset', 'limit' => (int)$value,
+                'timeout' => (float)$value,
                 default => throw new InvalidArgumentException("Unknown parameter: {$key}"),
             };
         }
@@ -337,9 +331,9 @@ final class ApiExtensions
     {
         $inputChannelId = null;
         if ($channel) {
-            $id = (string) $madelineProto->getId($channel);
+            $id = (string)$madelineProto->getId($channel);
 
-            $inputChannelId = (int) \str_replace(['-100', '-'], '', $id);
+            $inputChannelId = (int)\str_replace(['-100', '-'], '', $id);
             if (!$inputChannelId) {
                 throw new InvalidArgumentException('Invalid id');
             }
