@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-VERSION=1.0.0
+VERSION=1.0.1
 CURRENT_VERSION=$(cat /tas_version)
 
 if [ "$VERSION" != "$CURRENT_VERSION" ]; then

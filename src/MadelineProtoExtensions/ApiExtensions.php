@@ -8,7 +8,9 @@ use Amp\ByteStream\WritableResourceStream;
 use Amp\Http\Server\FormParser\StreamedField;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
+use AssertionError;
 use danog\MadelineProto;
+use danog\MadelineProto\API;
 use danog\MadelineProto\ParseMode;
 use danog\MadelineProto\StrTools;
 use InvalidArgumentException;
@@ -20,20 +22,9 @@ use function Amp\delay;
 
 final class ApiExtensions
 {
-    private MadelineProto\Api $madelineProto;
-    private Request $request;
-    private ?StreamedField $file;
-
-    public function __construct(MadelineProto\Api $madelineProto, Request $request, ?StreamedField $file)
+    public function getHistoryHtml(API $madelineProto, ...$params): array
     {
-        $this->madelineProto = $madelineProto;
-        $this->request = $request;
-        $this->file = $file;
-    }
-
-    public function getHistoryHtml(array $data): array
-    {
-        $response = $this->madelineProto->messages->getHistory(...$data);
+        $response = $madelineProto->messages->getHistory(...$params);
         if (!empty($response['messages'])) {
             foreach ($response['messages'] as &$message) {
                 $message['message'] = StrTools::entitiesToHtml(
@@ -82,7 +73,7 @@ final class ApiExtensions
      * </pre>
      *
      */
-    public function copyMessages(array $data)
+    public function copyMessages(API $madelineProto, ...$data)
     {
         $data = \array_merge(
             [
@@ -93,7 +84,7 @@ final class ApiExtensions
             $data
         );
 
-        $response = $this->madelineProto->channels->getMessages(
+        $response = $madelineProto->channels->getMessages(
             [
                 'channel' => $data['from_peer'],
                 'id' => $data['id'],
@@ -112,9 +103,9 @@ final class ApiExtensions
             ];
             if (self::hasMedia($message, false)) {
                 $messageData['media'] = $message; //MadelineProto сама достанет все media из сообщения.
-                $result[] = $this->madelineProto->messages->sendMedia(...$messageData);
+                $result[] = $madelineProto->messages->sendMedia(...$messageData);
             } else {
-                $result[] = $this->madelineProto->messages->sendMessage(...$messageData);
+                $result[] = $madelineProto->messages->sendMessage(...$messageData);
             }
             if ($key > 0) {
                 delay(\random_int(300, 2000) / 1000);
@@ -129,7 +120,7 @@ final class ApiExtensions
      *
      *
      */
-    public function getMedia(array $data): Response
+    public function getMedia(API $madelineProto, ...$data): Response
     {
         $data = \array_merge(
             [
@@ -140,7 +131,7 @@ final class ApiExtensions
             $data
         );
 
-        $message = $data['message'] ?: ($this->getMessages($data))['messages'][0] ?? null;
+        $message = $data['message'] ?: ($this->getMessages($madelineProto, ...$data))['messages'][0] ?? null;
         if (!$message || $message['_'] === 'messageEmpty') {
             throw new NoMediaException('Empty message');
         }
@@ -150,28 +141,28 @@ final class ApiExtensions
         }
 
         if ($message['media']['_'] !== 'messageMediaWebPage') {
-            $info = $this->madelineProto->getDownloadInfo($message);
+            $info = $madelineProto->getDownloadInfo($message);
         } else {
             $webpage = $message['media']['webpage'];
             if (!empty($webpage['embed_url'])) {
                 return new Response(302, ['Location' => $webpage['embed_url']]);
             } elseif (!empty($webpage['document'])) {
-                $info = $this->madelineProto->getDownloadInfo($webpage['document']);
+                $info = $madelineProto->getDownloadInfo($webpage['document']);
             } elseif (!empty($webpage['photo'])) {
-                $info = $this->madelineProto->getDownloadInfo($webpage['photo']);
+                $info = $madelineProto->getDownloadInfo($webpage['photo']);
             } else {
-                return $this->getMediaPreview($data);
+                return $this->getMediaPreview($madelineProto, ...$data);
             }
         }
 
-        return $this->downloadToResponse($info);
+        return $madelineProto->downloadToResponse(...$info);
     }
 
     /**
      * Загружает превью медиафайла из указанного сообщения в поток.
      *
      */
-    public function getMediaPreview(array $data): Response
+    public function getMediaPreview(API $madelineProto, ...$data): Response
     {
         $data = \array_merge(
             [
@@ -182,7 +173,7 @@ final class ApiExtensions
             $data
         );
 
-        $message = $data['message'] ?: ($this->getMessages($data))['messages'][0] ?? null;
+        $message = $data['message'] ?: ($this->getMessages($madelineProto, ...$data))['messages'][0] ?? null;
         if (!$message || $message['_'] === 'messageEmpty') {
             throw new NoMediaException('Empty message');
         }
@@ -230,7 +221,7 @@ final class ApiExtensions
         if (null === $thumb) {
             throw new NoMediaException('Empty preview');
         }
-        $info = $this->madelineProto->getDownloadInfo($thumb);
+        $info = $madelineProto->getDownloadInfo($thumb);
 
         if ($media['_'] === 'webPage') {
             $media = $media['photo'];
@@ -239,7 +230,7 @@ final class ApiExtensions
         //Фикс для LAYER 100+
         //TODO: Удалить, когда снова станет доступна загрузка photoSize
         if (isset($info['thumb_size'])) {
-            $infoFull = $this->madelineProto->getDownloadInfo($media);
+            $infoFull = $madelineProto->getDownloadInfo($media);
             $infoFull['InputFileLocation']['thumb_size'] = $info['thumb_size'];
             $infoFull['size'] = $info['size'];
             $infoFull['mime'] = $info['mime'] ?? 'image/jpeg';
@@ -248,21 +239,21 @@ final class ApiExtensions
             $info = $infoFull;
         }
 
-        return $this->downloadToResponse($info);
+        return $madelineProto->downloadToResponse(...$info);
     }
 
-    public function getMessages(array $data): array
+    public function getMessages(API $madelineProto, ...$data): array
     {
-        $peerInfo = $this->madelineProto->getInfo($data['peer']);
+        $peerInfo = $madelineProto->getInfo($data['peer']);
         if (\in_array($peerInfo['type'], ['channel', 'supergroup'])) {
-            $response = $this->madelineProto->channels->getMessages(
+            $response = $madelineProto->channels->getMessages(
                 [
                     'channel' => $data['peer'],
                     'id' => (array) $data['id'],
                 ]
             );
         } else {
-            $response = $this->madelineProto->messages->getMessages(['id' => (array) $data['id']]);
+            $response = $madelineProto->messages->getMessages(['id' => (array) $data['id']]);
         }
 
         return $response;
@@ -275,18 +266,18 @@ final class ApiExtensions
      *      Any downloadable array: message, media etc...
      *
      */
-    public function downloadToResponse(array $info): Response
+    public function downloadToResponse(API $madelineProto, ...$info): Response
     {
-        return $this->madelineProto->downloadToResponse($info, $this->request);
+        return $madelineProto->downloadToResponse(...$info);
     }
 
     /**
      * Адаптер для стандартного метода.
      *
      */
-    public function downloadToBrowser(array $info): Response
+    public function downloadToBrowser(API $madelineProto, ...$info): Response
     {
-        return $this->downloadToResponse($info);
+        return $madelineProto->downloadToResponse(...$info);
     }
 
     /**
@@ -295,16 +286,16 @@ final class ApiExtensions
      *
      * @throws NoMediaException
      */
-    public function uploadMediaForm(): array
+    public function uploadMediaForm(API $madelineProto, ReadableStream $file, string $mimeType, ?string $fileName): array
     {
-        if (empty($this->file)) {
-            throw new NoMediaException('File not found');
+        if ($fileName === null) {
+            throw new AssertionError("No file name was provided!");
         }
-        $inputFile = $this->madelineProto->messages->sendMedia(
-            $this->file,
+        $inputFile = $madelineProto->uploadFromStream(
+            $file,
             0,
-            $this->file->getMimeType(),
-            $this->file->getFilename()
+            $mimeType,
+            $fileName ?? ''
         );
         $inputFile['id'] = \unpack('P', $inputFile['id'])['1'];
         return [
@@ -312,24 +303,24 @@ final class ApiExtensions
                 '_' => 'inputMediaUploadedDocument',
                 'file' => $inputFile,
                 'attributes' => [
-                    ['_' => 'documentAttributeFilename', 'file_name' => $this->file->getFilename()]
+                    ['_' => 'documentAttributeFilename', 'file_name' => $fileName]
                 ]
             ]
         ];
     }
 
-    public function setEventHandler(): void
+    public function setEventHandler(API $madelineProto): void
     {
-        Client::getWrapper($this->madelineProto)->getAPI()->setEventHandler(EventHandler::class);
-        Client::getWrapper($this->madelineProto)->serialize();
+        Client::getWrapper($madelineProto)->getAPI()->setEventHandler(EventHandler::class);
+        Client::getWrapper($madelineProto)->serialize();
     }
 
-    public function serialize(): void
+    public function serialize(API $madelineProto): void
     {
-        Client::getWrapper($this->madelineProto)->serialize();
+        Client::getWrapper($madelineProto)->serialize();
     }
 
-    public function getUpdates(array $params): array
+    public function getUpdates(API $madelineProto, array $params): array
     {
         foreach ($params as $key => $value) {
             $params[$key] = match($key) {
@@ -339,26 +330,14 @@ final class ApiExtensions
             };
         }
 
-        return $this->madelineProto->getUpdates($params);
+        return $madelineProto->getUpdates($params);
     }
 
-    public function setNoop(): void
-    {
-        $this->madelineProto->setNoop();
-        Client::getWrapper($this->madelineProto)->serialize();
-    }
-
-    public function setWebhook(string $url): void
-    {
-        $this->madelineProto->setWebhook($url);
-        Client::getWrapper($this->madelineProto)->serialize();
-    }
-
-    public function unsubscribeFromUpdates(?string $channel = null): array
+    public function unsubscribeFromUpdates(API $madelineProto, ?string $channel = null): array
     {
         $inputChannelId = null;
         if ($channel) {
-            $id = (string) $this->madelineProto->getId($channel);
+            $id = (string) $madelineProto->getId($channel);
 
             $inputChannelId = (int) \str_replace(['-100', '-'], '', $id);
             if (!$inputChannelId) {
@@ -366,128 +345,26 @@ final class ApiExtensions
             }
         }
         $counter = 0;
-        foreach (Client::getWrapper($this->madelineProto)->getAPI()->feeders as $channelId => $_) {
+        foreach (Client::getWrapper($madelineProto)->getAPI()->feeders as $channelId => $_) {
             if ($channelId === 0) {
                 continue;
             }
             if ($inputChannelId && $inputChannelId !== $channelId) {
                 continue;
             }
-            Client::getWrapper($this->madelineProto)->getAPI()->feeders[$channelId]->stop();
-            Client::getWrapper($this->madelineProto)->getAPI()->updaters[$channelId]->stop();
+            Client::getWrapper($madelineProto)->getAPI()->feeders[$channelId]->stop();
+            Client::getWrapper($madelineProto)->getAPI()->updaters[$channelId]->stop();
             unset(
-                Client::getWrapper($this->madelineProto)->getAPI()->feeders[$channelId],
-                Client::getWrapper($this->madelineProto)->getAPI()->updaters[$channelId]
+                Client::getWrapper($madelineProto)->getAPI()->feeders[$channelId],
+                Client::getWrapper($madelineProto)->getAPI()->updaters[$channelId]
             );
-            Client::getWrapper($this->madelineProto)->getAPI()->getChannelStates()->remove($channelId);
+            Client::getWrapper($madelineProto)->getAPI()->getChannelStates()->remove($channelId);
             $counter++;
         }
 
         return [
             'disabled_update_loops' => $counter,
-            'current_update_loops' => \count(Client::getWrapper($this->madelineProto)->getAPI()->feeders),
+            'current_update_loops' => \count(Client::getWrapper($madelineProto)->getAPI()->feeders),
         ];
     }
-	
-	public function sendVideo(array $data): MadelineProto\EventHandler\Message
-	{
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-
-        foreach (['file', 'thumb'] as $key) {
-            if (!empty($data[$key])) {
-                $data[$key] = self::getMadelineMediaObject($data[$key]);
-            }
-        }
-
-        if (isset($data['parseMode'])) {
-            $data['parseMode'] = ParseMode::from($data['parseMode']);
-        }
-
-        return $this->madelineProto->sendVideo(...$data);
-	}
-
-    public function sendPhoto(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendPhoto(...$data);
-    }
-
-    public function sendSticker(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendSticker(...$data);
-    }
-
-    public function sendVoice(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendVoice(...$data);
-    }
-
-    public function sendAudio(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendAudio(...$data);
-    }
-
-    public function sendDocument(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendDocument(...$data);
-    }
-
-    public function sendDocumentPhoto(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendDocumentPhoto(...$data);
-    }
-
-    public function sendGif(array $data): MadelineProto\EventHandler\Message
-    {
-        if (!empty($this->file)) {
-            $data['file'] = $this->file;
-            $data['fileName'] = $this->file->getFilename();
-        }
-        return $this->madelineProto->sendGif(...$data);
-    }
-
-    private static function getMadelineMediaObject(string |array | StreamedField | null $input): MadelineProto\LocalFile|MadelineProto\RemoteUrl|MadelineProto\BotApiFileId|ReadableBuffer|ReadableStream|null
-    {
-        if (is_array($input) && !empty($input['_'])) {
-            $type = $input['_'];
-            unset($input['_']);
-            return match ($type) {
-                'LocalFile' => new MadelineProto\LocalFile(...$input),
-                'RemoteUrl' => new MadelineProto\RemoteUrl(...$input),
-                'BotApiFieldId' => new MadelineProto\BotApiFileId(...$input),
-                default => throw new InvalidArgumentException("Unknown type: {$type}"),
-            };
-        } elseif (is_string($input)) {
-            return new ReadableBuffer($input);
-        } else {
-            return $input;
-        }
-    }
-
 }

@@ -2,29 +2,40 @@
 
 namespace TelegramApiServer\Controllers;
 
+use Amp\Http\Server\Request;
+use Amp\Http\Server\Router;
 use Exception;
+use ReflectionClass;
+use ReflectionMethod;
 use TelegramApiServer\Client;
+use TelegramApiServer\MadelineProtoExtensions\SystemApiExtensions;
 
 final class SystemController extends AbstractApiController
 {
-    /**
-     * Получаем параметры из uri.
-     *
-     *
-     */
-    protected function resolvePath(array $path): void
+    private readonly SystemApiExtensions $extension;
+    private array $methods = [];
+    public function __construct()
     {
-        $this->api = \explode('.', $path['method'] ?? '');
+        $this->extension = new SystemApiExtensions(Client::getInstance());
+        foreach ((new ReflectionClass(SystemApiExtensions::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            $args = [];
+            foreach ($method->getParameters() as $param) {
+                $args[$param->getName()] = true;
+            }
+            $name = $method->getName();
+            $this->methods[$method->getName()] = function (...$params) use ($args, $name) {
+                return $this->extension->{$name}(...array_intersect_key($params, $args));
+            };
+        }
     }
 
     /**
      * @throws Exception
      */
-    protected function callApi()
+    protected function callApi(Request $request)
     {
-        $madelineProtoExtensions = new $this->extensionClass(Client::getInstance());
-        $result = $madelineProtoExtensions->{$this->api[0]}(...$this->parameters);
-        return $result;
+        $path = $request->getAttribute(Router::class);
+        $api = \explode('.', $path['method'] ?? '');
+        return $this->methods[$api[0]](...$this->resolveRequest($request));
     }
-
 }

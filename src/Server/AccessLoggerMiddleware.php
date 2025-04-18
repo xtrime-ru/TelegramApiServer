@@ -18,7 +18,6 @@ final class AccessLoggerMiddleware implements Middleware
 
     public function handleRequest(Request $request, RequestHandler $requestHandler): Response
     {
-
         $method = $request->getMethod();
         $uri = (string) $request->getUri();
         $protocolVersion = $request->getProtocolVersion();
