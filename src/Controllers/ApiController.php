@@ -29,21 +29,31 @@ final class ApiController extends AbstractApiController
         foreach ((new ReflectionClass(ApiExtensions::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             $args = [];
             foreach ($method->getParameters() as $param) {
-                $args[$param->getName()] = true;
+                $args[$param->getName()] = null;
             }
             $name = $method->getName();
-            $this->methods[$method->getName()] = function (API $API, ...$params) use ($args, $name) {
-                return $this->extension->{$name}($API, ...array_intersect_key($params, $args));
+            $needRequest = array_key_exists('request', $args);
+            $this->methods[$method->getName()] = function (API $API, ...$params) use ($args, $name, $needRequest) {
+                if (!$needRequest) {
+                    unset($params['request']);
+                }
+                $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
+                return $this->extension->{$name}($API, ...$argsPrepared);
             };
         }
         foreach ((new ReflectionClass(API::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             $args = [];
             foreach ($method->getParameters() as $param) {
-                $args[$param->getName()] = true;
+                $args[$param->getName()] = null;
             }
             $name = $method->getName();
-            $this->methodsMadeline[$method->getName()] = function (API $API, ...$params) use ($args, $name) {
-                return $API->{$name}(...array_intersect_key($params, $args));
+            $needRequest = array_key_exists('request', $args);
+            $this->methodsMadeline[$method->getName()] = function (API $API, ...$params) use ($args, $name, $needRequest) {
+                if (!$needRequest) {
+                    unset($params['request']);
+                }
+                $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
+                return $API->{$name}(...$argsPrepared);
             };
         }
     }

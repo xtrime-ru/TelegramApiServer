@@ -3,9 +3,12 @@
 namespace TelegramApiServer\MadelineProtoExtensions;
 
 use Amp\ByteStream\ReadableStream;
+use Amp\Http\Server\Request;
 use Amp\Http\Server\Response;
 use AssertionError;
 use danog\MadelineProto\API;
+use danog\MadelineProto\EventHandler\Message;
+use danog\MadelineProto\FileCallbackInterface;
 use danog\MadelineProto\StrTools;
 use InvalidArgumentException;
 use TelegramApiServer\Client;
@@ -15,9 +18,19 @@ use function Amp\delay;
 
 final class ApiExtensions
 {
-    public function getHistoryHtml(API $madelineProto, ...$params): array
+    public function getHistoryHtml(API $madelineProto, array|int|string|null $peer = null, int|null $offset_id = 0, int|null $offset_date = 0, int|null $add_offset = 0, int|null $limit = 0, int|null $max_id = 0, int|null $min_id = 0, array $hash = [], ?int $floodWaitLimit = null, ?string $queueId = null): array
     {
-        $response = $madelineProto->messages->getHistory(...$params);
+        $response = $madelineProto->messages->getHistory(
+            peer: $peer,
+            offset_id: $offset_id,
+            offset_date: $offset_date, add_offset: $add_offset,
+            limit: $limit,
+            max_id: $max_id,
+            min_id: $min_id,
+            hash: $hash,
+            floodWaitLimit: $floodWaitLimit,
+            queueId: $queueId,
+        );
         if (!empty($response['messages'])) {
             foreach ($response['messages'] as &$message) {
                 $message['message'] = StrTools::entitiesToHtml(
@@ -34,8 +47,6 @@ final class ApiExtensions
 
     /**
      * Проверяет есть ли подходящие медиа у сообщения.
-     *
-     *
      */
     private static function hasMedia(array $message = [], bool $allowWebPage = false): bool
     {
@@ -55,33 +66,12 @@ final class ApiExtensions
 
     /**
      * Пересылает сообщения без ссылки на оригинал.
-     *
-     * @param array $data
-     * <pre>
-     * [
-     *  'from_peer' => '',
-     *  'to_peer' => '',
-     *  'id' => [], //Id сообщения, или нескольких сообщений
-     * ]
-     * </pre>
-     *
      */
-    public function copyMessages(API $madelineProto, ...$data)
+    public function copyMessages(API $madelineProto, string|int $from_peer, string|int $to_peer, array|int $id)
     {
-        $data = \array_merge(
-            [
-                'from_peer' => '',
-                'to_peer' => '',
-                'id' => [],
-            ],
-            $data
-        );
-
         $response = $madelineProto->channels->getMessages(
-            [
-                'channel' => $data['from_peer'],
-                'id' => $data['id'],
-            ]
+            channel: $from_peer,
+            id: (array)$id,
         );
         $result = [];
         if (!$response || !\is_array($response) || !\array_key_exists('messages', $response)) {
@@ -91,7 +81,7 @@ final class ApiExtensions
         foreach ($response['messages'] as $key => $message) {
             $messageData = [
                 'message' => $message['message'] ?? '',
-                'peer' => $data['to_peer'],
+                'peer' => $to_peer,
                 'entities' => $message['entities'] ?? [],
             ];
             if (self::hasMedia($message, false)) {
@@ -110,21 +100,10 @@ final class ApiExtensions
 
     /**
      * Загружает медиафайл из указанного сообщения в поток.
-     *
-     *
      */
-    public function getMedia(API $madelineProto, ...$data): Response
+    public function getMedia(API $madelineProto, Request $request, string|int $peer = '', array|int $id = 0, array $message = []): Response
     {
-        $data = \array_merge(
-            [
-                'peer' => '',
-                'id' => [0],
-                'message' => [],
-            ],
-            $data
-        );
-
-        $message = $data['message'] ?: ($this->getMessages($madelineProto, ...$data))['messages'][0] ?? null;
+        $message = $message ?: ($this->getMessages($madelineProto, $peer, (array)$id))['messages'][0] ?? null;
         if (!$message || $message['_'] === 'messageEmpty') {
             throw new NoMediaException('Empty message');
         }
@@ -144,29 +123,20 @@ final class ApiExtensions
             } elseif (!empty($webpage['photo'])) {
                 $info = $madelineProto->getDownloadInfo($webpage['photo']);
             } else {
-                return $this->getMediaPreview($madelineProto, ...$data);
+                return $this->getMediaPreview($madelineProto, $request, $peer, $id, $message);
             }
         }
 
-        return $madelineProto->downloadToResponse(...$info);
+        return $madelineProto->downloadToResponse(messageMedia: $info, request: $request);
     }
 
     /**
      * Загружает превью медиафайла из указанного сообщения в поток.
      *
      */
-    public function getMediaPreview(API $madelineProto, ...$data): Response
+    public function getMediaPreview(API $madelineProto, Request $request, string|int $peer = '', array|int $id = 0, array $message = []): Response
     {
-        $data = \array_merge(
-            [
-                'peer' => '',
-                'id' => [0],
-                'message' => [],
-            ],
-            $data
-        );
-
-        $message = $data['message'] ?: ($this->getMessages($madelineProto, ...$data))['messages'][0] ?? null;
+        $message = $message ?: ($this->getMessages($madelineProto, $peer, (array)$id))['messages'][0] ?? null;
         if (!$message || $message['_'] === 'messageEmpty') {
             throw new NoMediaException('Empty message');
         }
@@ -232,45 +202,54 @@ final class ApiExtensions
             $info = $infoFull;
         }
 
-        return $madelineProto->downloadToResponse(...$info);
+        return $madelineProto->downloadToResponse(messageMedia: $info, request: $request);
     }
 
-    public function getMessages(API $madelineProto, ...$data): array
+    public function getMessages(API $madelineProto, string|int $peer, array|int $id): array
     {
-        $peerInfo = $madelineProto->getInfo($data['peer']);
+        $peerInfo = $madelineProto->getInfo($peer);
         if (\in_array($peerInfo['type'], ['channel', 'supergroup'])) {
             $response = $madelineProto->channels->getMessages(
-                [
-                    'channel' => $data['peer'],
-                    'id' => (array)$data['id'],
-                ]
+                channel:$peer,
+                id: $id,
             );
         } else {
-            $response = $madelineProto->messages->getMessages(['id' => (array)$data['id']]);
+            $response = $madelineProto->messages->getMessages(id: $id);
         }
 
         return $response;
     }
 
     /**
-     * Download to Amp HTTP response.
-     *
-     * @param array $info
-     *      Any downloadable array: message, media etc...
+     * Адаптер для стандартного метода.
      *
      */
-    public function downloadToResponse(API $madelineProto, ...$info): Response
+    public function downloadToResponse(API $madelineProto, FileCallbackInterface|Message|array|string $messageMedia, Request $request, ?callable $cb = null, ?int $size = null, ?string $mime = null, ?string $name = null): Response
     {
-        return $madelineProto->downloadToResponse(...$info);
+        return $madelineProto->downloadToResponse(
+            messageMedia: $messageMedia,
+            request: $request,
+            cb: $cb,
+            size: $size,
+            mime: $mime,
+            name: $name,
+        );
     }
 
     /**
      * Адаптер для стандартного метода.
      *
      */
-    public function downloadToBrowser(API $madelineProto, ...$info): Response
+    public function downloadToBrowser(API $madelineProto, FileCallbackInterface|Message|array|string $messageMedia, Request $request, ?callable $cb = null, ?int $size = null, ?string $mime = null, ?string $name = null): Response
     {
-        return $madelineProto->downloadToResponse(...$info);
+        return $madelineProto->downloadToResponse(
+            messageMedia: $messageMedia,
+            request: $request,
+            cb: $cb,
+            size: $size,
+            mime: $mime,
+            name: $name,
+        );
     }
 
     /**
@@ -286,10 +265,10 @@ final class ApiExtensions
             throw new AssertionError("No file name was provided!");
         }
         $inputFile = $madelineProto->uploadFromStream(
-            $file,
-            0,
-            $mimeType,
-            $fileName ?? ''
+            stream: $file,
+            size: 0,
+            mime: $mimeType,
+            fileName:  $fileName ?? '',
         );
         $inputFile['id'] = \unpack('P', $inputFile['id'])['1'];
         return [

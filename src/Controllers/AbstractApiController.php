@@ -121,7 +121,7 @@ abstract class AbstractApiController
                 break;
             case $contentType === 'application/json':
                 $body = $request->getBody()->buffer();
-                $params += \json_decode($body, true);
+                $params += (array)\json_decode($body, true);
                 break;
             default:
                 \parse_str($request->getBody()->buffer(), $post);
@@ -145,7 +145,7 @@ abstract class AbstractApiController
         return $params;
 
     }
-    private static function getMadelineMediaObject(string |array | StreamedField | null $input): RemoteUrl|BotApiFileId|ReadableBuffer|null
+    private static function getMadelineMediaObject(string |array | StreamedField | null $input): RemoteUrl|BotApiFileId|ReadableBuffer|StreamedField|null
     {
         if (is_array($input) && !empty($input['_'])) {
             return match ($input['_']) {
@@ -158,6 +158,7 @@ abstract class AbstractApiController
         if (is_string($input)) {
             return new ReadableBuffer($input);
         }
+
         return $input;
     }
 }

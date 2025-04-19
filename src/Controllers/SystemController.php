@@ -20,11 +20,16 @@ final class SystemController extends AbstractApiController
         foreach ((new ReflectionClass(SystemApiExtensions::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             $args = [];
             foreach ($method->getParameters() as $param) {
-                $args[$param->getName()] = true;
+                $args[$param->getName()] = null;
             }
             $name = $method->getName();
-            $this->methods[$method->getName()] = function (...$params) use ($args, $name) {
-                return $this->extension->{$name}(...array_intersect_key($params, $args));
+            $needRequest = array_key_exists('request', $args);
+            $this->methods[$method->getName()] = function (...$params) use ($args, $name, $needRequest) {
+                if (!$needRequest) {
+                    unset($params['request']);
+                }
+                $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
+                return $this->extension->{$name}(...$argsPrepared);
             };
         }
     }
