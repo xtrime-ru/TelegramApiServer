@@ -2187,16 +2187,16 @@
         },
         {
             "name": "danog/async-orm",
-            "version": "1.1.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/AsyncOrm.git",
-                "reference": "1a5129adeab04a4949b74289b4acfbc8a773bdc0"
+                "reference": "e5baea2f55e338eb54b24100e6f3b9ab9ed236a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/1a5129adeab04a4949b74289b4acfbc8a773bdc0",
-                "reference": "1a5129adeab04a4949b74289b4acfbc8a773bdc0",
+                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/e5baea2f55e338eb54b24100e6f3b9ab9ed236a4",
+                "reference": "e5baea2f55e338eb54b24100e6f3b9ab9ed236a4",
                 "shasum": ""
             },
             "require": {
@@ -2205,7 +2205,8 @@
                 "amphp/redis": "^2.0",
                 "amphp/sync": "^2.2",
                 "php": ">=8.2.4",
-                "revolt/event-loop": "^1.0.6"
+                "revolt/event-loop": "^1.0.6",
+                "symfony/polyfill-php83": "^1.32"
             },
             "require-dev": {
                 "amphp/php-cs-fixer-config": "^2.0.1",
@@ -2239,7 +2240,7 @@
             "description": "Async ORM based on AMPHP v3 and fibers.",
             "support": {
                 "issues": "https://github.com/danog/AsyncOrm/issues",
-                "source": "https://github.com/danog/AsyncOrm/tree/1.1.0"
+                "source": "https://github.com/danog/AsyncOrm/tree/1.1.2"
             },
             "funding": [
                 {
@@ -2247,7 +2248,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-24T16:49:13+00:00"
+            "time": "2025-05-05T09:43:33+00:00"
         },
         {
             "name": "danog/better-prometheus",
@@ -2586,12 +2587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "edd03346c02dee8a5adceadd8d2962f64a74f88f"
+                "reference": "c01f3f376430e5a87239635f3768ae6937eb2705"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/edd03346c02dee8a5adceadd8d2962f64a74f88f",
-                "reference": "edd03346c02dee8a5adceadd8d2962f64a74f88f",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/c01f3f376430e5a87239635f3768ae6937eb2705",
+                "reference": "c01f3f376430e5a87239635f3768ae6937eb2705",
                 "shasum": ""
             },
             "require": {
@@ -2707,7 +2708,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-04T20:29:44+00:00"
+            "time": "2025-05-05T09:32:50+00:00"
         },
         {
             "name": "danog/primemodule",
