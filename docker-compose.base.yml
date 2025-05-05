@@ -35,4 +35,4 @@ services:
       - --skip-grant-tables
       - --innodb-buffer-pool-size=128M
       - --innodb-compression-default=1
-      - --innodb_compression_algorithm=zlib
+      - --innodb-compression-algorithm=zlib
