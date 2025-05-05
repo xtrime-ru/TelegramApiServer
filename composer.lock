@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ec117f2ff8dea2cad0f4ff5903a5386",
+    "content-hash": "a3a843cc3adfb453289bc960aec6bbec",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2187,16 +2187,16 @@
         },
         {
             "name": "danog/async-orm",
-            "version": "1.1.2",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/AsyncOrm.git",
-                "reference": "e5baea2f55e338eb54b24100e6f3b9ab9ed236a4"
+                "reference": "da21147000bd9f1fae78ea46e749ca8b45b8c3b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/e5baea2f55e338eb54b24100e6f3b9ab9ed236a4",
-                "reference": "e5baea2f55e338eb54b24100e6f3b9ab9ed236a4",
+                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/da21147000bd9f1fae78ea46e749ca8b45b8c3b8",
+                "reference": "da21147000bd9f1fae78ea46e749ca8b45b8c3b8",
                 "shasum": ""
             },
             "require": {
@@ -2240,7 +2240,7 @@
             "description": "Async ORM based on AMPHP v3 and fibers.",
             "support": {
                 "issues": "https://github.com/danog/AsyncOrm/issues",
-                "source": "https://github.com/danog/AsyncOrm/tree/1.1.2"
+                "source": "https://github.com/danog/AsyncOrm/tree/1.1.1"
             },
             "funding": [
                 {
@@ -2248,7 +2248,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-05T09:43:33+00:00"
+            "time": "2025-05-05T09:35:44+00:00"
         },
         {
             "name": "danog/better-prometheus",

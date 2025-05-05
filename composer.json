@@ -30,7 +30,8 @@
     "amphp/websocket-client": "^v2",
     "vlucas/phpdotenv": "^5",
     "danog/madelineproto": "dev-v8-tas",
-    "amphp/dns": "2.x-dev"
+    "amphp/dns": "2.x-dev",
+    "danog/async-orm": "1.1.1"
   },
   "require-dev": {
     "amphp/php-cs-fixer-config": "^2.0.1"
