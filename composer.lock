@@ -2587,12 +2587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "c01f3f376430e5a87239635f3768ae6937eb2705"
+                "reference": "afa0c906ad500a2ad43c977717e74ce853caf735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/c01f3f376430e5a87239635f3768ae6937eb2705",
-                "reference": "c01f3f376430e5a87239635f3768ae6937eb2705",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/afa0c906ad500a2ad43c977717e74ce853caf735",
+                "reference": "afa0c906ad500a2ad43c977717e74ce853caf735",
                 "shasum": ""
             },
             "require": {
@@ -2611,7 +2611,7 @@
                 "amphp/socket": "^2.3.1",
                 "amphp/websocket-client": "^2.0.1",
                 "bacon/bacon-qr-code": "^3.0.1",
-                "danog/async-orm": "^1.1.0",
+                "danog/async-orm": "^1.1.1",
                 "danog/better-prometheus": "^0.1.1",
                 "danog/dns-over-https": "^1.0.1",
                 "danog/ipc": "^1.0.1",
@@ -2634,8 +2634,8 @@
                 "psr/http-factory": "^1.1.0",
                 "psr/log": "^3.0.2",
                 "revolt/event-loop": "^1.0.7",
-                "symfony/polyfill-mbstring": ">=1.31",
-                "symfony/polyfill-php83": "^1.31",
+                "symfony/polyfill-mbstring": ">=1.32",
+                "symfony/polyfill-php83": "^1.32",
                 "webmozart/assert": "^1.11"
             },
             "conflict": {
@@ -2649,9 +2649,9 @@
                 "danog/phpdoc": "^0.1.24",
                 "dg/bypass-finals": "dev-master",
                 "ext-ctype": "*",
-                "phpunit/phpunit": "^9.6.22",
+                "phpunit/phpunit": "^9.6.23",
                 "revolt/event-loop-adapter-react": "^1.1.1",
-                "symfony/yaml": "^6.4.20",
+                "symfony/yaml": "^6.4.21",
                 "vimeo/psalm": "dev-master"
             },
             "suggest": {
@@ -2708,7 +2708,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-05T09:32:50+00:00"
+            "time": "2025-05-13T12:12:43+00:00"
         },
         {
             "name": "danog/primemodule",
