@@ -7,6 +7,7 @@ use Amp\Future;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Router;
 use danog\MadelineProto\API;
+use danog\MadelineProto\MTProto;
 use Exception;
 use ReflectionClass;
 use ReflectionMethod;
@@ -41,21 +42,25 @@ final class ApiController extends AbstractApiController
                 return $this->extension->{$name}($API, ...$argsPrepared);
             };
         }
-        foreach ((new ReflectionClass(API::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $args = [];
-            foreach ($method->getParameters() as $param) {
-                $args[$param->getName()] = null;
-            }
-            $name = $method->getName();
-            $needRequest = array_key_exists('request', $args);
-            $this->methodsMadeline[$method->getName()] = function (API $API, ...$params) use ($args, $name, $needRequest) {
-                if (!$needRequest) {
-                    unset($params['request']);
+        $classes = [API::class, \danog\MadelineProto\MTProto::class];
+        foreach ($classes as $class) {
+            foreach ((new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+                $args = [];
+                foreach ($method->getParameters() as $param) {
+                    $args[$param->getName()] = null;
                 }
-                $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
-                return $API->{$name}(...$argsPrepared);
-            };
+                $name = $method->getName();
+                $needRequest = array_key_exists('request', $args);
+                $this->methodsMadeline[$method->getName()] = function (API|MTProto $API, ...$params) use ($args, $name, $needRequest) {
+                    if (!$needRequest) {
+                        unset($params['request']);
+                    }
+                    $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
+                    return $API->{$name}(...$argsPrepared);
+                };
+            }
         }
+
     }
 
     private static ?Future $w = null;
