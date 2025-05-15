@@ -35,11 +35,7 @@ final class ApiController extends AbstractApiController
             $name = $method->getName();
             $needRequest = array_key_exists('request', $args);
             $this->methods[$method->getName()] = function (API $API, ...$params) use ($args, $name, $needRequest) {
-                if (!$needRequest) {
-                    unset($params['request']);
-                }
-                $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
-                return $this->extension->{$name}($API, ...$argsPrepared);
+                return $this->extension->{$name}($API, ...self::prepareArgs($needRequest, $params, $args));
             };
         }
         $classes = [API::class, \danog\MadelineProto\MTProto::class];
@@ -52,11 +48,7 @@ final class ApiController extends AbstractApiController
                 $name = $method->getName();
                 $needRequest = array_key_exists('request', $args);
                 $this->methodsMadeline[$method->getName()] = function (API|MTProto $API, ...$params) use ($args, $name, $needRequest) {
-                    if (!$needRequest) {
-                        unset($params['request']);
-                    }
-                    $argsPrepared = array_intersect_key($params, $args) ?: array_values($params);
-                    return $API->{$name}(...$argsPrepared);
+                    return $API->{$name}(...self::prepareArgs($needRequest, $params, $args));
                 };
             }
         }
@@ -64,6 +56,20 @@ final class ApiController extends AbstractApiController
     }
 
     private static ?Future $w = null;
+
+    private static function prepareArgs(bool $needRequest, array $params, array $args): array
+    {
+        if (!$needRequest) {
+            unset($params['request']);
+        }
+        $argsPrepared = array_intersect_key($params, $args);
+        if (count($argsPrepared) !== count($params)) {
+            $argsPrepared = array_values($params);
+        }
+
+        return $argsPrepared;
+    }
+
     /**
      * @throws Exception
      */
