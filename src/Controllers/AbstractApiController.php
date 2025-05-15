@@ -121,7 +121,7 @@ abstract class AbstractApiController
                 break;
             case $contentType === 'application/json':
                 $body = $request->getBody()->buffer();
-                $params += (array)\json_decode($body, true);
+                $params += (array)\json_decode($body, true, flags: JSON_THROW_ON_ERROR);
                 break;
             default:
                 \parse_str($request->getBody()->buffer(), $post);
