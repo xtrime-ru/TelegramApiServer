@@ -18,6 +18,7 @@ services:
       - "-s=session"
     depends_on:
       - mysql
+    healthcheck: !reset []
   mysql:
     extends:
       file: docker-compose.base.yml

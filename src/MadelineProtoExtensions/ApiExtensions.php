@@ -242,7 +242,8 @@ final class ApiExtensions
      */
     public function downloadToBrowser(API $madelineProto, FileCallbackInterface|Message|array|string $messageMedia, Request $request, ?callable $cb = null, ?int $size = null, ?string $mime = null, ?string $name = null): Response
     {
-        return $madelineProto->downloadToResponse(
+        return $this->downloadToResponse(
+            madelineProto: $madelineProto,
             messageMedia: $messageMedia,
             request: $request,
             cb: $cb,
