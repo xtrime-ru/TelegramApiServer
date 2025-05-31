@@ -20,4 +20,13 @@ final class StartUpFixes
             unlink($file);
         }
     }
+
+    public static function removeOldSettings(string $session): void
+    {
+        info('Removing old settings file to fix startup if db settings changed' . PHP_EOL);
+        foreach (glob(ROOT_DIR . "/$session/safe.php*") as $file) {
+            info("removing: $file");
+            unlink($file);
+        }
+    }
 }
