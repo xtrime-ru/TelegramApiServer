@@ -29,14 +29,17 @@ docker compose pull
 ```
 
 ## Authorization
-Please only use old and valid accounts. All new accounts will be banned by telegram.
-If your account was banned read this: https://docs.madelineproto.xyz/docs/LOGIN.html#getting-permission-to-use-the-telegram-api
+
+> [!CAUTION]
+> Please only use old and valid accounts. All new accounts will be banned by telegram.
+> If your account was banned read this: https://docs.madelineproto.xyz/docs/LOGIN.html#getting-permission-to-use-the-telegram-api
+
 1. Get app_id and app_hash at [my.telegram.org](https://my.telegram.org/). 
     Only one app_id needed for any amount of users and bots.
 1. Fill app_id and app_hash in `.env.docker`.
 1. Start TelegramApiServer in cli:
-        1. Start container interactively: `docker compose run --rm api`
-        2. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in `command`.
+    1. Start container interactively: `docker compose run --rm api`  
+    1. If you need to start multiple sessions, create docker-compose.override.yml. Add additional containers there. Use unique ports and session names in `command`.
 1. Authorize your session:
     1. After promt, fill your phone number, or bot hash.
     1. You will receive telegram code. Type it in.
@@ -51,6 +54,13 @@ If your account was banned read this: https://docs.madelineproto.xyz/docs/LOGIN.
    ```
 1. Exit with `Ctrl + C` 
 1. Run container in background `docker compose up -d`.
+
+## Change existing account/session
+1. Stop container `docker compose stop api`
+2. Remove session folder: `rm -rf /sessions/session.madeline/`
+3. Remove `session_MTProto_session` from mysql database.
+4. Log out session from app.
+5. Authorize as usual.
 
 ## Update
 * `git pull` or `git fetch && git reset --hard origin/master`
