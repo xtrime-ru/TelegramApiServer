@@ -2587,12 +2587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "73a2c2981abfdb8f657f5f2d6cc43aecb578cb5f"
+                "reference": "dd19f6e462ef609af7fd9eabae3f02d94bec0ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/73a2c2981abfdb8f657f5f2d6cc43aecb578cb5f",
-                "reference": "73a2c2981abfdb8f657f5f2d6cc43aecb578cb5f",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/dd19f6e462ef609af7fd9eabae3f02d94bec0ca2",
+                "reference": "dd19f6e462ef609af7fd9eabae3f02d94bec0ca2",
                 "shasum": ""
             },
             "require": {
@@ -2601,7 +2601,7 @@
                 "amphp/dns": "^2.4.0",
                 "amphp/file": "^3.2.0",
                 "amphp/http": "^2.1.2",
-                "amphp/http-client": "^5.3.1",
+                "amphp/http-client": "^5.3.3",
                 "amphp/http-client-cookies": "^2",
                 "amphp/http-server": "^3.4.3",
                 "amphp/log": "^2",
@@ -2618,8 +2618,8 @@
                 "danog/loop": "^1.1.1",
                 "danog/primemodule": "^1.0.13",
                 "danog/telegram-entities": "^1.0.4",
-                "danog/tg-dialog-id": "^1.1.0",
-                "danog/tg-file-decoder": "^1.0.1",
+                "danog/tg-dialog-id": "^1.2.0",
+                "danog/tg-file-decoder": "^1.0.2",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
                 "ext-filter": "*",
@@ -2628,7 +2628,7 @@
                 "ext-xml": "*",
                 "ext-zlib": "*",
                 "league/uri": "^7.5.1",
-                "nikic/php-parser": "^5.4.0",
+                "nikic/php-parser": "^5.5.0",
                 "php-64bit": ">=8.2",
                 "phpseclib/phpseclib": "^3.0.43",
                 "psr/http-factory": "^1.1.0",
@@ -2708,7 +2708,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-04T20:13:15+00:00"
+            "time": "2025-06-04T20:39:46+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2820,16 +2820,16 @@
         },
         {
             "name": "danog/tg-dialog-id",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/tg-dialog-id.git",
-                "reference": "6118fe5ad17b068237a43262d459664869affcc0"
+                "reference": "ff4d75f7a40fb3826f0a7c3f67fa734b644ca807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/tg-dialog-id/zipball/6118fe5ad17b068237a43262d459664869affcc0",
-                "reference": "6118fe5ad17b068237a43262d459664869affcc0",
+                "url": "https://api.github.com/repos/danog/tg-dialog-id/zipball/ff4d75f7a40fb3826f0a7c3f67fa734b644ca807",
+                "reference": "ff4d75f7a40fb3826f0a7c3f67fa734b644ca807",
                 "shasum": ""
             },
             "require": {
@@ -2862,7 +2862,7 @@
             "description": "A library to work with Telegram bot API dialog IDs",
             "support": {
                 "issues": "https://github.com/danog/tg-dialog-id/issues",
-                "source": "https://github.com/danog/tg-dialog-id/tree/1.1.0"
+                "source": "https://github.com/danog/tg-dialog-id/tree/1.2.0"
             },
             "funding": [
                 {
@@ -2870,7 +2870,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-16T12:08:16+00:00"
+            "time": "2025-06-04T20:13:39+00:00"
         },
         {
             "name": "danog/tg-file-decoder",
