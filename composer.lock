@@ -2587,12 +2587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/MadelineProto.git",
-                "reference": "3e5a1c4750af098d18d23a153e9df20d70f3213e"
+                "reference": "a977122fd257fe5fbdfffebe7f97278ffe3bcfa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/3e5a1c4750af098d18d23a153e9df20d70f3213e",
-                "reference": "3e5a1c4750af098d18d23a153e9df20d70f3213e",
+                "url": "https://api.github.com/repos/danog/MadelineProto/zipball/a977122fd257fe5fbdfffebe7f97278ffe3bcfa8",
+                "reference": "a977122fd257fe5fbdfffebe7f97278ffe3bcfa8",
                 "shasum": ""
             },
             "require": {
@@ -2708,7 +2708,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-31T13:44:36+00:00"
+            "time": "2025-06-04T15:37:56+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2874,16 +2874,16 @@
         },
         {
             "name": "danog/tg-file-decoder",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/tg-file-decoder.git",
-                "reference": "5b1b69369e13a16b7a4905bf034a8ed997e5eaf8"
+                "reference": "f4da78c28d47b658c4596249f1d6595956f3b796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/tg-file-decoder/zipball/5b1b69369e13a16b7a4905bf034a8ed997e5eaf8",
-                "reference": "5b1b69369e13a16b7a4905bf034a8ed997e5eaf8",
+                "url": "https://api.github.com/repos/danog/tg-file-decoder/zipball/f4da78c28d47b658c4596249f1d6595956f3b796",
+                "reference": "f4da78c28d47b658c4596249f1d6595956f3b796",
                 "shasum": ""
             },
             "require": {
@@ -2924,7 +2924,7 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/tg-file-decoder/issues",
-                "source": "https://github.com/danog/tg-file-decoder/tree/1.0.1"
+                "source": "https://github.com/danog/tg-file-decoder/tree/1.0.2"
             },
             "funding": [
                 {
@@ -2932,7 +2932,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-19T21:31:39+00:00"
+            "time": "2025-05-31T15:14:35+00:00"
         },
         {
             "name": "dasprid/enum",
