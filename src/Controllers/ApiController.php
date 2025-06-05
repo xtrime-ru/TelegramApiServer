@@ -34,7 +34,7 @@ final class ApiController extends AbstractApiController
             }
             $name = $method->getName();
             $needRequest = array_key_exists('request', $args);
-            $this->methods[$method->getName()] = function (API $API, ...$params) use ($args, $name, $needRequest) {
+            $this->methods[mb_strtolower($name)] = function (API $API, ...$params) use ($args, $name, $needRequest) {
                 return $this->extension->{$name}($API, ...self::prepareArgs($needRequest, $params, $args));
             };
         }
@@ -47,7 +47,7 @@ final class ApiController extends AbstractApiController
                 }
                 $name = $method->getName();
                 $needRequest = array_key_exists('request', $args);
-                $this->methodsMadeline[$method->getName()] = function (API|MTProto $API, ...$params) use ($args, $name, $needRequest) {
+                $this->methodsMadeline[mb_strtolower($name)] = function (API|MTProto $API, ...$params) use ($args, $name, $needRequest) {
                     return $API->{$name}(...self::prepareArgs($needRequest, $params, $args));
                 };
             }
@@ -104,10 +104,10 @@ final class ApiController extends AbstractApiController
     private function callApiCommon(API $madelineProto, array $api, array $parameters)
     {
         $pathCount = \count($api);
-        if ($pathCount === 1 && \array_key_exists($api[0], $this->methods)) {
-            $result = $this->methods[$api[0]]($madelineProto, ...$parameters);
+        if ($pathCount === 1 && \array_key_exists(mb_strtolower($api[0]), $this->methods)) {
+            $result = $this->methods[mb_strtolower($api[0])]($madelineProto, ...$parameters);
         } else {
-            if ($api[0] === 'API') {
+            if (mb_strtolower($api[0]) === 'api') {
                 $madelineProto = Client::getWrapper($madelineProto)->getAPI();
                 \array_shift($api);
                 $pathCount = \count($api);
@@ -115,7 +115,7 @@ final class ApiController extends AbstractApiController
             //Проверяем нет ли в MadilineProto такого метода.
             switch ($pathCount) {
                 case 1:
-                    $result = $this->methodsMadeline[$api[0]]($madelineProto, ...$parameters);
+                    $result = $this->methodsMadeline[mb_strtolower($api[0])]($madelineProto, ...$parameters);
                     break;
                 case 2:
                     $result = $madelineProto->{$api[0]}->{$api[1]}(...$parameters);
