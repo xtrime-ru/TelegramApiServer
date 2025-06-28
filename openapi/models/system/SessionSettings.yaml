@@ -1,0 +1,4 @@
+type: object
+properties:
+  app_info:
+    $ref: '../system/AppInfo.yaml'
