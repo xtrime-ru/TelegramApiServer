@@ -85,7 +85,7 @@ foreach ($options['session'] as $session) {
 StartUpFixes::fix();
 foreach ($sessions as $session) {
     StartUpFixes::removeBrokenIpc($session);
-    if ((string)getenv('DB_HOST') === 'mysql') {
+    if ((string)getenv('DB_TYPE') !== 'memory') {
         StartUpFixes::removeOldSettings($session);
     }
 }
