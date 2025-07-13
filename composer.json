@@ -17,6 +17,12 @@
     "micro-service",
     "madelineproto"
   ],
+  "repositories": [
+    {
+      "type": "github",
+      "url": "https://github.com/xtrime-ru/MadelineProto.git"
+    }
+  ],
   "require": {
     "php": "^8.2",
     "ext-json": "*",
