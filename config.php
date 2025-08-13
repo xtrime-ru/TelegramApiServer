@@ -77,7 +77,7 @@ $settings = [
         ],
         'metrics' => [
             'enable_prometheus_collection' => filter_var((string)getenv("PROMETHEUS_ENABLE"), FILTER_VALIDATE_BOOL),
-            'enable_memprof_collection' => filter_var((string)getenv("PROMETHEUS_ENABLE"), FILTER_VALIDATE_BOOL),
+            'enable_memprof_collection' => false,
             'metrics_bind_to' => filter_var((string)getenv("PROMETHEUS_ENABLE"), FILTER_VALIDATE_BOOL) ? fromString((string)getenv("PROMETHEUS_BIND_TO")) : null,
         ]
     ],
