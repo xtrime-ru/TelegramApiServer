@@ -76,8 +76,9 @@ $settings = [
             'download_parallel_chunks' => 20,
         ],
         'metrics' => [
-            'enable_prometheus_collection' => (bool)getenv("PROMETHEUS_ENABLE"),
-            'metrics_bind_to' => (bool)getenv("PROMETHEUS_ENABLE") ? fromString((string)getenv("PROMETHEUS_BIND_TO")) : null,
+            'enable_prometheus_collection' => filter_var((string)getenv("PROMETHEUS_ENABLE"), FILTER_VALIDATE_BOOL),
+            'enable_memprof_collection' => filter_var((string)getenv("PROMETHEUS_ENABLE"), FILTER_VALIDATE_BOOL),
+            'metrics_bind_to' => filter_var((string)getenv("PROMETHEUS_ENABLE"), FILTER_VALIDATE_BOOL) ? fromString((string)getenv("PROMETHEUS_BIND_TO")) : null,
         ]
     ],
     'api' => [
