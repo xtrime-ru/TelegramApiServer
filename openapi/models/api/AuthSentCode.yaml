@@ -1,0 +1,18 @@
+type: object
+properties:
+  _:
+    type: string
+    default: "auth.sentCode"
+  type:
+    $ref: '../api/SentCodeTypeSms.yaml'
+  phone_code_hash:
+    type: string
+    example: "3aae168ea0609da27f"
+  next_type:
+    $ref: '../api/CodeTypeCall.yaml'
+  timeout:
+    type: integer
+    example: 120
+  phone_number:
+    type: string
+    example: "+79636025112"

@@ -1,0 +1,16 @@
+type: object
+properties:
+  exception:
+    type: string
+  message:
+    type: string
+  file:
+    type: string
+  line:
+    type: integer
+  code:
+    type: integer
+  backtrace:
+    type: array
+    items:
+      $ref: '../common/Backtrace.yaml'
