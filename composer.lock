@@ -1050,16 +1050,16 @@
         },
         {
             "name": "amphp/mysql",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/mysql.git",
-                "reference": "0eb9d1df67c206c043b1a1c6ad7ba1bc2aa836bf"
+                "reference": "bef63fda61eefca601be54aa1d983a6a31b4a50f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/mysql/zipball/0eb9d1df67c206c043b1a1c6ad7ba1bc2aa836bf",
-                "reference": "0eb9d1df67c206c043b1a1c6ad7ba1bc2aa836bf",
+                "url": "https://api.github.com/repos/amphp/mysql/zipball/bef63fda61eefca601be54aa1d983a6a31b4a50f",
+                "reference": "bef63fda61eefca601be54aa1d983a6a31b4a50f",
                 "shasum": ""
             },
             "require": {
@@ -1108,7 +1108,7 @@
             "description": "Asynchronous MySQL client for PHP based on Amp.",
             "support": {
                 "issues": "https://github.com/amphp/mysql/issues",
-                "source": "https://github.com/amphp/mysql/tree/v3.0.0"
+                "source": "https://github.com/amphp/mysql/tree/v3.0.1"
             },
             "funding": [
                 {
@@ -1116,7 +1116,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-10T17:33:58+00:00"
+            "time": "2025-11-08T22:59:09+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1333,16 +1333,16 @@
         },
         {
             "name": "amphp/postgres",
-            "version": "v2.1.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/postgres.git",
-                "reference": "c62555c6497782399a166f15c8da8e64be456141"
+                "reference": "fd7c2661966aeb3a9cc067a7ba507f22c370e1ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/postgres/zipball/c62555c6497782399a166f15c8da8e64be456141",
-                "reference": "c62555c6497782399a166f15c8da8e64be456141",
+                "url": "https://api.github.com/repos/amphp/postgres/zipball/fd7c2661966aeb3a9cc067a7ba507f22c370e1ce",
+                "reference": "fd7c2661966aeb3a9cc067a7ba507f22c370e1ce",
                 "shasum": ""
             },
             "require": {
@@ -1358,7 +1358,7 @@
                 "ext-pgsql": "*",
                 "ext-pq": "*",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "5.23"
+                "psalm/phar": "6.15.1"
             },
             "type": "library",
             "autoload": {
@@ -1393,7 +1393,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/postgres/issues",
-                "source": "https://github.com/amphp/postgres/tree/v2.1.1"
+                "source": "https://github.com/amphp/postgres/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -1401,7 +1401,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-21T04:45:08+00:00"
+            "time": "2026-02-22T18:50:10+00:00"
         },
         {
             "name": "amphp/process",
@@ -1696,16 +1696,16 @@
         },
         {
             "name": "amphp/sql",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sql.git",
-                "reference": "2a7962dba23bf017bbdd3c3a0af0eb212481627b"
+                "reference": "e7ab2f47ba930b7a5ff99d04e67750f1513f1622"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sql/zipball/2a7962dba23bf017bbdd3c3a0af0eb212481627b",
-                "reference": "2a7962dba23bf017bbdd3c3a0af0eb212481627b",
+                "url": "https://api.github.com/repos/amphp/sql/zipball/e7ab2f47ba930b7a5ff99d04e67750f1513f1622",
+                "reference": "e7ab2f47ba930b7a5ff99d04e67750f1513f1622",
                 "shasum": ""
             },
             "require": {
@@ -1715,7 +1715,7 @@
             "require-dev": {
                 "amphp/php-cs-fixer-config": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "5.23"
+                "psalm/phar": "6.15.1"
             },
             "type": "library",
             "autoload": {
@@ -1738,7 +1738,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sql/issues",
-                "source": "https://github.com/amphp/sql/tree/v2.0.1"
+                "source": "https://github.com/amphp/sql/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -1746,7 +1746,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-23T16:16:34+00:00"
+            "time": "2026-02-22T17:29:27+00:00"
         },
         {
             "name": "amphp/sql-common",
@@ -2588,12 +2588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "509d607c8cdfa56df28380e85462afbf87259d79"
+                "reference": "38b2435fe28032e8994e2af5d5e3cbbfa86c63ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/509d607c8cdfa56df28380e85462afbf87259d79",
-                "reference": "509d607c8cdfa56df28380e85462afbf87259d79",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/38b2435fe28032e8994e2af5d5e3cbbfa86c63ad",
+                "reference": "38b2435fe28032e8994e2af5d5e3cbbfa86c63ad",
                 "shasum": ""
             },
             "require": {
@@ -2768,7 +2768,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2025-12-08T16:46:27+00:00"
+            "time": "2026-02-22T21:28:52+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -5213,16 +5213,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.93.1",
+            "version": "v3.94.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "b3546ab487c0762c39f308dc1ec0ea2c461fc21a"
+                "reference": "7787ceff91365ba7d623ec410b8f429cdebb4f63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/b3546ab487c0762c39f308dc1ec0ea2c461fc21a",
-                "reference": "b3546ab487c0762c39f308dc1ec0ea2c461fc21a",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/7787ceff91365ba7d623ec410b8f429cdebb4f63",
+                "reference": "7787ceff91365ba7d623ec410b8f429cdebb4f63",
                 "shasum": ""
             },
             "require": {
@@ -5239,7 +5239,7 @@
                 "react/event-loop": "^1.5",
                 "react/socket": "^1.16",
                 "react/stream": "^1.4",
-                "sebastian/diff": "^4.0.6 || ^5.1.1 || ^6.0.2 || ^7.0",
+                "sebastian/diff": "^4.0.6 || ^5.1.1 || ^6.0.2 || ^7.0 || ^8.0",
                 "symfony/console": "^5.4.47 || ^6.4.24 || ^7.0 || ^8.0",
                 "symfony/event-dispatcher": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0",
                 "symfony/filesystem": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0",
@@ -5253,18 +5253,18 @@
                 "symfony/stopwatch": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "facile-it/paraunit": "^1.3.1 || ^2.7",
-                "infection/infection": "^0.32",
-                "justinrainbow/json-schema": "^6.6",
+                "facile-it/paraunit": "^1.3.1 || ^2.7.1",
+                "infection/infection": "^0.32.3",
+                "justinrainbow/json-schema": "^6.6.4",
                 "keradus/cli-executor": "^2.3",
                 "mikey179/vfsstream": "^1.6.12",
-                "php-coveralls/php-coveralls": "^2.9",
-                "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.6",
-                "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.6",
-                "phpunit/phpunit": "^9.6.31 || ^10.5.60 || ^11.5.48",
+                "php-coveralls/php-coveralls": "^2.9.1",
+                "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.7",
+                "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.7",
+                "phpunit/phpunit": "^9.6.34 || ^10.5.63 || ^11.5.51",
                 "symfony/polyfill-php85": "^1.33",
-                "symfony/var-dumper": "^5.4.48 || ^6.4.26 || ^7.4.0 || ^8.0",
-                "symfony/yaml": "^5.4.45 || ^6.4.30 || ^7.4.1 || ^8.0"
+                "symfony/var-dumper": "^5.4.48 || ^6.4.32 || ^7.4.4 || ^8.0.4",
+                "symfony/yaml": "^5.4.45 || ^6.4.30 || ^7.4.1 || ^8.0.1"
             },
             "suggest": {
                 "ext-dom": "For handling output formats in XML",
@@ -5305,7 +5305,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.93.1"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.94.2"
             },
             "funding": [
                 {
@@ -5313,7 +5313,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-28T23:50:50+00:00"
+            "time": "2026-02-20T16:13:53+00:00"
         },
         {
             "name": "psr/container",
@@ -5946,29 +5946,29 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "7.0.0",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "7ab1ea946c012266ca32390913653d844ecd085f"
+                "reference": "a2b6d09d7729ee87d605a439469f9dcc39be5ea3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7ab1ea946c012266ca32390913653d844ecd085f",
-                "reference": "7ab1ea946c012266ca32390913653d844ecd085f",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/a2b6d09d7729ee87d605a439469f9dcc39be5ea3",
+                "reference": "a2b6d09d7729ee87d605a439469f9dcc39be5ea3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.3"
+                "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^12.0",
+                "phpunit/phpunit": "^13.0",
                 "symfony/process": "^7.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "7.0-dev"
+                    "dev-main": "8.0-dev"
                 }
             },
             "autoload": {
@@ -6001,15 +6001,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
                 "security": "https://github.com/sebastianbergmann/diff/security/policy",
-                "source": "https://github.com/sebastianbergmann/diff/tree/7.0.0"
+                "source": "https://github.com/sebastianbergmann/diff/tree/8.0.0"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/sebastian/diff",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-02-07T04:55:46+00:00"
+            "time": "2026-02-06T04:42:27+00:00"
         },
         {
             "name": "symfony/console",
