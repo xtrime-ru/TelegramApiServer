@@ -1473,16 +1473,16 @@
         },
         {
             "name": "amphp/redis",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/redis.git",
-                "reference": "1572c2fec2849d272570919e998f9a3c1a5b1703"
+                "reference": "964bcf6c2574645058371925a3668240a622bdab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/redis/zipball/1572c2fec2849d272570919e998f9a3c1a5b1703",
-                "reference": "1572c2fec2849d272570919e998f9a3c1a5b1703",
+                "url": "https://api.github.com/repos/amphp/redis/zipball/964bcf6c2574645058371925a3668240a622bdab",
+                "reference": "964bcf6c2574645058371925a3668240a622bdab",
                 "shasum": ""
             },
             "require": {
@@ -1542,7 +1542,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/redis/issues",
-                "source": "https://github.com/amphp/redis/tree/v2.0.3"
+                "source": "https://github.com/amphp/redis/tree/v2.0.4"
             },
             "funding": [
                 {
@@ -1550,7 +1550,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-15T04:14:11+00:00"
+            "time": "2026-03-03T20:52:26+00:00"
         },
         {
             "name": "amphp/serialization",
@@ -2588,12 +2588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "d3d57a878df13bb8bc5e065aecf668763a7f06d9"
+                "reference": "544b01220b09ea144dec5d0e8871fdda3b3891e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/d3d57a878df13bb8bc5e065aecf668763a7f06d9",
-                "reference": "d3d57a878df13bb8bc5e065aecf668763a7f06d9",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/544b01220b09ea144dec5d0e8871fdda3b3891e1",
+                "reference": "544b01220b09ea144dec5d0e8871fdda3b3891e1",
                 "shasum": ""
             },
             "require": {
@@ -2654,7 +2654,7 @@
                 "quasarstream/webrtc": "^1.0",
                 "revolt/event-loop-adapter-react": "^1.1.1",
                 "symfony/yaml": "^6.4.26",
-                "vimeo/psalm": "7.0.0-beta14"
+                "vimeo/psalm": "dev-master"
             },
             "suggest": {
                 "ext-bcmath": "Install the bcmath extension to speed up authorization",
@@ -2769,7 +2769,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-02-27T22:46:45+00:00"
+            "time": "2026-03-04T21:59:49+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -7202,5 +7202,5 @@
         "ext-curl": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
