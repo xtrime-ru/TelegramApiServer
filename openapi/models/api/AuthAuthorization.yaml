@@ -1,0 +1,7 @@
+type: object
+properties:
+  _:
+    type: string
+    default: "auth.authorization"
+  user:
+    $ref: '../api/User.yaml'
