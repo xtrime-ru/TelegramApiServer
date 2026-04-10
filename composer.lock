@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "943b7f6849887142f37e17d5c228f2ce",
+    "content-hash": "f6209a2cde5e973ebb9af2544a5c7dca",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2597,12 +2597,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "7b8f0260b20baf21f8edeb195889e34fd6344c31"
+                "reference": "e44341acc8fba33ad9a094d56dcf4e6a16849ea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/7b8f0260b20baf21f8edeb195889e34fd6344c31",
-                "reference": "7b8f0260b20baf21f8edeb195889e34fd6344c31",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/e44341acc8fba33ad9a094d56dcf4e6a16849ea0",
+                "reference": "e44341acc8fba33ad9a094d56dcf4e6a16849ea0",
                 "shasum": ""
             },
             "require": {
@@ -2779,7 +2779,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-04-10T16:32:25+00:00"
+            "time": "2026-04-10T16:36:34+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -2834,16 +2834,16 @@
         },
         {
             "name": "danog/telegram-entities",
-            "version": "1.0.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danog/telegram-entities.git",
-                "reference": "19ab8a48bc4b9519c4493e2c62eb171fba8b58b4"
+                "url": "https://github.com/xtrime-ru/telegram-entities.git",
+                "reference": "c4cc4714e4350a3d81da21f758076c61f66d60f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/telegram-entities/zipball/19ab8a48bc4b9519c4493e2c62eb171fba8b58b4",
-                "reference": "19ab8a48bc4b9519c4493e2c62eb171fba8b58b4",
+                "url": "https://api.github.com/repos/xtrime-ru/telegram-entities/zipball/c4cc4714e4350a3d81da21f758076c61f66d60f6",
+                "reference": "c4cc4714e4350a3d81da21f758076c61f66d60f6",
                 "shasum": ""
             },
             "require": {
@@ -2860,13 +2860,23 @@
                 "phpunit/phpunit": "^11.0.9",
                 "vimeo/psalm": "dev-master"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "danog\\TelegramEntities\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "danog\\TestTelegramEntities\\": "tests/"
+                }
+            },
+            "scripts": {
+                "cs-fix": [
+                    "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v"
+                ]
+            },
             "license": [
                 "Apache-2.0"
             ],
@@ -2878,16 +2888,15 @@
             ],
             "description": "A library to work with Telegram UTF-16 styled text entities.",
             "support": {
-                "issues": "https://github.com/danog/telegram-entities/issues",
-                "source": "https://github.com/danog/telegram-entities/tree/1.0.5"
+                "source": "https://github.com/xtrime-ru/telegram-entities/tree/master"
             },
             "funding": [
                 {
-                    "url": "https://github.com/danog",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/danog"
                 }
             ],
-            "time": "2025-06-22T12:27:39+00:00"
+            "time": "2026-04-10T16:55:58+00:00"
         },
         {
             "name": "danog/tg-dialog-id",
@@ -7199,11 +7208,19 @@
             "time": "2026-03-30T15:14:47+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "danog/telegram-entities",
+            "version": "9999999-dev",
+            "alias": "1.0.x-dev",
+            "alias_normalized": "1.0.9999999.9999999-dev"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "amphp/dns": 20,
-        "danog/madelineproto": 20
+        "danog/madelineproto": 20,
+        "danog/telegram-entities": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
