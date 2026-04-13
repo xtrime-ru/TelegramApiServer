@@ -210,11 +210,18 @@ final class Client
         $prefix = Config::getInstance()->get('error.prefix');
         $resume = Config::getInstance()->get('error.resume_on_error');
 
+        $proxy = [
+            'address' => Config::getInstance()->get('error.proxy.address'),
+            'port' => Config::getInstance()->get('error.proxy.port'),
+            'username' => Config::getInstance()->get('error.proxy.username'),
+            'password' => Config::getInstance()->get('error.proxy.password'),
+        ];
+
         $currentHandler = EventLoop::getErrorHandler();
-        EventLoop::setErrorHandler(static fn (\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $prefix, $resume));
+        EventLoop::setErrorHandler(static fn (\Throwable $e) => self::errorHandler($e, $currentHandler, $token, $peers, $prefix, $resume, $proxy));
     }
 
-    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, string $prefix, bool $resume): void
+    private static function errorHandler(\Throwable $e, ?callable $currentHandler, string $token, array $peers, string $prefix, bool $resume, array $proxy): void
     {
         if ($e instanceof UnhandledFutureError) {
             $e = $e->getPrevious();
@@ -235,6 +242,14 @@ final class Client
 
                 \curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
                 \curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+
+                if ($proxy['address'] && $proxy['port']) {
+                    \curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+                    \curl_setopt($ch, CURLOPT_PROXY, "{$proxy['address']}:{$proxy['port']}");
+                    if ($proxy['username'] || $proxy['password']) {
+                        curl_setopt($ch, CURLOPT_PROXYUSERPWD, "{$proxy['username']}:{$proxy['password']}");
+                    }
+                }
 
                 $encoded = function (string $input): string {
                     return str_replace(['<', '>', '&'], ['&lt;', '&gt;', '&amp;'], $input);

@@ -23,7 +23,13 @@ $settings = [
             ),
         ),
         'prefix' => (string)getenv('ERROR_NOTIFICATION_PREFIX'),
-        'resume_on_error' => ((bool)getenv('RESUME_ON_ERROR'))
+        'resume_on_error' => ((bool)getenv('RESUME_ON_ERROR')),
+        'proxy' => [
+            "address" => (string)getenv('TELEGRAM_PROXY_ADDRESS'),
+            "port" => (int)getenv('TELEGRAM_PROXY_PORT'),
+            "username" => (string)getenv('TELEGRAM_PROXY_USERNAME'),
+            "password" => (string)getenv('TELEGRAM_PROXY_PASSWORD'),
+        ]
     ],
     'telegram' => [
         'app_info' => [ // obtained in https://my.telegram.org
