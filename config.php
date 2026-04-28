@@ -57,7 +57,8 @@ $settings = [
                         "password" => (string)getenv('TELEGRAM_PROXY_PASSWORD'),
                     ],
                 ]
-            ]
+            ],
+            'retry' => false,
         ],
         'serialization' => [
             'interval' => 600,
