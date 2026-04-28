@@ -231,7 +231,7 @@ final class Client
             $currentHandler($e);
         }
         if ($e->getPrevious()) {
-            self::errorHandler($e->getPrevious(), $currentHandler, $token, $peers, $prefix, true);
+            self::errorHandler($e->getPrevious(), $currentHandler, $token, $peers, $prefix, true, $proxy);
         }
         if ($peers && $token) {
             try {
@@ -244,7 +244,7 @@ final class Client
                 \curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
                 if ($proxy['address'] && $proxy['port']) {
-                    \curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+                    \curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5_HOSTNAME);
                     \curl_setopt($ch, CURLOPT_PROXY, "{$proxy['address']}:{$proxy['port']}");
                     if ($proxy['username'] || $proxy['password']) {
                         curl_setopt($ch, CURLOPT_PROXYUSERPWD, "{$proxy['username']}:{$proxy['password']}");
