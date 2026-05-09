@@ -1,0 +1,24 @@
+get:
+  tags:
+  - login
+  summary: Phone login
+  description: Phone login
+  operationId: phoneLogin
+  parameters:
+    - $ref: './openapi/parameters/session.yaml'
+    - in: query
+      name: phone
+      schema:
+        type: string
+      required: true
+      description: Phone number
+      example: '+71234567890'
+  responses:
+    200:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/api/AuthSentCodeResponse.yaml'
+    400:
+      $ref: './openapi/responses/common/BadRequest.yaml'
