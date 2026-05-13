@@ -102,7 +102,7 @@ final class Server
             $hostArray = \explode(':', $remote);
             if (\count($hostArray) >= 2) {
                 $port = (int) \array_pop($hostArray);
-                if ($port > 0 && $port <= 65353) {
+                if ($port > 0 && $port <= 65535) {
                     $remote = \implode(':', $hostArray);
                 }
             }
