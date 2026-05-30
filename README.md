@@ -180,6 +180,24 @@ There are few options to upload and send media files:
 
 ### Downloading files
 
+By bot API file ID (the session needs to be the same session that generated the file ID, no filesize limit):
+
+```shell script
+curl --location --request POST '127.0.0.1:9503/api/yourBot/downloadToResponse' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "media": {
+        "_": "BotApiFileId",
+        "fileId": "nalsfknalskfsnakfl",
+        "size": 123,
+        "fileName":  "name",
+        "protected":  false,
+    }
+}'
+```
+
+By MessageMedia:
+
 ```shell script
 curl --location --request POST '127.0.0.1:9503/api/downloadToResponse' \
 --header 'Content-Type: application/json' \

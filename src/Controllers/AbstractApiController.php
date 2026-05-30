@@ -151,7 +151,7 @@ abstract class AbstractApiController
             return match ($input['_']) {
                 'LocalFile' => new LocalFile(...$input),
                 'RemoteUrl' => new RemoteUrl(...$input),
-                'BotApiFieldId' => new BotApiFileId(...$input),
+                'BotApiFieldId', 'BotApiFileId' => new BotApiFileId(...$input),
                 default => throw new InvalidArgumentException("Unknown type: {$input['_']}"),
             };
         }
