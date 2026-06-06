@@ -24,7 +24,7 @@ services:
       timeout: 30s
       retries: 1
   mysql:
-    image: mariadb:11.4
+    image: mariadb:12.3
     restart: unless-stopped
     volumes:
       - ./.mysql:/var/lib/mysql
@@ -32,7 +32,13 @@ services:
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
       MARIADB_AUTO_UPGRADE: 'yes'
     command:
-      - --skip-grant-tables
+      - --skip-log-bin
+      - --general-log=0
+      - --slow-query-log=0
+      - --log-warnings=0
+      - --performance-schema=OFF
+      - --skip-name-resolve
+      - --host-cache-size=0
       - --innodb-buffer-pool-size=128M
       - --innodb-compression-default=1
       - --innodb-compression-algorithm=zlib
