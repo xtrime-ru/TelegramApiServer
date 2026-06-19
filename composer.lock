@@ -2596,12 +2596,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "62f9522cf046ae86bc0a0ec46d6cdc19c444302c"
+                "reference": "16414fb9d78761cd47ce29701f8087f4a7170d80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/62f9522cf046ae86bc0a0ec46d6cdc19c444302c",
-                "reference": "62f9522cf046ae86bc0a0ec46d6cdc19c444302c",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/16414fb9d78761cd47ce29701f8087f4a7170d80",
+                "reference": "16414fb9d78761cd47ce29701f8087f4a7170d80",
                 "shasum": ""
             },
             "require": {
@@ -2778,7 +2778,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-06-19T11:08:35+00:00"
+            "time": "2026-06-19T14:55:31+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -5300,16 +5300,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.95.9",
+            "version": "v3.95.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "7a6a04758239105992ec278e3248dfe76968ff89"
+                "reference": "93e1ab3e1f153024bd3ab23c8a349556063c6f17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/7a6a04758239105992ec278e3248dfe76968ff89",
-                "reference": "7a6a04758239105992ec278e3248dfe76968ff89",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/93e1ab3e1f153024bd3ab23c8a349556063c6f17",
+                "reference": "93e1ab3e1f153024bd3ab23c8a349556063c6f17",
                 "shasum": ""
             },
             "require": {
@@ -5393,7 +5393,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.95.9"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.95.10"
             },
             "funding": [
                 {
@@ -5401,7 +5401,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-19T10:25:34+00:00"
+            "time": "2026-06-19T14:45:22+00:00"
         },
         {
             "name": "psr/container",
