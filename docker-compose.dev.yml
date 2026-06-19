@@ -25,6 +25,13 @@ services:
       service: mysql
     ports:
       - "127.0.0.1:9507:3306"
+    command:
+      - --innodb-buffer-pool-size=128M
+      - --innodb-compression-default=1
+      - --innodb-compression-algorithm=zlib
+      - --lower-case-table-names=1
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_general_ci
 networks:
   default:
     name: telegram-api-server
