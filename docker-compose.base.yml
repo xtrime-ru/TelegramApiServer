@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    stop_grace_period: 15s
     volumes:
       - ./:/app-host-link
     working_dir: /app-host-link
@@ -26,6 +27,7 @@ services:
   mysql:
     image: mariadb:12.3
     restart: unless-stopped
+    stop_grace_period: 15s
     volumes:
       - ./.mysql:/var/lib/mysql
     environment:

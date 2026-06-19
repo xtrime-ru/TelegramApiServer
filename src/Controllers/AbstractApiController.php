@@ -16,8 +16,8 @@ use danog\MadelineProto\BotApiFileId;
 use danog\MadelineProto\LocalFile;
 use danog\MadelineProto\ParseMode;
 use danog\MadelineProto\RemoteUrl;
-use InvalidArgumentException;
 use JsonException;
+use PhpParser\Node\Scalar\MagicConst\File;
 use TelegramApiServer\Client;
 use TelegramApiServer\Exceptions\NoticeException;
 use TelegramApiServer\Logger;
@@ -131,13 +131,15 @@ abstract class AbstractApiController
             $params += $params['data'];
             unset($params['data']);
         }
-        if (isset($data['parseMode'])) {
-            $data['parseMode'] = ParseMode::from($data['parseMode']);
+        $params = self::resolveMadelineMediaObjects($params);
+
+        if (isset($params['parseMode'])) {
+            $params['parseMode'] = ParseMode::from($params['parseMode']);
         }
 
         foreach (['file', 'thumb'] as $key) {
-            if (isset($data[$key])) {
-                $data[$key] = self::getMadelineMediaObject($data[$key]);
+            if (isset($data[$key]) && is_string($data[$key])) {
+                $data[$key] = new ReadableBuffer($data[$key]);
             }
         }
 
@@ -145,18 +147,35 @@ abstract class AbstractApiController
         return $params;
 
     }
-    private static function getMadelineMediaObject(string |array | StreamedField | null $input): RemoteUrl|BotApiFileId|ReadableBuffer|StreamedField|null
+    private static function resolveMadelineMediaObjects(mixed $input): mixed
     {
-        if (is_array($input) && !empty($input['_'])) {
-            return match ($input['_']) {
-                'LocalFile' => new LocalFile(...$input),
-                'RemoteUrl' => new RemoteUrl(...$input),
-                'BotApiFieldId', 'BotApiFileId' => new BotApiFileId(...$input),
-                default => throw new InvalidArgumentException("Unknown type: {$input['_']}"),
-            };
+        if (!\is_array($input)) {
+            return $input;
         }
-        if (is_string($input)) {
-            return new ReadableBuffer($input);
+
+        foreach ($input as $k => $v) {
+            $input[$k] = self::resolveMadelineMediaObjects($v);
+        }
+
+        if (\array_key_exists('_', $input)) {
+            return self::getMadelineMediaObject($input);
+        }
+
+        return $input;
+    }
+
+    private static function getMadelineMediaObject(mixed $input): mixed
+    {
+        $types = [
+            'LocalFile' => LocalFile::class,
+            'RemoteUrl' => RemoteUrl::class,
+            'BotApiFieldId' => BotApiFileId::class,
+            'BotApiFileId' => BotApiFileId::class,
+        ];
+        if (\is_array($input) && !empty($input['_']) && array_key_exists($input['_'], $types)) {
+            $class = $types[$input['_']];
+            unset($input['_']);
+            return new $class(...$input);
         }
 
         return $input;
