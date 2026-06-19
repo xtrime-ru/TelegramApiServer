@@ -12,6 +12,7 @@ use Throwable;
 
 use function Amp\async;
 use function Amp\File\deleteFile;
+use function Amp\Future\await;
 use function Amp\Future\awaitAll;
 
 final class SystemApiExtensions
@@ -28,15 +29,16 @@ final class SystemApiExtensions
      */
     public function healthcheck(): array
     {
-        $results = [];
+        $promises = [];
         ['sessions' => $sessions] = $this->getSessionList();
         foreach ($sessions as $sessionKey => $session) {
             $instance = $this->client->instances[$sessionKey];
             if ($instance->getAuthorization() === API::LOGGED_IN) {
-                $results[$sessionKey] = $instance->getSelf();
+                $promises[$sessionKey] = async(fn() => Client::getWrapper($instance)->getAPI()->methodCallAsyncRead('ping', []));
             }
         }
-        return $results;
+
+        return await($promises);
     }
 
     public function addSession(string $session, array $settings = []): array
