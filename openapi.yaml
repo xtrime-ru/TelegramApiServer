@@ -1,0 +1,63 @@
+openapi: 3.0.1
+
+info:
+  title: Telegram Api Server
+  description: 'Fast, simple, async php telegram api server: MadelineProto + Amp HTTP
+    Server'
+  license:
+    name: MIT License
+    url: https://github.com/xtrime-ru/TelegramApiServer/blob/master/LICENSE
+  version: 1.10.4
+
+externalDocs:
+  description: Async PHP client/server API for the telegram MTProto protocol
+  url: https://github.com/danog/MadelineProto
+  
+servers:
+- url: https://example.com/
+- url: http://example.com/
+
+#security:
+#- basicAuth: []
+
+tags:
+- name: system
+  description: Different settings for sessions
+  externalDocs:
+    description: Find out more
+    url: https://github.com/xtrime-ru/TelegramApiServer#different-settings-for-sessions
+
+- name: api
+  description: All methods from MadelineProto supported
+  externalDocs:
+    description: Methods List
+    url: https://docs.madelineproto.xyz/API_docs/methods/
+
+- name: login
+  description: Login methods from MadelineProto
+  externalDocs:
+    description: Methods List
+    url: https://docs.madelineproto.xyz/API_docs/methods/
+
+paths:
+  /system/getSessionList:
+    $ref: './openapi/paths/system/getSessionList.yaml'
+
+  /system/addSession:
+    $ref: './openapi/paths/system/addSession.yaml'
+
+  /api/{session}/phoneLogin:
+    $ref: './openapi/paths/api/phoneLogin.yaml'
+
+  /api/{session}/completePhoneLogin:
+    $ref: './openapi/paths/api/completePhoneLogin.yaml'
+
+  /api/{session}/completeSignup:
+    $ref: './openapi/paths/api/completeSignup.yaml'
+
+
+
+#  securitySchemes:
+#    basicAuth:
+#      type: http
+#      scheme: basic

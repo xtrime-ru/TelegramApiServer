@@ -1,0 +1,11 @@
+description: Response for Foo service
+allOf:
+- $ref: '../common/ApiResponse.yaml'
+properties:
+  success:
+    type: boolean
+    default: false
+  errors:
+    type: array
+    items:
+        $ref: '../../models/common/Error.yaml'

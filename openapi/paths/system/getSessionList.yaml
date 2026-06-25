@@ -1,0 +1,15 @@
+get:
+  tags:
+  - system
+  summary: Get session list
+  description: Multiple values
+  operationId: getSessionList
+  responses:
+    200:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/system/GetSessionListResponse.yaml'
+    400:
+      $ref: './openapi/responses/common/BadRequest.yaml'

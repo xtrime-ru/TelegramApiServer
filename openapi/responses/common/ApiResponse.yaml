@@ -1,0 +1,13 @@
+properties:
+  success:
+    type: boolean
+  errors:
+    type: array
+    default: []
+    items:
+      type: object
+      properties: {}
+  response:
+    type: object
+    nullable: true
+    properties: {}
