@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6209a2cde5e973ebb9af2544a5c7dca",
+    "content-hash": "df18c4213a8f1cf5f631c2cdb9b33d50",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2255,17 +2255,140 @@
             "time": "2026-09-12T10:28:18+00:00"
         },
         {
-            "name": "danog/async-orm",
-            "version": "1.1.4",
+            "name": "cweagans/composer-configurable-plugin",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/danog/AsyncOrm.git",
-                "reference": "495f335d8ddb9dae8b773025911191f31c45e9ea"
+                "url": "https://github.com/cweagans/composer-configurable-plugin.git",
+                "reference": "15433906511a108a1806710e988629fd24b89974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/495f335d8ddb9dae8b773025911191f31c45e9ea",
-                "reference": "495f335d8ddb9dae8b773025911191f31c45e9ea",
+                "url": "https://api.github.com/repos/cweagans/composer-configurable-plugin/zipball/15433906511a108a1806710e988629fd24b89974",
+                "reference": "15433906511a108a1806710e988629fd24b89974",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~4.0",
+                "codeception/module-asserts": "^2.0",
+                "composer/composer": "~2.0",
+                "php-coveralls/php-coveralls": "~2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.0.0",
+                "phpro/grumphp": "^1.8.0",
+                "sebastian/phpcpd": "^6.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a lightweight configuration system for Composer plugins.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-configurable-plugin/issues",
+                "source": "https://github.com/cweagans/composer-configurable-plugin/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cweagans",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-12T04:58:58+00:00"
+        },
+        {
+            "name": "cweagans/composer-patches",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/bfa6018a5f864653d9ed899b902ea72f858a2cf7",
+                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "cweagans/composer-configurable-plugin": "^2.0",
+                "ext-json": "*",
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~4.0",
+                "codeception/module-asserts": "^2.0",
+                "codeception/module-cli": "^2.0",
+                "codeception/module-filesystem": "^2.0",
+                "composer/composer": "~2.0",
+                "php-coveralls/php-coveralls": "~2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.0.0",
+                "phpro/grumphp": "^1.8.0",
+                "sebastian/phpcpd": "^6.0",
+                "squizlabs/php_codesniffer": "^4.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "_": "The following two lines ensure that composer-patches is loaded as early as possible.",
+                "class": "cweagans\\Composer\\Plugin\\Patches",
+                "plugin-modifies-downloads": true,
+                "plugin-modifies-install-path": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-patches/issues",
+                "source": "https://github.com/cweagans/composer-patches/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cweagans",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-10-30T23:44:22+00:00"
+        },
+        {
+            "name": "danog/async-orm",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danog/AsyncOrm.git",
+                "reference": "4a2a7a54c5002bef6cdf80b338085e9e131bf719"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/4a2a7a54c5002bef6cdf80b338085e9e131bf719",
+                "reference": "4a2a7a54c5002bef6cdf80b338085e9e131bf719",
                 "shasum": ""
             },
             "require": {
@@ -2309,7 +2432,7 @@
             "description": "Async ORM based on AMPHP v3 and fibers.",
             "support": {
                 "issues": "https://github.com/danog/AsyncOrm/issues",
-                "source": "https://github.com/danog/AsyncOrm/tree/1.1.4"
+                "source": "https://github.com/danog/AsyncOrm/tree/1.1.6"
             },
             "funding": [
                 {
@@ -2317,7 +2440,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-12T18:39:01+00:00"
+            "time": "2026-10-19T18:46:06+00:00"
         },
         {
             "name": "danog/better-prometheus",
@@ -2461,16 +2584,16 @@
         },
         {
             "name": "danog/ipc",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/ipc.git",
-                "reference": "505e672b76af6ec623f7ef78efb2416f62ef8e29"
+                "reference": "eea6de6a57273f32a4f90a652ae1409786be18a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/ipc/zipball/505e672b76af6ec623f7ef78efb2416f62ef8e29",
-                "reference": "505e672b76af6ec623f7ef78efb2416f62ef8e29",
+                "url": "https://api.github.com/repos/danog/ipc/zipball/eea6de6a57273f32a4f90a652ae1409786be18a0",
+                "reference": "eea6de6a57273f32a4f90a652ae1409786be18a0",
                 "shasum": ""
             },
             "require": {
@@ -2485,6 +2608,9 @@
                 "amphp/phpunit-util": "v3.x-dev",
                 "phpunit/phpunit": "^9.6.22",
                 "psalm/phar": "^5.26.1"
+            },
+            "suggest": {
+                "ext-sockets": "Required for UNIX socket support on Windows (TCP is used otherwise)"
             },
             "type": "library",
             "autoload": {
@@ -2524,9 +2650,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/ipc/issues",
-                "source": "https://github.com/danog/ipc/tree/1.0.1"
+                "source": "https://github.com/danog/ipc/tree/1.1.0"
             },
-            "time": "2025-04-18T14:42:00+00:00"
+            "time": "2026-10-18T18:06:10+00:00"
         },
         {
             "name": "danog/libdns-json",
@@ -2656,12 +2782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "47850734318fc5a45984064402aa8b5afd62961f"
+                "reference": "613428241870936027a11ff00be8bc9e417e29d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/47850734318fc5a45984064402aa8b5afd62961f",
-                "reference": "47850734318fc5a45984064402aa8b5afd62961f",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/613428241870936027a11ff00be8bc9e417e29d9",
+                "reference": "613428241870936027a11ff00be8bc9e417e29d9",
                 "shasum": ""
             },
             "require": {
@@ -2681,32 +2807,32 @@
                 "amphp/socket": "^2.4.1",
                 "amphp/websocket-client": "^2.0.2",
                 "bacon/bacon-qr-code": "^3.1.1",
-                "danog/async-orm": "^1.1.4",
+                "danog/async-orm": "^1.1.6",
                 "danog/better-prometheus": "^0.1.1",
                 "danog/dns-over-https": "^1.0.1",
-                "danog/ipc": "^1.0.1",
+                "danog/ipc": "^1.1.0",
                 "danog/loop": "^1.1.1",
                 "danog/php-rtc-av": "^1.1.11",
-                "danog/php-rtc-codecs": "^1.1.18",
+                "danog/php-rtc-codecs": "^1.1.19",
                 "danog/php-rtc-datachannel": "^1.1.10",
-                "danog/php-rtc-dtls": "^2.0.15",
+                "danog/php-rtc-dtls": "^2.0.19",
                 "danog/php-rtc-exception": "^1.1.10",
-                "danog/php-rtc-ice": "^2.0.17",
+                "danog/php-rtc-ice": "^2.0.18",
                 "danog/php-rtc-mdns": "^1.1.12",
                 "danog/php-rtc-mixin": "^2.0.9",
-                "danog/php-rtc-ntp": "^1.1.12",
-                "danog/php-rtc-rtcp": "^1.1.10",
-                "danog/php-rtc-rtp": "^2.0.21",
+                "danog/php-rtc-ntp": "^1.1.14",
+                "danog/php-rtc-rtcp": "^1.1.11",
+                "danog/php-rtc-rtp": "^2.0.23",
                 "danog/php-rtc-rtp-parameter": "^1.1.8",
                 "danog/php-rtc-sctp": "^2.0.14",
                 "danog/php-rtc-sdp": "^1.1.12",
-                "danog/php-rtc-srtp": "^1.1.14",
+                "danog/php-rtc-srtp": "^1.1.16",
                 "danog/php-rtc-stats": "^1.1.7",
                 "danog/php-rtc-stun": "^2.0.18",
                 "danog/php-rtc-turn": "^2.0.9",
                 "danog/php-rtc-webrtc": "^2.0.19",
                 "danog/primemodule": "^1.0.13",
-                "danog/telegram-entities": "^1.0.6",
+                "danog/telegram-entities": "^1.1.0",
                 "danog/tg-dialog-id": "^2",
                 "danog/tg-file-decoder": "^1.0.2",
                 "ext-dom": "*",
@@ -2737,7 +2863,7 @@
             },
             "require-dev": {
                 "amphp/phpunit-util": "^3",
-                "bamarni/composer-bin-plugin": "1.8.2",
+                "bamarni/composer-bin-plugin": "1.9.1",
                 "brianium/paratest": "^6.11.1",
                 "danog/phpdoc": "^0.1.24",
                 "dg/bypass-finals": "dev-master",
@@ -2749,11 +2875,13 @@
             },
             "suggest": {
                 "ext-bcmath": "Install the bcmath extension to speed up authorization",
-                "ext-ffi": "Install the FFI extension (with libopus, libvpx and ffmpeg) to transcode audio and video in realtime; not required to play back pre-converted files",
+                "ext-ffi": "Install the FFI extension (with libopus, libvpx and ffmpeg) to transcode audio and video in realtime; not required to play and record video and audio inside calls",
                 "ext-gmp": "Install the gmp extension to speed up authorization",
                 "ext-openssl": "Install the openssl extension for faster crypto",
                 "ext-pdo": "Install the pdo extension to store session data on MySQL",
                 "ext-primemodule": "Install the primemodule and FFI extensions to speed up MadelineProto (https://prime.madelineproto.xyz)",
+                "ext-sockets": "Install the sockets extension on Windows to use UNIX sockets for IPC (otherwise TCP on 127.0.0.1 is used, which any local user can connect to)",
+                "ext-sodium": "Install the sodium extension for faster crypto",
                 "ext-uv": "Install the uv extension to greatly speed up MadelineProto!"
             },
             "type": "library",
@@ -2786,7 +2914,8 @@
                     "@test-light"
                 ],
                 "test": [
-                    "@paratest"
+                    "@paratest",
+                    "@test-session"
                 ],
                 "test-light": [
                     "@paratest-light"
@@ -2810,10 +2939,13 @@
                     "tools/fix_docs.sh"
                 ],
                 "paratest": [
-                    "@php -dzend.assertions=1 ./vendor/bin/paratest -fv"
+                    "@php -dzend.assertions=1 ./vendor/bin/paratest -v --exclude-group session"
+                ],
+                "test-session": [
+                    "tests/session_tests.sh"
                 ],
                 "paratest-light": [
-                    "@php -dzend.assertions=1 ./vendor/bin/paratest -fvc phpunit-light.xml"
+                    "@php -dzend.assertions=1 ./vendor/bin/paratest -vc phpunit-light.xml --exclude-group session"
                 ],
                 "bin": [
                     "echo 'bin not installed'"
@@ -2859,7 +2991,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-10-13T23:00:11+00:00"
+            "time": "2026-10-22T20:32:25+00:00"
         },
         {
             "name": "danog/php-rtc-av",
@@ -2943,16 +3075,16 @@
         },
         {
             "name": "danog/php-rtc-codecs",
-            "version": "1.1.18",
+            "version": "1.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-codecs.git",
-                "reference": "d46ece9004fd3d21725c67bbd50e0404fbced945"
+                "reference": "00836382276949099077e19659ff6648b823284f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-codecs/zipball/d46ece9004fd3d21725c67bbd50e0404fbced945",
-                "reference": "d46ece9004fd3d21725c67bbd50e0404fbced945",
+                "url": "https://api.github.com/repos/danog/php-rtc-codecs/zipball/00836382276949099077e19659ff6648b823284f",
+                "reference": "00836382276949099077e19659ff6648b823284f",
                 "shasum": ""
             },
             "require": {
@@ -3014,9 +3146,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-codecs/issues",
-                "source": "https://github.com/danog/php-rtc-codecs/tree/1.1.18"
+                "source": "https://github.com/danog/php-rtc-codecs/tree/1.1.19"
             },
-            "time": "2026-09-21T20:56:39+00:00"
+            "time": "2026-10-16T23:52:08+00:00"
         },
         {
             "name": "danog/php-rtc-datachannel",
@@ -3089,16 +3221,16 @@
         },
         {
             "name": "danog/php-rtc-dtls",
-            "version": "2.0.15",
+            "version": "2.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-dtls.git",
-                "reference": "d7ea908e8f4e33b461dae1f5392f43e72f5f32ca"
+                "reference": "794180b0c3cf54842df44b7bcb44f8fb50f199c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-dtls/zipball/d7ea908e8f4e33b461dae1f5392f43e72f5f32ca",
-                "reference": "d7ea908e8f4e33b461dae1f5392f43e72f5f32ca",
+                "url": "https://api.github.com/repos/danog/php-rtc-dtls/zipball/794180b0c3cf54842df44b7bcb44f8fb50f199c8",
+                "reference": "794180b0c3cf54842df44b7bcb44f8fb50f199c8",
                 "shasum": ""
             },
             "require": {
@@ -3106,10 +3238,10 @@
                 "danog/php-rtc-exception": "^1.1.5",
                 "danog/php-rtc-ice": "^1.1.18 || ^2.0",
                 "danog/php-rtc-mixin": "^2.0",
-                "danog/php-rtc-rtp": "^1.1.13 || ^2.0",
+                "danog/php-rtc-rtp": "^2.0.23",
                 "danog/php-rtc-sctp": "^1.1.5 || ^2.0",
                 "danog/php-rtc-sdp": "^1.1.6",
-                "danog/php-rtc-srtp": "^1.1.7",
+                "danog/php-rtc-srtp": "^1.1.16",
                 "danog/php-rtc-stats": "^1.1.3",
                 "php-64bit": "^8.2",
                 "phpseclib/phpseclib": "^4.0",
@@ -3167,9 +3299,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-dtls/issues",
-                "source": "https://github.com/danog/php-rtc-dtls/tree/2.0.15"
+                "source": "https://github.com/danog/php-rtc-dtls/tree/2.0.20"
             },
-            "time": "2026-09-22T11:29:36+00:00"
+            "time": "2026-10-17T20:02:59+00:00"
         },
         {
             "name": "danog/php-rtc-exception",
@@ -3237,16 +3369,16 @@
         },
         {
             "name": "danog/php-rtc-ice",
-            "version": "2.0.17",
+            "version": "2.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-ice.git",
-                "reference": "464af8bf52d0440079f6c3be692bc2821a4eccc9"
+                "reference": "91c53e982f334cf3bfe64a9e298d874bba51a3f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-ice/zipball/464af8bf52d0440079f6c3be692bc2821a4eccc9",
-                "reference": "464af8bf52d0440079f6c3be692bc2821a4eccc9",
+                "url": "https://api.github.com/repos/danog/php-rtc-ice/zipball/91c53e982f334cf3bfe64a9e298d874bba51a3f1",
+                "reference": "91c53e982f334cf3bfe64a9e298d874bba51a3f1",
                 "shasum": ""
             },
             "require": {
@@ -3310,9 +3442,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-ice/issues",
-                "source": "https://github.com/danog/php-rtc-ice/tree/2.0.17"
+                "source": "https://github.com/danog/php-rtc-ice/tree/2.0.18"
             },
-            "time": "2026-10-06T14:07:02+00:00"
+            "time": "2026-10-16T21:18:22+00:00"
         },
         {
             "name": "danog/php-rtc-mdns",
@@ -3450,16 +3582,16 @@
         },
         {
             "name": "danog/php-rtc-ntp",
-            "version": "1.1.12",
+            "version": "1.1.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-ntp.git",
-                "reference": "c5d93a36a0e9e9f284fd846964fa9b4d2b5b43bd"
+                "reference": "d70dc01410dba146cb808b9c2bf3c28ed1199d20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-ntp/zipball/c5d93a36a0e9e9f284fd846964fa9b4d2b5b43bd",
-                "reference": "c5d93a36a0e9e9f284fd846964fa9b4d2b5b43bd",
+                "url": "https://api.github.com/repos/danog/php-rtc-ntp/zipball/d70dc01410dba146cb808b9c2bf3c28ed1199d20",
+                "reference": "d70dc01410dba146cb808b9c2bf3c28ed1199d20",
                 "shasum": ""
             },
             "require": {
@@ -3512,22 +3644,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-ntp/issues",
-                "source": "https://github.com/danog/php-rtc-ntp/tree/1.1.12"
+                "source": "https://github.com/danog/php-rtc-ntp/tree/1.1.15"
             },
-            "time": "2026-09-22T11:37:54+00:00"
+            "time": "2026-10-16T23:17:01+00:00"
         },
         {
             "name": "danog/php-rtc-rtcp",
-            "version": "1.1.10",
+            "version": "1.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-rtcp.git",
-                "reference": "3034c6d008e28c53085b64783b34e2f1365dc519"
+                "reference": "f2e7c76d040fb0c4b2e4b62a611d13c6352af145"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-rtcp/zipball/3034c6d008e28c53085b64783b34e2f1365dc519",
-                "reference": "3034c6d008e28c53085b64783b34e2f1365dc519",
+                "url": "https://api.github.com/repos/danog/php-rtc-rtcp/zipball/f2e7c76d040fb0c4b2e4b62a611d13c6352af145",
+                "reference": "f2e7c76d040fb0c4b2e4b62a611d13c6352af145",
                 "shasum": ""
             },
             "require": {
@@ -3579,22 +3711,22 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-rtcp/issues",
-                "source": "https://github.com/danog/php-rtc-rtcp/tree/1.1.10"
+                "source": "https://github.com/danog/php-rtc-rtcp/tree/1.1.11"
             },
-            "time": "2026-09-22T11:37:59+00:00"
+            "time": "2026-10-16T23:52:08+00:00"
         },
         {
             "name": "danog/php-rtc-rtp",
-            "version": "2.0.21",
+            "version": "2.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-rtp.git",
-                "reference": "10aa6e54ef9e24a77ac9f5306ed01f342a453d36"
+                "reference": "e9bee7a5aae91f6abec1fe9a599eefbce219d967"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-rtp/zipball/10aa6e54ef9e24a77ac9f5306ed01f342a453d36",
-                "reference": "10aa6e54ef9e24a77ac9f5306ed01f342a453d36",
+                "url": "https://api.github.com/repos/danog/php-rtc-rtp/zipball/e9bee7a5aae91f6abec1fe9a599eefbce219d967",
+                "reference": "e9bee7a5aae91f6abec1fe9a599eefbce219d967",
                 "shasum": ""
             },
             "require": {
@@ -3603,7 +3735,7 @@
                 "danog/php-rtc-codecs": "^1.1.18",
                 "danog/php-rtc-exception": "^1.1.5",
                 "danog/php-rtc-mixin": "^2.0",
-                "danog/php-rtc-ntp": "^1.1.6",
+                "danog/php-rtc-ntp": "^1.1.14",
                 "danog/php-rtc-rtcp": "^1.1.4",
                 "danog/php-rtc-rtp-parameter": "^1.1.4",
                 "danog/php-rtc-sdp": "^1.1.6",
@@ -3660,9 +3792,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-rtp/issues",
-                "source": "https://github.com/danog/php-rtc-rtp/tree/2.0.21"
+                "source": "https://github.com/danog/php-rtc-rtp/tree/2.0.23"
             },
-            "time": "2026-10-06T14:40:06+00:00"
+            "time": "2026-10-16T23:52:08+00:00"
         },
         {
             "name": "danog/php-rtc-rtp-parameter",
@@ -3881,16 +4013,16 @@
         },
         {
             "name": "danog/php-rtc-srtp",
-            "version": "1.1.14",
+            "version": "1.1.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-srtp.git",
-                "reference": "bfa2db528cb7370a26b4441b8f81b1a678a6053c"
+                "reference": "b19959292663d8933a0a48cd1fda05788fb5c542"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-srtp/zipball/bfa2db528cb7370a26b4441b8f81b1a678a6053c",
-                "reference": "bfa2db528cb7370a26b4441b8f81b1a678a6053c",
+                "url": "https://api.github.com/repos/danog/php-rtc-srtp/zipball/b19959292663d8933a0a48cd1fda05788fb5c542",
+                "reference": "b19959292663d8933a0a48cd1fda05788fb5c542",
                 "shasum": ""
             },
             "require": {
@@ -3943,9 +4075,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-srtp/issues",
-                "source": "https://github.com/danog/php-rtc-srtp/tree/1.1.14"
+                "source": "https://github.com/danog/php-rtc-srtp/tree/1.1.16"
             },
-            "time": "2026-09-22T11:38:11+00:00"
+            "time": "2026-10-16T22:00:35+00:00"
         },
         {
             "name": "danog/php-rtc-stats",
@@ -4165,16 +4297,16 @@
         },
         {
             "name": "danog/php-rtc-webrtc",
-            "version": "2.0.19",
+            "version": "2.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/php-rtc-webrtc.git",
-                "reference": "da22a5875ba64a581fcf457d8f7203e212848825"
+                "reference": "58f8a24180cd1e137127214f9bfba3b0a7eff97b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/php-rtc-webrtc/zipball/da22a5875ba64a581fcf457d8f7203e212848825",
-                "reference": "da22a5875ba64a581fcf457d8f7203e212848825",
+                "url": "https://api.github.com/repos/danog/php-rtc-webrtc/zipball/58f8a24180cd1e137127214f9bfba3b0a7eff97b",
+                "reference": "58f8a24180cd1e137127214f9bfba3b0a7eff97b",
                 "shasum": ""
             },
             "require": {
@@ -4184,7 +4316,7 @@
                 "danog/php-rtc-ice": "^2.0.17",
                 "danog/php-rtc-mixin": "^2.0",
                 "danog/php-rtc-ntp": "^1.1.6",
-                "danog/php-rtc-rtp": "^2.0.21",
+                "danog/php-rtc-rtp": "^2.0.23",
                 "danog/php-rtc-sctp": "^2.0.14",
                 "danog/php-rtc-sdp": "^1.1.6",
                 "danog/php-rtc-stats": "^1.1.3",
@@ -4236,9 +4368,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/php-rtc-webrtc/issues",
-                "source": "https://github.com/danog/php-rtc-webrtc/tree/2.0.19"
+                "source": "https://github.com/danog/php-rtc-webrtc/tree/2.0.20"
             },
-            "time": "2026-10-06T15:52:17+00:00"
+            "time": "2026-10-16T23:52:08+00:00"
         },
         {
             "name": "danog/primemodule",
@@ -4293,16 +4425,16 @@
         },
         {
             "name": "danog/telegram-entities",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/xtrime-ru/telegram-entities.git",
-                "reference": "3f568ce722e8e92c570a948076f550f5f9757e72"
+                "url": "https://github.com/danog/telegram-entities.git",
+                "reference": "92ca7621594b7a6c4a820c3b557e66ee1d439273"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/telegram-entities/zipball/3f568ce722e8e92c570a948076f550f5f9757e72",
-                "reference": "3f568ce722e8e92c570a948076f550f5f9757e72",
+                "url": "https://api.github.com/repos/danog/telegram-entities/zipball/92ca7621594b7a6c4a820c3b557e66ee1d439273",
+                "reference": "92ca7621594b7a6c4a820c3b557e66ee1d439273",
                 "shasum": ""
             },
             "require": {
@@ -4318,23 +4450,13 @@
                 "phpunit/phpunit": "^11.0.9",
                 "vimeo/psalm": "dev-master"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "danog\\TelegramEntities\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "danog\\TestTelegramEntities\\": "tests/"
-                }
-            },
-            "scripts": {
-                "cs-fix": [
-                    "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
@@ -4346,15 +4468,16 @@
             ],
             "description": "A library to work with Telegram UTF-16 styled text entities.",
             "support": {
-                "source": "https://github.com/xtrime-ru/telegram-entities/tree/master"
+                "issues": "https://github.com/danog/telegram-entities/issues",
+                "source": "https://github.com/danog/telegram-entities/tree/1.1.0"
             },
             "funding": [
                 {
-                    "type": "github",
-                    "url": "https://github.com/danog"
+                    "url": "https://github.com/danog",
+                    "type": "github"
                 }
             ],
-            "time": "2026-10-13T23:05:52+00:00"
+            "time": "2026-10-18T15:46:15+00:00"
         },
         {
             "name": "danog/tg-dialog-id",
@@ -4688,20 +4811,21 @@
         },
         {
             "name": "league/uri",
-            "version": "7.8.1",
+            "version": "7.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "08cf38e3924d4f56238125547b5720496fac8fd4"
+                "reference": "fcc872a3d872aa13f935e0cd1887b9abb06da07f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/08cf38e3924d4f56238125547b5720496fac8fd4",
-                "reference": "08cf38e3924d4f56238125547b5720496fac8fd4",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/fcc872a3d872aa13f935e0cd1887b9abb06da07f",
+                "reference": "fcc872a3d872aa13f935e0cd1887b9abb06da07f",
                 "shasum": ""
             },
             "require": {
-                "league/uri-interfaces": "^7.8.1",
+                "ext-mbstring": "*",
+                "league/uri-interfaces": "^7.9.0",
                 "php": "^8.1",
                 "psr/http-factory": "^1"
             },
@@ -4774,7 +4898,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri-src/issues",
-                "source": "https://github.com/thephpleague/uri/tree/7.8.1"
+                "source": "https://github.com/thephpleague/uri/tree/7.9.0"
             },
             "funding": [
                 {
@@ -4782,24 +4906,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-15T20:22:25+00:00"
+            "time": "2026-10-16T15:19:33+00:00"
         },
         {
             "name": "league/uri-components",
-            "version": "7.8.1",
+            "version": "7.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-components.git",
-                "reference": "848ff9db2f0be06229d6034b7c2e33d41b4fd675"
+                "reference": "4e37c1663f7d0daebbab6b3d947631b0835b3943"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-components/zipball/848ff9db2f0be06229d6034b7c2e33d41b4fd675",
-                "reference": "848ff9db2f0be06229d6034b7c2e33d41b4fd675",
+                "url": "https://api.github.com/repos/thephpleague/uri-components/zipball/4e37c1663f7d0daebbab6b3d947631b0835b3943",
+                "reference": "4e37c1663f7d0daebbab6b3d947631b0835b3943",
                 "shasum": ""
             },
             "require": {
-                "league/uri": "^7.8.1",
+                "league/uri": "^7.9.0",
                 "php": "^8.1"
             },
             "suggest": {
@@ -4858,7 +4982,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri-src/issues",
-                "source": "https://github.com/thephpleague/uri-components/tree/7.8.1"
+                "source": "https://github.com/thephpleague/uri-components/tree/7.9.0"
             },
             "funding": [
                 {
@@ -4866,20 +4990,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-15T20:22:25+00:00"
+            "time": "2026-10-16T15:19:33+00:00"
         },
         {
             "name": "league/uri-interfaces",
-            "version": "7.8.1",
+            "version": "7.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri-interfaces.git",
-                "reference": "85d5c77c5d6d3af6c54db4a78246364908f3c928"
+                "reference": "eb5f6d24e6a4fe0a8e9c78ded4eb1dfff1404f58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/85d5c77c5d6d3af6c54db4a78246364908f3c928",
-                "reference": "85d5c77c5d6d3af6c54db4a78246364908f3c928",
+                "url": "https://api.github.com/repos/thephpleague/uri-interfaces/zipball/eb5f6d24e6a4fe0a8e9c78ded4eb1dfff1404f58",
+                "reference": "eb5f6d24e6a4fe0a8e9c78ded4eb1dfff1404f58",
                 "shasum": ""
             },
             "require": {
@@ -4942,7 +5066,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri-src/issues",
-                "source": "https://github.com/thephpleague/uri-interfaces/tree/7.8.1"
+                "source": "https://github.com/thephpleague/uri-interfaces/tree/7.9.0"
             },
             "funding": [
                 {
@@ -4950,7 +5074,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-08T20:05:35+00:00"
+            "time": "2026-10-16T15:19:33+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6966,16 +7090,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993"
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/528948210cc46f967a4b98e83b19e76f2b504993",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993",
+                "url": "https://api.github.com/repos/composer/semver/zipball/9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
                 "shasum": ""
             },
             "require": {
@@ -7027,7 +7151,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.5.1"
+                "source": "https://github.com/composer/semver/tree/3.5.2"
             },
             "funding": [
                 {
@@ -7039,7 +7163,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-05T13:12:12+00:00"
+            "time": "2026-10-22T15:37:26+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -7109,42 +7233,42 @@
         },
         {
             "name": "ergebnis/agent-detector",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/agent-detector.git",
-                "reference": "e211f17928c8b95a51e06040792d57f5462fb271"
+                "reference": "0cd815cec1207873c37624d33f0f2853523152f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/agent-detector/zipball/e211f17928c8b95a51e06040792d57f5462fb271",
-                "reference": "e211f17928c8b95a51e06040792d57f5462fb271",
+                "url": "https://api.github.com/repos/ergebnis/agent-detector/zipball/0cd815cec1207873c37624d33f0f2853523152f3",
+                "reference": "0cd815cec1207873c37624d33f0f2853523152f3",
                 "shasum": ""
             },
             "require": {
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.51.0",
-                "ergebnis/license": "^2.7.0",
+                "ergebnis/composer-normalize": "^2.54.0",
+                "ergebnis/license": "^2.8.0",
                 "ergebnis/php-cs-fixer-config": "^6.60.2",
-                "ergebnis/phpstan-rules": "^2.13.1",
-                "ergebnis/phpunit-slow-test-detector": "^2.24.0",
-                "ergebnis/rector-rules": "^1.18.1",
+                "ergebnis/phpstan-rules": "^2.14.0",
+                "ergebnis/phpunit-slow-test-detector": "^2.26.0",
+                "ergebnis/rector-rules": "^1.18.5",
                 "fakerphp/faker": "^1.24.1",
                 "infection/infection": "^0.26.6",
                 "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan": "^2.1.54",
-                "phpstan/phpstan-deprecation-rules": "^2.0.4",
-                "phpstan/phpstan-phpunit": "^2.0.16",
-                "phpstan/phpstan-strict-rules": "^2.0.10",
+                "phpstan/phpstan": "^2.2.14",
+                "phpstan/phpstan-deprecation-rules": "^2.0.5",
+                "phpstan/phpstan-phpunit": "^2.1.1",
+                "phpstan/phpstan-strict-rules": "^2.1.0",
                 "phpunit/phpunit": "^9.6.34",
-                "rector/rector": "^2.4.2"
+                "rector/rector": "^2.7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.2-dev"
+                    "dev-main": "1.3-dev"
                 },
                 "composer-normalize": {
                     "indent-size": 2,
@@ -7174,7 +7298,7 @@
                 "security": "https://github.com/ergebnis/agent-detector/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/agent-detector"
             },
-            "time": "2026-05-07T08:19:07+00:00"
+            "time": "2026-10-15T11:13:32+00:00"
         },
         {
             "name": "evenement/evenement",
@@ -8099,16 +8223,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v8.1.8",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "4b81146e3ee248ea969186f85499b54fbc78db08"
+                "reference": "630e74196a2635ec0f06c12bd3fb47cfedf85157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/4b81146e3ee248ea969186f85499b54fbc78db08",
-                "reference": "4b81146e3ee248ea969186f85499b54fbc78db08",
+                "url": "https://api.github.com/repos/symfony/console/zipball/630e74196a2635ec0f06c12bd3fb47cfedf85157",
+                "reference": "630e74196a2635ec0f06c12bd3fb47cfedf85157",
                 "shasum": ""
             },
             "require": {
@@ -8175,7 +8299,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v8.1.8"
+                "source": "https://github.com/symfony/console/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -8195,7 +8319,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-18T16:00:27+00:00"
+            "time": "2026-10-12T19:11:16+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -8436,16 +8560,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v8.1.6",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "7599ebb855fede59413ddb7f15198d67bfcae7ba"
+                "reference": "43d109c803d22c00bb820ed45df250b6a8792ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/7599ebb855fede59413ddb7f15198d67bfcae7ba",
-                "reference": "7599ebb855fede59413ddb7f15198d67bfcae7ba",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/43d109c803d22c00bb820ed45df250b6a8792ca2",
+                "reference": "43d109c803d22c00bb820ed45df250b6a8792ca2",
                 "shasum": ""
             },
             "require": {
@@ -8483,7 +8607,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v8.1.6"
+                "source": "https://github.com/symfony/filesystem/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -8503,7 +8627,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-23T10:06:25+00:00"
+            "time": "2026-10-06T20:05:50+00:00"
         },
         {
             "name": "symfony/finder",
@@ -8893,16 +9017,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v8.1.7",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "10823b09358e690df4ff943e24e8492bb1019fc3"
+                "reference": "59a682fd049b2d4d37c444f5ac21b7d01b8c7189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/10823b09358e690df4ff943e24e8492bb1019fc3",
-                "reference": "10823b09358e690df4ff943e24e8492bb1019fc3",
+                "url": "https://api.github.com/repos/symfony/process/zipball/59a682fd049b2d4d37c444f5ac21b7d01b8c7189",
+                "reference": "59a682fd049b2d4d37c444f5ac21b7d01b8c7189",
                 "shasum": ""
             },
             "require": {
@@ -8934,7 +9058,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v8.1.7"
+                "source": "https://github.com/symfony/process/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -8954,7 +9078,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-02T12:40:29+00:00"
+            "time": "2026-10-08T16:57:43+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -9111,16 +9235,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v8.1.7",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "d950140b5f56f31901e5b7a0c04ffc3a3deb943c"
+                "reference": "07fb208558f941eab50ec49c89c2a6a93fb11f01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/d950140b5f56f31901e5b7a0c04ffc3a3deb943c",
-                "reference": "d950140b5f56f31901e5b7a0c04ffc3a3deb943c",
+                "url": "https://api.github.com/repos/symfony/string/zipball/07fb208558f941eab50ec49c89c2a6a93fb11f01",
+                "reference": "07fb208558f941eab50ec49c89c2a6a93fb11f01",
                 "shasum": ""
             },
             "require": {
@@ -9177,7 +9301,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v8.1.7"
+                "source": "https://github.com/symfony/string/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -9197,22 +9321,14 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-11T14:51:16+00:00"
+            "time": "2026-10-03T15:16:03+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "danog/telegram-entities",
-            "version": "9999999-dev",
-            "alias": "1.0.x-dev",
-            "alias_normalized": "1.0.9999999.9999999-dev"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "amphp/dns": 20,
-        "danog/madelineproto": 20,
-        "danog/telegram-entities": 20
+        "danog/madelineproto": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

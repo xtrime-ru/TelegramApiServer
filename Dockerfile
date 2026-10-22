@@ -1,8 +1,11 @@
 FROM danog/madelineproto:latest
 
+# Install system files and keep the existing root-based runtime behavior.
+USER root
+
 STOPSIGNAL SIGTERM
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 
 COPY --from=ghcr.io/ufoscout/docker-compose-wait:latest /wait /usr/local/bin/docker-compose-wait
 

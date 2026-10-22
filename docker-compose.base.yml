@@ -1,6 +1,6 @@
 services:
   api:
-    image: xtrime/telegram-api-server:2.7
+    image: xtrime/telegram-api-server:2.8
     init: true
     build:
       context: .

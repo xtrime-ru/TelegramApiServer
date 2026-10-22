@@ -1,0 +1,21 @@
+diff --git a/src/Entities.php b/src/Entities.php
+--- a/src/Entities.php
++++ b/src/Entities.php
+@@ -589,7 +589,7 @@
+                 "text_mention" => $allowTelegramTags ? '<a href="tg://user?id='.$entity['user']['id'].'">' : '',
+                 "date_time" => $allowTelegramTags
+                     ? '<tg-time unix="'.$entity['unix_time'].'"'.(($entity['date_time_format'] ?? '') !== '' ? ' format="'.EntityTools::htmlEscape($entity['date_time_format']).'"' : '').'>'
+-                    : '',
++                    : '<time datetime="'.\date('c', $entity['unix_time']).'">',
+                 default => '',
+             };
+             $offset += $length;
+@@ -608,7 +608,7 @@
+                 "spoiler" => $allowTelegramTags ? '</tg-spoiler>' : '</span>',
+                 "custom_emoji" => $allowTelegramTags ? "</tg-emoji>" : '',
+                 "text_mention" => $allowTelegramTags ? '</a>' : '',
+-                "date_time" => $allowTelegramTags ? '</tg-time>' : '',
++                "date_time" => $allowTelegramTags ? '</tg-time>' : '</time>',
+                 default => '',
+             } . ($insertions[$offset] ?? '');
+         }

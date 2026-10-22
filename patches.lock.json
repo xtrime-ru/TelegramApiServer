@@ -1,0 +1,19 @@
+{
+    "_hash": "b0de9f0028bd8e72de419e2b92b7339527327d7fa790106f542b2d1b35821c0f",
+    "patches": {
+        "danog/telegram-entities": [
+            {
+                "package": "danog/telegram-entities",
+                "description": "Render date_time entities as HTML time elements (upstream PR #8)",
+                "url": "patches/telegram-entities-date-time-html.patch",
+                "sha256": "de72e20b0a9cdd677db9ade69fef276a637da8a8b421548deedb740500631a45",
+                "depth": 1,
+                "extra": {
+                    "upstream-pr": "https://github.com/danog/telegram-entities/pull/8",
+                    "upstream-commit": "c1a4951a3d7b6fb6262015ef1ae636ef70fa284d",
+                    "provenance": "patches-file:patches.json"
+                }
+            }
+        ]
+    }
+}
