@@ -11,6 +11,7 @@ use ReflectionClass;
 use ReflectionMethod;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
+use TelegramApiServer\Exceptions\NoticeException;
 use TelegramApiServer\RequestBatcher;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use UnexpectedValueException;
@@ -54,6 +55,13 @@ final class ApiController extends AbstractApiController
     }
 
     private static ?RequestBatcher $batcher = null;
+    private static bool $stopping = false;
+
+    public static function stopQueue(): void
+    {
+        self::$stopping = true;
+        self::$batcher?->stop();
+    }
 
     private static function prepareArgs(bool $needRequest, array $params, array $args): array
     {
@@ -73,6 +81,9 @@ final class ApiController extends AbstractApiController
      */
     protected function callApi(Request $request): mixed
     {
+        if (self::$stopping) {
+            throw new NoticeException('Server is stopping', 503);
+        }
         $path = $request->getAttribute(Router::class);
         $session = $path['session'] ?? null;
         $api = \explode('.', $path['method'] ?? '');
@@ -83,6 +94,7 @@ final class ApiController extends AbstractApiController
         self::$batcher ??= new RequestBatcher(
             Config::getInstance()->get('api.bulk_size'),
             Config::getInstance()->get('api.bulk_interval'),
+            Config::getInstance()->get('api.bulk_concurrency'),
         );
         return self::$batcher->execute(fn () => $this->callApiCommon($madelineProto, $api, $params));
     }

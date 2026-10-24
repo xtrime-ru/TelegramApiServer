@@ -95,8 +95,6 @@ docker-compose.yml:
 
 ## Usage
 Access Telegram API with simple GET/POST requests.
-
-`REQUESTS_BULK_SIZE=10` and `REQUESTS_BULK_INTERVAL=0.003` send a batch as soon as it contains 10 HTTP API calls or 3 ms have passed since its first call, whichever happens first. Full batches can start one after another without an interval delay. These are the defaults. An interval of `0` skips accumulation. The queue is shared across sessions within one TAS process. Each HTTP call can produce multiple Telegram RPCs.
 Regular and application/json POST supported.
 It's recommended to use http_build_query, when using GET requests.
     
@@ -125,6 +123,26 @@ It's recommended to use http_build_query, when using GET requests.
 * sendMessage: `http://127.0.0.1:9503/api/messages.sendMessage/?peer=@xtrime&message=Hello!`
 * copy message from one channel to another (not repost): `http://127.0.0.1:9503/api/copyMessages/?from_peer=@xtrime&to_peer=@xtrime&id[0]=1`
     
+## Request batching
+
+TAS can group requests into batches and limit concurrency. Similar mechanisms are used in official Telegram clients ([Desktop](https://github.com/telegramdesktop/tdesktop/blob/dev/Telegram/SourceFiles/mtproto/session.cpp), [Android](https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/jni/tgnet/ConnectionsManager.cpp)).
+
+Batching is disabled by default. To enable it, set a positive interval in `.env` or `.env.docker`:
+
+```dotenv
+REQUESTS_BULK_INTERVAL=0.003
+REQUESTS_BULK_SIZE=10
+REQUESTS_BULK_CONCURRENCY=5
+```
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `REQUESTS_BULK_INTERVAL` | `0` | Maximum batch collection time in seconds. `0` disables batching and the concurrency limit. |
+| `REQUESTS_BULK_SIZE` | `10` | Maximum requests per batch. |
+| `REQUESTS_BULK_CONCURRENCY` | `5` | Maximum batches executing concurrently. |
+
+A batch starts when its size is reached or the interval expires, whichever happens first. These limits are shared across sessions within one TAS process.
+
 ## Advanced features
 ### Get events/updates
 Telegram is event driven platform. For example:  every time your account receives a message you immediately get an update.

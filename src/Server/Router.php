@@ -25,6 +25,7 @@ final class Router
     public function __construct(SocketHttpServer $server, ErrorHandler $errorHandler)
     {
         $this->server = $server;
+        $server->onStop(ApiController::stopQueue(...));
         $this->router = new \Amp\Http\Server\Router(
             httpServer: $server,
             logger: Logger::getInstance(),
