@@ -2,8 +2,6 @@
 
 namespace TelegramApiServer\Controllers;
 
-use Amp\DeferredFuture;
-use Amp\Future;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Router;
 use danog\MadelineProto\API;
@@ -11,9 +9,9 @@ use danog\MadelineProto\MTProto;
 use Exception;
 use ReflectionClass;
 use ReflectionMethod;
-use Revolt\EventLoop;
 use TelegramApiServer\Client;
 use TelegramApiServer\Config;
+use TelegramApiServer\RequestBatcher;
 use TelegramApiServer\MadelineProtoExtensions\ApiExtensions;
 use UnexpectedValueException;
 
@@ -55,7 +53,7 @@ final class ApiController extends AbstractApiController
 
     }
 
-    private static ?Future $w = null;
+    private static ?RequestBatcher $batcher = null;
 
     private static function prepareArgs(bool $needRequest, array $params, array $args): array
     {
@@ -80,24 +78,13 @@ final class ApiController extends AbstractApiController
         $api = \explode('.', $path['method'] ?? '');
 
         $madelineProto = Client::getInstance()->getSession($session);
-        $tick = Config::getInstance()->get('api.bulk_interval');
         $params = $this->resolveRequest($request);
 
-        if (!$tick) {
-            return $this->callApiCommon($madelineProto, $api, $params);
-        }
-
-        if (!self::$w) {
-            $f = new DeferredFuture();
-            self::$w = $f->getFuture();
-            EventLoop::delay($tick, static function () use ($f): void {
-                $f->complete();
-                self::$w = null;
-            });
-        }
-        self::$w->await();
-
-        return $this->callApiCommon($madelineProto, $api, $params);
+        self::$batcher ??= new RequestBatcher(
+            Config::getInstance()->get('api.bulk_size'),
+            Config::getInstance()->get('api.bulk_interval'),
+        );
+        return self::$batcher->execute(fn () => $this->callApiCommon($madelineProto, $api, $params));
     }
 
 

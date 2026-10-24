@@ -95,6 +95,8 @@ docker-compose.yml:
 
 ## Usage
 Access Telegram API with simple GET/POST requests.
+
+`REQUESTS_BULK_SIZE=10` and `REQUESTS_BULK_INTERVAL=0.003` send a batch as soon as it contains 10 HTTP API calls or 3 ms have passed since its first call, whichever happens first. Full batches can start one after another without an interval delay. These are the defaults. An interval of `0` skips accumulation. The queue is shared across sessions within one TAS process. Each HTTP call can produce multiple Telegram RPCs.
 Regular and application/json POST supported.
 It's recommended to use http_build_query, when using GET requests.
     

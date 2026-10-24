@@ -96,7 +96,8 @@ $settings = [
             )
         ),
         'passwords' => (array)json_decode((string)getenv('PASSWORDS'), true),
-        'bulk_interval' => (float)getenv('REQUESTS_BULK_INTERVAL')
+        'bulk_interval' => (float)(getenv('REQUESTS_BULK_INTERVAL') === false ? 0.003 : getenv('REQUESTS_BULK_INTERVAL')),
+        'bulk_size' => (int)(getenv('REQUESTS_BULK_SIZE') === false ? 10 : getenv('REQUESTS_BULK_SIZE')),
     ],
 ];
 
