@@ -1,5 +1,7 @@
 <?php
 
+use Amp\CancelledException;
+use Amp\DeferredCancellation;
 use Amp\DeferredFuture;
 use PHPUnit\Framework\TestCase;
 use TelegramApiServer\RequestBatcher;
@@ -185,5 +187,55 @@ final class RequestBatcherTest extends TestCase
         self::assertSame('first', $batcher->execute(static fn () => 'first'));
         self::assertSame('second', $batcher->execute(static fn () => 'second'));
         $batcher->stop();
+    }
+
+    public function testCancellationBeforeBatchIsReadySkipsOnlyCancelledRequest(): void
+    {
+        $batcher = new RequestBatcher(2, 60);
+        $cancellation = new DeferredCancellation;
+        $called = false;
+        $cancelled = async(static function () use ($batcher, $cancellation, &$called): void {
+            $batcher->execute(static function () use (&$called): void {
+                $called = true;
+            }, $cancellation->getCancellation());
+        });
+        delay(0.001);
+        $cancellation->cancel();
+        $other = async(fn () => $batcher->execute(static fn () => 'other'));
+        try {
+            $cancelled->await(new \Amp\TimeoutCancellation(1));
+            self::fail('Expected cancellation');
+        } catch (CancelledException) {
+            self::assertFalse($called);
+        }
+        self::assertSame('other', $other->await(new \Amp\TimeoutCancellation(1)));
+        $batcher->stop();
+        self::assertFalse($called);
+    }
+
+    public function testCancellationWhileWaitingForBatchSlotSkipsRequest(): void
+    {
+        $batcher = new RequestBatcher(1, 60, 1);
+        $gate = new DeferredFuture;
+        $cancellation = new DeferredCancellation;
+        $called = false;
+        $first = async(fn () => $batcher->execute(fn () => $gate->getFuture()->await()));
+        $cancelled = async(static function () use ($batcher, $cancellation, &$called): void {
+            $batcher->execute(static function () use (&$called): void {
+                $called = true;
+            }, $cancellation->getCancellation());
+        });
+        delay(0.001);
+        $cancellation->cancel();
+        $gate->complete();
+        $first->await();
+        try {
+            $cancelled->await(new \Amp\TimeoutCancellation(1));
+            self::fail('Expected cancellation');
+        } catch (CancelledException) {
+            self::assertFalse($called);
+        }
+        $batcher->stop();
+        self::assertFalse($called);
     }
 }

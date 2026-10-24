@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer\Controllers;
 
+use Amp\CancelledException;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\Router;
 use danog\MadelineProto\API;
@@ -96,7 +97,13 @@ final class ApiController extends AbstractApiController
             Config::getInstance()->get('api.bulk_interval'),
             Config::getInstance()->get('api.bulk_concurrency'),
         );
-        return self::$batcher->execute(fn () => $this->callApiCommon($madelineProto, $api, $params));
+        $client = $request->getClient();
+        return self::$batcher->execute(function () use ($client, $madelineProto, $api, $params): mixed {
+            if ($client->isClosed()) {
+                throw new CancelledException;
+            }
+            return $this->callApiCommon($madelineProto, $api, $params);
+        });
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace TelegramApiServer;
 
+use Amp\Cancellation;
 use Amp\CancelledException;
 use Amp\DeferredCancellation;
 use Amp\DeferredFuture;
@@ -87,8 +88,9 @@ final class RequestBatcher
         await($requests);
     }
 
-    public function execute(callable $request): mixed
+    public function execute(callable $request, ?Cancellation $cancellation = null): mixed
     {
+        $cancellation?->throwIfRequested();
         if ($this->interval === 0.0) {
             return $request();
         }
@@ -97,12 +99,15 @@ final class RequestBatcher
         }
         $deferred = new DeferredFuture;
         try {
-            $this->input->push([$request, $deferred]);
+            $this->input->push([static function () use ($request, $cancellation): mixed {
+                $cancellation?->throwIfRequested();
+                return $request();
+            }, $deferred]);
         } catch (DisposedException $error) {
             $this->worker->await(); // Propagate a consumer failure to producers awaiting consumption.
             throw new RuntimeException('Request queue is stopped', 503, $error);
         }
-        awaitFirst([$deferred->getFuture(), $this->worker]);
+        awaitFirst([$deferred->getFuture(), $this->worker], $cancellation);
         return $deferred->getFuture()->await();
     }
 
