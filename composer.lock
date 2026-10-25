@@ -2379,16 +2379,16 @@
         },
         {
             "name": "danog/async-orm",
-            "version": "1.1.6",
+            "version": "1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/AsyncOrm.git",
-                "reference": "4a2a7a54c5002bef6cdf80b338085e9e131bf719"
+                "reference": "5f721426349a970cbb43b0daf7947d58a3807d16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/4a2a7a54c5002bef6cdf80b338085e9e131bf719",
-                "reference": "4a2a7a54c5002bef6cdf80b338085e9e131bf719",
+                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/5f721426349a970cbb43b0daf7947d58a3807d16",
+                "reference": "5f721426349a970cbb43b0daf7947d58a3807d16",
                 "shasum": ""
             },
             "require": {
@@ -2432,7 +2432,7 @@
             "description": "Async ORM based on AMPHP v3 and fibers.",
             "support": {
                 "issues": "https://github.com/danog/AsyncOrm/issues",
-                "source": "https://github.com/danog/AsyncOrm/tree/1.1.6"
+                "source": "https://github.com/danog/AsyncOrm/tree/1.1.7"
             },
             "funding": [
                 {
@@ -2440,7 +2440,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-19T18:46:06+00:00"
+            "time": "2026-10-24T12:19:22+00:00"
         },
         {
             "name": "danog/better-prometheus",
@@ -2782,12 +2782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "0ca122091ee8eb094c584fc22e94266011147abd"
+                "reference": "f4f4a11c9ff19b331f32af62498bf584ff0721a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/0ca122091ee8eb094c584fc22e94266011147abd",
-                "reference": "0ca122091ee8eb094c584fc22e94266011147abd",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/f4f4a11c9ff19b331f32af62498bf584ff0721a1",
+                "reference": "f4f4a11c9ff19b331f32af62498bf584ff0721a1",
                 "shasum": ""
             },
             "require": {
@@ -2807,7 +2807,7 @@
                 "amphp/socket": "^2.4.1",
                 "amphp/websocket-client": "^2.0.2",
                 "bacon/bacon-qr-code": "^3.1.1",
-                "danog/async-orm": "^1.1.6",
+                "danog/async-orm": "^1.1.7",
                 "danog/better-prometheus": "^0.1.1",
                 "danog/dns-over-https": "^1.0.1",
                 "danog/ipc": "^1.1.0",
@@ -2875,7 +2875,7 @@
             },
             "suggest": {
                 "ext-bcmath": "Install the bcmath extension to speed up authorization",
-                "ext-ffi": "Install the FFI extension (with libopus, libvpx and ffmpeg) to transcode audio and video in realtime; not required to play and record video and audio inside calls",
+                "ext-ffi": "Install FFI with libcrypto for faster AES-IGE, and with libopus, libvpx and ffmpeg for realtime audio/video transcoding; not required to play and record video and audio inside calls",
                 "ext-gmp": "Install the gmp extension to speed up authorization",
                 "ext-openssl": "Install the openssl extension for faster crypto",
                 "ext-pdo": "Install the pdo extension to store session data on MySQL",
@@ -2935,6 +2935,9 @@
                 "file_ref_map": [
                     "php tools/gen_filerefmap.php"
                 ],
+                "file_ref_map_docs": [
+                    "php tools/gen_filerefmap_docs.php"
+                ],
                 "docs-fix": [
                     "tools/fix_docs.sh"
                 ],
@@ -2991,7 +2994,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-10-23T00:32:20+00:00"
+            "time": "2026-10-25T17:29:32+00:00"
         },
         {
             "name": "danog/php-rtc-av",
@@ -6744,16 +6747,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v5.7.0",
+            "version": "v5.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpdotenv/phpdotenv.git",
-                "reference": "301c07936b16d88628b126b01d082ba153cf4c40"
+                "reference": "96149103e62ac67e915f6d2ef59b72dee2e011e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpdotenv/phpdotenv/zipball/301c07936b16d88628b126b01d082ba153cf4c40",
-                "reference": "301c07936b16d88628b126b01d082ba153cf4c40",
+                "url": "https://api.github.com/repos/phpdotenv/phpdotenv/zipball/96149103e62ac67e915f6d2ef59b72dee2e011e0",
+                "reference": "96149103e62ac67e915f6d2ef59b72dee2e011e0",
                 "shasum": ""
             },
             "require": {
@@ -6780,7 +6783,7 @@
                     "forward-command": false
                 },
                 "branch-alias": {
-                    "dev-master": "5.6-dev"
+                    "dev-master": "5.8-dev"
                 }
             },
             "autoload": {
@@ -6811,8 +6814,8 @@
                 "environment"
             ],
             "support": {
-                "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/v5.7.0"
+                "issues": "https://github.com/phpdotenv/phpdotenv/issues",
+                "source": "https://github.com/phpdotenv/phpdotenv/tree/v5.8.0"
             },
             "funding": [
                 {
@@ -6824,7 +6827,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-24T18:07:49+00:00"
+            "time": "2026-10-25T16:26:19+00:00"
         },
         {
             "name": "webmozart/assert",
