@@ -143,6 +143,21 @@ REQUESTS_BULK_CONCURRENCY=5
 
 A batch starts when its size is reached or the interval expires, whichever happens first. These limits are shared across sessions within one TAS process.
 
+### MTProto container size
+
+`TELEGRAM_CONTAINER_MAX_SIZE` sets MadelineProto's outgoing container size threshold
+in bytes. The default is `32768` (32 KiB); use `65536` to experiment with 64 KiB.
+Restart TAS after changing it. Existing per-session `rpc.container_max_size`
+overrides take precedence over ENV.
+
+This setting is independent of the number of API calls in a TAS batch. The limit
+of 1020 queued messages is preserved, and a single oversized message can still be
+sent on its own. Larger containers do not guarantee fewer FLOOD_WAIT errors.
+
+The setting is supplied by a local Composer patch. `composer install`
+automatically reinstalls MadelineProto and telegram-entities to apply their
+patches to an existing `vendor` directory.
+
 ## Advanced features
 ### Get events/updates
 Telegram is event driven platform. For example:  every time your account receives a message you immediately get an update.

@@ -1,0 +1,70 @@
+--- a/src/Settings/RPC.php
++++ b/src/Settings/RPC.php
+@@ -17,6 +17,7 @@
+ namespace danog\MadelineProto\Settings;
+
+ use danog\MadelineProto\SettingsAbstract;
++use InvalidArgumentException;
+
+ /**
+  * RPC settings.
+@@ -43,6 +44,23 @@
+      * Encode payload with GZIP if bigger than.
+      */
+     protected int $gzipEncodeIfGt = 1024 * 1024;
++
++    /** Container size threshold in bytes, including its eight-byte header. */
++    protected int $containerMaxSize = 32768;
++
++    public function getContainerMaxSize(): int
++    {
++        return $this->containerMaxSize;
++    }
++
++    public function setContainerMaxSize(int $containerMaxSize): self
++    {
++        if ($containerMaxSize <= 8) {
++            throw new InvalidArgumentException('Container size must exceed its eight-byte header');
++        }
++        $this->containerMaxSize = $containerMaxSize;
++        return $this;
++    }
+
+     /**
+      * Get RPC drop timeout.
+--- a/src/Loop/Connection/WriteLoop.php
++++ b/src/Loop/Connection/WriteLoop.php
+@@ -49,7 +49,6 @@
+ final class WriteLoop extends Loop implements Subscriber, EphemeralSubscriber
+ {
+     private const MAX_COUNT = 1020;
+-    private const MAX_SIZE = 1 << 15;
+     private const LONG_POLL_TIMEOUT = 30.0;
+     private const LONG_POLL_TIMEOUT_MS = 30_000;
+     public const MAX_IDS = 8192;
+@@ -181,6 +180,7 @@
+                 || $this->queue->check_queue->count()
+             )
+         ) {
++            $maxSize = $this->API->getSettings()->getRpc()->getContainerMaxSize() - 8;
+             $this->API->logger("Resuming write loop in DC $this->datacenter", Logger::ULTRA_VERBOSE);
+             if (0 !== ($check = $this->queue->check_queue)->count()) {
+                 $this->queue->check_queue = new WeakMap;
+@@ -321,7 +321,7 @@
+
+                 $body_length = \strlen($message->getSerializedBody());
+                 $actual_length = $body_length + 32;
+-                if ($total_length && $total_length + $actual_length > 32760 || $count >= self::MAX_COUNT) {
++                if ($total_length && $total_length + $actual_length > $maxSize || $count >= self::MAX_COUNT) {
+                     $this->API->logger('Length overflow, postponing part of payload', Logger::ULTRA_VERBOSE);
+                     break;
+                 }
+@@ -340,7 +340,7 @@
+
+                 $body_length = \strlen($MTmessage['body']);
+                 $actual_length = $body_length + 32;
+-                if ($total_length && $total_length + $actual_length > 32760) {
++                if ($total_length && $total_length + $actual_length > $maxSize) {
+                     $this->API->logger('Length overflow, postponing part of payload', Logger::ULTRA_VERBOSE);
+                     break;
+                 }

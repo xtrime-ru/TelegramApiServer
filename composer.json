@@ -67,6 +67,7 @@
     }
   },
   "scripts": {
+    "post-install-cmd": "@composer reinstall danog/madelineproto danog/telegram-entities --no-interaction --no-scripts",
     "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php -d pcre.jit=0 vendor/bin/php-cs-fixer fix -v  --rules='{\"@PSR12\": true, \"declare_strict_types\": false}' ."
   }
 }

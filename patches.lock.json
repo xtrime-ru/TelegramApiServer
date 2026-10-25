@@ -1,5 +1,5 @@
 {
-    "_hash": "b0de9f0028bd8e72de419e2b92b7339527327d7fa790106f542b2d1b35821c0f",
+    "_hash": "8d4be23b2062091efd1cf946f3e3630266036d860063e813198b50dee19a2a62",
     "patches": {
         "danog/telegram-entities": [
             {
@@ -11,6 +11,18 @@
                 "extra": {
                     "upstream-pr": "https://github.com/danog/telegram-entities/pull/8",
                     "upstream-commit": "c1a4951a3d7b6fb6262015ef1ae636ef70fa284d",
+                    "provenance": "patches-file:patches.json"
+                }
+            }
+        ],
+        "danog/madelineproto": [
+            {
+                "package": "danog/madelineproto",
+                "description": "Configure outgoing MTProto container size through RPC settings",
+                "url": "patches/madelineproto-container-size.patch",
+                "sha256": "431090b19ba145b11c964db7fa94d48ca71e8b4305222b39da95105ecb11109c",
+                "depth": 1,
+                "extra": {
                     "provenance": "patches-file:patches.json"
                 }
             }
