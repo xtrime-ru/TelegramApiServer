@@ -42,7 +42,6 @@ $settings = [
             'level' => (int)getenv('LOGGER_LEVEL'), // Logging level, available logging levels are: ULTRA_VERBOSE - 5, VERBOSE - 4 , NOTICE - 3, WARNING - 2, ERROR - 1, FATAL_ERROR - 0.
         ],
         'rpc' => [
-            'container_max_size' => (int)(getenv('TELEGRAM_CONTAINER_MAX_SIZE') === false ? 32768 : getenv('TELEGRAM_CONTAINER_MAX_SIZE')),
             'flood_timeout' => 5,
             'rpc_resend_timeout' => 10,
             'rpc_drop_timeout' => 20,

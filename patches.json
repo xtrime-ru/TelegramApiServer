@@ -10,14 +10,6 @@
           "upstream-commit": "c1a4951a3d7b6fb6262015ef1ae636ef70fa284d"
         }
       }
-    ],
-    "danog/madelineproto": [
-      {
-        "description": "Configure outgoing MTProto container size through RPC settings",
-        "url": "patches/madelineproto-container-size.patch",
-        "sha256": "431090b19ba145b11c964db7fa94d48ca71e8b4305222b39da95105ecb11109c",
-        "depth": 1
-      }
     ]
   }
 }
