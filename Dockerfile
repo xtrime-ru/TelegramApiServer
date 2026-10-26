@@ -5,17 +5,17 @@ FROM ${MADELINE_IMAGE} AS base
 USER root
 
 # Compatibility with base images released before the asynchronous crypto executor.
-FROM base AS ige-build
+FROM base AS crypto-build
 
-COPY dev/ige/ /usr/src/madeline-ige/
+COPY dev/crypto/ /usr/src/madeline-crypto/
 RUN set -eux; \
     mkdir -p /artifacts; \
-    if ! php -r 'try { $ffi = FFI::cdef("unsigned madeline_crypto_abi(void); unsigned madeline_crypto_operations(void);", getenv("MADELINE_IGE_LIBRARY") ?: "/usr/local/lib/libmadeline-ige.so"); exit($ffi->madeline_crypto_abi() === 1 && ($ffi->madeline_crypto_operations() & 7) === 7 ? 0 : 1); } catch (Throwable) { exit(1); }'; then \
+    if ! php -r 'try { $ffi = FFI::cdef("unsigned madeline_crypto_abi(void); unsigned madeline_crypto_operations(void);", getenv("MADELINE_CRYPTO_LIBRARY") ?: "/usr/local/lib/libmadeline-crypto.so"); exit($ffi->madeline_crypto_abi() === 2 && ($ffi->madeline_crypto_operations() & 7) === 7 ? 0 : 1); } catch (Throwable) { exit(1); }'; then \
         apt-get update; \
         apt-get install -y --no-install-recommends cmake gcc libc6-dev make libssl-dev; \
-        cmake -S /usr/src/madeline-ige -B /tmp/ige-build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF; \
-        cmake --build /tmp/ige-build --config Release; \
-        install -D /tmp/ige-build/libmadeline-ige.so /artifacts/usr/local/lib/libmadeline-ige.so; \
+        cmake -S /usr/src/madeline-crypto -B /tmp/crypto-build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF; \
+        cmake --build /tmp/crypto-build --config Release; \
+        install -D /tmp/crypto-build/libmadeline-crypto.so /artifacts/usr/local/lib/libmadeline-crypto.so; \
     fi
 
 FROM base AS zstd-build
@@ -40,12 +40,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --link --from=zstd-build /artifacts/ /
-COPY --link --from=ige-build /artifacts/ /
+COPY --link --from=crypto-build /artifacts/ /
 
-ARG MADELINE_IGE_LIBRARY
-ENV MADELINE_IGE_LIBRARY="${MADELINE_IGE_LIBRARY:-/usr/local/lib/libmadeline-ige.so}"
+ARG MADELINE_CRYPTO_LIBRARY
+ENV MADELINE_CRYPTO_LIBRARY="${MADELINE_CRYPTO_LIBRARY:-/usr/local/lib/libmadeline-crypto.so}"
 
-RUN php --ri zstd && php -r '$ffi = FFI::cdef("int madeline_ige_crypt(const char *in, char *out, size_t size, const char *key, char *iv, int encrypt); unsigned madeline_crypto_abi(void); unsigned madeline_crypto_operations(void);", getenv("MADELINE_IGE_LIBRARY")); if ($ffi->madeline_crypto_abi() !== 1 || ($ffi->madeline_crypto_operations() & 7) !== 7 || $ffi->madeline_ige_crypt("", $ffi->new("char[1]"), 0, str_repeat("\0", 32), $ffi->new("char[32]"), 1) !== 1) { throw new RuntimeException("EVP-IGE initialization failed"); }'
+RUN php --ri zstd && php -r '$ffi = FFI::cdef("int madeline_ige_crypt(const char *in, char *out, size_t size, const char *key, char *iv, int encrypt); unsigned madeline_crypto_abi(void); unsigned madeline_crypto_operations(void);", getenv("MADELINE_CRYPTO_LIBRARY")); if ($ffi->madeline_crypto_abi() !== 2 || ($ffi->madeline_crypto_operations() & 7) !== 7 || $ffi->madeline_ige_crypt("", $ffi->new("char[1]"), 0, str_repeat("\0", 32), $ffi->new("char[32]"), 1) !== 1) { throw new RuntimeException("Native crypto initialization failed"); }'
 
 STOPSIGNAL SIGTERM
 
