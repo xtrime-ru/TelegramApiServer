@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options: &default-logging-options
+    max-size: "20m"
+    max-file: "5"
+
 services:
   api:
     image: xtrime/telegram-api-server:2.8
@@ -14,11 +20,7 @@ services:
       - mysql
     environment:
       WAIT_HOSTS: mysql:3306
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1024k"
-        max-file: "2"
+    logging: *default-logging # 5 x 20 MiB = 100 MiB total.
     healthcheck:
       test: timeout 15 curl -f http://localhost:9503/system/healthcheck || sh -c 'kill -INT -1 && (sleep 5; kill -s 9 -1)'
       interval: 60s
@@ -26,6 +28,11 @@ services:
       retries: 1
   mysql:
     image: mariadb:12.3
+    logging:
+      <<: *default-logging
+      options:
+        <<: *default-logging-options
+        max-size: "1m" # 5 x 1 MiB = 5 MiB total.
     restart: unless-stopped
     stop_grace_period: 15s
     volumes:
