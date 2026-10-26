@@ -1,3 +1,5 @@
 .*
 !.env.docker.example
 sessions/
+dev/crypto/target/
+dev/crypto/build/
