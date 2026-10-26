@@ -2782,12 +2782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "259169004ebef59ae4efb270afa867a4c0072b05"
+                "reference": "7a4f9ff8dfb0ef57735994f21882b16589e8acb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/259169004ebef59ae4efb270afa867a4c0072b05",
-                "reference": "259169004ebef59ae4efb270afa867a4c0072b05",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/7a4f9ff8dfb0ef57735994f21882b16589e8acb8",
+                "reference": "7a4f9ff8dfb0ef57735994f21882b16589e8acb8",
                 "shasum": ""
             },
             "require": {
@@ -2875,8 +2875,9 @@
             },
             "suggest": {
                 "ext-bcmath": "Install the bcmath extension to speed up authorization",
-                "ext-ffi": "Install FFI with libcrypto for faster AES-IGE, and with libopus, libvpx and ffmpeg for realtime audio/video transcoding; not required to play and record video and audio inside calls",
+                "ext-ffi": "Install FFI with libcrypto for the AES-IGE fallback, and with libopus, libvpx and ffmpeg for realtime audio/video transcoding; not required to play and record video and audio inside calls",
                 "ext-gmp": "Install the gmp extension to speed up authorization",
+                "ext-madeline_crypto": "Optional Rust acceleration for AES-IGE and MTProto v2 transport decoding",
                 "ext-openssl": "Install the openssl extension for faster crypto",
                 "ext-pdo": "Install the pdo extension to store session data on MySQL",
                 "ext-primemodule": "Install the primemodule and FFI extensions to speed up MadelineProto (https://prime.madelineproto.xyz)",
@@ -2994,7 +2995,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-10-25T21:50:23+00:00"
+            "time": "2026-10-26T02:44:03+00:00"
         },
         {
             "name": "danog/php-rtc-av",
