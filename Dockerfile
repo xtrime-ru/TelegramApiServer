@@ -9,7 +9,7 @@ FROM base AS crypto-build
 COPY dev/crypto/ /usr/src/madeline-crypto/
 RUN set -eux; \
     mkdir -p /artifacts; \
-    if ! php -r 'exit(extension_loaded("madeline_crypto") && \danog\MadelineProto\Native\Crypto::version() === "0.1.0" ? 0 : 1);'; then \
+    if ! php -r 'exit(extension_loaded("madeline_crypto") && \danog\MadelineProto\Native\Crypto::version() === "0.2.0" ? 0 : 1);'; then \
         apt-get update; \
         apt-get install -y --no-install-recommends build-essential libclang-dev libssl-dev pkg-config curl ca-certificates; \
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain 1.92.0; \
@@ -44,7 +44,7 @@ RUN apt-get update \
 COPY --link --from=zstd-build /artifacts/ /
 COPY --link --from=crypto-build /artifacts/ /
 
-RUN php --ri zstd && php -r 'if (!extension_loaded("madeline_crypto") || \danog\MadelineProto\Native\Crypto::version() !== "0.1.0") { throw new RuntimeException("Native crypto extension unavailable"); }'
+RUN php --ri zstd && php -r 'if (!extension_loaded("madeline_crypto") || \danog\MadelineProto\Native\Crypto::version() !== "0.2.0") { throw new RuntimeException("Native crypto extension unavailable"); }'
 
 STOPSIGNAL SIGTERM
 
