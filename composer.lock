@@ -2782,12 +2782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "7a4f9ff8dfb0ef57735994f21882b16589e8acb8"
+                "reference": "98f15c0b40ba06bd16d6b05b4d659470b682562c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/7a4f9ff8dfb0ef57735994f21882b16589e8acb8",
-                "reference": "7a4f9ff8dfb0ef57735994f21882b16589e8acb8",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/98f15c0b40ba06bd16d6b05b4d659470b682562c",
+                "reference": "98f15c0b40ba06bd16d6b05b4d659470b682562c",
                 "shasum": ""
             },
             "require": {
@@ -2995,7 +2995,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-10-26T02:44:03+00:00"
+            "time": "2026-10-26T10:56:33+00:00"
         },
         {
             "name": "danog/php-rtc-av",
