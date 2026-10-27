@@ -1,0 +1,16 @@
+type: object
+properties:
+  _:
+    type: string
+    default: "help.termsOfService"
+  popup:
+    type: boolean
+    default: false
+  id:
+    $ref: '../api/TermsOfServiceId.yaml'
+  text:
+    type: string
+    default: "By signing up for Telegram, you agree not to:\n\n- Use our service to send spam or scam users.\n- Promote violence on publicly viewable Telegram bots, groups or channels.\n- Post pornographic content on publicly viewable Telegram bots, groups or channels.\n\nWe reserve the right to update these Terms of Service later."
+  entities:
+    type: array
+    items: {}

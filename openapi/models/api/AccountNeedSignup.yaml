@@ -1,0 +1,7 @@
+type: object
+properties:
+  _:
+    type: string
+    default: "account.needSignup"
+  terms_of_service:
+    $ref: '../api/TermsOfService.yaml'

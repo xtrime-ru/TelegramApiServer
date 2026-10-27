@@ -1,0 +1,23 @@
+get:
+  tags:
+  - login
+  summary: Complete signup
+  description: Complete signup
+  operationId: completeSignup
+  parameters:
+    - $ref: './openapi/parameters/session.yaml'
+    - in: query
+      name: firstName
+      schema:
+        type: string
+      required: true
+      description: first name
+  responses:
+    200:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/api/CompleteSignupResponse.yaml'
+    400:
+      $ref: './openapi/responses/common/BadRequest.yaml'
