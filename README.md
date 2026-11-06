@@ -413,6 +413,22 @@ Full list of custom methods and their parameters available in [ApiExtensions cla
 * `getMediaPreview` - download media preview to stream/browser
 * `uploadMediaForm` - upload document from POST request.
 
+## Crypto
+
+The Docker image inherits `madeline_crypto` from `danog/madelineproto`; TAS does
+not build or install it. Extension sources are maintained in
+[danog/MadelineCrypto](https://github.com/danog/MadelineCrypto).
+
+Recent MadelineProto versions use synchronous native crypto even when the async
+executor is unavailable. AES-IGE falls back to FFI/libcrypto, then OpenSSL, then
+pure PHP when native crypto is unavailable. AES-CTR prefers native crypto, then
+OpenSSL, then phpseclib. Invalid encrypted messages are rejected without retrying
+another backend.
+
+TAS currently pins an older MadelineProto with API 0.2.0; adopting the newer
+behavior requires updating the PHP dependency. Crypto API compatibility and
+fallback selection are handled by MadelineProto.
+
 ## Contacts
 
 * Telegram:   
