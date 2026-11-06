@@ -38,7 +38,6 @@
     "danog/madelineproto": "dev-v8-tas",
     "amphp/dns": "2.x-dev",
     "danog/async-orm": "^1.1.1",
-    "cweagans/composer-patches": "^2.0",
     "amphp/pipeline": "^1"
   },
   "require-dev": {
@@ -62,8 +61,7 @@
   },
   "config": {
     "allow-plugins": {
-      "symfony/thanks": false,
-      "cweagans/composer-patches": true
+      "symfony/thanks": false
     }
   },
   "scripts": {
