@@ -2663,12 +2663,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "35a3916337a526fd37fd9367e6349bf05052c189"
+                "reference": "fe5ab9479ad36eb8b98e15a465ad87903d96e47e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/35a3916337a526fd37fd9367e6349bf05052c189",
-                "reference": "35a3916337a526fd37fd9367e6349bf05052c189",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/fe5ab9479ad36eb8b98e15a465ad87903d96e47e",
+                "reference": "fe5ab9479ad36eb8b98e15a465ad87903d96e47e",
                 "shasum": ""
             },
             "require": {
@@ -2688,10 +2688,10 @@
                 "amphp/socket": "^2.4.1",
                 "amphp/websocket-client": "^2.0.2",
                 "bacon/bacon-qr-code": "^3.1.1",
-                "danog/async-orm": "^1.1.10",
+                "danog/async-orm": "^1.2.1",
                 "danog/better-prometheus": "^0.1.1",
                 "danog/dns-over-https": "^1.0.1",
-                "danog/ipc": "^1.1.0",
+                "danog/ipc": "^1.1.1",
                 "danog/loop": "^1.1.1",
                 "danog/php-rtc-av": "^1.1.11",
                 "danog/php-rtc-codecs": "^1.1.20",
@@ -2875,7 +2875,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-11-08T22:46:30+00:00"
+            "time": "2026-11-08T23:02:22+00:00"
         },
         {
             "name": "danog/php-rtc-av",
