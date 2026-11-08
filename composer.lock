@@ -1404,16 +1404,16 @@
         },
         {
             "name": "amphp/process",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/process.git",
-                "reference": "6ee0d11112a9b1338b7dc270d51f254e872c90b5"
+                "reference": "acfd64f68df5fa7f2d674c93d1986b2bf5d02770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/process/zipball/6ee0d11112a9b1338b7dc270d51f254e872c90b5",
-                "reference": "6ee0d11112a9b1338b7dc270d51f254e872c90b5",
+                "url": "https://api.github.com/repos/amphp/process/zipball/acfd64f68df5fa7f2d674c93d1986b2bf5d02770",
+                "reference": "acfd64f68df5fa7f2d674c93d1986b2bf5d02770",
                 "shasum": ""
             },
             "require": {
@@ -1460,7 +1460,7 @@
             "homepage": "https://amphp.org/process",
             "support": {
                 "issues": "https://github.com/amphp/process/issues",
-                "source": "https://github.com/amphp/process/tree/v2.1.1"
+                "source": "https://github.com/amphp/process/tree/v2.1.2"
             },
             "funding": [
                 {
@@ -1468,7 +1468,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-01T22:46:42+00:00"
+            "time": "2026-11-07T16:33:32+00:00"
         },
         {
             "name": "amphp/redis",
@@ -2256,20 +2256,21 @@
         },
         {
             "name": "danog/async-orm",
-            "version": "1.1.10",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/AsyncOrm.git",
-                "reference": "620dc4d554ba71c6bde548e3406ff5fe0706f886"
+                "reference": "3d5ff7dcc34477084a8604ca7ffa34956109cb5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/620dc4d554ba71c6bde548e3406ff5fe0706f886",
-                "reference": "620dc4d554ba71c6bde548e3406ff5fe0706f886",
+                "url": "https://api.github.com/repos/danog/AsyncOrm/zipball/3d5ff7dcc34477084a8604ca7ffa34956109cb5c",
+                "reference": "3d5ff7dcc34477084a8604ca7ffa34956109cb5c",
                 "shasum": ""
             },
             "require": {
                 "amphp/mysql": "^3.0",
+                "amphp/parallel": "^2.3",
                 "amphp/postgres": "^2.0",
                 "amphp/redis": "^2.0",
                 "amphp/sync": "^2.2",
@@ -2284,7 +2285,10 @@
                 "friendsofphp/php-cs-fixer": "^3.52.1",
                 "infection/infection": "^0.28.1",
                 "phpunit/phpunit": "^11.0.9",
-                "vimeo/psalm": "dev-master"
+                "vimeo/psalm": "^7"
+            },
+            "suggest": {
+                "ext-pdo_sqlite": "For the SQLite backend"
             },
             "type": "library",
             "autoload": {
@@ -2309,7 +2313,7 @@
             "description": "Async ORM based on AMPHP v3 and fibers.",
             "support": {
                 "issues": "https://github.com/danog/AsyncOrm/issues",
-                "source": "https://github.com/danog/AsyncOrm/tree/1.1.10"
+                "source": "https://github.com/danog/AsyncOrm/tree/1.2.1"
             },
             "funding": [
                 {
@@ -2317,7 +2321,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-02T14:01:52+00:00"
+            "time": "2026-11-08T17:15:57+00:00"
         },
         {
             "name": "danog/better-prometheus",
@@ -2461,16 +2465,16 @@
         },
         {
             "name": "danog/ipc",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danog/ipc.git",
-                "reference": "eea6de6a57273f32a4f90a652ae1409786be18a0"
+                "reference": "1c5226ce863d6e6b436cb7fbbb4c01f4337171cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danog/ipc/zipball/eea6de6a57273f32a4f90a652ae1409786be18a0",
-                "reference": "eea6de6a57273f32a4f90a652ae1409786be18a0",
+                "url": "https://api.github.com/repos/danog/ipc/zipball/1c5226ce863d6e6b436cb7fbbb4c01f4337171cb",
+                "reference": "1c5226ce863d6e6b436cb7fbbb4c01f4337171cb",
                 "shasum": ""
             },
             "require": {
@@ -2527,9 +2531,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danog/ipc/issues",
-                "source": "https://github.com/danog/ipc/tree/1.1.0"
+                "source": "https://github.com/danog/ipc/tree/1.1.1"
             },
-            "time": "2026-10-18T18:06:10+00:00"
+            "time": "2026-11-06T17:38:31+00:00"
         },
         {
             "name": "danog/libdns-json",
@@ -2659,12 +2663,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xtrime-ru/MadelineProto.git",
-                "reference": "256f27ca34c07febfc108e9cef4b2d493f21f766"
+                "reference": "35a3916337a526fd37fd9367e6349bf05052c189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/256f27ca34c07febfc108e9cef4b2d493f21f766",
-                "reference": "256f27ca34c07febfc108e9cef4b2d493f21f766",
+                "url": "https://api.github.com/repos/xtrime-ru/MadelineProto/zipball/35a3916337a526fd37fd9367e6349bf05052c189",
+                "reference": "35a3916337a526fd37fd9367e6349bf05052c189",
                 "shasum": ""
             },
             "require": {
@@ -2871,7 +2875,7 @@
                     "url": "https://github.com/danog"
                 }
             ],
-            "time": "2026-11-06T15:51:34+00:00"
+            "time": "2026-11-08T22:46:30+00:00"
         },
         {
             "name": "danog/php-rtc-av",
@@ -5171,16 +5175,16 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v3.1.3",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "d5b01a39b3415c2cd581d3bd3a3575c1ebbd8e77"
+                "reference": "5efef6e6cb43e088ccab7d0c1e2f2ab25b9e8b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/d5b01a39b3415c2cd581d3bd3a3575c1ebbd8e77",
-                "reference": "d5b01a39b3415c2cd581d3bd3a3575c1ebbd8e77",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/5efef6e6cb43e088ccab7d0c1e2f2ab25b9e8b54",
+                "reference": "5efef6e6cb43e088ccab7d0c1e2f2ab25b9e8b54",
                 "shasum": ""
             },
             "require": {
@@ -5236,7 +5240,7 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2025-09-24T15:06:41+00:00"
+            "time": "2026-11-06T20:31:19+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -7288,16 +7292,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.95.28",
+            "version": "v3.95.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "de66c41256ad603e63cf033bd153fa4a14ebaca4"
+                "reference": "60e424d3e54b15b0174924fb123783aae0de7b0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/de66c41256ad603e63cf033bd153fa4a14ebaca4",
-                "reference": "de66c41256ad603e63cf033bd153fa4a14ebaca4",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/60e424d3e54b15b0174924fb123783aae0de7b0c",
+                "reference": "60e424d3e54b15b0174924fb123783aae0de7b0c",
                 "shasum": ""
             },
             "require": {
@@ -7331,12 +7335,12 @@
             "require-dev": {
                 "facile-it/paraunit": "^1.3.1 || ^2.11.0",
                 "infection/infection": "^0.32.7",
-                "justinrainbow/json-schema": "^6.12.0",
+                "justinrainbow/json-schema": "^6.14.0",
                 "keradus/cli-executor": "^2.3",
                 "php-coveralls/php-coveralls": "^2.9.1",
                 "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.8",
                 "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.8",
-                "phpunit/phpunit": "^9.6.36 || ^10.5.64 || ^11.5.56 || ^12.5.35 || ^13.3.3",
+                "phpunit/phpunit": "^9.6.38 || ^10.5.66 || ^11.5.57 || ^12.5.43 || ^13.4.6",
                 "symfony/polyfill-php85": "^1.43",
                 "symfony/var-dumper": "^5.4.54 || ^6.4.49 || ^7.4.22 || ^8.1.10",
                 "symfony/yaml": "^5.4.56 || ^6.4.50 || ^7.4.23 || ^8.1.11"
@@ -7380,7 +7384,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.95.28"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.95.29"
             },
             "funding": [
                 {
@@ -7388,7 +7392,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-04T13:04:49+00:00"
+            "time": "2026-11-06T16:25:42+00:00"
         },
         {
             "name": "psr/container",

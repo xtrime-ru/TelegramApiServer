@@ -48,7 +48,6 @@ $settings = [
         ],
         'connection' => [
             'max_media_socket_count' => 10,
-            'idle_timeout' => 60,
             'proxies' => [
                 '\danog\MadelineProto\Stream\Proxy\SocksProxy' => [
                     [
