@@ -1,0 +1,32 @@
+get:
+  tags:
+  - system
+  summary: Add session
+  description: Add session
+  operationId: addSession
+  parameters:
+    - in: query
+      name: session
+      schema:
+        type: string
+      required: true
+      description: Session name
+    - in: query
+      name: settings
+      schema:
+        type: object
+        properties:
+          settings:
+            $ref: '../../models/system/SessionSettings.yaml'
+      required: false
+      description: Settings
+
+  responses:
+    200:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../responses/system/GetSessionListResponse.yaml'
+    400:
+      $ref: './openapi/responses/common/BadRequest.yaml'

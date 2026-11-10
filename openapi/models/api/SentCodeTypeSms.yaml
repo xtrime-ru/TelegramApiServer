@@ -1,0 +1,7 @@
+properties:
+  _:
+    type: string
+    default: "auth.sentCodeTypeSms"
+  length:
+    type: integer
+    example: 5
